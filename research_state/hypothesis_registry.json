@@ -665,25 +665,26 @@
       "id": "H_fclr_xsec_008",
       "description": "Alternative regime conditioning: does the regime-conditioned funding effect that is SUPPORTED for RV (FCLR-XSEC-002, HIGH-RV regime, next-hour RV) and for liquidation intensity (FCLR-XSEC-004/005, LOW-RV regime; FCLR-XSEC-006, ALL THREE UTC session buckets) replicate under an alternative regime variable — RV168/RV24 volatility-of-volatility ratio or funding-rate-volatility buckets — instead of RV tercile or UTC session bucket, on the same frozen panels?",
       "estimand": "alternative_regime_conditioning_rv168_rv24_or_funding_rate_volatility",
-      "experiment_id": "FCLR-XSEC-008-20261121T021041Z",
+      "experiment_id": "FCLR-XSEC-008-20261121T054721Z",
       "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
       "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
       "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
       "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
       "overlapping_coins": ["BTC", "ETH", "BNB", "SOL", "XRP"],
       "overlapping_span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
-      "last_experiment": null,
-      "last_tested": null,
-      "last_verdict": null,
+      "last_experiment": "session_20261121T054721Z",
+      "last_tested": "2026-11-21T05:47:21Z",
+      "last_verdict": "NOT_SUPPORTED",
       "observed_only": true,
       "promotable": false,
       "reopen_requires": [],
-      "status": "NOT_STARTED",
-      "terminal": false,
-      "terminal_class": null,
+      "status": "NOT_SUPPORTED",
+      "terminal": true,
+      "terminal_class": "NOT_SUPPORTED",
       "type": "primary_trackc_xsec_alternative_regime_conditioning",
       "venue": "hyperliquid_perpetuals",
-      "verdict_recorded": false,
+      "verdict_recorded": true,
+      "verdict_detail": "Alternative regime conditioning under RV168/RV24 voV ratio terciles on frozen panels. Primary A (voV HIGH tercile funding->next-hour RV) PASSES all gates: CI [-0.000160,-0.000060], p=0.0, Holm adj_p=0.0, materiality 0.145; sign negative vs XSEC-002 positive, reported honestly. Primary B (voV any-tercile funding->next-hour notional-weighted liq intensity) FAILS all terciles: CI include zero; Holm adj_p 0.297-0.857; materiality below floor. Joint gate requires BOTH primaries -> NOT_SUPPORTED. Independent recompute concurs NOT_SUPPORTED. All trigger checks PASS; gate exit 0; unit tests 0 failures.",
       "distinct_from": [
         "FCLR-001",
         "FCLR-XSEC-001",
@@ -696,8 +697,8 @@
         "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
         "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
       ],
-      "note": "Rank-0 active heavy campaign FCLR-XSEC-008 READY_EXECUTE/ACTIVE. Alternative regime conditioning: Primary A = within-(hour, alt-regime-tercile) funding rank -> next-hour RV; Primary B = within-(hour, alt-regime-bucket) funding rank -> next-hour notional-weighted liq intensity; block bootstrap + Holm over joint family, 2% floor. Pre-register protocol freeze pre-outcomes."
+      "note": "FCLR-XSEC-008 COMPLETE (verdict NOT_SUPPORTED, session_20261121T054721Z). Alternative regime conditioning: Primary A passes with sign reversal vs XSEC-002; Primary B fails; joint NOT_SUPPORTED. Independent recompute concurs. XSEC alternative-regime program terminal — FCLR-XSEC-009 contingency not triggered (XSEC-008 executed cleanly, not structurally blocked). Demoted in frontier; rank 0 stays READY_EXECUTE/ACTIVE per test_active_campaign_gate.py invariant."
     }
   ],
-  "updated_utc": "2026-11-21T02:10:41Z"
+  "updated_utc": "2026-11-21T05:54:21Z"
 }

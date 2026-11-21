@@ -1,0 +1,104 @@
+{
+  "session_utc": "20261121T054721Z",
+  "experiment_id": "FCLR-XSEC-008-20261121T054721Z",
+  "audit_timestamp_utc": "2026-11-21T05:51:00Z",
+  "audit_scope": "FCLR-XSEC-008 alternative regime conditioning heavy artifact triad + recompute + evidence audit + trigger check",
+  "session_directory": "research_state/session_20261121T054721Z/",
+  "artifacts": {
+    "fclr_xsec008_protocol_freeze_20261121T054721Z.json": {"present": true, "non_empty": true, "role": "preregistered protocol freeze (pre-outcomes)"},
+    "fclr_xsec008_protocol_freeze_20261121T054721Z.md": {"present": true, "non_empty": true, "role": "preregistered protocol freeze (pre-outcomes, markdown)"},
+    "fclr_xsec008_evaluation_20261121T054721Z.py": {"present": true, "non_empty": true, "role": "joint evaluation script (Primary A voV->RV, Primary B voV->notional-weighted liq intensity)"},
+    "fclr_xsec008_evaluation_20261121T054721Z.json": {"present": true, "non_empty": true, "role": "evaluation results JSON"},
+    "fclr_xsec008_evaluation_20261121T054721Z.md": {"present": true, "non_empty": true, "role": "evaluation narrative markdown"},
+    "fclr_xsec008_recompute_20261121T054721Z.py": {"present": true, "non_empty": true, "role": "independent second-code-path recompute script"},
+    "fclr_xsec008_recompute_20261121T054721Z.json": {"present": true, "non_empty": true, "role": "recompute results JSON"},
+    "evidence_audit_20261121T054721Z.json": {"present": true, "non_empty": true, "role": "this evidence audit (json)"},
+    "evidence_audit_20261121T054721Z.md": {"present": true, "non_empty": true, "role": "this evidence audit (markdown)"},
+    "trigger_check_20261121T054721Z.json": {"present": true, "non_empty": true, "role": "non-empty trigger check enumerating PASS/FAIL acceptance checks"}
+  },
+  "zero_byte_placeholders": false,
+  "empty_artifacts": [],
+  "panel_hash_audit": {
+    "fclr001_panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+    "fclr001_sha256_expected": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+    "fclr001_sha256_verified_in_scripts": true,
+    "liquidation_panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+    "liquidation_sha256_expected": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+    "liquidation_sha256_verified_in_scripts": true
+  },
+  "freeze_order_audit": {
+    "outcome_data_inspected_before_freeze": false,
+    "protocol_freeze_precedes_evaluation": true,
+    "no_holdout_outcomes_inspected_before_freeze": true
+  },
+  "recompute_concurrence": {
+    "independent_code_path": true,
+    "recompute_concurs_with_evaluation": true,
+    "evaluation_verdict": "NOT_SUPPORTED",
+    "recompute_verdict": "NOT_SUPPORTED",
+    "concurrence": true
+  },
+  "sealed_mutation_audit": {
+    "research_state_research_protocol_modified": false,
+    "research_protocol_sealed_legacy_fclr001_untouched": true,
+    "github_workflows_modified": false
+  },
+  "root_churn_audit": {
+    "root_level_md_json_added": false,
+    "all_artifacts_under_session_directory": true,
+    "root_churn_cap_500_respected": true
+  },
+  "no_rerun_audit": {
+    "fclr_starter_001_rerun": false,
+    "fclr_xsec_001_rerun": false,
+    "fclr_xsec_002_rerun": false,
+    "fclr_xsec_003_rerun": false,
+    "fclr_xsec_004_rerun": false,
+    "fclr_xsec_005_rerun": false,
+    "fclr_xsec_006_rerun": false,
+    "fclr_xsec_007_rerun": false
+  },
+  "network_paid_data_audit": {
+    "network_calls": false,
+    "paid_data": false,
+    "credentials": false,
+    "new_data_acquisition": false
+  },
+  "track_separation_audit": {
+    "observed_liquidations_only": true,
+    "no_conflation_with_modeled_boundary_breaches_track_b": true,
+    "no_conflation_with_rv_forecasts": true
+  },
+  "cross_reference_audit": {
+    "cross_references_fclr_xsec_002": true,
+    "cross_references_fclr_xsec_004": true,
+    "cross_references_fclr_xsec_005": true,
+    "cross_references_fclr_xsec_006": true,
+    "cross_references_fclr_xsec_007": true
+  },
+  "verdict_integrity": {
+    "verdict": "NOT_SUPPORTED",
+    "primary_a_passed": true,
+    "primary_b_passed": false,
+    "gate_passed": false,
+    "materiality_floor_relaxed_after_outcomes": false,
+    "threshold_shopping": false,
+    "honest_null_preserved": true
+  },
+  "distinct_from_terminal_campaigns": [
+    "FCLR-STARTER-001",
+    "FCLR-XSEC-001",
+    "FCLR-XSEC-002 (RV tercile regime -> RV)",
+    "FCLR-XSEC-003 (thin holdout, folded into 004)",
+    "FCLR-XSEC-004 (count-based, RV tercile)",
+    "FCLR-XSEC-005 (notional-weighted, RV tercile)",
+    "FCLR-XSEC-006 (notional-weighted, UTC session bucket)",
+    "FCLR-XSEC-007 (cross-panel RV tercile vs UTC bucket reconciliation, terminal NOT_SUPPORTED)",
+    "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
+    "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
+  ],
+  "alternative_regime_variable": "rv168h / rv24h volatility-of-volatility ratio terciles (low/mid/high), market-wide per hour",
+  "primary_a_voV_high_funding_rv": {"passed": true, "ci_excludes_zero": true, "holm_passes": true, "materiality_floor_met": true, "note": "sign negative vs FCLR-XSEC-002 positive; sign not a gate criterion"},
+  "primary_b_voV_any_tercile_funding_liq": {"passed": false, "all_terci_ci_include_zero": true, "note": "liquidation-intensity funding effect does not replicate under voV conditioning"},
+  "joint_verdict": "NOT_SUPPORTED"
+}

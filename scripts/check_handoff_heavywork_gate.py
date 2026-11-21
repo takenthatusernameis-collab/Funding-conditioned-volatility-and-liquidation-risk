@@ -331,6 +331,7 @@ NEW_QUANT_PREFIXES = (
     "fclr_risk",
     "fclr_starter",
     "fclr_xsec007_",        # FCLR-XSEC-007 cross-panel reconciliation quantitative artifacts
+    "fclr_xsec008_",        # FCLR-XSEC-008 alternative regime conditioning quantitative artifacts
     "independent_recompute_",
     "trigger_readiness_power_calibration_",
     "trigger_readiness_power_ledger_",

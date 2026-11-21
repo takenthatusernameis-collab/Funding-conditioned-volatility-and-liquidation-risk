@@ -1,57 +1,29 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T04:49:01Z
-**Sole active campaign:** FCLR-XSEC-008-20261121T021041Z (rank-0, READY_EXECUTE/ACTIVE, verdict pending)
-**Latest completed heavy session on disk:** session_20261121T021041Z (FCLR-XSEC-007, verdict NOT_SUPPORTED — honest null: Primary A high-RV tercile funding→RV CI [-0.0004, 2.005] includes zero, p=0.272, Holm adj_p=0.816; joint gate requires BOTH primaries, so Primary A failing forces NOT_SUPPORTED regardless of Primary B; independent recompute concurs NOT_SUPPORTED; all trigger checks PASS; both panel sha256 verified)
-**Machine-enforced gate baseline (verified this refresh — 2026-11-21T04:49:01Z):** `python3 scripts/check_handoff_heavywork_gate.py` → `[PASS] ... reason=OK`, exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 24 tests, 0 failures; both frozen panel sha256 values re-verified on disk (`41962f82...` FCLR-001, `81a100d5...` combined liquidation); root `research_state/` md+json count 499/500 (cap 500). Feasibility of FCLR-XSEC-008 re-probed on the frozen panels (see §1 de-risk block): Primary A has 0 hours with <3 coins and 61% vol-of-vol coverage; Primary B has 5,641 multi-coin hours and 100% funding/vol-of-vol coverage — the campaign is executable, not blocked.
+**Timestamp:** 2026-11-21T05:54:21Z
+**Sole active campaign:** FCLR-XSEC-008-20261121T054721Z (rank-0, READY_EXECUTE/ACTIVE, verdict NOT_SUPPORTED — XSEC alternative-regime program terminal)
+**Latest completed heavy session on disk:** session_20261121T054721Z (FCLR-XSEC-008, verdict NOT_SUPPORTED — Primary A voV HIGH tercile funding→RV PASSES all gates CI [-0.000160,-0.000060] p=0.0 Holm adj_p=0.0 materiality 0.145; Primary B voV any-tercile funding→notional-weighted liq intensity FAILS all terciles CI include zero Holm adj_p 0.297-0.857; joint gate requires BOTH primaries -> NOT_SUPPORTED; independent recompute concurs; all trigger checks PASS; both panel sha256 verified)
+**Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 24 tests, 0 failures; both frozen panel sha256 values re-verified on disk (`41962f82...` FCLR-001, `81a100d5...` combined liquidation); root `research_state/` md+json count 499/500 (cap 500). FCLR-XSEC-008 executed to verdict NOT_SUPPORTED on frozen panels; XSEC program terminal (no further XSEC campaign; §6 contingency FCLR-XSEC-009 not triggered).
 **Environment:** `pip3 install -r requirements.txt` already run (numpy, pandas, scipy, pyarrow, requests); Python 3.12.3. Both frozen panels load and their sha256 values are asserted in every script.
 
 > This is the SINGLE durable handoff. It supersedes every prior prose handoff block. There is exactly ONE initial task message (Section 1) and exactly ONE active campaign (FCLR-XSEC-008). All other campaigns (STARTER-001, FCLR-001, XSEC-001..007, LIQ-XSEC-QLIKE, LIQ-XSEC-ORDERING, LIQ-COMBINED-PANEL, Track A/B/C) are terminal and must NOT be re-run. A session that does not emit the Section 4 artifact triad under a new `research_state/session_<UTC>/` directory has NOT completed the handoff and the gate will fail. The previous refresh was blocked only by a stale, empty session directory newer than the recorded latest session; that empty directory has been removed, so the gate is green again and the next heavy session can proceed without a staleness failure.
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T04:49:01Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T05:54:21Z)
 
 **Why this is the focus (repository-name priority + heaviest non-duplicative work):** The repository is named *Funding-conditioned-volatility-and-liquidation-risk* — it has two scientific halves that must be reconciled by a single mechanism: (a) does the funding rate *condition volatility* (RV), and (b) does it *condition liquidation risk*? The completed cross-sectional (XSEC) program has already shown, on the frozen panels:
 - **Funding → next-hour RV is SUPPORTED only in the HIGH-RV regime** (FCLR-XSEC-002, CI [0.0046, 0.2348], p=0.019, materiality 1.09).
 - **Funding → next-hour liquidation intensity is SUPPORTED in the LOW-RV regime** (FCLR-XSEC-004 count-based, FCLR-XSEC-005 notional-weighted, both CI exclude 0, p=0.0) and **across all three UTC session buckets** (FCLR-XSEC-006, notional-weighted).
 - **Cross-panel reconciliation under RV-tercile vs UTC-session conditioning is an honest null** (FCLR-XSEC-007, NOT_SUPPORTED, independent recompute concurs).
+- **Alternative regime conditioning (RV168/RV24 voV ratio terciles): NOT_SUPPORTED** (FCLR-XSEC-008, session_20261121T054721Z — Primary A PASSES with sign reversal vs XSEC-002 but Primary B FAILS; joint gate requires BOTH primaries, so NOT_SUPPORTED; independent recompute concurs). XSEC alternative-regime program is now **terminal**.
 
-The single most relevant, heaviest, non-duplicative next step that simultaneously exercises BOTH halves of the repository name is therefore **FCLR-XSEC-008: alternative regime conditioning**. It re-tests the *same* funding→RV and funding→liquidation mechanisms under a *different* regime variable — **volatility-of-volatility (RV168/RV24 ratio) or funding-rate-volatility buckets** — instead of RV tercile or UTC session bucket. This is the contingency-ladder next mechanism (handoff §6, step 1); it is *not* a re-run of any terminal campaign. If the funding effect is a genuine structural feature it must survive a regime re-split; if it only appears under RV-tercile it was a binning artifact. Either outcome is publishable and heavy.
+**State is synchronized and consistent (verified 2026-11-21T05:54:21Z):**
+- `research_state/experiment_frontier.json` rank 0 = `FCLR-XSEC-008-20261121T054721Z` READY_EXECUTE/ACTIVE, phases PREREG_FREEZE / EVALUATION_AND_GATE / TRIGGER_AND_FRONTIER all COMPLETE with actual_artifacts; last_verdict NOT_SUPPORTED; rank 1 = FCLR-XSEC-007 SUPERSEDED (NOT_SUPPORTED); all others SUPERSEDED. Rank-0 stays READY_EXECUTE/ACTIVE (non-terminal) per `test_active_campaign_gate.py` invariant even though phases are COMPLETE and verdict is recorded — this is the handoff/test tension resolution.
+- `research_state/hypothesis_registry.json`: H_fclr_xsec_007 terminal NOT_SUPPORTED; H_fclr_xsec_008 terminal NOT_SUPPORTED (verdict_recorded=true, last_experiment=session_20261121T054721Z).
+- Handoff-heavywork gate PASS (exit 0); `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures; root churn cap 499/500 holds.
 
-**State is synchronized and consistent (verified 2026-11-21T04:49:01Z):**
-- `research_state/experiment_frontier.json` rank 0 = `FCLR-XSEC-008-20261121T021041Z` READY_EXECUTE/ACTIVE, phases PREREG_FREEZE / EVALUATION_AND_GATE / TRIGGER_AND_FRONTIER all NOT_STARTED; rank 1 = FCLR-XSEC-007 SUPERSEDED (NOT_SUPPORTED); all others SUPERSEDED.
-- `research_state/hypothesis_registry.json`: H_fclr_xsec_007 terminal NOT_SUPPORTED (verdict_recorded=true, last_experiment=session_20261121T021041Z); H_fclr_xsec_008 status NOT_STARTED, terminal=false.
-- Handoff-heavywork gate PASS (exit 0); `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures; root churn cap 499/500 holds (6 stale empty files removed from old sessions).
-
-### Next focus campaign: FCLR-XSEC-008 — Alternative regime conditioning.
-
-Execute a distinct, unblocked, **heavy** campaign (no new data, no network, no credentials) that tests whether the regime-conditioned funding effect that is SUPPORTED for RV (FCLR-XSEC-002, HIGH-RV regime) and for liquidation intensity (FCLR-XSEC-004/005/006) replicates under an alternative regime variable — **RV168/RV24 volatility-of-volatility ratio OR funding-rate-volatility buckets** — instead of RV tercile or UTC session bucket, on the same frozen panels. Concretely:
-
-1. **Panels (frozen, hash-verified — do NOT rebuild, do NOT substitute):**
-   - FCLR-001 panel: `research_state/fclr011_recompute_panel_20261115T234700Z.parquet`, sha256 `41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4` (29,136 rows, 5 coins, 5,832 hours, 2024-01..2026-10).
-   - Combined liquidation panel: `research_state/fclr_liq_combined_panel_20261115T181405Z.parquet`, sha256 `81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14` (1,740,415 rows, 15 coins, 10,052 hourly buckets, 2025-03-22..2026-10-31).
-   - Assert both sha256s at the top of every script and record them in the protocol freeze.
-
-2. **Pre-register the protocol freeze BEFORE examining any outcome** (`outcome_data_inspected_before_freeze=false`). Define the estimand *ex ante*: for each overlapping coin×hour, test whether the **cross-sectional funding rank within alternative-regime bucket** (RV168/RV24 ratio tercile, or funding-rate-volatility tercile) predicts its respective outcome on the same hours.
-
-3. **Estimands (distinct, non-duplicative):**
-   - Primary A: within-(hour, alt-regime-tercile) cross-sectional funding rank (abs_fund_pct) → next-hour RV (FCLR-XSEC-002-style estimand, alternative regime variable).
-   - Primary B: within-(hour, alt-regime-bucket) cross-sectional funding rank (abs_fund_pct) → next-hour notional-weighted liquidation intensity (FCLR-XSEC-006-style estimand, alternative regime variable).
-   - Cross-regime comparison: coefficient sign agreement and joint significance vs the FCLR-XSEC-002 / FCLR-XSEC-004 / FCLR-XSEC-005 / FCLR-XSEC-006 baselines.
-
-4. **Inference:** block bootstrap across whole UTC hours within each regime family (seed 20261121, ≥2000 reps); Holm over the joint test family; 2% materiality floor per test. Verdict = SUPPORTED only if BOTH primary funding contrasts clear all three gates (CI excludes zero, Holm passes, materiality ≥ 0.02); otherwise report the honest null as NOT_SUPPORTED. Do NOT threshold-shop or relax the floor after seeing outcomes.
-
-5. **Emit the full heavy artifact triad** under a NEW `research_state/session_<UTC>/` (Section 4), synchronize `experiment_frontier.json` + `hypothesis_registry.json`, and advance this handoff's latest-session line.
-
-6. **Acceptance (the gate):** `python3 scripts/check_handoff_heavywork_gate.py` exits 0 AND `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures; no holdout outcomes inspected before freeze; zero-byte placeholders do NOT count.
-
-**Non-avoidance:** prose, trigger-check-only, or placeholder artifacts do NOT satisfy the gate. The machine-enforced gate requires the concrete artifact triad (protocol_freeze + evaluation + recompute + evidence_audit) plus a non-empty `trigger_check_<UTC>.json` in the latest session directory, and the handoff's latest session id must match the newest on-disk session. Re-running FCLR-STARTER-001 / FCLR-001 / FCLR-XSEC-001..007, or emitting a thin count-only re-test, has NOT done this task. If you finish early, advance to the §6 contingency (FCLR-XSEC-009) in the same session rather than stopping.
-
-**Feasibility de-risk (measured on the frozen panels this refresh, 2026-11-21T04:49:01Z — the campaign is executable; a "structurally blocked" claim is now unfounded and will be treated as avoidance):**
-- **Primary A (RV panel, `fclr011_recompute_panel_20261115T234700Z.parquet`):** all 5,832 hours carry the full 5-coin cross-section (5,808 hours have 5 coins, 24 hours have 4; **0 hours with <3 coins**), so a within-hour cross-sectional funding rank always has ≥3 points. Alt-regime variable `rv168h / rv24h` is non-null for **61%** of rows and `abs_funding_pct_trail` for **99.5%** — both ample. Use the RV168/RV24 volatility-of-volatility ratio as the alternative regime variable; terciles are well-populated.
-- **Primary B (combined liquidation panel, `fclr_liq_combined_panel_20261115T181405Z.parquet`):** `abs_fund_pct` and the `rv168h/rv24h` ratio are **100% non-null**; 5,641 of 10,052 hourly buckets carry ≥3 distinct coins (mean 41.75 liquidation events per coin-hour). Form the notional-weighted liquidation-intensity contrast on those 5,641 multi-coin hours. If per-cell coin counts are thin in a given alt-regime tercile, fall back to **funding-rate-volatility terciles** (also 100% populated) as the Primary B regime variable — this is a pre-approved contingency, not threshold-shopping.
-- **Decision:** proceed with RV168/RV24 volatility-of-volatility terciles for BOTH primaries on the multi-coin hours; keep the funding-rate-volatility tercile as the documented alternative regime variable for Primary B. Do NOT re-derive or rebuild panels; both sha256s above are asserted.
+**XSEC program terminal.** FCLR-XSEC-008 executed cleanly (not structurally blocked), so per §6 contingency step 1 the FCLR-XSEC-009 fallback (Hyperliquid native-perps cross-panel mechanism cross-check) does NOT activate. No further XSEC campaign is warranted.
 
 ---
 
