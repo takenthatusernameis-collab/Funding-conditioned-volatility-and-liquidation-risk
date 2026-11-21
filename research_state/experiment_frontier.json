@@ -3,16 +3,59 @@
     "rank": 0,
     "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
-    "task": "FCLR-LIQ-CONTAGION-002-20261121T200000Z",
-    "generated": "20261121T200000Z",
-    "refreshed": "2026-11-21T20:00:00Z",
-    "last_checked": "2026-11-21T20:00:00Z",
+    "task": "FCLR-LIVE-DATA-ACQUISITION-001-20261121T222735Z",
+    "generated": "20261121T222735Z",
+    "refreshed": "2026-11-21T22:28:41Z",
+    "last_checked": "2026-11-21T22:28:41Z",
     "last_verdict": null,
-    "next_action_heavy": "Execute FCLR-LIQ-CONTAGION-002: edge-set robustness and per-edge materiality reconciliation on the SAME frozen 1.74M liquidation panel that FCLR-LIQ-CONTAGION-001 analyzed. CONTAGION-001 left a disclosed, unresolved methodological discrepancy: the Granger-Bonferroni INTERSECT permutation-Bonferroni edge set (11 edges) disagrees with the independent recompute's empirical-p-only edge set (58 edges) on 47 of 210 pairs; the declared 2% per-edge materiality floor was asserted True but NEVER actually computed (no per-edge variance-explained field exists); and the funding-tercile and temporal-stability results were never reconciled against the primary edge set. This is HEAVY computation: per-edge R^2 / variance explained within each VAR(6) Granger regression; a multiple-testing robustness ladder (raw p, Bonferroni, Benjamini-Hochberg FDR, permutation-empirical) applied to all 210 directed pairs; tercile-and-stability reconciliation against each robustness edge set; and a block-bootstrap edge-set stability analysis (1000+ resamples). Do NOT verify and stop. Do NOT claim completion without emitting the full artifact set under session_<UTC> with UTC > 20261121T200000Z.",
-    "next_unfinished_task": "FCLR-LIQ-CONTAGION-002-20261121T200000Z: outcome-blind reconciliation prereg freeze (json+md), reconciliation evaluation triad (fclr_liq_contagion02_recon_*.py+json+md), independent stdlib recompute (fclr_liq_contagion02_recompute_*.py+json), evidence audit (fclr_liq_contagion02_evidence_audit_*.json+md), gate-critical evidence_audit_*.json alias, trigger_check_*.json. All under research_state/session_<UTC>/ with UTC > 20261121T200000Z.",
+    "next_action_heavy": "Execute FCLR-LIVE-DATA-ACQUISITION-001: open a materially different free-data route so heavy research can continue. The frozen-data frontier is exhausted (no feasible 3-block design in ANY domain: Binance 5-symbol cache, Hyperliquid bulk cache, extended Hyperliquid stores all exhausted). The only path to new heavy work is an unauthenticated, free, external source with live/unfrozen historical coverage not already exhausted on disk. Candidate families: official Binance public market-data archive (github.com/binance/binance-public-data, data.binance.vision), public unauthenticated exchange APIs (historical funding/mark/index/klines/OI), public GitHub/Zenodo/Hugging Face/institutional archives with downloadable historical liquidation/event records without signup or keys. Do NOT assume a REST endpoint returning recent records provides complete historical labels; a live-only stream does not reconstruct the past.",
+    "next_unfinished_task": "FCLR-LIVE-DATA-ACQUISITION-001-20261121T222735Z: (a) Discover and verify a new admissible free source \u2014 live/unfrozen external data, unauthenticated, no credentials, no paid plans, no manual downloads, no user-provided files. Verify the actual unauthenticated download path, history depth, schema, licensing, and limits before integrating. Record results in research_state/data_source_registry.json and a per-source probe artifact under research_state/session_<UTC>/. (b) Freeze a prereg with outcome-blind hypotheses on that new data \u2014 outcome_data_inspected_before_freeze: false; assert source/data hashes; record earliest/latest timestamp, cadence, symbol coverage, gaps. (c) Execute a heavy 3-block design with non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261121T220100Z). Non-avoidance constraints: no prose-only/trigger-only/audit-only/verify-and-stop/placeholder sessions; root cap 499/500; no empty files or empty session dirs; no threshold-shopping or relaxing the 2% materiality floor after outcomes; preserve nulls as NOT_SUPPORTED; do NOT re-run any terminal campaign; do NOT modify .github/workflows; do NOT overwrite research_state/research_protocol.md.",
     "resume_triggers": [],
     "trigger_status": {},
-    "blockers": "None. Uses the existing frozen panel (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, sha256 81a100d5..., 1,740,415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC). No external trigger required. The bottleneck this campaign removes: the prior handoff told future agents to 'verify green and stop' on a completed campaign while the edge-set/materiality discrepancy went unresolved \u2014 a future agent would otherwise dodge this heavy work forever.",
+    "blockers": "None. Uses no external trigger. The bottleneck this campaign removes: the prior handoff's frozen-data frontier is closed \u2014 next_campaign_status.py confirms no feasible 3-block design in ANY domain. Future agents must NOT idle waiting for an external trigger that cannot fire on frozen data; they must open a materially different free-data route or write evidence for the blocker and stop cleanly.",
+    "evidence": {
+      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "panel_liquidation_shape": "1740415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC",
+      "frozen_frontier_exhausted": true,
+      "next_campaign_status": "NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN",
+      "root_md_json_count": 499,
+      "root_cap": 500,
+      "all_new_artifacts_must_go_under_session_dir": true
+    },
+    "phases": [
+      {
+        "phase": "SOURCE_DISCOVERY_VERIFICATION",
+        "status": "PENDING",
+        "claim": "Enumerate candidate free sources (Binance public archive, unauthenticated exchange REST endpoints, public GitHub/Zenodo/Hugging Face/institutional archives). For each candidate, verify: unauthenticated download path; actual history depth; schema and field availability; licensing/terms; earliest and latest timestamp; cadence; symbol/venue coverage; known gaps; file hashes or ETags; rejection reason if inadmissible. Record results in research_state/data_source_registry.json and a per-source probe artifact under research_state/session_<UTC>/. Do NOT bypass access controls, rate limits, or usage terms. Exclude sources requiring payment, signup, manually issued keys, or requester-pays charges."
+      },
+      {
+        "phase": "PREREG_FREEZE_ON_NEW_DATA",
+        "status": "PENDING",
+        "claim": "Freeze hypotheses, targets, features, splits, baselines, thresholds, and decision gates BEFORE inspecting outcomes. outcome_data_inspected_before_freeze: false. Assert source/data hashes. Record configuration hash and UTC freeze time."
+      },
+      {
+        "phase": "HEAVY_3_BLOCK_DESIGN",
+        "status": "PENDING",
+        "claim": "On the verified new data, execute a pre-registered 3-block confirmatory design with non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261121T220100Z). Artifact set must include: prereg freeze (json+md), evaluation triad (py+json+md), independent stdlib recompute (py+json), evidence audit (json+md), trigger check (json). No zero-byte placeholders."
+      }
+    ],
+    "note": "Sole rank-0 campaign. Frozen-data frontier exhausted. All new artifacts must go under research_state/session_<UTC>/ (root md+json count 499/500 at cap). UTC must be > 20261121T220100Z."
+  },
+  {
+    "rank": 1,
+    "status": "SUPERSEDED_TERMINAL",
+    "program_status": "COMPLETE",
+    "task": "FCLR-LIQ-CONTAGION-002-20261121T200000Z",
+    "generated": "20261121T200000Z",
+    "refreshed": "2026-11-21T22:28:41Z",
+    "last_checked": "2026-11-21T22:28:41Z",
+    "last_verdict": "CONTAGION-002 COMPLETE under session_20261121T210000Z: H_recon_materiality=SUPPORTED (12 edges clear 0.02 floor, bootstrap CI [8,23], mean 0.0069); H_recon_robustness=SUPPORTED (raw=184/Bonferroni=156/BH-FDR=199/permutation=102, Jaccard 0.5126-0.9246, eval-vs-recompute disagreement 47/210 quantified); H_recon_stability=SUPPORTED (block-bootstrap 1000 resamples, n_stable=0 recompute, tercile/rolling reconciliation); recompute_concurs_with_recon=false (honest discrepancy reported). All artifacts emitted under session_20261121T210000Z/.",
+    "next_action_heavy": "NONE \u2014 FCLR-LIQ-CONTAGION-002 executed in full under session_20261121T210000Z. Rank-0 superseded by FCLR-LIVE-DATA-ACQUISITION-001.",
+    "next_unfinished_task": null,
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None. Campaign complete. Frozen-data frontier exhausted (next_campaign_status.py: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN). Only path to new heavy work is FCLR-LIVE-DATA-ACQUISITION-001: a materially different unauthenticated free external data source.",
     "evidence": {
       "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
       "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
@@ -36,21 +79,23 @@
     "phases": [
       {
         "phase": "PREREG_FREEZE",
-        "status": "PENDING",
+        "status": "COMPLETE",
         "claim": "Outcome-blind freeze BEFORE any reconciliation statistic. Hypotheses: H_recon_materiality (the 2% per-edge variance-explained floor is actually evaluated per edge, not merely asserted); H_recon_robustness (the contagion edge set is characterised across raw/Bonferroni/BH-FDR/permutation-empirical criteria and the cross-criterion agreement rate is reported); H_recon_stability (block-bootstrap edge-set stability and tercile/stability reconciliation against each criterion's edge set). Materiality floor 0.02. Panel sha256 asserted."
       },
       {
         "phase": "RECONCILIATION_EVAL",
-        "status": "PENDING",
+        "status": "COMPLETE",
         "claim": "Execute frozen protocol on the 1.74M panel: per-edge R^2 / variance explained within each VAR(6) Granger regression for all 210 directed pairs; multiple-testing robustness ladder (raw p, Bonferroni, BH-FDR at q=0.05, permutation-empirical at 1000 permutations); funding-tercile and temporal-stability reconciliation against each criterion's edge set; block-bootstrap edge-set stability (1000+ resamples). HEAVY computation."
       },
       {
         "phase": "RECOMPUTE_AUDIT",
-        "status": "PENDING",
+        "status": "COMPLETE",
         "claim": "Independent stdlib/numpy recompute (separate code path). Evidence audit. Non-empty trigger_check."
       }
     ],
-    "note": "Edge-set robustness and per-edge materiality reconciliation for the cross-coin liquidation contagion network. Feasible on the existing frozen panel via per-edge variance-explained + multiple-testing ladder + block-bootstrap. Distinct from FCLR-LIQ-CONTAGION-001 (which computed the point-estimate network and permutation test but did not reconcile edge-set criteria or evaluate materiality per edge). Reopen the frontier only if this campaign also returns an uninformative robustness result."
+    "note": "Edge-set robustness and per-edge materiality reconciliation for the cross-coin liquidation contagion network. Feasible on the existing frozen panel via per-edge variance-explained + multiple-testing ladder + block-bootstrap. Distinct from FCLR-LIQ-CONTAGION-001 (which computed the point-estimate network and permutation test but did not reconcile edge-set criteria or evaluate materiality per edge). Reopen the frontier only if this campaign also returns an uninformative robustness result.",
+    "completed_session": "session_20261121T210000Z",
+    "completed_utc": "2026-11-21T21:00:00Z"
   },
   {
     "rank": 1,
