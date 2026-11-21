@@ -1,0 +1,88 @@
+{
+  "experiment_id": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
+  "session_utc": "20261121T080000Z",
+  "document": "negative_results_preservation",
+  "generated_at_utc": "2026-11-21T08:00:00Z",
+  "purpose": "Preserve every null/inconclusive outcome with a mechanistic explanation so future agents cannot accidentally re-run a null as if it were unexplored, and so the negative results remain scientifically usable.",
+  "outcome_data_inspected_before_freeze": false,
+  "negative_results": [
+    {
+      "campaign": "FCLR-STARTER-001",
+      "verdict": "NOT_SUPPORTED",
+      "outcome": "C2 funding-conditioned vs B1 RV-only on 24h forward RV",
+      "statistic": "rel QLIKE +2.62% (C2 worse), Holm adj_p 0.075",
+      "mechanistic_explanation": "Adding funding terms to an RV-only baseline did not improve 24h forward RV QLIKE; the improvement was negative and not significant after Holm correction. RV persistence dominates; funding adds no incremental 24h-horizon volatility skill.",
+      "reusable_lesson": "RV-only baseline is strong at 24h horizon; do not re-run time-series 24h RV C2-vs-B1 on this panel."
+    },
+    {
+      "campaign": "FCLR-XSEC-001",
+      "verdict": "NOT_SUPPORTED",
+      "outcome": "pooled within-hour cross-sectional funding contrast on RV",
+      "statistic": "funding contrast CI [-0.390, +0.158] incl. 0",
+      "mechanistic_explanation": "Pooled across all regimes, the funding effect on next-hour RV is indistinguishable from zero. The effect only emerges once the sample is conditioned on the RV regime (see XSEC-002).",
+      "reusable_lesson": "Do not pool across RV regimes when testing funding->RV; regime conditioning is necessary."
+    },
+    {
+      "campaign": "FCLR-FWD-VOL-011-CONFIRM",
+      "verdict": "NOT_REPLICATED",
+      "outcome": "out-of-sample forward confirmation of FCLR-011 RV forecast gate",
+      "statistic": "pooled C2 vs B1 mean diff +0.026760, CI [0.000343, 0.064822] favouring B1, rel -5.55%, n=10200, 85 days",
+      "mechanistic_explanation": "The FCLR-011 sealed PASS (4.94% QLIKE improvement on 2026-05..2026-08) did not generalize to the 2026-08..2026-10 forward window; C2 was significantly worse than B1 out-of-sample. The sealed PASS does not constitute generalizable skill.",
+      "reusable_lesson": "A sealed in-window PASS is not evidence of forward skill. Always require out-of-sample forward confirmation."
+    },
+    {
+      "campaign": "FCLR-XSEC-007",
+      "verdict": "NOT_SUPPORTED",
+      "outcome": "cross-panel reconciliation: RV tercile regime vs UTC session bucket",
+      "statistic": "Primary A high-RV CI [-0.0004, 2.005] incl. 0 (p=0.272, Holm 0.816); Primary B pass; joint gate needs both",
+      "mechanistic_explanation": "The two conditioning schemes (RV tercile vs UTC session) do not reconcile into a single coherent mechanism: the RV-tercile-based Primary A contrast includes zero, so the joint gate (requiring both) fails even though the UTC-bucket Primary B passes.",
+      "reusable_lesson": "RV-tercile and UTC-session conditioning are not interchangeable; do not assume a single regime variable explains both panels."
+    },
+    {
+      "campaign": "FCLR-XSEC-008",
+      "verdict": "NOT_SUPPORTED",
+      "outcome": "alternative regime conditioning (rv168/rv24 vol-of-vol terciles)",
+      "statistic": "Primary A passes with sign reversal vs XSEC-002; Primary B fails; joint gate NOT_SUPPORTED",
+      "mechanistic_explanation": "An alternative regime variable (volatility-of-volatility) produces a Primary A result with the opposite sign to the RV-tercile result (XSEC-002), and Primary B fails. The funding effect is not robust to the choice of regime variable.",
+      "reusable_lesson": "Funding-conditioning results are regime-variable-dependent and not robust across alternative conditioning schemes; the XSEC program is terminal."
+    },
+    {
+      "campaign": "FCLR-LIQ-OOS-FORECAST-001",
+      "verdict": "NOT_SUPPORTED",
+      "outcome": "out-of-sample forecast of next-24h observed notional-weighted liquidation intensity (C2 vs B1)",
+      "statistic": "QLIKE FAIL rel -5.88% CI incl. zero materiality not met; Brier PASS +11.48%; LogLoss PASS +8.63%; joint gate requires ALL -> NOT_SUPPORTED",
+      "mechanistic_explanation": "C2 (RV+funding+premium+ema) did not improve the continuous QLIKE intensity forecast out-of-sample (relative reduction -5.88%, CI includes zero). It did improve the binary Brier/LogLoss classification, but the joint gate requires ALL three metrics, so the honest verdict is NOT_SUPPORTED. The funding-conditioned signal is detectable in classification but not in continuous intensity magnitude out-of-sample.",
+      "reusable_lesson": "Funding conditioning may carry binary liquidation-risk signal but not continuous intensity-magnitude skill. Do not conflate classification improvement with forecast skill."
+    },
+    {
+      "campaign": "FCLR-LIQ-COMBINED-PANEL",
+      "verdict": "NOT_MET",
+      "outcome": "time-series 24h liquidation intensity C2 vs B1",
+      "statistic": "time-series QLIKE gate NOT_MET",
+      "mechanistic_explanation": "Time-series (non-cross-sectional) funding-conditioned liquidation intensity forecast did not meet the QLIKE gate.",
+      "reusable_lesson": "Time-series liquidation intensity forecasting is not viable on this panel; cross-sectional regime-conditioned contrasts are the only SUPPORTED liquidation associations."
+    },
+    {
+      "campaign": "Track B (modeled breaches)",
+      "verdict": "NOT_MET",
+      "outcome": "funding-conditioned forecast of modeled synthetic boundary breaches",
+      "statistic": "pooled Log Loss B1=0.292447 -> C2=0.287540 = +1.68% (<2% floor); CI [-0.010997, 0.003094] crosses zero; only 2 non-overlapping 30-day blocks (<3)",
+      "mechanistic_explanation": "Even on modeled synthetic boundary breaches (a proxy, NOT observed liquidations), the funding-conditioned improvement was below the 2% materiality floor and not significant, with insufficient independent blocks. The risk overlay is INELIGIBLE.",
+      "reusable_lesson": "Modeled boundary breaches are a weaker proxy than observed liquidations; do not promote Track B results to observed-liquidation claims."
+    }
+  ],
+  "inconclusive_or_blocked": [
+    {
+      "item": "Track A (12-month observed-liq extension)",
+      "status": "BLOCKED/NOT_MET",
+      "explanation": "Track A observed-liquidation extension did not pass; combined with the frozen-panel frontier exhaustion, no new Track A confirmatory design is feasible without new data."
+    },
+    {
+      "item": "3-block confirmatory design (any domain)",
+      "status": "BLOCKED_ON_DESIGN",
+      "explanation": "No contiguous or disjoint 3-block design is feasible on the frozen Binance mark+funding data or the Hyperliquid bulk/extended frontiers. See frontier_exhaustion_audit_20261121T080000Z."
+    }
+  ],
+  "preservation_guarantee": "All negative results above are preserved verbatim with their exact statistics and mechanistic explanations. They are NOT to be re-run as if unexplored. The honest null NOT_SUPPORTED verdicts are preserved; no 2% materiality floor was relaxed after seeing outcomes.",
+  "reopen_requires": ["NEW_OBSERVED_LIQUIDATION_SOURCE"]
+}

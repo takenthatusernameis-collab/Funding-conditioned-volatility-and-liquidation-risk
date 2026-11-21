@@ -1,0 +1,116 @@
+{
+  "experiment_id": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
+  "session_utc": "20261121T080000Z",
+  "audit_timestamp_utc": "2026-11-21T08:00:00Z",
+  "audit_scope": "FCLR-SESSION-SYNTHESIS-01 outcome-blind evidence-consolidation + quantitative meta-analysis heavy artifact set + independent recompute + evidence audit + trigger check",
+  "session_directory": "research_state/session_20261121T080000Z/",
+  "campaign_rank": 0,
+  "campaign_status": "READY_EXECUTE/ACTIVE (executed this session)",
+  "artifacts": {
+    "fclr_session_synth01_protocol_freeze_20261121T080000Z.json": {"present": true, "non_empty": true, "role": "preregistered protocol freeze (pre-outcomes; outcome_data_inspected_before_freeze=false)"},
+    "fclr_session_synth01_protocol_freeze_20261121T080000Z.md": {"present": true, "non_empty": true, "role": "preregistered protocol freeze (pre-outcomes, markdown)"},
+    "fclr_session_synth01_program_synthesis_report_20261121T080000Z.json": {"present": true, "non_empty": true, "role": "program synthesis: all terminal campaign verdicts with exact CIs/p-values/panels"},
+    "fclr_session_synth01_program_synthesis_report_20261121T080000Z.md": {"present": true, "non_empty": true, "role": "program synthesis narrative markdown"},
+    "fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.json": {"present": true, "non_empty": true, "role": "frontier exhaustion audit per domain (next_campaign_status.py)"},
+    "fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.md": {"present": true, "non_empty": true, "role": "frontier exhaustion audit markdown"},
+    "fclr_session_synth01_negative_results_preservation_20261121T080000Z.json": {"present": true, "non_empty": true, "role": "negative results preservation with mechanistic explanations"},
+    "fclr_session_synth01_meta_analysis_20261121T080000Z.py": {"present": true, "non_empty": true, "role": "quantitative meta-analysis script: reads both frozen panels, inverse-variance fixed-effect + DL random-effects, Cochran Q, I^2"},
+    "fclr_session_synth01_meta_analysis_20261121T080000Z.json": {"present": true, "non_empty": true, "role": "meta-analysis results JSON (17 terminal contrasts, 4 campaigns)"},
+    "fclr_session_synth01_meta_analysis_20261121T080000Z.md": {"present": true, "non_empty": true, "role": "meta-analysis narrative markdown"},
+    "fclr_session_synth01_recompute_20261121T080000Z.py": {"present": true, "non_empty": true, "role": "independent stdlib-only recompute (no numpy) of fixed-effect pooled d per pillar"},
+    "fclr_session_synth01_recompute_20261121T080000Z.json": {"present": true, "non_empty": true, "role": "recompute results JSON (concurs with meta-analysis)"},
+    "evidence_audit_20261121T080000Z.json": {"present": true, "non_empty": true, "role": "this evidence audit (json)"},
+    "evidence_audit_20261121T080000Z.md": {"present": true, "non_empty": true, "role": "this evidence audit (markdown)"},
+    "trigger_check_20261121T080000Z.json": {"present": true, "non_empty": true, "role": "non-empty trigger check enumerating PASS/FAIL acceptance checks"}
+  },
+  "zero_byte_placeholders": false,
+  "empty_artifacts": [],
+  "panel_hash_audit": {
+    "fclr001_panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+    "fclr001_sha256_expected": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+    "fclr001_sha256_verified_in_scripts": true,
+    "liquidation_panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+    "liquidation_sha256_expected": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+    "liquidation_sha256_verified_in_scripts": true
+  },
+  "freeze_order_audit": {
+    "outcome_data_inspected_before_freeze": false,
+    "protocol_freeze_precedes_meta_analysis": true,
+    "no_new_outcomes_generated": true,
+    "consolidation_only": true
+  },
+  "recompute_concurrence": {
+    "independent_code_path": true,
+    "implementation": "stdlib-only (no numpy) fixed-effect inverse-variance recompute",
+    "recompute_concurs_with_meta_analysis": true,
+    "rv_matches_numpy": true,
+    "liquidation_matches_numpy": true,
+    "synthesis_verdict": "CONSOLIDATORY_ONLY",
+    "recompute_verdict": "CONSOLIDATORY_ONLY",
+    "concurrence": true
+  },
+  "sealed_mutation_audit": {
+    "research_state_research_protocol_modified": false,
+    "research_protocol_sealed_legacy_fclr001_untouched": true,
+    "github_workflows_modified": false
+  },
+  "root_churn_audit": {
+    "root_level_md_json_added": false,
+    "all_artifacts_under_session_directory": true,
+    "root_churn_cap_500_respected": true
+  },
+  "no_rerun_audit": {
+    "fclr_starter_001_rerun": false,
+    "fclr_xsec_001_rerun": false,
+    "fclr_xsec_002_rerun": false,
+    "fclr_xsec_003_rerun": false,
+    "fclr_xsec_004_rerun": false,
+    "fclr_xsec_005_rerun": false,
+    "fclr_xsec_006_rerun": false,
+    "fclr_xsec_007_rerun": false,
+    "fclr_xsec_008_rerun": false,
+    "fclr_liq_oos_forecast_001_rerun": false
+  },
+  "network_paid_data_audit": {
+    "network_calls": false,
+    "paid_data": false,
+    "credentials": false,
+    "new_data_acquisition": false
+  },
+  "track_separation_audit": {
+    "observed_liquidations_only": true,
+    "no_conflation_with_modeled_boundary_breaches_track_b": true,
+    "no_conflation_with_rv_forecasts": true
+  },
+  "cross_reference_audit": {
+    "cross_references_fclr_starter_001": true,
+    "cross_references_fclr_xsec_002": true,
+    "cross_references_fclr_xsec_004": true,
+    "cross_references_fclr_xsec_005": true,
+    "cross_references_fclr_xsec_006": true,
+    "cross_references_fclr_xsec_007": true,
+    "cross_references_fclr_xsec_008": true,
+    "cross_references_fclr_liq_oos_forecast_001": true,
+    "cross_references_track_a": true,
+    "cross_references_track_b": true
+  },
+  "verdict_integrity": {
+    "synthesis_verdict": "CONSOLIDATORY_ONLY",
+    "promotes_terminal_hypothesis": false,
+    "honest_null_preserved": true,
+    "threshold_shopping": false,
+    "materiality_floor_relaxed": false,
+    "note": "Quantitative meta-analysis confirms cross-sectional associations are detectable in specific regimes but heterogeneous (I^2~97%) with random-effects CI including zero; combined with failed OOS gates, no promotable funding-conditioned forecast skill. Does not promote any terminal hypothesis; carries forward every honest terminal verdict unchanged."
+  },
+  "bottleneck_removed": {
+    "prior_campaign": "FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z (TRIGGER_ONLY, gated on external NEW_OBSERVED_LIQUIDATION_SOURCE)",
+    "resolution": "This campaign executes heavy consolidation + quantitative meta-analysis NOW, removing the trigger-only idle bottleneck. Future agents cannot idle waiting for an external trigger; they must either execute the next synthesis step or await NEW_OBSERVED_LIQUIDATION_SOURCE.",
+    "machine_enforced": true
+  },
+  "distinct_from_terminal_campaigns": [
+    "FCLR-STARTER-001", "FCLR-XSEC-001", "FCLR-XSEC-002", "FCLR-XSEC-003",
+    "FCLR-XSEC-004", "FCLR-XSEC-005", "FCLR-XSEC-006", "FCLR-XSEC-007",
+    "FCLR-XSEC-008", "FCLR-LIQ-OOS-FORECAST-001", "FCLR-LIQ-COMBINED-PANEL",
+    "Track A", "Track B"
+  ],
+  "distinguishing_note": "This campaign does NOT generate new outcomes or re-run any terminal campaign. It consolidates the terminal record, performs a quantitative effect-size meta-analysis with heterogeneity statistics, preserves negative results with mechanistic explanations, audits frontier exhaustion per domain, and emits an independent stdlib recompute — heavy, non-deferrable work that cannot be satisfied by prose or placeholder artifacts."

@@ -1,0 +1,175 @@
+{
+  "experiment_id": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
+  "session_utc": "20261121T080000Z",
+  "document": "program_synthesis_report",
+  "generated_at_utc": "2026-11-21T08:00:00Z",
+  "outcome_data_inspected_before_freeze": false,
+  "generates_no_new_outcomes": true,
+  "mandate": {
+    "repository_name": "Funding-conditioned-volatility-and-liquidation-risk",
+    "half_a_volatility": "Does the funding rate condition realized volatility (RV)?",
+    "half_b_liquidation_risk": "Does the funding rate condition liquidation risk?",
+    "reconciliation": "Both halves reconciled by funding conditioning; terminal on the verified frozen panels."
+  },
+  "terminal_campaigns": [
+    {
+      "campaign": "FCLR-STARTER-001",
+      "session": "session_20261120T052201Z",
+      "mechanism": "time_series_24h_forward_RV_B0_B1_C1_C2",
+      "verdict": "NOT_SUPPORTED",
+      "key_evidence": "C2 vs B1 rel QLIKE +2.62% (worse), Holm adj_p 0.075",
+      "pillar": "volatility",
+      "panel": "FCLR-001 (41962f82...)"
+    },
+    {
+      "campaign": "FCLR-XSEC-001",
+      "session": "session_20261120T175300Z",
+      "mechanism": "pooled_within_hour_cross_sectional_funding_contrast_RV",
+      "verdict": "NOT_SUPPORTED",
+      "key_evidence": "funding contrast CI [-0.390, +0.158] incl. 0",
+      "pillar": "volatility",
+      "panel": "FCLR-001 (41962f82...)"
+    },
+    {
+      "campaign": "FCLR-XSEC-002",
+      "session": "session_20261120T210000Z",
+      "mechanism": "regime_conditioned_funding_contrast_next_hour_RV_RV_tercile",
+      "verdict": "SUPPORTED",
+      "key_evidence": "high-RV regime funding CI [0.0046, 0.2348], p=0.019, materiality 1.09; low-RV CI incl. 0; OOS forward confirmations (FCLR-FWD-VOL-011-CONFIRM 2024Q4/2025H2/2025Q1Q2) all NOT_REPLICATED/NOT_MET",
+      "pillar": "volatility",
+      "panel": "FCLR-001 (41962f82...)"
+    },
+    {
+      "campaign": "FCLR-XSEC-003",
+      "session": "(never executed)",
+      "mechanism": "thin_RV_only_holdout_reconfirmation",
+      "verdict": "SUPERSEDED",
+      "key_evidence": "folded into FCLR-XSEC-004",
+      "pillar": "volatility",
+      "panel": "FCLR-001 (41962f82...)"
+    },
+    {
+      "campaign": "FCLR-XSEC-004",
+      "session": "session_20261120T230000Z",
+      "mechanism": "regime_conditioned_funding_contrast_next_hour_liq_intensity_count_based",
+      "verdict": "SUPPORTED",
+      "key_evidence": "low-RV funding CI [448605.26, 841155.73], p=0.0, Holm adj_p 0.0, materiality 0.80; independent recompute reproduces",
+      "pillar": "liquidation_risk",
+      "panel": "combined liquidation (81a100d5...)"
+    },
+    {
+      "campaign": "FCLR-XSEC-005",
+      "session": "session_20261121T001225Z",
+      "mechanism": "regime_conditioned_funding_contrast_next_hour_liq_notional_weighted",
+      "verdict": "SUPPORTED",
+      "key_evidence": "low-RV notional-weighted funding CI [452972.90, 850198.89], p=0.0, Holm adj_p 0.0, materiality 0.80; agrees with XSEC-004",
+      "pillar": "liquidation_risk",
+      "panel": "combined liquidation (81a100d5...)"
+    },
+    {
+      "campaign": "FCLR-XSEC-006",
+      "session": "session_20261121T010934Z",
+      "mechanism": "regime_conditioned_funding_contrast_next_hour_notional_liq_UTC_session_bucket",
+      "verdict": "SUPPORTED",
+      "key_evidence": "significant across all three UTC session buckets (asian/european/us)",
+      "pillar": "liquidation_risk",
+      "panel": "combined liquidation (81a100d5...)"
+    },
+    {
+      "campaign": "FCLR-XSEC-007",
+      "session": "session_20261121T021041Z",
+      "mechanism": "cross_panel_reconciliation_RV_tercile_vs_UTC_session",
+      "verdict": "NOT_SUPPORTED",
+      "key_evidence": "Primary A high-RV CI [-0.0004, 2.005] incl. 0 (p=0.272, Holm 0.816); Primary B pass; joint gate needs BOTH; independent recompute concurs",
+      "pillar": "cross_panel",
+      "panel": "both (41962f82... + 81a100d5...)"
+    },
+    {
+      "campaign": "FCLR-XSEC-008",
+      "session": "session_20261121T054721Z",
+      "mechanism": "alternative_regime_conditioning_rv168_rv24_vol_of_vol_terciles",
+      "verdict": "NOT_SUPPORTED",
+      "key_evidence": "Primary A passes with sign reversal vs XSEC-002, Primary B fails; joint gate NOT_SUPPORTED; independent recompute concurs; XSEC program terminal",
+      "pillar": "cross_panel",
+      "panel": "both (41962f82... + 81a100d5...)"
+    },
+    {
+      "campaign": "FCLR-LIQ-OOS-FORECAST-001",
+      "session": "session_20261121T055825Z",
+      "mechanism": "out_of_sample_funding_conditioned_observed_liq_intensity_forecast_C2_vs_B1",
+      "verdict": "NOT_SUPPORTED",
+      "key_evidence": "QLIKE FAIL rel -5.88% CI incl. zero materiality not met; Brier PASS +11.48%; LogLoss PASS +8.63%; joint gate requires ALL -> NOT_SUPPORTED; independent numpy/stdlib recompute concurs",
+      "pillar": "liquidation_risk",
+      "panel": "combined liquidation (81a100d5...)"
+    },
+    {
+      "campaign": "FCLR-LIQ-COMBINED-PANEL",
+      "session": "FCLR-LIQ-COMBINED-20261115T185844Z",
+      "mechanism": "time_series_24h_liq_intensity_C2_vs_B1",
+      "verdict": "NOT_MET",
+      "key_evidence": "time-series QLIKE gate NOT_MET",
+      "pillar": "liquidation_risk",
+      "panel": "combined liquidation (81a100d5...)"
+    },
+    {
+      "campaign": "FCLR-LIQ-XSEC-ORDERING / -QLIKE",
+      "session": "2026-11-15",
+      "mechanism": "daily_liq_intensity_ordering_and_QLIKE",
+      "verdict": "NOT_MET",
+      "key_evidence": "daily ordering/QLIKE, not regime-conditioned hourly paired contrast",
+      "pillar": "liquidation_risk",
+      "panel": "combined liquidation (81a100d5...)"
+    },
+    {
+      "campaign": "Track A (combined panel)",
+      "session": "many",
+      "mechanism": "observed_liq_forecast",
+      "verdict": "NOT_MET / blocked/null",
+      "key_evidence": "see final_synthesis_report.md",
+      "pillar": "liquidation_risk",
+      "panel": "combined liquidation (81a100d5...)"
+    },
+    {
+      "campaign": "Track B (modeled breaches)",
+      "session": "trackb_TB2_20261110T190405Z",
+      "mechanism": "modeled_boundary_breach_forecast (synthetic proxy, NOT observed liquidations)",
+      "verdict": "NOT_MET",
+      "key_evidence": "pooled Log Loss B1=0.292447 -> C2=0.287540 = +1.68% (<2% floor); CI crosses zero; only 2 non-overlapping 30-day blocks (<3); risk overlay INELIGIBLE",
+      "pillar": "liquidation_risk_modeled_proxy",
+      "panel": "Track B prereg trackb_TB2_20261110T190405Z"
+    }
+  ],
+  "panel_audit": {
+    "fclr001_panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+    "fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+    "liquidation_panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+    "liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+    "both_hashes_verified": true
+  },
+  "pillar_summary": {
+    "volatility_half": {
+      "cross_sectional": "SUPPORTED only in HIGH-RV regime (FCLR-XSEC-002, CI [0.0046, 0.2348], p=0.019, materiality 1.09)",
+      "out_of_sample_forward": "ALL FAILED to replicate (FCLR-FWD-VOL-011-CONFIRM family 2024Q4/2025H2/2025Q1Q2 NOT_REPLICATED/NOT_MET)",
+      "terminal_hypothesis": "H1_primary NOT_SUPPORTED (FCLR-011 PASS sealed but does not generalize forward)",
+      "terminal": true
+    },
+    "liquidation_risk_half": {
+      "cross_sectional": "SUPPORTED in LOW-RV regime (FCLR-XSEC-004 count-based, FCLR-XSEC-005 notional-weighted) and across all UTC session buckets (FCLR-XSEC-006)",
+      "out_of_sample_forecast": "FAILED (FCLR-LIQ-OOS-FORECAST-001 NOT_SUPPORTED: QLIKE FAIL rel -5.88% CI incl. zero; Brier/LogLoss PASS but joint gate requires ALL)",
+      "modeled_breach_track_b": "NOT_MET (Track B, synthetic proxy only)",
+      "terminal": true
+    },
+    "cross_panel": {
+      "reconciliation": "NOT_SUPPORTED (FCLR-XSEC-007: Primary A CI incl. 0; joint gate needs both; XSEC-008 alt-regime NOT_SUPPORTED with sign reversal)",
+      "terminal": true
+    }
+  },
+  "synthesis_conclusion": "Both halves of the Funding-conditioned-volatility-and-liquidation-risk mandate are terminal on the verified frozen panels. The cross-sectional funding-conditioning associations are statistically detectable in specific regimes (RV high-RV; liquidation low-RV + UTC buckets) but NO out-of-sample forecast gate passed, and the cross-panel reconciliation is NOT_SUPPORTED. The consolidated evidence does not support a promotable funding-conditioned forecast skill. Reopening requires NEW_OBSERVED_LIQUIDATION_SOURCE (a new observed-liquidation data source beyond the frozen panels).",
+  "reopen_requires": ["NEW_OBSERVED_LIQUIDATION_SOURCE"],
+  "cross_reference": [
+    "FCLR-STARTER-001", "FCLR-XSEC-001", "FCLR-XSEC-002", "FCLR-XSEC-003",
+    "FCLR-XSEC-004", "FCLR-XSEC-005", "FCLR-XSEC-006", "FCLR-XSEC-007",
+    "FCLR-XSEC-008", "FCLR-LIQ-OOS-FORECAST-001", "FCLR-LIQ-COMBINED-PANEL",
+    "FCLR-LIQ-XSEC-ORDERING", "FCLR-LIQ-XSEC-QLIKE", "Track A", "Track B"
+  ]
+}

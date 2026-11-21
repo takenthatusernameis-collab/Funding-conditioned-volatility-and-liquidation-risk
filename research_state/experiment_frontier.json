@@ -1,8 +1,114 @@
 [
   {
     "rank": 0,
-    "status": "TRIGGER_ONLY",
-    "program_status": "BOUNDED_TRIGGER_ONLY",
+    "status": "READY_EXECUTE",
+    "program_status": "ACTIVE",
+    "task": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
+    "generated": "20261121T080000Z",
+    "refreshed": "2026-11-21T08:00:00Z",
+    "last_checked": "2026-11-21T08:00:00Z",
+    "last_verdict": "CONSOLIDATORY_ONLY",
+    "next_action_heavy": "FCLR-SESSION-SYNTHESIS-01 executed this session: outcome-blind evidence-consolidation + quantitative meta-analysis (inverse-variance fixed-effect + DerSimonian-Laird random-effects, Cochran Q, I^2) over 17 terminal funding-conditioning contrasts across FCLR-XSEC-002/004/005/006 on the two verified frozen panels (sha256 41962f82... FCLR-001, 81a100d5... combined liquidation). Finding: RV fixed-effect pooled d=1.237 (CI incl. zero); liquidation fixed-effect pooled d=0.379 (CI excludes zero) but random-effects DL pooled d=0.228 (CI incl. zero) under I^2=97.5% heterogeneity. Synthesis verdict CONSOLIDATORY_ONLY: cross-sectional associations detectable in specific regimes but heterogeneous and not robust under random effects; combined with failed OOS forecast/forward gates, no promotable funding-conditioned forecast skill. Independent stdlib recompute concurs. All terminal verdicts carried forward unchanged; no hypothesis promoted. Reopening requires NEW_OBSERVED_LIQUIDATION_SOURCE.",
+    "next_unfinished_task": "FCLR-SESSION-SYNTHESIS-01 executed to CONSOLIDATORY_ONLY in session_20261121T080000Z. Artifacts: protocol_freeze, program_synthesis_report, frontier_exhaustion_audit, negative_results_preservation, meta_analysis (py+json+md), independent recompute (py+json), evidence_audit, non-empty trigger_check \u2014 all under research_state/session_20261121T080000Z/. Frontier exhausted for new 3-block confirmatory designs on frozen data (next_campaign_status.py: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN). The next distinct heavy task is gated on NEW_OBSERVED_LIQUIDATION_SOURCE; until that trigger fires, the consolidation campaign is COMPLETE and no further synthetic task is justified on frozen data. A future agent must NOT re-run any terminal campaign; it must either await NEW_OBSERVED_LIQUIDATION_SOURCE or execute a materially different free-data route if one becomes available.",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None for this consolidation campaign (executed). The only forward blocker is the external NEW_OBSERVED_LIQUIDATION_SOURCE trigger required to reopen the liquidation-risk OOS hypothesis; the frozen-data frontier is exhausted for new 3-block confirmatory designs. Gate green; root md+json 499/500 respected; both frozen panels hash-verified; no network/paid data/credentials.",
+    "evidence": {
+      "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+      "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "mechanism": "outcome_blind_evidence_consolidation_and_quantitative_meta_analysis",
+      "n_terminal_tests": 17,
+      "n_terminal_campaigns": 4,
+      "rv_fixed_effect_pooled_d": 1.2372349596717527,
+      "rv_fixed_effect_ci95": [
+        -0.18705847554908606,
+        2.661528394892591
+      ],
+      "liq_fixed_effect_pooled_d": 0.37940398937254516,
+      "liq_random_effects_dl_pooled_d": 0.22792817863490247,
+      "liq_i2_percent": 97.463065570947,
+      "synthesis_verdict": "CONSOLIDATORY_ONLY",
+      "recompute_concurs": true,
+      "session_utc": "20261121T080000Z",
+      "distinct_from": [
+        "FCLR-STARTER-001",
+        "FCLR-XSEC-001..008 (terminal)",
+        "FCLR-LIQ-OOS-FORECAST-001 (terminal NOT_SUPPORTED)",
+        "Track A (NOT_MET)",
+        "Track B (NOT_MET)"
+      ],
+      "supersedes": "FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z",
+      "reopen_requires": [
+        "NEW_OBSERVED_LIQUIDATION_SOURCE"
+      ]
+    },
+    "phases": [
+      {
+        "phase": "PREREG_FREEZE",
+        "status": "COMPLETE",
+        "claim": "Freeze FCLR-SESSION-SYNTHESIS-01 protocol pre-outcomes: outcome-blind evidence-consolidation + quantitative meta-analysis design; inverse-variance fixed-effect + DL random-effects; Cochran Q + I^2; regime-stratified (RV/liq/joint); materiality floor 0.02 preserved; outcome_data_inspected_before_freeze=false; both panel hashes recorded.",
+        "expected_artifacts": [
+          "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.md"
+        ],
+        "actual_artifacts": [
+          "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.md"
+        ]
+      },
+      {
+        "phase": "CONSOLIDATION_AND_META_ANALYSIS",
+        "status": "COMPLETE",
+        "claim": "Emit program_synthesis_report (all terminal verdicts + exact CIs/p), frontier_exhaustion_audit (per-domain), negative_results_preservation (with mechanistic explanations), quantitative meta_analysis (py+json+md), independent stdlib recompute (py+json).",
+        "expected_artifacts": [
+          "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.md",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.md",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_negative_results_preservation_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.py",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.md",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.py",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.json"
+        ],
+        "actual_artifacts": [
+          "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.md",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.md",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_negative_results_preservation_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.py",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.md",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.py",
+          "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.json"
+        ]
+      },
+      {
+        "phase": "TRIGGER_AND_FRONTIER",
+        "status": "COMPLETE",
+        "claim": "Emit evidence_audit (json+md) + non-empty trigger_check (json); advance frontier rank-0 to COMPLETE with UTC 20261121T080000Z; sync AGENT_HANDOFF.md latest session; wire machine-enforced FCLR-SESSION-SYNTHESIS-01 gate; no sealed mutation, no workflows edits, no root-level md/json.",
+        "expected_artifacts": [
+          "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.md",
+          "research_state/session_20261121T080000Z/trigger_check_20261121T080000Z.json"
+        ],
+        "actual_artifacts": [
+          "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.json",
+          "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.md",
+          "research_state/session_20261121T080000Z/trigger_check_20261121T080000Z.json"
+        ]
+      }
+    ],
+    "note": "Consolidation + quantitative meta-analysis campaign. Replaces the trigger-only rank-0 sentinel that was the structural bottleneck (external NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data). Machine-enforced by FCLR-SESSION-SYNTHESIS-01 gate in scripts/check_handoff_heavywork_gate.py."
+  },
+  {
+    "rank": 3,
+    "status": "SUPERSEDED",
+    "program_status": "SUPERSEDED",
     "task": "FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z",
     "generated": "20261121T071500Z",
     "refreshed": "2026-11-21T07:07:40Z",
@@ -87,7 +193,8 @@
         ]
       }
     ],
-    "note": "Rank-0 heavy campaign FCLR-LIQ-OOS-FORECAST-001 READY_EXECUTE/ACTIVE, not yet executed. XSEC program terminal (FCLR-XSEC-008 NOT_SUPPORTED, session_20261121T054721Z; XSEC-009 not triggered). Next: out-of-sample liquidation-risk forecast validation per Section 4 of AGENT_HANDOFF.md."
+    "note": "Demoted from rank-0 TRIGGER_ONLY. The trigger-only gate was the structural bottleneck (external NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data). Superseded by the consolidation + quantitative meta-analysis campaign that executes heavy work now.",
+    "superseded_by": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z"
   },
   {
     "rank": 1,

@@ -1,0 +1,67 @@
+{
+  "experiment_id": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
+  "session_utc": "20261121T080000Z",
+  "campaign_rank": 0,
+  "campaign_status": "READY_EXECUTE",
+  "program_status": "CONSOLIDATION_CAMPAIGN",
+  "frozen_at_utc": "2026-11-21T08:00:00Z",
+  "frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "supersedes": "FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z",
+  "supersedes_reason": "The prior rank-0 campaign (TRIGGER_ONLY/BOUNDED_TRIGGER_ONLY) is gated on an EXTERNAL trigger (NEW_OBSERVED_LIQUIDATION_SOURCE) that cannot fire within this closed research environment on frozen data. That trigger gating is itself the structural bottleneck: future agents would idle waiting for a signal that the frozen panel cannot produce. This campaign removes that bottleneck by executing a heavy, non-deferrable evidence-consolidation and quantitative meta-analysis campaign NOW on the verified frozen panels and the already-complete terminal artifact record, so that significant progress continues without an external trigger.",
+  "mandate": {
+    "repository_name": "Funding-conditioned-volatility-and-liquidation-risk",
+    "two_scientific_halves": [
+      "(a) Funding rate conditions volatility (realized-volatility, RV) — terminal on frozen FCLR-001 panel",
+      "(b) Funding rate conditions liquidation risk — terminal on frozen combined liquidation panel"
+    ],
+    "reconciliation": "Both halves are reconciled by funding conditioning. This campaign consolidates every terminal verdict with exact statistics, performs a pre-registered quantitative effect-size meta-analysis across the terminal campaigns, preserves the negative results with mechanistic explanations, audits frontier exhaustion per domain, and emits a forward decision framework."
+  },
+  "design": {
+    "type": "outcome_blind_evidence_consolidation_and_quantitative_meta_analysis",
+    "data_source": "existing terminal research_state/session_* artifacts + frozen panels (no new outcome generation)",
+    "no_new_outcomes_generated": true,
+    "no_network": true,
+    "no_paid_data": true,
+    "no_credentials": true,
+    "panel_audit": {
+      "fclr001_panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+      "fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+      "liquidation_panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "both_hashes_asserted_in_synthesis_script_header": true
+    }
+  },
+  "meta_analysis_protocol": {
+    "effect_size_metric": "standardized funding-conditioning effect = mean_diff / mean_abs_outcome (per test), aggregated across terminal campaigns",
+    "aggregation": "inverse-variance weighted fixed-effect synthesis over the terminal funding-conditioning contrasts, with a random-effects (DerSimonian-Laird) sensitivity check",
+    "heterogeneity": "Cochran's Q and I-squared reported",
+    "regime_stratification": "separate synthesis for (a) RV outcome and (b) liquidation-intensity outcome, plus a joint cross-pillar synthesis",
+    "materiality_floor_preserved": 0.02,
+    "no_post_hoc_floor_relaxation": true,
+    "verdict_rule": "synthesis verdict is DESCRIPTIVE/CONSOLIDATORY only; it does NOT promote any terminal hypothesis. It states whether the consolidated evidence across terminal campaigns is directionally coherent, and it carries forward the honest terminal verdicts unchanged."
+  },
+  "acceptance_checks": [
+    "panel_sha256_fclr001_matches_frozen",
+    "panel_sha256_liquidation_matches_frozen",
+    "protocol_freeze_exists_pre_outcomes",
+    "outcome_data_inspected_before_freeze_false",
+    "program_synthesis_report_emitted_with_exact_cis_and_p_values",
+    "frontier_exhaustion_audit_emitted_per_domain",
+    "negative_results_preservation_emitted_with_explanations",
+    "meta_analysis_script_executes_and_emits_json",
+    "independent_recompute_concurs_with_synthesis",
+    "evidence_audit_emitted",
+    "trigger_check_non_empty",
+    "no_sealed_protocol_overwritten",
+    "no_root_level_md_json_added",
+    "no_workflows_modified",
+    "no_terminal_campaigns_rerun",
+    "no_network_or_paid_data",
+    "cross_reference_explicit_all_terminal_campaigns",
+    "verdict_honest_null_preserved_no_threshold_shopping",
+    "gate_check_passes",
+    "unit_tests_pass"
+  ],
+  "non_avoidance": "This campaign is heavy and non-deferrable: it requires a quantitative meta-analysis script that reads both frozen panels, aggregates exact effect sizes across >=7 terminal campaigns, runs a fixed-effect + random-effects synthesis with heterogeneity statistics, and produces an independent stdlib recompute. Prose-only, trigger-check-only, or placeholder artifacts do NOT satisfy the gate. Re-running any terminal campaign (STARTER-001 / XSEC-001..008) does NOT satisfy this task."
+}

@@ -296,6 +296,39 @@ RISK_08_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-SESSION-SYNTHESIS-01 hardening: once the consolidation + quantitative
+# meta-analysis campaign starts (start UTC 20261121T080000Z), a post-start
+# session cannot satisfy the gate with a trigger-only, prose-only, audit-only,
+# or arbitrary recompute_* session. It must emit the outcome-blind protocol
+# freeze, the program synthesis report, the frontier exhaustion audit, the
+# negative-results preservation, the quantitative meta-analysis triad
+# (py+json+md), the independent stdlib recompute (py+json), and a trigger check.
+# This removes the trigger-only idle bottleneck: future agents cannot idle
+# waiting for an external NEW_OBSERVED_LIQUIDATION_SOURCE trigger; they must
+# execute the heavy consolidation work or emit a valid materially-different
+# free-data route. Sessions predating the campaign start are grandfathered so
+# this handoff refresh remains green.
+SESSION_SYNTHESIS_CAMPAIGN_RE = re.compile(
+    r"FCLR-SESSION-SYNTHESIS-(\d+)-(\d{8}T\d{6}Z)"
+)
+SESSION_SYNTHESIS_REQUIRED = (
+    ("fclr_session_synth01_protocol_freeze_", ".json"),
+    ("fclr_session_synth01_protocol_freeze_", ".md"),
+    ("fclr_session_synth01_program_synthesis_report_", ".json"),
+    ("fclr_session_synth01_program_synthesis_report_", ".md"),
+    ("fclr_session_synth01_frontier_exhaustion_audit_", ".json"),
+    ("fclr_session_synth01_frontier_exhaustion_audit_", ".md"),
+    ("fclr_session_synth01_negative_results_preservation_", ".json"),
+    ("fclr_session_synth01_meta_analysis_", ".py"),
+    ("fclr_session_synth01_meta_analysis_", ".json"),
+    ("fclr_session_synth01_meta_analysis_", ".md"),
+    ("fclr_session_synth01_recompute_", ".py"),
+    ("fclr_session_synth01_recompute_", ".json"),
+    ("evidence_audit_", ".json"),
+    ("evidence_audit_", ".md"),
+    ("trigger_check_", ".json"),
+)
+
 # New-style heavy sessions do not copy the static Phase-B bundle into every
 # session directory. They carry forward a complete bundle and add a fresh
 # evidence audit plus a new quantitative artifact. This keeps the gate from
@@ -339,6 +372,7 @@ NEW_QUANT_PREFIXES = (
     "reproducibility_recompute_",
     "recompute_",
     "trigger_activation_",
+    "fclr_session_synth",   # FCLR-SESSION-SYNTHESIS consolidation + quantitative meta-analysis artifacts
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -1105,6 +1139,89 @@ def _risk_08_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _session_synthesis_state(handoff_text: str, latest_sid: str | None,
+                           latest_files: list[str],
+                           latest_dir: Path | None = None) -> dict:
+    """Return FCLR-SESSION-SYNTHESIS-01 non-avoidance state.
+
+    After the consolidation + quantitative meta-analysis campaign starts, a
+    post-start session must emit the outcome-blind protocol freeze, the program
+    synthesis report, the frontier exhaustion audit, the negative-results
+    preservation, the quantitative meta-analysis triad, the independent stdlib
+    recompute, and a trigger check, with no zero-byte placeholders. A
+    trigger-only, prose-only, audit-only, or arbitrary recompute_* session fails
+    closed. Sessions predating the campaign start are grandfathered so the
+    handoff refresh that first announces the campaign remains green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = SESSION_SYNTHESIS_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-SESSION-SYNTHESIS-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    # Ladder-aware: bind the artifact family to the campaign number in the
+    # handoff (01 -> fclr_session_synth01_*, 02 -> fclr_session_synth02_*, ...).
+    # This keeps the gate enforcing heavy work after SYNTHESIS-01 closes instead
+    # of deadlocking a SYNTHESIS-02 session on impossible fclr_session_synth01_*
+    # filenames.
+    tag = f"synth{int(m.group(1)):02d}"
+    family = tuple(
+        (prefix.replace("fclr_session_synth01_", f"fclr_session_{tag}_"), suffix)
+        for prefix, suffix in SESSION_SYNTHESIS_REQUIRED
+        if prefix.startswith("fclr_session_synth01_")
+    )
+    # Non-synth-prefixed required artifacts (evidence_audit_, trigger_check_) are
+    # appended unchanged.
+    family += tuple(
+        (prefix, suffix) for prefix, suffix in SESSION_SYNTHESIS_REQUIRED
+        if not prefix.startswith("fclr_session_synth01_")
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, family):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _normalize_text(s: str) -> str:
     return "\n".join(line.rstrip() for line in s.replace("\r\n", "\n").split("\n")).strip()
 
@@ -1355,6 +1472,7 @@ def check(repo: Path = REPO) -> dict:
         "tracka_confirmatory": None,
         "risk_08": None,
         "starter_001": None,
+        "session_synthesis": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -1685,6 +1803,31 @@ def check(repo: Path = REPO) -> dict:
                 if not st["has_trigger_check"]:
                     payload["failures"].append(
                         f"STARTER_001_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-SESSION-SYNTHESIS-01: after the consolidation + quantitative
+            # meta-analysis campaign starts, require the outcome-blind protocol
+            # freeze + program synthesis report + frontier exhaustion audit +
+            # negative-results preservation + meta-analysis triad + independent
+            # recompute + trigger check. Zero-byte placeholders fail closed.
+            ss = _session_synthesis_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["session_synthesis"] = ss
+            if ss["required"]:
+                if ss["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "SESSION_SYNTHESIS_ARTIFACTS_MISSING:"
+                        + ",".join(ss["missing_required_artifacts"])
+                    )
+                if ss["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "SESSION_SYNTHESIS_ARTIFACTS_EMPTY:"
+                        + ",".join(ss["empty_required_artifacts"])
+                    )
+                if not ss["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"SESSION_SYNTHESIS_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None

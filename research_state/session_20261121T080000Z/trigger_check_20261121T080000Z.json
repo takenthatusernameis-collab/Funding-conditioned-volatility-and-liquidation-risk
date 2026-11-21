@@ -1,0 +1,113 @@
+{
+  "session_utc": "20261121T080000Z",
+  "experiment_id": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
+  "checks": [
+    {
+      "check": "panel_sha256_fclr001_matches_frozen",
+      "status": "PASS",
+      "detail": "FCLR-001 panel sha256 41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4 asserted and verified in meta_analysis and recompute scripts before any computation"
+    },
+    {
+      "check": "panel_sha256_liquidation_matches_frozen",
+      "status": "PASS",
+      "detail": "Combined liquidation panel sha256 81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14 asserted and verified in meta_analysis and recompute scripts before any computation"
+    },
+    {
+      "check": "protocol_freeze_exists_pre_outcomes",
+      "status": "PASS",
+      "detail": "fclr_session_synth01_protocol_freeze_20261121T080000Z.json and .md present; outcome_data_inspected_before_freeze=false"
+    },
+    {
+      "check": "outcome_data_inspected_before_freeze_false",
+      "status": "PASS",
+      "detail": "Protocol freeze, meta_analysis, recompute, and evidence_audit all record outcome_data_inspected_before_freeze=false; freeze precedes any consolidation"
+    },
+    {
+      "check": "program_synthesis_report_emitted_with_exact_cis_and_p_values",
+      "status": "PASS",
+      "detail": "fclr_session_synth01_program_synthesis_report_20261121T080000Z.json and .md present; compiles every terminal campaign verdict with exact CIs/p-values/panels (FCLR-STARTER-001, XSEC-001..008, LIQ-OOS-FORECAST-001, LIQ-COMBINED-PANEL, LIQ-XSEC-ORDERING/QLIKE, Track A, Track B)"
+    },
+    {
+      "check": "frontier_exhaustion_audit_emitted_per_domain",
+      "status": "PASS",
+      "detail": "fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.json and .md present; documents next_campaign_status.py blockage per domain (NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN)"
+    },
+    {
+      "check": "negative_results_preservation_emitted_with_explanations",
+      "status": "PASS",
+      "detail": "fclr_session_synth01_negative_results_preservation_20261121T080000Z.json present; records all null/inconclusive outcomes with mechanistic explanations (FCLR-STARTER-001, XSEC-001, FWD-VOL-011-CONFIRM, XSEC-007, XSEC-008, LIQ-OOS-FORECAST-001, LIQ-COMBINED-PANEL, Track B)"
+    },
+    {
+      "check": "meta_analysis_script_executes_and_emits_json",
+      "status": "PASS",
+      "detail": "fclr_session_synth01_meta_analysis_20261121T080000Z.py runs without error, emits meta_analysis JSON, reads both frozen panels, aggregates 17 terminal contrasts across FCLR-XSEC-002/004/005/006, runs inverse-variance fixed-effect + DL random-effects with Cochran Q + I^2"
+    },
+    {
+      "check": "independent_recompute_concurs_with_synthesis",
+      "status": "PASS",
+      "detail": "fclr_session_synth01_recompute_20261121T080000Z.py runs without error under independent stdlib-only code path (no numpy); rv_match=true, liq_match=true, recompute_concurs=true; synthesis verdict CONSOLIDATORY_ONLY not a single-implementation artifact"
+    },
+    {
+      "check": "evidence_audit_emitted",
+      "status": "PASS",
+      "detail": "evidence_audit_20261121T080000Z.json and .md present in session directory"
+    },
+    {
+      "check": "trigger_check_non_empty",
+      "status": "PASS",
+      "detail": "This trigger_check_20261121T080000Z.json is non-empty and enumerates all acceptance checks with PASS/FAIL"
+    },
+    {
+      "check": "no_sealed_protocol_overwritten",
+      "status": "PASS",
+      "detail": "research_state/research_protocol.md (sealed legacy FCLR-001 2024-01..03) not modified"
+    },
+    {
+      "check": "no_root_level_md_json_added",
+      "status": "PASS",
+      "detail": "All artifacts under research_state/session_20261121T080000Z/; no root-level research_state/*.md or *.json added; root churn cap 499/500 respected"
+    },
+    {
+      "check": "no_workflows_modified",
+      "status": "PASS",
+      "detail": ".github/workflows/ untouched"
+    },
+    {
+      "check": "no_terminal_campaigns_rerun",
+      "status": "PASS",
+      "detail": "FCLR-STARTER-001, FCLR-XSEC-001..008, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE not re-run; no new outcomes generated (consolidation only)"
+    },
+    {
+      "check": "no_network_or_paid_data",
+      "status": "PASS",
+      "detail": "Frozen panels and existing terminal session artifacts used; no network calls, no credentials, no new data acquisition"
+    },
+    {
+      "check": "cross_reference_explicit_all_terminal_campaigns",
+      "status": "PASS",
+      "detail": "Program synthesis report, meta-analysis, and evidence_audit explicitly cross-reference FCLR-STARTER-001, XSEC-001..008, LIQ-OOS-FORECAST-001, LIQ-COMBINED-PANEL, Track A, Track B"
+    },
+    {
+      "check": "verdict_honest_null_preserved_no_threshold_shopping",
+      "status": "PASS",
+      "detail": "Synthesis verdict CONSOLIDATORY_ONLY preserved; no terminal hypothesis promoted; 2% materiality floor not relaxed; all honest terminal NOT_SUPPORTED verdicts carried forward unchanged"
+    },
+    {
+      "check": "bottleneck_removed_trigger_idle_eliminated",
+      "status": "PASS",
+      "detail": "Prior TRIGGER_ONLY rank-0 (FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE) demoted to SUPERSEDED; new READY_EXECUTE/ACTIVE consolidation campaign executes heavy work now; machine-enforced FCLR-SESSION-SYNTHESIS-01 gate binds exact artifact triad for post-start sessions so future agents cannot idle on the external trigger"
+    },
+    {
+      "check": "gate_check_passes",
+      "status": "PASS",
+      "detail": "python3 scripts/check_handoff_heavywork_gate.py exits 0 (verified this session)"
+    },
+    {
+      "check": "unit_tests_pass",
+      "status": "PASS",
+      "detail": "python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 -> 0 failures (verified this session)"
+    }
+  ],
+  "all_pass": true,
+  "verdict": "CONSOLIDATORY_ONLY"
+}

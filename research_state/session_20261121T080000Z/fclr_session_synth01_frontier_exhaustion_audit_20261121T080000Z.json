@@ -1,0 +1,48 @@
+{
+  "experiment_id": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
+  "session_utc": "20261121T080000Z",
+  "document": "frontier_exhaustion_audit",
+  "generated_at_utc": "2026-11-21T08:00:00Z",
+  "tool": "scripts/next_campaign_status.py",
+  "tool_exit_code": 0,
+  "overall_status": "NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN",
+  "domains": {
+    "binance_5_symbol_mark_funding_contiguous": {
+      "status": "EXHAUSTED",
+      "detail": "No contiguous run spans >=127 days. 2024-04..2024-05 span=61d TOO SHORT; 2025-01..2025-01 span=31d TOO SHORT. The Binance 5-symbol contiguous design is exhausted.",
+      "ready_funding_months": ["2024-04", "2024-05", "2025-01"]
+    },
+    "binance_disjoint_30day_block": {
+      "status": "INFEASIBLE",
+      "detail": "No disjoint 30-day block is feasible. 2024-04 train includes 2024-02/2024-03 missing_or_unfunded; 2024-05 train includes 2024-03 missing_or_unfunded; 2025-01 train includes 2024-11/2024-12 missing_or_unfunded.",
+      "candidate_test_months": ["2024-04", "2024-05", "2025-01"],
+      "all_infeasible": true
+    },
+    "mark_plus_funding_only_B0_B1_C1": {
+      "status": "BLOCKED_ON_DESIGN",
+      "detail": "Individually feasible test months = 1 ['2025-01']; mutually non-overlapping selection = 1 (need >=3); overlapping pairs = 0. A >=3-block confirmatory design cannot be frozen from local cached data."
+    },
+    "hyperliquid_bulk_frontier": {
+      "status": "EXHAUSTED",
+      "detail": "candles_1h/funding/open_interest/liquidations all 18 months. No untouched Hyperliquid region long enough for a 3-block design (2025-05-01..2025-05-24 span=24d TOO SHORT)."
+    },
+    "hyperliquid_extended_frontier": {
+      "status": "EXHAUSTED",
+      "detail": "17 coins with candles + funding, 18 event months. Usable months outside tested windows: 2025-11..2026-10, but no untouched contiguous region -> extended Hyperliquid frontier exhausted."
+    },
+    "months_with_klines_but_no_funding": {
+      "status": "BASELINE_ONLY",
+      "detail": "2024-01/2024-02/2024-03 have complete klines but no funding (funding starts 2024-04); baseline-only designs only, not funding-conditioned."
+    }
+  },
+  "frozens_with_no_evaluation": {
+    "status": "NONE",
+    "detail": "Every frozen prereg has an evaluation artifact (verified by next_campaign_status.py)."
+  },
+  "bottleneck_assessment": {
+    "primary_bottleneck": "The prior rank-0 campaign (FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z) was TRIGGER_ONLY, gated on an external NEW_OBSERVED_LIQUIDATION_SOURCE trigger that cannot fire on frozen data. This caused future agents to idle.",
+    "resolution": "This synthesis campaign executes a heavy, non-deferrable evidence-consolidation + quantitative meta-analysis NOW, removing the trigger-only idle bottleneck. The frontier is genuinely exhausted for NEW 3-block confirmatory designs on frozen data, but consolidation/meta-analysis of the existing terminal record is heavy, admissible, and non-duplicative work.",
+    "reopen_requires": ["NEW_OBSERVED_LIQUIDATION_SOURCE"]
+  },
+  "verdict": "FRONTIER_EXHAUSTED_FOR_NEW_CONFIRMATORY_DESIGNS_CONSOLIDATION_CONTINUES"
+}

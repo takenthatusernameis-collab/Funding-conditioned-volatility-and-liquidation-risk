@@ -1,0 +1,452 @@
+{
+  "cross_reference": [
+    "FCLR-STARTER-001",
+    "FCLR-XSEC-001",
+    "FCLR-XSEC-002",
+    "FCLR-XSEC-003",
+    "FCLR-XSEC-004",
+    "FCLR-XSEC-005",
+    "FCLR-XSEC-006",
+    "FCLR-XSEC-007",
+    "FCLR-XSEC-008",
+    "FCLR-LIQ-OOS-FORECAST-001",
+    "FCLR-LIQ-COMBINED-PANEL",
+    "Track A",
+    "Track B"
+  ],
+  "design": "outcome_blind_inverse_variance_fixed_effect_plus_dl_random_effects_meta_analysis",
+  "experiment_id": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
+  "generates_no_new_outcomes": true,
+  "meta_analysis": {
+    "joint_cross_pillar": {
+      "fixed_effect": {
+        "ci95": [
+          0.3371792381568842,
+          0.42319299958228995
+        ],
+        "ci_excludes_zero": true,
+        "pooled_d": 0.3801861188695871,
+        "se": 0.021942286077909632
+      },
+      "heterogeneity": {
+        "cochran_q": 554.2247648115809,
+        "df": 16,
+        "i2_percent": 97.11308461550982
+      },
+      "k": 17,
+      "label": "joint_cross_pillar",
+      "random_effects_dl": {
+        "ci95": [
+          -0.016817035246323497,
+          0.524903189050875
+        ],
+        "ci_excludes_zero": false,
+        "pooled_d": 0.25404307690227573,
+        "se": 0.1381939347696935,
+        "tau2": 0.28396644659171866
+      }
+    },
+    "liquidation_pillar": {
+      "fixed_effect": {
+        "ci95": [
+          0.336377489428277,
+          0.4224304893168133
+        ],
+        "ci_excludes_zero": true,
+        "pooled_d": 0.37940398937254516,
+        "se": 0.021952295889932746
+      },
+      "heterogeneity": {
+        "cochran_q": 551.8471364364733,
+        "df": 14,
+        "i2_percent": 97.463065570947
+      },
+      "k": 15,
+      "label": "liquidation_pillar",
+      "random_effects_dl": {
+        "ci95": [
+          -0.04633252766682619,
+          0.5021888849366312
+        ],
+        "ci_excludes_zero": false,
+        "pooled_d": 0.22792817863490247,
+        "se": 0.13992893178659627,
+        "tau2": 0.2840756364292375
+      }
+    },
+    "rv_pillar": {
+      "fixed_effect": {
+        "ci95": [
+          -0.18705847554908606,
+          2.661528394892591
+        ],
+        "ci_excludes_zero": false,
+        "pooled_d": 1.2372349596717527,
+        "se": 0.7266803240922647
+      },
+      "heterogeneity": {
+        "cochran_q": 0.9853679101298111,
+        "df": 1,
+        "i2_percent": 0.0
+      },
+      "k": 2,
+      "label": "rv_pillar",
+      "random_effects_dl": {
+        "ci95": [
+          -0.18705847554908606,
+          2.661528394892591
+        ],
+        "ci_excludes_zero": false,
+        "pooled_d": 1.2372349596717527,
+        "se": 0.7266803240922647,
+        "tau2": 0.0
+      }
+    }
+  },
+  "n_terminal_tests": 17,
+  "outcome_data_inspected_before_freeze": false,
+  "panel_hash_verified": true,
+  "panel_hashes": {
+    "fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+    "liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14"
+  },
+  "panel_summary": {
+    "fclr001": {
+      "cols": 22,
+      "columns": [
+        "coin",
+        "ts",
+        "split",
+        "close",
+        "open",
+        "high",
+        "low",
+        "rv1h",
+        "rv24h",
+        "rv168h",
+        "target_rv24h",
+        "signed_funding",
+        "funding_asof_lag_h",
+        "abs_funding_pct_trail",
+        "abs_funding_trail_n",
+        "ema24",
+        "ema24_dist",
+        "log_rv1h",
+        "log_rv24h",
+        "log_rv168h",
+        "premium",
+        "premium_status"
+      ],
+      "path": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+      "rows": 29136,
+      "sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4"
+    },
+    "liquidation": {
+      "cols": 13,
+      "columns": [
+        "timestamp",
+        "coin",
+        "notional_usd",
+        "side",
+        "source",
+        "tx_hash",
+        "fundingRate",
+        "premium",
+        "abs_fund_pct",
+        "mark",
+        "ema_dist",
+        "rv24h",
+        "rv168h"
+      ],
+      "path": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "rows": 1740415,
+      "sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14"
+    }
+  },
+  "reopen_requires": [
+    "NEW_OBSERVED_LIQUIDATION_SOURCE"
+  ],
+  "session_utc": "20261121T080000Z",
+  "significance_tally": {
+    "holm_significant_negative": 3,
+    "holm_significant_positive": 5,
+    "positive_campaigns": [
+      "FCLR-XSEC-004",
+      "FCLR-XSEC-005",
+      "FCLR-XSEC-006"
+    ]
+  },
+  "synthesis_verdict": "CONSOLIDATORY_ONLY",
+  "synthesis_verdict_note": "Descriptive consolidation of terminal verdicts. Does NOT promote any terminal hypothesis. RV-pillar OOS confirmations all failed; liquidation-pillar cross-sectional contrasts are significant but the OOS forecast gate failed on QLIKE. Joint evidence is directionally incoherent for a promotable funding-conditioning forecast skill.",
+  "terminal_tests": [
+    {
+      "campaign": "FCLR-XSEC-002",
+      "ci_high": 0.23483353482508343,
+      "ci_low": 0.004607377846938501,
+      "effect_size": 1.0932877329426645,
+      "holm_passes": false,
+      "materiality_met": true,
+      "mean_abs": 0.0792584777987284,
+      "mean_diff": 0.08665232150905827,
+      "n": 1522,
+      "outcome": "rv_next_hour",
+      "p_value": 0.019,
+      "regime": "high_rv_regime",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-002",
+      "ci_high": 0.4040827256569798,
+      "ci_low": -2.49928409580716e-06,
+      "effect_size": 4.8520153277821,
+      "holm_passes": false,
+      "materiality_met": true,
+      "mean_abs": 0.02776033660467825,
+      "mean_diff": 0.13469357871028936,
+      "n": 1541,
+      "outcome": "rv_next_hour",
+      "p_value": 0.397,
+      "regime": "low_rv_regime",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-004",
+      "ci_high": 393874.1400357488,
+      "ci_low": -125531.59907101281,
+      "effect_size": 0.09008860811802193,
+      "holm_passes": false,
+      "materiality_met": true,
+      "mean_abs": 1575935.1730014372,
+      "mean_diff": 141973.80621993355,
+      "n": 1880,
+      "outcome": "liq_count_next_hour",
+      "p_value": 0.263,
+      "regime": "high_rv_regime",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-004",
+      "ci_high": 841155.728255727,
+      "ci_low": 448605.2600716211,
+      "effect_size": 0.8011456107312974,
+      "holm_passes": true,
+      "materiality_met": true,
+      "mean_abs": 803236.7038311284,
+      "mean_diff": 643509.5596525837,
+      "n": 1880,
+      "outcome": "liq_count_next_hour",
+      "p_value": 0.0,
+      "regime": "low_rv_regime",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-005",
+      "ci_high": 381875.8499049977,
+      "ci_low": -144081.97113365371,
+      "effect_size": 0.09008860811802193,
+      "holm_passes": false,
+      "materiality_met": true,
+      "mean_abs": 1575935.1730014372,
+      "mean_diff": 141973.80621993355,
+      "n": 1880,
+      "outcome": "liq_notional_next_hour",
+      "p_value": 0.324,
+      "regime": "high_rv_regime",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-005",
+      "ci_high": 850198.8852350473,
+      "ci_low": 452972.89920212555,
+      "effect_size": 0.8011456107312974,
+      "holm_passes": true,
+      "materiality_met": true,
+      "mean_abs": 803236.7038311284,
+      "mean_diff": 643509.5596525837,
+      "n": 1880,
+      "outcome": "liq_notional_next_hour",
+      "p_value": 0.0,
+      "regime": "low_rv_regime",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-005",
+      "ci_high": 22.951312594984774,
+      "ci_low": 12.643970966312057,
+      "effect_size": 0.41475710672294,
+      "holm_passes": null,
+      "materiality_met": true,
+      "mean_abs": 42.83295910184442,
+      "mean_diff": 17.765274189463014,
+      "n": 1880,
+      "outcome": "liq_notional_next_hour",
+      "p_value": 0.0,
+      "regime": "high_rv_regime_count_based_crossref",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-005",
+      "ci_high": 48.475813576494424,
+      "ci_low": 36.365394060283684,
+      "effect_size": 0.9537419754758264,
+      "holm_passes": null,
+      "materiality_met": true,
+      "mean_abs": 44.30432877672625,
+      "mean_diff": 42.2548980496454,
+      "n": 1880,
+      "outcome": "liq_notional_next_hour",
+      "p_value": 0.0,
+      "regime": "low_rv_regime_count_based_crossref",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-006",
+      "ci_high": 521424.030204578,
+      "ci_low": 162051.18387816066,
+      "effect_size": 0.36091477138327677,
+      "holm_passes": true,
+      "materiality_met": true,
+      "mean_abs": 939809.269354498,
+      "mean_diff": 339191.04759296303,
+      "n": 1692,
+      "outcome": "liq_notional_next_hour_utc_bucket",
+      "p_value": 0.0,
+      "regime": "asian",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-006",
+      "ci_high": 782271.644384776,
+      "ci_low": 334549.6911690049,
+      "effect_size": 0.570285654651771,
+      "holm_passes": true,
+      "materiality_met": true,
+      "mean_abs": 983774.3905692492,
+      "mean_diff": 561032.4223554312,
+      "n": 2080,
+      "outcome": "liq_notional_next_hour_utc_bucket",
+      "p_value": 0.0,
+      "regime": "european",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-006",
+      "ci_high": 698081.5750183635,
+      "ci_low": 94749.59345225734,
+      "effect_size": 0.2616826004415316,
+      "holm_passes": true,
+      "materiality_met": true,
+      "mean_abs": 1545810.9030907394,
+      "mean_diff": 404511.81691165705,
+      "n": 1868,
+      "outcome": "liq_notional_next_hour_utc_bucket",
+      "p_value": 0.013,
+      "regime": "us",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-006",
+      "ci_high": -747385.1721634931,
+      "ci_low": -1198717.0935244416,
+      "effect_size": -1.0290195267839657,
+      "holm_passes": true,
+      "materiality_met": true,
+      "mean_abs": 939809.269354498,
+      "mean_diff": -967082.08961835,
+      "n": 1692,
+      "outcome": "liq_notional_next_hour_utc_bucket",
+      "p_value": 0.0,
+      "regime": "asian_rv_persistence_baseline_notional_weighted",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-006",
+      "ci_high": -890695.4538553141,
+      "ci_low": -1322094.0275686302,
+      "effect_size": -1.1197265001481023,
+      "holm_passes": true,
+      "materiality_met": true,
+      "mean_abs": 983774.3905692492,
+      "mean_diff": -1101558.2552874377,
+      "n": 2080,
+      "outcome": "liq_notional_next_hour_utc_bucket",
+      "p_value": 0.0,
+      "regime": "european_rv_persistence_baseline_notional_weighted",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-006",
+      "ci_high": -798282.4980063172,
+      "ci_low": -1602453.9568318948,
+      "effect_size": -0.7503070453526697,
+      "holm_passes": true,
+      "materiality_met": true,
+      "mean_abs": 1545810.9030907394,
+      "mean_diff": -1159832.8113719546,
+      "n": 1868,
+      "outcome": "liq_notional_next_hour_utc_bucket",
+      "p_value": 0.0,
+      "regime": "us_rv_persistence_baseline_notional_weighted",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-006",
+      "ci_high": 26.52181922281324,
+      "ci_low": 16.517060941545648,
+      "effect_size": 0.6183703844751761,
+      "holm_passes": null,
+      "materiality_met": true,
+      "mean_abs": 34.55817378497791,
+      "mean_diff": 21.36975121017674,
+      "n": 1692,
+      "outcome": "liq_notional_next_hour_utc_bucket",
+      "p_value": 0.0,
+      "regime": "asian_count_based_crossref",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-006",
+      "ci_high": 38.518041394803106,
+      "ci_low": 27.228707074175826,
+      "effect_size": 0.7442972017487398,
+      "holm_passes": null,
+      "materiality_met": true,
+      "mean_abs": 43.90142143680369,
+      "mean_diff": 32.675705128205124,
+      "n": 2080,
+      "outcome": "liq_notional_next_hour_utc_bucket",
+      "p_value": 0.0,
+      "regime": "european_count_based_crossref",
+      "verdict": "SUPPORTED"
+    },
+    {
+      "campaign": "FCLR-XSEC-006",
+      "ci_high": 28.513365835627607,
+      "ci_low": 18.6645840662282,
+      "effect_size": 0.5421250925086694,
+      "holm_passes": null,
+      "materiality_met": true,
+      "mean_abs": 43.39401556925073,
+      "mean_diff": 23.52498470480269,
+      "n": 1868,
+      "outcome": "liq_notional_next_hour_utc_bucket",
+      "p_value": 0.0,
+      "regime": "us_count_based_crossref",
+      "verdict": "SUPPORTED"
+    }
+  ],
+  "verdict_by_campaign": {
+    "FCLR-XSEC-002": [
+      "SUPPORTED"
+    ],
+    "FCLR-XSEC-004": [
+      "SUPPORTED"
+    ],
+    "FCLR-XSEC-005": [
+      "SUPPORTED"
+    ],
+    "FCLR-XSEC-006": [
+      "SUPPORTED"
+    ]
+  }
+}

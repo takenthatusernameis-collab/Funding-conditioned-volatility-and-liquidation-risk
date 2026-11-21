@@ -727,6 +727,24 @@
       "terminal": true,
       "terminal_class": "NOT_SUPPORTED",
       "type": "primary_tracka_observed_liquidity"
+    },
+    {
+      "id": "H_fclr_session_synthesis_01",
+      "type": "consolidation_meta_analysis",
+      "description": "Outcome-blind evidence-consolidation + quantitative meta-analysis across terminal funding-conditioning campaigns (does the consolidated record support a promotable funding-conditioned forecast skill?).",
+      "status": "CONSOLIDATORY_ONLY",
+      "terminal": true,
+      "terminal_class": "CONSOLIDATORY_ONLY",
+      "last_experiment": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
+      "last_tested": "2026-11-21T08:00:00Z",
+      "last_verdict": "CONSOLIDATORY_ONLY: RV fixed-effect pooled d=1.237 (CI incl. zero); liquidation fixed-effect pooled d=0.379 (CI excl. zero) but random-effects DL pooled d=0.228 (CI incl. zero) under I^2=97.5% heterogeneity; joint random-effects CI incl. zero. Cross-sectional associations detectable in specific regimes but not homogeneous and not robust under random effects; combined with failed OOS forecast/forward gates, no promotable funding-conditioned forecast skill. Does not promote any terminal hypothesis; all terminal verdicts carried forward unchanged.",
+      "evidence": "17 terminal funding-conditioning contrasts across FCLR-XSEC-002/004/005/006 on the two verified frozen panels (sha256 41962f82... FCLR-001, 81a100d5... combined liquidation). Inverse-variance fixed-effect + DerSimonian-Laird random-effects, Cochran Q, I^2. Independent stdlib recompute concurs (rv_match=true, liq_match=true, recompute_concurs=true). Artifacts under research_state/session_20261121T080000Z/.",
+      "reopen_requires": [
+        "NEW_OBSERVED_LIQUIDATION_SOURCE"
+      ],
+      "supersedes": [
+        "H_fclr_liq_oos_funding_conditioned_forecast (terminal NOT_SUPPORTED; consolidation does not reopen it)"
+      ]
     }
   ],
   "updated_utc": "2026-11-21T06:54:00Z"
