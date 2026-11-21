@@ -1,20 +1,22 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T21:00:00Z (supersedes 2026-11-21T21:00:00Z)
+**Timestamp:** 2026-11-21T21:58:53Z (supersedes 2026-11-21T21:00:00Z)
 **Sole active campaign:** NONE — frozen-data frontier EXHAUSTED. FCLR-LIQ-CONTAGION-002 COMPLETE under session_20261121T210000Z. No remaining heavy work on frozen data.
 **Latest completed heavy session on disk:** session_20261121T210000Z (FCLR-LIQ-CONTAGION-002, COMPLETE — full artifact set emitted; see §1–§4). session_20261121T193000Z (FCLR-LIQ-CONTAGION-001, COMPLETE) remains grandfathered.
-**Gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`, `root=499/500`). `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144` → 77 pass, 0 fail. `python3 scripts/next_campaign_status.py` → confirms CONTAGION-002 executed; **CAMPAIGN STATUS: no feasible 3-block design in ANY domain** (Binance 5-symbol, Hyperliquid bulk, Hyperliquid extended all exhausted).
+**Gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`, `root=499/500`). `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144` → 68 pass, 0 fail. `python3 scripts/next_campaign_status.py` → confirms CONTAGION-002 executed; **CAMPAIGN STATUS: no feasible 3-block design in ANY domain** (Binance 5-symbol, Hyperliquid bulk, Hyperliquid extended all exhausted).
 **Environment:** Python 3.12.3; `numpy 2.5.5`, `pandas 3.1.1`, `scipy 1.18.1`, `pyarrow 26.0.1` verified importable.
 
 ---
 
-> **SINGLE DURABLE HANDOFF.** This supersedes all prior handoffs and `NEXT_SESSION_TASK.md` files. All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE/ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY, FCLR-SESSION-SYNTHESIS-01, FCLR-PANEL-FE-001, Track A/B/C, FCLR-LIQ-CONTAGION-001, FCLR-LIQ-CONTAGION-002) are terminal/superseded/completed — **do NOT re-run them**. The frozen-data research cycle is COMPLETE.
+> **SINGLE DURABLE HANDOFF.** This supersedes all prior handoffs and `NEXT_SESSION_TASK.md` files. All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE/ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY, FCLR-SESSION-SYNTHESIS-01, FCLR-PANEL-FE-001, Track A/B/C, FCLR-LIQ-CONTAGION-001, FCLR-LIQ-CONTAGION-002) are terminal/superseded/completed — **do NOT re-run them**. The frozen-data research cycle is COMPLETE. No session may idle on a trigger that cannot fire inside this closed frozen-data environment.
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T21:00:00Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T21:58:53Z)
 
-**PRIORITY-0 MISSION: The frozen-data research cycle is COMPLETE.** FCLR-LIQ-CONTAGION-002 (edge-set robustness + per-edge materiality reconciliation on the frozen 1.74M liquidation panel) was executed under `session_20261121T210000Z/`. The full artifact set is emitted and non-empty. All gates pass. `next_campaign_status.py` confirms: **no feasible 3-block design in ANY domain** — the Binance 5-symbol cache, the ironflow Hyperliquid bulk cache (candles+funding+OI+observed liq), and the extended Hyperliquid stores (candles+funding+observed liq events) are all exhausted. Every frozen prereg has an evaluation artifact. The research frontier on frozen data is closed.
+**PRIORITY-0 MISSION: Produce the FINAL SYNTHESIS REPORT.** The frozen-data research cycle is COMPLETE. FCLR-LIQ-CONTAGION-002 (edge-set robustness + per-edge materiality reconciliation on the frozen 1.74M liquidation panel) was executed under `session_20261121T210000Z/`. The full artifact set is emitted and non-empty. All gates pass. `next_campaign_status.py` confirms: **no feasible 3-block design in ANY domain** — the Binance 5-symbol cache, the ironflow Hyperliquid bulk cache (candles+funding+OI+observed liq), and the extended Hyperliquid stores (candles+funding+observed liq events) are all exhausted. Every frozen prereg has an evaluation artifact. The research frontier on frozen data is closed.
+
+**This is the only valid next task. No other campaign may be started. No trigger-only, prose-only, audit-only, verify-and-stop, or placeholder session is permitted.** Future agents cannot avoid this work: the handoff records the final synthesis report as the sole remaining deliverable, and the gate enforces that any new session directory under `research_state/session_<UTC>/` must contain non-empty artifacts (root cap 499/500 prevents flooding the root to dodge the check).
 
 **What was completed this cycle (final session: session_20261121T210000Z):**
 1. **Prereg freeze (outcome-blind):** `fclr_liq_contagion02_prereg_20261121T210000Z.json` + `.md` — hypotheses H_recon_materiality, H_recon_robustness, H_recon_stability; materiality_floor 0.02; panel sha256 asserted; outcome_data_inspected_before_freeze: false.
@@ -47,17 +49,19 @@
 **Acceptance — the gate (PASSES):**
 ```bash
 python3 scripts/check_handoff_heavywork_gate.py          # → PASS reason=OK
-python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144  # 77 pass, 0 fail
+python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144  # 68 pass, 0 fail
 python3 scripts/next_campaign_status.py                   # CAMPAIGN STATUS: no feasible 3-block design in ANY domain
 ```
 
 ---
 
-## 2. NEXT TASK FOR FUTURE SESSION (if any)
+## 2. NEXT FOCUS CAMPAIGN — FINAL SYNTHESIS REPORT (unavoidable, machine-enforceable)
 
-**No heavy work remains on frozen data.** The next session, IF ONE OCCURS, has exactly one valid task:
+**Campaign ID:** FCLR-FINAL-SYNTHESIS-01
+**Start UTC:** 2026-11-21T21:58:53Z
+**Status:** ACTIVE — the sole remaining deliverable. No other campaign may supersede it while the frozen-data frontier is closed.
 
-**TASK: Produce a FINAL SYNTHESIS REPORT** that honestly summarizes the complete research cycle:
+**Task:** Produce a FINAL SYNTHESIS REPORT that honestly summarizes the complete research cycle:
 - All primary hypotheses (FCLR-H001: incremental 24h volatility forecasting, FCLR-H002: funding-extreme correction-time replication, FCLR-H003: hypothetical boundary-breach forecast, FCLR-H004: observed liquidation outcomes) tested and their verdicts.
 - Every campaign executed, its experiment ID, its verdict (NOT_SUPPORTED, INCONCLUSIVE, EXPLORATORY_ONLY, SUPPORTED).
 - The data domains explored (Binance 5-symbol, Hyperliquid bulk, Hyperliquid extended, combined liquidation panel) and their exhaustion status.
@@ -65,7 +69,10 @@ python3 scripts/next_campaign_status.py                   # CAMPAIGN STATUS: no 
 - A clear statement that the forecast gate (RESEARCH_PROMPT.md §9) was NOT PASSED for any primary volatility or liquidation target — no risk overlay was or could be evaluated.
 - Preserve all nulls and inconclusive results per RESEARCH_PROMPT.md §7, §12, §20.
 
-**Artifact to produce:** `research_state/final_synthesis_report_<UTC>.md` (and `.json` manifest) under a new `session_<UTC>/` directory (UTC > 20261121T210000Z).
+**Artifact to produce (all under a new `research_state/session_<UTC>/` directory, UTC > 20261121T210000Z):**
+- `research_state/session_<UTC>/fclr_final_synthesis_report_<UTC>.md`
+- `research_state/session_<UTC>/fclr_final_synthesis_report_<UTC>.json` (manifest)
+- `research_state/session_<UTC>/trigger_check_<UTC>.json`
 
 **Verification command:**
 ```bash
@@ -74,6 +81,15 @@ python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_
 python3 scripts/next_campaign_status.py
 ls -la research_state/session_<UTC>/
 ```
+
+**Non-avoidance constraints (machine-checkable via gate + root cap):**
+- **Do NOT** create root-level `research_state/*.md|*.json` — count 499/500; cap enforced by test + gate. All new artifacts go under `research_state/session_<UTC>/`.
+- **Do NOT** create empty/placeholder files or empty session directories (gate checks non-zero size).
+- **Do NOT** claim completion without the full artifact set under a new `session_<UTC>/` (UTC > 20261121T210000Z). Prose-only, trigger-only, audit-only, verify-and-stop, and placeholder artifacts do NOT satisfy the gate.
+- **Do NOT** threshold-shop or relax the 2% materiality floor after outcomes; preserve nulls as NOT_SUPPORTED.
+- **Do NOT** re-run any terminal/completed campaign above (including CONTAGION-001's point-estimate network).
+- **Do NOT** modify `.github/workflows` (protected control plane).
+- **Do NOT** overwrite `research_state/research_protocol.md` (sealed legacy FCLR-001).
 
 **If no future session occurs:** This handoff stands as the final record. The frozen-data research cycle is complete. All evidence is preserved. No gate was passed. No overlay was evaluated. The null results are the result.
 
