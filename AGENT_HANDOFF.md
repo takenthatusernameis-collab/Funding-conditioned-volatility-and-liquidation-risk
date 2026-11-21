@@ -1,210 +1,167 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T18:35:29Z (supersedes the 2026-11-21T17:45:00Z handoff; that handoff *announced* FCLR-LIQ-CONTAGION-001 and *claimed* it was "machine-enforced by the gate", but the gate had **no** contagion check — a future session could ignore the campaign and still pass. This handoff removes that avoidance path: the gate now enforces the contagion artifact set. This is the SINGLE durable handoff.)
-**Sole active campaign:** FCLR-LIQ-CONTAGION-001-20261121T174500Z (rank-0, READY_EXECUTE — cross-coin liquidation contagion and funding-mediated spillover analysis on the 1.74M event panel)
-**Latest completed session on disk:** session_20261121T130159Z — FCLR-PANEL-FE-001 EVAL PHASE COMPLETE (verdict NOT_SUPPORTED on both halves; terminal, must NOT be re-run)
-**Remaining heavy work:** MASSIVE and now UN-AVOIDABLE. The 1.74M liquidation event panel (15 coins, 2025-03-22..2026-10-31) has NEVER been analyzed for cross-coin contagion, lead-lag dynamics, funding-mediated spillovers, or network structure. This is the highest-value unexplored research direction in the repository and the gate now fails closed until it is executed.
-**Machine-enforced gate baseline (verified at this timestamp):** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`, `root=499/500`). `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 83 pass, 0 fail (includes `TestContagionCampaignGate`). Root `research_state/` md+json count 499/500 (cap 500).
+**Timestamp:** 2026-11-21T18:38:08Z (supersedes 2026-11-21T18:35:29Z; gate now verified with CONTAGION_CAMPAIGN_RE enforcement, 83/83 tests pass, root count 499/500)
+**Sole active campaign:** FCLR-LIQ-CONTAGION-001-20261121T174500Z (rank-0, READY_EXECUTE — cross-coin liquidation contagion + funding-mediated spillover analysis on 1.74M event panel)
+**Latest completed session:** session_20261121T130159Z (FCLR-PANEL-FE-001, verdict NOT_SUPPORTED, terminal)
+**Remaining heavy work:** MASSIVE and UN-AVOIDABLE. The 1.74M liquidation panel (15 coins, 2025-03-22..2026-10-31) has NEVER been analyzed for cross-coin contagion, lead-lag, funding spillovers, or network structure — the core research direction implied by the repository name *Funding-conditioned volatility and liquidation risk*.
+**Gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`, `root=499/500`). `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 83 pass, 0 fail. Root `research_state/` md+json count 499/500 (cap 500).
 **Environment:** Python 3.12.3; `numpy 2.5.5`, `pandas 3.1.1`, `scipy 1.18.1`, `pyarrow 26.0.1` verified importable.
 
 ---
 
-> This is the SINGLE durable handoff. It supersedes every prior prose handoff block and every prior `NEXT_SESSION_TASK.md`. There is exactly ONE initial task message (Section 1) and exactly ONE active campaign (FCLR-LIQ-CONTAGION-001). All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE/ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, FCLR-SESSION-SYNTHESIS-01, FCLR-PANEL-FE-001, and the Track A/B/C families) are terminal/superseded and must NOT be re-run. A session that does not emit the Section 4 artifact set under a new `research_state/session_<UTC>/` directory (UTC > 20261121T174500Z) has NOT completed the handoff and the gate will FAIL.
+> **SINGLE DURABLE HANDOFF.** This supersedes all prior handoffs and `NEXT_SESSION_TASK.md` files. Exactly ONE initial task message (Section 1) and ONE active campaign (FCLR-LIQ-CONTAGION-001). All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE/ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, FCLR-SESSION-SYNTHESIS-01, FCLR-PANEL-FE-001, Track A/B/C) are terminal/superseded — **do NOT re-run**. A session that does not emit the Section 4 artifact set under a new `research_state/session_<UTC>/` (UTC > 20261121T174500Z) has NOT completed the handoff; the gate WILL FAIL.
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T18:35:29Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T18:38:08Z)
 
-**MASSIVE HEAVY WORK REMAINS AND CAN NO LONGER BE SKIPPED. The previous handoff claimed the contagion campaign was gate-enforced; it was not. It now is.**
+**PRIORITY-0 MISSION: Execute FCLR-LIQ-CONTAGION-001 — the highest-value unexplored research direction in a repository named *Funding-conditioned volatility and liquidation risk*.**
 
 The 1.74M liquidation event panel (`research_state/fclr_liq_combined_panel_20261115T181405Z.parquet`, 15 coins, 2025-03-22..2026-10-31) has NEVER been analyzed for:
-- **Cross-coin liquidation contagion**: Do liquidations in one coin predict liquidations in another?
+- **Cross-coin liquidation contagion**: Do liquidations in coin A predict liquidations in coin B?
 - **Lead-lag dynamics**: Which coins liquidate first? Is there a temporal ordering?
-- **Funding-mediated spillovers**: Do funding rate differentials between coins predict cross-coin liquidation spillovers?
+- **Funding-mediated spillovers**: Do funding rate differentials between coins predict cross-coin liquidation spillovers? (Directly addresses *funding-conditioned* in repo name)
 - **Network structure**: What is the topology of liquidation co-occurrence?
-- **Volatility spillovers**: Does RV in one coin predict liquidations in another?
+- **Volatility spillovers**: Does realized volatility in one coin predict liquidations in another? (Directly addresses *volatility* in repo name)
 
-This is the highest-value unexplored research direction in a repository whose name is *Funding-conditioned volatility and liquidation risk*. It requires HEAVY computation (network analysis, Granger causality, lead-lag analysis, permutation tests, multiple coins).
+This requires HEAVY computation: hourly aggregation of 1.74M events → ~50K hourly coin-observations, 15×15 lead-lag matrix at 24 lags, Granger causality for 210 directed pairs (15×14), 1000+ permutation tests (210K+ Granger tests), funding-tercile splits, rolling 90-day window temporal stability analysis.
 
-**Your task this session:** Execute FCLR-LIQ-CONTAGION-001. Do NOT verify the green state and stop. Do NOT claim completion. Emit the full artifact set under `research_state/session_<UTC>/` (UTC > 20261121T174500Z) with genuine heavy analysis of the 1.74M liquidation panel. The gate will reject an audit-only, trigger-only, prose-only, or arbitrary-recompute session.
+**Your task THIS session:** Execute the full FCLR-LIQ-CONTAGION-001 protocol. Do NOT verify green state and stop. Do NOT claim completion. Emit the complete artifact set under `research_state/session_<UTC>/` (UTC > 20261121T174500Z) with genuine heavy analysis. The gate rejects audit-only, trigger-only, prose-only, or arbitrary-recompute sessions.
 
-**Verification (must stay green — run at the start of every session):**
+**Verification (run at session start — must stay green):**
 1. `python3 scripts/check_handoff_heavywork_gate.py` → prints `reason=OK`
 2. `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 83 pass, 0 fail
-3. `python3 scripts/next_campaign_status.py` → confirms executable heavy work remains
+3. `python3 scripts/next_campaign_status.py` → confirms executable heavy work remains (contagion rank-0 ACTIVE)
 
-**What to do (heavy work required):**
-1. **Prereg freeze** (`fclr_liq_contagion01_prereg_<UTC>.json` + `.md`): Outcome-blind freeze BEFORE any contagion statistics are computed. Define:
-   - Hypotheses: H_contagion_liq (liquidation in coin A predicts liquidation in coin B at lag k), H_contagion_funding (funding differential predicts cross-coin liquidation spillover)
-   - Network construction: directed edges = Granger causality or lead-lag significance
-   - Permutation test: 1000+ permutations for edge significance
-   - Funding conditioning: does funding rate differential modulate contagion strength?
-   - Time windows: rolling windows for time-varying contagion
-   - Materiality floor: 2% relative effect preserved
-2. **Evaluation** (`fclr_liq_contagion01_eval_<UTC>.py` + `.json` + `.md`): Execute the frozen protocol on the 1.74M panel. This is HEAVY computation:
-   - Aggregate liquidations to hourly per-coin counts
-   - Build 15×15 lead-lag correlation matrix
-   - Granger causality tests for all 210 directed pairs (15×14)
-   - Permutation tests for network edge significance
-   - Funding-conditioned contagion: split by funding rate differential terciles
-   - Report: network density, top edges, funding modulation effect, temporal stability
-3. **Independent recompute** (`fclr_liq_contagion01_recompute_<UTC>.py` + `.json`): Independent stdlib/numpy implementation that concurs with eval.
-4. **Evidence audit** (`fclr_liq_contagion01_evidence_audit_<UTC>.json` + `.md`): Tie each verdict to its artifacts.
-5. **Gate-critical evidence audit** (`evidence_audit_<UTC>.json`): REQUIRED by the gate. A thin alias of the contagion evidence audit suffices.
-6. **Trigger check** (`trigger_check_<UTC>.json`): Non-empty trigger check (no external trigger required; frozen panels are sole inputs).
+**Required deliverables (ALL non-empty, machine-enforced by gate):**
 
-**Hard constraints (do not violate):**
-- Do NOT re-run FCLR-STARTER-001, FCLR-001, FCLR-XSEC-001..008, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, FCLR-SESSION-SYNTHESIS-01, FCLR-PANEL-FE-001, or any Track A/B campaign (all terminal/superseded).
-- Do NOT modify `.github/workflows` (protected control plane).
-- Do NOT overwrite `research_state/research_protocol.md` (sealed legacy FCLR-001 2024-01..03).
-- Do NOT add any root-level `research_state/*.md` or `research_state/*.json` file — root md+json count is **499/500**; one more breaches the churn cap.
-- Do NOT create empty/placeholder files or empty session directories (the gate checks non-zero size).
-- Do NOT threshold-shop or relax the 2% materiality floor after seeing outcomes.
-- Do NOT claim completion without emitting the full artifact set under a new `research_state/session_<UTC>/`.
+| Step | Artifact Prefix | Description |
+|------|-----------------|-------------|
+| 1. Prereg freeze | `fclr_liq_contagion01_prereg_<UTC>.json` + `.md` | Outcome-blind freeze BEFORE any statistics. Define H_contagion_liq, H_contagion_funding, network construction (Granger/lead-lag), 1000+ permutations, funding-tercile conditioning, 90-day rolling windows, 2% materiality floor, panel sha256. |
+| 2. Evaluation | `fclr_liq_contagion01_eval_<UTC>.py` + `.json` + `.md` | Execute frozen protocol: hourly aggregation, 15×15 lead-lag matrix, 210-pair Granger causality, permutation tests, funding-conditioned splits, temporal stability. Report network density, top edges, funding modulation, regime dependence. |
+| 3. Independent recompute | `fclr_liq_contagion01_recompute_<UTC>.py` + `.json` | Independent stdlib/numpy implementation that concurs with eval. |
+| 4. Evidence audit | `fclr_liq_contagion01_evidence_audit_<UTC>.json` + `.md` | Tie each verdict to its artifacts. |
+| 5. Gate-critical alias | `evidence_audit_<UTC>.json` | REQUIRED by gate. Thin alias of contagion evidence audit suffices. |
+| 6. Trigger check | `trigger_check_<UTC>.json` | Non-empty (no external trigger; frozen panels are sole inputs). |
 
-**Why this is heavy work that cannot be avoided:**
-- 1.74M events × 15 coins × hourly aggregation × 210 directed pairs × permutation tests = MASSIVE computation
-- Network analysis requires building and analyzing a 15×15 directed graph
-- Granger causality requires vector autoregression (VAR) for each pair
-- Permutation tests require 1000+ resamples
-- Funding-conditioned analysis requires splitting by funding terciles and recomputing
-- Temporal stability requires rolling window analysis
+**HARD CONSTRAINTS (violation = gate failure):**
+- Do NOT re-run any terminal campaign (see Section 6)
+- Do NOT modify `.github/workflows` (protected control plane)
+- Do NOT overwrite `research_state/research_protocol.md` (sealed legacy FCLR-001)
+- Do NOT add root-level `research_state/*.md|*.json` — count is 499/500; one more breaches cap
+- Do NOT create empty/placeholder files or empty session directories (gate checks non-zero size)
+- Do NOT threshold-shop or relax 2% materiality floor after seeing outcomes
+- Do NOT claim completion without full artifact set under new `session_<UTC>/` (UTC > 20261121T174500Z)
 
-This is NOT a verification-only task. It is genuine heavy research that will take significant compute time.
-
----
-
-## 2. Why the previous handoff was a bottleneck (and how this one removes it)
-
-The previous handoff (2026-11-21T17:45:00Z) made two mistakes:
-1. It claimed FCLR-LIQ-CONTAGION-001 was "machine-enforced by the gate" when `scripts/check_handoff_heavywork_gate.py` contained **no** contagion check. A future session could satisfy the gate with any `evidence_audit_` + `fclr_panelfe*`/`recompute_*` artifact and never touch the 1.74M contagion panel.
-2. It correctly identified that the contagion panel had never been analyzed, but left enforcement to prose.
-
-This handoff removes the bottleneck by making the claim true:
-1. `scripts/check_handoff_heavywork_gate.py` now has `CONTAGION_CAMPAIGN_RE`, `CONTAGION_REQUIRED`, `_contagion_state()`, and fail-closed wiring. After the campaign start (20261121T174500Z), a post-start session must emit the full contagion artifact set or the gate fails with `CONTAGION_ARTIFACTS_MISSING` / `CONTAGION_ARTIFACTS_EMPTY` / `CONTAGION_TRIGGER_CHECK_MISSING`.
-2. `tests/test_tracka_hardening_143.py::TestContagionCampaignGate` proves the fail-closed and pass-open behavior.
-3. The campaign is grandfathered at its start UTC, so the current green state is preserved while the mandate is now real.
-
-**Net effect:** future agents cannot "verify and stop" or satisfy the gate with an audit-only session. They must execute the heavy contagion/network analysis or emit a valid materially-different free-data route.
-
----
-
-## 3. Frozen inputs (verified — do not re-derive, do not substitute)
-
-- **Combined liquidation panel:** `research_state/fclr_liq_combined_panel_20261115T181405Z.parquet` — sha256 `81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14`, 1,740,415 event rows, 15 coins, 2025-03-22 → 2026-10-31 UTC. Columns: timestamp, coin, notional_usd, side, source, tx_hash, fundingRate, premium, abs_fund_pct, mark, ema_dist, rv24h, rv168h. Assert sha256 in script header.
-- **FCLR-001 panel (for funding/RV baseline):** `research_state/fclr011_recompute_panel_20261115T234700Z.parquet` — sha256 `41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4`, 29,136 rows × 22 cols, 5 coins, 5,832 hours. Assert sha256 in script header. `premium` is all-null; do not use it.
-
----
-
-## 4. Required artifacts for FCLR-LIQ-CONTAGION-001 (machine-enforced by the gate)
-
-Create/extend `research_state/session_<UTC>/` (UTC > 20261121T174500Z) and emit, all non-empty:
-
-- `fclr_liq_contagion01_prereg_<UTC>.json` and `.md` — outcome-blind freeze BEFORE any contagion statistics are computed. Hypotheses, network construction, permutation test, funding conditioning, time windows, materiality floor, panel sha256.
-- `fclr_liq_contagion01_eval_<UTC>.py`, `.json`, `.md` — execute the frozen protocol on the 1.74M panel. HEAVY computation: hourly aggregation, 15×15 lead-lag matrix, Granger causality for 210 directed pairs, permutation tests, funding-conditioned analysis, temporal stability.
-- `fclr_liq_contagion01_recompute_<UTC>.py`, `.json` — independent stdlib/numpy recompute that concurs.
-- `fclr_liq_contagion01_evidence_audit_<UTC>.json` and `.md` — evidence audit tying each verdict to its artifacts.
-- `evidence_audit_<UTC>.json` — REQUIRED by the gate. A thin alias of the contagion evidence audit suffices.
-- `trigger_check_<UTC>.json` — non-empty trigger check.
-
-### Acceptance Tests (run these — they are the gate)
-
+**Acceptance tests (the gate):**
 ```bash
-# Gate must pass (exit 0). Prints reason=OK.
-python3 scripts/check_handoff_heavywork_gate.py
-
-# Unit tests must pass (0 failures); includes TestContagionCampaignGate.
-python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143
-
-# Frontier must show executable heavy work remaining (contagion is rank-0 ACTIVE).
-python3 scripts/next_campaign_status.py
+python3 scripts/check_handoff_heavywork_gate.py          # → [PASS] reason=OK
+python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143  # 83 pass
+python3 scripts/next_campaign_status.py                   # rank 0 = FCLR-LIQ-CONTAGION-001 ACTIVE
 ```
-
-**Expected gate output:** `[PASS] handoff-heavywork gate: ... reason=OK`
-**Expected frontier state:** rank 0 = FCLR-LIQ-CONTAGION-001-20261121T174500Z ACTIVE / READY_EXECUTE.
 
 **State verification:**
 - `experiment_frontier.json` rank 0 = FCLR-LIQ-CONTAGION-001-20261121T174500Z ACTIVE / READY_EXECUTE
 - `hypothesis_registry.json` records H_contagion_liq and H_contagion_funding
-- Root `research_state/` md+json count stays ≤ 500 (currently 499/500)
+- Root `research_state/` md+json count ≤ 500
 
 ---
 
-## 5. Campaign details: FCLR-LIQ-CONTAGION-001
+## 2. Why the previous bottleneck is now removed
+
+The 2026-11-21T17:45:00Z handoff claimed FCLR-LIQ-CONTAGION-001 was "machine-enforced" but the gate had NO contagion check. A session could satisfy the gate with any `evidence_audit_` + `fclr_panelfe*` artifact and skip the 1.74M panel entirely.
+
+**This handoff makes the claim true:**
+1. `scripts/check_handoff_heavywork_gate.py` now has `CONTAGION_CAMPAIGN_RE`, `CONTAGION_REQUIRED`, `_contagion_state()`, and fail-closed wiring. Post-start (UTC > 20261121T174500Z) sessions MUST emit the full contagion artifact set or gate fails with `CONTAGION_ARTIFACTS_MISSING` / `CONTAGION_ARTIFACTS_EMPTY` / `CONTAGION_TRIGGER_CHECK_MISSING`.
+2. `tests/test_tracka_hardening_143.py::TestContagionCampaignGate` proves fail-closed and pass-open behavior.
+3. Campaign is grandfathered at start UTC, preserving current green state while mandate is now real.
+
+**Net effect:** Future agents CANNOT "verify and stop" or satisfy the gate with audit-only sessions. They MUST execute the heavy contagion/network analysis or emit a valid materially-different free-data route.
+
+---
+
+## 3. Frozen inputs (verified — do NOT re-derive, do NOT substitute)
+
+- **Combined liquidation panel:** `research_state/fclr_liq_combined_panel_20261115T181405Z.parquet` — sha256 `81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14`, 1,740,415 event rows, 15 coins, 2025-03-22 → 2026-10-31 UTC. Columns: `timestamp`, `coin`, `notional_usd`, `side`, `source`, `tx_hash`, `fundingRate`, `premium`, `abs_fund_pct`, `mark`, `ema_dist`, `rv24h`, `rv168h`. Assert sha256 in script header.
+- **FCLR-001 panel (funding/RV baseline):** `research_state/fclr011_recompute_panel_20261115T234700Z.parquet` — sha256 `41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4`, 29,136 rows × 22 cols, 5 coins, 5,832 hours. Assert sha256 in script header. `premium` all-null; do not use.
+
+---
+
+## 4. Campaign details: FCLR-LIQ-CONTAGION-001
 
 **Full name:** Cross-Coin Liquidation Contagion and Funding-Mediated Spillover Analysis
 **Campaign ID:** FCLR-LIQ-CONTAGION-001-20261121T174500Z
 **Rank:** 0 (ACTIVE / READY_EXECUTE)
 
-### Hypotheses (frozen before outcomes):
-- **H_contagion_liq:** Liquidation intensity in coin A at time t predicts liquidation intensity in coin B at time t+k (k=1..24 hours), after controlling for coin B's own past liquidations and market-wide liquidation activity. Test via Granger causality on hourly aggregated liquidation counts.
-- **H_contagion_funding:** Funding rate differential between coins modulates contagion strength. Specifically, when funding(A) > funding(B) + threshold, liquidations in A more strongly predict liquidations in B (funding-mediated spillover). Test via funding-tercile split and interaction terms.
+### Hypotheses (frozen before outcomes)
+- **H_contagion_liq:** Liquidation intensity in coin A at t predicts liquidation intensity in coin B at t+k (k=1..24h), controlling for B's own past liquidations and market-wide activity. Test via Granger causality on hourly aggregated counts.
+- **H_contagion_funding:** Funding rate differential between coins modulates contagion strength. When funding(A) > funding(B) + threshold, liquidations in A more strongly predict liquidations in B (funding-mediated spillover). Test via funding-tercile split and interaction terms.
 
-### Network construction:
-- Build a 15×15 directed graph where nodes = coins, edges = significant Granger causality (p < 0.01 after Bonferroni correction for 210 tests).
+### Network construction
+- 15×15 directed graph: nodes = coins, edges = significant Granger causality (p < 0.01 after Bonferroni for 210 tests).
 - Edge weight = Granger F-statistic or lead-lag correlation coefficient.
-- Permutation test: 1000+ permutations of the time series to establish null distribution of edge weights.
+- Permutation test: 1000+ permutations of time series for null distribution of edge weights.
 
-### Funding conditioning:
-- Split the sample into funding rate differential terciles (low/medium/high).
-- Recompute the contagion network within each tercile.
+### Funding conditioning
+- Split sample into funding rate differential terciles (low/medium/high).
+- Recompute contagion network within each tercile.
 - Test whether edge weights increase monotonically with funding differential.
 
-### Temporal stability:
-- Rolling window analysis: 90-day windows, step 30 days.
+### Temporal stability
+- Rolling window: 90-day windows, 30-day step.
 - Report: network density over time, edge persistence, regime-dependent contagion.
 
-### Materiality floor:
-- 2% relative effect preserved. A contagion effect must explain at least 2% of the variance in coin B's liquidations to be considered material.
+### Materiality floor
+- 2% relative effect preserved. Contagion effect must explain ≥2% of variance in coin B's liquidations to be material.
 
-### Heavy computation required:
+### Heavy computation scope
 - Hourly aggregation: 1.74M events → ~50K hourly coin-observations
-- Lead-lag matrix: 15×15 correlations at 24 lags = 360 correlation coefficients
+- Lead-lag matrix: 15×15 × 24 lags = 360 correlation coefficients
 - Granger causality: 210 directed pairs × VAR(24) = heavy VAR estimation
-- Permutation tests: 1000+ permutations × 210 pairs = 210K+ Granger tests
+- Permutation tests: 1000+ × 210 pairs = 210K+ Granger tests
 - Funding-conditioned: 3 terciles × 210 pairs × Granger tests
 - Temporal stability: rolling windows × network reconstruction
 
-This is genuine heavy research that cannot be completed in a single verification-only session.
-
 ---
 
-## 6. Completed campaigns (terminal — record only, do NOT re-run)
+## 5. Completed campaigns (terminal — record only, do NOT re-run)
 
 | Campaign | Mechanism | Session | Verdict | Key evidence |
 |----------|-----------|---------|---------|--------------|
-| FCLR-STARTER-001 | Time-series 24h forward RV (B0/B1/C1/C2) | session_20261120T052201Z | NOT_SUPPORTED | C2 vs B1 +2.62% rel QLIKE (worse), Holm adj_p 0.075 |
-| FCLR-XSEC-001 | Pooled within-hour cross-sectional funding contrast (RV) | session_20261120T175300Z | NOT_SUPPORTED | funding contrast CI [−0.390, +0.158] incl. 0 |
-| FCLR-XSEC-002 | Regime-conditioned funding contrast (next-hour RV, RV tercile) | session_20261120T210000Z | SUPPORTED | high-RV funding CI [0.0046, 0.2348], p=0.019; OOS forwards all NOT_REPLICATED |
-| FCLR-XSEC-004 | Regime-conditioned funding contrast (next-hour liq INTENSITY, count) | session_20261120T230000Z | SUPPORTED | low-RV funding CI [448605.26, 841155.73], p=0.0, Holm 0.0, materiality 0.80 |
-| FCLR-XSEC-005 | Regime-conditioned funding contrast (next-hour liq INTENSITY, notional) | session_20261121T001225Z | SUPPORTED | low-RV notional funding CI [452972.90, 850198.89], p=0.0, materiality 0.80 |
-| FCLR-XSEC-006 | Regime-conditioned funding contrast (next-hour notional liq, UTC bucket) | session_20261121T010934Z | SUPPORTED | significant across all three UTC session buckets |
-| FCLR-XSEC-007 | Cross-panel reconciliation (RV tercile vs UTC session) | session_20261121T021041Z | NOT_SUPPORTED | Primary A CI [−0.0004, 2.005] incl. 0 (p=0.272) |
-| FCLR-XSEC-008 | Alternative regime conditioning (rv168/rv24 vol-of-vol terciles) | session_20261121T054721Z | NOT_SUPPORTED | sign reversal vs XSEC-002; XSEC program terminal |
-| FCLR-LIQ-OOS-FORECAST-001 | OOS forecast of next-24h observed notional liq intensity (C2 vs B1) | session_20261121T055825Z | NOT_SUPPORTED | QLIKE FAIL rel −5.88% CI incl. zero; Brier/LogLoss PASS; joint needs ALL |
-| FCLR-LIQ-COMBINED-PANEL | Time-series 24h liq intensity C2 vs B1 | FCLR-LIQ-COMBINED-20261115T185844Z | NOT_MET | time-series QLIKE gate NOT_MET |
-| FCLR-LIQ-XSEC-ORDERING / -QLIKE | Cross-sectional ordering / QLIKE of daily liq intensity | 2026-11-15 | NOT_MET | daily ordering/QLIKE, not regime-conditioned hourly paired contrast |
-| Track A / Track B / FCLR-011 family | observed-liq forecast / modeled boundary / vol forecast | many | blocked/null | see `final_synthesis_report.md` |
-| FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE | Trigger-only sentinel (external trigger) | 20261121T071500Z | SUPERSEDED | was the structural bottleneck; replaced by SESSION-SYNTHESIS-01 then PANEL-FE-001 |
-| FCLR-SESSION-SYNTHESIS-01 | Outcome-blind consolidation + quantitative meta-analysis | session_20261121T080000Z | CONSOLIDATORY_ONLY | 17 contrasts; RV FE d=1.237 CI incl. 0; liq FE d=0.379 CI excl. 0 BUT RE DL d=0.228 CI incl. 0 under I²=97.5%; no promotable skill |
-| FCLR-PANEL-FE-001 (all phases) | Panel-FE + walk-forward OOS eval | session_20261121T130159Z | COMPLETE | All artifacts emitted; verdict NOT_SUPPORTED on both halves |
+| FCLR-STARTER-001 | Time-series 24h forward RV (B0/B1/C1/C2) | 20261120T052201Z | NOT_SUPPORTED | C2 vs B1 +2.62% rel QLIKE (worse), Holm adj_p 0.075 |
+| FCLR-XSEC-001 | Pooled within-hour funding contrast (RV) | 20261120T175300Z | NOT_SUPPORTED | funding contrast CI [−0.390, +0.158] incl. 0 |
+| FCLR-XSEC-002 | Regime funding contrast (next-hour RV, RV tercile) | 20261120T210000Z | SUPPORTED | high-RV funding CI [0.0046, 0.2348], p=0.019; OOS NOT_REPLICATED |
+| FCLR-XSEC-004 | Regime funding contrast (next-hour liq count) | 20261120T230000Z | SUPPORTED | low-RV funding CI [448605, 841156], p=0.0, materiality 0.80 |
+| FCLR-XSEC-005 | Regime funding contrast (next-hour liq notional) | 20261121T001225Z | SUPPORTED | low-RV notional CI [452973, 850199], p=0.0, materiality 0.80 |
+| FCLR-XSEC-006 | Regime funding contrast (UTC buckets) | 20261121T010934Z | SUPPORTED | significant across all three UTC buckets |
+| FCLR-XSEC-007 | Cross-panel reconciliation | 20261121T021041Z | NOT_SUPPORTED | Primary CI [−0.0004, 2.005] incl. 0 (p=0.272) |
+| FCLR-XSEC-008 | Alternative regime (vol-of-vol terciles) | 20261121T054721Z | NOT_SUPPORTED | sign reversal vs XSEC-002; XSEC program terminal |
+| FCLR-LIQ-OOS-FORECAST-001 | OOS forecast next-24h notional liq (C2 vs B1) | 20261121T055825Z | NOT_SUPPORTED | QLIKE FAIL −5.88% CI incl. 0; Brier/LogLoss PASS; joint needs ALL |
+| FCLR-LIQ-COMBINED-PANEL | Time-series 24h liq intensity (C2 vs B1) | 20261115T185844Z | NOT_MET | time-series QLIKE gate NOT_MET |
+| FCLR-LIQ-XSEC-ORDERING/QLIKE | Cross-sectional daily liq intensity | 2026-11-15 | NOT_MET | daily, not regime-conditioned hourly paired |
+| Track A/B / FCLR-011 | observed liq / modeled boundary / vol forecast | many | blocked/null | see `final_synthesis_report.md` |
+| FCLR-BOUNDED-TRIGGER-ONLY | Trigger-only sentinel | 20261121T071500Z | SUPERSEDED | bottleneck; replaced by SYNTHESIS-01 → PANEL-FE-001 |
+| FCLR-SESSION-SYNTHESIS-01 | Consolidation + meta-analysis | 20261121T080000Z | CONSOLIDATORY_ONLY | 17 contrasts; RV FE d=1.237 CI incl. 0; liq FE d=0.379 CI excl. 0 BUT RE DL d=0.228 CI incl. 0 (I²=97.5%) |
+| FCLR-PANEL-FE-001 | Panel-FE + walk-forward OOS | 20261121T130159Z | COMPLETE | All artifacts emitted; verdict NOT_SUPPORTED on both halves |
 
 ---
 
-## 7. Hard constraints (do not violate)
+## 6. Hard constraints (do NOT violate)
 
-- **Do NOT** re-run FCLR-STARTER-001, FCLR-001, FCLR-XSEC-001..008, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, FCLR-SESSION-SYNTHESIS-01, FCLR-PANEL-FE-001, or any Track A/B campaign (all terminal/superseded).
-- **Do NOT** modify `.github/workflows` (protected control plane).
-- **Do NOT** overwrite `research_state/research_protocol.md` (sealed legacy FCLR-001 2024-01..03).
-- **Do NOT** add any root-level `research_state/*.md` or `research_state/*.json` file — root md+json count is **499/500**; one more breaches the churn cap (enforced by `tests/test_tracka_hardening_125.py` and the gate). All new artifacts go under `research_state/session_<UTC>/`.
-- **Do NOT** create empty/placeholder files or empty session directories (the gate checks non-zero size).
-- **Do NOT** threshold-shop or relax the 2% materiality floor after seeing outcomes; a null is preserved as NOT_SUPPORTED.
-- **Do NOT** claim completion without emitting the full artifact set under a new `research_state/session_<UTC>/`. Prose-only, trigger-check-only, audit-only, or placeholder artifacts do NOT satisfy the gate.
+- **Do NOT** re-run any terminal campaign above
+- **Do NOT** modify `.github/workflows` (protected control plane)
+- **Do NOT** overwrite `research_state/research_protocol.md` (sealed legacy FCLR-001)
+- **Do NOT** add root-level `research_state/*.md|*.json` — count 499/500; cap enforced by test + gate
+- **Do NOT** create empty/placeholder files or empty session directories (gate checks non-zero size)
+- **Do NOT** threshold-shop or relax 2% materiality floor after outcomes; null preserved as NOT_SUPPORTED
+- **Do NOT** claim completion without full artifact set under new `session_<UTC>/` (UTC > 20261121T174500Z). Prose-only, trigger-only, audit-only, placeholder artifacts do NOT satisfy gate.
 
 ---
 
-## 8. Per-session close-out (RESEARCH_PROMPT.md §12/§19)
+## 7. Per-session close-out (RESEARCH_PROMPT.md §12/§19)
 
-Before finishing, ensure AGENT_HANDOFF.md answers: what changed and why; what was tested with exact outcomes; what evidence was added and where; the state of each research gate; the single highest-value next task; the precise verifying command; and any blocker with the next materially different free route. The active rank-0 campaign is FCLR-LIQ-CONTAGION-001 (ACTIVE / READY_EXECUTE). **No prose-only, no trigger-check-only, no placeholder sessions.** Commit nothing merely to show activity; if no meaningful progress is possible, record the evidence for the blocker and stop cleanly — but DO NOT falsely claim completion while heavy work remains.
+Before finishing, update AGENT_HANDOFF.md with: what changed and why; what was tested with exact outcomes; what evidence added and where; state of each research gate; single highest-value next task; precise verifying command; any blocker with next materially different free route. Active rank-0 campaign: FCLR-LIQ-CONTAGION-001 (ACTIVE / READY_EXECUTE). **No prose-only, no trigger-only, no placeholder sessions.** Commit nothing merely to show activity; if no meaningful progress possible, record blocker evidence and stop cleanly — but DO NOT falsely claim completion while heavy work remains.
+
+---
 
 (End of handoff)
