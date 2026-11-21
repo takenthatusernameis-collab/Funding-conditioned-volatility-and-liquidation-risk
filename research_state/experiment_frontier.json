@@ -3,13 +3,66 @@
     "rank": 0,
     "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
+    "task": "FCLR-LIQ-CONTAGION-002-20261121T200000Z",
+    "generated": "20261121T200000Z",
+    "refreshed": "2026-11-21T20:00:00Z",
+    "last_checked": "2026-11-21T20:00:00Z",
+    "last_verdict": null,
+    "next_action_heavy": "Execute FCLR-LIQ-CONTAGION-002: edge-set robustness and per-edge materiality reconciliation on the SAME frozen 1.74M liquidation panel that FCLR-LIQ-CONTAGION-001 analyzed. CONTAGION-001 left a disclosed, unresolved methodological discrepancy: the Granger-Bonferroni INTERSECT permutation-Bonferroni edge set (11 edges) disagrees with the independent recompute's empirical-p-only edge set (58 edges) on 47 of 210 pairs; the declared 2% per-edge materiality floor was asserted True but NEVER actually computed (no per-edge variance-explained field exists); and the funding-tercile and temporal-stability results were never reconciled against the primary edge set. This is HEAVY computation: per-edge R^2 / variance explained within each VAR(6) Granger regression; a multiple-testing robustness ladder (raw p, Bonferroni, Benjamini-Hochberg FDR, permutation-empirical) applied to all 210 directed pairs; tercile-and-stability reconciliation against each robustness edge set; and a block-bootstrap edge-set stability analysis (1000+ resamples). Do NOT verify and stop. Do NOT claim completion without emitting the full artifact set under session_<UTC> with UTC > 20261121T200000Z.",
+    "next_unfinished_task": "FCLR-LIQ-CONTAGION-002-20261121T200000Z: outcome-blind reconciliation prereg freeze (json+md), reconciliation evaluation triad (fclr_liq_contagion02_recon_*.py+json+md), independent stdlib recompute (fclr_liq_contagion02_recompute_*.py+json), evidence audit (fclr_liq_contagion02_evidence_audit_*.json+md), gate-critical evidence_audit_*.json alias, trigger_check_*.json. All under research_state/session_<UTC>/ with UTC > 20261121T200000Z.",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None. Uses the existing frozen panel (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, sha256 81a100d5..., 1,740,415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC). No external trigger required. The bottleneck this campaign removes: the prior handoff told future agents to 'verify green and stop' on a completed campaign while the edge-set/materiality discrepancy went unresolved \u2014 a future agent would otherwise dodge this heavy work forever.",
+    "evidence": {
+      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "panel_liquidation_shape": "1740415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC",
+      "prior_campaign": "FCLR-LIQ-CONTAGION-001-20261121T174500Z (COMPLETED under session_20261121T193000Z)",
+      "prior_session": "research_state/session_20261121T193000Z",
+      "discrepancy_to_reconcile": {
+        "eval_edges": 11,
+        "eval_density": 0.05238095238095238,
+        "eval_method": "Granger-Bonferroni INTERSECT permutation-Bonferroni",
+        "recompute_edges": 58,
+        "recompute_density": 0.2761904761904762,
+        "recompute_method": "empirical-p only (300 permutations)",
+        "eval_n_granger_significant": 155,
+        "eval_n_permutation_significant": 16,
+        "materiality_floor": 0.02,
+        "materiality_floor_computed_per_edge": false
+      },
+      "frontier_status": "FCLR-LIQ-CONTAGION-002 rank-0 ACTIVE (edge-set robustness + per-edge materiality reconciliation)"
+    },
+    "phases": [
+      {
+        "phase": "PREREG_FREEZE",
+        "status": "PENDING",
+        "claim": "Outcome-blind freeze BEFORE any reconciliation statistic. Hypotheses: H_recon_materiality (the 2% per-edge variance-explained floor is actually evaluated per edge, not merely asserted); H_recon_robustness (the contagion edge set is characterised across raw/Bonferroni/BH-FDR/permutation-empirical criteria and the cross-criterion agreement rate is reported); H_recon_stability (block-bootstrap edge-set stability and tercile/stability reconciliation against each criterion's edge set). Materiality floor 0.02. Panel sha256 asserted."
+      },
+      {
+        "phase": "RECONCILIATION_EVAL",
+        "status": "PENDING",
+        "claim": "Execute frozen protocol on the 1.74M panel: per-edge R^2 / variance explained within each VAR(6) Granger regression for all 210 directed pairs; multiple-testing robustness ladder (raw p, Bonferroni, BH-FDR at q=0.05, permutation-empirical at 1000 permutations); funding-tercile and temporal-stability reconciliation against each criterion's edge set; block-bootstrap edge-set stability (1000+ resamples). HEAVY computation."
+      },
+      {
+        "phase": "RECOMPUTE_AUDIT",
+        "status": "PENDING",
+        "claim": "Independent stdlib/numpy recompute (separate code path). Evidence audit. Non-empty trigger_check."
+      }
+    ],
+    "note": "Edge-set robustness and per-edge materiality reconciliation for the cross-coin liquidation contagion network. Feasible on the existing frozen panel via per-edge variance-explained + multiple-testing ladder + block-bootstrap. Distinct from FCLR-LIQ-CONTAGION-001 (which computed the point-estimate network and permutation test but did not reconcile edge-set criteria or evaluate materiality per edge). Reopen the frontier only if this campaign also returns an uninformative robustness result."
+  },
+  {
+    "rank": 1,
+    "status": "SUPERSEDED_TERMINAL",
+    "program_status": "COMPLETE",
     "task": "FCLR-LIQ-CONTAGION-001-20261121T174500Z",
     "generated": "20261121T174500Z",
     "refreshed": "2026-11-21T17:45:00Z",
     "last_checked": "2026-11-21T17:45:00Z",
-    "last_verdict": null,
-    "next_action_heavy": "Execute FCLR-LIQ-CONTAGION-001: cross-coin liquidation contagion and funding-mediated spillover analysis on the 1.74M event panel. This is HEAVY computation: hourly aggregation, 15x15 lead-lag matrix, Granger causality for 210 directed pairs, permutation tests (1000+), funding-conditioned analysis, temporal stability. Do NOT verify and stop. Do NOT claim completion without emitting the full artifact set.",
-    "next_unfinished_task": "FCLR-LIQ-CONTAGION-001-20261121T174500Z: prereg freeze, evaluation, independent recompute, evidence audit, gate-critical evidence audit, trigger check. All under research_state/session_<UTC>/ with UTC > 20261121T174500Z.",
+    "last_verdict": "NOT_SUPPORTED (H_contagion_liq SUPPORTED 11 edges; H_contagion_funding NOT_SUPPORTED; overall NOT_SUPPORTED; recompute DISCREPANCY 58 vs 11 edges disclosed)",
+    "next_action_heavy": "NONE. FCLR-LIQ-CONTAGION-001 executed in full under session_20261121T193000Z. See FCLR-LIQ-CONTAGION-002 (rank 0) for the active robustness-reconciliation campaign.",
+    "next_unfinished_task": null,
     "resume_triggers": [],
     "trigger_status": {},
     "blockers": "None. The 1.74M liquidation panel has rich data (fundingRate, premium, mark, ema_dist, rv24h, rv168h, notional_usd, side) and 15 coins. No external trigger required. This campaign uses the existing frozen panel.",
@@ -57,10 +110,12 @@
         "claim": "Independent stdlib/numpy recompute. Evidence audit. Non-empty trigger_check."
       }
     ],
-    "note": "Cross-coin liquidation contagion and funding-mediated spillover analysis. This is the highest-value unexplored research direction on the 1.74M event panel. Requires HEAVY computation (network analysis, Granger causality, permutation tests)."
+    "note": "Cross-coin liquidation contagion and funding-mediated spillover analysis. This is the highest-value unexplored research direction on the 1.74M event panel. Requires HEAVY computation (network analysis, Granger causality, permutation tests).",
+    "completed_session": "session_20261121T193000Z",
+    "completed_utc": "2026-11-21T19:30:00Z"
   },
   {
-    "rank": 1,
+    "rank": 2,
     "status": "SUPERSEDED",
     "program_status": "SUPERSEDED",
     "task": "FCLR-PANEL-FE-001-20261121T085602Z",
@@ -107,9 +162,9 @@
     "note": "Superseded by FCLR-LIQ-CONTAGION-001-20261121T174500Z (cross-coin liquidation contagion analysis on 1.74M event panel). This panel-FE campaign is terminal."
   },
   {
-    "rank": 2,
+    "rank": 3,
     "status": "SUPERSEDED",
-    "program_status": "ACTIVE",
+    "program_status": "SUPERSEDED",
     "task": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
     "generated": "20261121T080000Z",
     "refreshed": "2026-11-21T08:00:00Z",
@@ -214,7 +269,7 @@
     "superseded_by": "FCLR-PANEL-FE-001-20261121T085602Z"
   },
   {
-    "rank": 3,
+    "rank": 4,
     "status": "SUPERSEDED",
     "program_status": "SUPERSEDED",
     "task": "FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z",
@@ -305,7 +360,7 @@
     "superseded_by": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z"
   },
   {
-    "rank": 4,
+    "rank": 5,
     "status": "SUPERSEDED",
     "program_status": "SUPERSEDED",
     "task": "FCLR-XSEC-007-20261121T021041Z",
@@ -399,7 +454,7 @@
     "note": "FCLR-XSEC-007 COMPLETE (verdict NOT_SUPPORTED, session_20261121T021041Z). Honest null: Primary A high-RV tercile funding -> next-hour RV CI [-0.0004, 2.005] includes zero (p=0.272, Holm adj_p=0.816); joint gate requires BOTH primaries and Primary A fails. Independent recompute concurs NOT_SUPPORTED. All 20 trigger checks PASS. Demoted in frontier; succeeded by FCLR-XSEC-008 as rank-0 active heavy campaign per contingency ladder step 1 (alternative regime conditioning)."
   },
   {
-    "rank": 5,
+    "rank": 6,
     "status": "SUPERSEDED",
     "program_status": "SUPERSEDED",
     "task": "FCLR-XSEC-006-20261121T010934Z",
@@ -486,7 +541,7 @@
     "note": "FCLR-XSEC-006 COMPLETE (verdict SUPPORTED, session_20261121T010934Z). UTC-session-bucketed (Asian/European/US) regime-conditioned notional-weighted liquidation-intensity confirmation. All three buckets SUPPORTED: Asian CI [162051, 521424], European CI [334550, 782272], US CI [94750, 698082]; all p<=0.013, Holm adj_p<=0.013, materiality 0.26-0.57. Independent recompute reproduces. Cross-reference: FCLR-XSEC-004 low-RV count-based CI [448605, 841156] and FCLR-XSEC-005 low-RV notional-weighted CI [452973, 850199] both SUPPORTED; divergence: session-bucketed effect appears in ALL THREE buckets, not confined to low-RV regime. Demoted in frontier; succeeded by FCLR-XSEC-007 as rank-0 active heavy campaign."
   },
   {
-    "rank": 6,
+    "rank": 7,
     "status": "SUPERSEDED",
     "program_status": "SUPERSEDED",
     "task": "FCLR-XSEC-005-20261121T001225Z",

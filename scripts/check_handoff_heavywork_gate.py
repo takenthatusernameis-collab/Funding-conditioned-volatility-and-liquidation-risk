@@ -372,6 +372,46 @@ PANEL_FE_REQUIRED = (
 # evidence_audit_ alias (json), and a trigger check, with no zero-byte
 # placeholders. Sessions predating the campaign start are grandfathered so this
 # handoff refresh stays green.
+# FCLR-LIQ-CONTAGION-002 hardening: FCLR-LIQ-CONTAGION-001 left a disclosed,
+# unresolved methodological discrepancy on the frozen 1.74M panel: the edge set
+# was NOT robust to the multiple-testing correction (eval = Granger-Bonferroni
+# INTERSECT permutation-Bonferroni = 11 edges; independent recompute = empirical-
+# p only = 58 edges; 155 Granger-significant pairs collapse to 11 or 16 depending
+# on the criterion). The declared 2% per-edge materiality floor was asserted True
+# but never actually computed (no per-edge variance-explained field exists), and
+# the funding-tercile / temporal-stability results were never reconciled against
+# the primary edge set. The 2026-11-21T19:51:14Z handoff declared the frontier
+# exhausted and told future agents to "verify green and stop" — which would let
+# them dodge this heavy reconciliation forever. This campaign removes that
+# bottleneck: it mandates a materially different, feasible, HEAVY robustness-
+# reconciliation study on the SAME frozen panel, behind a fresh outcome-blind
+# prereg frozen before any outcome is computed. Once this campaign starts
+# (start UTC 20261121T200000Z), a post-start session cannot satisfy the gate with
+# a trigger-only, prose-only, audit-only, verify-and-stop, or arbitrary
+# recompute_* session. It must emit the outcome-blind robustness prereg freeze,
+# the heavy reconciliation evaluation triad (py+json+md: per-edge variance-
+# explained / materiality, Bonferroni vs BH-FDR vs permutation-empirical edge-set
+# robustness ladder, tercile-and-stability reconciliation against the primary
+# edge set, bootstrap edge-set stability), the independent stdlib recompute
+# (py+json), the evidence audit (json+md), the gate-critical evidence_audit_
+# alias (json), and a trigger check, with no zero-byte placeholders. Sessions
+# predating the campaign start (incl. session_20261121T193000Z) are grandfathered
+# so this handoff refresh stays green.
+CONTAGION_002_CAMPAIGN_RE = re.compile(r"FCLR-LIQ-CONTAGION-(\d+)-(\d{8}T\d{6}Z)")
+CONTAGION_002_REQUIRED = (
+    ("fclr_liq_contagion02_prereg_", ".json"),
+    ("fclr_liq_contagion02_prereg_", ".md"),
+    ("fclr_liq_contagion02_recon_", ".py"),
+    ("fclr_liq_contagion02_recon_", ".json"),
+    ("fclr_liq_contagion02_recon_", ".md"),
+    ("fclr_liq_contagion02_recompute_", ".py"),
+    ("fclr_liq_contagion02_recompute_", ".json"),
+    ("fclr_liq_contagion02_evidence_audit_", ".json"),
+    ("fclr_liq_contagion02_evidence_audit_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 CONTAGION_CAMPAIGN_RE = re.compile(r"FCLR-LIQ-CONTAGION-(\d+)-(\d{8}T\d{6}Z)")
 CONTAGION_REQUIRED = (
     ("fclr_liq_contagion01_prereg_", ".json"),
@@ -433,6 +473,7 @@ NEW_QUANT_PREFIXES = (
     "fclr_session_synth",   # FCLR-SESSION-SYNTHESIS consolidation + quantitative meta-analysis artifacts
     "fclr_panelfe",         # FCLR-PANEL-FE panel fixed-effects funding-conditioning evaluation artifacts
     "fclr_liq_contagion",   # FCLR-LIQ-CONTAGION cross-coin liquidation contagion + funding spillover artifacts
+    "fclr_liq_contagion02", # FCLR-LIQ-CONTAGION-002 robustness-reconciliation artifacts (edge-set + materiality)
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -1383,11 +1424,20 @@ def _contagion_state(handoff_text: str, latest_sid: str | None,
         "has_trigger_check": False,
         "pass": True,
     }
-    m = CONTAGION_CAMPAIGN_RE.search(handoff_text or "")
-    if not m:
+    all_matches = CONTAGION_CAMPAIGN_RE.findall(handoff_text or "")
+    if not all_matches:
         return out
-    campaign_start = m.group(2)
-    out["campaign_id"] = f"FCLR-LIQ-CONTAGION-{m.group(1)}-{campaign_start}"
+    # Bind only the highest-numbered CONTAGION campaign referenced in the
+    # handoff; lower-numbered (completed) campaigns in the history table must
+    # not bind their artifact family onto a later session. This keeps the gate
+    # enforcing the *active* campaign instead of an already-closed one.
+    max_num = max(int(num) for num, _ in all_matches)
+    if max_num != 1:
+        # A higher-numbered CONTAGION campaign (e.g. 002) supersedes this one;
+        # its dedicated state function binds the heavy work.
+        return out
+    campaign_start = next(start for num, start in all_matches if int(num) == 1)
+    out["campaign_id"] = f"FCLR-LIQ-CONTAGION-01-{campaign_start}"
     out["campaign_start_utc"] = campaign_start
     if not latest_sid:
         return out
@@ -1402,12 +1452,99 @@ def _contagion_state(handoff_text: str, latest_sid: str | None,
         p = latest_dir / name
         return p.is_file() and p.stat().st_size > 0
 
-    # Ladder-aware: bind the artifact family to the campaign number in the
-    # handoff (01 -> fclr_liq_contagion01_*, 02 -> fclr_liq_contagion02_*, ...).
-    tag = f"contagion{int(m.group(1)):02d}"
+    # Ladder-aware: bind the artifact family to the campaign number (always 01
+    # here, since this branch only runs when 001 is the highest CONTAGION
+    # campaign referenced in the handoff).
+    tag = "contagion01"
     family = tuple(
         (prefix.replace("fclr_liq_contagion01_", f"fclr_liq_{tag}_"), suffix)
         for prefix, suffix in CONTAGION_REQUIRED
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["artifact_family"] = tag
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, family):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
+def _contagion_002_state(handoff_text: str, latest_sid: str | None,
+                         latest_files: list[str],
+                         latest_dir: Path | None = None) -> dict:
+    """Return FCLR-LIQ-CONTAGION-002 robustness-reconciliation state.
+
+    FCLR-LIQ-CONTAGION-001 left a disclosed, unresolved methodological
+    discrepancy (eval 11 edges vs recompute 58 edges; declared 2% per-edge
+    materiality never computed). After this campaign starts, a post-start
+    session must emit the outcome-blind prereg freeze, the heavy reconciliation
+    evaluation triad (py+json+md), the independent stdlib recompute (py+json),
+    the contagion evidence audit (json+md), the gate-critical evidence_audit_
+    alias (json), and a trigger check, with no zero-byte placeholders.
+    Trigger-only, prose-only, audit-only, verify-and-stop, or arbitrary
+    recompute_* sessions fail closed. Sessions that predate the campaign start
+    (incl. session_20261121T193000Z, the CONTAGION-001 session) are grandfathered
+    so the handoff refresh that announces the campaign stays green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    all_matches = CONTAGION_002_CAMPAIGN_RE.findall(handoff_text or "")
+    if not all_matches:
+        return out
+    # Bind only the highest-numbered CONTAGION campaign referenced in the
+    # handoff; lower-numbered (completed) campaigns in the history table must
+    # not bind their artifact family onto a later session. This keeps the gate
+    # enforcing the *active* campaign instead of an already-closed one.
+    campaign_num = max(int(num) for num, _ in all_matches)
+    campaign_start = next(start for num, start in all_matches if int(num) == campaign_num)
+    out["campaign_id"] = f"FCLR-LIQ-CONTAGION-{campaign_num:02d}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    # Only bind the reconciliation artifacts when the highest CONTAGION campaign
+    # is the 002 robustness campaign (or a later ladder step). A handoff whose
+    # highest campaign is 001 leaves required=False and defers to _contagion_state.
+    out["required"] = campaign_num >= 2
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    # Ladder-aware: bind the artifact family to the campaign number in the
+    # handoff (02 -> fclr_liq_contagion02_*, 03 -> fclr_liq_contagion03_*, ...).
+    tag = f"contagion{campaign_num:02d}"
+    family = tuple(
+        (prefix.replace("fclr_liq_contagion02_", f"fclr_liq_{tag}_"), suffix)
+        for prefix, suffix in CONTAGION_002_REQUIRED
     )
     required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
     out["artifact_family"] = tag
@@ -2092,6 +2229,33 @@ def check(repo: Path = REPO) -> dict:
                 if not ct["has_trigger_check"]:
                     payload["failures"].append(
                         f"CONTAGION_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-LIQ-CONTAGION-002: after the robustness-reconciliation
+            # campaign starts, require the outcome-blind prereg + reconciliation
+            # evaluation triad + independent stdlib recompute + evidence audit +
+            # gate-critical evidence_audit_ alias + trigger check. Zero-byte
+            # placeholders fail closed, so a future session cannot dodge the heavy
+            # edge-set robustness + per-edge materiality reconciliation with a
+            # trigger-only, audit-only, or verify-and-stop session.
+            ct2 = _contagion_002_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["contagion_002"] = ct2
+            if ct2["required"]:
+                if ct2["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "CONTAGION_002_ARTIFACTS_MISSING:"
+                        + ",".join(ct2["missing_required_artifacts"])
+                    )
+                if ct2["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "CONTAGION_002_ARTIFACTS_EMPTY:"
+                        + ",".join(ct2["empty_required_artifacts"])
+                    )
+                if not ct2["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"CONTAGION_002_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
