@@ -1,0 +1,23 @@
+{
+  "session_utc": "20261121T130159Z",
+  "experiment_id": "FCLR-PANEL-FE-001-20261121T130159Z",
+  "campaign": "FCLR-PANEL-FE-001",
+  "audit_prefix": "evidence_audit_",
+  "note": "Gate-critical evidence audit with the literal `evidence_audit_` filename prefix required by the FCLR-PANEL-FE-001 new-style heavy-session check (AUDIT_PREFIX='evidence_audit_'). The sibling `fclr_panelfe01_evidence_audit_*` files do not satisfy this check because their names do not start with `evidence_audit_`. This file is a thin alias of `fclr_panelfe01_evidence_audit_20261121T130159Z.json`.",
+  "source_audit": "research_state/session_20261121T130159Z/fclr_panelfe01_evidence_audit_20261121T130159Z.json",
+  "verdict": "NOT_SUPPORTED",
+  "overall_verdict": "NOT_SUPPORTED",
+  "half_a_verdict": "NOT_SUPPORTED (H_panelfe_vol)",
+  "half_b_verdict": "NOT_SUPPORTED (H_panelfe_liq)",
+  "materiality_floor": 0.02,
+  "materiality_met": false,
+  "recompute_concurs": true,
+  "outcome_data_inspected_before_freeze": false,
+  "panels_hash_verified": true,
+  "artifact_triad_complete": true,
+  "sealed_artifacts_mutated": false,
+  "root_level_md_json_added": false,
+  "workflow_files_modified": false,
+  "no_network_or_paid_data": true,
+  "terminal_campaigns_not_rerun": true
+}

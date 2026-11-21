@@ -1,0 +1,31 @@
+{
+  "session_utc": "20261121T130159Z",
+  "experiment_id": "FCLR-PANEL-FE-001-20261121T130159Z",
+  "campaign": "FCLR-PANEL-FE-001",
+  "trigger_required": false,
+  "trigger_name": "none",
+  "detail": "No external trigger is required. The frozen panels (FCLR-001 sha256 41962f82…c1f4; combined liquidation sha256 81a100d5…7f14) are the sole inputs and are hash-verified on disk. The structural bottleneck of awaiting an external `NEW_OBSERVED_LIQUIDATION_SOURCE` trigger is removed: the panel fixed-effects + walk-forward design is feasible on existing frozen data and does not require any external trigger or new data acquisition.",
+  "panel_fclr001": {
+    "path": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+    "sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+    "verified": true
+  },
+  "panel_combined_liquidation": {
+    "path": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+    "sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+    "verified": true
+  },
+  "prereg_frozen": true,
+  "prereg_path": "research_state/session_20261121T130159Z/fclr_panelfe01_prereg_20261121T130159Z.json",
+  "outcome_data_inspected_before_freeze": false,
+  "eval_emitted": true,
+  "recompute_emitted": true,
+  "recompute_concurs": true,
+  "evidence_audit_emitted": true,
+  "all_artifacts_non_empty": true,
+  "no_network_calls": true,
+  "no_paid_data": true,
+  "no_credentials": true,
+  "no_new_data_acquisition": true,
+  "verdict": "PASS"
+}
