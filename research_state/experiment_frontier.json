@@ -3,16 +3,91 @@
     "rank": 0,
     "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
-    "task": "FCLR-XSEC-006-20261121T005519Z",
-    "generated": "20261121T005519Z",
-    "refreshed": "2026-11-21T00:55:19Z",
-    "last_checked": "2026-11-21T00:55:19Z",
+    "task": "FCLR-XSEC-007-20261121T015418Z",
+    "generated": "20261121T015418Z",
+    "refreshed": "2026-11-21T01:54:18Z",
+    "last_checked": "2026-11-21T01:54:18Z",
     "last_verdict": null,
-    "next_action_heavy": "Preregister and execute FCLR-XSEC-006: UTC-session-bucketed (Asian/European/US) regime-conditioned cross-sectional funding effect on next-hour notional-weighted observed liquidation intensity on the frozen combined metpie+ironflow panel (panel_sha256 81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14). Distinct estimand from FCLR-XSEC-004 (count-based, RV tercile) and FCLR-XSEC-005 (notional-weighted, RV tercile): regime = UTC trading-session bucket at hour t instead of RV tercile; outcome = sum of notional_usd in next hour; predictor = within-(hour,session) abs_fund_pct rank; baseline = within-session RV persistence; block bootstrap across whole UTC hours within each session bucket (seed 20261121, >=2000 reps); Holm over the session-bucket x {funding contrast, persistence baseline} family; 2% materiality floor. Pre-register protocol freeze BEFORE examining liquidation outcomes (outcome_data_inspected_before_freeze=false). Emit protocol_freeze, evaluation, recompute, evidence_audit, and a non-empty trigger_check under a new research_state/session_<UTC>/; synchronize experiment_frontier.json + hypothesis_registry.json; advance AGENT_HANDOFF.md latest-session line. No new data, no network, no credentials. Do not re-run FCLR-STARTER-001 / FCLR-001 / FCLR-XSEC-001 / FCLR-XSEC-002 / FCLR-XSEC-003 / FCLR-XSEC-004 / FCLR-XSEC-005.",
-    "next_unfinished_task": "FCLR-XSEC-006 Step 1: preregister protocol freeze (fclr_xsec006_protocol_freeze_<UTC>.json+.md, session-bucket regime defined ex-ante, outcome_data_inspected_before_freeze=false, distinct estimand from XSEC-004/XSEC-005). Step 2: session-conditioned notional-weighted evaluation (fclr_xsec006_evaluation_<UTC>.py+.json+.md) with block bootstrap + Holm, 2% floor. Step 3: independent recompute + evidence_audit + non-empty trigger_check_<UTC>.json. Step 4: advance FCLR-XSEC-006 to COMPLETE with the new UTC, set last_verdict, demote FCLR-XSEC-005 to SUPERSEDED; sync hypothesis_registry.json (H_fclr_xsec_006 terminal with verdict). Acceptance: python3 scripts/check_handoff_heavywork_gate.py exits 0 and python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 -> 0 failures; no holdout outcomes inspected before freeze; zero-byte placeholders do NOT count.",
+    "next_action_heavy": "Preregister and execute FCLR-XSEC-007: cross-panel mechanism reconciliation of FCLR-XSEC-002 (RV-tercile regime -> next-hour RV) and FCLR-XSEC-006 (UTC-session-bucket regime -> next-hour notional-weighted liquidation intensity) on overlapping 5-coin FCLR-001 hours. Panels: (1) FCLR-001 panel research_state/fclr011_recompute_panel_20261115T234700Z.parquet (sha256 41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4, 5 coins, 5,832 hours); (2) Combined liquidation panel research_state/fclr_liq_combined_panel_20261115T181405Z.parquet (sha256 81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14, 15 coins, 10,052 hours). Join on (coin, hour) for 5 overlapping coins (BTC, ETH, BNB, SOL, XRP) and overlapping hours (2025-03-22..2026-10-31). Primary A: within-(hour, RV-tercile) funding rank -> next-hour RV. Primary B: within-(hour, UTC-session-bucket) funding rank -> next-hour notional-weighted liq intensity. Cross-panel: coefficient sign agreement and joint significance on same hours. Block bootstrap across whole UTC hours within each regime family (seed 20261121, >=2000 reps); Holm over joint family; 2% materiality floor. Pre-register protocol freeze BEFORE examining outcomes (outcome_data_inspected_before_freeze=false). Emit protocol_freeze, evaluation, recompute, evidence_audit, and non-empty trigger_check under new research_state/session_<UTC>/; sync experiment_frontier.json + hypothesis_registry.json; advance AGENT_HANDOFF.md latest-session line. No new data, no network, no credentials. Do not re-run FCLR-STARTER-001 / FCLR-001 / FCLR-XSEC-001 / FCLR-XSEC-002 / FCLR-XSEC-003 / FCLR-XSEC-004 / FCLR-XSEC-005 / FCLR-XSEC-006.",
+    "next_unfinished_task": "FCLR-XSEC-007 Step 1: preregister protocol freeze (fclr_xsec007_protocol_freeze_<UTC>.json+.md, both panel hashes recorded, joint estimand defined ex-ante, outcome_data_inspected_before_freeze=false). Step 2: cross-panel evaluation (fclr_xsec007_evaluation_<UTC>.py+.json+.md) with block bootstrap + Holm over joint family, 2% floor. Step 3: independent recompute + evidence_audit + non-empty trigger_check_<UTC>.json. Step 4: advance FCLR-XSEC-007 to COMPLETE with the new UTC, set last_verdict, demote FCLR-XSEC-006 to SUPERSEDED; sync hypothesis_registry.json (H_fclr_xsec_007 terminal with verdict). Acceptance: python3 scripts/check_handoff_heavywork_gate.py exits 0 and python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 -> 0 failures; no holdout outcomes inspected before freeze; zero-byte placeholders do NOT count.",
     "resume_triggers": [],
     "trigger_status": {},
-    "blockers": "None agent-removable: frozen combined panel already built and hash-frozen; no network, no paid/credentialed data needed; distinct estimand from terminal SUPPORTED FCLR-XSEC-002/004/005. Root research_state/ md+json count 499/500: ALL new artifacts go under research_state/session_<UTC>/.",
+    "blockers": "None agent-removable: both frozen panels already built and hash-frozen; overlapping 5 coins and hours identified; no network, no paid/credentialed data needed; distinct estimand from all terminal SUPPORTED campaigns (FCLR-XSEC-002, 004, 005, 006). Root research_state/ md+json count 499/500: ALL new artifacts go under research_state/session_<UTC>/.",
+    "evidence": {
+      "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+      "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "overlapping_coins": ["BTC", "ETH", "BNB", "SOL", "XRP"],
+      "overlapping_span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
+      "mechanism": "cross_panel_mechanism_reconciliation_rv_tercile_vs_utc_session_bucket",
+      "distinct_from": [
+        "FCLR-001",
+        "FCLR-XSEC-001",
+        "FCLR-XSEC-002",
+        "FCLR-XSEC-003",
+        "FCLR-XSEC-004 (count-based, RV tercile)",
+        "FCLR-XSEC-005 (notional-weighted, RV tercile)",
+        "FCLR-XSEC-006 (notional-weighted, UTC session bucket)",
+        "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
+        "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
+      ],
+      "supersedes": "FCLR-XSEC-006-20261121T010934Z"
+    },
+    "phases": [
+      {
+        "phase": "PREREG_FREEZE",
+        "status": "NOT_STARTED",
+        "claim": "Freeze FCLR-XSEC-007 protocol pre-outcomes: joint cross-panel estimand on overlapping 5-coin hours; Primary A = within-(hour, RV-tercile) funding rank -> next-hour RV (FCLR-XSEC-002 style); Primary B = within-(hour, UTC-session-bucket) funding rank -> next-hour notional-weighted liq intensity (FCLR-XSEC-006 style); block bootstrap + Holm over joint regime family + 2% floor. outcome_data_inspected_before_freeze=false. Both panel hashes recorded.",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/fclr_xsec007_protocol_freeze_<UTC>.json",
+          "research_state/session_<UTC>/fclr_xsec007_protocol_freeze_<UTC>.md"
+        ],
+        "actual_artifacts": []
+      },
+      {
+        "phase": "EVALUATION_AND_GATE",
+        "status": "NOT_STARTED",
+        "claim": "Cross-panel evaluation: both primary funding contrasts on overlapping hours, block bootstrap across holdout hours within each regime family (seed 20261121, >=2000 reps), Holm over joint family, 2% materiality floor; independent recompute; verdict SUPPORTED only if BOTH primary contrasts clear all gates; otherwise honest NOT_SUPPORTED; cross-reference FCLR-XSEC-002, XSEC-004, XSEC-005, XSEC-006.",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/fclr_xsec007_evaluation_<UTC>.py",
+          "research_state/session_<UTC>/fclr_xsec007_evaluation_<UTC>.json",
+          "research_state/session_<UTC>/fclr_xsec007_evaluation_<UTC>.md",
+          "research_state/session_<UTC>/fclr_xsec007_recompute_<UTC>.py",
+          "research_state/session_<UTC>/fclr_xsec007_recompute_<UTC>.json"
+        ],
+        "actual_artifacts": []
+      },
+      {
+        "phase": "TRIGGER_AND_FRONTIER",
+        "status": "NOT_STARTED",
+        "claim": "Emit non-empty trigger_check_<UTC>.json + evidence_audit_<UTC>.{json,md}; advance FCLR-XSEC-007 to COMPLETE with the new UTC, set last_verdict, demote FCLR-XSEC-006 to SUPERSEDED; sync hypothesis_registry.json; no sealed mutation, no workflows edits, no root-level md/json.",
+        "expected_artifacts": [
+          "research_state/session_<UTC>/trigger_check_<UTC>.json",
+          "research_state/session_<UTC>/evidence_audit_<UTC>.json",
+          "research_state/session_<UTC>/evidence_audit_<UTC>.md"
+        ],
+        "actual_artifacts": []
+      }
+    ],
+    "note": "Rank-0 active heavy campaign FCLR-XSEC-007 READY_EXECUTE/ACTIVE. Cross-panel mechanism reconciliation: does the regime-conditioned funding effect that is SUPPORTED for RV (FCLR-XSEC-002, HIGH-RV) and for liquidation intensity (FCLR-XSEC-004/005, LOW-RV; FCLR-XSEC-006, ALL THREE UTC buckets) reconcile on the same 5-coin FCLR-001 hours? Heavy work required; not a trigger-check-only session."
+  },
+  {
+    "rank": 1,
+    "status": "SUPERSEDED",
+    "program_status": "SUPERSEDED",
+    "task": "FCLR-XSEC-006-20261121T010934Z",
+    "generated": "20261121T005519Z",
+    "refreshed": "2026-11-21T01:54:18Z",
+    "last_checked": "2026-11-21T01:54:18Z",
+    "last_verdict": "SUPPORTED",
+    "next_action_heavy": null,
+    "next_unfinished_task": null,
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": null,
+    "superseded_at": "2026-11-21T01:54:18Z",
+    "superseded_by": "FCLR-XSEC-007-20261121T015418Z",
     "evidence": {
       "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
       "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
@@ -37,18 +112,21 @@
     "phases": [
       {
         "phase": "PREREG_FREEZE",
-        "status": "NOT_STARTED",
+        "status": "COMPLETE",
         "claim": "Freeze FCLR-XSEC-006 protocol pre-outcomes: outcome = next-hour notional-weighted (sum notional_usd) liquidation intensity; regime = UTC trading-session bucket (Asian/European/US) at hour t; predictor = within-(hour,session) abs_fund_pct rank; baseline = within-session RV persistence; block bootstrap + Holm over session-bucket x {funding contrast, persistence baseline} family + 2% floor. outcome_data_inspected_before_freeze=false. Distinct from FCLR-XSEC-004 (count-based) and FCLR-XSEC-005 (notional-weighted, RV tercile).",
         "expected_artifacts": [
           "research_state/session_<UTC>/fclr_xsec006_protocol_freeze_<UTC>.json",
           "research_state/session_<UTC>/fclr_xsec006_protocol_freeze_<UTC>.md"
         ],
-        "actual_artifacts": []
+        "actual_artifacts": [
+          "research_state/session_20261121T010934Z/fclr_xsec006_protocol_freeze_20261121T010934Z.json",
+          "research_state/session_20261121T010934Z/fclr_xsec006_protocol_freeze_20261121T010934Z.md"
+        ]
       },
       {
         "phase": "EVALUATION_AND_GATE",
-        "status": "NOT_STARTED",
-        "claim": "Session-conditioned notional-weighted evaluation: regime-conditioned funding contrast, block bootstrap across holdout hours within session bucket (seed 20261121, >=2000 reps), Holm over the family, 2% materiality floor; independent recompute; verdict SUPPORTED or honest NOT_SUPPORTED; cross-reference FCLR-XSEC-004 and FCLR-XSEC-005.",
+        "status": "COMPLETE",
+        "claim": "Session-conditioned notional-weighted evaluation: regime-conditioned funding contrast, block bootstrap across holdout hours within session bucket (seed 20261121, >=2000 reps), Holm over the family, 2% materiality floor; independent recompute; verdict SUPPORTED; cross-reference FCLR-XSEC-004 and FCLR-XSEC-005.",
         "expected_artifacts": [
           "research_state/session_<UTC>/fclr_xsec006_evaluation_<UTC>.py",
           "research_state/session_<UTC>/fclr_xsec006_evaluation_<UTC>.json",
@@ -56,21 +134,30 @@
           "research_state/session_<UTC>/fclr_xsec006_recompute_<UTC>.py",
           "research_state/session_<UTC>/fclr_xsec006_recompute_<UTC>.json"
         ],
-        "actual_artifacts": []
+        "actual_artifacts": [
+          "research_state/session_20261121T010934Z/fclr_xsec006_evaluation_20261121T010934Z.py",
+          "research_state/session_20261121T010934Z/fclr_xsec006_evaluation_20261121T010934Z.json",
+          "research_state/session_20261121T010934Z/fclr_xsec006_recompute_20261121T010934Z.py",
+          "research_state/session_20261121T010934Z/fclr_xsec006_recompute_20261121T010934Z.json"
+        ]
       },
       {
         "phase": "TRIGGER_AND_FRONTIER",
-        "status": "NOT_STARTED",
+        "status": "COMPLETE",
         "claim": "Emit non-empty trigger_check_<UTC>.json + evidence_audit_<UTC>.{json,md}; advance FCLR-XSEC-006 to COMPLETE with the new UTC, set last_verdict, demote FCLR-XSEC-005 to SUPERSEDED; sync hypothesis_registry.json; no sealed mutation, no workflows edits, no root-level md/json.",
         "expected_artifacts": [
           "research_state/session_<UTC>/trigger_check_<UTC>.json",
           "research_state/session_<UTC>/evidence_audit_<UTC>.json",
           "research_state/session_<UTC>/evidence_audit_<UTC>.md"
         ],
-        "actual_artifacts": []
+        "actual_artifacts": [
+          "research_state/session_20261121T010934Z/trigger_check_20261121T010934Z.json",
+          "research_state/session_20261121T010934Z/evidence_audit_20261121T010934Z.json",
+          "research_state/session_20261121T010934Z/evidence_audit_20261121T010934Z.md"
+        ]
       }
     ],
-    "note": "Rank-0 active heavy campaign FCLR-XSEC-006 READY_EXECUTE/ACTIVE. UTC-session-bucketed (Asian/European/US) regime-conditioned notional-weighted liquidation-intensity confirmation of FCLR-XSEC-004/005. Distinct regime variable (UTC session bucket vs RV tercile) + same frozen panel + same notional-weighted outcome. Heavy work required; not a trigger-check-only session."
+    "note": "FCLR-XSEC-006 COMPLETE (verdict SUPPORTED, session_20261121T010934Z). UTC-session-bucketed (Asian/European/US) regime-conditioned notional-weighted liquidation-intensity confirmation. All three buckets SUPPORTED: Asian CI [162051, 521424], European CI [334550, 782272], US CI [94750, 698082]; all p<=0.013, Holm adj_p<=0.013, materiality 0.26-0.57. Independent recompute reproduces. Cross-reference: FCLR-XSEC-004 low-RV count-based CI [448605, 841156] and FCLR-XSEC-005 low-RV notional-weighted CI [452973, 850199] both SUPPORTED; divergence: session-bucketed effect appears in ALL THREE buckets, not confined to low-RV regime. Demoted in frontier; succeeded by FCLR-XSEC-007 as rank-0 active heavy campaign."
   },
   {
     "rank": 1,
@@ -78,8 +165,8 @@
     "program_status": "SUPERSEDED",
     "task": "FCLR-XSEC-005-20261121T001225Z",
     "generated": "20261121T000722Z",
-    "refreshed": "2026-11-21T00:12:25Z",
-    "last_checked": "2026-11-21T00:12:25Z",
+    "refreshed": "2026-11-21T01:54:18Z",
+    "last_checked": "2026-11-21T01:54:18Z",
     "last_verdict": "SUPPORTED",
     "next_action_heavy": null,
     "next_unfinished_task": null,
@@ -156,614 +243,6 @@
         ]
       }
     ],
-    "note": "Rank-0 active heavy campaign FCLR-XSEC-005 COMPLETE (verdict SUPPORTED). Notional-weighted (dollar severity) confirmation of the FCLR-XSEC-004 low-RV liquidation finding. Distinct estimand (notional-weighted vs count) + same frozen panel. Low-RV regime funding contrast SUPPORTED: CI [452972.90, 850198.89], p=0.0, Holm passes, materiality 0.80. High-RV regime honest null. Independent recompute reproduces. Strong agreement with FCLR-XSEC-004 count-based result."
-  },
-  {
-    "rank": 1,
-    "status": "SUPERSEDED",
-    "program_status": "SUPERSEDED",
-    "task": "FCLR-XSEC-004-20261120T225115Z",
-    "generated": "20261120T225115Z",
-    "refreshed": "2026-11-21T00:05:00Z",
-    "last_checked": "2026-11-21T00:05:00Z",
-    "last_verdict": "SUPPORTED",
-    "next_action_heavy": null,
-    "next_unfinished_task": null,
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": null,
-    "evidence": {
-      "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "rows": 1740415,
-      "coins": 15,
-      "hours": 10052,
-      "span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
-      "features_zero_null": true,
-      "mechanism": "regime_conditioned_cross_sectional_funding_effect_on_next_hour_liquidation_intensity",
-      "distinct_from": [
-        "FCLR-001",
-        "FCLR-XSEC-001",
-        "FCLR-XSEC-002",
-        "FCLR-XSEC-003",
-        "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
-        "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
-      ],
-      "supersedes": "FCLR-XSEC-003-20261120T214950Z"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/fclr_xsec004_protocol_freeze_<UTC>.json",
-          "research_state/session_<UTC>/fclr_xsec004_protocol_freeze_<UTC>.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261120T230000Z/fclr_xsec004_protocol_freeze_20261120T230000Z.json",
-          "research_state/session_20261120T230000Z/fclr_xsec004_protocol_freeze_20261120T230000Z.md"
-        ],
-        "claim": "COMPLETE in session_20261120T230000Z (verdict SUPPORTED)."
-      },
-      {
-        "phase": "EVALUATION_AND_GATE",
-        "status": "COMPLETE",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/fclr_xsec004_evaluation_<UTC>.py",
-          "research_state/session_<UTC>/fclr_xsec004_evaluation_<UTC>.json",
-          "research_state/session_<UTC>/fclr_xsec004_evaluation_<UTC>.md",
-          "research_state/session_<UTC>/fclr_xsec004_recompute_<UTC>.py",
-          "research_state/session_<UTC>/fclr_xsec004_recompute_<UTC>.json"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261120T230000Z/fclr_xsec004_evaluation_20261120T230000Z.py",
-          "research_state/session_20261120T230000Z/fclr_xsec004_evaluation_20261120T230000Z.json",
-          "research_state/session_20261120T230000Z/recompute_fclr_xsec004_20261120T230000Z.py",
-          "research_state/session_20261120T230000Z/recompute_fclr_xsec004_20261120T230000Z.json"
-        ],
-        "claim": "COMPLETE in session_20261120T230000Z (verdict SUPPORTED)."
-      },
-      {
-        "phase": "TRIGGER_AND_FRONTIER",
-        "status": "COMPLETE",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/trigger_check_<UTC>.json",
-          "research_state/session_<UTC>/evidence_audit_<UTC>.json",
-          "research_state/session_<UTC>/evidence_audit_<UTC>.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261120T230000Z/trigger_check_20261120T230000Z.json",
-          "research_state/session_20261120T230000Z/evidence_audit_20261120T230000Z.json",
-          "research_state/session_20261120T230000Z/evidence_audit_20261120T230000Z.md"
-        ],
-        "claim": "COMPLETE in session_20261120T230000Z (verdict SUPPORTED)."
-      }
-    ],
-    "note": "FCLR-XSEC-004 executed and COMPLETE in session_20261120T230000Z. Regime-conditioned cross-sectional funding effect on next-hour observed liquidation intensity: LOW market-wide-RV regime funding contrast SUPPORTED (CI [448605.26, 841155.73], p=0.0, Holm adj_p=0.0, materiality 0.80 >= 0.02); HIGH-RV regime contrast is an honest null (CI includes zero, p=0.263). Independent recompute reproduces the verdict. Both the volatility half (FCLR-XSEC-002, HIGH-RV) and the liquidation-risk half (FCLR-XSEC-004, LOW-RV) of the repository mandate are now SUPPORTED but regime-distinct.",
-    "superseded_at": "2026-11-21T00:12:25Z",
-    "superseded_by": "FCLR-XSEC-005-20261121T001225Z"
-  },
-  {
-    "rank": 1,
-    "status": "SUPERSEDED",
-    "program_status": "SUPERSEDED",
-    "task": "FCLR-XSEC-003-20261120T214950Z",
-    "generated": "20261120T214950Z",
-    "refreshed": "20261120T214950Z",
-    "last_checked": "20261120T214950Z",
-    "last_verdict": null,
-    "next_action_heavy": "Preregister and execute FCLR-XSEC-003: out-of-sample holdout recompute confirmation of the regime-conditioned funding effect on the frozen FCLR-001 panel (panel_sha256 41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4). Hold out a disjoint set of UTC hours per coin never inspected by FCLR-XSEC-002 (out-of-sample holdout). Pre-register the protocol freeze BEFORE examining holdout outcomes; recompute the regime-conditioned funding contrast (high vs low market-wide-RV tercile) on the holdout; block bootstrap across holdout hours within regime (seed 20261120, >=2000 reps); Holm over the 4-test family; 2% materiality floor. Emit protocol_freeze, evaluation, and a non-empty trigger_check under a new research_state/session_<UTC>/; synchronize experiment_frontier.json + hypothesis_registry.json. No new data, no network, no credentials. Do not re-run FCLR-STARTER-001 or FCLR-XSEC-001 (terminal NOT_SUPPORTED).",
-    "next_unfinished_task": "FCLR-XSEC-003 Step 1: preregister protocol freeze (fclr_xsec003_protocol_freeze_<UTC>.json+.md, holdout defined ex-ante, outcome_data_inspected_before_freeze=false, distinct estimand from FCLR-STARTER-001 and FCLR-XSEC-002). Step 2: holdout evaluation (fclr_xsec003_evaluation_<UTC>.py+.json+.md) with block bootstrap + Holm over 4 tests, 2% floor. Step 3: emit non-empty trigger_check_<UTC>.json; set rank-0 = FCLR-XSEC-003 READY_EXECUTE/ACTIVE, FCLR-XSEC-002 SUPERSEDED; sync hypothesis_registry.json (H_fclr_xsec_003 NOT_STARTED). Acceptance: python3 scripts/check_handoff_heavywork_gate.py exits 0 and python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 -> 0 failures; no holdout outcomes inspected before freeze; zero-byte placeholders do NOT count.",
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": "None agent-removable: frozen FCLR-001 panel already built and hash-frozen; no network, no paid/credentialed data needed; distinct estimand from NOT_SUPPORTED FCLR-STARTER-001 and FCLR-XSEC-002. Root research_state/ md+json count 499/500: ALL new artifacts go under research_state/session_<UTC>/.",
-    "evidence": {
-      "frontier_cells": 0,
-      "all_terminal": false,
-      "data_through": "2026-10",
-      "new_files_found": 0,
-      "panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
-      "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
-      "prior_campaign": "FCLR-XSEC-002",
-      "prior_verdict": "SUPPORTED",
-      "prior_session": "session_20261120T210000Z",
-      "mechanism": "out-of-sample holdout recompute confirmation of regime-conditioned funding effect"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "NOT_STARTED",
-        "claim": "Freeze FCLR-XSEC-003 protocol pre-outcomes: ex-ante disjoint holdout of UTC hours per coin, unit contract x hour, target rv1h t+1, predictor within-hour funding rank within market-wide-RV regime, baseline within-regime RV persistence, evaluation block bootstrap + Holm + 2% floor. outcome_data_inspected_before_freeze=false.",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/fclr_xsec003_protocol_freeze_<UTC>.json",
-          "research_state/session_<UTC>/fclr_xsec003_protocol_freeze_<UTC>.md"
-        ]
-      },
-      {
-        "phase": "EVALUATION_AND_GATE",
-        "status": "NOT_STARTED",
-        "claim": "Holdout evaluation: regime-conditioned funding contrast, block bootstrap across holdout hours within regime, Holm over family (regimes x contrasts), 2% materiality floor; emit verdict SUPPORTED or honest NOT_SUPPORTED.",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/fclr_xsec003_evaluation_<UTC>.py",
-          "research_state/session_<UTC>/fclr_xsec003_evaluation_<UTC>.json",
-          "research_state/session_<UTC>/fclr_xsec003_evaluation_<UTC>.md"
-        ]
-      },
-      {
-        "phase": "TRIGGER_AND_FRONTIER",
-        "status": "NOT_STARTED",
-        "claim": "Emit non-empty trigger_check_<UTC>.json; rank-0 = FCLR-XSEC-003 ACTIVE, FCLR-XSEC-002 SUPERSEDED; sync hypothesis_registry.json; no sealed mutation, no workflows edits, no root-level md/json.",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/trigger_check_<UTC>.json"
-        ]
-      }
-    ],
-    "note": "FCLR-XSEC-003 is the rank-0 active heavy campaign (out-of-sample holdout confirmation of the SUPPORTED FCLR-XSEC-002 regime-conditioned funding effect). tests/test_active_campaign_gate.py invariant: exactly one rank-0, ACTIVE/READY_EXECUTE, concrete unfinished task, phases present, all others SUPERSEDED.",
-    "supersedes": "FCLR-XSEC-002-20261120T180707Z",
-    "superseded_at": "2026-11-20T22:05:00Z",
-    "superseded_by": "FCLR-XSEC-004-20261120T220500Z"
-  },
-  {
-    "rank": 1,
-    "status": "SUPERSEDED",
-    "program_status": "SUPERSEDED",
-    "task": "FCLR-XSEC-002-20261120T180707Z",
-    "generated": "20261120T180707Z",
-    "refreshed": "20261120T210000Z",
-    "last_checked": "20261120T210000Z",
-    "last_verdict": "SUPPORTED",
-    "next_action_heavy": null,
-    "next_unfinished_task": null,
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": "None agent-removable: frozen FCLR-001 panel already built and hash-frozen (panel_sha256: 41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4); no network, no paid/credentialed data needed for this exploratory mechanism; distinct estimand from NOT_SUPPORTED FCLR-STARTER-001 (time-series 24h RV) and NOT_SUPPORTED FCLR-XSEC-001 (within-hour cross-sectional funding contrast) \u2014 regime conditioning is a different identification strategy. Root research_state/ md+json count 499/500: ALL new artifacts go under research_state/session_<UTC>/ \u2014 one root-level md/json file breaches the churn cap and fails the heavy-work gate.",
-    "evidence": {
-      "frontier_cells": 0,
-      "all_terminal": true,
-      "data_through": "2026-10",
-      "new_files_found": 0,
-      "panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
-      "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
-      "prior_campaign": "FCLR-XSEC-001",
-      "prior_verdict": "NOT_SUPPORTED",
-      "prior_session": "session_20261120T175300Z",
-      "mechanism": "UTC-hour / market-wide-RV conditioning (RESEARCH_PROMPT.md section 16 contingency ladder, mechanism 1)",
-      "last_verdict": "SUPPORTED",
-      "last_session": "20261120T210000Z"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "claim": "FCLR-XSEC-002 protocol frozen pre-outcomes; distinct estimand from FCLR-STARTER-001 and FCLR-XSEC-001; outcome_data_inspected_before_freeze=false.",
-        "expected_artifacts": [
-          "research_state/session_20261120T210000Z/fclr_xsec002_protocol_freeze_20261120T210000Z.json",
-          "research_state/session_20261120T210000Z/fclr_xsec002_protocol_freeze_20261120T210000Z.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261120T210000Z/fclr_xsec002_protocol_freeze_20261120T210000Z.json",
-          "research_state/session_20261120T210000Z/fclr_xsec002_protocol_freeze_20261120T210000Z.md"
-        ]
-      },
-      {
-        "phase": "BASELINES",
-        "status": "COMPLETE",
-        "claim": "Within-regime RV persistence baselines computed per market-wide-RV regime on frozen panel.",
-        "expected_artifacts": [
-          "research_state/session_20261120T210000Z/fclr_xsec002_baselines_20261120T210000Z.py",
-          "research_state/session_20261120T210000Z/fclr_xsec002_baselines_20261120T210000Z.json",
-          "research_state/session_20261120T210000Z/fclr_xsec002_baselines_20261120T210000Z.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261120T210000Z/fclr_xsec002_baselines_20261120T210000Z.py",
-          "research_state/session_20261120T210000Z/fclr_xsec002_baselines_20261120T210000Z.json",
-          "research_state/session_20261120T210000Z/fclr_xsec002_baselines_20261120T210000Z.md"
-        ]
-      },
-      {
-        "phase": "EVALUATION_AND_GATE",
-        "status": "COMPLETE",
-        "claim": "Regime-conditioned funding contrast evaluated; block bootstrap + Holm over 4-test family; verdict SUPPORTED. Independently reproduced by recompute_fclr_xsec002_20261120T210000Z.py.",
-        "expected_artifacts": [
-          "research_state/session_20261120T210000Z/fclr_xsec002_evaluation_20261120T210000Z.py",
-          "research_state/session_20261120T210000Z/fclr_xsec002_evaluation_20261120T210000Z.json",
-          "research_state/session_20261120T210000Z/fclr_xsec002_evaluation_20261120T210000Z.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261120T210000Z/fclr_xsec002_evaluation_20261120T210000Z.py",
-          "research_state/session_20261120T210000Z/fclr_xsec002_evaluation_20261120T210000Z.json",
-          "research_state/session_20261120T210000Z/fclr_xsec002_evaluation_20261120T210000Z.md"
-        ]
-      },
-      {
-        "phase": "TRIGGER_AND_FRONTIER",
-        "status": "COMPLETE",
-        "claim": "Non-empty trigger_check emitted; frontier + hypothesis registry synchronized; no sealed mutation, no workflows edits, no root-level md/json.",
-        "expected_artifacts": [
-          "research_state/session_20261120T210000Z/trigger_check_20261120T210000Z.json"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261120T210000Z/trigger_check_20261120T210000Z.json",
-          "research_state/session_20261120T210000Z/evidence_audit_20261120T210000Z.json",
-          "research_state/session_20261120T210000Z/evidence_audit_20261120T210000Z.md",
-          "research_state/session_20261120T210000Z/recompute_fclr_xsec002_20261120T210000Z.py",
-          "research_state/session_20261120T210000Z/recompute_fclr_xsec002_20261120T210000Z.json"
-        ]
-      }
-    ],
-    "note": "FCLR-XSEC-002 COMPLETE (verdict SUPPORTED, session_20261120T210000Z), independently reproduced by recompute_fclr_xsec002_20261120T210000Z. Demoted to rank 1 SUPERSEDED; succeeded by FCLR-XSEC-003 as rank-0 active heavy campaign.",
-    "supersedes": "FCLR-XSEC-001-20261120T071741Z",
-    "superseded_at": "2026-11-20T21:49:50Z",
-    "superseded_by": "FCLR-XSEC-003-20261120T214950Z"
-  },
-  {
-    "rank": 6,
-    "status": "SUPERSEDED",
-    "program_status": "SUPERSEDED",
-    "task": "FCLR-XSEC-001-20261120T071741Z",
-    "generated": "20261120T071741Z",
-    "refreshed": "20261120T180707Z",
-    "last_checked": "20261120T180707Z",
-    "last_verdict": "NOT_SUPPORTED",
-    "next_action_heavy": null,
-    "next_unfinished_task": null,
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": "None agent-removable: verdict NOT_SUPPORTED emitted, all artifacts complete under session_20261120T175300Z/. Do NOT re-run FCLR-XSEC-001.",
-    "evidence": {
-      "frontier_cells": 0,
-      "all_terminal": true,
-      "data_through": "2026-10",
-      "new_files_found": 0,
-      "panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
-      "panel_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
-      "prior_campaign": "FCLR-STARTER-001",
-      "prior_verdict": "NOT_SUPPORTED",
-      "prior_session": "session_20261120T052201Z",
-      "mechanism": "within-hour cross-sectional funding-intensity contrast (RESEARCH_PROMPT.md section 16 contingency ladder, mechanism 3)"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "claim": "fclr_xsec001_protocol_freeze_20261120T175300Z.json+.md \u2014 preregistered protocol, outcome_data_inspected_before_freeze=false",
-        "expected_artifacts": [
-          "research_state/session_20261120T175300Z/fclr_xsec001_protocol_freeze_20261120T175300Z.json",
-          "research_state/session_20261120T175300Z/fclr_xsec001_protocol_freeze_20261120T175300Z.md"
-        ]
-      },
-      {
-        "phase": "BASELINES",
-        "status": "COMPLETE",
-        "claim": "fclr_xsec001_baselines_20261120T175300Z.py+.json+.md \u2014 within-hour RV persistence baseline",
-        "expected_artifacts": [
-          "research_state/session_20261120T175300Z/fclr_xsec001_baselines_20261120T175300Z.py",
-          "research_state/session_20261120T175300Z/fclr_xsec001_baselines_20261120T175300Z.json",
-          "research_state/session_20261120T175300Z/fclr_xsec001_baselines_20261120T175300Z.md"
-        ]
-      },
-      {
-        "phase": "EVALUATION_AND_GATE",
-        "status": "COMPLETE",
-        "claim": "fclr_xsec001_evaluation_20261120T175300Z.py+.json+.md \u2014 cross-sectional evaluation, verdict NOT_SUPPORTED",
-        "expected_artifacts": [
-          "research_state/session_20261120T175300Z/fclr_xsec001_evaluation_20261120T175300Z.py",
-          "research_state/session_20261120T175300Z/fclr_xsec001_evaluation_20261120T175300Z.json",
-          "research_state/session_20261120T175300Z/fclr_xsec001_evaluation_20261120T175300Z.md"
-        ]
-      },
-      {
-        "phase": "TRIGGER_AND_FRONTIER",
-        "status": "COMPLETE",
-        "claim": "trigger_check_20261120T175300Z.json \u2014 non-empty, 9 checks all PASS; independent_recompute_fclr_xsec001_20261120T175300Z.py+.json \u2014 numpy-only recompute; evidence_audit_20261120T175300Z.md \u2014 evidence audit",
-        "expected_artifacts": [
-          "research_state/session_20261120T175300Z/trigger_check_20261120T175300Z.json",
-          "research_state/session_20261120T175300Z/independent_recompute_fclr_xsec001_20261120T175300Z.py",
-          "research_state/session_20261120T175300Z/independent_recompute_fclr_xsec001_20261120T175300Z.json",
-          "research_state/session_20261120T175300Z/evidence_audit_20261120T175300Z.md"
-        ]
-      }
-    ],
-    "note": "DEMOTED: FCLR-XSEC-001 within-hour cross-sectional funding contrast COMPLETE with verdict NOT_SUPPORTED (session_20261120T175300Z). Funding contrast CI [\u22120.390010, +0.157598] includes zero (p=0.388, Holm adj_p=0.388); RV persistence baseline CI [\u22120.121076, +0.487735] includes zero (p=0.257, Holm adj_p=0.514). Superseded by FCLR-XSEC-002 (UTC-hour / market-wide-RV conditioning). Do not re-run FCLR-XSEC-001.",
-    "superseded_by": "FCLR-XSEC-002-20261120T180707Z",
-    "superseded_at": "2026-11-20T18:07:07Z"
-  },
-  {
-    "rank": 5,
-    "status": "SUPERSEDED",
-    "program_status": "SUPERSEDED",
-    "task": "FCLR-001-FROZEN-STARTER-PROTOCOL-20261119T231806Z",
-    "generated": "20261119T231806Z",
-    "refreshed": "20261120T071741Z",
-    "last_checked": "20261120T071741Z",
-    "last_verdict": "NOT_SUPPORTED",
-    "next_action_heavy": null,
-    "next_unfinished_task": null,
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": "None agent-removable: FCLR-001 \u00a714 is fully specified in RESEARCH_PROMPT.md; infrastructure (baselines, features, eval, block bootstrap, walk-forward) implemented in src/. research_protocol.md holds the OLD 2026-11-06 sealed legacy protocol and must NOT be overwritten \u2014 FCLR-001 \u00a714 freeze written to a NEW timestamped path research_state/protocol_fclr_starter_001_<UTC>.md per the FCLR-STARTER-001 gate (overwriting the sealed file fails closed: PROTOCOL_FREEZE_OVERWRITES_SEALED). Prior frontier rank-0 was TRIGGER_ONLY waiting on external triggers \u2014 superseded because FCLR-001 is a fresh frozen protocol, not a re-run of concluded cached-data estimands.",
-    "evidence": {
-      "frontier_cells": 0,
-      "all_terminal": true,
-      "data_through": "2026-10",
-      "new_files_found": 0,
-      "suite_baseline": "1341 tests, 0 failures (after frontier repair)"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "claim": "Freeze research_state/protocol_fclr_starter_001_<UTC>.md from RESEARCH_PROMPT.md \u00a714 verbatim (FCLR-001: unit, timing, universe, target, features, baselines, splits, metrics, inference, gate). outcome_data_inspected_before_freeze=false. Do NOT write research_state/research_protocol.md (sealed legacy FCLR-001 2024-01..03).",
-        "expected_artifacts": [
-          "research_state/protocol_fclr_starter_001_<UTC>.md (matches RESEARCH_PROMPT.md \u00a714 exactly)",
-          "research_state/protocol_fclr_starter_001_<UTC>.json (hash-bound, experiment_id starts with FCLR-STARTER-001, outcome_data_inspected_before_freeze=false, protocol_path not the sealed file)"
-        ]
-      },
-      {
-        "phase": "PANEL_BUILD_AND_HASH",
-        "status": "COMPLETE",
-        "claim": "Build Hyperliquid mark/index/funding/klines panel reusing frozen panel where possible; record source hashes, cutoff dates, eligible sample definition; hash+freeze eligible panel before target generation.",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/panel build report + panel hash",
-          "research_state/session_<UTC>/trigger_check_<UTC>.json"
-        ]
-      },
-      {
-        "phase": "BASELINE_B0_B1",
-        "status": "COMPLETE",
-        "claim": "Run B0 (persistence RV24h) and B1 (HAR-style OLS log RV1h/RV24h/RV168h -> log target) on development/validation; record QLIKE/MAE/RMSE metrics.",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/baseline evaluation + metrics"
-        ]
-      }
-    ],
-    "note": "DEMOTED: FCLR-STARTER-001 Track C confirmatory (24h forward RV forecasting) is COMPLETE with verdict NOT_SUPPORTED (session_20261120T052201Z, holdout_opened=true, C2 vs B1 diff +0.0094 CI[+0.0024,+0.0164] rel -2.62% Holm adj_p 0.075). All three steps done; holdout inspected and sealed. Superseded by FCLR-XSEC-001 (distinct-mechanism exploratory, within-hour cross-sectional funding contrast on the same frozen panel). Do not re-run FCLR-STARTER-001. All others SUPERSEDED per test_active_campaign_gate.py invariant.",
-    "superseded_by": "FCLR-XSEC-001-20261120T071741Z",
-    "superseded_at": "2026-11-20T07:17:41Z"
-  },
-  {
-    "blockers": "None agent-removable on cache: the 15-coin combined panel is already built (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, 1,740,415 events, all causal features present, 7,512 daily rows). No network, no paid/credentialed data. Materially different estimand (cross-sectional QLIKE, not cross-sectional rank-IC or per-coin time-series QLIKE). Uses 2 pristine metpie blocks never tested for this estimand.",
-    "evidence": {
-      "n_coins": 15,
-      "n_daily_rows": 7512,
-      "network_used_for_outcomes": false,
-      "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "prior_cell": "FCLR-LIQ-XSEC-ORDERING-20261115T185957Z",
-      "prior_evaluation": "FCLR-LIQ-XSEC-ORDERING-20261115T203507Z",
-      "prior_verdict": "NOT_MET",
-      "promotable": false,
-      "sealed_artifacts_mutated": false
-    },
-    "generated": "20261115T203550Z",
-    "last_checked": "20261115T215045Z",
-    "last_evaluation": "FCLR-LIQ-XSEC-QLIKE-20261115T214949Z",
-    "last_verdict": "NOT_MET",
-    "next_action_heavy": null,
-    "next_unfinished_task": null,
-    "note": "CONCLUDED NOT_MET (FCLR-LIQ-XSEC-QLIKE-20261115T203550Z executed 2026-11-15: C2 worse than B1 on cross-sectional QLIKE, rel improvement -75.56%, only 2/3 blocks evaluable; H_fclr_liq_xsec_qlike_forecast terminal NOT_MET). Demoted to rank 1; superseded by the TRIGGER_ONLY sentinel. Do not re-run this estimand.",
-    "phases": [
-      {
-        "actual_artifacts": [
-          "research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.json",
-          "research_state/prereg_fclr_liq_combined_xsec_qlike_20261115T214903Z.md"
-        ],
-        "claim": "Freeze NEW pre-outcomes prereg for cross-sectional QLIKE of next-day liquidation intensity (C2 vs B1) on the 15-coin combined panel: daily cross-sectional QLIKE (primary) + rank-IC + top-3 hit-rate (secondary), expanding-window walk-forward, 3 non-overlapping 30d test blocks (2 pristine metpie + 1 estimand-novel ironflow), 7d purge/embargo, 2000 block-bootstrap reps seed 20261115, Holm, materiality floor. outcome_data_inspected_before_freeze=false.",
-        "expected_artifacts": [
-          "research_state/prereg_fclr_liq_combined_xsec_qlike_<UTC>.json",
-          "research_state/prereg_fclr_liq_combined_xsec_qlike_<UTC>.md"
-        ],
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETED"
-      },
-      {
-        "actual_artifacts": [
-          "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.json",
-          "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-20261115T214949Z.md"
-        ],
-        "claim": "Execute frozen prereg on the existing combined panel; emit cross-sectional QLIKE / rank-IC / top-3 hit-rate verdict with block-bootstrap CI and Holm; run forecast gate.",
-        "expected_artifacts": [
-          "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-<UTC>.json",
-          "research_state/evaluation_summary_FCLR-LIQ-XSEC-QLIKE-<UTC>.md"
-        ],
-        "phase": "EVALUATION_AND_GATE",
-        "status": "COMPLETED"
-      },
-      {
-        "actual_artifacts": [
-          "research_state/tracka_script_scope_registry.json (193->195 scripts)",
-          "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY synced"
-        ],
-        "claim": "Register both new scripts in BOTH scope registries (drift green); update experiment_frontier.json + hypothesis_registry.json (H_fclr_liq_xsec_qlike_forecast); no sealed mutation, no workflows edits.",
-        "expected_artifacts": [
-          "research_state/tracka_script_scope_registry.json (191->193 scripts)",
-          "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY synced"
-        ],
-        "phase": "REGISTRY_AND_FRONTIER",
-        "status": "COMPLETED"
-      }
-    ],
-    "program_status": "SUPERSEDED",
-    "rank": 2,
-    "refreshed": "20261115T203550Z",
-    "resume_triggers": [
-      "GATE4_BRANCH_1",
-      "NEW_OBSERVED_LIQUIDATION_SOURCE"
-    ],
-    "status": "SUPERSEDED",
-    "task": "FCLR-LIQ-XSEC-QLIKE-20261115T203550Z",
-    "previous_rank": 0,
-    "superseded_by": "FCLR-BOUNDED-TRIGGER-ONLY-20261115T220000Z"
-  },
-  {
-    "blockers": "None agent-removable on cache: the 15-coin combined panel is already built (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, 1,740,415 events, all causal features present, 7,512 daily rows). No network, no paid/credentialed data. Materially different estimand (cross-sectional ordering, not per-coin time-series QLIKE).",
-    "evidence": {
-      "n_coins": 15,
-      "n_daily_rows": 7512,
-      "network_used_for_outcomes": false,
-      "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "prior_cell": "FCLR-LIQ-COMBINED-PANEL-20261115T170000Z",
-      "prior_evaluation": "FCLR-LIQ-COMBINED-20261115T185844Z",
-      "prior_verdict": "NOT_MET",
-      "promotable": false,
-      "sealed_artifacts_mutated": false
-    },
-    "generated": "20261115T185957Z",
-    "last_checked": "20261115T203510Z",
-    "last_evaluation": "FCLR-LIQ-XSEC-ORDERING-20261115T203507Z",
-    "last_verdict": "NOT_MET",
-    "next_action_heavy": null,
-    "next_unfinished_task": null,
-    "note": "CONCLUDED NOT_MET (forecast gate) on the combined metpie+ironflow 15-coin panel; demoted and superseded by the cross-sectional QLIKE cell. Heavy work is the DEFAULT path.",
-    "phases": [
-      {
-        "actual_artifacts": [
-          "research_state/prereg_fclr_liq_combined_xsec_20261115T203501Z.json",
-          "research_state/prereg_fclr_liq_combined_xsec_20261115T203501Z.md"
-        ],
-        "claim": "Freeze NEW pre-outcomes prereg for cross-sectional liquidation ordering (C2 vs B1) on the 15-coin combined panel: daily rank-IC + top-3 hit-rate + cross-sectional QLIKE, expanding-window walk-forward, 3 non-overlapping 30d test blocks (2025-10, 2026-01, 2026-09), 7d purge/embargo, 2000 block-bootstrap reps seed 20261115, Holm, materiality floor. outcome_data_inspected_before_freeze=false.",
-        "expected_artifacts": [
-          "research_state/prereg_fclr_liq_combined_xsec_<UTC>.json",
-          "research_state/prereg_fclr_liq_combined_xsec_<UTC>.md"
-        ],
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETED"
-      },
-      {
-        "actual_artifacts": [
-          "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.json",
-          "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-20261115T203507Z.md"
-        ],
-        "claim": "Execute frozen prereg on the existing combined panel; emit cross-sectional rank-IC / top-3 hit-rate / cross-sectional QLIKE verdict with block-bootstrap CI and Holm; run forecast gate.",
-        "expected_artifacts": [
-          "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-<UTC>.json",
-          "research_state/evaluation_summary_FCLR-LIQ-XSEC-ORDERING-<UTC>.md"
-        ],
-        "phase": "EVALUATION_AND_GATE",
-        "status": "COMPLETED"
-      },
-      {
-        "claim": "Register both new scripts in BOTH scope registries (drift green); update experiment_frontier.json + hypothesis_registry.json (H_fclr_liq_xsec_ordering_forecast); no sealed mutation, no workflows edits.",
-        "expected_artifacts": [
-          "research_state/tracka_script_scope_registry.json (191->193 scripts)",
-          "tests/test_tracka_hardening_117.py SCRIPT_REGISTRY synced"
-        ],
-        "phase": "REGISTRY_AND_FRONTIER",
-        "status": "COMPLETED"
-      }
-    ],
-    "program_status": "SUPERSEDED",
-    "rank": 3,
-    "refreshed": "20261115T185957Z",
-    "resume_triggers": [
-      "GATE4_BRANCH_1",
-      "NEW_OBSERVED_LIQUIDATION_SOURCE"
-    ],
-    "status": "SUPERSEDED",
-    "superseded_at": "2026-11-15T20:35:50Z",
-    "superseded_by": "FCLR-LIQ-XSEC-QLIKE-20261115T203550Z",
-    "task": "FCLR-LIQ-XSEC-ORDERING-20261115T185957Z",
-    "previous_rank": 1
-  },
-  {
-    "blockers": "None agent-removable on cache: \u00a716 audit = ADMISSIBLE_PENDING_BOUNDED_ACQUISITION (see research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.{json,md}); only the 2025-03..2025-10 HL candle/funding context must be fetched (bounded, unauthenticated). Not a re-probe: metpie is a materially new observed-liquidation source family never used for outcomes.",
-    "evidence": {
-      "audit": "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.{json,md}",
-      "class": "CONFIRMATORY_PENDING_PREREG",
-      "combined_span_days": 588.5234,
-      "determination": "ADMISSIBLE_PENDING_BOUNDED_ACQUISITION",
-      "funded_coins_ge_min_events": 15,
-      "n_30d_blocks": 19,
-      "n_pristine_blocks": 2,
-      "network_used_for_outcomes": false,
-      "promotable": false,
-      "sealed_artifacts_mutated": false
-    },
-    "generated": "20261115T170000Z",
-    "last_checked": "20261115T185845Z",
-    "last_evaluation": "FCLR-LIQ-COMBINED-20261115T185844Z",
-    "last_verdict": "NOT_MET",
-    "next_action_heavy": null,
-    "next_unfinished_task": null,
-    "note": "CONCLUDED NOT_MET (forecast gate) on the combined metpie+ironflow 15-coin panel; demoted and superseded by the cross-sectional liquidation-ordering cell. Heavy work is the DEFAULT path.",
-    "phases": [
-      {
-        "actual_artifacts": [
-          "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.json",
-          "research_state/audits/admissibility_audit_liq_combined_metpie_ironflow_20261115T170000Z.md"
-        ],
-        "claim": "\u00a716 admissibility + integration audit of the combined metpie (2025-03-22..2025-05-25) + ironflow (2025-05-25..2026-10-31) Hyperliquid observed-liquidation source. Determination ADMISSIBLE_PENDING_BOUNDED_ACQUISITION; all criteria PASS except aligned market context (cache covers 2025-11+ only).",
-        "expected_artifacts": [
-          "research_state/admissibility_audit_liq_combined_metpie_ironflow_<UTC>.json",
-          "research_state/admissibility_audit_liq_combined_metpie_ironflow_<UTC>.md"
-        ],
-        "phase": "ADMISSIBILITY_AUDIT",
-        "status": "COMPLETED"
-      },
-      {
-        "actual_artifacts": [
-          "research_state/fclr_liq_combined_context_fetch_report_20261115T181320Z.json"
-        ],
-        "claim": "Bounded first-time unauthenticated Hyperliquid candle+funding acquisition for the 15 funded coins over 2025-03-22..2025-10-31 (cache currently 2025-11+). Idempotent, provenance-stamped, no keys.",
-        "expected_artifacts": [
-          "research_state/data_cache/hyperliquid_candles/<COIN>/2025-0[3-9].json",
-          "2025-10.json",
-          "research_state/data_cache/hyperliquid_funding/<COIN>.json (extended)"
-        ],
-        "phase": "BOUNDED_CONTEXT_ACQUISITION",
-        "status": "COMPLETED"
-      },
-      {
-        "actual_artifacts": [
-          "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-          "research_state/fclr_liq_combined_panel_build_report_20261115T181405Z.json"
-        ],
-        "claim": "Unified observed-liquidation panel: metpie+ironflow events deduped on (coin,timestamp,notional_usd,tx-hash) + aligned 1h/4h funding, mark/index premium, RV24h features (causal, no look-ahead).",
-        "expected_artifacts": [
-          "research_state/fclr_liq_combined_panel_<UTC>.parquet",
-          "research_state/fclr_liq_combined_panel_build_report_<UTC>.json"
-        ],
-        "phase": "COMBINED_PANEL_BUILD",
-        "status": "COMPLETED"
-      },
-      {
-        "actual_artifacts": [
-          "research_state/prereg_fclr_liq_combined_20261115T181449Z.json",
-          "research_state/prereg_fclr_liq_combined_20261115T181449Z.md"
-        ],
-        "claim": "Freeze NEW prereg PRE-OUTCOMES: 24h observed-liquidation-intensity QLIKE C2 vs B1 expanding-window walk-forward, >=5 instruments, >=3 non-overlapping 30d test blocks incl. the 2 pristine metpie blocks + estimand-novel 2025-05..2025-10 blocks, block bootstrap, Holm, 2% materiality floor.",
-        "expected_artifacts": [
-          "research_state/prereg_fclr_liq_combined_<UTC>.json",
-          "research_state/prereg_fclr_liq_combined_<UTC>.md"
-        ],
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETED"
-      },
-      {
-        "actual_artifacts": [
-          "research_state/evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.json",
-          "research_state/evaluation_summary_FCLR-LIQ-COMBINED-20261115T185844Z.md"
-        ],
-        "claim": "Execute frozen prereg, emit verdict, run forecast gate; update frontier/hypothesis registry; no sealed mutation.",
-        "expected_artifacts": [
-          "research_state/evaluation_summary_FCLR-LIQ-COMBINED-<UTC>.json",
-          "research_state/evaluation_summary_FCLR-LIQ-COMBINED-<UTC>.md"
-        ],
-        "phase": "EVALUATION_AND_GATE",
-        "status": "COMPLETED"
-      }
-    ],
-    "program_status": "SUPERSEDED",
-    "rank": 4,
-    "refreshed": "20261115T170000Z",
-    "resume_triggers": [
-      "GATE4_BRANCH_1",
-      "NEW_OBSERVED_LIQUIDATION_SOURCE"
-    ],
-    "status": "SUPERSEDED",
-    "superseded_at": "2026-11-15T18:59:57Z",
-    "superseded_by": "FCLR-LIQ-XSEC-ORDERING-20261115T185957Z",
-    "task": "FCLR-LIQ-COMBINED-PANEL-20261115T170000Z",
-    "previous_rank": 2
+    "note": "FCLR-XSEC-005 executed and COMPLETE in session_20261121T001225Z. Notional-weighted (dollar severity) confirmation of the FCLR-XSEC-004 low-RV liquidation finding. Low-RV regime funding contrast SUPPORTED: CI [452972.90, 850198.89], p=0.0, Holm passes, materiality 0.80. High-RV regime honest null. Independent recompute reproduces. Strong agreement with FCLR-XSEC-004 count-based result."
   }
 ]

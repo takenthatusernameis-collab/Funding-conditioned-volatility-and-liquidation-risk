@@ -1,0 +1,199 @@
+{
+  "experiment_id": "FCLR-XSEC-006-RECOMPUTE-20261121T010934Z",
+  "session_utc": "20261121T010934Z",
+  "panel_path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "panel_hash_verified": true,
+  "estimand": "utc_session_bucket_conditioned_cross_sectional_funding_effect_on_next_hour_notional_weighted_liquidation_intensity",
+  "mechanism": "UTC trading-session bucket conditioning of the funding effect applied to NOTIONAL-WEIGHTED observed liquidation intensity (independent recompute)",
+  "outcome_data_inspected_before_freeze": false,
+  "seed": 20261121,
+  "n_bootstrap_reps": 2000,
+  "alpha": 0.05,
+  "materiality_floor": 0.02,
+  "family_size": 6,
+  "holm_correction": "holm",
+  "hours_per_bucket": {
+    "asian": 1692,
+    "european": 2080,
+    "us": 1868
+  },
+  "bucket_edges_utc": {
+    "asian": [
+      0,
+      8
+    ],
+    "european": [
+      8,
+      16
+    ],
+    "us": [
+      16,
+      24
+    ]
+  },
+  "tests": {
+    "asian_funding_contrast_notional_weighted": {
+      "construct": "funding_notional_weighted",
+      "n_hours": 1692,
+      "mean_diff": 339191.04759296303,
+      "ci_low": 162051.18387816066,
+      "ci_high": 521424.030204578,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 950,
+      "mean_abs_outcome": 939809.269354498,
+      "materiality_effect": 0.36091477138327677,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "european_funding_contrast_notional_weighted": {
+      "construct": "funding_notional_weighted",
+      "n_hours": 2080,
+      "mean_diff": 561032.4223554312,
+      "ci_low": 334549.6911690049,
+      "ci_high": 782271.644384776,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 1230,
+      "mean_abs_outcome": 983774.3905692492,
+      "materiality_effect": 0.570285654651771,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "us_funding_contrast_notional_weighted": {
+      "construct": "funding_notional_weighted",
+      "n_hours": 1868,
+      "mean_diff": 404511.81691165705,
+      "ci_low": 94749.59345225734,
+      "ci_high": 698081.5750183635,
+      "p_value": 0.013,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 1064,
+      "mean_abs_outcome": 1545810.9030907394,
+      "materiality_effect": 0.2616826004415316,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.013,
+      "holm_passes": true
+    },
+    "asian_rv_persistence_baseline_notional_weighted": {
+      "construct": "persistence_notional_weighted",
+      "n_hours": 1692,
+      "mean_diff": -967082.08961835,
+      "ci_low": -1198717.0935244416,
+      "ci_high": -747385.1721634931,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 431,
+      "mean_abs_outcome": 939809.269354498,
+      "materiality_effect": 1.0290195267839657,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "european_rv_persistence_baseline_notional_weighted": {
+      "construct": "persistence_notional_weighted",
+      "n_hours": 2080,
+      "mean_diff": -1101558.2552874377,
+      "ci_low": -1322094.0275686302,
+      "ci_high": -890695.4538553141,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 486,
+      "mean_abs_outcome": 983774.3905692492,
+      "materiality_effect": 1.1197265001481023,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "us_rv_persistence_baseline_notional_weighted": {
+      "construct": "persistence_notional_weighted",
+      "n_hours": 1868,
+      "mean_diff": -1159832.8113719546,
+      "ci_low": -1602453.9568318948,
+      "ci_high": -798282.4980063172,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 479,
+      "mean_abs_outcome": 1545810.9030907394,
+      "materiality_effect": 0.7503070453526697,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "asian_funding_contrast_count_based_crossref": {
+      "construct": "funding_count_based_crossref",
+      "n_hours": 1692,
+      "mean_diff": 21.36975121017674,
+      "ci_low": 16.517060941545648,
+      "ci_high": 26.52181922281324,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 932,
+      "mean_abs_outcome": 34.55817378497791,
+      "materiality_effect": 0.6183703844751761,
+      "materiality_floor_met": true,
+      "holm_adj_p_crossref": 0.0
+    },
+    "european_funding_contrast_count_based_crossref": {
+      "construct": "funding_count_based_crossref",
+      "n_hours": 2080,
+      "mean_diff": 32.675705128205124,
+      "ci_low": 27.228707074175826,
+      "ci_high": 38.518041394803106,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 1229,
+      "mean_abs_outcome": 43.90142143680369,
+      "materiality_effect": 0.7442972017487398,
+      "materiality_floor_met": true,
+      "holm_adj_p_crossref": 0.0
+    },
+    "us_funding_contrast_count_based_crossref": {
+      "construct": "funding_count_based_crossref",
+      "n_hours": 1868,
+      "mean_diff": 23.52498470480269,
+      "ci_low": 18.6645840662282,
+      "ci_high": 28.513365835627607,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 1046,
+      "mean_abs_outcome": 43.39401556925073,
+      "materiality_effect": 0.5421250925086694,
+      "materiality_floor_met": true,
+      "holm_adj_p_crossref": 0.0
+    }
+  },
+  "primary_test_names": [
+    "asian_funding_contrast_notional_weighted",
+    "european_funding_contrast_notional_weighted",
+    "us_funding_contrast_notional_weighted",
+    "asian_rv_persistence_baseline_notional_weighted",
+    "european_rv_persistence_baseline_notional_weighted",
+    "us_rv_persistence_baseline_notional_weighted"
+  ],
+  "funding_tests_notional_weighted": [
+    "asian_funding_contrast_notional_weighted",
+    "european_funding_contrast_notional_weighted",
+    "us_funding_contrast_notional_weighted"
+  ],
+  "cross_reference": {
+    "fclr_xsec_004_low_rv_funding_ci": [
+      448605.26,
+      841155.73
+    ],
+    "fclr_xsec_004_low_rv_verdict": "SUPPORTED (count-based, low-RV tercile)",
+    "fclr_xsec_004_high_rv_verdict": "NOT_SUPPORTED (honest null)",
+    "fclr_xsec_005_low_rv_funding_ci": [
+      452972.899202,
+      850198.885235
+    ],
+    "fclr_xsec_005_low_rv_verdict": "SUPPORTED (notional-weighted, low-RV tercile)",
+    "fclr_xsec_005_high_rv_verdict": "NOT_SUPPORTED (honest null)"
+  },
+  "gate_passed": true,
+  "verdict": "SUPPORTED",
+  "reproduces_fclr_xsec006_evaluation": true
+}

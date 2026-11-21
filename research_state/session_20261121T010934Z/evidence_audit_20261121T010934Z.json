@@ -1,0 +1,35 @@
+{
+  "session_utc": "20261121T010934Z",
+  "experiment_id": "FCLR-XSEC-006-20261121T010934Z",
+  "panel_path": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "panel_hash_verified": true,
+  "protocol_freeze_path": "research_state/session_20261121T010934Z/fclr_xsec006_protocol_freeze_20261121T010934Z.json",
+  "outcome_data_inspected_before_freeze": false,
+  "evaluation_path": "research_state/session_20261121T010934Z/fclr_xsec006_evaluation_20261121T010934Z.json",
+  "recompute_path": "research_state/session_20261121T010934Z/fclr_xsec006_recompute_20261121T010934Z.json",
+  "recompute_verdict": "SUPPORTED",
+  "reproduces_evaluation": true,
+  "verdict": "SUPPORTED",
+  "gate_passed": true,
+  "estimand": "utc_session_bucket_conditioned_cross_sectional_funding_effect_on_next_hour_notional_weighted_liquidation_intensity",
+  "regime_variable": "UTC trading-session bucket (Asian [00:00,08:00), European [08:00,16:00), US [16:00,24:00)) at hour t",
+  "predictor": "within-(hour, session_bucket) cross-sectional rank of abs_fund_pct (high vs low funding)",
+  "outcome": "next-hour NOTIONAL-WEIGHTED observed liquidation intensity = sum of notional_usd in hour t+1",
+  "baseline": "within-session-bucket RV persistence (coin's own rv24h at t split high/low within (hour, bucket))",
+  "inference": "block bootstrap across whole UTC hours within each session bucket (seed 20261121, 2000 reps), Holm over 6-test family (3 buckets x {funding contrast, RV persistence}), 2% materiality floor",
+  "cross_reference_fclr_xsec_004": {
+    "low_rv_verdict": "SUPPORTED (count-based, RV tercile)",
+    "low_rv_funding_ci": [448605.26, 841155.73],
+    "high_rv_verdict": "NOT_SUPPORTED (honest null)"
+  },
+  "cross_reference_fclr_xsec_005": {
+    "low_rv_verdict": "SUPPORTED (notional-weighted, RV tercile)",
+    "low_rv_funding_ci": [452972.90, 850198.89],
+    "high_rv_verdict": "NOT_SUPPORTED (honest null)"
+  },
+  "agreement_with_prior": "FCLR-XSEC-006 finds SUPPORTED funding contrasts in ALL THREE UTC session buckets (Asian, European, US) for notional-weighted liquidation intensity, whereas FCLR-XSEC-004/005 found SUPPORTED only in the LOW-RV tercile regime. The session-bucketed regime transform reveals the effect is not confined to low-RV periods but persists across all trading sessions.",
+  "sealed_artifacts_mutated": false,
+  "root_level_md_json_added": false,
+  "workflow_files_modified": false
+}
