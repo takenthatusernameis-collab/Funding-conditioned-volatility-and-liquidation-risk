@@ -1,0 +1,11 @@
+{
+  "session_utc": "20261121T210000Z",
+  "experiment_id": "FCLR-LIQ-CONTAGION-002-20261121T210000Z",
+  "campaign": "FCLR-LIQ-CONTAGION-002",
+  "trigger_check_utc": "2026-11-21T21:00:00Z",
+  "required": false,
+  "reason": "FCLR-LIQ-CONTAGION-002 requires no external trigger. It operates solely on the existing frozen combined liquidation panel (research_state/fclr_liq_combined_panel_20261115T181405Z.parquet, sha256 81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14). No NEW_OBSERVED_LIQUIDATION_SOURCE, no paid data, no credentials, no network access, and no human approval are needed. The heavy reconciliation work (per-edge variance-explained, four-criterion robustness ladder, tercile/temporal-stability reconciliation, block-bootstrap stability, independent recompute, evidence audit) is fully executable on frozen data.",
+  "trigger_present": false,
+  "trigger_required": false,
+  "gate_can_proceed_without_trigger": true
+}

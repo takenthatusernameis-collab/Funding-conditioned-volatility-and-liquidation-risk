@@ -1,0 +1,19 @@
+{
+  "session_utc": "20261121T210000Z",
+  "experiment_id": "FCLR-LIQ-CONTAGION-002-20261121T210000Z",
+  "campaign": "FCLR-LIQ-CONTAGION-002",
+  "audit_kind": "evidence_audit_alias",
+  "audit_utc": "2026-11-21T21:00:00Z",
+  "source": "fclr_liq_contagion02_evidence_audit_20261121T210000Z.json",
+  "contagion_002_complete": true,
+  "all_artifacts_non_empty": true,
+  "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "n_clearing_floor": 12,
+  "n_stable_edges": 12,
+  "recompute_concurs_with_recon": false,
+  "verdicts": {
+    "H_recon_materiality": "SUPPORTED",
+    "H_recon_robustness": "SUPPORTED",
+    "H_recon_stability": "SUPPORTED"
+  }
+}

@@ -1,0 +1,1725 @@
+{
+  "session_utc": "20261121T210000Z",
+  "experiment_id": "FCLR-LIQ-CONTAGION-002-20261121T210000Z",
+  "campaign": "FCLR-LIQ-CONTAGION-002",
+  "panel_path": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "panel_rows": 1740415,
+  "n_coins": 15,
+  "n_pairs": 210,
+  "n_hours": 10052,
+  "var_order": 6,
+  "alpha_raw": 0.01,
+  "alpha_bonferroni": 4.761904761904762e-05,
+  "n_bootstrap": 1000,
+  "block_length_h": 24,
+  "seed": 20261121,
+  "materiality_floor": 0.02,
+  "method": "independent stdlib/numpy OLS + FWL; no shared helpers with recon; scipy used only for global Bonferroni critical-value calibration",
+  "variance_explained": {
+    "n_clearing_floor": 15,
+    "fraction_clearing": 0.07142857142857142,
+    "mean": 0.006914548966192837,
+    "median": 0.004091662915366334,
+    "bootstrap_ci_lo": 8.0,
+    "bootstrap_ci_hi": 23.0
+  },
+  "bootstrap_stability": {
+    "n_stable_edges": 0,
+    "fraction_stable": 0.0,
+    "edges": [
+      {
+        "src": "AAVE",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004422050516477594,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004179736741374285,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.009763067764989253,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0011416314939669547,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002377951422910418,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0020341035392320572,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0058913118231010975,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.001826348825889501,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004354934010180833,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0013474850614418887,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002333634252031369,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004185366915781308,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0025204893161296926,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AAVE",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0028314895180666655,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.014362376685949862,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.005039262534836553,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.021304518178792753,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "ADA",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0008943480468858178,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0025391897153957954,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.008643979999885865,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.005509690792951161,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0029029953380536044,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.013044357984731358,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0036008714423316768,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0026609838593879553,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.00573810349772963,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.011079743164025824,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ADA",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0038716658538944237,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.010242305669711738,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.006040004769323537,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.026639406628465534,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "AVAX",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0006608892719194293,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.007909178686716034,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.009105446208993895,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0022076183874224498,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0157150927754256,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.013838474199195372,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0028030864596723104,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0016626209678063386,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.008431767329543538,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.010897944396851211,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "AVAX",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.003267888465880331,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002622404563804359,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0028656806429083748,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002745906552440336,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0015766832082328985,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0015427481736722815,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002988774554783191,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0033134781969164084,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0036986883248779634,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0008064886669224558,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0010358343220868704,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.012052567326961361,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002535601299254231,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0017699556434206398,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BNB",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0015464445971345997,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.006242771193278207,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0030628999017333625,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002826026627247624,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.012176349075656234,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.007613562578900113,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004519158787363087,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0021615142974515944,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.007143832330807731,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.00673021273958696,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.003549672962950612,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0022550605266553614,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004459498931516759,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.00493418337338325,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "BTC",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0007262827093248436,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.01407754737607747,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0023734902140079006,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0064582285500063286,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.021642705633083903,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "CRV",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0017438395194596668,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.00682923180310302,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.007400290529200437,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.00524008571106005,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.012514247038807769,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0033895168958291144,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0039496621988380776,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.006250834141918626,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.010180852838981624,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "CRV",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0061539360543948485,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.007942081834192205,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002693521146614919,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0035386297035103764,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.025803769552985578,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "DOGE",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0014909760364327784,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0022369462492747294,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.006941928592721136,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004377153654719801,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.007696159283728132,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.003580411766482494,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.003147253199499378,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0024605891368986166,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.007143777638109361,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "DOGE",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004003589089358384,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ETH",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.018767569156624808,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ETH",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.01611426297455465,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ETH",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.011785338722056116,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ETH",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.021817102015980527,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "ETH",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0011006461079484664,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ETH",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.02522713645472463,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "ETH",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.017455544271810286,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ETH",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.03669065025231655,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "ETH",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.020304293652757766,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "ETH",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0037055254519168246,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ETH",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0036092598689089206,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ETH",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.018538089293549498,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ETH",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.012161993524535397,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "ETH",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002149910221592277,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.005201331876343529,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0009183393060365752,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.010184573087553939,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.02563849739710844,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "LINK",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0010708766589978547,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0016074801875293199,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0023529630353524844,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.008202127369602907,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0068217163085649846,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0035940756205419255,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0027565261687669818,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.00010246251248613447,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0071636916678274876,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LINK",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0031471525665039968,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0032342901123857404,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.006073919873246125,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.009634094371388069,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.018476729919715607,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0010417158786487635,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0017345546531623013,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002743000515301297,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.007004614606930026,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004417078620766457,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002301266094259846,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0024005791425851797,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002134009343505494,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.005061782108712554,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "LTC",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0031286725852499586,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0002557710076427355,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0011696917143610985,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.001952245483773818,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.003167385360034136,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0014740633815480964,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.00333937775713955,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0009714007913138589,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.001597909986717827,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0005905695357627527,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0008328671854490599,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0018903435506787414,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0012717148947838375,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0031203838234875603,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "NEAR",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0026646877347459297,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.012526415522514323,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.008210147712789051,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.006316718496546581,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.029778554498625875,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "SOL",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002935646233382494,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.01680264831341438,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.01202014419601194,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.005028688268937875,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.023261576294192343,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "SOL",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.014956983916691868,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0033598543835354766,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.010107735418270924,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.011134230404343692,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SOL",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002231164163360777,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.007776350672698218,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0033928440371306934,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.007691631890516359,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0185561452195675,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0019719516031972972,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.002741118227706063,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0020667662146257593,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.008239765913296004,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0012809536676587907,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.003650564513825727,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0025999075454967713,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004304306433952743,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0057802661723622695,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "SUI",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.006349860715928801,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004785236152019645,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0025740654656769557,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.007044593323232817,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.013129344799559739,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.000691021130885261,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.003771746858406533,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0010824923915377926,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004738706969999895,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0021115794037693814,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0016903742974055946,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0023996358007563057,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0025517600208544433,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0026598349935287313,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "UNI",
+        "tgt": "XRP",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0022391313732420537,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "XRP",
+        "tgt": "AAVE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.014562138976587646,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "XRP",
+        "tgt": "ADA",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.014308407241967247,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "XRP",
+        "tgt": "AVAX",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.017622159076613242,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "XRP",
+        "tgt": "BNB",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.018170668849238458,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "XRP",
+        "tgt": "BTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0008638861341915272,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "XRP",
+        "tgt": "CRV",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.02721835871268885,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "XRP",
+        "tgt": "DOGE",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.02336884149833951,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "XRP",
+        "tgt": "ETH",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.0048090723285260095,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "XRP",
+        "tgt": "LINK",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.02277117089692693,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "XRP",
+        "tgt": "LTC",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.02515762042350811,
+        "clears_materiality_floor": true
+      },
+      {
+        "src": "XRP",
+        "tgt": "NEAR",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.004519039696325389,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "XRP",
+        "tgt": "SOL",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.005233501936618867,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "XRP",
+        "tgt": "SUI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.01824998721463178,
+        "clears_materiality_floor": false
+      },
+      {
+        "src": "XRP",
+        "tgt": "UNI",
+        "selection_frequency": 0.0,
+        "stable": false,
+        "variance_explained": 0.016197160505165842,
+        "clears_materiality_floor": false
+      }
+    ]
+  },
+  "recompute_concurs_with_recon": false,
+  "recon_reference": {
+    "n_clearing_floor": 12,
+    "n_stable_edges": 12,
+    "variance_explained_mean": 0.006277
+  },
+  "no_network": true,
+  "no_paid_data": true,
+  "no_credentials": true,
+  "no_new_data_acquisition": true,
+  "no_root_level_md_json": true,
+  "separate_code_path": true
+}

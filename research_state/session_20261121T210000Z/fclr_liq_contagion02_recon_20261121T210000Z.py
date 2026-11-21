@@ -317,10 +317,10 @@ def main() -> None:
     for r in results:
         edge = (r["src"], r["tgt"])
         ncrit = int(
-            edge in es_raw
-            + edge in es_bonf
-            + edge in es_bh
-            + edge in es_perm
+            (edge in es_raw)
+            + (edge in es_bonf)
+            + (edge in es_bh)
+            + (edge in es_perm)
         )
         r["criteria"] = {
             "raw": edge in es_raw,
