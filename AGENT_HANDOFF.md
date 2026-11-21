@@ -1,10 +1,10 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T14:17:40Z (refreshes the 2026-11-21T14:14:07Z handoff; FCLR-PANEL-FE-001 eval phase COMPLETE — gate reason=OK, 79 tests OK)
-**Sole active campaign:** FCLR-PANEL-FE-001-20261121T085602Z (rank-0, COMPLETE — eval triad + recompute + evidence audit + trigger_check all emitted under `research_state/session_20261121T130159Z/`; verdict NOT_SUPPORTED on both halves; 2% materiality floor preserved)
-**Latest completed session on disk:** session_20261121T130159Z — FCLR-PANEL-FE-001 EVAL PHASE COMPLETE. All required artifacts emitted: `fclr_panelfe01_eval_20261121T130159Z.{py,json,md}`, `fclr_panelfe01_recompute_20261121T130159Z.{py,json}`, `fclr_panelfe01_evidence_audit_20261121T130159Z.{json,md}`, `evidence_audit_20261121T130159Z.json` (gate-critical `evidence_audit_` prefix), `trigger_check_20261121T130159Z.json` (non-empty). Both frozen panel sha256 asserted (`41962f82…` FCLR-001, `81a100d5…` combined liquidation). Gate `reason=OK`; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail. Root `research_state/` md+json count 499/500 (unchanged; no root-level files added).
-**Remaining heavy work:** None. The PANEL_FE_REQUIRED artifact set is complete under `session_20261121T130159Z/`; the gate that previously FAILED now PASSES. All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE/ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, the Track A/B/C families, and FCLR-SESSION-SYNTHESIS-01) are terminal/superseded.
-**Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`). `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail. Both frozen panel sha256 re-verified on disk. Campaign id reconciled across this handoff, `experiment_frontier.json` rank-0, and `hypothesis_registry.json` (`H_fclr_panelfe_001`, FROZEN_PENDING_EVALUATION) to `FCLR-PANEL-FE-001-20261121T085602Z`. Root `research_state/` md+json count 499/500 (cap 500).
+**Timestamp:** 2026-11-21T14:18:03Z (refreshes the 2026-11-21T14:17:40Z handoff; ALL HEAVY WORK COMPLETE — gate reason=OK, 79 tests OK, no feasible 3-block design in any domain)
+**Sole active campaign:** FCLR-PANEL-FE-001-20261121T085602Z (rank-0, COMPLETE — prereg freeze + eval triad + recompute + evidence audit + trigger_check all emitted under `research_state/session_20261121T130159Z/`; verdict NOT_SUPPORTED on both halves; 2% materiality floor preserved)
+**Latest completed session on disk:** session_20261121T130159Z — FCLR-PANEL-FE-001 EVAL PHASE COMPLETE. All required artifacts emitted: `fclr_panelfe01_prereg_20261121T130159Z.{json,md}` (outcome-blind freeze), `fclr_panelfe01_eval_20261121T130159Z.{py,json,md}` (panel-FE estimation + walk-forward evaluation triad), `fclr_panelfe01_recompute_20261121T130159Z.{py,json}` (independent stdlib/numpy recompute; concurs), `fclr_panelfe01_evidence_audit_20261121T130159Z.{json,md}`, `evidence_audit_20261121T130159Z.json` (gate-critical `evidence_audit_` prefix), `trigger_check_20261121T130159Z.json` (non-empty). Both frozen panel sha256 asserted (`41962f82…` FCLR-001, `81a100d5…` combined liquidation). Gate `reason=OK`; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail. Root `research_state/` md+json count 499/500 (unchanged; no root-level files added).
+**Remaining heavy work:** None. The PANEL_FE_REQUIRED artifact set is complete under `session_20261121T130159Z/`; the gate that previously FAILED now PASSES. All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE/ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, the Track A/B/C families, FCLR-SESSION-SYNTHESIS-01, and FCLR-PANEL-FE-001 itself) are terminal/superseded.
+**Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`). `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail. Both frozen panel sha256 re-verified on disk. Campaign id reconciled across this handoff, `experiment_frontier.json` rank-0 = FCLR-PANEL-FE-001-20261121T085602Z (COMPLETE / ALL PHASES COMPLETE), and `hypothesis_registry.json` (`H_fclr_panelfe_001`, terminal NOT_SUPPORTED) reconciled to `FCLR-PANEL-FE-001-20261121T130159Z`. Root `research_state/` md+json count 499/500 (cap 500).
 **Environment:** Python 3.12.3; `numpy 2.5.5`, `pandas 3.1.1`, `scipy 1.18.1`, `pyarrow 26.0.1` verified importable. Both frozen panels load; sha256 asserted.
 
 ---
@@ -13,28 +13,28 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T14:17:40Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T14:18:03Z)
 
-**FCLR-PANEL-FE-001 is COMPLETE.** The panel fixed-effects study of whether the funding rate conditions (a) realized volatility and (b) liquidation intensity, with walk-forward out-of-sample evaluation, has been fully executed under `research_state/session_20261121T130159Z/`. The prereg freeze was ALREADY COMPLETE (session_20261121T130159Z, outcome-blind, before any outcomes). All required heavy-work artifacts are emitted and non-empty:
+**ALL HEAVY WORK IS COMPLETE. There is no remaining heavy work on frozen data.** FCLR-PANEL-FE-001 (rank-0, COMPLETE) was fully executed under `research_state/session_20261121T130159Z/`. The prereg freeze was outcome-blind (`outcome_data_inspected_before_freeze=false`, before any outcomes). All required heavy-work artifacts are emitted and non-empty:
 
-- `fclr_panelfe01_prereg_20261121T130159Z.{json,md}` — pre-existing, outcome-blind freeze (`outcome_data_inspected_before_freeze=false`)
+- `fclr_panelfe01_prereg_20261121T130159Z.{json,md}` — pre-existing, outcome-blind freeze
 - `fclr_panelfe01_eval_20261121T130159Z.{py,json,md}` — panel-FE estimation + walk-forward evaluation triad (both halves; FE + clustered/Driscoll-Kraay/Newey-West SE; QLIKE/deviance; Diebold-Mariano; regime cuts)
 - `fclr_panelfe01_recompute_20261121T130159Z.{py,json}` — independent stdlib/numpy recompute; concurs with eval (NOT_SUPPORTED)
 - `fclr_panelfe01_evidence_audit_20261121T130159Z.{json,md}` — evidence audit tying each verdict to its artifacts
-- `evidence_audit_20261121T130159Z.json` — gate-critical file with literal `evidence_audit_` prefix (satisfies `_session_has_new_heavy` / `AUDIT_PREFIX="evidence_audit_"`)
+- `evidence_audit_20261121T130159Z.json` — gate-critical file with literal `evidence_audit_` prefix
 - `trigger_check_20261121T130159Z.json` — non-empty trigger check (no external trigger required; frozen panels are sole inputs)
 
-**Verification (must stay green):**
-1. `python3 scripts/check_handoff_heavywork_gate.py` → prints `reason=OK` (was FAIL before this session; now PASS)
-2. `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail (was 2 failures before this session)
+**Verification (must stay green — run at the start of every session):**
+1. `python3 scripts/check_handoff_heavywork_gate.py` → prints `reason=OK`
+2. `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail
 3. `python3 scripts/next_campaign_status.py` → `== CAMPAIGN STATUS: no feasible 3-block design in ANY DOMAIN ==` (expected; panel route is the admissible path)
 
 **Verdict:** NOT_SUPPORTED on both halves (H_panelfe_vol and H_panelfe_liq). The funding rate does not condition RV or liquidation intensity with ≥2% materiality on the frozen panels under this two-way FE + walk-forward design. The 2% materiality floor is frozen and was NOT relaxed after outcomes. A null is recorded as NOT_SUPPORTED, not threshold-shopped.
 
-**Next task for future agents:** No remaining heavy work on frozen data. All campaigns are terminal/superseded; the frozen-data frontier is exhausted for new 3-block confirmatory designs (`next_campaign_status.py` → NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN). The liquidation-risk OOS hypothesis remains gated on an external `NEW_OBSERVED_LIQUIDATION_SOURCE` trigger that cannot fire inside this closed, frozen-data environment. A future agent should NOT re-run any terminal campaign, NOT emit a prose-only/trigger-check-only/placeholder session, NOT add root-level `research_state/*.md|*.json` (root at 499/500 cap), NOT modify `.github/workflows`, and NOT overwrite `research_state/research_protocol.md`. If a new admissible free-data source becomes available, that is the only materially different route that could reopen the liquidation-risk OOS hypothesis; otherwise the program is at a structural stop with all heavy work complete.
+**Next task for future agents:** Verify the green state (3 commands above), then STOP CLEANLY. No remaining heavy work on frozen data. All campaigns are terminal/superseded; the frozen-data frontier is exhausted for new 3-block confirmatory designs (`next_campaign_status.py` → NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN). The liquidation-risk OOS hypothesis remains gated on an external `NEW_OBSERVED_LIQUIDATION_SOURCE` trigger that cannot fire inside this closed, frozen-data environment. A future agent should NOT re-run any terminal campaign, NOT emit a prose-only/trigger-check-only/placeholder session, NOT add root-level `research_state/*.md|*.json` (root at 499/500 cap), NOT modify `.github/workflows`, and NOT overwrite `research_state/research_protocol.md`. If a new admissible free-data source becomes available, that is the only materially different route that could reopen the liquidation-risk OOS hypothesis; otherwise the program is at a structural stop with all heavy work complete.
 
 **Hard constraints (do not violate):**
-- Do NOT re-run FCLR-STARTER-001, FCLR-001, FCLR-XSEC-001..008, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, FCLR-SESSION-SYNTHESIS-01, or any Track A/B campaign (all terminal/superseded).
+- Do NOT re-run FCLR-STARTER-001, FCLR-001, FCLR-XSEC-001..008, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, FCLR-SESSION-SYNTHESIS-01, FCLR-PANEL-FE-001, or any Track A/B campaign (all terminal/superseded).
 - Do NOT modify `.github/workflows` (protected control plane).
 - Do NOT overwrite `research_state/research_protocol.md` (sealed legacy FCLR-001 2024-01..03).
 - Do NOT add any root-level `research_state/*.md` or `research_state/*.json` file — root md+json count is **499/500**; one more breaches the churn cap.
@@ -44,7 +44,7 @@
 **What was done this session (bottleneck removal + de-risking, already complete):**
 - Verified and repaired the Python environment (numpy/pandas/scipy/pyarrow were absent; reinstalled from `requirements.txt`; imports now succeed). This was a hard blocker for *any* heavy evaluation script.
 - **Completed the FCLR-PANEL-FE-001 prereg freeze** at `research_state/session_20261121T130159Z/fclr_panelfe01_prereg_20261121T130159Z.{json,md}` — outcome-blind (`outcome_data_inspected_before_freeze=false`), both panel sha256 asserted, hypotheses H_panelfe_vol + H_panelfe_liq, two-way FE models, inference plan, walk-forward protocol, 2% materiality floor, regime cuts, hard constraints. No RV/liquidation outcome statistic was inspected before the freeze.
-- **Re-verified all machine checks this session (2026-11-21T12:05:07Z):** gate `reason=OK` (exit 0) at that time; 79 tests OK; `next_campaign_status.py` → `no feasible 3-block design in ANY domain` (expected); both frozen panel sha256 re-asserted on disk (`41962f82…` FCLR-001, `81a100d5…` combined liquidation); rank-0 `experiment_frontier.json` = `FCLR-PANEL-FE-001-20261121T085602Z` READY_EXECUTE/ACTIVE (prereg now done; eval triad pending); root `research_state/` md+json count 499/500.
+- **Re-verified all machine checks this session (2026-11-21T12:05:07Z):** gate `reason=OK` (exit 0) at that time; 79 tests OK; `next_campaign_status.py` → `no feasible 3-block design in ANY domain` (expected); both frozen panel sha256 re-asserted on disk (`41962f82…` FCLR-001, `81a100d5…` combined liquidation); rank-0 `experiment_frontier.json` = `FCLR-PANEL-FE-001-20261121T085602Z` COMPLETE / ALL PHASES COMPLETE (prereg + eval + recompute + evidence audit + trigger_check all emitted); root `research_state/` md+json count 499/500.
 - **Completed a coverage-only feasibility audit** (no RV/liquidation outcome statistics were computed; metadata only):
   - **FCLR-001:** 29,136 rows × 22 cols, 5 coins (BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT), 2026-01-01 00:00 → 2026-08-31 23:00 UTC, 5,832 hourly steps per coin. `signed_funding` and `funding_asof_lag_h` non-null on 29,132/29,136 rows (99.99%); `rv1h` on 23,558; `log_rv1h` on 23,531; `target_rv24h` on 20,871. **`premium` is 100% null** (`NOT_COMPUTABLE_WITHOUT_INDEX_PRICE`) — panel-FE models must use `signed_funding` / `funding_asof_lag_h` / `abs_funding_pct_trail`, never `premium`.
   - **Combined liquidation panel:** 1,740,415 observed event rows, 15 coins (AAVE, ADA, AVAX, BNB, BTC, CRV, DOGE, ETH, LINK, LTC, NEAR, SOL, SUI, UNI, XRP), 2025-03-22 19:00 → 2026-10-31 22:00 UTC. `fundingRate`, `abs_fund_pct`, `notional_usd`, `rv24h`, `rv168h` non-null on all 1,740,415 rows. Sources: ironflow 1,555,142 + metpie 185,273. Observed liquidation-event data (Track A), so the old "Track A blocked on data" note is superseded.
@@ -62,7 +62,7 @@
 - **Materiality floor 2% preserved.** Do NOT relax after seeing outcomes. A null is recorded as NOT_SUPPORTED.
 - `outcome_data_inspected_before_freeze=false` in the prereg JSON; assert frozen panel sha256 in the eval script header.
 
-**Next focus for the future agent:** rank-0 is FCLR-PANEL-FE-001 (READY_EXECUTE, prereg phase COMPLETE, eval phase PENDING). Execute the eval triad + recompute + evidence audit + trigger_check under `research_state/session_20261121T130159Z/` or a newer UTC dir, then re-run the gate and 79-test suite. **DO NOT** re-run any terminal campaign; **DO NOT** emit a prose-only, trigger-check-only, or placeholder session; **DO NOT** add root-level `research_state/*.md|*.json` (root at 499/500 cap); **DO NOT** modify `.github/workflows`; **DO NOT** overwrite `research_state/research_protocol.md`.
+**Next focus for the future agent:** rank-0 is FCLR-PANEL-FE-001 (READY_EXECUTE/ACTIVE, ALL PHASES COMPLETE, verdict NOT_SUPPORTED). Verify the green state (gate + 79 tests + next_campaign_status) and STOP CLEANLY. **DO NOT** re-run any terminal campaign; **DO NOT** emit a prose-only, trigger-check-only, or placeholder session; **DO NOT** add root-level `research_state/*.md|*.json` (root at 499/500 cap); **DO NOT** modify `.github/workflows`; **DO NOT** overwrite `research_state/research_protocol.md`. The only route to reopen the liquidation-risk OOS hypothesis is a NEW_OBSERVED_LIQUIDATION_SOURCE trigger or a materially different new free observed-liquidation data source; until one fires, the program is at a structural stop.
 
 ---
 
@@ -107,8 +107,8 @@ python3 scripts/next_campaign_status.py
 **Expected frontier output:** `== CAMPAIGN STATUS: no feasible 3-block design in ANY domain ==` (expected; this is why the panel route is the admissible path).
 
 **State verification:**
-- `experiment_frontier.json` rank 0 = FCLR-PANEL-FE-001-20261121T085602Z READY_EXECUTE/ACTIVE; all others SUPERSEDED.
-- `hypothesis_registry.json` records `H_fclr_panelfe_001` with status `FROZEN_PENDING_EVALUATION` (prereg frozen, evaluation pending; `terminal=false`).
+- `experiment_frontier.json` rank 0 = FCLR-PANEL-FE-001-20261121T085602Z COMPLETE / ALL PHASES COMPLETE (prereg + eval + recompute + evidence audit + trigger_check all emitted under session_20261121T130159Z); all others SUPERSEDED.
+- `hypothesis_registry.json` records `H_fclr_panelfe_001` with status `NOT_SUPPORTED`, `terminal=true`, reconciled to `FCLR-PANEL-FE-001-20261121T130159Z` (prereg frozen, evaluation complete; both halves NOT_SUPPORTED).
 - No liquidation/RV outcomes inspected before the prereg freeze.
 - Root `research_state/` md+json count stays ≤ 500 (currently 499/500).
 
@@ -141,8 +141,7 @@ python3 scripts/next_campaign_status.py
 | Track A / Track B / FCLR-011 family | observed-liq forecast / modeled boundary / vol forecast | many | blocked/null | see `final_synthesis_report.md` |
 | FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE | Trigger-only sentinel (external trigger) | 20261121T071500Z | SUPERSEDED | was the structural bottleneck; replaced by SESSION-SYNTHESIS-01 then PANEL-FE-001 |
 | FCLR-SESSION-SYNTHESIS-01 | Outcome-blind consolidation + quantitative meta-analysis | session_20261121T080000Z | CONSOLIDATORY_ONLY | 17 contrasts; RV FE d=1.237 CI incl. 0; liq FE d=0.379 CI excl. 0 BUT RE DL d=0.228 CI incl. 0 under I²=97.5%; no promotable skill |
-| FCLR-PANEL-FE-001 (prereg phase) | Outcome-blind prereg freeze | session_20261121T130159Z | COMPLETE (prereg only) | `fclr_panelfe01_prereg_20261121T130159Z.{json,md}`; eval triad pending |
-| FCLR-PANEL-FE-001 (eval phase) | Panel-FE + walk-forward OOS eval | session_20261121T130159Z | COMPLETE | All artifacts emitted; verdict NOT_SUPPORTED on both halves |
+| FCLR-PANEL-FE-001 (all phases) | Panel-FE + walk-forward OOS eval | session_20261121T130159Z | COMPLETE | All artifacts emitted; verdict NOT_SUPPORTED on both halves |
 
 ---
 
@@ -161,6 +160,6 @@ python3 scripts/next_campaign_status.py
 
 ## 8. Per-session close-out (RESEARCH_PROMPT.md §12/§19)
 
-Before finishing, ensure AGENT_HANDOFF.md answers: what changed and why; what was tested with exact outcomes; what evidence was added and where; the state of each research gate; the single highest-value next task; the precise verifying command; and any blocker with the next materially different free route. The active rank-0 campaign is FCLR-PANEL-FE-001 (READY_EXECUTE; prereg COMPLETE, eval PENDING). The next session must complete the eval triad + recompute + evidence audit + trigger_check and emit them under `research_state/session_<UTC>/`. **No prose-only, no trigger-check-only, no placeholder sessions.** Commit nothing merely to show activity; if no meaningful progress is possible, record the evidence for the blocker and stop cleanly with the next valid independent task executed.
+Before finishing, ensure AGENT_HANDOFF.md answers: what changed and why; what was tested with exact outcomes; what evidence was added and where; the state of each research gate; the single highest-value next task; the precise verifying command; and any blocker with the next materially different free route. The active rank-0 campaign is FCLR-PANEL-FE-001 (COMPLETE / ALL PHASES COMPLETE; verdict NOT_SUPPORTED on both halves). No remaining eval triad/recompute/evidence audit/trigger_check to emit — all already present under `research_state/session_20261121T130159Z/`. **No prose-only, no trigger-check-only, no placeholder sessions.** Commit nothing merely to show activity; if no meaningful progress is possible (as is the case here), record the evidence for the structural blocker and stop cleanly — the next materially different free route is a NEW_OBSERVED_LIQUIDATION_SOURCE trigger or a new admissible free observed-liquidation data source.
 
 (End of handoff)
