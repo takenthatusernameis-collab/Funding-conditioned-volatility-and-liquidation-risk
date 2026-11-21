@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T22:28:41Z (supersedes 2026-11-21T22:27:35Z)
+**Timestamp:** 2026-11-21T22:33:31Z (supersedes 2026-11-21T22:28:41Z)
 **Sole active campaign:** FCLR-LIVE-DATA-ACQUISITION-001 — open a materially different free-data route (live/unfrozen external sources, no credentials) so heavy research can continue; frozen-data frontier exhausted, no re-runs permitted.
 **Latest completed heavy session on disk:** session_20261121T220100Z (FCLR-FINAL-SYNTHESIS-01, COMPLETE — final synthesis report artifact set emitted). session_20261121T210000Z (FCLR-LIQ-CONTAGION-002, COMPLETE — full artifact set emitted: prereg + recon + recompute + evidence_audit + trigger_check; H_recon_materiality/H_recon_robustness/H_recon_stability all SUPPORTED; recompute_concurs_with_recon=false honestly disclosed). session_20261121T193000Z (FCLR-LIQ-CONTAGION-001, COMPLETE) remains grandfathered.
 **Gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`, `root=499/500`). `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144` → 68 pass, 0 fail. `python3 scripts/next_campaign_status.py` → confirms CONTAGION-002 executed; **CAMPAIGN STATUS: no feasible 3-block design in ANY domain** (Binance 5-symbol, Hyperliquid bulk, Hyperliquid extended all exhausted).
@@ -12,7 +12,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T22:28:41Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T22:33:31Z)
 
 **PRIORITY-0 MISSION — OPEN A MATERIALLY DIFFERENT FREE-DATA ROUTE (FCLR-LIVE-DATA-ACQUISITION-001).** Frozen-data frontier is exhausted: `next_campaign_status.py` confirms **no feasible 3-block design in ANY domain** — Binance 5-symbol cache, ironflow Hyperliquid bulk cache (candles+funding+OI+observed liq), and extended Hyperliquid stores (candles+funding+observed liq events) are all exhausted. Every frozen prereg has an evaluation artifact. The research frontier on frozen data is closed. Future sessions must NOT re-run terminal campaigns or idle on frozen data.
 
