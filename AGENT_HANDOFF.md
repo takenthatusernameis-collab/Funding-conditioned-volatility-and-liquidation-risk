@@ -1,16 +1,16 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T03:50:52Z
+**Timestamp:** 2026-11-21T04:42:22Z
 **Sole active campaign:** FCLR-XSEC-008-20261121T021041Z (rank-0, READY_EXECUTE/ACTIVE, verdict pending)
 **Latest completed heavy session on disk:** session_20261121T021041Z (FCLR-XSEC-007, verdict NOT_SUPPORTED — honest null: Primary A high-RV tercile funding→RV CI [-0.0004, 2.005] includes zero, p=0.272, Holm adj_p=0.816; joint gate requires BOTH primaries, so Primary A failing forces NOT_SUPPORTED regardless of Primary B; independent recompute concurs NOT_SUPPORTED; all trigger checks PASS; both panel sha256 verified)
-**Machine-enforced gate baseline (verified this refresh — 2026-11-21T03:50:52Z):** `python3 scripts/check_handoff_heavywork_gate.py` → `[PASS] ... reason=OK`, exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 24 tests, 0 failures; both frozen panel sha256 values re-verified on disk (`41962f82...` FCLR-001, `81a100d5...` combined liquidation); root `research_state/` md+json count 499/500 (cap 500).
+**Machine-enforced gate baseline (verified this refresh — 2026-11-21T04:42:22Z):** `python3 scripts/check_handoff_heavywork_gate.py` → `[PASS] ... reason=OK`, exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 24 tests, 0 failures; both frozen panel sha256 values re-verified on disk (`41962f82...` FCLR-001, `81a100d5...` combined liquidation); root `research_state/` md+json count 499/500 (cap 500).
 **Environment:** `pip3 install -r requirements.txt` already run (numpy, pandas, scipy, pyarrow, requests); Python 3.12.3. Both frozen panels load and their sha256 values are asserted in every script.
 
 > This is the SINGLE durable handoff. It supersedes every prior prose handoff block. There is exactly ONE initial task message (Section 1) and exactly ONE active campaign (FCLR-XSEC-008). All other campaigns (STARTER-001, FCLR-001, XSEC-001..007, LIQ-XSEC-QLIKE, LIQ-XSEC-ORDERING, LIQ-COMBINED-PANEL, Track A/B/C) are terminal and must NOT be re-run. A session that does not emit the Section 4 artifact triad under a new `research_state/session_<UTC>/` directory has NOT completed the handoff and the gate will fail. The previous refresh was blocked only by a stale, empty session directory newer than the recorded latest session; that empty directory has been removed, so the gate is green again and the next heavy session can proceed without a staleness failure.
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T03:50:52Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T04:42:22Z)
 
 **Why this is the focus (repository-name priority + heaviest non-duplicative work):** The repository is named *Funding-conditioned-volatility-and-liquidation-risk* — it has two scientific halves that must be reconciled by a single mechanism: (a) does the funding rate *condition volatility* (RV), and (b) does it *condition liquidation risk*? The completed cross-sectional (XSEC) program has already shown, on the frozen panels:
 - **Funding → next-hour RV is SUPPORTED only in the HIGH-RV regime** (FCLR-XSEC-002, CI [0.0046, 0.2348], p=0.019, materiality 1.09).
@@ -19,7 +19,7 @@
 
 The single most relevant, heaviest, non-duplicative next step that simultaneously exercises BOTH halves of the repository name is therefore **FCLR-XSEC-008: alternative regime conditioning**. It re-tests the *same* funding→RV and funding→liquidation mechanisms under a *different* regime variable — **volatility-of-volatility (RV168/RV24 ratio) or funding-rate-volatility buckets** — instead of RV tercile or UTC session bucket. This is the contingency-ladder next mechanism (handoff §6, step 1); it is *not* a re-run of any terminal campaign. If the funding effect is a genuine structural feature it must survive a regime re-split; if it only appears under RV-tercile it was a binning artifact. Either outcome is publishable and heavy.
 
-**State is synchronized and consistent (verified 2026-11-21T03:50:52Z):**
+**State is synchronized and consistent (verified 2026-11-21T04:42:22Z):**
 - `research_state/experiment_frontier.json` rank 0 = `FCLR-XSEC-008-20261121T021041Z` READY_EXECUTE/ACTIVE, phases PREREG_FREEZE / EVALUATION_AND_GATE / TRIGGER_AND_FRONTIER all NOT_STARTED; rank 1 = FCLR-XSEC-007 SUPERSEDED (NOT_SUPPORTED); all others SUPERSEDED.
 - `research_state/hypothesis_registry.json`: H_fclr_xsec_007 terminal NOT_SUPPORTED (verdict_recorded=true, last_experiment=session_20261121T021041Z); H_fclr_xsec_008 status NOT_STARTED, terminal=false.
 - Handoff-heavywork gate PASS (exit 0); `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures; root churn cap 499/500 holds (6 stale empty files removed from old sessions).
