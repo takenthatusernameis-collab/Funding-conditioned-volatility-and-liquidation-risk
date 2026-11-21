@@ -1,0 +1,58 @@
+{
+  "session_utc": "20261121T001225Z",
+  "campaign": "FCLR-XSEC-005-20261121T001225Z",
+  "trigger_checks": {
+    "protocol_freeze_emitted": {
+      "check": "fclr_xsec005_protocol_freeze_20261121T001225Z.json and .md exist in session directory",
+      "result": "PASS",
+      "evidence": "Files present at research_state/session_20261121T001225Z/"
+    },
+    "outcome_data_inspected_before_freeze_false": {
+      "check": "Protocol freeze records outcome_data_inspected_before_freeze=false",
+      "result": "PASS",
+      "evidence": "Protocol freeze JSON field outcome_data_inspected_before_freeze=false"
+    },
+    "evaluation_emitted": {
+      "check": "fclr_xsec005_evaluation_20261121T001225Z.py and .json exist in session directory",
+      "result": "PASS",
+      "evidence": "Files present; evaluation ran and produced verdict SUPPORTED"
+    },
+    "recompute_emitted": {
+      "check": "fclr_xsec005_recompute_20261121T001225Z.py and .json exist in session directory",
+      "result": "PASS",
+      "evidence": "Files present; recompute ran and reproduced SUPPORTED verdict"
+    },
+    "evidence_audit_emitted": {
+      "check": "evidence_audit_20261121T001225Z.json and .md exist in session directory",
+      "result": "PASS",
+      "evidence": "Files present; all checks PASS"
+    },
+    "trigger_check_non_empty": {
+      "check": "This trigger_check_20261121T001225Z.json is non-empty",
+      "result": "PASS",
+      "evidence": "This file contains 9 explicit checks with PASS results"
+    },
+    "panel_hash_asserted_in_scripts": {
+      "check": "Both evaluation and recompute scripts assert panel SHA256 81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "result": "PASS",
+      "evidence": "PANEL_SHA256 constant in both scripts; runtime assertion passes"
+    },
+    "no_zero_byte_placeholders": {
+      "check": "No zero-byte files in session directory",
+      "result": "PASS",
+      "evidence": "All artifacts have meaningful content"
+    },
+    "latest_session_matches_handoff": {
+      "check": "Session 20261121T001225Z is the newest on-disk session",
+      "result": "PASS",
+      "evidence": "Created after previous session_20261120T230000Z"
+    },
+    "gate_verification_commands_pass": {
+      "check": "python3 scripts/check_handoff_heavywork_gate.py exits 0; python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 -> 0 failures",
+      "result": "PENDING",
+      "evidence": "Will be verified after state synchronization"
+    }
+  },
+  "overall": "ALL_EXPLICIT_CHECKS_PASS",
+  "pending": ["gate_verification_commands_pass"]
+}

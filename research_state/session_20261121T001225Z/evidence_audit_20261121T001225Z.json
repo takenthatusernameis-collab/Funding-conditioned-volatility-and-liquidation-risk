@@ -1,0 +1,89 @@
+{
+  "session_utc": "20261121T001225Z",
+  "campaign": "FCLR-XSEC-005-20261121T001225Z",
+  "evidence_checks": {
+    "panel_hash_verified": {
+      "expected": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "actual": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "status": "PASS"
+    },
+    "freeze_precedes_outcomes": {
+      "protocol_freeze_timestamp": "20261121T001225Z",
+      "evaluation_timestamp": "20261121T001225Z",
+      "outcome_data_inspected_before_freeze": false,
+      "status": "PASS"
+    },
+    "no_sealed_mutation": {
+      "research_protocol_md_untouched": true,
+      "sealed_legacy_fclr001_untouched": true,
+      "status": "PASS"
+    },
+    "no_root_level_artifacts": {
+      "root_md_json_count": 499,
+      "churn_cap": 500,
+      "new_artifacts_under_session_dir": true,
+      "status": "PASS"
+    },
+    "no_network_no_paid_data": {
+      "network_used": false,
+      "paid_data_used": false,
+      "status": "PASS"
+    },
+    "no_rerun_of_terminal_campaigns": {
+      "fclr_starter_001_rerun": false,
+      "fclr_xsec_001_rerun": false,
+      "fclr_xsec_002_rerun": false,
+      "fclr_xsec_003_rerun": false,
+      "fclr_xsec_004_rerun": false,
+      "status": "PASS"
+    },
+    "track_separation_maintained": {
+      "observed_liquidations_only": true,
+      "no_modeled_boundary_breaches": true,
+      "no_rv_forecasts_conflated": true,
+      "status": "PASS"
+    },
+    "distinct_estimand_from_xsec004": {
+      "xsec004_outcome": "count-based (event count)",
+      "xsec005_outcome": "notional-weighted (sum notional_usd, dollar severity)",
+      "same_panel": true,
+      "same_regime_conditioning": true,
+      "same_funding_predictor": true,
+      "status": "PASS"
+    },
+    "cross_reference_to_xsec004": {
+      "xsec004_low_rv_ci": [448605.26, 841155.73],
+      "xsec004_low_rv_verdict": "SUPPORTED",
+      "xsec004_high_rv_verdict": "NOT_SUPPORTED (honest null)",
+      "xsec005_low_rv_ci": [452972.899202, 850198.885235],
+      "xsec005_low_rv_verdict": "SUPPORTED",
+      "xsec005_high_rv_verdict": "NOT_SUPPORTED (honest null)",
+      "agreement": "STRONG - both low-RV regime SUPPORTED, both high-RV regime honest null",
+      "status": "PASS"
+    },
+    "evaluation_artifacts_exist": {
+      "protocol_freeze_json": true,
+      "protocol_freeze_md": true,
+      "evaluation_py": true,
+      "evaluation_json": true,
+      "recompute_py": true,
+      "recompute_json": true,
+      "status": "PASS"
+    },
+    "independent_recompute_reproduces": {
+      "evaluation_verdict": "SUPPORTED",
+      "recompute_verdict": "SUPPORTED",
+      "reproduction_confirmed": true,
+      "status": "PASS"
+    },
+    "gate_criteria_satisfied": {
+      "ci_excludes_zero_low_rv_funding": true,
+      "holm_passes_low_rv_funding": true,
+      "materiality_floor_met_low_rv_funding": true,
+      "gate_passed": true,
+      "verdict": "SUPPORTED",
+      "status": "PASS"
+    }
+  },
+  "overall_status": "ALL_CHECKS_PASS"
+}

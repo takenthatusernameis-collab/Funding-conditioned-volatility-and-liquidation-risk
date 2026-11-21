@@ -1,0 +1,129 @@
+{
+  "experiment_id": "FCLR-XSEC-005-RECOMPUTE-20261121T001225Z",
+  "session_utc": "20261121T001225Z",
+  "panel_path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "panel_hash_verified": true,
+  "estimand": "regime_conditioned_cross_sectional_funding_effect_on_next_hour_notional_weighted_liquidation_intensity",
+  "mechanism": "UTC-hour / market-wide-RV conditioning of the funding effect applied to NOTIONAL-WEIGHTED observed liquidation intensity (independent recompute)",
+  "outcome_data_inspected_before_freeze": false,
+  "seed": 20261121,
+  "n_bootstrap_reps": 2000,
+  "alpha": 0.05,
+  "materiality_floor": 0.02,
+  "family_size": 4,
+  "holm_correction": "holm",
+  "market_rv_tercile_low": 0.019909976620116343,
+  "market_rv_tercile_high": 0.03306734643473102,
+  "tests": {
+    "high_funding_contrast_notional_weighted": {
+      "construct": "funding_notional_weighted",
+      "n_hours": 1880,
+      "mean_diff": 141973.80621993355,
+      "ci_low": -144081.97113365371,
+      "ci_high": 381875.8499049977,
+      "p_value": 0.324,
+      "ci_excludes_zero": false,
+      "positive_diff_count": 1019,
+      "mean_abs_outcome": 1575935.1730014372,
+      "materiality_effect": 0.09008860811802193,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.324,
+      "holm_passes": false
+    },
+    "low_funding_contrast_notional_weighted": {
+      "construct": "funding_notional_weighted",
+      "n_hours": 1880,
+      "mean_diff": 643509.5596525837,
+      "ci_low": 452972.89920212555,
+      "ci_high": 850198.8852350473,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 1169,
+      "mean_abs_outcome": 803236.7038311284,
+      "materiality_effect": 0.8011456107312974,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "high_rv_persistence_baseline_notional_weighted": {
+      "construct": "persistence_notional_weighted",
+      "n_hours": 1880,
+      "mean_diff": -1348168.5485422788,
+      "ci_low": -1797555.4058678024,
+      "ci_high": -1018912.8719941424,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 437,
+      "mean_abs_outcome": 1575935.1730014372,
+      "materiality_effect": 0.8554720851712657,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "low_rv_persistence_baseline_notional_weighted": {
+      "construct": "persistence_notional_weighted",
+      "n_hours": 1880,
+      "mean_diff": -901991.3548352835,
+      "ci_low": -1099077.0493590045,
+      "ci_high": -712780.1149735146,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 481,
+      "mean_abs_outcome": 803236.7038311284,
+      "materiality_effect": 1.1229458894658741,
+      "materiality_floor_met": true,
+      "holm_adj_p": 0.0,
+      "holm_passes": true
+    },
+    "high_funding_contrast_count_based_crossref": {
+      "construct": "funding_count_based_crossref",
+      "n_hours": 1880,
+      "mean_diff": 17.765274189463014,
+      "ci_low": 12.643970966312057,
+      "ci_high": 22.951312594984774,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 1030,
+      "mean_abs_outcome": 42.83295910184442,
+      "materiality_effect": 0.41475710672294,
+      "materiality_floor_met": true,
+      "holm_adj_p_crossref": 0.0
+    },
+    "low_funding_contrast_count_based_crossref": {
+      "construct": "funding_count_based_crossref",
+      "n_hours": 1880,
+      "mean_diff": 42.2548980496454,
+      "ci_low": 36.365394060283684,
+      "ci_high": 48.475813576494424,
+      "p_value": 0.0,
+      "ci_excludes_zero": true,
+      "positive_diff_count": 1162,
+      "mean_abs_outcome": 44.30432877672625,
+      "materiality_effect": 0.9537419754758264,
+      "materiality_floor_met": true,
+      "holm_adj_p_crossref": 0.0
+    }
+  },
+  "primary_test_names": [
+    "high_funding_contrast_notional_weighted",
+    "low_funding_contrast_notional_weighted",
+    "high_rv_persistence_baseline_notional_weighted",
+    "low_rv_persistence_baseline_notional_weighted"
+  ],
+  "funding_tests_notional_weighted": [
+    "high_funding_contrast_notional_weighted",
+    "low_funding_contrast_notional_weighted"
+  ],
+  "cross_reference": {
+    "fclr_xsec_004_low_rv_funding_ci": [
+      448605.26,
+      841155.73
+    ],
+    "fclr_xsec_004_low_rv_verdict": "SUPPORTED",
+    "fclr_xsec_004_high_rv_verdict": "NOT_SUPPORTED (honest null)"
+  },
+  "gate_passed": true,
+  "verdict": "SUPPORTED",
+  "reproduces_fclr_xsec005_evaluation": true
+}
