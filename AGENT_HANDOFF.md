@@ -1,8 +1,8 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T00:07:22Z
-**Sole active campaign:** FCLR-XSEC-005-20261121T000722Z (rank-0, READY_EXECUTE / ACTIVE, all phases NOT_STARTED)
-**Latest completed heavy session on disk:** session_20261120T230000Z (FCLR-XSEC-004, verdict SUPPORTED)
+**Timestamp:** 2026-11-21T00:54:14Z
+**Sole active campaign:** FCLR-XSEC-005-20261121T001225Z (rank-0, COMPLETE, verdict SUPPORTED)
+**Latest completed heavy session on disk:** session_20261121T001225Z (FCLR-XSEC-005, verdict SUPPORTED — notional-weighted low-RV funding contrast CI excludes zero, Holm passes, materiality clears)
 **Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS, exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures.
 **Environment:** `pip3 install -r requirements.txt` already run (numpy, pandas, scipy, pyarrow, requests). Python 3.12.3. The frozen FCLR-001 panel and the frozen combined liquidation panel both load; both sha256 values are verified below.
 
@@ -10,7 +10,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T00:07:22Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T00:54:14Z)
 
 **Why this is the focus (repository-name priority + heaviest non-duplicative work):** This repository is `Funding-conditioned-volatility-and-liquidation-risk`. As of session_20261120T230000Z **both halves of the mandate are now SUPPORTED but regime-distinct**: FCLR-XSEC-002 (volatility, HIGH-RV regime) and FCLR-XSEC-004 (liquidation intensity, LOW-RV regime, CI [448605.26, 841155.73], p=0.0, Holm passes, materiality 0.80). The single heaviest, highest-value, **still-open, non-duplicative** question that matches the repo mandate is whether the newly-SUPPORTED low-RV liquidation finding is an artifact of the **count-based** outcome definition or survives a **notional-weighted** outcome (dollar liquidation severity, not event counts) — i.e. does the funding signal predict *how much* capital is liquidated, not just *how many* liquidation events fire. That is a distinct estimand (notional-weighted next-hour liquidation intensity), uses the same frozen panel, and is feasible with zero new data / no network / no credentials. It is the contingency-ladder FCLR-XSEC-005 and it is *not* a re-run of any terminal campaign.
 
