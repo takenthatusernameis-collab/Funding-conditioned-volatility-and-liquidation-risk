@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T18:38:08Z (supersedes 2026-11-21T18:35:29Z; gate now verified with CONTAGION_CAMPAIGN_RE enforcement, 83/83 tests pass, root count 499/500)
+**Timestamp:** 2026-11-21T18:42:30Z (supersedes 2026-11-21T18:38:08Z; gate verified with CONTAGION_CAMPAIGN_RE enforcement, 83/83 tests pass, root count 499/500)
 **Sole active campaign:** FCLR-LIQ-CONTAGION-001-20261121T174500Z (rank-0, READY_EXECUTE — cross-coin liquidation contagion + funding-mediated spillover analysis on 1.74M event panel)
 **Latest completed session:** session_20261121T130159Z (FCLR-PANEL-FE-001, verdict NOT_SUPPORTED, terminal)
 **Remaining heavy work:** MASSIVE and UN-AVOIDABLE. The 1.74M liquidation panel (15 coins, 2025-03-22..2026-10-31) has NEVER been analyzed for cross-coin contagion, lead-lag, funding spillovers, or network structure — the core research direction implied by the repository name *Funding-conditioned volatility and liquidation risk*.
@@ -13,11 +13,13 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T18:38:08Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T18:42:30Z)
 
 **PRIORITY-0 MISSION: Execute FCLR-LIQ-CONTAGION-001 — the highest-value unexplored research direction in a repository named *Funding-conditioned volatility and liquidation risk*.**
 
-The 1.74M liquidation event panel (`research_state/fclr_liq_combined_panel_20261115T181405Z.parquet`, 15 coins, 2025-03-22..2026-10-31) has NEVER been analyzed for:
+The repository name mandates three things: **funding-conditioned**, **volatility**, and **liquidation risk**. No campaign to date has joined all three. FCLR-LIQ-CONTAGION-001 is the first campaign that does: it tests whether liquidations in coin A predict liquidations in coin B (liquidation risk), whether funding rate differentials between coins modulate that cross-coin prediction (funding-conditioned), and whether realized volatility in one coin predicts liquidations in another (volatility). The 1.74M event panel (15 coins, 2025-03-22..2026-10-31) carries `fundingRate`, `premium`, `mark`, `ema_dist`, `rv24h`, `rv168h`, `notional_usd`, `side` — everything needed, no external trigger, no paid data, no credentials.
+
+It has NEVER been analyzed for:
 - **Cross-coin liquidation contagion**: Do liquidations in coin A predict liquidations in coin B?
 - **Lead-lag dynamics**: Which coins liquidate first? Is there a temporal ordering?
 - **Funding-mediated spillovers**: Do funding rate differentials between coins predict cross-coin liquidation spillovers? (Directly addresses *funding-conditioned* in repo name)
