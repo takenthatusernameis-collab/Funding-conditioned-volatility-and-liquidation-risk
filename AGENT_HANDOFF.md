@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T12:02:00Z (refreshed and re-verified green this session; supersedes the 2026-11-21T11:58:45Z refresh)
+**Timestamp:** 2026-11-21T12:05:07Z (re-verified green this session; supersedes the 2026-11-21T12:02:00Z refresh)
 **Sole active campaign:** FCLR-PANEL-FE-001-20261121T085602Z (rank-0, READY_EXECUTE/ACTIVE) — the heavy panel fixed-effects funding-conditioning study of realized volatility and liquidation intensity with walk-forward OOS
 **Latest completed heavy session on disk:** session_20261121T080000Z (FCLR-SESSION-SYNTHESIS-01, verdict CONSOLIDATORY_ONLY — inverse-variance fixed-effect + DerSimonian-Laird random-effects meta-analysis over 17 terminal funding-conditioning contrasts; RV FE pooled d=1.237 CI incl. zero; liquidation FE pooled d=0.379 CI excl. zero BUT RE DL pooled d=0.228 CI incl. zero under I²=97.5%; independent stdlib recompute concurs; all terminal verdicts carried forward unchanged, no hypothesis promoted)
 **Frontier status (machine-verified):** `python3 scripts/next_campaign_status.py` → `NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN`. The 3-block confirmatory route is exhausted on every domain (Binance 5-symbol contiguous + disjoint + mark+funding-only; Hyperliquid bulk + extended). **This handoff does NOT ask the next session to wait for that route.** It redirects to a *materially different, feasible* design that uses the full frozen panels (panel fixed effects + walk-forward), which the 3-block frontier check does not and cannot certify as exhausted.
@@ -11,7 +11,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T12:02:00Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T12:05:07Z)
 
 **Execute FCLR-PANEL-FE-001 — a panel fixed-effects study of whether the funding rate conditions (a) realized volatility and (b) liquidation intensity, with a walk-forward out-of-sample evaluation — behind a fresh outcome-blind prereg frozen before any outcome is inspected.**
 
@@ -30,7 +30,7 @@
 
 **What was done this session (bottleneck removal + de-risking, already complete):**
 - Verified and repaired the Python environment (numpy/pandas/scipy/pyarrow were absent; reinstalled from `requirements.txt`; imports now succeed). This was a hard blocker for *any* heavy evaluation script.
-- Re-verified the machine checks on a clean tree: gate `reason=OK` (exit 0); 79 tests OK; `next_campaign_status.py` → `no feasible 3-block design in ANY domain` (expected); both frozen panel sha256 re-verified on disk (`41962f82…` FCLR-001, `81a100d5…` combined liquidation); root `research_state/` md+json count 499/500; rank-0 `experiment_frontier.json` = `FCLR-PANEL-FE-001-20261121T085602Z` READY_EXECUTE/ACTIVE; `hypothesis_registry.json` holds `H_fclr_panelfe_001` FROZEN_PENDING_EVALUATION (terminal=false).
+- **Re-verified all machine checks green again this session (2026-11-21T12:05:07Z):** gate `reason=OK` (exit 0); 79 tests OK; `next_campaign_status.py` → `no feasible 3-block design in ANY domain` (expected); both frozen panel sha256 re-asserted on disk (`41962f82…` FCLR-001, `81a100d5…` combined liquidation); FCLR-001 spot-check re-confirmed 29,136 rows × 22 cols, 5 coins (BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT), `premium` 100% null, `signed_funding` non-null on 29,132 rows; rank-0 `experiment_frontier.json` = `FCLR-PANEL-FE-001-20261121T085602Z` READY_EXECUTE/ACTIVE (NOT yet executed); root `research_state/` md+json count 499/500.
 - Completed a **coverage-only feasibility audit** (no RV/liquidation outcome statistics were computed; this is metadata needed to make the campaign executable, not a peek at results):
   - **FCLR-001:** 29,136 rows × 22 cols, 5 coins (BNBUSDT/BTCUSDT/ETHUSDT/XRPUSDT/SOLUSDT), 2026-01-01 00:00 → 2026-08-31 23:00 UTC, 5,832 hourly steps per coin. `signed_funding` and `funding_asof_lag_h` are non-null on 29,132/29,136 rows (99.99%); `rv1h` on 23,558; `log_rv1h` on 23,531; `target_rv24h` on 20,871. **`premium` is 100% null** (`premium_status=NOT_COMPUTABLE_WITHOUT_INDEX_PRICE`) — the panel-FE models must use `signed_funding` / `funding_asof_lag_h` / `abs_funding_pct_trail`, never `premium`.
   - **Combined liquidation panel:** 1,740,415 observed event rows, 15 coins (AAVE, ADA, AVAX, BNB, BTC, CRV, DOGE, ETH, LINK, LTC, NEAR, SOL, SUI, UNI, XRP), 2025-03-22 19:00 → 2026-10-31 22:00 UTC. `fundingRate`, `abs_fund_pct`, `notional_usd`, `rv24h`, `rv168h` are non-null on all 1,740,415 rows. Sources: ironflow 1,555,142 + metpie 185,273. This is **observed** liquidation-event data (Track A), so the old "Track A blocked on data" note is superseded for this design.
