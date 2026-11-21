@@ -1,7 +1,7 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T22:01:00Z (supersedes 2026-11-21T21:58:53Z)
-**Sole active campaign:** NONE — frozen-data frontier EXHAUSTED. FCLR-LIQ-CONTAGION-002 COMPLETE under session_20261121T210000Z; FCLR-FINAL-SYNTHESIS-01 COMPLETE under session_20261121T220100Z. No remaining heavy work on frozen data.
+**Timestamp:** 2026-11-21T22:05:11Z (supersedes 2026-11-21T22:01:00Z)
+**Sole active campaign:** FCLR-LIVE-DATA-ACQUISITION-001 — open a materially different free-data route (live/unfrozen external sources) so heavy research can continue; frozen-data frontier exhausted, no re-runs permitted.
 **Latest completed heavy session on disk:** session_20261121T220100Z (FCLR-FINAL-SYNTHESIS-01, COMPLETE — final synthesis report artifact set emitted; see §1–§2). session_20261121T210000Z (FCLR-LIQ-CONTAGION-002, COMPLETE — full artifact set emitted; see §3–§4) remains the heavy-session bundle of record. session_20261121T193000Z (FCLR-LIQ-CONTAGION-001, COMPLETE) remains grandfathered.
 **Gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`, `root=499/500`). `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144` → 68 pass, 0 fail. `python3 scripts/next_campaign_status.py` → confirms CONTAGION-002 executed; **CAMPAIGN STATUS: no feasible 3-block design in ANY domain** (Binance 5-symbol, Hyperliquid bulk, Hyperliquid extended all exhausted).
 **Environment:** Python 3.12.3; `numpy 2.5.5`, `pandas 3.1.1`, `scipy 1.18.1`, `pyarrow 26.0.1` verified importable.
@@ -12,7 +12,11 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T21:58:53Z; mission COMPLETE under session_20261121T220100Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T22:05:11Z)
+
+**PRIORITY-0 MISSION — OPEN A MATERIALLY DIFFERENT FREE-DATA ROUTE.** Frozen-data frontier is exhausted (all 3 domains exhausted, no feasible 3-block design). Future sessions must NOT re-run terminal campaigns or idle on frozen data. Next session must (a) discover and verify a new admissible free source (live/unfrozen external data, no credentials), (b) freeze a prereg with outcome-blind hypotheses on that new data, (c) execute a heavy 3-block design with non-empty artifacts under `research_state/session_<UTC>/` (UTC > 20261121T220100Z). Non-avoidance constraints apply: no prose-only/trigger-only/audit-only/verify-and-stop/placeholder sessions; root cap 499/500.
+
+---
 
 **PRIORITY-0 MISSION — COMPLETE: Produce the FINAL SYNTHESIS REPORT.** The frozen-data research cycle is COMPLETE. FCLR-LIQ-CONTAGION-002 (edge-set robustness + per-edge materiality reconciliation on the frozen 1.74M liquidation panel) was executed under `session_20261121T210000Z/`. The full artifact set is emitted and non-empty. All gates pass. `next_campaign_status.py` confirms: **no feasible 3-block design in ANY domain** — the Binance 5-symbol cache, the ironflow Hyperliquid bulk cache (candles+funding+OI+observed liq), and the extended Hyperliquid stores (candles+funding+observed liq events) are all exhausted. Every frozen prereg has an evaluation artifact. The research frontier on frozen data is closed.
 
