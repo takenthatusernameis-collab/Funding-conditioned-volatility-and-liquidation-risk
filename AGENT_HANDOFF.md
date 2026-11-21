@@ -1,31 +1,39 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T08:00:00Z
-**Sole active campaign:** FCLR-SESSION-SYNTHESIS-01-20261121T080000Z (rank-0, READY_EXECUTE/ACTIVE, verdict CONSOLIDATORY_ONLY — outcome-blind evidence-consolidation + quantitative meta-analysis over 17 terminal funding-conditioning contrasts; replaces the prior TRIGGER_ONLY sentinel that was the structural bottleneck)
+**Timestamp:** 2026-11-21T08:53:37Z
+**Sole active campaign:** FCLR-SESSION-SYNTHESIS-01-20261121T080000Z (rank-0, READY_EXECUTE/ACTIVE → COMPLETE, verdict CONSOLIDATORY_ONLY — outcome-blind evidence-consolidation + quantitative meta-analysis over 17 terminal funding-conditioning contrasts; replaces the prior TRIGGER_ONLY sentinel that was the structural bottleneck)
 **Latest completed heavy session on disk:** session_20261121T080000Z (FCLR-SESSION-SYNTHESIS-01, verdict CONSOLIDATORY_ONLY — inverse-variance fixed-effect + DerSimonian-Laird random-effects meta-analysis with Cochran Q + I² over FCLR-XSEC-002/004/005/006 terminal contrasts on the two verified frozen panels; RV fixed-effect pooled d=1.237 CI incl. zero; liquidation fixed-effect pooled d=0.379 CI excl. zero BUT random-effects DL pooled d=0.228 CI incl. zero under I²=97.5% heterogeneity; independent stdlib recompute concurs; all terminal verdicts carried forward unchanged, no hypothesis promoted)
-**Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 24 tests, 0 failures; both frozen panel sha256 values re-verified on disk (`41962f82...` FCLR-001, `81a100d5...` combined liquidation); root `research_state/` md+json count 499/500 (cap 500). The new `FCLR-SESSION-SYNTHESIS-01` gate binding (in `scripts/check_handoff_heavywork_gate.py`) enforces the exact consolidation artifact triad for any post-start session so future agents cannot idle on the external trigger.
+**Frontier status (machine-verified):** `python3 scripts/next_campaign_status.py` → NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN. All domains exhausted: Binance 5-symbol contiguous + disjoint + mark+funding-only; Hyperliquid bulk (ironflow) + extended (candles+funding+observed-liq). No actionable frozen prereg remains without an evaluation artifact.
+**Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → exit 0; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 24 tests, 0 failures; both frozen panel sha256 values re-verified on disk (`41962f82...` FCLR-001, `81a100d5...` combined liquidation); root `research_state/` md+json count 499/500 (cap 500). The `FCLR-SESSION-SYNTHESIS-01` gate binding enforces the exact consolidation artifact triad for any post-start session so future agents cannot idle on the external trigger.
 **Environment:** `pip3 install -r requirements.txt` already run (numpy, pandas, scipy, pyarrow, requests); Python 3.12.3. Both frozen panels load and their sha256 values are asserted in every script.
 
 > This is the SINGLE durable handoff. It supersedes every prior prose handoff block. There is exactly ONE initial task message (Section 1) and exactly ONE active campaign (FCLR-SESSION-SYNTHESIS-01). All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE, LIQ-XSEC-ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, Track A/B/C) are terminal/superseded and must NOT be re-run. A session that does not emit the Section 4 artifact set under a new `research_state/session_<UTC>/` directory has NOT completed the handoff and the gate will fail.
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T08:00:00Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T08:53:37Z)
 
-**Why this is the focus (repository-name priority + bottleneck removal):** The repository is named *Funding-conditioned-volatility-and-liquidation-risk* — two scientific halves reconciled by funding conditioning: (a) does the funding rate *condition volatility* (RV), and (b) does it *condition liquidation risk*? Both halves are now terminal on the verified frozen panels, and the prior rank-0 campaign (`FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z`, TRIGGER_ONLY) was gated on an external `NEW_OBSERVED_LIQUIDATION_SOURCE` trigger that cannot fire inside this closed, frozen-data environment. That trigger gate was the structural bottleneck: future agents would idle waiting for a signal the frozen panel cannot produce. **This session removes that bottleneck** by executing the heavy consolidation + quantitative meta-analysis campaign `FCLR-SESSION-SYNTHESIS-01` now.
+**Why this is the focus (repository-name priority + bottleneck removal):** The repository is named *Funding-conditioned-volatility-and-liquidation-risk* — two scientific halves reconciled by funding conditioning: (a) does the funding rate *condition volatility* (RV), and (b) does it *condition liquidation risk*? Both halves are now **terminal on the verified frozen panels**, and the prior rank-0 campaign (`FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z`, TRIGGER_ONLY) was gated on an external `NEW_OBSERVED_LIQUIDATION_SOURCE` trigger that **cannot fire inside this closed, frozen-data environment**. That trigger gate was the structural bottleneck: future agents would idle waiting for a signal the frozen panel cannot produce. **This session removed that bottleneck** by executing the heavy consolidation + quantitative meta-analysis campaign `FCLR-SESSION-SYNTHESIS-01` in `session_20261121T080000Z/`. The consolidation is now **COMPLETE**.
 
-**What was executed this session (heavy, non-deferrable):** `FCLR-SESSION-SYNTHESIS-01-20261121T080000Z` in `research_state/session_20261121T080000Z/`:
+**Frontier status (machine-verified, 2026-11-21T08:53:37Z):** `python3 scripts/next_campaign_status.py` → **NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN**. All four data domains are exhausted for a 3-block confirmatory design:
+- Binance 5-symbol contiguous: only 2024-04..2024-05 (61d) and 2025-01 (31d) remain untested → TOO SHORT (need ≥127d)
+- Binance 5-symbol disjoint blocks: 3 candidate months (2024-04, 2024-05, 2025-01) but ALL INFEASIBLE (train months unfunded)
+- Mark+funding-only (B0/B1/C1): only 2025-01 individually feasible, but 1 < 3 mutually non-overlapping blocks required
+- Hyperliquid bulk (ironflow): 18 months present but only 2025-05-01..2025-05-24 (24d) untouched → TOO SHORT
+- Hyperliquid extended (candles+funding+observed-liq events): 12 usable months (2025-11..2026-10) but all inside tested windows → no untouched contiguous region
+
+**What was executed this session (heavy, non-deferrable — already done):** `FCLR-SESSION-SYNTHESIS-01-20261121T080000Z` in `research_state/session_20261121T080000Z/`:
 - **Protocol freeze** (pre-outcomes, `outcome_data_inspected_before_freeze=false`): outcome-blind evidence-consolidation + meta-analysis design; inverse-variance fixed-effect + DerSimonian-Laird random-effects; Cochran Q + I²; regime-stratified (RV/liq/joint); 2% materiality floor preserved.
 - **Program synthesis report** (json+md): every terminal campaign verdict with exact CIs/p-values/panels (FCLR-STARTER-001, XSEC-001..008, LIQ-OOS-FORECAST-001, LIQ-COMBINED-PANEL, LIQ-XSEC-ORDERING/QLIKE, Track A, Track B).
 - **Frontier exhaustion audit** (json+md): per-domain blockage from `next_campaign_status.py` (NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN).
 - **Negative results preservation** (json): all null/inconclusive outcomes with mechanistic explanations.
-- **Quantitative meta-analysis** (py+json+md): 17 terminal funding-conditioning contrasts across FCLR-XSEC-002/004/005/006 on both frozen panels (sha256 asserted). **Finding:** RV fixed-effect pooled d=1.237 (CI incl. zero); liquidation fixed-effect pooled d=0.379 (CI excl. zero) but random-effects DL pooled d=0.228 (CI incl. zero) under I²=97.5% heterogeneity; joint random-effects CI incl. zero.
+- **Quantitative meta-analysis** (py+json+md): 17 terminal funding-conditioning contrasts across FCLR-XSEC-002/004/005/006 on both frozen panels (sha256 asserted). **Finding:** RV fixed-effect pooled d=1.237 (CI incl. zero); liquidation fixed-effect pooled d=0.379 (CI excl. zero) BUT random-effects DL pooled d=0.228 (CI incl. zero) under I²=97.5% heterogeneity; joint random-effects CI incl. zero.
 - **Independent stdlib recompute** (py+json): concurs (rv_match=true, liq_match=true, recompute_concurs=true).
 - **Evidence audit** (json+md) + **non-empty trigger_check** (json): all 20 acceptance checks PASS.
 
 **Synthesis verdict: CONSOLIDATORY_ONLY.** The cross-sectional funding-conditioning associations are statistically detectable in specific regimes (RV high-RV; liquidation low-RV + UTC buckets) but **not homogeneous** (I²≈97%) and **not robust under random effects** (pooled CI includes zero). Combined with the FAILED out-of-sample forward/forecast gates (FCLR-LIQ-OOS-FORECAST-001 QLIKE FAIL; all RV forward confirmations NOT_REPLICATED), the consolidated evidence does **not** support a promotable funding-conditioned forecast skill. No terminal hypothesis was promoted; every honest terminal verdict is carried forward unchanged.
 
-**Next focus for the future agent (rank-0 is now COMPLETE for this consolidation):** The consolidation campaign is executed. The frozen-data frontier is genuinely exhausted for new 3-block confirmatory designs. **Reopening the liquidation-risk OOS hypothesis requires `NEW_OBSERVED_LIQUIDATION_SOURCE`** — a new observed-liquidation data source beyond the frozen panels. Until that trigger fires, the only admissible heavy work is a **materially different free-data route** (e.g., a new instrument set with adequate contiguous funding+liquidation coverage that `next_campaign_status.py` confirms as feasible), executed behind a fresh outcome-blind prereg. Do NOT re-run any terminal campaign; do NOT emit a prose-only or trigger-check-only session; do NOT add root-level `research_state/*.md|*.json` (root at 499/500 cap); do NOT modify `.github/workflows`; do NOT overwrite the sealed `research_state/research_protocol.md`.
+**Next focus for the future agent (rank-0 is now COMPLETE for this consolidation):** The consolidation campaign is **EXECUTED TO TERMINAL VERDICT**. The frozen-data frontier is **genuinely exhausted** for new 3-block confirmatory designs (`next_campaign_status.py` → NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN). **Reopening the liquidation-risk OOS hypothesis requires `NEW_OBSERVED_LIQUIDATION_SOURCE`** — a new observed-liquidation data source beyond the frozen panels. Until that trigger fires, the **only admissible heavy work** is a **materially different free-data route** (e.g., a new instrument set with adequate contiguous funding+liquidation coverage that `next_campaign_status.py` confirms as feasible), executed behind a **fresh outcome-blind prereg** frozen pre-outcomes. **DO NOT** re-run any terminal campaign; **DO NOT** emit a prose-only or trigger-check-only session; **DO NOT** add root-level `research_state/*.md|*.json` (root at 499/500 cap); **DO NOT** modify `.github/workflows`; **DO NOT** overwrite the sealed `research_state/research_protocol.md`.
 
 ---
 
@@ -60,14 +68,43 @@
 
 ## 4. Required artifacts for the NEXT heavy session (machine-enforced by FCLR-SESSION-SYNTHESIS-01 gate)
 
-If the next agent executes a materially different free-data route, it must create a new `research_state/session_<UTC>/` and emit a full outcome-blind triad appropriate to that route (protocol freeze pre-outcomes, evaluation triad, independent recompute, evidence audit, non-empty trigger_check). The `FCLR-SESSION-SYNTHESIS-01` gate in `scripts/check_handoff_heavywork_gate.py` binds the exact consolidation artifact set for any post-20261121T080000Z session that claims this campaign family. Prose-only, trigger-check-only, or placeholder artifacts do NOT satisfy the gate.
+The consolidation campaign is **COMPLETE** (executed in `session_20261121T080000Z/` with verdict CONSOLIDATORY_ONLY). The next session has exactly two admissible paths:
 
-### Acceptance test (run these — they are the gate)
-- `python3 scripts/check_handoff_heavywork_gate.py` exits 0 (prints `[PASS] handoff-heavywork gate: ... reason=OK`).
-- `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125` → 0 failures.
-- `experiment_frontier.json` rank 0 = FCLR-SESSION-SYNTHESIS-01 READY_EXECUTE/ACTIVE with all others SUPERSEDED; rank-0 `next_unfinished_task` non-empty; `hypothesis_registry.json` records the consolidation verdict.
-- No liquidation/RV outcomes inspected before the protocol freeze.
-- Root `research_state/` md+json count stays ≤ 500.
+### PATH A: Materially Different Free-Data Route (EXECUTE HEAVY WORK)
+If a new free data source (instrument set) with adequate contiguous funding+liquidation coverage is available, the session **MUST** create a new `research_state/session_<UTC>/` and emit the full outcome-blind triad appropriate to that route:
+- Protocol freeze (pre-outcomes, `outcome_data_inspected_before_freeze=false`)
+- Evaluation triad (source/result/report: .py + .json + .md)
+- Independent stdlib recompute (py+json)
+- Evidence audit (json+md)
+- Non-empty trigger_check (json)
+
+### PATH B: Blocker Evidence + Clean Stop (if no free-data route exists)
+If `next_campaign_status.py` confirms **NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN** (as it does now), the session **MUST** emit the blocker evidence in the handoff and stop cleanly — **no prose-only, no trigger-check-only, no placeholder sessions.**
+
+**The `FCLR-SESSION-SYNTHESIS-01` gate in `scripts/check_handoff_heavywork_gate.py` binds the exact consolidation artifact set for any post-20261121T080000Z session that claims this campaign family.** Prose-only, trigger-check-only, or placeholder artifacts do NOT satisfy the gate. Future agents cannot avoid doing heavy work; the trigger-only idle is dead.
+
+### Acceptance Tests (run these — they are the gate)
+
+```bash
+# Gate must pass (exit 0)
+python3 scripts/check_handoff_heavywork_gate.py
+
+# Unit tests must pass (0 failures)
+python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125
+
+# Frontier must show exhausted (machine-verified)
+python3 scripts/next_campaign_status.py
+```
+
+**Expected gate output:** `[PASS] handoff-heavywork gate: ... reason=OK`
+**Expected frontier output:** `== CAMPAIGN STATUS: no feasible 3-block design in ANY domain ==`
+
+**State verification:**
+- `experiment_frontier.json` rank 0 = FCLR-SESSION-SYNTHESIS-01 READY_EXECUTE/ACTIVE → COMPLETE with all others SUPERSEDED
+- Rank-0 `next_unfinished_task` = "materially different free-data route OR blocker evidence + clean stop"
+- `hypothesis_registry.json` records the consolidation verdict CONSOLIDATORY_ONLY (terminal)
+- No liquidation/RV outcomes inspected before any protocol freeze
+- Root `research_state/` md+json count stays ≤ 500 (currently 499/500)
 
 ---
 
@@ -86,6 +123,6 @@ If the next agent executes a materially different free-data route, it must creat
 
 ## 6. Per-session close-out (RESEARCH_PROMPT.md §12/§19)
 
-Before finishing, ensure AGENT_HANDOFF.md answers: what changed and why; what was tested with exact outcomes; what evidence was added and where; the state of each research gate; the single highest-value next task; the precise verifying command; and any blocker with the next materially different free route. The active rank-0 campaign is FCLR-SESSION-SYNTHESIS-01 (READY_EXECUTE/ACTIVE, executed this session to CONSOLIDATORY_ONLY). Commit nothing merely to show activity; if no meaningful progress is possible, record the evidence for the blocker and stop cleanly with the next valid independent task executed.
+Before finishing, ensure AGENT_HANDOFF.md answers: what changed and why; what was tested with exact outcomes; what evidence was added and where; the state of each research gate; the single highest-value next task; the precise verifying command; and any blocker with the next materially different free route. The active rank-0 campaign is FCLR-SESSION-SYNTHESIS-01 (COMPLETE, verdict CONSOLIDATORY_ONLY). The next session must either execute a materially different free-data route behind a fresh outcome-blind prereg, or emit the blocker evidence (`next_campaign_status.py` → NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN) and stop cleanly. **No prose-only, no trigger-check-only, no placeholder sessions.** Commit nothing merely to show activity; if no meaningful progress is possible, record the evidence for the blocker and stop cleanly with the next valid independent task executed.
 
 (End of handoff)
