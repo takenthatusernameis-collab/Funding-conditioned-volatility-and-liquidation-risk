@@ -745,7 +745,35 @@
       "supersedes": [
         "H_fclr_liq_oos_funding_conditioned_forecast (terminal NOT_SUPPORTED; consolidation does not reopen it)"
       ]
+    },
+    {
+      "id": "H_fclr_panelfe_001",
+      "type": "panel_fixed_effects_funding_conditioning",
+      "claim": "Two-way (coin + hour) fixed-effects panel: the funding rate conditions (a) next-hour realized volatility on FCLR-001 and (b) hourly liquidation intensity on the combined liquidation panel, with expanding-window walk-forward out-of-sample support and >=2% economic materiality.",
+      "description": "FCLR-PANEL-FE-001: panel fixed-effects funding-conditioning of RV (H_panelfe_vol) and liquidation intensity (H_panelfe_liq). Feasible on the existing frozen panels via within-coin/within-hour variation; does not require the exhausted 3-block confirmatory design or any external trigger.",
+      "estimand": "two_way_fe_funding_conditioning_rv_and_liq",
+      "experiment_id": "FCLR-PANEL-FE-001-20261121T085602Z",
+      "status": "FROZEN_PENDING_EVALUATION",
+      "terminal": false,
+      "terminal_class": null,
+      "last_experiment": null,
+      "last_tested": null,
+      "last_verdict": "PENDING",
+      "observed_only": true,
+      "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+      "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "prereg": "research_state/session_<UTC>/fclr_panelfe01_prereg_<UTC>.json",
+      "prereg_document": "research_state/session_<UTC>/fclr_panelfe01_prereg_<UTC>.md",
+      "outcome_data_inspected_before_freeze": false,
+      "materiality_floor": 0.02,
+      "distinct_from": "Distinct from FCLR-XSEC-001..008 (pooled cross-sectional regime contrasts), FCLR-LIQ-OOS-FORECAST-001 (time-series 24h QLIKE forecast), and the 3-block confirmatory design (impossible on frozen data). Uses two-way fixed effects + walk-forward over the full panel.",
+      "reopen_requires": [],
+      "venue": "binance_fclr001_and_combined_liquidation_panel",
+      "verdict_recorded": false,
+      "updated_utc": "2026-11-21T08:56:02Z"
     }
   ],
-  "updated_utc": "2026-11-21T06:54:00Z"
+  "updated_utc": "2026-11-21T08:56:02Z"
 }

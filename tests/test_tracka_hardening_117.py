@@ -45,6 +45,14 @@ BLOCKED_PAYLOAD = {
 }
 
 SCRIPT_REGISTRY = {
+  "confirmatory_eval.py": {
+    "class": "track_c_sealed_volatility",
+    "reason": "FCLR-STARTER-001 confirmatory evaluation writer: runs C1/C2 vs B1 on sealed holdout, computes paired QLIKE diff, block bootstrap >=2000 reps, Holm correction, and emits the verdict + trigger check for the frozen Track C starter protocol."
+  },
+  "update_fclr_starter_frontier.py": {
+    "class": "repo_maintenance_utility",
+    "reason": "Reads the on-disk FCLR-STARTER-001 Step 1 artifact triad and flips rank-0 phases NOT_STARTED->COMPLETE in experiment_frontier.json; never mutates any other rank, never writes the sealed research_protocol.md."
+  },
   "fclr_fwd_vol_confirm.py": {
     "class": "track_c_sealed_volatility",
     "reason": "FCLR-FWD-VOL-011-CONFIRM heavy pipeline; no liquidation outcome reads; timestamped Track C artifacts only."
