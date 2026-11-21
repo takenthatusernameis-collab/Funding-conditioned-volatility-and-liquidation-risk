@@ -1,0 +1,131 @@
+{
+  "session_utc": "20261121T055825Z",
+  "experiment_id": "FCLR-LIQ-OOS-FORECAST-001-20261121T055825Z",
+  "audit_timestamp_utc": "2026-11-21T06:54:00Z",
+  "audit_scope": "FCLR-LIQ-OOS-FORECAST-001 out-of-sample liquidation-risk forecast heavy artifact triad + recompute + evidence audit + trigger check",
+  "session_directory": "research_state/session_20261121T055825Z/",
+  "campaign_rank": 0,
+  "campaign_status": "READY_EXECUTE/ACTIVE (executed this session)",
+  "artifacts": {
+    "fclr_liq_oos001_protocol_freeze_20261121T055825Z.json": {"present": true, "non_empty": true, "role": "preregistered protocol freeze (pre-outcomes; outcome_data_inspected_before_freeze=false)"},
+    "fclr_liq_oos001_protocol_freeze_20261121T055825Z.md": {"present": true, "non_empty": true, "role": "preregistered protocol freeze (pre-outcomes, markdown)"},
+    "fclr_liq_oos001_evaluation_20261121T055825Z.py": {"present": true, "non_empty": true, "role": "OOS evaluation script: C2 (funding-conditioned) vs B1 (RV-only), next-24h observed notional-weighted liquidation intensity, chronological walk-forward, QLIKE/Brier/LogLoss, block bootstrap+Holm, 2% floor"},
+    "fclr_liq_oos001_evaluation_20261121T055825Z.json": {"present": true, "non_empty": true, "role": "evaluation results JSON"},
+    "fclr_liq_oos001_evaluation_20261121T055825Z.md": {"present": true, "non_empty": true, "role": "evaluation narrative markdown"},
+    "fclr_liq_oos001_recompute_20261121T055825Z.py": {"present": true, "non_empty": true, "role": "independent second-code-path recompute (numpy/stdlib-only)"},
+    "fclr_liq_oos001_recompute_20261121T055825Z.json": {"present": true, "non_empty": true, "role": "recompute results JSON"},
+    "recompute_fclr_liq_oos001_20261121T055825Z.json": {"present": true, "non_empty": true, "role": "recompute results JSON (gate-recognized recompute_ prefixed quantitative artifact; same results as the mandate-named recompute json)"},
+    "evidence_audit_20261121T055825Z.json": {"present": true, "non_empty": true, "role": "this evidence audit (json)"},
+    "evidence_audit_20261121T055825Z.md": {"present": true, "non_empty": true, "role": "this evidence audit (markdown)"},
+    "trigger_check_20261121T055825Z.json": {"present": true, "non_empty": true, "role": "non-empty trigger check enumerating PASS/FAIL acceptance checks"}
+  },
+  "zero_byte_placeholders": false,
+  "empty_artifacts": [],
+  "panel_hash_audit": {
+    "fclr001_panel": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+    "fclr001_sha256_expected": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+    "fclr001_sha256_verified_in_scripts": true,
+    "liquidation_panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+    "liquidation_sha256_expected": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+    "liquidation_sha256_verified_in_scripts": true
+  },
+  "freeze_order_audit": {
+    "outcome_data_inspected_before_freeze": false,
+    "protocol_freeze_precedes_evaluation": true,
+    "no_holdout_outcomes_inspected_before_freeze": true
+  },
+  "recompute_concurrence": {
+    "independent_code_path": true,
+    "recompute_concurs_with_evaluation": true,
+    "evaluation_verdict": "NOT_SUPPORTED",
+    "recompute_verdict": "NOT_SUPPORTED",
+    "concurrence": true
+  },
+  "sealed_mutation_audit": {
+    "research_state_research_protocol_modified": false,
+    "research_protocol_sealed_legacy_fclr001_untouched": true,
+    "github_workflows_modified": false
+  },
+  "root_churn_audit": {
+    "root_level_md_json_added": false,
+    "all_artifacts_under_session_directory": true,
+    "root_churn_cap_500_respected": true
+  },
+  "no_rerun_audit": {
+    "fclr_starter_001_rerun": false,
+    "fclr_xsec_001_rerun": false,
+    "fclr_xsec_002_rerun": false,
+    "fclr_xsec_003_rerun": false,
+    "fclr_xsec_004_rerun": false,
+    "fclr_xsec_005_rerun": false,
+    "fclr_xsec_006_rerun": false,
+    "fclr_xsec_007_rerun": false,
+    "fclr_xsec_009_triggered": false
+  },
+  "network_paid_data_audit": {
+    "network_calls": false,
+    "paid_data": false,
+    "credentials": false,
+    "new_data_acquisition": false
+  },
+  "track_separation_audit": {
+    "observed_liquidations_only": true,
+    "no_conflation_with_modeled_boundary_breaches_track_b": true,
+    "no_conflation_with_rv_forecasts": true
+  },
+  "cross_reference_audit": {
+    "cross_references_fclr_xsec_002": true,
+    "cross_references_fclr_xsec_004": true,
+    "cross_references_fclr_xsec_005": true,
+    "cross_references_fclr_xsec_006": true,
+    "cross_references_fclr_xsec_007": true,
+    "cross_references_fclr_xsec_008": true,
+    "cross_references_fclr_liq_combined_panel": true,
+    "cross_references_track_a_combined_panel": true,
+    "cross_references_track_b_modeled_breaches": true
+  },
+  "verdict_integrity": {
+    "verdict": "NOT_SUPPORTED",
+    "qlike_gate_pass": false,
+    "brier_gate_pass": true,
+    "logloss_gate_pass": true,
+    "all_metrics_pass": false,
+    "joint_gate_passed": false,
+    "materiality_floor_relaxed_after_outcomes": false,
+    "threshold_shopping": false,
+    "honest_null_preserved": true,
+    "note": "Brier (+11.48% relative reduction) and LogLoss (+8.63%) clear all gates favoring C2, but QLIKE (continuous intensity forecast) does not (relative reduction -5.88%, CI includes zero, materiality not met). Joint gate requires ALL three metrics, so verdict is the honest null NOT_SUPPORTED. No threshold-shopping or floor relaxation after seeing outcomes."
+  },
+  "coin_universe": ["BTC", "ETH", "BNB", "SOL", "XRP"],
+  "grain": "coin-day; target = next-24h sum(notional_usd); features = last value within current 24h bucket",
+  "splits": {
+    "train": "2025-03-22 -> 2025-12-31",
+    "validation": "2026-01-01 -> 2026-03-31 (diagnostic only, no tuning)",
+    "test_blocks": ["2026-04-01..2026-05-31", "2026-06-01..2026-08-31", "2026-09-01..2026-10-31"],
+    "purge_days": 1
+  },
+  "models": {
+    "B1_RV_only": ["log(rv24h)"],
+    "C2_funding_conditioned": ["log(rv24h)", "fundingRate", "abs_fund_pct", "premium", "ema_dist"]
+  },
+  "inference": {
+    "method": "block bootstrap across the 3 chronological test blocks (2000 reps, seed 20261121)",
+    "correction": "Holm step-down over the joint 3-metric family (QLIKE, Brier, LogLoss), alpha 0.05",
+    "materiality_floor": 0.02
+  },
+  "distinct_from_terminal_campaigns": [
+    "FCLR-STARTER-001",
+    "FCLR-XSEC-001",
+    "FCLR-XSEC-002 (RV tercile regime -> next-hour RV; SUPPORTED, OOS forward confirmations all failed)",
+    "FCLR-XSEC-003 (thin holdout, folded into 004)",
+    "FCLR-XSEC-004 (count-based, RV tercile, SUPPORTED)",
+    "FCLR-XSEC-005 (notional-weighted, RV tercile, SUPPORTED)",
+    "FCLR-XSEC-006 (notional-weighted, UTC session bucket, SUPPORTED)",
+    "FCLR-XSEC-007 (cross-panel reconciliation, terminal NOT_SUPPORTED)",
+    "FCLR-XSEC-008 (alternative regime conditioning voV, terminal NOT_SUPPORTED; XSEC program terminal)",
+    "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
+    "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)",
+    "Track B modeled breaches (NOT_MET; modeled proxy, not observed liquidations)",
+    "Track A combined panel (NOT_MET)"
+  ],
+  "distinguishing_note": "This campaign forecasts OBSERVED liquidation intensity out-of-sample (funding-conditioned vs RV-only), distinct from the cross-sectional XSEC associations (terminal) and from Track B modeled boundary-breach forecasts."

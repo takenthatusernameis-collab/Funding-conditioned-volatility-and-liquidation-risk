@@ -1,0 +1,92 @@
+{
+  "campaign_id": "FCLR-LIQ-OOS-FORECAST-001-20261121T055825Z",
+  "campaign_rank": 0,
+  "status": "PREREG_FREEZE",
+  "session_utc": "20261121T055825Z",
+  "generated_utc": "2026-11-21T05:58:25Z",
+  "preregister_utc": "2026-11-21T05:58:25Z",
+  "outcome_data_inspected_before_freeze": false,
+  "freeze_before_outcomes": true,
+  "estimand": "out-of-sample forecast of next-24h observed notional-weighted liquidation intensity (sum of notional_usd per coin per 24h bucket) on the verified frozen combined liquidation panel, C2 (funding-conditioned) vs B1 (RV-only baseline)",
+  "mechanism": "out_of_sample_funding_conditioned_observed_liquidation_intensity_forecast",
+  "panels": {
+    "combined_liquidation_panel": {
+      "path": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "rows": 1740415,
+      "coins": 15,
+      "hourly_buckets": 10052,
+      "span_utc": "2025-03-22T19:00:00Z -> 2026-10-31T22:00:00Z",
+      "zero_null_features": true
+    },
+    "cross_reference_panel_fclr001": {
+      "path": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+      "sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4"
+    }
+  },
+  "coin_universe": ["BTC", "ETH", "BNB", "SOL", "XRP"],
+  "grain": "coin-day (coin, 24h bucket); target = next-24h sum(notional_usd); features = last value within the current 24h bucket (causal, pre-target)",
+  "models": {
+    "B1_RV_only": ["log(rv24h)"],
+    "C2_funding_conditioned": ["log(rv24h)", "fundingRate", "abs_fund_pct", "premium", "ema_dist"]
+  },
+  "feature_map": {
+    "rv24h": "realized volatility 24h (last in bucket)",
+    "fundingRate": "funding rate (last in bucket)",
+    "abs_fund_pct": "absolute funding pct (last in bucket)",
+    "premium": "premium (last in bucket)",
+    "ema_dist": "ema distance (last in bucket)"
+  },
+  "splits": {
+    "train": {"start": "2025-03-22T00:00:00Z", "end": "2025-12-31T00:00:00Z"},
+    "validation": {"start": "2026-01-01T00:00:00Z", "end": "2026-03-31T00:00:00Z", "note": "diagnostic only; no threshold-shopping, no holdout tuning, no model selection on validation"},
+    "test_blocks": [
+      {"start": "2026-04-01T00:00:00Z", "end": "2026-05-31T23:59:59Z"},
+      {"start": "2026-06-01T00:00:00Z", "end": "2026-08-31T23:59:59Z"},
+      {"start": "2026-09-01T00:00:00Z", "end": "2026-10-31T23:59:59Z"}
+    ],
+    "purge_days": 1,
+    "split_kind": "chronological expanding walk-forward; no random split"
+  },
+  "binary_event_rule": "event = 1 if next-24h observed intensity > train-period median intensity (median computed on train only, applied ex-ante to test); never tuned on test outcomes",
+  "metrics_family": ["QLIKE", "Brier", "LogLoss"],
+  "metric_definitions": {
+    "QLIKE": "qlike(y, yhat) = y/yhat - log(y/yhat) - 1 for y>0, yhat>0; intensity forecast via OLS of log(y) on features, yhat = exp(pred); lower is better",
+    "Brier": "mean((p - e)^2) over test observations; p = logistic-regression predicted probability of the binary event; lower is better",
+    "LogLoss": "-mean(e*log(p) + (1-e)*log(1-p)); p = logistic-regression predicted probability; lower is better"
+  },
+  "contrast": "paired C2 - B1 per test observation; improvement if C2 metric < B1 metric (diff < 0)",
+  "inference": {
+    "method": "block bootstrap across the 3 chronological test blocks (resample blocks with replacement)",
+    "n_bootstrap_reps": 2000,
+    "seed": 20261121,
+    "ci_level": 0.95,
+    "correction": "Holm step-down over the joint 3-metric family (QLIKE, Brier, LogLoss)",
+    "alpha": 0.05
+  },
+  "materiality_floor": 0.02,
+  "materiality_rule": "relative reduction (mean_B1 - mean_C2) / mean_B1 >= 0.02 for each metric; mean_abs_outcome denominator where applicable",
+  "gates_per_metric": [
+    "block-bootstrap 95% CI of mean diff entirely below zero (C2 strictly better)",
+    "Holm-adjusted p < 0.05",
+    "relative reduction >= 2.0% materiality floor"
+  ],
+  "verdict_rule": "SUPPORTED only if ALL three metrics in the joint family clear every gate; otherwise honest NOT_SUPPORTED; no threshold-shopping or floor relaxation after seeing outcomes",
+  "independent_recompute": "separate numpy/stdlib-only code path (fclr_liq_oos001_recompute_20261121T055825Z.py) reproducing the OOS evaluation; verdict must not be a single-implementation artifact",
+  "cross_references": [
+    "FCLR-XSEC-002 (funding->RV HIGH-RV SUPPORTED; OOS forward confirmations all failed)",
+    "FCLR-XSEC-004/005/006 (funding->notional-weighted liq intensity SUPPORTED cross-sectionally)",
+    "FCLR-XSEC-007 (joint cross-panel gate NOT_SUPPORTED)",
+    "FCLR-XSEC-008 (alternative regime conditioning NOT_SUPPORTED; XSEC program terminal)",
+    "FCLR-LIQ-COMBINED-PANEL (time-series 24h liq intensity NOT_MET)",
+    "Track B modeled breaches (NOT_MET); Track A combined panel (NOT_MET)"
+  ],
+  "track_separation": "this campaign forecasts OBSERVED liquidation intensity only; never conflates with Track B modeled boundary breaches or RV forecasts",
+  "constraints": [
+    "no root-level research_state md/json (root at 499/500 cap); all artifacts under research_state/session_20261121T055825Z/",
+    "no .github/workflows edits, no sealed mutation, no research_state/research_protocol.md overwrite",
+    "no empty/placeholder files, no zero-byte artifacts",
+    "both frozen panel sha256 values asserted in script headers before any computation",
+    "no network/paid data/credentials"
+  ]
+}

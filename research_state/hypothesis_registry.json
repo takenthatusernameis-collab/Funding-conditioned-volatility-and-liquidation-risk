@@ -626,14 +626,20 @@
     },
     {
       "id": "H_fclr_xsec_007",
-      "description": "Cross-panel mechanism reconciliation: does the regime-conditioned funding effect that is SUPPORTED for RV (FCLR-XSEC-002, HIGH-RV regime, next-hour RV) and for liquidation intensity (FCLR-XSEC-004/005, LOW-RV regime; FCLR-XSEC-006, ALL THREE UTC session buckets) reconcile on the SAME 5-coin FCLR-001 hours by joining the two frozen panels on coin×hour?",
+      "description": "Cross-panel mechanism reconciliation: does the regime-conditioned funding effect that is SUPPORTED for RV (FCLR-XSEC-002, HIGH-RV regime, next-hour RV) and for liquidation intensity (FCLR-XSEC-004/005, LOW-RV regime; FCLR-XSEC-006, ALL THREE UTC session buckets) reconcile on the SAME 5-coin FCLR-001 hours by joining the two frozen panels on coin\u00d7hour?",
       "estimand": "cross_panel_mechanism_reconciliation_rv_tercile_vs_utc_session_bucket",
       "experiment_id": "FCLR-XSEC-007-20261121T015418Z",
       "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
       "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
       "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
       "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "overlapping_coins": ["BTC", "ETH", "BNB", "SOL", "XRP"],
+      "overlapping_coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP"
+      ],
       "overlapping_span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
       "last_experiment": "session_20261121T021041Z",
       "last_tested": "2026-11-21T02:10:41Z",
@@ -663,14 +669,20 @@
     },
     {
       "id": "H_fclr_xsec_008",
-      "description": "Alternative regime conditioning: does the regime-conditioned funding effect that is SUPPORTED for RV (FCLR-XSEC-002, HIGH-RV regime, next-hour RV) and for liquidation intensity (FCLR-XSEC-004/005, LOW-RV regime; FCLR-XSEC-006, ALL THREE UTC session buckets) replicate under an alternative regime variable — RV168/RV24 volatility-of-volatility ratio or funding-rate-volatility buckets — instead of RV tercile or UTC session bucket, on the same frozen panels?",
+      "description": "Alternative regime conditioning: does the regime-conditioned funding effect that is SUPPORTED for RV (FCLR-XSEC-002, HIGH-RV regime, next-hour RV) and for liquidation intensity (FCLR-XSEC-004/005, LOW-RV regime; FCLR-XSEC-006, ALL THREE UTC session buckets) replicate under an alternative regime variable \u2014 RV168/RV24 volatility-of-volatility ratio or funding-rate-volatility buckets \u2014 instead of RV tercile or UTC session bucket, on the same frozen panels?",
       "estimand": "alternative_regime_conditioning_rv168_rv24_or_funding_rate_volatility",
       "experiment_id": "FCLR-XSEC-008-20261121T054721Z",
       "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
       "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
       "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
       "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "overlapping_coins": ["BTC", "ETH", "BNB", "SOL", "XRP"],
+      "overlapping_coins": [
+        "BTC",
+        "ETH",
+        "BNB",
+        "SOL",
+        "XRP"
+      ],
       "overlapping_span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
       "last_experiment": "session_20261121T054721Z",
       "last_tested": "2026-11-21T05:47:21Z",
@@ -697,8 +709,25 @@
         "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
         "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
       ],
-      "note": "FCLR-XSEC-008 COMPLETE (verdict NOT_SUPPORTED, session_20261121T054721Z). Alternative regime conditioning: Primary A passes with sign reversal vs XSEC-002; Primary B fails; joint NOT_SUPPORTED. Independent recompute concurs. XSEC alternative-regime program terminal — FCLR-XSEC-009 contingency not triggered (XSEC-008 executed cleanly, not structurally blocked). Demoted in frontier; rank 0 stays READY_EXECUTE/ACTIVE per test_active_campaign_gate.py invariant."
+      "note": "FCLR-XSEC-008 COMPLETE (verdict NOT_SUPPORTED, session_20261121T054721Z). Alternative regime conditioning: Primary A passes with sign reversal vs XSEC-002; Primary B fails; joint NOT_SUPPORTED. Independent recompute concurs. XSEC alternative-regime program terminal \u2014 FCLR-XSEC-009 contingency not triggered (XSEC-008 executed cleanly, not structurally blocked). Demoted in frontier; rank 0 stays READY_EXECUTE/ACTIVE per test_active_campaign_gate.py invariant."
+    },
+    {
+      "description": "Funding-conditioned features (abs_fund_pct rank + fundingRate + premium + ema_dist on top of rv24h) improve out-of-sample forecasting of next-24h OBSERVED notional-weighted liquidation intensity vs RV-only baseline, on the frozen combined liquidation panel.",
+      "estimand": "out_of_sample_funding_conditioned_observed_liquidation_intensity_forecast",
+      "evidence": "FCLR-LIQ-OOS-FORECAST-001-20261121T055825Z on combined liquidation panel sha256 81a100d5..., coins BTC/ETH/BNB/SOL/XRP, coin-day grain, chronological walk-forward (train 2025-03-22..2025-12-31, val 2026-01-01..2026-03-31, test blocks 2026-04-01..05-31 / 06-01..08-31 / 09-01..10-31, purge 1d). C2 vs B1 paired contrasts, block bootstrap 2000 reps seed 20261121, Holm over QLIKE/Brier/LogLoss, 2% materiality floor. QLIKE FAIL (rel -5.88%, CI incl. zero); Brier PASS (+11.48%); LogLoss PASS (+8.63%). Joint gate requires ALL three -> NOT_SUPPORTED. Independent numpy/stdlib recompute concurs NOT_SUPPORTED. Observed liquidations only (not Track B modeled breaches). XSEC cross-sectional associations terminal (FCLR-XSEC-004/005/006 SUPPORTED cross-sectionally) but no OOS forecast gate passed.",
+      "frozen_at": "2026-11-21T05:58:25Z",
+      "id": "H_liq_oos_funding_conditioned_forecast",
+      "last_experiment": "FCLR-LIQ-OOS-FORECAST-001-20261121T055825Z",
+      "last_tested": "2026-11-21T06:54:00Z",
+      "last_verdict": "OOS forecast gate NOT_SUPPORTED (QLIKE fail; Brier +11.48% PASS; LogLoss +8.63% PASS; joint requires ALL three metrics; independent recompute concurs NOT_SUPPORTED)",
+      "reopen_requires": [
+        "NEW_OBSERVED_LIQUIDATION_SOURCE"
+      ],
+      "status": "NOT_SUPPORTED",
+      "terminal": true,
+      "terminal_class": "NOT_SUPPORTED",
+      "type": "primary_tracka_observed_liquidity"
     }
   ],
-  "updated_utc": "2026-11-21T05:54:21Z"
+  "updated_utc": "2026-11-21T06:54:00Z"
 }

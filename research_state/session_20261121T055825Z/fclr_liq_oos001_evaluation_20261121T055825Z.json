@@ -1,0 +1,165 @@
+{
+  "blocks": [
+    {
+      "block": 0,
+      "start": "2026-04-01",
+      "end": "2026-05-31",
+      "cutoff": "2026-03-31",
+      "n_train": 1764,
+      "n_test": 280,
+      "models": {
+        "B1": {
+          "n_test": 280,
+          "mean_qlike": 6.15245570930545,
+          "mean_brier": 0.21944416034742578,
+          "mean_logloss": 0.6311406072349599
+        },
+        "C2": {
+          "n_test": 280,
+          "mean_qlike": 6.156741629653714,
+          "mean_brier": 0.19239637936269482,
+          "mean_logloss": 0.5704418754042392
+        }
+      },
+      "event_rate": 0.31785714285714284
+    },
+    {
+      "block": 1,
+      "start": "2026-06-01",
+      "end": "2026-08-31",
+      "cutoff": "2026-05-31",
+      "n_train": 2044,
+      "n_test": 405,
+      "models": {
+        "B1": {
+          "n_test": 405,
+          "mean_qlike": 13.69104742018202,
+          "mean_brier": 0.23597205185919307,
+          "mean_logloss": 0.6648455822786362
+        },
+        "C2": {
+          "n_test": 405,
+          "mean_qlike": 14.241221904919994,
+          "mean_brier": 0.20430998489626706,
+          "mean_logloss": 0.5986493634569006
+        }
+      },
+      "event_rate": 0.3802469135802469
+    },
+    {
+      "block": 2,
+      "start": "2026-09-01",
+      "end": "2026-10-31",
+      "cutoff": "2026-08-31",
+      "n_train": 2449,
+      "n_test": 278,
+      "models": {
+        "B1": {
+          "n_test": 278,
+          "mean_qlike": 12.510070484376834,
+          "mean_brier": 0.23804190325235677,
+          "mean_logloss": 0.6690670824130499
+        },
+        "C2": {
+          "n_test": 278,
+          "mean_qlike": 13.979061849518674,
+          "mean_brier": 0.21911185087138335,
+          "mean_logloss": 0.6300989498195516
+        }
+      },
+      "event_rate": 0.38848920863309355
+    }
+  ],
+  "metrics": {},
+  "verdict": "NOT_SUPPORTED",
+  "metric_summary": {
+    "QLIKE": {
+      "metric": "QLIKE",
+      "n_test_obs": 963,
+      "mean_b1": 11.15821536701558,
+      "mean_c2": 11.814913522286426,
+      "mean_diff_c2_minus_b1": 0.6566981552708464,
+      "ci_low": 0.6566981552708464,
+      "ci_high": 0.6566981552708464,
+      "ci_excludes_zero_c2_better": false,
+      "p_value": 0.0,
+      "relative_reduction_pct": -5.885333215668955,
+      "relative_reduction": -0.058853332156689545,
+      "materiality_floor_met": false,
+      "improves": false,
+      "holm_passes": true,
+      "gate_pass": false,
+      "holm_adj_p": 0.0
+    },
+    "Brier": {
+      "metric": "Brier",
+      "n_test_obs": 963,
+      "mean_b1": 0.23176396158297782,
+      "mean_c2": 0.20511902870902107,
+      "mean_diff_c2_minus_b1": -0.02664493287395671,
+      "ci_low": -0.0266449328739566,
+      "ci_high": -0.0266449328739566,
+      "ci_excludes_zero_c2_better": true,
+      "p_value": 0.0,
+      "relative_reduction_pct": 11.496581561675255,
+      "relative_reduction": 0.11496581561675255,
+      "materiality_floor_met": true,
+      "improves": true,
+      "holm_passes": true,
+      "gate_pass": true,
+      "holm_adj_p": 0.0
+    },
+    "LogLoss": {
+      "metric": "LogLoss",
+      "n_test_obs": 963,
+      "mean_b1": 0.6562642572787792,
+      "mean_c2": 0.5995267137726553,
+      "mean_diff_c2_minus_b1": -0.05673754350612388,
+      "ci_low": -0.05673754350612374,
+      "ci_high": -0.05673754350612374,
+      "ci_excludes_zero_c2_better": true,
+      "p_value": 0.0,
+      "relative_reduction_pct": 8.645533087751565,
+      "relative_reduction": 0.08645533087751565,
+      "materiality_floor_met": true,
+      "improves": true,
+      "holm_passes": true,
+      "gate_pass": true,
+      "holm_adj_p": 0.0
+    }
+  },
+  "gate_results": [
+    {
+      "metric": "QLIKE",
+      "gate_pass": false,
+      "ci_excludes_zero_c2_better": false,
+      "holm_passes": true,
+      "materiality_floor_met": false,
+      "relative_reduction": -0.058853332156689545
+    },
+    {
+      "metric": "Brier",
+      "gate_pass": true,
+      "ci_excludes_zero_c2_better": true,
+      "holm_passes": true,
+      "materiality_floor_met": true,
+      "relative_reduction": 0.11496581561675255
+    },
+    {
+      "metric": "LogLoss",
+      "gate_pass": true,
+      "ci_excludes_zero_c2_better": true,
+      "holm_passes": true,
+      "materiality_floor_met": true,
+      "relative_reduction": 0.08645533087751565
+    }
+  ],
+  "all_metrics_pass": false,
+  "seed": 20261121,
+  "n_bootstrap": 2000,
+  "materiality_floor": 0.02,
+  "panel_sha256_liquidation": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "panel_sha256_fclr001": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+  "outcome_data_inspected_before_freeze": false,
+  "track": "observed_liquidation_intensity_only_not_modeled_breaches"
+}
