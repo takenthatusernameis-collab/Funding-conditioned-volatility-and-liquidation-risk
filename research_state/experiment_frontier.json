@@ -1,14 +1,74 @@
 [
   {
     "rank": 0,
-    "status": "COMPLETE",
-    "program_status": "COMPLETE",
+    "status": "READY_EXECUTE",
+    "program_status": "ACTIVE",
+    "task": "FCLR-LIQ-CONTAGION-001-20261121T174500Z",
+    "generated": "20261121T174500Z",
+    "refreshed": "2026-11-21T17:45:00Z",
+    "last_checked": "2026-11-21T17:45:00Z",
+    "last_verdict": null,
+    "next_action_heavy": "Execute FCLR-LIQ-CONTAGION-001: cross-coin liquidation contagion and funding-mediated spillover analysis on the 1.74M event panel. This is HEAVY computation: hourly aggregation, 15x15 lead-lag matrix, Granger causality for 210 directed pairs, permutation tests (1000+), funding-conditioned analysis, temporal stability. Do NOT verify and stop. Do NOT claim completion without emitting the full artifact set.",
+    "next_unfinished_task": "FCLR-LIQ-CONTAGION-001-20261121T174500Z: prereg freeze, evaluation, independent recompute, evidence audit, gate-critical evidence audit, trigger check. All under research_state/session_<UTC>/ with UTC > 20261121T174500Z.",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None. The 1.74M liquidation panel has rich data (fundingRate, premium, mark, ema_dist, rv24h, rv168h, notional_usd, side) and 15 coins. No external trigger required. This campaign uses the existing frozen panel.",
+    "evidence": {
+      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "panel_liquidation_shape": "1740415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC",
+      "coins": [
+        "AAVE",
+        "ADA",
+        "AVAX",
+        "BNB",
+        "BTC",
+        "CRV",
+        "DOGE",
+        "ETH",
+        "LINK",
+        "LTC",
+        "NEAR",
+        "SOL",
+        "SUI",
+        "UNI",
+        "XRP"
+      ],
+      "sources": {
+        "ironflow": 1555142,
+        "metpie": 185273
+      },
+      "frontier_status": "FCLR-LIQ-CONTAGION-001 rank-0 ACTIVE (cross-coin contagion + funding spillover analysis)"
+    },
+    "phases": [
+      {
+        "phase": "PREREG_FREEZE",
+        "status": "PENDING",
+        "claim": "Outcome-blind freeze BEFORE any contagion statistics. Hypotheses: H_contagion_liq (liquidation in A predicts B at lag k), H_contagion_funding (funding differential modulates contagion). Network: directed edges = Granger causality. Permutation test: 1000+. Funding conditioning: tercile split. 2% materiality floor. Panel sha256 asserted."
+      },
+      {
+        "phase": "CONTAGION_EVAL",
+        "status": "PENDING",
+        "claim": "Execute frozen protocol on 1.74M panel: hourly aggregation, 15x15 lead-lag matrix, Granger causality for 210 directed pairs, permutation tests, funding-conditioned analysis, temporal stability. HEAVY computation."
+      },
+      {
+        "phase": "RECOMPUTE_AUDIT",
+        "status": "PENDING",
+        "claim": "Independent stdlib/numpy recompute. Evidence audit. Non-empty trigger_check."
+      }
+    ],
+    "note": "Cross-coin liquidation contagion and funding-mediated spillover analysis. This is the highest-value unexplored research direction on the 1.74M event panel. Requires HEAVY computation (network analysis, Granger causality, permutation tests)."
+  },
+  {
+    "rank": 1,
+    "status": "SUPERSEDED",
+    "program_status": "SUPERSEDED",
     "task": "FCLR-PANEL-FE-001-20261121T085602Z",
     "generated": "20261121T085602Z",
     "refreshed": "2026-11-21T16:32:18Z",
     "last_checked": "2026-11-21T16:32:18Z",
     "last_verdict": "NOT_SUPPORTED",
-    "next_action_heavy": "NONE — all heavy work complete. FCLR-PANEL-FE-001 executed to COMPLETE / ALL PHASES COMPLETE under research_state/session_20261121T130159Z/ (verdict NOT_SUPPORTED on both halves; gate reason=OK; 79 tests OK). Next session: verify green state (`python3 scripts/check_handoff_heavywork_gate.py` → reason=OK; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass; `python3 scripts/next_campaign_status.py` → NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN) and STOP CLEANLY. No remaining heavy work on frozen data; reopen only on NEW_OBSERVED_LIQUIDATION_SOURCE or a materially different new free observed-liquidation source.",
+    "next_action_heavy": "NONE \u2014 all heavy work complete. FCLR-PANEL-FE-001 executed to COMPLETE / ALL PHASES COMPLETE under research_state/session_20261121T130159Z/ (verdict NOT_SUPPORTED on both halves; gate reason=OK; 79 tests OK). Next session: verify green state (`python3 scripts/check_handoff_heavywork_gate.py` \u2192 reason=OK; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` \u2192 79 pass; `python3 scripts/next_campaign_status.py` \u2192 NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN) and STOP CLEANLY. No remaining heavy work on frozen data; reopen only on NEW_OBSERVED_LIQUIDATION_SOURCE or a materially different new free observed-liquidation source.",
     "next_unfinished_task": "None. FCLR-PANEL-FE-001 all phases COMPLETE under session_20261121T130159Z (prereg + eval + recompute + evidence audit + trigger_check all emitted). No further heavy task on frozen data; the frozen-data frontier is exhausted for new 3-block confirmatory designs (NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN).",
     "resume_triggers": [],
     "trigger_status": {},
@@ -44,10 +104,10 @@
         "claim": "Independent stdlib/numpy recompute concurs; evidence audit emitted; non-empty trigger_check emitted under session_20261121T130159Z/."
       }
     ],
-    "note": "Panel fixed-effects funding-conditioning campaign. Replaces the trigger-gated liquidation-OOS dead end and the exhausted 3-block confirmatory frontier as the rank-0 heavy task. Machine-enforced by the FCLR-PANEL-FE-001 gate family."
+    "note": "Superseded by FCLR-LIQ-CONTAGION-001-20261121T174500Z (cross-coin liquidation contagion analysis on 1.74M event panel). This panel-FE campaign is terminal."
   },
   {
-    "rank": 1,
+    "rank": 2,
     "status": "SUPERSEDED",
     "program_status": "ACTIVE",
     "task": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
@@ -245,7 +305,7 @@
     "superseded_by": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z"
   },
   {
-    "rank": 1,
+    "rank": 4,
     "status": "SUPERSEDED",
     "program_status": "SUPERSEDED",
     "task": "FCLR-XSEC-007-20261121T021041Z",
@@ -339,7 +399,7 @@
     "note": "FCLR-XSEC-007 COMPLETE (verdict NOT_SUPPORTED, session_20261121T021041Z). Honest null: Primary A high-RV tercile funding -> next-hour RV CI [-0.0004, 2.005] includes zero (p=0.272, Holm adj_p=0.816); joint gate requires BOTH primaries and Primary A fails. Independent recompute concurs NOT_SUPPORTED. All 20 trigger checks PASS. Demoted in frontier; succeeded by FCLR-XSEC-008 as rank-0 active heavy campaign per contingency ladder step 1 (alternative regime conditioning)."
   },
   {
-    "rank": 2,
+    "rank": 5,
     "status": "SUPERSEDED",
     "program_status": "SUPERSEDED",
     "task": "FCLR-XSEC-006-20261121T010934Z",
@@ -426,7 +486,7 @@
     "note": "FCLR-XSEC-006 COMPLETE (verdict SUPPORTED, session_20261121T010934Z). UTC-session-bucketed (Asian/European/US) regime-conditioned notional-weighted liquidation-intensity confirmation. All three buckets SUPPORTED: Asian CI [162051, 521424], European CI [334550, 782272], US CI [94750, 698082]; all p<=0.013, Holm adj_p<=0.013, materiality 0.26-0.57. Independent recompute reproduces. Cross-reference: FCLR-XSEC-004 low-RV count-based CI [448605, 841156] and FCLR-XSEC-005 low-RV notional-weighted CI [452973, 850199] both SUPPORTED; divergence: session-bucketed effect appears in ALL THREE buckets, not confined to low-RV regime. Demoted in frontier; succeeded by FCLR-XSEC-007 as rank-0 active heavy campaign."
   },
   {
-    "rank": 2,
+    "rank": 6,
     "status": "SUPERSEDED",
     "program_status": "SUPERSEDED",
     "task": "FCLR-XSEC-005-20261121T001225Z",

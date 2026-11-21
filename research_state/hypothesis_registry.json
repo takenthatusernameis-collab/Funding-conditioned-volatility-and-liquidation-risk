@@ -1,6 +1,28 @@
 {
   "hypotheses": [
     {
+      "id": "H_contagion_liq",
+      "type": "primary_contagion",
+      "description": "Liquidation intensity in coin A at time t predicts liquidation intensity in coin B at time t+k (k=1..24 hours), after controlling for coin B's own past liquidations and market-wide liquidation activity.",
+      "test_method": "Granger causality on hourly aggregated liquidation counts. 15x15 directed graph. Permutation test (1000+) for edge significance.",
+      "status": "NOT_STARTED",
+      "terminal": false,
+      "evidence": "PENDING: FCLR-LIQ-CONTAGION-001 campaign will test this hypothesis on the 1.74M liquidation event panel.",
+      "reopen_requires": [],
+      "next_test": "FCLR-LIQ-CONTAGION-001-20261121T174500Z"
+    },
+    {
+      "id": "H_contagion_funding",
+      "type": "primary_contagion_funding",
+      "description": "Funding rate differential between coins modulates contagion strength. When funding(A) > funding(B) + threshold, liquidations in A more strongly predict liquidations in B (funding-mediated spillover).",
+      "test_method": "Funding-tercile split and interaction terms. Recompute contagion network within each funding differential tercile.",
+      "status": "NOT_STARTED",
+      "terminal": false,
+      "evidence": "PENDING: FCLR-LIQ-CONTAGION-001 campaign will test this hypothesis on the 1.74M liquidation event panel with funding conditioning.",
+      "reopen_requires": [],
+      "next_test": "FCLR-LIQ-CONTAGION-001-20261121T174500Z"
+    },
+    {
       "description": "Funding extremes + RV + price dislocation improve OOS forecast of future RV/stress vs RV-only baseline",
       "evidence": "FCLR-014 confirmatory on 2025 H1 panel: C2 vs B1 rel QLIKE reduction 1.14% (<2% floor), CI crosses zero. FCLR-011: sealed gate PASS (4.94%, CI excludes zero, 5 instruments, 3 blocks, 2026-05..2026-08). Forward confirmation FCLR-FWD-VOL-011-CONFIRM: NOT_REPLICATED (pooled C2 vs B1 mean diff +0.026760, CI [0.000343,0.064822] favouring B1, rel -5.55%, n=10200, 85 days; repro_011_pass=True at delta 0.044pp). Pre-registered forward confirmation failed; H1_primary NOT_SUPPORTED on the forward window. FCLR-011 PASS remains sealed and unrefuted but does not generalize.",
       "frozen_at": "2026-11-06T20:36:32Z",
