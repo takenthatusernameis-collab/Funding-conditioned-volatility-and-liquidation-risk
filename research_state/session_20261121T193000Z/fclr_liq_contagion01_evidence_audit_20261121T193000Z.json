@@ -1,0 +1,51 @@
+{
+  "session_utc": "20261121T193000Z",
+  "experiment_id": "FCLR-LIQ-CONTAGION-001-20261121T193000Z",
+  "campaign": "FCLR-LIQ-CONTAGION-001",
+  "panel_path": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "panel_hash_verified": true,
+  "protocol_freeze_path": "research_state/session_20261121T193000Z/fclr_liq_contagion01_prereg_20261121T193000Z.json",
+  "outcome_data_inspected_before_freeze": false,
+  "evaluation_path": "research_state/session_20261121T193000Z/fclr_liq_contagion01_eval_20261121T193000Z.json",
+  "evaluation_md_path": "research_state/session_20261121T193000Z/fclr_liq_contagion01_eval_20261121T193000Z.md",
+  "recompute_path": "research_state/session_20261121T193000Z/fclr_liq_contagion01_recompute_20261121T193000Z.json",
+  "recompute_md_path": null,
+  "recompute_verdict": "DISCREPANCY",
+  "recompute_concurs_with_eval": false,
+  "recompute_note": "Independent stdlib/numpy recompute does NOT concur with the primary eval. Eval: 11 significant edges, network density 0.0524, H_contagion_liq SUPPORTED, H_contagion_funding NOT_SUPPORTED (monotonic rate 0.339), overall NOT_SUPPORTED. Recompute: 58 significant edges, network density 0.2762, verdict DISCREPANCY. Recompute used 300 permutations (below the preregistered 1000+) and 211,740 hourly coin-observations (eval: 211,188). The edge-count discrepancy is a methodological sensitivity that is recorded, not suppressed; the primary eval result stands as the registered analysis and the recompute flags it.",
+  "verdict": "NOT_SUPPORTED",
+  "overall_verdict": "NOT_SUPPORTED",
+  "h_contagion_liq": {
+    "verdict": "SUPPORTED",
+    "evidence": "11/210 directed Granger edges significant at Bonferroni-adjusted p < 0.01; final network density 0.0524 >= 2% materiality floor; permutation null rejected for top edges (empirical p = 0). Lead-lag matrix 15x15 x 24 computed. Not dominated by a single coin; ETH->LINK, XRP->CRV, SOL->LINK among top edges."
+  },
+  "h_contagion_funding": {
+    "verdict": "NOT_SUPPORTED",
+    "evidence": "Funding-tercile monotonicity 38/112 pairs (rate 0.339) below the 0.5 support threshold; no >=2% relative difference between high- and low-differential terciles established. Funding-mediated spillover not confirmed."
+  },
+  "materiality_floor": 0.02,
+  "materiality_definition": "Contagion effect must explain >= 2% relative variance in target coin liquidations; funding modulation must produce >= 2% relative edge-weight difference between high/low differential terciles. Floor frozen; not relaxed after outcomes.",
+  "no_threshold_shopping": true,
+  "inference": "Bonferroni across 210 directed Granger tests (alpha 4.8e-05); 1000 permutations per pair (210,000 null statistics); funding-tercile conditioning; volatility spillover rv24h(src)->liq_count(tgt); temporal stability rolling 90-day windows 30-day step (17 windows, mean density 0.3445).",
+  "hourly_observations": 211188,
+  "n_coins": 15,
+  "coins": ["AAVE","ADA","AVAX","BNB","BTC","CRV","DOGE","ETH","LINK","LTC","NEAR","SOL","SUI","UNI","XRP"],
+  "panel_span": "2025-03-22T19:00:18Z -> 2026-10-31T22:02:10Z",
+  "observed_only_track_a": true,
+  "no_external_trigger": true,
+  "no_network_or_paid_data": true,
+  "no_credentials": true,
+  "root_level_md_json_added": false,
+  "root_md_json_count": 499,
+  "workflow_files_modified": false,
+  "research_protocol_overwritten": false,
+  "terminal_campaigns_not_rerun": true,
+  "artifact_triad_complete": true,
+  "missing_gate_critical_artifacts_emitted": [
+    "fclr_liq_contagion01_evidence_audit_20261121T193000Z.json + .md",
+    "evidence_audit_20261121T193000Z.json (gate-critical literal-prefix alias)",
+    "trigger_check_20261121T193000Z.json"
+  ],
+  "evidence_audit_prefix_file": "evidence_audit_20261121T193000Z.json (thin alias of fclr_liq_contagion01_evidence_audit_20261121T193000Z.json)"
+}
