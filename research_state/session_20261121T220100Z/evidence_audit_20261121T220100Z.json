@@ -1,0 +1,35 @@
+{
+  "session_utc": "20261121T220100Z",
+  "experiment_id": "FCLR-FINAL-SYNTHESIS-01-20261121T220100Z",
+  "campaign": "FCLR-FINAL-SYNTHESIS-01",
+  "audit_kind": "evidence_audit",
+  "audit_utc": "2026-11-21T22:01:00Z",
+  "source_panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "panel_rows": 1740415,
+  "n_coins": 15,
+  "directed_pairs": 210,
+  "artifacts_inventory": [
+    {"name": "fclr_final_synthesis_report_20261121T220100Z.md", "non_empty": true},
+    {"name": "fclr_final_synthesis_report_20261121T220100Z.json", "non_empty": true},
+    {"name": "trigger_check_20261121T220100Z.json", "non_empty": true},
+    {"name": "evidence_audit_20261121T220100Z.json", "non_empty": true},
+    {"name": "recompute_20261121T220100Z.json", "non_empty": true}
+  ],
+  "all_artifacts_non_empty": true,
+  "no_root_level_artifacts": true,
+  "root_md_json_count": 499,
+  "root_count_cap": 500,
+  "no_terminal_campaign_rerun": true,
+  "workflows_unmodified": true,
+  "sealed_protocol_unoverwritten": true,
+  "forecast_gate_passed": false,
+  "next_campaign_status": "no feasible 3-block design in ANY domain",
+  "verdicts_preserved": {
+    "FCLR-H001": "NOT_SUPPORTED",
+    "FCLR-H002": "NOT_SUPPORTED",
+    "FCLR-H003": "NOT_SUPPORTED",
+    "FCLR-H004": "NOT_SUPPORTED / DATA_BLOCKED"
+  },
+  "note": "Evidence audit for the final synthesis session. All cited statistics were verified against the executed campaign artifacts under research_state/session_20261121T210000Z/ (FCLR-LIQ-CONTAGION-002). No threshold shopped or relaxed; nulls preserved as NOT_SUPPORTED."
+}

@@ -1,0 +1,13 @@
+{
+  "session_utc": "20261121T220100Z",
+  "experiment_id": "FCLR-FINAL-SYNTHESIS-01-20261121T220100Z",
+  "campaign": "FCLR-FINAL-SYNTHESIS-01",
+  "trigger_check_utc": "2026-11-21T22:01:00Z",
+  "required": false,
+  "reason": "FCLR-FINAL-SYNTHESIS-01 requires no external trigger. It operates solely on the existing frozen data artifacts already on disk (the combined liquidation panel, the frozen preregs, and all executed campaign evaluation artifacts). No NEW_OBSERVED_LIQUIDATION_SOURCE, no paid data, no credentials, no network access, and no human approval are needed. The heavy work of this session (authoring the full final synthesis report manifest and non-empty artifacts) is fully executable on frozen data.",
+  "trigger_present": false,
+  "trigger_required": false,
+  "gate_can_proceed_without_trigger": true,
+  "next_campaign_status": "no feasible 3-block design in ANY domain",
+  "frozen_data_frontier": "EXHAUSTED"
+}

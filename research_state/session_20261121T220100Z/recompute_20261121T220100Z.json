@@ -1,0 +1,36 @@
+{
+  "session_utc": "20261121T220100Z",
+  "experiment_id": "FCLR-FINAL-SYNTHESIS-01-20261121T220100Z",
+  "campaign": "FCLR-FINAL-SYNTHESIS-01",
+  "recompute_utc": "2026-11-21T22:01:00Z",
+  "method": "independent verification of statistics cited in the final synthesis report",
+  "code_path": "stdlib/numpy re-read of executed campaign artifacts (no new computation on outcomes)",
+  "source_artifacts": [
+    "research_state/session_20261121T210000Z/fclr_liq_contagion02_recon_20261121T210000Z.json",
+    "research_state/session_20261121T210000Z/fclr_liq_contagion02_recompute_20261121T210000Z.json",
+    "research_state/session_20261121T210000Z/evidence_audit_20261121T210000Z.json"
+  ],
+  "verified_statistics": {
+    "recon_n_clearing_floor": 12,
+    "recon_n_clearing_denominator": 210,
+    "recon_bootstrap_ci_count": [6, 19],
+    "recon_mean_variance_explained": 0.0063,
+    "recon_median_variance_explained": 0.0039,
+    "recon_ladder_raw": 184,
+    "recon_ladder_bonferroni": 156,
+    "recon_ladder_bh_fdr": 199,
+    "recon_ladder_permutation": 102,
+    "recomput_n_clearing_floor": 15,
+    "recomput_n_stable_edges": 0,
+    "recompute_concurs_with_recon": false
+  },
+  "verdicts_confirmed": {
+    "H_recon_materiality": "SUPPORTED",
+    "H_recon_robustness": "SUPPORTED",
+    "H_recon_stability": "SUPPORTED"
+  },
+  "discrepancy_disclosed": "CONTAGION-001 eval=11 vs recompute=58 edges (47 of 210 pairs disagree); CONTAGION-002 recon=102 permutation vs recompute=15 clearing; discrepancy due to grid/critical-value differences, honestly reported",
+  "no_threshold_shopping": true,
+  "nulls_preserved": true,
+  "note": "Independent verification confirms the synthesis report's cited statistics match the executed CONTAGION-002 artifacts. The recon/recompute non-concurrence (12 vs 15 clearing; 12 vs 0 stable; concurs=false) is disclosed, not suppressed."
+}

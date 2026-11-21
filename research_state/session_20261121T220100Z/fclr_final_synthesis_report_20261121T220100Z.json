@@ -1,0 +1,45 @@
+{
+  "session_utc": "20261121T220100Z",
+  "experiment_id": "FCLR-FINAL-SYNTHESIS-01-20261121T220100Z",
+  "campaign": "FCLR-FINAL-SYNTHESIS-01",
+  "report_kind": "final_synthesis_report",
+  "report_utc": "2026-11-21T22:01:00Z",
+  "repository": "Funding-conditioned-volatility-and-liquidation-risk",
+  "status": "COMPLETE",
+  "sole_remaining_deliverable": true,
+  "frozen_data_frontier": "EXHAUSTED",
+  "forecast_gate_passed": false,
+  "forecast_gate_note": "No primary volatility or liquidation target passed the RESEARCH_PROMPT.md §9 forecast gate; no risk overlay was or could be evaluated.",
+  "artifacts": [
+    "fclr_final_synthesis_report_20261121T220100Z.md",
+    "fclr_final_synthesis_report_20261121T220100Z.json",
+    "trigger_check_20261121T220100Z.json"
+  ],
+  "session_directory": "research_state/session_20261121T220100Z/",
+  "root_md_json_count": 499,
+  "root_count_cap": 500,
+  "no_root_level_artifacts": true,
+  "no_empty_placeholders": true,
+  "no_terminal_campaign_rerun": true,
+  "workflows_unmodified": true,
+  "sealed_protocol_unoverwritten": true,
+  "terminal_verdicts": {
+    "FCLR-H001_incremental_24h_volatility_forecasting": "NOT_SUPPORTED",
+    "FCLR-H002_funding_extreme_correction_time_replication": "NOT_SUPPORTED",
+    "FCLR-H003_hypothetical_boundary_breach_forecast": "NOT_SUPPORTED",
+    "FCLR-H004_observed_liquidation_outcomes": "NOT_SUPPORTED / DATA_BLOCKED"
+  },
+  "data_domains_exhausted": [
+    "Binance 5-symbol cache",
+    "Hyperliquid ironflow bulk (candles+funding+OI+observed liq)",
+    "Hyperliquid extended (candles+funding+observed-liq events)",
+    "Combined liquidation panel (1.74M event rows, 15 coins, 210 directed pairs)"
+  ],
+  "next_campaign_status": "no feasible 3-block design in ANY domain",
+  "gate_commands": [
+    "python3 scripts/check_handoff_heavywork_gate.py",
+    "python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144",
+    "python3 scripts/next_campaign_status.py"
+  ],
+  "final_record": "If no future session occurs, this handoff stands as the final record. All evidence preserved. No gate passed. No overlay evaluated. The null results are the result."
+}
