@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T17:40:00Z (supersedes the 2026-11-21T17:45:00Z handoff; that handoff *announced* FCLR-LIQ-CONTAGION-001 and *claimed* it was "machine-enforced by the gate", but the gate had **no** contagion check — a future session could ignore the campaign and still pass. This handoff removes that avoidance path: the gate now enforces the contagion artifact set. This is the SINGLE durable handoff.)
+**Timestamp:** 2026-11-21T18:35:29Z (supersedes the 2026-11-21T17:45:00Z handoff; that handoff *announced* FCLR-LIQ-CONTAGION-001 and *claimed* it was "machine-enforced by the gate", but the gate had **no** contagion check — a future session could ignore the campaign and still pass. This handoff removes that avoidance path: the gate now enforces the contagion artifact set. This is the SINGLE durable handoff.)
 **Sole active campaign:** FCLR-LIQ-CONTAGION-001-20261121T174500Z (rank-0, READY_EXECUTE — cross-coin liquidation contagion and funding-mediated spillover analysis on the 1.74M event panel)
 **Latest completed session on disk:** session_20261121T130159Z — FCLR-PANEL-FE-001 EVAL PHASE COMPLETE (verdict NOT_SUPPORTED on both halves; terminal, must NOT be re-run)
 **Remaining heavy work:** MASSIVE and now UN-AVOIDABLE. The 1.74M liquidation event panel (15 coins, 2025-03-22..2026-10-31) has NEVER been analyzed for cross-coin contagion, lead-lag dynamics, funding-mediated spillovers, or network structure. This is the highest-value unexplored research direction in the repository and the gate now fails closed until it is executed.
@@ -13,7 +13,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T17:40:00Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T18:35:29Z)
 
 **MASSIVE HEAVY WORK REMAINS AND CAN NO LONGER BE SKIPPED. The previous handoff claimed the contagion campaign was gate-enforced; it was not. It now is.**
 
