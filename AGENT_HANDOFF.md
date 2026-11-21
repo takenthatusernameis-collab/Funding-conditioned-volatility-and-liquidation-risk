@@ -1,7 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T13:03:55Z (refreshes the 2026-11-21T12:58:03Z handoff; the prereg freeze at session_20261121T130159Z is now complete and this handoff records it)
-**Sole active campaign:** FCLR-PANEL-FE-001-20261121T085602Z (rank-0, READY_EXECUTE/ACTIVE) — the panel fixed-effects funding-conditioning study of realized volatility and liquidation intensity with walk-forward OOS
+**Timestamp:** 2026-11-21T13:07:02Z (refreshes the 2026-11-21T13:03:55Z handoff; prereg freeze at session_20261121T130159Z complete; eval triad + recompute + evidence audit + trigger check remain the single non-avoidable heavy-work deliverable)**Sole active campaign:** FCLR-PANEL-FE-001-20261121T085602Z (rank-0, READY_EXECUTE/ACTIVE) — the panel fixed-effects funding-conditioning study of realized volatility and liquidation intensity with walk-forward OOS
 **Latest completed session on disk:** session_20261121T130159Z — FCLR-PANEL-FE-001 PREREG_FREEZE phase COMPLETE. `fclr_panelfe01_prereg_20261121T130159Z.json` + `.md` emitted under `research_state/session_20261121T130159Z/`; `outcome_data_inspected_before_freeze=false`; both frozen panel sha256 asserted (`41962f82…` FCLR-001, `81a100d5…` combined liquidation); no RV/liquidation outcome statistics inspected before freeze.
 **Remaining heavy work (all under a session dir with UTC > 20261121T085602Z — use session_20261121T130159Z or a newer UTC):** `fclr_panelfe01_eval_<UTC>.{py,json,md}` (two-way FE estimation + walk-forward, both halves), `fclr_panelfe01_recompute_<UTC>.{py,json}` (independent stdlib/numpy recompute that concurs), `fclr_panelfe01_evidence_audit_<UTC>.{json,md}` (evidence audit tying each verdict to its artifacts), `trigger_check_<UTC>.json` (non-empty; records no external trigger is required). The gate currently FAILS because `session_20261121T130159Z` is the latest disk session but only carries the prereg — the PANEL_FE_REQUIRED artifact set is incomplete. This is the bottleneck to clear.
 
@@ -15,7 +14,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T13:03:55Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T13:07:02Z)
 
 **Complete FCLR-PANEL-FE-001 — the panel fixed-effects study of whether the funding rate conditions (a) realized volatility and (b) liquidation intensity, with walk-forward out-of-sample evaluation. The prereg freeze is ALREADY COMPLETE (session_20261121T130159Z, outcome-blind, before any outcomes). Do not re-freeze.**
 
