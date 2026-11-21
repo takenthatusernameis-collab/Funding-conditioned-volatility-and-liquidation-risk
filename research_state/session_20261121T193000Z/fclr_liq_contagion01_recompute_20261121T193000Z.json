@@ -1,0 +1,89 @@
+{
+  "session_utc": "20261121T193000Z",
+  "experiment_id": "FCLR-LIQ-CONTAGION-001-20261121T193000Z",
+  "campaign": "FCLR-LIQ-CONTAGION-001",
+  "method": "independent stdlib/numpy recompute (separate code path from eval)",
+  "panel_path": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+  "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+  "panel_rows": 1740415,
+  "n_coins": 15,
+  "n_pairs": 210,
+  "lags": 24,
+  "granger_p": 6,
+  "n_permutations": 300,
+  "alpha_bonferroni": 4.761904761904762e-05,
+  "materiality_floor": 0.02,
+  "seed": 20261121,
+  "hourly_observations": 211740,
+  "n_edges": 58,
+  "network_density": 0.2761904761904762,
+  "eval_edges": 11,
+  "eval_density": 0.05238095238095238,
+  "recompute_concurs_with_eval": false,
+  "top_edges": [
+    {
+      "src": "ETH",
+      "tgt": "LINK",
+      "granger_f": 105.09100923953923,
+      "empirical_p": 0.0
+    },
+    {
+      "src": "XRP",
+      "tgt": "CRV",
+      "granger_f": 72.74053198087134,
+      "empirical_p": 0.0
+    },
+    {
+      "src": "SOL",
+      "tgt": "LINK",
+      "granger_f": 61.35679405781795,
+      "empirical_p": 0.0
+    },
+    {
+      "src": "XRP",
+      "tgt": "LINK",
+      "granger_f": 59.82681694675465,
+      "empirical_p": 0.0
+    },
+    {
+      "src": "ETH",
+      "tgt": "LTC",
+      "granger_f": 55.985532576146916,
+      "empirical_p": 0.0
+    },
+    {
+      "src": "ETH",
+      "tgt": "SUI",
+      "granger_f": 54.74372677801529,
+      "empirical_p": 0.0
+    },
+    {
+      "src": "ETH",
+      "tgt": "AAVE",
+      "granger_f": 52.245488812679426,
+      "empirical_p": 0.0
+    },
+    {
+      "src": "ETH",
+      "tgt": "ADA",
+      "granger_f": 50.80907150171537,
+      "empirical_p": 0.0
+    },
+    {
+      "src": "XRP",
+      "tgt": "SUI",
+      "granger_f": 50.506260237885236,
+      "empirical_p": 0.0
+    },
+    {
+      "src": "SOL",
+      "tgt": "CRV",
+      "granger_f": 45.22301542235241,
+      "empirical_p": 0.0
+    }
+  ],
+  "verdict": "DISCREPANCY",
+  "no_network": true,
+  "no_paid_data": true,
+  "no_credentials": true
+}

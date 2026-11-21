@@ -1,0 +1,104 @@
+{
+  "experiment_id": "FCLR-LIQ-CONTAGION-001-20261121T193000Z",
+  "campaign": "FCLR-LIQ-CONTAGION-001",
+  "session": "session_20261121T193000Z",
+  "generated_utc": "2026-11-21T19:30:00Z",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "outcome_data_inspected_before_freeze_note": "This prereg was frozen before any contagion, lead-lag, Granger, permutation, funding-tercile, or temporal-stability statistic was computed. The only prior inspection was metadata/coverage (row counts, null fractions, timestamp ranges, per-coin event counts, panel sha256) required to make the design executable. No target distribution, edge weight, causality p-value, or network metric was observed.",
+  "repository": "Funding-conditioned-volatility-and-liquidation-risk",
+  "repository_name_priority": "The repository is named Funding-conditioned-volatility-and-liquidation-risk, which mandates three pillars: funding-conditioned, volatility, liquidation risk. No campaign to date has joined all three. FCLR-LIQ-CONTAGION-001 is the first: it tests whether liquidations in coin A predict liquidations in coin B (liquidation risk), whether funding rate differentials between coins modulate that cross-coin prediction (funding-conditioned), and whether realized volatility in one coin predicts liquidations in another (volatility).",
+  "frozen_inputs": {
+    "combined_liquidation_panel": {
+      "path": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+      "sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+      "rows": 1740415,
+      "n_coins": 15,
+      "coins": ["AAVE", "ADA", "AVAX", "BNB", "BTC", "CRV", "DOGE", "ETH", "LINK", "LTC", "NEAR", "SOL", "SUI", "UNI", "XRP"],
+      "from": "2025-03-22T19:00:18Z",
+      "to": "2026-10-31T22:02:10Z",
+      "sources": {"ironflow": 1555142, "metpie": 185273},
+      "label_kind": "observed_liquidation_events_Track_A",
+      "columns": ["timestamp", "coin", "notional_usd", "side", "source", "tx_hash", "fundingRate", "premium", "abs_fund_pct", "mark", "ema_dist", "rv24h", "rv168h"],
+      "null_notes": "fundingRate, abs_fund_pct, notional_usd, rv24h, rv168h are non-null on all 1,740,415 rows. premium is present but not required by this protocol."
+    }
+  },
+  "hypotheses": [
+    {
+      "id": "H_contagion_liq",
+      "type": "primary_contagion",
+      "directional_claim": "Liquidation intensity in coin A at hour t predicts liquidation intensity in coin B at hour t+k (k=1..24h), after controlling for coin B's own past liquidations and market-wide liquidation activity, for a material subset of directed (A->B) pairs.",
+      "estimand": "Granger-causality F-statistic / p-value of coin-A liquidation count in a VAR of coin-B hourly liquidation count, on hourly aggregated counts; lead-lag cross-correlation at lags 1..24h.",
+      "materiality_floor_relative": 0.02,
+      "materiality_definition": "Contagion effect must explain >= 2% of the variance in coin B's liquidations (equivalently the lead-lag/Granger signal must clear a 2% relative effect floor) to be material. Frozen; not relaxed after outcomes."
+    },
+    {
+      "id": "H_contagion_funding",
+      "type": "primary_contagion_funding",
+      "directional_claim": "The funding rate differential between coins modulates contagion strength: when funding(A) > funding(B) + threshold, liquidations in A more strongly predict liquidations in B (funding-mediated spillover).",
+      "estimand": "Funding-tercile (low/medium/high differential) stratified contagion network; monotonicity of edge weights with funding differential; interaction term funding_diff x lagged_liquidation_A in the coin-B intensity regression.",
+      "materiality_floor_relative": 0.02,
+      "materiality_definition": "Funding modulation must produce a >= 2% relative difference in edge weight / effect between high- and low-differential terciles to be material. Frozen; not relaxed after outcomes."
+    }
+  ],
+  "network_construction": {
+    "nodes": "15 coins",
+    "graph": "15x15 directed graph; edge A->B present if Granger causality p < 0.01 after Bonferroni correction for 210 directed tests (alpha_adj = 0.01/210).",
+    "edge_weight": "Granger F-statistic or maximum absolute lead-lag correlation coefficient across lags 1..24h.",
+    "permutation_test": "1000+ time-series permutations per directed pair for a null distribution of edge weights; empirical p-value = fraction of null weights >= observed weight.",
+    "lead_lag_lags": 24,
+    "directed_pairs": 210
+  },
+  "funding_conditioning": {
+    "split": "Funding rate differential between coin pairs split into terciles (low / medium / high).",
+    "within_tercile": "Recompute the contagion network (Granger + lead-lag) within each funding-differential tercile.",
+    "monotonicity_test": "Test whether edge weights increase monotonically with funding differential across terciles.",
+    "interaction": "Interaction term funding_diff x lagged liquidation of source coin in target-coin intensity regression."
+  },
+  "temporal_stability": {
+    "design": "Rolling window: 90-day windows, 30-day step, over the full panel span.",
+    "reported": "Network density over time, edge persistence (fraction of windows an edge is significant), regime-dependent contagion.",
+    "windows": "Pre-registered; boundaries derived from panel timestamp span only."
+  },
+  "hourly_aggregation": {
+    "rule": "Collapse the event-level combined liquidation panel to (coin, UTC floor-hour) by count of events and sum of notional_usd. Build the COMPLETE hourly grid over each coin's observed span so zero-event hours are explicit zeros (flagged has_event=False; not silently fabricated). Funding predictor for an hour = mean of fundingRate across events inside that hour; for zero-event hours funding is carried from the most recent prior in-panel funding observation (forward fill of FUNDING only, never of the outcome), flagged funding_is_ffill=True. Hours with no prior funding are dropped and counted.",
+    "inputs": "notional_usd (count + sum), fundingRate (hourly mean), rv24h, rv168h (hourly, carried forward within coin), mark/ema_dist (hourly).",
+    "expected_observations": "~50,000 hourly coin-observations."
+  },
+  "inference": {
+    "primary_se": "Permutation-based empirical p-values (1000+ permutations) for each directed pair and edge weight.",
+    "multiple_testing": "Bonferroni correction across 210 directed Granger tests; Holm familywise correction across the declared hypothesis family; raw and adjusted p-values both reported.",
+    "block_bootstrap": "Block bootstrap across contiguous UTC time blocks (jointly across coins) to preserve common market shocks and serial dependence; deterministic seed; sensitivity to leave-one-coin-out reported.",
+    "no_random_split": true,
+    "chronological_only": true
+  },
+  "decision_rule": {
+    "support_requires_H_contagion_liq": [
+      "At least one directed (A->B) edge significant at Bonferroni-adjusted p < 0.01 across the 210 pairs",
+      "Lead-lag / Granger signal clears the 2% relative materiality floor",
+      "Not dominated by a single coin or a single time block",
+      "Permutation null rejected (empirical p < 0.01)"
+    ],
+    "support_requires_H_contagion_funding": [
+      "Edge weight / effect increases monotonically with funding-differential tercile (low < medium < high)",
+      "Interaction term significant after multiplicity correction",
+      ">= 2% relative difference between high- and low-differential terciles"
+    ],
+    "a_null_is_recorded_as": "NOT_SUPPORTED",
+    "no_threshold_shopping": true,
+    "outcome_data_inspected_before_freeze": false
+  },
+  "hard_constraints_honored": [
+    "outcome_data_inspected_before_freeze=false",
+    "panel sha256 asserted in eval script header before any read",
+    "no random train/test split; strictly chronological",
+    "materiality floor 0.02 frozen and not relaxed after outcomes",
+    "observed liquidations kept distinct from modeled boundary breaches (Track A observed events only)",
+    "no external trigger required; frozen panel is the sole input",
+    "no network, no paid data, no credentials",
+    "no root-level research_state/*.md|*.json added (root churn cap 499/500 respected)",
+    "no .github/workflows modification",
+    "no overwrite of research_state/research_protocol.md"
+  ]
+}
