@@ -1,10 +1,10 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T13:58:51Z (refreshes the 2026-11-21T13:08:35Z handoff; FCLR-PANEL-FE-001 eval phase now COMPLETE — gate reason=OK, 79 tests OK)**Sole active campaign:** FCLR-PANEL-FE-001-20261121T085602Z (rank-0, now COMPLETE — eval triad + recompute + evidence audit + trigger_check all emitted under `research_state/session_20261121T130159Z/`; verdict NOT_SUPPORTED on both halves; 2% materiality floor preserved)**Latest completed session on disk:** session_20261121T130159Z — FCLR-PANEL-FE-001 EVAL PHASE COMPLETE. All required artifacts emitted: `fclr_panelfe01_eval_20261121T130159Z.{py,json,md}`, `fclr_panelfe01_recompute_20261121T130159Z.{py,json}`, `fclr_panelfe01_evidence_audit_20261121T130159Z.{json,md}`, `evidence_audit_20261121T130159Z.json` (gate-critical `evidence_audit_` prefix), `trigger_check_20261121T130159Z.json` (non-empty). Both frozen panel sha256 asserted (`41962f82…` FCLR-001, `81a100d5…` combined liquidation). Gate `reason=OK`; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail. Root `research_state/` md+json count 499/500 (unchanged; no root-level files added).
+**Timestamp:** 2026-11-21T14:14:07Z (refreshes the 2026-11-21T13:58:51Z handoff; FCLR-PANEL-FE-001 eval phase COMPLETE — gate reason=OK, 79 tests OK)
+**Sole active campaign:** FCLR-PANEL-FE-001-20261121T085602Z (rank-0, COMPLETE — eval triad + recompute + evidence audit + trigger_check all emitted under `research_state/session_20261121T130159Z/`; verdict NOT_SUPPORTED on both halves; 2% materiality floor preserved)
+**Latest completed session on disk:** session_20261121T130159Z — FCLR-PANEL-FE-001 EVAL PHASE COMPLETE. All required artifacts emitted: `fclr_panelfe01_eval_20261121T130159Z.{py,json,md}`, `fclr_panelfe01_recompute_20261121T130159Z.{py,json}`, `fclr_panelfe01_evidence_audit_20261121T130159Z.{json,md}`, `evidence_audit_20261121T130159Z.json` (gate-critical `evidence_audit_` prefix), `trigger_check_20261121T130159Z.json` (non-empty). Both frozen panel sha256 asserted (`41962f82…` FCLR-001, `81a100d5…` combined liquidation). Gate `reason=OK`; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail. Root `research_state/` md+json count 499/500 (unchanged; no root-level files added).
 **Remaining heavy work:** None. The PANEL_FE_REQUIRED artifact set is complete under `session_20261121T130159Z/`; the gate that previously FAILED now PASSES. All prior campaigns (STARTER-001, FCLR-001, FCLR-XSEC-001..008, LIQ-XSEC-QLIKE/ORDERING, LIQ-COMBINED-PANEL, FCLR-LIQ-OOS-FORECAST-001, FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE, the Track A/B/C families, and FCLR-SESSION-SYNTHESIS-01) are terminal/superseded.
-
-**Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → now PASS (`reason=OK`). `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail. Both frozen panel sha256 re-verified on disk. Campaign id reconciled across this handoff, `experiment_frontier.json` rank-0, and `hypothesis_registry.json` (`H_fclr_panelfe_001`, FROZEN_PENDING_EVALUATION) to `FCLR-PANEL-FE-001-20261121T085602Z`. Root `research_state/` md+json count 499/500 (cap 500).
-
+**Machine-enforced gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`). `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass, 0 fail. Both frozen panel sha256 re-verified on disk. Campaign id reconciled across this handoff, `experiment_frontier.json` rank-0, and `hypothesis_registry.json` (`H_fclr_panelfe_001`, FROZEN_PENDING_EVALUATION) to `FCLR-PANEL-FE-001-20261121T085602Z`. Root `research_state/` md+json count 499/500 (cap 500).
 **Environment:** Python 3.12.3; `numpy 2.5.5`, `pandas 3.1.1`, `scipy 1.18.1`, `pyarrow 26.0.1` verified importable. Both frozen panels load; sha256 asserted.
 
 ---
@@ -13,9 +13,9 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T13:58:51Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T14:14:07Z)
 
-**FCLR-PANEL-FE-001 is COMPLETE.** The panel fixed-effects study of whether the funding rate conditions (a) realized volatility and (b) liquidation intensity, with walk-forward out-of-sample evaluation, has been executed under `research_state/session_20261121T130159Z/`. The prereg freeze was ALREADY COMPLETE (session_20261121T130159Z, outcome-blind, before any outcomes). All required heavy-work artifacts are emitted and non-empty:
+**FCLR-PANEL-FE-001 is COMPLETE.** The panel fixed-effects study of whether the funding rate conditions (a) realized volatility and (b) liquidation intensity, with walk-forward out-of-sample evaluation, has been fully executed under `research_state/session_20261121T130159Z/`. The prereg freeze was ALREADY COMPLETE (session_20261121T130159Z, outcome-blind, before any outcomes). All required heavy-work artifacts are emitted and non-empty:
 
 - `fclr_panelfe01_prereg_20261121T130159Z.{json,md}` — pre-existing, outcome-blind freeze (`outcome_data_inspected_before_freeze=false`)
 - `fclr_panelfe01_eval_20261121T130159Z.{py,json,md}` — panel-FE estimation + walk-forward evaluation triad (both halves; FE + clustered/Driscoll-Kraay/Newey-West SE; QLIKE/deviance; Diebold-Mariano; regime cuts)
@@ -84,11 +84,11 @@ The 3-block confirmatory design (train/test blocks of ≥127 contiguous days) is
 Create/extend `research_state/session_<UTC>/` (UTC > 20261121T085602Z; use `session_20261121T130159Z` which already has the prereg) and emit, all non-empty:
 
 - `fclr_panelfe01_prereg_<UTC>.json` and `.md` — **ALREADY COMPLETE** at session_20261121T130159Z (outcome-blind freeze, `outcome_data_inspected_before_freeze=false`, hypotheses, models, inference, walk-forward protocol, 2% floor, panel sha256).
-- `fclr_panelfe01_eval_<UTC>.py`, `.json`, `.md` — **PENDING** — panel-FE estimation + walk-forward evaluation triad (both halves; FE + clustered/Driscoll-Kraay/Newey-West SE; QLIKE/deviance; Diebold-Mariano; regime cuts).
-- `fclr_panelfe01_recompute_<UTC>.py`, `.json` — **PENDING** — independent stdlib/numpy recompute that concurs.
-- `fclr_panelfe01_evidence_audit_<UTC>.json` and `.md` — **PENDING** — evidence audit tying each verdict to its artifacts.
-- `evidence_audit_<UTC>.json` — **PENDING** — REQUIRED by the gate's new-style heavy-session check (`AUDIT_PREFIX="evidence_audit_"`). The `fclr_panelfe01_evidence_audit_*` filename does not start with `evidence_audit_`, so a separate file with that literal prefix must also be present in the latest session or the gate fails with `HEAVY_SESSION_ARTIFACTS_MISSING`. A thin alias of the panel-FE evidence audit suffices.
-- `trigger_check_<UTC>.json` — **PENDING** — non-empty trigger check.
+- `fclr_panelfe01_eval_<UTC>.py`, `.json`, `.md` — **COMPLETE** at session_20261121T130159Z — panel-FE estimation + walk-forward evaluation triad (both halves; FE + clustered/Driscoll-Kraay/Newey-West SE; QLIKE/deviance; Diebold-Mariano; regime cuts).
+- `fclr_panelfe01_recompute_<UTC>.py`, `.json` — **COMPLETE** at session_20261121T130159Z — independent stdlib/numpy recompute that concurs.
+- `fclr_panelfe01_evidence_audit_<UTC>.json` and `.md` — **COMPLETE** at session_20261121T130159Z — evidence audit tying each verdict to its artifacts.
+- `evidence_audit_<UTC>.json` — **COMPLETE** at session_20261121T130159Z — REQUIRED by the gate's new-style heavy-session check (`AUDIT_PREFIX="evidence_audit_"`). The `fclr_panelfe01_evidence_audit_*` filename does not start with `evidence_audit_`, so a separate file with that literal prefix must also be present in the latest session or the gate fails with `HEAVY_SESSION_ARTIFACTS_MISSING`. A thin alias of the panel-FE evidence audit suffices.
+- `trigger_check_<UTC>.json` — **COMPLETE** at session_20261121T130159Z — non-empty trigger check.
 
 ### Acceptance Tests (run these — they are the gate)
 
@@ -142,6 +142,7 @@ python3 scripts/next_campaign_status.py
 | FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE | Trigger-only sentinel (external trigger) | 20261121T071500Z | SUPERSEDED | was the structural bottleneck; replaced by SESSION-SYNTHESIS-01 then PANEL-FE-001 |
 | FCLR-SESSION-SYNTHESIS-01 | Outcome-blind consolidation + quantitative meta-analysis | session_20261121T080000Z | CONSOLIDATORY_ONLY | 17 contrasts; RV FE d=1.237 CI incl. 0; liq FE d=0.379 CI excl. 0 BUT RE DL d=0.228 CI incl. 0 under I²=97.5%; no promotable skill |
 | FCLR-PANEL-FE-001 (prereg phase) | Outcome-blind prereg freeze | session_20261121T130159Z | COMPLETE (prereg only) | `fclr_panelfe01_prereg_20261121T130159Z.{json,md}`; eval triad pending |
+| FCLR-PANEL-FE-001 (eval phase) | Panel-FE + walk-forward OOS eval | session_20261121T130159Z | COMPLETE | All artifacts emitted; verdict NOT_SUPPORTED on both halves |
 
 ---
 
