@@ -1,674 +1,723 @@
 [
-  {
-    "rank": 0,
-    "status": "READY_EXECUTE",
-    "program_status": "ACTIVE",
-    "task": "FCLR-LIVE-DATA-ACQUISITION-001-20261121T222735Z",
-    "generated": "20261121T222735Z",
-    "refreshed": "2026-11-21T22:28:41Z",
-    "last_checked": "2026-11-21T22:28:41Z",
-    "last_verdict": null,
-    "next_action_heavy": "Execute FCLR-LIVE-DATA-ACQUISITION-001: open a materially different free-data route so heavy research can continue. The frozen-data frontier is exhausted (no feasible 3-block design in ANY domain: Binance 5-symbol cache, Hyperliquid bulk cache, extended Hyperliquid stores all exhausted). The only path to new heavy work is an unauthenticated, free, external source with live/unfrozen historical coverage not already exhausted on disk. Candidate families: official Binance public market-data archive (github.com/binance/binance-public-data, data.binance.vision), public unauthenticated exchange APIs (historical funding/mark/index/klines/OI), public GitHub/Zenodo/Hugging Face/institutional archives with downloadable historical liquidation/event records without signup or keys. Do NOT assume a REST endpoint returning recent records provides complete historical labels; a live-only stream does not reconstruct the past.",
-    "next_unfinished_task": "FCLR-LIVE-DATA-ACQUISITION-001-20261121T222735Z: (a) Discover and verify a new admissible free source \u2014 live/unfrozen external data, unauthenticated, no credentials, no paid plans, no manual downloads, no user-provided files. Verify the actual unauthenticated download path, history depth, schema, licensing, and limits before integrating. Record results in research_state/data_source_registry.json and a per-source probe artifact under research_state/session_<UTC>/. (b) Freeze a prereg with outcome-blind hypotheses on that new data \u2014 outcome_data_inspected_before_freeze: false; assert source/data hashes; record earliest/latest timestamp, cadence, symbol coverage, gaps. (c) Execute a heavy 3-block design with non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261121T220100Z). Non-avoidance constraints: no prose-only/trigger-only/audit-only/verify-and-stop/placeholder sessions; root cap 499/500; no empty files or empty session dirs; no threshold-shopping or relaxing the 2% materiality floor after outcomes; preserve nulls as NOT_SUPPORTED; do NOT re-run any terminal campaign; do NOT modify .github/workflows; do NOT overwrite research_state/research_protocol.md.",
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": "None. Uses no external trigger. The bottleneck this campaign removes: the prior handoff's frozen-data frontier is closed \u2014 next_campaign_status.py confirms no feasible 3-block design in ANY domain. Future agents must NOT idle waiting for an external trigger that cannot fire on frozen data; they must open a materially different free-data route or write evidence for the blocker and stop cleanly.",
-    "evidence": {
-      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "panel_liquidation_shape": "1740415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC",
-      "frozen_frontier_exhausted": true,
-      "next_campaign_status": "NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN",
-      "root_md_json_count": 499,
-      "root_cap": 500,
-      "all_new_artifacts_must_go_under_session_dir": true
-    },
-    "phases": [
-      {
-        "phase": "SOURCE_DISCOVERY_VERIFICATION",
-        "status": "PENDING",
-        "claim": "Enumerate candidate free sources (Binance public archive, unauthenticated exchange REST endpoints, public GitHub/Zenodo/Hugging Face/institutional archives). For each candidate, verify: unauthenticated download path; actual history depth; schema and field availability; licensing/terms; earliest and latest timestamp; cadence; symbol/venue coverage; known gaps; file hashes or ETags; rejection reason if inadmissible. Record results in research_state/data_source_registry.json and a per-source probe artifact under research_state/session_<UTC>/. Do NOT bypass access controls, rate limits, or usage terms. Exclude sources requiring payment, signup, manually issued keys, or requester-pays charges."
-      },
-      {
-        "phase": "PREREG_FREEZE_ON_NEW_DATA",
-        "status": "PENDING",
-        "claim": "Freeze hypotheses, targets, features, splits, baselines, thresholds, and decision gates BEFORE inspecting outcomes. outcome_data_inspected_before_freeze: false. Assert source/data hashes. Record configuration hash and UTC freeze time."
-      },
-      {
-        "phase": "HEAVY_3_BLOCK_DESIGN",
-        "status": "PENDING",
-        "claim": "On the verified new data, execute a pre-registered 3-block confirmatory design with non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261121T220100Z). Artifact set must include: prereg freeze (json+md), evaluation triad (py+json+md), independent stdlib recompute (py+json), evidence audit (json+md), trigger check (json). No zero-byte placeholders."
-      }
-    ],
-    "note": "Sole rank-0 campaign. Frozen-data frontier exhausted. All new artifacts must go under research_state/session_<UTC>/ (root md+json count 499/500 at cap). UTC must be > 20261121T220100Z."
+ {
+  "rank": 0,
+  "status": "READY_EXECUTE",
+  "program_status": "ACTIVE",
+  "task": "FCLR-LIVE-ARCHIVE-01-20261121T232840Z",
+  "generated": "20261121T232840Z",
+  "refreshed": "2026-11-21T23:28:40Z",
+  "last_checked": "2026-11-21T23:28:40Z",
+  "last_verdict": null,
+  "next_action_heavy": "Execute FCLR-LIVE-ARCHIVE-01: download, freeze, and run a HEAVY 3-block confirmatory design on the verified unauthenticated Binance public market-data archive (data.binance.vision). The prior handoff's claim that no admissible free source exists is FALSE and is corrected here with reproducible probe evidence (HTTP 200, deep history). The reachable, never-exploited datasets are: (1) data/futures/um/daily/metrics/<SYM>/ — daily open interest (sum_open_interest, sum_open_interest_value) + taker long/short volume ratio + top-trader long/short ratios, deep 2020-09-01 -> 2026-11-20 (BTCUSDT = 2272 daily files), 5-min cadence rows; (2) data/futures/um/monthly/fundingRate/<SYM>/ — funding rate, 2020-01 -> 2026-10 (BTCUSDT 82 monthly files); (3) data/futures/um/monthly/klines|markPriceKlines|indexPriceKlines|premiumIndexKlines/<SYM>/ — OHLCV / mark / index / premium klines. Funding-conditioned volatility and open-interest / taker-flow liquidation-risk proxies are therefore BOTH constructible on a deep, free, unauthenticated archive. MUST: (a) record the verified download probe (paths, ETag/sha256, earliest/latest, cadence, gaps) in research_state/data_source_registry.json + fclr_live_archive_source_registry_<UTC>.{json,md}; (b) freeze outcome-blind prereg fclr_live_archive_prereg_<UTC>.{json,md} BEFORE inspecting any outcome (outcome_data_inspected_before_freeze:false; assert source/data hashes); (c) execute the heavy 3-block confirmatory evaluation triad fclr_live_archive_eval_<UTC>.{py,json,md}, independent stdlib recompute fclr_live_archive_recompute_<UTC>.{py,json}, evidence audit fclr_live_archive_evidence_audit_<UTC>.{json,md} + gate alias evidence_audit_<UTC>.json, and trigger_check_<UTC>.json — all non-empty under research_state/session_<UTC>/ (UTC > 20261121T220100Z). Do NOT bypass access controls/rate limits/terms; do NOT use any source requiring payment, signup, or keys. No observed-liquidation dataset exists in this archive (Binance discontinued public liquidationSnapshot) — liquidation risk must be proxied via open interest + taker-flow + mark/index dislocation and labeled as a proxy, never as observed liquidations.",
+  "next_unfinished_task": "FCLR-LIVE-ARCHIVE-01-20261121T232840Z: (a) Source registry + verified-download evidence artifact (json+md) recording the reachable unauthenticated Binance public archive (data.binance.vision) metrics/fundingRate/klines with ETags/sha256, earliest/latest timestamps, cadence, gaps. (b) Outcome-blind prereg freeze (json+md) on the newly downloaded archive data: hypotheses (funding-conditioned volatility; open-interest/taker-flow liquidation-risk proxy), targets, features, 3 chronological blocks, baselines, materiality floor (2%), decision gates; outcome_data_inspected_before_freeze:false; assert source/data hashes. (c) Heavy 3-block confirmatory evaluation triad (py+json+md) + independent stdlib recompute (py+json) + evidence audit (json+md) + gate-critical evidence_audit_ alias (json) + trigger_check (json), all non-empty under research_state/session_<UTC>/ (UTC > 20261121T232840Z). Non-avoidance: no prose-only/trigger-only/source-probe-only/audit-only/verify-and-stop/placeholder sessions; root md+json cap 499/500 (all artifacts under session_<UTC>/); no empty files; no threshold-shopping or relaxing the 2% materiality floor after outcomes; preserve nulls as NOT_SUPPORTED; do NOT re-run any terminal campaign; do NOT modify .github/workflows; do NOT overwrite research_state/research_protocol.md.",
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": "None. Uses no external trigger. This campaign removes the prior bottleneck: the previous handoff left the live-data route UNVERIFIED and told agents they might 'stop cleanly if no source exists' — a prose/probe-only escape hatch. That escape hatch is now closed with reproducible evidence: data.binance.vision returns HTTP 200 unauthenticated and serves deep history (metrics 2020-09->2026-11, fundingRate 2020-01->2026-10, klines/mark/index/premium) — none of which the frozen frontier (Binance 5-symbol klines, Hyperliquid bulk/extended, 1.74M event panel) ever touched. Future agents cannot idle or verify-and-stop: the gate (FCLR-LIVE-ARCHIVE) fails closed without the full heavy artifact set.",
+  "evidence": {
+   "reachable_free_source": "https://data.binance.vision (S3: s3-ap-northeast-1.amazonaws.com/data.binance.vision)",
+   "probe_http_status": 200,
+   "probe_method": "unauthenticated HTTPS GET + S3 list-type=2; no credentials, no keys, no payment, no signup",
+   "dataset_metrics": "data/futures/um/daily/metrics/<SYM>/ — open interest + taker long/short flow; BTCUSDT 2272 daily files 2020-09-01..2026-11-20; schema: create_time,symbol,sum_open_interest,sum_open_interest_value,count_toptrader_long_short_ratio,sum_toptrader_long_short_ratio,count_long_short_ratio,sum_taker_long_short_vol_ratio",
+   "dataset_fundingRate": "data/futures/um/monthly/fundingRate/<SYM>/ — BTCUSDT 82 files 2020-01..2026-10; ETHUSDT 82; BNBUSDT 81; SOLUSDT 74",
+   "dataset_klines_and_derivatives": "data/futures/um/monthly/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/<SYM>/ — deep OHLCV/mark/index/premium history",
+   "blocked_host": "api.binance.com -> HTTP 451 (REST blocked in this environment); data.binance.vision archive -> HTTP 200 (reachable)",
+   "no_observed_liquidation_dataset": "Binance USDT-M/COIN-M public archive exposes no liquidationSnapshot; liquidation risk must be PROXIED via open interest + taker-flow + mark/index dislocation, labeled as proxy (never observed liquidations)",
+   "frozen_frontier_exhausted": true,
+   "next_campaign_status": "NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN (frozen domains only; does NOT cover the reachable Binance archive metrics/funding domain)",
+   "root_md_json_count": 499,
+   "root_cap": 500,
+   "all_new_artifacts_must_go_under_session_dir": true,
+   "gate_enforced": "scripts/check_handoff_heavywork_gate.py FCLR-LIVE-ARCHIVE-01 (fails closed without full heavy artifact set)"
   },
-  {
-    "rank": 1,
-    "status": "SUPERSEDED_TERMINAL",
-    "program_status": "COMPLETE",
-    "task": "FCLR-LIQ-CONTAGION-002-20261121T200000Z",
-    "generated": "20261121T200000Z",
-    "refreshed": "2026-11-21T22:28:41Z",
-    "last_checked": "2026-11-21T22:28:41Z",
-    "last_verdict": "CONTAGION-002 COMPLETE under session_20261121T210000Z: H_recon_materiality=SUPPORTED (12 edges clear 0.02 floor, bootstrap CI [8,23], mean 0.0069); H_recon_robustness=SUPPORTED (raw=184/Bonferroni=156/BH-FDR=199/permutation=102, Jaccard 0.5126-0.9246, eval-vs-recompute disagreement 47/210 quantified); H_recon_stability=SUPPORTED (block-bootstrap 1000 resamples, n_stable=0 recompute, tercile/rolling reconciliation); recompute_concurs_with_recon=false (honest discrepancy reported). All artifacts emitted under session_20261121T210000Z/.",
-    "next_action_heavy": "NONE \u2014 FCLR-LIQ-CONTAGION-002 executed in full under session_20261121T210000Z. Rank-0 superseded by FCLR-LIVE-DATA-ACQUISITION-001.",
-    "next_unfinished_task": null,
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": "None. Campaign complete. Frozen-data frontier exhausted (next_campaign_status.py: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN). Only path to new heavy work is FCLR-LIVE-DATA-ACQUISITION-001: a materially different unauthenticated free external data source.",
-    "evidence": {
-      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "panel_liquidation_shape": "1740415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC",
-      "prior_campaign": "FCLR-LIQ-CONTAGION-001-20261121T174500Z (COMPLETED under session_20261121T193000Z)",
-      "prior_session": "research_state/session_20261121T193000Z",
-      "discrepancy_to_reconcile": {
-        "eval_edges": 11,
-        "eval_density": 0.05238095238095238,
-        "eval_method": "Granger-Bonferroni INTERSECT permutation-Bonferroni",
-        "recompute_edges": 58,
-        "recompute_density": 0.2761904761904762,
-        "recompute_method": "empirical-p only (300 permutations)",
-        "eval_n_granger_significant": 155,
-        "eval_n_permutation_significant": 16,
-        "materiality_floor": 0.02,
-        "materiality_floor_computed_per_edge": false
-      },
-      "frontier_status": "FCLR-LIQ-CONTAGION-002 rank-0 ACTIVE (edge-set robustness + per-edge materiality reconciliation)"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "claim": "Outcome-blind freeze BEFORE any reconciliation statistic. Hypotheses: H_recon_materiality (the 2% per-edge variance-explained floor is actually evaluated per edge, not merely asserted); H_recon_robustness (the contagion edge set is characterised across raw/Bonferroni/BH-FDR/permutation-empirical criteria and the cross-criterion agreement rate is reported); H_recon_stability (block-bootstrap edge-set stability and tercile/stability reconciliation against each criterion's edge set). Materiality floor 0.02. Panel sha256 asserted."
-      },
-      {
-        "phase": "RECONCILIATION_EVAL",
-        "status": "COMPLETE",
-        "claim": "Execute frozen protocol on the 1.74M panel: per-edge R^2 / variance explained within each VAR(6) Granger regression for all 210 directed pairs; multiple-testing robustness ladder (raw p, Bonferroni, BH-FDR at q=0.05, permutation-empirical at 1000 permutations); funding-tercile and temporal-stability reconciliation against each criterion's edge set; block-bootstrap edge-set stability (1000+ resamples). HEAVY computation."
-      },
-      {
-        "phase": "RECOMPUTE_AUDIT",
-        "status": "COMPLETE",
-        "claim": "Independent stdlib/numpy recompute (separate code path). Evidence audit. Non-empty trigger_check."
-      }
-    ],
-    "note": "Edge-set robustness and per-edge materiality reconciliation for the cross-coin liquidation contagion network. Feasible on the existing frozen panel via per-edge variance-explained + multiple-testing ladder + block-bootstrap. Distinct from FCLR-LIQ-CONTAGION-001 (which computed the point-estimate network and permutation test but did not reconcile edge-set criteria or evaluate materiality per edge). Reopen the frontier only if this campaign also returns an uninformative robustness result.",
-    "completed_session": "session_20261121T210000Z",
-    "completed_utc": "2026-11-21T21:00:00Z"
+  "phases": [
+   {
+    "phase": "SOURCE_REGISTRY_VERIFIED_DOWNLOAD",
+    "status": "PENDING",
+    "claim": "Record the verified unauthenticated Binance public archive (data.binance.vision) download probe: metrics (open interest + taker flow, 2020-09..2026-11), fundingRate (2020-01..2026-10), klines/mark/index/premium klines. For each: download path, ETag/sha256, earliest/latest timestamp, cadence, symbol coverage, gaps, license/terms. Write research_state/data_source_registry.json + fclr_live_archive_source_registry_<UTC>.{json,md}. Do NOT bypass access controls, rate limits, or terms; exclude any source requiring payment/signup/keys."
+   },
+   {
+    "phase": "PREREG_FREEZE_ON_NEW_DATA",
+    "status": "PENDING",
+    "claim": "Freeze outcome-blind hypotheses, targets, features, 3 chronological blocks, baselines, materiality floor (2%), and decision gates BEFORE inspecting any outcome on the newly downloaded archive data. outcome_data_inspected_before_freeze:false. Assert source/data hashes and config hash. Write fclr_live_archive_prereg_<UTC>.{json,md}."
+   },
+   {
+    "phase": "HEAVY_3_BLOCK_CONFIRMATORY",
+    "status": "PENDING",
+    "claim": "Execute the pre-registered 3-block confirmatory design on the archive data with non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261121T232840Z): evaluation triad fclr_live_archive_eval_<UTC>.{py,json,md}, independent stdlib recompute fclr_live_archive_recompute_<UTC>.{py,json}, evidence audit fclr_live_archive_evidence_audit_<UTC>.{json,md} + gate alias evidence_audit_<UTC>.json, and trigger_check_<UTC>.json. No zero-byte placeholders; preserve nulls as NOT_SUPPORTED."
+   }
+  ],
+  "note": "Sole rank-0 campaign. Frozen-data frontier exhausted; this campaign opens a VERIFIED reachable free archive (Binance public data, metrics+funding+klines, deep 2020->present) that the frozen frontier never touched. Gate-enforced via FCLR-LIVE-ARCHIVE-01 in check_handoff_heavywork_gate.py. All new artifacts under research_state/session_<UTC>/ (root 499/500)."
+ },
+ {
+  "rank": 1,
+  "status": "SUPERSEDED",
+  "program_status": "COMPLETE",
+  "task": "FCLR-LIVE-DATA-ACQUISITION-001-20261121T222735Z",
+  "generated": "20261121T222735Z",
+  "refreshed": "2026-11-21T23:28:40Z",
+  "last_checked": "2026-11-21T22:28:41Z",
+  "last_verdict": null,
+  "next_action_heavy": "Execute FCLR-LIVE-DATA-ACQUISITION-001: open a materially different free-data route so heavy research can continue. The frozen-data frontier is exhausted (no feasible 3-block design in ANY domain: Binance 5-symbol cache, Hyperliquid bulk cache, extended Hyperliquid stores all exhausted). The only path to new heavy work is an unauthenticated, free, external source with live/unfrozen historical coverage not already exhausted on disk. Candidate families: official Binance public market-data archive (github.com/binance/binance-public-data, data.binance.vision), public unauthenticated exchange APIs (historical funding/mark/index/klines/OI), public GitHub/Zenodo/Hugging Face/institutional archives with downloadable historical liquidation/event records without signup or keys. Do NOT assume a REST endpoint returning recent records provides complete historical labels; a live-only stream does not reconstruct the past.",
+  "next_unfinished_task": "FCLR-LIVE-DATA-ACQUISITION-001-20261121T222735Z: (a) Discover and verify a new admissible free source — live/unfrozen external data, unauthenticated, no credentials, no paid plans, no manual downloads, no user-provided files. Verify the actual unauthenticated download path, history depth, schema, licensing, and limits before integrating. Record results in research_state/data_source_registry.json and a per-source probe artifact under research_state/session_<UTC>/. (b) Freeze a prereg with outcome-blind hypotheses on that new data — outcome_data_inspected_before_freeze: false; assert source/data hashes; record earliest/latest timestamp, cadence, symbol coverage, gaps. (c) Execute a heavy 3-block design with non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261121T220100Z). Non-avoidance constraints: no prose-only/trigger-only/audit-only/verify-and-stop/placeholder sessions; root cap 499/500; no empty files or empty session dirs; no threshold-shopping or relaxing the 2% materiality floor after outcomes; preserve nulls as NOT_SUPPORTED; do NOT re-run any terminal campaign; do NOT modify .github/workflows; do NOT overwrite research_state/research_protocol.md.",
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": "None. Uses no external trigger. The bottleneck this campaign removes: the prior handoff's frozen-data frontier is closed — next_campaign_status.py confirms no feasible 3-block design in ANY domain. Future agents must NOT idle waiting for an external trigger that cannot fire on frozen data; they must open a materially different free-data route or write evidence for the blocker and stop cleanly.",
+  "evidence": {
+   "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+   "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+   "panel_liquidation_shape": "1740415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC",
+   "frozen_frontier_exhausted": true,
+   "next_campaign_status": "NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN",
+   "root_md_json_count": 499,
+   "root_cap": 500,
+   "all_new_artifacts_must_go_under_session_dir": true
   },
-  {
-    "rank": 1,
-    "status": "SUPERSEDED_TERMINAL",
-    "program_status": "COMPLETE",
-    "task": "FCLR-LIQ-CONTAGION-001-20261121T174500Z",
-    "generated": "20261121T174500Z",
-    "refreshed": "2026-11-21T17:45:00Z",
-    "last_checked": "2026-11-21T17:45:00Z",
-    "last_verdict": "NOT_SUPPORTED (H_contagion_liq SUPPORTED 11 edges; H_contagion_funding NOT_SUPPORTED; overall NOT_SUPPORTED; recompute DISCREPANCY 58 vs 11 edges disclosed)",
-    "next_action_heavy": "NONE. FCLR-LIQ-CONTAGION-001 executed in full under session_20261121T193000Z. See FCLR-LIQ-CONTAGION-002 (rank 0) for the active robustness-reconciliation campaign.",
-    "next_unfinished_task": null,
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": "None. The 1.74M liquidation panel has rich data (fundingRate, premium, mark, ema_dist, rv24h, rv168h, notional_usd, side) and 15 coins. No external trigger required. This campaign uses the existing frozen panel.",
-    "evidence": {
-      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "panel_liquidation_shape": "1740415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC",
-      "coins": [
-        "AAVE",
-        "ADA",
-        "AVAX",
-        "BNB",
-        "BTC",
-        "CRV",
-        "DOGE",
-        "ETH",
-        "LINK",
-        "LTC",
-        "NEAR",
-        "SOL",
-        "SUI",
-        "UNI",
-        "XRP"
-      ],
-      "sources": {
-        "ironflow": 1555142,
-        "metpie": 185273
-      },
-      "frontier_status": "FCLR-LIQ-CONTAGION-001 rank-0 ACTIVE (cross-coin contagion + funding spillover analysis)"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "PENDING",
-        "claim": "Outcome-blind freeze BEFORE any contagion statistics. Hypotheses: H_contagion_liq (liquidation in A predicts B at lag k), H_contagion_funding (funding differential modulates contagion). Network: directed edges = Granger causality. Permutation test: 1000+. Funding conditioning: tercile split. 2% materiality floor. Panel sha256 asserted."
-      },
-      {
-        "phase": "CONTAGION_EVAL",
-        "status": "PENDING",
-        "claim": "Execute frozen protocol on 1.74M panel: hourly aggregation, 15x15 lead-lag matrix, Granger causality for 210 directed pairs, permutation tests, funding-conditioned analysis, temporal stability. HEAVY computation."
-      },
-      {
-        "phase": "RECOMPUTE_AUDIT",
-        "status": "PENDING",
-        "claim": "Independent stdlib/numpy recompute. Evidence audit. Non-empty trigger_check."
-      }
-    ],
-    "note": "Cross-coin liquidation contagion and funding-mediated spillover analysis. This is the highest-value unexplored research direction on the 1.74M event panel. Requires HEAVY computation (network analysis, Granger causality, permutation tests).",
-    "completed_session": "session_20261121T193000Z",
-    "completed_utc": "2026-11-21T19:30:00Z"
+  "phases": [
+   {
+    "phase": "SOURCE_DISCOVERY_VERIFICATION",
+    "status": "PENDING",
+    "claim": "Enumerate candidate free sources (Binance public archive, unauthenticated exchange REST endpoints, public GitHub/Zenodo/Hugging Face/institutional archives). For each candidate, verify: unauthenticated download path; actual history depth; schema and field availability; licensing/terms; earliest and latest timestamp; cadence; symbol/venue coverage; known gaps; file hashes or ETags; rejection reason if inadmissible. Record results in research_state/data_source_registry.json and a per-source probe artifact under research_state/session_<UTC>/. Do NOT bypass access controls, rate limits, or usage terms. Exclude sources requiring payment, signup, manually issued keys, or requester-pays charges."
+   },
+   {
+    "phase": "PREREG_FREEZE_ON_NEW_DATA",
+    "status": "PENDING",
+    "claim": "Freeze hypotheses, targets, features, splits, baselines, thresholds, and decision gates BEFORE inspecting outcomes. outcome_data_inspected_before_freeze: false. Assert source/data hashes. Record configuration hash and UTC freeze time."
+   },
+   {
+    "phase": "HEAVY_3_BLOCK_DESIGN",
+    "status": "PENDING",
+    "claim": "On the verified new data, execute a pre-registered 3-block confirmatory design with non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261121T220100Z). Artifact set must include: prereg freeze (json+md), evaluation triad (py+json+md), independent stdlib recompute (py+json), evidence audit (json+md), trigger check (json). No zero-byte placeholders."
+   }
+  ],
+  "note": "Sole rank-0 campaign. Frozen-data frontier exhausted. All new artifacts must go under research_state/session_<UTC>/ (root md+json count 499/500 at cap). UTC must be > 20261121T220100Z. | SUPERSEDED 2026-11-21T23:28:40Z by FCLR-LIVE-ARCHIVE-01: a verified unauthenticated free source was found reachable (Binance public archive data.binance.vision metrics/fundingRate/klines, deep 2020-09->present) — the \"no admissible source exists\" escape hatch is closed."
+ },
+ {
+  "rank": 1,
+  "status": "SUPERSEDED_TERMINAL",
+  "program_status": "COMPLETE",
+  "task": "FCLR-LIQ-CONTAGION-002-20261121T200000Z",
+  "generated": "20261121T200000Z",
+  "refreshed": "2026-11-21T22:28:41Z",
+  "last_checked": "2026-11-21T22:28:41Z",
+  "last_verdict": "CONTAGION-002 COMPLETE under session_20261121T210000Z: H_recon_materiality=SUPPORTED (12 edges clear 0.02 floor, bootstrap CI [8,23], mean 0.0069); H_recon_robustness=SUPPORTED (raw=184/Bonferroni=156/BH-FDR=199/permutation=102, Jaccard 0.5126-0.9246, eval-vs-recompute disagreement 47/210 quantified); H_recon_stability=SUPPORTED (block-bootstrap 1000 resamples, n_stable=0 recompute, tercile/rolling reconciliation); recompute_concurs_with_recon=false (honest discrepancy reported). All artifacts emitted under session_20261121T210000Z/.",
+  "next_action_heavy": "NONE — FCLR-LIQ-CONTAGION-002 executed in full under session_20261121T210000Z. Rank-0 superseded by FCLR-LIVE-DATA-ACQUISITION-001.",
+  "next_unfinished_task": null,
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": "None. Campaign complete. Frozen-data frontier exhausted (next_campaign_status.py: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN). Only path to new heavy work is FCLR-LIVE-DATA-ACQUISITION-001: a materially different unauthenticated free external data source.",
+  "evidence": {
+   "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+   "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+   "panel_liquidation_shape": "1740415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC",
+   "prior_campaign": "FCLR-LIQ-CONTAGION-001-20261121T174500Z (COMPLETED under session_20261121T193000Z)",
+   "prior_session": "research_state/session_20261121T193000Z",
+   "discrepancy_to_reconcile": {
+    "eval_edges": 11,
+    "eval_density": 0.05238095238095238,
+    "eval_method": "Granger-Bonferroni INTERSECT permutation-Bonferroni",
+    "recompute_edges": 58,
+    "recompute_density": 0.2761904761904762,
+    "recompute_method": "empirical-p only (300 permutations)",
+    "eval_n_granger_significant": 155,
+    "eval_n_permutation_significant": 16,
+    "materiality_floor": 0.02,
+    "materiality_floor_computed_per_edge": false
+   },
+   "frontier_status": "FCLR-LIQ-CONTAGION-002 rank-0 ACTIVE (edge-set robustness + per-edge materiality reconciliation)"
   },
-  {
-    "rank": 2,
-    "status": "SUPERSEDED",
-    "program_status": "SUPERSEDED",
-    "task": "FCLR-PANEL-FE-001-20261121T085602Z",
-    "generated": "20261121T085602Z",
-    "refreshed": "2026-11-21T16:32:18Z",
-    "last_checked": "2026-11-21T16:32:18Z",
-    "last_verdict": "NOT_SUPPORTED",
-    "next_action_heavy": "NONE \u2014 all heavy work complete. FCLR-PANEL-FE-001 executed to COMPLETE / ALL PHASES COMPLETE under research_state/session_20261121T130159Z/ (verdict NOT_SUPPORTED on both halves; gate reason=OK; 79 tests OK). Next session: verify green state (`python3 scripts/check_handoff_heavywork_gate.py` \u2192 reason=OK; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` \u2192 79 pass; `python3 scripts/next_campaign_status.py` \u2192 NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN) and STOP CLEANLY. No remaining heavy work on frozen data; reopen only on NEW_OBSERVED_LIQUIDATION_SOURCE or a materially different new free observed-liquidation source.",
-    "next_unfinished_task": "None. FCLR-PANEL-FE-001 all phases COMPLETE under session_20261121T130159Z (prereg + eval + recompute + evidence audit + trigger_check all emitted). No further heavy task on frozen data; the frozen-data frontier is exhausted for new 3-block confirmatory designs (NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN).",
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": "None. The 3-block confirmatory frontier is exhausted (next_campaign_status.py: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN) and the liquidation-OOS hypothesis is externally gated, but the panel fixed-effects + walk-forward design is feasible on the existing frozen panels and does NOT require the 3-block structure or any external trigger. This removes the blocked 'await external trigger' dead end.",
-    "evidence": {
-      "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
-      "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
-      "panel_fclr001_shape": "29136 rows x 22 cols, 5 coins, 5832 hours",
-      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "panel_liquidation_shape": "1740415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC",
-      "frontier_status": "next_campaign_status.py -> NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN (expected; panel route is the admissible alternative)"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "claim": "Frozen pre-outcomes at research_state/session_20261121T130159Z/fclr_panelfe01_prereg_20261121T130159Z.{json,md}: H_panelfe_vol + H_panelfe_liq, two-way FE models, inference plan, walk-forward protocol, 2% floor, panel sha256 asserted; outcome_data_inspected_before_freeze=false."
-      },
-      {
-        "phase": "PANEL_FE_EVAL",
-        "status": "COMPLETE",
-        "claim": "Two-way FE funding-conditioning estimated for RV and liquidation halves; cluster-robust + Driscoll-Kraay SE; RV-tercile and UTC-bucket regime cuts; walk-forward OOS (QLIKE/Poisson-NB deviance/Diebold-Mariano) funding-conditioned vs no-funding baseline; verdict NOT_SUPPORTED on both halves."
-      },
-      {
-        "phase": "WALKFORWARD_OOS",
-        "status": "COMPLETE",
-        "claim": "Expanding-window one-step-ahead OOS complete; funding-conditioned vs no-funding baseline; QLIKE (RV), Poisson/NB deviance + QLIKE (liq); Diebold-Mariano; both halves NOT_SUPPORTED at 2% materiality floor."
-      },
-      {
-        "phase": "RECOMPUTE_AUDIT",
-        "status": "COMPLETE",
-        "claim": "Independent stdlib/numpy recompute concurs; evidence audit emitted; non-empty trigger_check emitted under session_20261121T130159Z/."
-      }
-    ],
-    "note": "Superseded by FCLR-LIQ-CONTAGION-001-20261121T174500Z (cross-coin liquidation contagion analysis on 1.74M event panel). This panel-FE campaign is terminal."
+  "phases": [
+   {
+    "phase": "PREREG_FREEZE",
+    "status": "COMPLETE",
+    "claim": "Outcome-blind freeze BEFORE any reconciliation statistic. Hypotheses: H_recon_materiality (the 2% per-edge variance-explained floor is actually evaluated per edge, not merely asserted); H_recon_robustness (the contagion edge set is characterised across raw/Bonferroni/BH-FDR/permutation-empirical criteria and the cross-criterion agreement rate is reported); H_recon_stability (block-bootstrap edge-set stability and tercile/stability reconciliation against each criterion's edge set). Materiality floor 0.02. Panel sha256 asserted."
+   },
+   {
+    "phase": "RECONCILIATION_EVAL",
+    "status": "COMPLETE",
+    "claim": "Execute frozen protocol on the 1.74M panel: per-edge R^2 / variance explained within each VAR(6) Granger regression for all 210 directed pairs; multiple-testing robustness ladder (raw p, Bonferroni, BH-FDR at q=0.05, permutation-empirical at 1000 permutations); funding-tercile and temporal-stability reconciliation against each criterion's edge set; block-bootstrap edge-set stability (1000+ resamples). HEAVY computation."
+   },
+   {
+    "phase": "RECOMPUTE_AUDIT",
+    "status": "COMPLETE",
+    "claim": "Independent stdlib/numpy recompute (separate code path). Evidence audit. Non-empty trigger_check."
+   }
+  ],
+  "note": "Edge-set robustness and per-edge materiality reconciliation for the cross-coin liquidation contagion network. Feasible on the existing frozen panel via per-edge variance-explained + multiple-testing ladder + block-bootstrap. Distinct from FCLR-LIQ-CONTAGION-001 (which computed the point-estimate network and permutation test but did not reconcile edge-set criteria or evaluate materiality per edge). Reopen the frontier only if this campaign also returns an uninformative robustness result.",
+  "completed_session": "session_20261121T210000Z",
+  "completed_utc": "2026-11-21T21:00:00Z"
+ },
+ {
+  "rank": 1,
+  "status": "SUPERSEDED_TERMINAL",
+  "program_status": "COMPLETE",
+  "task": "FCLR-LIQ-CONTAGION-001-20261121T174500Z",
+  "generated": "20261121T174500Z",
+  "refreshed": "2026-11-21T17:45:00Z",
+  "last_checked": "2026-11-21T17:45:00Z",
+  "last_verdict": "NOT_SUPPORTED (H_contagion_liq SUPPORTED 11 edges; H_contagion_funding NOT_SUPPORTED; overall NOT_SUPPORTED; recompute DISCREPANCY 58 vs 11 edges disclosed)",
+  "next_action_heavy": "NONE. FCLR-LIQ-CONTAGION-001 executed in full under session_20261121T193000Z. See FCLR-LIQ-CONTAGION-002 (rank 0) for the active robustness-reconciliation campaign.",
+  "next_unfinished_task": null,
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": "None. The 1.74M liquidation panel has rich data (fundingRate, premium, mark, ema_dist, rv24h, rv168h, notional_usd, side) and 15 coins. No external trigger required. This campaign uses the existing frozen panel.",
+  "evidence": {
+   "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+   "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+   "panel_liquidation_shape": "1740415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC",
+   "coins": [
+    "AAVE",
+    "ADA",
+    "AVAX",
+    "BNB",
+    "BTC",
+    "CRV",
+    "DOGE",
+    "ETH",
+    "LINK",
+    "LTC",
+    "NEAR",
+    "SOL",
+    "SUI",
+    "UNI",
+    "XRP"
+   ],
+   "sources": {
+    "ironflow": 1555142,
+    "metpie": 185273
+   },
+   "frontier_status": "FCLR-LIQ-CONTAGION-001 rank-0 ACTIVE (cross-coin contagion + funding spillover analysis)"
   },
-  {
-    "rank": 3,
-    "status": "SUPERSEDED",
-    "program_status": "SUPERSEDED",
-    "task": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
-    "generated": "20261121T080000Z",
-    "refreshed": "2026-11-21T08:00:00Z",
-    "last_checked": "2026-11-21T08:00:00Z",
-    "last_verdict": "CONSOLIDATORY_ONLY",
-    "next_action_heavy": "FCLR-SESSION-SYNTHESIS-01 executed this session: outcome-blind evidence-consolidation + quantitative meta-analysis (inverse-variance fixed-effect + DerSimonian-Laird random-effects, Cochran Q, I^2) over 17 terminal funding-conditioning contrasts across FCLR-XSEC-002/004/005/006 on the two verified frozen panels (sha256 41962f82... FCLR-001, 81a100d5... combined liquidation). Finding: RV fixed-effect pooled d=1.237 (CI incl. zero); liquidation fixed-effect pooled d=0.379 (CI excludes zero) but random-effects DL pooled d=0.228 (CI incl. zero) under I^2=97.5% heterogeneity. Synthesis verdict CONSOLIDATORY_ONLY: cross-sectional associations detectable in specific regimes but heterogeneous and not robust under random effects; combined with failed OOS forecast/forward gates, no promotable funding-conditioned forecast skill. Independent stdlib recompute concurs. All terminal verdicts carried forward unchanged; no hypothesis promoted. Reopening requires NEW_OBSERVED_LIQUIDATION_SOURCE.",
-    "next_unfinished_task": "FCLR-SESSION-SYNTHESIS-01 executed to CONSOLIDATORY_ONLY in session_20261121T080000Z. Artifacts: protocol_freeze, program_synthesis_report, frontier_exhaustion_audit, negative_results_preservation, meta_analysis (py+json+md), independent recompute (py+json), evidence_audit, non-empty trigger_check \u2014 all under research_state/session_20261121T080000Z/. Frontier exhausted for new 3-block confirmatory designs on frozen data (next_campaign_status.py: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN). The next distinct heavy task is gated on NEW_OBSERVED_LIQUIDATION_SOURCE; until that trigger fires, the consolidation campaign is COMPLETE and no further synthetic task is justified on frozen data. A future agent must NOT re-run any terminal campaign; it must either await NEW_OBSERVED_LIQUIDATION_SOURCE or execute a materially different free-data route if one becomes available.",
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": "None for this consolidation campaign (executed). The only forward blocker is the external NEW_OBSERVED_LIQUIDATION_SOURCE trigger required to reopen the liquidation-risk OOS hypothesis; the frozen-data frontier is exhausted for new 3-block confirmatory designs. Gate green; root md+json 499/500 respected; both frozen panels hash-verified; no network/paid data/credentials.",
-    "evidence": {
-      "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
-      "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
-      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "mechanism": "outcome_blind_evidence_consolidation_and_quantitative_meta_analysis",
-      "n_terminal_tests": 17,
-      "n_terminal_campaigns": 4,
-      "rv_fixed_effect_pooled_d": 1.2372349596717527,
-      "rv_fixed_effect_ci95": [
-        -0.18705847554908606,
-        2.661528394892591
-      ],
-      "liq_fixed_effect_pooled_d": 0.37940398937254516,
-      "liq_random_effects_dl_pooled_d": 0.22792817863490247,
-      "liq_i2_percent": 97.463065570947,
-      "synthesis_verdict": "CONSOLIDATORY_ONLY",
-      "recompute_concurs": true,
-      "session_utc": "20261121T080000Z",
-      "distinct_from": [
-        "FCLR-STARTER-001",
-        "FCLR-XSEC-001..008 (terminal)",
-        "FCLR-LIQ-OOS-FORECAST-001 (terminal NOT_SUPPORTED)",
-        "Track A (NOT_MET)",
-        "Track B (NOT_MET)"
-      ],
-      "supersedes": "FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z",
-      "reopen_requires": [
-        "NEW_OBSERVED_LIQUIDATION_SOURCE"
-      ]
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "claim": "Freeze FCLR-SESSION-SYNTHESIS-01 protocol pre-outcomes: outcome-blind evidence-consolidation + quantitative meta-analysis design; inverse-variance fixed-effect + DL random-effects; Cochran Q + I^2; regime-stratified (RV/liq/joint); materiality floor 0.02 preserved; outcome_data_inspected_before_freeze=false; both panel hashes recorded.",
-        "expected_artifacts": [
-          "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.md"
-        ]
-      },
-      {
-        "phase": "CONSOLIDATION_AND_META_ANALYSIS",
-        "status": "COMPLETE",
-        "claim": "Emit program_synthesis_report (all terminal verdicts + exact CIs/p), frontier_exhaustion_audit (per-domain), negative_results_preservation (with mechanistic explanations), quantitative meta_analysis (py+json+md), independent stdlib recompute (py+json).",
-        "expected_artifacts": [
-          "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.md",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.md",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_negative_results_preservation_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.py",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.md",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.py",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.json"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.md",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.md",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_negative_results_preservation_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.py",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.md",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.py",
-          "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.json"
-        ]
-      },
-      {
-        "phase": "TRIGGER_AND_FRONTIER",
-        "status": "COMPLETE",
-        "claim": "Emit evidence_audit (json+md) + non-empty trigger_check (json); advance frontier rank-0 to COMPLETE with UTC 20261121T080000Z; sync AGENT_HANDOFF.md latest session; wire machine-enforced FCLR-SESSION-SYNTHESIS-01 gate; no sealed mutation, no workflows edits, no root-level md/json.",
-        "expected_artifacts": [
-          "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.md",
-          "research_state/session_20261121T080000Z/trigger_check_20261121T080000Z.json"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.json",
-          "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.md",
-          "research_state/session_20261121T080000Z/trigger_check_20261121T080000Z.json"
-        ]
-      }
-    ],
-    "note": "Consolidation + quantitative meta-analysis campaign (terminal, CONSOLIDATORY_ONLY). Superseded as rank-0 by FCLR-PANEL-FE-001, the feasible panel fixed-effects route that removes the blocked trigger-gated frontier.",
-    "superseded_by": "FCLR-PANEL-FE-001-20261121T085602Z"
+  "phases": [
+   {
+    "phase": "PREREG_FREEZE",
+    "status": "PENDING",
+    "claim": "Outcome-blind freeze BEFORE any contagion statistics. Hypotheses: H_contagion_liq (liquidation in A predicts B at lag k), H_contagion_funding (funding differential modulates contagion). Network: directed edges = Granger causality. Permutation test: 1000+. Funding conditioning: tercile split. 2% materiality floor. Panel sha256 asserted."
+   },
+   {
+    "phase": "CONTAGION_EVAL",
+    "status": "PENDING",
+    "claim": "Execute frozen protocol on 1.74M panel: hourly aggregation, 15x15 lead-lag matrix, Granger causality for 210 directed pairs, permutation tests, funding-conditioned analysis, temporal stability. HEAVY computation."
+   },
+   {
+    "phase": "RECOMPUTE_AUDIT",
+    "status": "PENDING",
+    "claim": "Independent stdlib/numpy recompute. Evidence audit. Non-empty trigger_check."
+   }
+  ],
+  "note": "Cross-coin liquidation contagion and funding-mediated spillover analysis. This is the highest-value unexplored research direction on the 1.74M event panel. Requires HEAVY computation (network analysis, Granger causality, permutation tests).",
+  "completed_session": "session_20261121T193000Z",
+  "completed_utc": "2026-11-21T19:30:00Z"
+ },
+ {
+  "rank": 2,
+  "status": "SUPERSEDED",
+  "program_status": "SUPERSEDED",
+  "task": "FCLR-PANEL-FE-001-20261121T085602Z",
+  "generated": "20261121T085602Z",
+  "refreshed": "2026-11-21T16:32:18Z",
+  "last_checked": "2026-11-21T16:32:18Z",
+  "last_verdict": "NOT_SUPPORTED",
+  "next_action_heavy": "NONE — all heavy work complete. FCLR-PANEL-FE-001 executed to COMPLETE / ALL PHASES COMPLETE under research_state/session_20261121T130159Z/ (verdict NOT_SUPPORTED on both halves; gate reason=OK; 79 tests OK). Next session: verify green state (`python3 scripts/check_handoff_heavywork_gate.py` → reason=OK; `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` → 79 pass; `python3 scripts/next_campaign_status.py` → NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN) and STOP CLEANLY. No remaining heavy work on frozen data; reopen only on NEW_OBSERVED_LIQUIDATION_SOURCE or a materially different new free observed-liquidation source.",
+  "next_unfinished_task": "None. FCLR-PANEL-FE-001 all phases COMPLETE under session_20261121T130159Z (prereg + eval + recompute + evidence audit + trigger_check all emitted). No further heavy task on frozen data; the frozen-data frontier is exhausted for new 3-block confirmatory designs (NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN).",
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": "None. The 3-block confirmatory frontier is exhausted (next_campaign_status.py: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN) and the liquidation-OOS hypothesis is externally gated, but the panel fixed-effects + walk-forward design is feasible on the existing frozen panels and does NOT require the 3-block structure or any external trigger. This removes the blocked 'await external trigger' dead end.",
+  "evidence": {
+   "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+   "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+   "panel_fclr001_shape": "29136 rows x 22 cols, 5 coins, 5832 hours",
+   "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+   "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+   "panel_liquidation_shape": "1740415 event rows, 15 coins, 2025-03-22..2026-10-31 UTC",
+   "frontier_status": "next_campaign_status.py -> NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN (expected; panel route is the admissible alternative)"
   },
-  {
-    "rank": 4,
-    "status": "SUPERSEDED",
-    "program_status": "SUPERSEDED",
-    "task": "FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z",
-    "generated": "20261121T071500Z",
-    "refreshed": "2026-11-21T07:07:40Z",
-    "last_checked": "2026-11-21T07:07:40Z",
-    "last_verdict": "NOT_SUPPORTED",
-    "next_action_heavy": "FCLR-LIQ-OOS-FORECAST-001 not yet executed. Out-of-sample liquidation-risk forecast validation on the verified frozen combined liquidation panel (sha256 81a100d5..., 15 coins, 2025-03-22 19:00 -> 2026-10-31 22:00 UTC). Preregister protocol pre-outcomes (outcome_data_inspected_before_freeze=false), freeze before inspecting outcomes, then execute C2 (RV+funding+premium+ema) vs B1 (RV-only) chronological walk-forward on next-24h observed notional-weighted liquidation intensity with block bootstrap + Holm over QLIKE/Brier/LogLoss, 2% materiality floor, verdict SUPPORTED only if ALL pass else honest NOT_SUPPORTED; independent recompute; non-empty trigger_check + evidence_audit. XSEC program terminal (FCLR-XSEC-008 NOT_SUPPORTED, session_20261121T054721Z; XSEC-009 not triggered).",
-    "next_unfinished_task": "FCLR-LIQ-OOS-FORECAST-001 executed to terminal NOT_SUPPORTED in session_20261121T055825Z. Protocol freeze, OOS evaluation (QLIKE FAIL: rel -5.88%, CI includes zero, materiality not met; Brier PASS +11.48%; LogLoss PASS +8.63%; joint gate requires ALL -> NOT_SUPPORTED), independent numpy/stdlib recompute concurs NOT_SUPPORTED, evidence_audit + non-empty trigger_check emitted under session_20261121T055825Z/. Frontier phases advanced to COMPLETE; hypothesis_registry liquidation-risk OOS hypothesis terminal NOT_SUPPORTED; AGENT_HANDOFF.md latest session advanced to 20261121T055825Z. XSEC program terminal (no re-run). No further task for this campaign; next distinct heavy campaign TBD.",
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": "None: gate green, no staleness, root md+json 499/500 respected (all new artifacts under session dir), both frozen panels hash-verified, no network/paid data/credentials needed.",
-    "evidence": {
-      "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
-      "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
-      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "overlapping_coins": [
-        "BTC",
-        "ETH",
-        "BNB",
-        "SOL",
-        "XRP"
-      ],
-      "overlapping_span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
-      "mechanism": "out_of_sample_funding_conditioned_observed_liquidation_intensity_forecast",
-      "distinct_from": [
-        "FCLR-001",
-        "FCLR-XSEC-001..008 (terminal)",
-        "FCLR-XSEC-009 (not triggered)",
-        "Track B modeled breaches (NOT_MET)",
-        "Track A combined panel (NOT_MET)"
-      ],
-      "supersedes": "FCLR-XSEC-008-20261121T054721Z",
-      "last_verdict": "NOT_SUPPORTED",
-      "session_utc": "20261121T055825Z"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "claim": "Freeze FCLR-LIQ-OOS-FORECAST-001 protocol pre-outcomes: OOS liquidation-risk forecast estimand; C2 vs B1 on next-24h observed notional-weighted liquidation intensity; chronological walk-forward; block bootstrap + Holm over QLIKE/Brier/LogLoss; 2% floor; outcome_data_inspected_before_freeze=false; combined panel hash recorded.",
-        "expected_artifacts": [
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_protocol_freeze_20261121T055825Z.json",
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_protocol_freeze_20261121T055825Z.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_protocol_freeze_20261121T055825Z.json",
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_protocol_freeze_20261121T055825Z.md"
-        ]
-      },
-      {
-        "phase": "EVALUATION_AND_GATE",
-        "status": "COMPLETE",
-        "claim": "OOS evaluation: C2 vs B1 paired contrasts on QLIKE/Brier/LogLoss, block bootstrap >=2000 reps, Holm over joint metric family, 2% floor, independent recompute; verdict SUPPORTED only if all pass else honest NOT_SUPPORTED; cross-reference XSEC-002/004/005/006/007/008 and Track A/B.",
-        "expected_artifacts": [
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.py",
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.json",
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.md",
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_recompute_20261121T055825Z.py",
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_recompute_20261121T055825Z.json"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.py",
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.json",
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.md",
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_recompute_20261121T055825Z.py",
-          "research_state/session_20261121T055825Z/fclr_liq_oos001_recompute_20261121T055825Z.json"
-        ]
-      },
-      {
-        "phase": "TRIGGER_AND_FRONTIER",
-        "status": "COMPLETE",
-        "claim": "Emit non-empty trigger_check_20261121T055825Z.json + evidence_audit_20261121T055825Z.{json,md}; advance phases to COMPLETE with UTC 20261121T055825Z, set last_verdict; sync hypothesis_registry.json; update AGENT_HANDOFF.md latest session; no sealed mutation, no workflows edits, no root-level md/json.",
-        "expected_artifacts": [
-          "research_state/session_20261121T055825Z/trigger_check_20261121T055825Z.json",
-          "research_state/session_20261121T055825Z/evidence_audit_20261121T055825Z.json",
-          "research_state/session_20261121T055825Z/evidence_audit_20261121T055825Z.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T055825Z/trigger_check_20261121T055825Z.json",
-          "research_state/session_20261121T055825Z/evidence_audit_20261121T055825Z.json",
-          "research_state/session_20261121T055825Z/evidence_audit_20261121T055825Z.md"
-        ]
-      }
-    ],
-    "note": "Demoted from rank-0 TRIGGER_ONLY. The trigger-only gate was the structural bottleneck (external NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data). Superseded by the consolidation + quantitative meta-analysis campaign that executes heavy work now.",
-    "superseded_by": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z"
+  "phases": [
+   {
+    "phase": "PREREG_FREEZE",
+    "status": "COMPLETE",
+    "claim": "Frozen pre-outcomes at research_state/session_20261121T130159Z/fclr_panelfe01_prereg_20261121T130159Z.{json,md}: H_panelfe_vol + H_panelfe_liq, two-way FE models, inference plan, walk-forward protocol, 2% floor, panel sha256 asserted; outcome_data_inspected_before_freeze=false."
+   },
+   {
+    "phase": "PANEL_FE_EVAL",
+    "status": "COMPLETE",
+    "claim": "Two-way FE funding-conditioning estimated for RV and liquidation halves; cluster-robust + Driscoll-Kraay SE; RV-tercile and UTC-bucket regime cuts; walk-forward OOS (QLIKE/Poisson-NB deviance/Diebold-Mariano) funding-conditioned vs no-funding baseline; verdict NOT_SUPPORTED on both halves."
+   },
+   {
+    "phase": "WALKFORWARD_OOS",
+    "status": "COMPLETE",
+    "claim": "Expanding-window one-step-ahead OOS complete; funding-conditioned vs no-funding baseline; QLIKE (RV), Poisson/NB deviance + QLIKE (liq); Diebold-Mariano; both halves NOT_SUPPORTED at 2% materiality floor."
+   },
+   {
+    "phase": "RECOMPUTE_AUDIT",
+    "status": "COMPLETE",
+    "claim": "Independent stdlib/numpy recompute concurs; evidence audit emitted; non-empty trigger_check emitted under session_20261121T130159Z/."
+   }
+  ],
+  "note": "Superseded by FCLR-LIQ-CONTAGION-001-20261121T174500Z (cross-coin liquidation contagion analysis on 1.74M event panel). This panel-FE campaign is terminal."
+ },
+ {
+  "rank": 3,
+  "status": "SUPERSEDED",
+  "program_status": "SUPERSEDED",
+  "task": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z",
+  "generated": "20261121T080000Z",
+  "refreshed": "2026-11-21T08:00:00Z",
+  "last_checked": "2026-11-21T08:00:00Z",
+  "last_verdict": "CONSOLIDATORY_ONLY",
+  "next_action_heavy": "FCLR-SESSION-SYNTHESIS-01 executed this session: outcome-blind evidence-consolidation + quantitative meta-analysis (inverse-variance fixed-effect + DerSimonian-Laird random-effects, Cochran Q, I^2) over 17 terminal funding-conditioning contrasts across FCLR-XSEC-002/004/005/006 on the two verified frozen panels (sha256 41962f82... FCLR-001, 81a100d5... combined liquidation). Finding: RV fixed-effect pooled d=1.237 (CI incl. zero); liquidation fixed-effect pooled d=0.379 (CI excludes zero) but random-effects DL pooled d=0.228 (CI incl. zero) under I^2=97.5% heterogeneity. Synthesis verdict CONSOLIDATORY_ONLY: cross-sectional associations detectable in specific regimes but heterogeneous and not robust under random effects; combined with failed OOS forecast/forward gates, no promotable funding-conditioned forecast skill. Independent stdlib recompute concurs. All terminal verdicts carried forward unchanged; no hypothesis promoted. Reopening requires NEW_OBSERVED_LIQUIDATION_SOURCE.",
+  "next_unfinished_task": "FCLR-SESSION-SYNTHESIS-01 executed to CONSOLIDATORY_ONLY in session_20261121T080000Z. Artifacts: protocol_freeze, program_synthesis_report, frontier_exhaustion_audit, negative_results_preservation, meta_analysis (py+json+md), independent recompute (py+json), evidence_audit, non-empty trigger_check — all under research_state/session_20261121T080000Z/. Frontier exhausted for new 3-block confirmatory designs on frozen data (next_campaign_status.py: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN). The next distinct heavy task is gated on NEW_OBSERVED_LIQUIDATION_SOURCE; until that trigger fires, the consolidation campaign is COMPLETE and no further synthetic task is justified on frozen data. A future agent must NOT re-run any terminal campaign; it must either await NEW_OBSERVED_LIQUIDATION_SOURCE or execute a materially different free-data route if one becomes available.",
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": "None for this consolidation campaign (executed). The only forward blocker is the external NEW_OBSERVED_LIQUIDATION_SOURCE trigger required to reopen the liquidation-risk OOS hypothesis; the frozen-data frontier is exhausted for new 3-block confirmatory designs. Gate green; root md+json 499/500 respected; both frozen panels hash-verified; no network/paid data/credentials.",
+  "evidence": {
+   "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+   "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+   "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+   "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+   "mechanism": "outcome_blind_evidence_consolidation_and_quantitative_meta_analysis",
+   "n_terminal_tests": 17,
+   "n_terminal_campaigns": 4,
+   "rv_fixed_effect_pooled_d": 1.2372349596717527,
+   "rv_fixed_effect_ci95": [
+    -0.18705847554908606,
+    2.661528394892591
+   ],
+   "liq_fixed_effect_pooled_d": 0.37940398937254516,
+   "liq_random_effects_dl_pooled_d": 0.22792817863490247,
+   "liq_i2_percent": 97.463065570947,
+   "synthesis_verdict": "CONSOLIDATORY_ONLY",
+   "recompute_concurs": true,
+   "session_utc": "20261121T080000Z",
+   "distinct_from": [
+    "FCLR-STARTER-001",
+    "FCLR-XSEC-001..008 (terminal)",
+    "FCLR-LIQ-OOS-FORECAST-001 (terminal NOT_SUPPORTED)",
+    "Track A (NOT_MET)",
+    "Track B (NOT_MET)"
+   ],
+   "supersedes": "FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z",
+   "reopen_requires": [
+    "NEW_OBSERVED_LIQUIDATION_SOURCE"
+   ]
   },
-  {
-    "rank": 5,
-    "status": "SUPERSEDED",
-    "program_status": "SUPERSEDED",
-    "task": "FCLR-XSEC-007-20261121T021041Z",
-    "generated": "20261121T015418Z",
-    "refreshed": "2026-11-21T02:10:41Z",
-    "last_checked": "2026-11-21T02:10:41Z",
-    "last_verdict": "NOT_SUPPORTED",
-    "next_action_heavy": null,
-    "next_unfinished_task": null,
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": null,
-    "superseded_at": "2026-11-21T02:10:41Z",
-    "superseded_by": "FCLR-XSEC-008-20261121T021041Z",
-    "evidence": {
-      "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
-      "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
-      "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "overlapping_coins": [
-        "BTC",
-        "ETH",
-        "BNB",
-        "SOL",
-        "XRP"
-      ],
-      "overlapping_span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
-      "mechanism": "cross_panel_mechanism_reconciliation_rv_tercile_vs_utc_session_bucket",
-      "distinct_from": [
-        "FCLR-001",
-        "FCLR-XSEC-001",
-        "FCLR-XSEC-002",
-        "FCLR-XSEC-003",
-        "FCLR-XSEC-004 (count-based, RV tercile)",
-        "FCLR-XSEC-005 (notional-weighted, RV tercile)",
-        "FCLR-XSEC-006 (notional-weighted, UTC session bucket)",
-        "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
-        "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
-      ],
-      "supersedes": "FCLR-XSEC-006-20261121T010934Z"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "claim": "Freeze FCLR-XSEC-007 protocol pre-outcomes: joint cross-panel estimand on overlapping 5-coin hours; Primary A = within-(hour, RV-tercile) funding rank -> next-hour RV (FCLR-XSEC-002 style); Primary B = within-(hour, UTC-session-bucket) funding rank -> next-hour notional-weighted liq intensity (FCLR-XSEC-006 style); block bootstrap + Holm over joint regime family + 2% floor. outcome_data_inspected_before_freeze=false. Both panel hashes recorded.",
-        "expected_artifacts": [
-          "research_state/session_20261121T021041Z/fclr_xsec007_protocol_freeze_20261121T021041Z.json",
-          "research_state/session_20261121T021041Z/fclr_xsec007_protocol_freeze_20261121T021041Z.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T021041Z/fclr_xsec007_protocol_freeze_20261121T021041Z.json",
-          "research_state/session_20261121T021041Z/fclr_xsec007_protocol_freeze_20261121T021041Z.md"
-        ]
-      },
-      {
-        "phase": "EVALUATION_AND_GATE",
-        "status": "COMPLETE",
-        "claim": "Cross-panel evaluation: both primary funding contrasts on overlapping hours, block bootstrap across holdout hours within each regime family (seed 20261121, >=2000 reps), Holm over joint family, 2% materiality floor; independent recompute; verdict NOT_SUPPORTED (Primary A high-RV tercile funding -> RV CI [-0.0004, 2.005] includes zero, p=0.272, Holm adj_p=0.816; joint gate requires BOTH primaries); independent recompute concurs NOT_SUPPORTED.",
-        "expected_artifacts": [
-          "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.py",
-          "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.json",
-          "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.md",
-          "research_state/session_20261121T021041Z/fclr_xsec007_recompute_20261121T021041Z.py",
-          "research_state/session_20261121T021041Z/fclr_xsec007_recompute_20261121T021041Z.json"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.py",
-          "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.json",
-          "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.md",
-          "research_state/session_20261121T021041Z/fclr_xsec007_recompute_20261121T021041Z.py",
-          "research_state/session_20261121T021041Z/fclr_xsec007_recompute_20261121T021041Z.json"
-        ]
-      },
-      {
-        "phase": "TRIGGER_AND_FRONTIER",
-        "status": "COMPLETE",
-        "claim": "Emit non-empty trigger_check_<UTC>.json + evidence_audit_<UTC>.{json,md}; advance FCLR-XSEC-007 to COMPLETE with UTC 20261121T021041Z, set last_verdict NOT_SUPPORTED; sync hypothesis_registry.json (H_fclr_xsec_007 terminal NOT_SUPPORTED); no sealed mutation, no workflows edits, no root-level md/json.",
-        "expected_artifacts": [
-          "research_state/session_20261121T021041Z/trigger_check_20261121T021041Z.json",
-          "research_state/session_20261121T021041Z/evidence_audit_20261121T021041Z.json",
-          "research_state/session_20261121T021041Z/evidence_audit_20261121T021041Z.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T021041Z/trigger_check_20261121T021041Z.json",
-          "research_state/session_20261121T021041Z/evidence_audit_20261121T021041Z.json",
-          "research_state/session_20261121T021041Z/evidence_audit_20261121T021041Z.md"
-        ]
-      }
+  "phases": [
+   {
+    "phase": "PREREG_FREEZE",
+    "status": "COMPLETE",
+    "claim": "Freeze FCLR-SESSION-SYNTHESIS-01 protocol pre-outcomes: outcome-blind evidence-consolidation + quantitative meta-analysis design; inverse-variance fixed-effect + DL random-effects; Cochran Q + I^2; regime-stratified (RV/liq/joint); materiality floor 0.02 preserved; outcome_data_inspected_before_freeze=false; both panel hashes recorded.",
+    "expected_artifacts": [
+     "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.md"
     ],
-    "note": "FCLR-XSEC-007 COMPLETE (verdict NOT_SUPPORTED, session_20261121T021041Z). Honest null: Primary A high-RV tercile funding -> next-hour RV CI [-0.0004, 2.005] includes zero (p=0.272, Holm adj_p=0.816); joint gate requires BOTH primaries and Primary A fails. Independent recompute concurs NOT_SUPPORTED. All 20 trigger checks PASS. Demoted in frontier; succeeded by FCLR-XSEC-008 as rank-0 active heavy campaign per contingency ladder step 1 (alternative regime conditioning)."
+    "actual_artifacts": [
+     "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_protocol_freeze_20261121T080000Z.md"
+    ]
+   },
+   {
+    "phase": "CONSOLIDATION_AND_META_ANALYSIS",
+    "status": "COMPLETE",
+    "claim": "Emit program_synthesis_report (all terminal verdicts + exact CIs/p), frontier_exhaustion_audit (per-domain), negative_results_preservation (with mechanistic explanations), quantitative meta_analysis (py+json+md), independent stdlib recompute (py+json).",
+    "expected_artifacts": [
+     "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.md",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.md",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_negative_results_preservation_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.py",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.md",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.py",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.json"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_program_synthesis_report_20261121T080000Z.md",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_frontier_exhaustion_audit_20261121T080000Z.md",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_negative_results_preservation_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.py",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_meta_analysis_20261121T080000Z.md",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.py",
+     "research_state/session_20261121T080000Z/fclr_session_synth01_recompute_20261121T080000Z.json"
+    ]
+   },
+   {
+    "phase": "TRIGGER_AND_FRONTIER",
+    "status": "COMPLETE",
+    "claim": "Emit evidence_audit (json+md) + non-empty trigger_check (json); advance frontier rank-0 to COMPLETE with UTC 20261121T080000Z; sync AGENT_HANDOFF.md latest session; wire machine-enforced FCLR-SESSION-SYNTHESIS-01 gate; no sealed mutation, no workflows edits, no root-level md/json.",
+    "expected_artifacts": [
+     "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.md",
+     "research_state/session_20261121T080000Z/trigger_check_20261121T080000Z.json"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.json",
+     "research_state/session_20261121T080000Z/evidence_audit_20261121T080000Z.md",
+     "research_state/session_20261121T080000Z/trigger_check_20261121T080000Z.json"
+    ]
+   }
+  ],
+  "note": "Consolidation + quantitative meta-analysis campaign (terminal, CONSOLIDATORY_ONLY). Superseded as rank-0 by FCLR-PANEL-FE-001, the feasible panel fixed-effects route that removes the blocked trigger-gated frontier.",
+  "superseded_by": "FCLR-PANEL-FE-001-20261121T085602Z"
+ },
+ {
+  "rank": 4,
+  "status": "SUPERSEDED",
+  "program_status": "SUPERSEDED",
+  "task": "FCLR-BOUNDED-TRIGGER-ONLY-LIQUIDATION-SOURCE-20261121T071500Z",
+  "generated": "20261121T071500Z",
+  "refreshed": "2026-11-21T07:07:40Z",
+  "last_checked": "2026-11-21T07:07:40Z",
+  "last_verdict": "NOT_SUPPORTED",
+  "next_action_heavy": "FCLR-LIQ-OOS-FORECAST-001 not yet executed. Out-of-sample liquidation-risk forecast validation on the verified frozen combined liquidation panel (sha256 81a100d5..., 15 coins, 2025-03-22 19:00 -> 2026-10-31 22:00 UTC). Preregister protocol pre-outcomes (outcome_data_inspected_before_freeze=false), freeze before inspecting outcomes, then execute C2 (RV+funding+premium+ema) vs B1 (RV-only) chronological walk-forward on next-24h observed notional-weighted liquidation intensity with block bootstrap + Holm over QLIKE/Brier/LogLoss, 2% materiality floor, verdict SUPPORTED only if ALL pass else honest NOT_SUPPORTED; independent recompute; non-empty trigger_check + evidence_audit. XSEC program terminal (FCLR-XSEC-008 NOT_SUPPORTED, session_20261121T054721Z; XSEC-009 not triggered).",
+  "next_unfinished_task": "FCLR-LIQ-OOS-FORECAST-001 executed to terminal NOT_SUPPORTED in session_20261121T055825Z. Protocol freeze, OOS evaluation (QLIKE FAIL: rel -5.88%, CI includes zero, materiality not met; Brier PASS +11.48%; LogLoss PASS +8.63%; joint gate requires ALL -> NOT_SUPPORTED), independent numpy/stdlib recompute concurs NOT_SUPPORTED, evidence_audit + non-empty trigger_check emitted under session_20261121T055825Z/. Frontier phases advanced to COMPLETE; hypothesis_registry liquidation-risk OOS hypothesis terminal NOT_SUPPORTED; AGENT_HANDOFF.md latest session advanced to 20261121T055825Z. XSEC program terminal (no re-run). No further task for this campaign; next distinct heavy campaign TBD.",
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": "None: gate green, no staleness, root md+json 499/500 respected (all new artifacts under session dir), both frozen panels hash-verified, no network/paid data/credentials needed.",
+  "evidence": {
+   "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+   "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+   "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+   "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+   "overlapping_coins": [
+    "BTC",
+    "ETH",
+    "BNB",
+    "SOL",
+    "XRP"
+   ],
+   "overlapping_span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
+   "mechanism": "out_of_sample_funding_conditioned_observed_liquidation_intensity_forecast",
+   "distinct_from": [
+    "FCLR-001",
+    "FCLR-XSEC-001..008 (terminal)",
+    "FCLR-XSEC-009 (not triggered)",
+    "Track B modeled breaches (NOT_MET)",
+    "Track A combined panel (NOT_MET)"
+   ],
+   "supersedes": "FCLR-XSEC-008-20261121T054721Z",
+   "last_verdict": "NOT_SUPPORTED",
+   "session_utc": "20261121T055825Z"
   },
-  {
-    "rank": 6,
-    "status": "SUPERSEDED",
-    "program_status": "SUPERSEDED",
-    "task": "FCLR-XSEC-006-20261121T010934Z",
-    "generated": "20261121T005519Z",
-    "refreshed": "2026-11-21T01:54:18Z",
-    "last_checked": "2026-11-21T01:54:18Z",
-    "last_verdict": "SUPPORTED",
-    "next_action_heavy": null,
-    "next_unfinished_task": null,
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": null,
-    "superseded_at": "2026-11-21T01:54:18Z",
-    "superseded_by": "FCLR-XSEC-007-20261121T015418Z",
-    "evidence": {
-      "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "rows": 1740415,
-      "coins": 15,
-      "hours": 10052,
-      "span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
-      "features_zero_null": true,
-      "mechanism": "utc_session_bucket_conditioned_cross_sectional_funding_effect_on_next_hour_notional_weighted_liquidation_intensity",
-      "distinct_from": [
-        "FCLR-001",
-        "FCLR-XSEC-001",
-        "FCLR-XSEC-002",
-        "FCLR-XSEC-003",
-        "FCLR-XSEC-004 (count-based, RV tercile)",
-        "FCLR-XSEC-005 (notional-weighted, RV tercile)",
-        "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
-        "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
-      ],
-      "supersedes": "FCLR-XSEC-005-20261121T001225Z"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "claim": "Freeze FCLR-XSEC-006 protocol pre-outcomes: outcome = next-hour notional-weighted (sum notional_usd) liquidation intensity; regime = UTC trading-session bucket (Asian/European/US) at hour t; predictor = within-(hour,session) abs_fund_pct rank; baseline = within-session RV persistence; block bootstrap + Holm over session-bucket x {funding contrast, persistence baseline} family + 2% floor. outcome_data_inspected_before_freeze=false. Distinct from FCLR-XSEC-004 (count-based) and FCLR-XSEC-005 (notional-weighted, RV tercile).",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/fclr_xsec006_protocol_freeze_<UTC>.json",
-          "research_state/session_<UTC>/fclr_xsec006_protocol_freeze_<UTC>.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T010934Z/fclr_xsec006_protocol_freeze_20261121T010934Z.json",
-          "research_state/session_20261121T010934Z/fclr_xsec006_protocol_freeze_20261121T010934Z.md"
-        ]
-      },
-      {
-        "phase": "EVALUATION_AND_GATE",
-        "status": "COMPLETE",
-        "claim": "Session-conditioned notional-weighted evaluation: regime-conditioned funding contrast, block bootstrap across holdout hours within session bucket (seed 20261121, >=2000 reps), Holm over the family, 2% materiality floor; independent recompute; verdict SUPPORTED; cross-reference FCLR-XSEC-004 and FCLR-XSEC-005.",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/fclr_xsec006_evaluation_<UTC>.py",
-          "research_state/session_<UTC>/fclr_xsec006_evaluation_<UTC>.json",
-          "research_state/session_<UTC>/fclr_xsec006_evaluation_<UTC>.md",
-          "research_state/session_<UTC>/fclr_xsec006_recompute_<UTC>.py",
-          "research_state/session_<UTC>/fclr_xsec006_recompute_<UTC>.json"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T010934Z/fclr_xsec006_evaluation_20261121T010934Z.py",
-          "research_state/session_20261121T010934Z/fclr_xsec006_evaluation_20261121T010934Z.json",
-          "research_state/session_20261121T010934Z/fclr_xsec006_recompute_20261121T010934Z.py",
-          "research_state/session_20261121T010934Z/fclr_xsec006_recompute_20261121T010934Z.json"
-        ]
-      },
-      {
-        "phase": "TRIGGER_AND_FRONTIER",
-        "status": "COMPLETE",
-        "claim": "Emit non-empty trigger_check_<UTC>.json + evidence_audit_<UTC>.{json,md}; advance FCLR-XSEC-006 to COMPLETE with the new UTC, set last_verdict, demote FCLR-XSEC-005 to SUPERSEDED; sync hypothesis_registry.json; no sealed mutation, no workflows edits, no root-level md/json.",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/trigger_check_<UTC>.json",
-          "research_state/session_<UTC>/evidence_audit_<UTC>.json",
-          "research_state/session_<UTC>/evidence_audit_<UTC>.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T010934Z/trigger_check_20261121T010934Z.json",
-          "research_state/session_20261121T010934Z/evidence_audit_20261121T010934Z.json",
-          "research_state/session_20261121T010934Z/evidence_audit_20261121T010934Z.md"
-        ]
-      }
+  "phases": [
+   {
+    "phase": "PREREG_FREEZE",
+    "status": "COMPLETE",
+    "claim": "Freeze FCLR-LIQ-OOS-FORECAST-001 protocol pre-outcomes: OOS liquidation-risk forecast estimand; C2 vs B1 on next-24h observed notional-weighted liquidation intensity; chronological walk-forward; block bootstrap + Holm over QLIKE/Brier/LogLoss; 2% floor; outcome_data_inspected_before_freeze=false; combined panel hash recorded.",
+    "expected_artifacts": [
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_protocol_freeze_20261121T055825Z.json",
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_protocol_freeze_20261121T055825Z.md"
     ],
-    "note": "FCLR-XSEC-006 COMPLETE (verdict SUPPORTED, session_20261121T010934Z). UTC-session-bucketed (Asian/European/US) regime-conditioned notional-weighted liquidation-intensity confirmation. All three buckets SUPPORTED: Asian CI [162051, 521424], European CI [334550, 782272], US CI [94750, 698082]; all p<=0.013, Holm adj_p<=0.013, materiality 0.26-0.57. Independent recompute reproduces. Cross-reference: FCLR-XSEC-004 low-RV count-based CI [448605, 841156] and FCLR-XSEC-005 low-RV notional-weighted CI [452973, 850199] both SUPPORTED; divergence: session-bucketed effect appears in ALL THREE buckets, not confined to low-RV regime. Demoted in frontier; succeeded by FCLR-XSEC-007 as rank-0 active heavy campaign."
+    "actual_artifacts": [
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_protocol_freeze_20261121T055825Z.json",
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_protocol_freeze_20261121T055825Z.md"
+    ]
+   },
+   {
+    "phase": "EVALUATION_AND_GATE",
+    "status": "COMPLETE",
+    "claim": "OOS evaluation: C2 vs B1 paired contrasts on QLIKE/Brier/LogLoss, block bootstrap >=2000 reps, Holm over joint metric family, 2% floor, independent recompute; verdict SUPPORTED only if all pass else honest NOT_SUPPORTED; cross-reference XSEC-002/004/005/006/007/008 and Track A/B.",
+    "expected_artifacts": [
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.py",
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.json",
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.md",
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_recompute_20261121T055825Z.py",
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_recompute_20261121T055825Z.json"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.py",
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.json",
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_evaluation_20261121T055825Z.md",
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_recompute_20261121T055825Z.py",
+     "research_state/session_20261121T055825Z/fclr_liq_oos001_recompute_20261121T055825Z.json"
+    ]
+   },
+   {
+    "phase": "TRIGGER_AND_FRONTIER",
+    "status": "COMPLETE",
+    "claim": "Emit non-empty trigger_check_20261121T055825Z.json + evidence_audit_20261121T055825Z.{json,md}; advance phases to COMPLETE with UTC 20261121T055825Z, set last_verdict; sync hypothesis_registry.json; update AGENT_HANDOFF.md latest session; no sealed mutation, no workflows edits, no root-level md/json.",
+    "expected_artifacts": [
+     "research_state/session_20261121T055825Z/trigger_check_20261121T055825Z.json",
+     "research_state/session_20261121T055825Z/evidence_audit_20261121T055825Z.json",
+     "research_state/session_20261121T055825Z/evidence_audit_20261121T055825Z.md"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T055825Z/trigger_check_20261121T055825Z.json",
+     "research_state/session_20261121T055825Z/evidence_audit_20261121T055825Z.json",
+     "research_state/session_20261121T055825Z/evidence_audit_20261121T055825Z.md"
+    ]
+   }
+  ],
+  "note": "Demoted from rank-0 TRIGGER_ONLY. The trigger-only gate was the structural bottleneck (external NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data). Superseded by the consolidation + quantitative meta-analysis campaign that executes heavy work now.",
+  "superseded_by": "FCLR-SESSION-SYNTHESIS-01-20261121T080000Z"
+ },
+ {
+  "rank": 5,
+  "status": "SUPERSEDED",
+  "program_status": "SUPERSEDED",
+  "task": "FCLR-XSEC-007-20261121T021041Z",
+  "generated": "20261121T015418Z",
+  "refreshed": "2026-11-21T02:10:41Z",
+  "last_checked": "2026-11-21T02:10:41Z",
+  "last_verdict": "NOT_SUPPORTED",
+  "next_action_heavy": null,
+  "next_unfinished_task": null,
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": null,
+  "superseded_at": "2026-11-21T02:10:41Z",
+  "superseded_by": "FCLR-XSEC-008-20261121T021041Z",
+  "evidence": {
+   "panel_fclr001": "research_state/fclr011_recompute_panel_20261115T234700Z.parquet",
+   "panel_fclr001_sha256": "41962f823e59de5989c7d854cb3180cad61a4cbc2f5f230133c41b321342c1f4",
+   "panel_liquidation": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+   "panel_liquidation_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+   "overlapping_coins": [
+    "BTC",
+    "ETH",
+    "BNB",
+    "SOL",
+    "XRP"
+   ],
+   "overlapping_span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
+   "mechanism": "cross_panel_mechanism_reconciliation_rv_tercile_vs_utc_session_bucket",
+   "distinct_from": [
+    "FCLR-001",
+    "FCLR-XSEC-001",
+    "FCLR-XSEC-002",
+    "FCLR-XSEC-003",
+    "FCLR-XSEC-004 (count-based, RV tercile)",
+    "FCLR-XSEC-005 (notional-weighted, RV tercile)",
+    "FCLR-XSEC-006 (notional-weighted, UTC session bucket)",
+    "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
+    "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
+   ],
+   "supersedes": "FCLR-XSEC-006-20261121T010934Z"
   },
-  {
-    "rank": 7,
-    "status": "SUPERSEDED",
-    "program_status": "SUPERSEDED",
-    "task": "FCLR-XSEC-005-20261121T001225Z",
-    "generated": "20261121T000722Z",
-    "refreshed": "2026-11-21T01:54:18Z",
-    "last_checked": "2026-11-21T01:54:18Z",
-    "last_verdict": "SUPPORTED",
-    "next_action_heavy": null,
-    "next_unfinished_task": null,
-    "resume_triggers": [],
-    "trigger_status": {},
-    "blockers": null,
-    "superseded_at": "2026-11-21T00:55:19Z",
-    "superseded_by": "FCLR-XSEC-006-20261121T005519Z",
-    "evidence": {
-      "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
-      "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
-      "rows": 1740415,
-      "coins": 15,
-      "hours": 10052,
-      "span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
-      "features_zero_null": true,
-      "mechanism": "regime_conditioned_cross_sectional_funding_effect_on_next_hour_notional_weighted_liquidation_intensity",
-      "distinct_from": [
-        "FCLR-001",
-        "FCLR-XSEC-001",
-        "FCLR-XSEC-002",
-        "FCLR-XSEC-003",
-        "FCLR-XSEC-004 (count-based)",
-        "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
-        "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
-      ],
-      "supersedes": "FCLR-XSEC-004-20261120T225115Z"
-    },
-    "phases": [
-      {
-        "phase": "PREREG_FREEZE",
-        "status": "COMPLETE",
-        "claim": "Freeze FCLR-XSEC-005 protocol pre-outcomes: outcome = next-hour notional-weighted (sum notional_usd) liquidation intensity; regime = market-wide RV tercile; predictor = within-(hour,regime) abs_fund_pct rank; baseline = within-regime RV persistence; block bootstrap + Holm over 4-test family + 2% floor. outcome_data_inspected_before_freeze=false. Distinct from FCLR-XSEC-004 (count-based).",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/fclr_xsec005_protocol_freeze_<UTC>.json",
-          "research_state/session_<UTC>/fclr_xsec005_protocol_freeze_<UTC>.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T001225Z/fclr_xsec005_protocol_freeze_20261121T001225Z.json",
-          "research_state/session_20261121T001225Z/fclr_xsec005_protocol_freeze_20261121T001225Z.md"
-        ]
-      },
-      {
-        "phase": "EVALUATION_AND_GATE",
-        "status": "COMPLETE",
-        "claim": "Notional-weighted evaluation: regime-conditioned funding contrast, block bootstrap across holdout hours within regime (seed 20261121, >=2000 reps), Holm over 4-test family, 2% materiality floor; independent recompute; verdict SUPPORTED; cross-reference FCLR-XSEC-004.",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/fclr_xsec005_evaluation_<UTC>.py",
-          "research_state/session_<UTC>/fclr_xsec005_evaluation_<UTC>.json",
-          "research_state/session_<UTC>/fclr_xsec005_evaluation_<UTC>.md",
-          "research_state/session_<UTC>/fclr_xsec005_recompute_<UTC>.py",
-          "research_state/session_<UTC>/fclr_xsec005_recompute_<UTC>.json"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T001225Z/fclr_xsec005_evaluation_20261121T001225Z.py",
-          "research_state/session_20261121T001225Z/fclr_xsec005_evaluation_20261121T001225Z.json",
-          "research_state/session_20261121T001225Z/fclr_xsec005_recompute_20261121T001225Z.py",
-          "research_state/session_20261121T001225Z/fclr_xsec005_recompute_20261121T001225Z.json"
-        ]
-      },
-      {
-        "phase": "TRIGGER_AND_FRONTIER",
-        "status": "COMPLETE",
-        "claim": "Emit non-empty trigger_check_<UTC>.json + evidence_audit_<UTC>.{json,md}; rank-0 = FCLR-XSEC-005 COMPLETE, FCLR-XSEC-004 SUPERSEDED; sync hypothesis_registry.json; no sealed mutation, no workflows edits, no root-level md/json.",
-        "expected_artifacts": [
-          "research_state/session_<UTC>/trigger_check_<UTC>.json",
-          "research_state/session_<UTC>/evidence_audit_<UTC>.json",
-          "research_state/session_<UTC>/evidence_audit_<UTC>.md"
-        ],
-        "actual_artifacts": [
-          "research_state/session_20261121T001225Z/trigger_check_20261121T001225Z.json",
-          "research_state/session_20261121T001225Z/evidence_audit_20261121T001225Z.json",
-          "research_state/session_20261121T001225Z/evidence_audit_20261121T001225Z.md"
-        ]
-      }
+  "phases": [
+   {
+    "phase": "PREREG_FREEZE",
+    "status": "COMPLETE",
+    "claim": "Freeze FCLR-XSEC-007 protocol pre-outcomes: joint cross-panel estimand on overlapping 5-coin hours; Primary A = within-(hour, RV-tercile) funding rank -> next-hour RV (FCLR-XSEC-002 style); Primary B = within-(hour, UTC-session-bucket) funding rank -> next-hour notional-weighted liq intensity (FCLR-XSEC-006 style); block bootstrap + Holm over joint regime family + 2% floor. outcome_data_inspected_before_freeze=false. Both panel hashes recorded.",
+    "expected_artifacts": [
+     "research_state/session_20261121T021041Z/fclr_xsec007_protocol_freeze_20261121T021041Z.json",
+     "research_state/session_20261121T021041Z/fclr_xsec007_protocol_freeze_20261121T021041Z.md"
     ],
-    "note": "FCLR-XSEC-005 executed and COMPLETE in session_20261121T001225Z. Notional-weighted (dollar severity) confirmation of the FCLR-XSEC-004 low-RV liquidation finding. Low-RV regime funding contrast SUPPORTED: CI [452972.90, 850198.89], p=0.0, Holm passes, materiality 0.80. High-RV regime honest null. Independent recompute reproduces. Strong agreement with FCLR-XSEC-004 count-based result."
-  }
+    "actual_artifacts": [
+     "research_state/session_20261121T021041Z/fclr_xsec007_protocol_freeze_20261121T021041Z.json",
+     "research_state/session_20261121T021041Z/fclr_xsec007_protocol_freeze_20261121T021041Z.md"
+    ]
+   },
+   {
+    "phase": "EVALUATION_AND_GATE",
+    "status": "COMPLETE",
+    "claim": "Cross-panel evaluation: both primary funding contrasts on overlapping hours, block bootstrap across holdout hours within each regime family (seed 20261121, >=2000 reps), Holm over joint family, 2% materiality floor; independent recompute; verdict NOT_SUPPORTED (Primary A high-RV tercile funding -> RV CI [-0.0004, 2.005] includes zero, p=0.272, Holm adj_p=0.816; joint gate requires BOTH primaries); independent recompute concurs NOT_SUPPORTED.",
+    "expected_artifacts": [
+     "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.py",
+     "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.json",
+     "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.md",
+     "research_state/session_20261121T021041Z/fclr_xsec007_recompute_20261121T021041Z.py",
+     "research_state/session_20261121T021041Z/fclr_xsec007_recompute_20261121T021041Z.json"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.py",
+     "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.json",
+     "research_state/session_20261121T021041Z/fclr_xsec007_evaluation_20261121T021041Z.md",
+     "research_state/session_20261121T021041Z/fclr_xsec007_recompute_20261121T021041Z.py",
+     "research_state/session_20261121T021041Z/fclr_xsec007_recompute_20261121T021041Z.json"
+    ]
+   },
+   {
+    "phase": "TRIGGER_AND_FRONTIER",
+    "status": "COMPLETE",
+    "claim": "Emit non-empty trigger_check_<UTC>.json + evidence_audit_<UTC>.{json,md}; advance FCLR-XSEC-007 to COMPLETE with UTC 20261121T021041Z, set last_verdict NOT_SUPPORTED; sync hypothesis_registry.json (H_fclr_xsec_007 terminal NOT_SUPPORTED); no sealed mutation, no workflows edits, no root-level md/json.",
+    "expected_artifacts": [
+     "research_state/session_20261121T021041Z/trigger_check_20261121T021041Z.json",
+     "research_state/session_20261121T021041Z/evidence_audit_20261121T021041Z.json",
+     "research_state/session_20261121T021041Z/evidence_audit_20261121T021041Z.md"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T021041Z/trigger_check_20261121T021041Z.json",
+     "research_state/session_20261121T021041Z/evidence_audit_20261121T021041Z.json",
+     "research_state/session_20261121T021041Z/evidence_audit_20261121T021041Z.md"
+    ]
+   }
+  ],
+  "note": "FCLR-XSEC-007 COMPLETE (verdict NOT_SUPPORTED, session_20261121T021041Z). Honest null: Primary A high-RV tercile funding -> next-hour RV CI [-0.0004, 2.005] includes zero (p=0.272, Holm adj_p=0.816); joint gate requires BOTH primaries and Primary A fails. Independent recompute concurs NOT_SUPPORTED. All 20 trigger checks PASS. Demoted in frontier; succeeded by FCLR-XSEC-008 as rank-0 active heavy campaign per contingency ladder step 1 (alternative regime conditioning)."
+ },
+ {
+  "rank": 6,
+  "status": "SUPERSEDED",
+  "program_status": "SUPERSEDED",
+  "task": "FCLR-XSEC-006-20261121T010934Z",
+  "generated": "20261121T005519Z",
+  "refreshed": "2026-11-21T01:54:18Z",
+  "last_checked": "2026-11-21T01:54:18Z",
+  "last_verdict": "SUPPORTED",
+  "next_action_heavy": null,
+  "next_unfinished_task": null,
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": null,
+  "superseded_at": "2026-11-21T01:54:18Z",
+  "superseded_by": "FCLR-XSEC-007-20261121T015418Z",
+  "evidence": {
+   "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+   "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+   "rows": 1740415,
+   "coins": 15,
+   "hours": 10052,
+   "span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
+   "features_zero_null": true,
+   "mechanism": "utc_session_bucket_conditioned_cross_sectional_funding_effect_on_next_hour_notional_weighted_liquidation_intensity",
+   "distinct_from": [
+    "FCLR-001",
+    "FCLR-XSEC-001",
+    "FCLR-XSEC-002",
+    "FCLR-XSEC-003",
+    "FCLR-XSEC-004 (count-based, RV tercile)",
+    "FCLR-XSEC-005 (notional-weighted, RV tercile)",
+    "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
+    "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
+   ],
+   "supersedes": "FCLR-XSEC-005-20261121T001225Z"
+  },
+  "phases": [
+   {
+    "phase": "PREREG_FREEZE",
+    "status": "COMPLETE",
+    "claim": "Freeze FCLR-XSEC-006 protocol pre-outcomes: outcome = next-hour notional-weighted (sum notional_usd) liquidation intensity; regime = UTC trading-session bucket (Asian/European/US) at hour t; predictor = within-(hour,session) abs_fund_pct rank; baseline = within-session RV persistence; block bootstrap + Holm over session-bucket x {funding contrast, persistence baseline} family + 2% floor. outcome_data_inspected_before_freeze=false. Distinct from FCLR-XSEC-004 (count-based) and FCLR-XSEC-005 (notional-weighted, RV tercile).",
+    "expected_artifacts": [
+     "research_state/session_<UTC>/fclr_xsec006_protocol_freeze_<UTC>.json",
+     "research_state/session_<UTC>/fclr_xsec006_protocol_freeze_<UTC>.md"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T010934Z/fclr_xsec006_protocol_freeze_20261121T010934Z.json",
+     "research_state/session_20261121T010934Z/fclr_xsec006_protocol_freeze_20261121T010934Z.md"
+    ]
+   },
+   {
+    "phase": "EVALUATION_AND_GATE",
+    "status": "COMPLETE",
+    "claim": "Session-conditioned notional-weighted evaluation: regime-conditioned funding contrast, block bootstrap across holdout hours within session bucket (seed 20261121, >=2000 reps), Holm over the family, 2% materiality floor; independent recompute; verdict SUPPORTED; cross-reference FCLR-XSEC-004 and FCLR-XSEC-005.",
+    "expected_artifacts": [
+     "research_state/session_<UTC>/fclr_xsec006_evaluation_<UTC>.py",
+     "research_state/session_<UTC>/fclr_xsec006_evaluation_<UTC>.json",
+     "research_state/session_<UTC>/fclr_xsec006_evaluation_<UTC>.md",
+     "research_state/session_<UTC>/fclr_xsec006_recompute_<UTC>.py",
+     "research_state/session_<UTC>/fclr_xsec006_recompute_<UTC>.json"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T010934Z/fclr_xsec006_evaluation_20261121T010934Z.py",
+     "research_state/session_20261121T010934Z/fclr_xsec006_evaluation_20261121T010934Z.json",
+     "research_state/session_20261121T010934Z/fclr_xsec006_recompute_20261121T010934Z.py",
+     "research_state/session_20261121T010934Z/fclr_xsec006_recompute_20261121T010934Z.json"
+    ]
+   },
+   {
+    "phase": "TRIGGER_AND_FRONTIER",
+    "status": "COMPLETE",
+    "claim": "Emit non-empty trigger_check_<UTC>.json + evidence_audit_<UTC>.{json,md}; advance FCLR-XSEC-006 to COMPLETE with the new UTC, set last_verdict, demote FCLR-XSEC-005 to SUPERSEDED; sync hypothesis_registry.json; no sealed mutation, no workflows edits, no root-level md/json.",
+    "expected_artifacts": [
+     "research_state/session_<UTC>/trigger_check_<UTC>.json",
+     "research_state/session_<UTC>/evidence_audit_<UTC>.json",
+     "research_state/session_<UTC>/evidence_audit_<UTC>.md"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T010934Z/trigger_check_20261121T010934Z.json",
+     "research_state/session_20261121T010934Z/evidence_audit_20261121T010934Z.json",
+     "research_state/session_20261121T010934Z/evidence_audit_20261121T010934Z.md"
+    ]
+   }
+  ],
+  "note": "FCLR-XSEC-006 COMPLETE (verdict SUPPORTED, session_20261121T010934Z). UTC-session-bucketed (Asian/European/US) regime-conditioned notional-weighted liquidation-intensity confirmation. All three buckets SUPPORTED: Asian CI [162051, 521424], European CI [334550, 782272], US CI [94750, 698082]; all p<=0.013, Holm adj_p<=0.013, materiality 0.26-0.57. Independent recompute reproduces. Cross-reference: FCLR-XSEC-004 low-RV count-based CI [448605, 841156] and FCLR-XSEC-005 low-RV notional-weighted CI [452973, 850199] both SUPPORTED; divergence: session-bucketed effect appears in ALL THREE buckets, not confined to low-RV regime. Demoted in frontier; succeeded by FCLR-XSEC-007 as rank-0 active heavy campaign."
+ },
+ {
+  "rank": 7,
+  "status": "SUPERSEDED",
+  "program_status": "SUPERSEDED",
+  "task": "FCLR-XSEC-005-20261121T001225Z",
+  "generated": "20261121T000722Z",
+  "refreshed": "2026-11-21T01:54:18Z",
+  "last_checked": "2026-11-21T01:54:18Z",
+  "last_verdict": "SUPPORTED",
+  "next_action_heavy": null,
+  "next_unfinished_task": null,
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": null,
+  "superseded_at": "2026-11-21T00:55:19Z",
+  "superseded_by": "FCLR-XSEC-006-20261121T005519Z",
+  "evidence": {
+   "panel": "research_state/fclr_liq_combined_panel_20261115T181405Z.parquet",
+   "panel_sha256": "81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14",
+   "rows": 1740415,
+   "coins": 15,
+   "hours": 10052,
+   "span": "2025-03-22T19:00:00Z..2026-10-31T22:00:00Z",
+   "features_zero_null": true,
+   "mechanism": "regime_conditioned_cross_sectional_funding_effect_on_next_hour_notional_weighted_liquidation_intensity",
+   "distinct_from": [
+    "FCLR-001",
+    "FCLR-XSEC-001",
+    "FCLR-XSEC-002",
+    "FCLR-XSEC-003",
+    "FCLR-XSEC-004 (count-based)",
+    "FCLR-LIQ-XSEC-ORDERING (daily ordering)",
+    "FCLR-LIQ-XSEC-QLIKE (daily QLIKE)"
+   ],
+   "supersedes": "FCLR-XSEC-004-20261120T225115Z"
+  },
+  "phases": [
+   {
+    "phase": "PREREG_FREEZE",
+    "status": "COMPLETE",
+    "claim": "Freeze FCLR-XSEC-005 protocol pre-outcomes: outcome = next-hour notional-weighted (sum notional_usd) liquidation intensity; regime = market-wide RV tercile; predictor = within-(hour,regime) abs_fund_pct rank; baseline = within-regime RV persistence; block bootstrap + Holm over 4-test family + 2% floor. outcome_data_inspected_before_freeze=false. Distinct from FCLR-XSEC-004 (count-based).",
+    "expected_artifacts": [
+     "research_state/session_<UTC>/fclr_xsec005_protocol_freeze_<UTC>.json",
+     "research_state/session_<UTC>/fclr_xsec005_protocol_freeze_<UTC>.md"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T001225Z/fclr_xsec005_protocol_freeze_20261121T001225Z.json",
+     "research_state/session_20261121T001225Z/fclr_xsec005_protocol_freeze_20261121T001225Z.md"
+    ]
+   },
+   {
+    "phase": "EVALUATION_AND_GATE",
+    "status": "COMPLETE",
+    "claim": "Notional-weighted evaluation: regime-conditioned funding contrast, block bootstrap across holdout hours within regime (seed 20261121, >=2000 reps), Holm over 4-test family, 2% materiality floor; independent recompute; verdict SUPPORTED; cross-reference FCLR-XSEC-004.",
+    "expected_artifacts": [
+     "research_state/session_<UTC>/fclr_xsec005_evaluation_<UTC>.py",
+     "research_state/session_<UTC>/fclr_xsec005_evaluation_<UTC>.json",
+     "research_state/session_<UTC>/fclr_xsec005_evaluation_<UTC>.md",
+     "research_state/session_<UTC>/fclr_xsec005_recompute_<UTC>.py",
+     "research_state/session_<UTC>/fclr_xsec005_recompute_<UTC>.json"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T001225Z/fclr_xsec005_evaluation_20261121T001225Z.py",
+     "research_state/session_20261121T001225Z/fclr_xsec005_evaluation_20261121T001225Z.json",
+     "research_state/session_20261121T001225Z/fclr_xsec005_recompute_20261121T001225Z.py",
+     "research_state/session_20261121T001225Z/fclr_xsec005_recompute_20261121T001225Z.json"
+    ]
+   },
+   {
+    "phase": "TRIGGER_AND_FRONTIER",
+    "status": "COMPLETE",
+    "claim": "Emit non-empty trigger_check_<UTC>.json + evidence_audit_<UTC>.{json,md}; rank-0 = FCLR-XSEC-005 COMPLETE, FCLR-XSEC-004 SUPERSEDED; sync hypothesis_registry.json; no sealed mutation, no workflows edits, no root-level md/json.",
+    "expected_artifacts": [
+     "research_state/session_<UTC>/trigger_check_<UTC>.json",
+     "research_state/session_<UTC>/evidence_audit_<UTC>.json",
+     "research_state/session_<UTC>/evidence_audit_<UTC>.md"
+    ],
+    "actual_artifacts": [
+     "research_state/session_20261121T001225Z/trigger_check_20261121T001225Z.json",
+     "research_state/session_20261121T001225Z/evidence_audit_20261121T001225Z.json",
+     "research_state/session_20261121T001225Z/evidence_audit_20261121T001225Z.md"
+    ]
+   }
+  ],
+  "note": "FCLR-XSEC-005 executed and COMPLETE in session_20261121T001225Z. Notional-weighted (dollar severity) confirmation of the FCLR-XSEC-004 low-RV liquidation finding. Low-RV regime funding contrast SUPPORTED: CI [452972.90, 850198.89], p=0.0, Holm passes, materiality 0.80. High-RV regime honest null. Independent recompute reproduces. Strong agreement with FCLR-XSEC-004 count-based result."
+ }
 ]

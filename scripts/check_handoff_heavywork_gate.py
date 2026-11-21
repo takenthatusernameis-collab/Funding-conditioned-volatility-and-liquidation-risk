@@ -458,6 +458,41 @@ STARTER_REQUIRED = (
 STARTER_SECTION_HEADING = "## 14. Mandatory frozen starter protocol: FCLR-001"
 STARTER_SEALED_PROTOCOL = "research_state/research_protocol.md"
 
+# FCLR-LIVE-ARCHIVE hardening: the frozen-data frontier is exhausted
+# (next_campaign_status.py: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN) and the
+# prior handoff told future agents the only remaining path was an *unverified*
+# free-data route that might not exist — leaving a prose-only / source-probe-only
+# escape hatch that could pass the gate without any heavy research. This campaign
+# removes that bottleneck: a materially different, verified, unauthenticated free
+# source (the Binance public market-data archive at data.binance.vision — the
+# ``metrics`` dataset of daily open interest + taker long/short flow, deep
+# 2020-09 -> present, plus fundingRate/klines/mark/index/premium) is reachable and
+# was never exploited. Once this campaign starts, a post-start session cannot
+# satisfy the gate with a trigger-only, prose-only, source-probe-only, audit-only,
+# or verify-and-stop session. It must emit the outcome-blind source registry +
+# verified-download evidence, the outcome-blind prereg freeze, the heavy 3-block
+# confirmatory evaluation triad (py+json+md) on the newly downloaded archive data,
+# the independent stdlib recompute (py+json), the evidence audit (json+md), the
+# gate-critical evidence_audit_ alias (json), and a trigger check, with no
+# zero-byte placeholders. Sessions predating the campaign start are grandfathered
+# so this handoff refresh that first announces the campaign stays green.
+LIVE_ARCHIVE_CAMPAIGN_RE = re.compile(r"FCLR-LIVE-ARCHIVE-(\d+)-(\d{8}T\d{6}Z)")
+LIVE_ARCHIVE_REQUIRED = (
+    ("fclr_live_archive_source_registry_", ".json"),
+    ("fclr_live_archive_source_registry_", ".md"),
+    ("fclr_live_archive_prereg_", ".json"),
+    ("fclr_live_archive_prereg_", ".md"),
+    ("fclr_live_archive_eval_", ".py"),
+    ("fclr_live_archive_eval_", ".json"),
+    ("fclr_live_archive_eval_", ".md"),
+    ("fclr_live_archive_recompute_", ".py"),
+    ("fclr_live_archive_recompute_", ".json"),
+    ("fclr_live_archive_evidence_audit_", ".json"),
+    ("fclr_live_archive_evidence_audit_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 NEW_QUANT_PREFIXES = (
     "fclr_risk",
     "fclr_starter",
@@ -474,6 +509,7 @@ NEW_QUANT_PREFIXES = (
     "fclr_panelfe",         # FCLR-PANEL-FE panel fixed-effects funding-conditioning evaluation artifacts
     "fclr_liq_contagion",   # FCLR-LIQ-CONTAGION cross-coin liquidation contagion + funding spillover artifacts
     "fclr_liq_contagion02", # FCLR-LIQ-CONTAGION-002 robustness-reconciliation artifacts (edge-set + materiality)
+    "fclr_live_archive",    # FCLR-LIVE-ARCHIVE reachable free-archive source + heavy 3-block design artifacts
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -1570,6 +1606,87 @@ def _contagion_002_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _live_archive_state(handoff_text: str, latest_sid: str | None,
+                        latest_files: list[str],
+                        latest_dir: Path | None = None) -> dict:
+    """Return FCLR-LIVE-ARCHIVE non-avoidance state.
+
+    After the live-archive campaign starts, a post-start session must emit the
+    outcome-blind source registry + verified-download evidence, the outcome-blind
+    prereg freeze, the heavy 3-block confirmatory evaluation triad (py+json+md) on
+    the newly downloaded archive data, the independent stdlib recompute (py+json),
+    the evidence audit (json+md), the gate-critical evidence_audit_ alias (json),
+    and a trigger check, with no zero-byte placeholders. Trigger-only,
+    prose-only, source-probe-only, audit-only, and verify-and-stop sessions fail
+    closed. Sessions that predate the campaign start are grandfathered so the
+    handoff refresh that announces the campaign stays green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = LIVE_ARCHIVE_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-LIVE-ARCHIVE-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    # Ladder-aware: bind the artifact family to the campaign number in the
+    # handoff (01 -> fclr_live_archive01_*, 02 -> fclr_live_archive02_*, ...).
+    tag = f"live_archive{int(m.group(1)):02d}"
+    family = tuple(
+        (prefix.replace("fclr_live_archive01_", f"fclr_{tag}_"), suffix)
+        for prefix, suffix in LIVE_ARCHIVE_REQUIRED
+        if prefix.startswith("fclr_live_archive01_")
+    )
+    family += tuple(
+        (prefix, suffix) for prefix, suffix in LIVE_ARCHIVE_REQUIRED
+        if not prefix.startswith("fclr_live_archive01_")
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["artifact_family"] = tag
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, family):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _normalize_text(s: str) -> str:
     return "\n".join(line.rstrip() for line in s.replace("\r\n", "\n").split("\n")).strip()
 
@@ -1823,6 +1940,8 @@ def check(repo: Path = REPO) -> dict:
         "session_synthesis": None,
         "panel_fe": None,
         "contagion": None,
+        "contagion_002": None,
+        "live_archive": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -2256,6 +2375,35 @@ def check(repo: Path = REPO) -> dict:
                 if not ct2["has_trigger_check"]:
                     payload["failures"].append(
                         f"CONTAGION_002_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-LIVE-ARCHIVE: after the reachable free-archive campaign starts,
+            # require the source registry + verified-download evidence, the
+            # outcome-blind prereg freeze, the heavy 3-block confirmatory
+            # evaluation triad (py+json+md) on the newly downloaded archive data,
+            # the independent stdlib recompute (py+json), the evidence audit
+            # (json+md), the gate-critical evidence_audit_ alias (json), and a
+            # trigger check. Zero-byte placeholders fail closed, so a future
+            # session cannot dodge the heavy archive research with a trigger-only,
+            # prose-only, source-probe-only, audit-only, or verify-and-stop session.
+            la = _live_archive_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["live_archive"] = la
+            if la["required"]:
+                if la["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "LIVE_ARCHIVE_ARTIFACTS_MISSING:"
+                        + ",".join(la["missing_required_artifacts"])
+                    )
+                if la["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "LIVE_ARCHIVE_ARTIFACTS_EMPTY:"
+                        + ",".join(la["empty_required_artifacts"])
+                    )
+                if not la["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"LIVE_ARCHIVE_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
