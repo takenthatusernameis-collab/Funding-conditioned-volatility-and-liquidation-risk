@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T10:03:42Z
+**Timestamp:** 2026-11-21T10:55:39Z
 **Sole active campaign:** FCLR-PANEL-FE-001-20261121T085602Z (rank-0, READY_EXECUTE/ACTIVE → the heavy panel fixed-effects funding-conditioning study with walk-forward OOS; replaces the trigger-gated liquidation-OOS dead end that was the structural bottleneck)
 **Latest completed heavy session on disk:** session_20261121T080000Z (FCLR-SESSION-SYNTHESIS-01, verdict CONSOLIDATORY_ONLY — inverse-variance fixed-effect + DerSimonian-Laird random-effects meta-analysis over 17 terminal funding-conditioning contrasts; RV FE pooled d=1.237 CI incl. zero; liquidation FE pooled d=0.379 CI excl. zero BUT RE DL pooled d=0.228 CI incl. zero under I²=97.5%; independent stdlib recompute concurs; all terminal verdicts carried forward unchanged, no hypothesis promoted)
 **Frontier status (machine-verified):** `python3 scripts/next_campaign_status.py` → NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN. The 3-block confirmatory route is exhausted on every domain (Binance 5-symbol contiguous + disjoint + mark+funding-only; Hyperliquid bulk + extended). **This handoff therefore does NOT ask the next session to wait for that route.** It redirects to a *materially different, feasible* design that uses the full frozen panels (panel fixed effects + walk-forward), which the 3-block frontier check does not and cannot certify as exhausted.
@@ -11,9 +11,18 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T10:03:42Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T10:55:39Z)
 
 **Execute FCLR-PANEL-FE-001 — a panel fixed-effects study of whether the funding rate conditions (a) realized volatility and (b) liquidation intensity, with a walk-forward out-of-sample evaluation — behind a fresh outcome-blind prereg frozen before any outcome is inspected.**
+
+**First action (do this before anything else, in this order — no shortcuts):**
+1. `cd` to repo root; run `python3 scripts/check_handoff_heavywork_gate.py` (must print `reason=OK`) and `python3 -m unittest tests.test_active_campaign_gate tests.test_tracka_hardening_125 tests.test_tracka_hardening_143` (must be all OK). If either fails, fix the environment first — nothing else counts as progress until both are green.
+2. Create `research_state/session_<UTC>/` with `UTC > 20261121T085602Z`.
+3. Freeze the outcome-blind prereg FIRST (`fclr_panelfe01_prereg_<UTC>.json` + `.md`, `outcome_data_inspected_before_freeze=false`, both panel sha256 asserted). Do NOT read any RV/liquidation outcome statistics before this file exists.
+4. Only then run the panel-FE evaluation triad, the independent stdlib/numpy recompute, the evidence audit, and the non-empty `trigger_check_<UTC>.json`.
+5. Re-run the gate and the 79-test suite; both must stay green before you stop.
+
+**This is non-avoidable heavy work.** A prose-only session, a trigger-check-only session, an audit-only session, a placeholder file, or an empty session directory does NOT satisfy the `FCLR-PANEL-FE-001` gate family and is a failed session. The bottleneck that blocked the prior session (awaiting an external `NEW_OBSERVED_LIQUIDATION_SOURCE` trigger, or hunting a non-existent new free-data route) is removed: the frozen panels are sufficient and verified, so the only remaining input is the agent's own execution of the study.
 
 **Why this is the focus (repository-name priority):** The repository is named *Funding-conditioned-volatility-and-liquidation-risk* — two scientific halves reconciled by funding conditioning. Half (a): does the funding rate *condition volatility (RV)*? Half (b): does it *condition liquidation risk*? Every prior campaign answered these with **pooled cross-sectional regime contrasts** or a **3-block time-series confirmation**. Both routes are now exhausted or underpowered on the frozen panels (see Section 6). This campaign attacks the same two halves with a **materially different and feasible design**: a two-way (coin + hour) fixed-effects panel regression on the full frozen panels, which uses within-coin, within-hour variation and therefore does **not** require the 3 mutually non-overlapping ≥127-day contiguous blocks that the frontier check reports as unavailable.
 
@@ -25,7 +34,7 @@
   - FCLR-001: `coin, ts, split, close/open/high/low, rv1h, rv24h, rv168h, target_rv24h, signed_funding, funding_asof_lag_h, abs_funding_pct_trail, abs_funding_trail_n, ema24, ema24_dist, log_rv1h, log_rv24h, log_rv168h, premium, premium_status` (29,136 rows × 22 cols, 5 coins, 5,832 hours).
   - Combined liquidation panel: `timestamp, coin, notional_usd, side, source, tx_hash, fundingRate, premium, abs_fund_pct, mark, ema_dist, rv24h, rv168h` (1,740,415 event rows, 15 coins; aggregate to hourly count + notional per coin).
 - Wired a new machine-enforced gate family `FCLR-PANEL-FE-001` into `scripts/check_handoff_heavywork_gate.py` with a matching regression test in `tests/test_tracka_hardening_143.py` (`TestPanelFeCampaignGate`, 5 tests). Post-20261121T085602Z sessions that do not emit the full panel-FE artifact set fail closed.
-- This refresh (2026-11-21T10:03:42Z): re-ran the gate (`reason=OK`) and the 79-test acceptance suite (all OK); re-confirmed both frozen panels expose the exact columns the panel-FE design needs — FCLR-001 `coin, ts, log_rv1h, signed_funding, funding_asof_lag_h, rv24h, rv168h, target_rv24h, ema24_dist, premium, premium_status`; combined liquidation `timestamp, coin, notional_usd, fundingRate, abs_fund_pct, rv24h, rv168h` — so there is no schema bottleneck to the heavy evaluation; and reconciled the campaign id to the single canonical `FCLR-PANEL-FE-001-20261121T085602Z` already used by `experiment_frontier.json` rank-0 and `hypothesis_registry.json`.
+- This refresh (2026-11-21T10:55:39Z): re-ran the gate (`reason=OK`, exit 0) and the 79-test acceptance suite (all OK, 0 failures); re-verified both frozen panel sha256 values on disk (`41962f82…` FCLR-001, `81a100d5…` combined liquidation) so there is no schema or integrity bottleneck to the heavy evaluation; re-confirmed rank-0 in `experiment_frontier.json` is `FCLR-PANEL-FE-001-20261121T085602Z` READY_EXECUTE/ACTIVE with all others SUPERSEDED; re-confirmed `hypothesis_registry.json` holds `H_fclr_panelfe_001` FROZEN_PENDING_EVALUATION; and re-confirmed the `FCLR-PANEL-FE-001` gate family in `scripts/check_handoff_heavywork_gate.py` binds the full Section 4 artifact set for any post-20261121T085602Z session.
 
 **The two pre-registered hypotheses (frozen before outcomes):**
 - **H_panelfe_vol (half a):** In a two-way (coin + hour) fixed-effects panel on FCLR-001, the coefficient on `funding_asof_lag_h` / `signed_funding` in a regression of next-hour `log_rv1h` (and, robustness, `target_rv24h`) is non-zero and economically material (≥2% relative effect).
