@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-21T22:05:11Z (supersedes 2026-11-21T22:01:00Z)
+**Timestamp:** 2026-11-21T22:22:15Z (supersedes 2026-11-21T22:05:11Z)
 **Sole active campaign:** FCLR-LIVE-DATA-ACQUISITION-001 — open a materially different free-data route (live/unfrozen external sources) so heavy research can continue; frozen-data frontier exhausted, no re-runs permitted.
 **Latest completed heavy session on disk:** session_20261121T220100Z (FCLR-FINAL-SYNTHESIS-01, COMPLETE — final synthesis report artifact set emitted; see §1–§2). session_20261121T210000Z (FCLR-LIQ-CONTAGION-002, COMPLETE — full artifact set emitted; see §3–§4) remains the heavy-session bundle of record. session_20261121T193000Z (FCLR-LIQ-CONTAGION-001, COMPLETE) remains grandfathered.
 **Gate baseline:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS (`reason=OK`, `root=499/500`). `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144` → 68 pass, 0 fail. `python3 scripts/next_campaign_status.py` → confirms CONTAGION-002 executed; **CAMPAIGN STATUS: no feasible 3-block design in ANY domain** (Binance 5-symbol, Hyperliquid bulk, Hyperliquid extended all exhausted).
@@ -12,7 +12,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T22:05:11Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-21T22:22:15Z)
 
 **PRIORITY-0 MISSION — OPEN A MATERIALLY DIFFERENT FREE-DATA ROUTE.** Frozen-data frontier is exhausted (all 3 domains exhausted, no feasible 3-block design). Future sessions must NOT re-run terminal campaigns or idle on frozen data. Next session must (a) discover and verify a new admissible free source (live/unfrozen external data, no credentials), (b) freeze a prereg with outcome-blind hypotheses on that new data, (c) execute a heavy 3-block design with non-empty artifacts under `research_state/session_<UTC>/` (UTC > 20261121T220100Z). Non-avoidance constraints apply: no prose-only/trigger-only/audit-only/verify-and-stop/placeholder sessions; root cap 499/500.
 
