@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T20:57:55Z (supersedes 2026-11-22T20:04:53Z)
+**Timestamp:** 2026-11-22T21:00:09Z (supersedes 2026-11-22T20:57:55Z)
 **Session type:** handoff timestamp refresh + bottleneck re-verification. The in-flight `session_20261122T190000Z` is complete on disk (FCLR-POOLED-ROBUST-002 decision NOT_SUPPORTED_LEAKAGE_ROBUST_NULL) with its `trigger_check_` bookkeeping file present and non-empty and its carried-forward `fclr_pooled001_*` / `fclr_pooled_audit001_*` bundles in place; the real-repo gate passes closed→green (see §1a). Sole rank-0 campaign is `FCLR-LIQ-RISK-ESCALATION-09-20261122T193000Z` (**ACTIVE / READY_EXECUTE**, gate-enforced). Campaign start UTC `20261122T193000Z` has **elapsed** (current UTC 2026-11-22T20:04:53Z). The next session (UTC > `20261122T193000Z`) **must** produce the full heavy artifact set under its own `session_<UTC>/` or the gate fails closed.
 
 **Sole rank-0 campaign (gate-enforced):** `FCLR-LIQ-RISK-ESCALATION-09-20261122T193000Z` — **ACTIVE / READY_EXECUTE**. A heavy, outcome-blind, leakage-hardened **confirmatory study of the repository's liquidation-risk pillar using the OBSERVED ironflow liquidations bulk stream (Track A)** — the first confirmatory use of observed liquidation events, distinct from the modeled Track B breach proxy. It asks the second half of the primary research question (RESEARCH_PROMPT.md §3.2): do funding-conditioned features predict **observed** liquidation intensity (hourly event count and open-interest-normalized notional), under an explicit §15 label-admissibility audit (coverage, completeness, capped-sample check, `market`→`coin` identity) and the same leakage hardening that confirmed the volatility null. Gate binding `FCLR-LIQ-RISK-ESCALATION` (artifact family `fclr_risk09_*`) fails closed without the full heavy artifact set under `research_state/session_<UTC>/` (UTC > `20261122T193000Z`).
@@ -19,7 +19,7 @@ Repository focus (per repo name **Funding-conditioned-volatility-and-liquidation
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (handoff timestamp refresh 2026-11-22T20:57:55Z; campaign start UTC 20261122T193000Z **ELAPSED**)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (handoff timestamp refresh 2026-11-22T21:00:09Z; campaign start UTC 20261122T193000Z **ELAPSED**)
 
 > **READ THIS FIRST.**
 >
