@@ -1,0 +1,24 @@
+{
+  "experiment_id": "FCLR-POOLED-001",
+  "campaign": "FCLR-POOLED-001-20261122T040000Z",
+  "session_utc": "20261122T092003Z",
+  "trigger_type": "campaign_start_pooled_heavy_work",
+  "trigger_fired": true,
+  "trigger_utc": "20261122T040000Z",
+  "session_utc": "20261122T092003Z",
+  "pooled_campaign_start": "20261122T040000Z",
+  "status": "EXECUTED",
+  "artifacts_complete": 13,
+  "artifact_family": "fclr_pooled001_*",
+  "decision": "NOT_SUPPORTED",
+  "summary": "FCLR-POOLED-001 pooled chronological OOS confirmatory design executed on on-disk ironflow bulk data (18 months, 2025-05..2026-10, 799 markets). Funding-conditioned features (C2) do not improve 24h forward realized variance QLIKE over RV-only baseline (B1). Relative QLIKE difference ~0.0%, below -2.0% materiality floor. Null result preserved.",
+  "no_new_source_required": true,
+  "no_network_used": true,
+  "stdlib_pyarrow_only": true,
+  "bottlenecks_removed": [
+    "broken_3_block_30day_funding_framing_sidestepped_by_pooled_chronological_design",
+    "no_external_trigger_needed_ironflow_bulk_on_disk",
+    "no_new_data_source_required",
+    "single_rank0_confirmed_no_deadlock"
+  ]
+}
