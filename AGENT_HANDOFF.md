@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-22T22:51:07Z
+# AGENT HANDOFF — 2026-11-22T23:46:00Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -9,26 +9,28 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-**Rank-0 campaign:** `FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z` — status `READY_EXECUTE`, program `ACTIVE`. Campaign start UTC `20261122T225107Z` has **ELAPSED**. Your new `session_<UTC>/` MUST have UTC **> `20261122T225107Z`** and MUST be recorded in this handoff before the gate will pass.
+**Rank-0 campaign:** `FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z` — status `READY_EXECUTE`, program `ACTIVE`. Campaign start UTC `20261122T225107Z` has **ELAPSED**. Your new `session_<UTC>/` MUST have UTC **> `20261122T225107Z`** and MUST be recorded in this handoff (append the literal id `session_<UTC>`) before the gate will pass.
+
+**This campaign is NOW machine-enforced by the gate (previously it was not — that was the bottleneck).** `scripts/check_handoff_heavywork_gate.py::_tracks01_state` binds the `fclr_tracks01_*` artifact family to `FCLR-TRACKA-SOURCE-AUDIT-(N)`. Any post-start session that lacks the full non-empty artifact set (or is trigger-only / prose-only / source-probe-only / audit-only / verify-and-stop) fails closed with `TRACKA_SOURCE_AUDIT_ARTIFACTS_MISSING` / `_EMPTY` / `_TRIGGER_CHECK_MISSING`. Zero-byte placeholders do not count.
 
 **Why this campaign and nothing else (priority by repo name + frontier):**
 The repo name is **Funding-conditioned-volatility-and-liquidation-risk**. The primary question (§3.2) has two halves:
 1. **Volatility forecasting (Track C)** — CLOSED leakage-robust: `FCLR-POOLED-ROBUST-002` returned `NOT_SUPPORTED_LEAKAGE_ROBUST_NULL` (C2−B1 QLIKE = +1.011%, Holm primary p=0.6365 vs α₂=0.00833).
-2. **Liquidation-risk forecasting** — Track A (observed liquidations) just evaluated in `FCLR-LIQ-RISK-ESCALATION-09` → `NOT_SUPPORTED` (+0.149% rel QLIKE, fails -2% floor, CI95 includes zero, Holm p=0.6365). Track B (modeled breach) evaluated in `FCLR-POOLED-001`, `FCLR-POOLED-ROBUST-002`, `FCLR-LIVE-ARCHIVE-01/02` → all `NOT_SUPPORTED`.
+2. **Liquidation-risk forecasting** — Track A (observed liquidations) evaluated in `FCLR-LIQ-RISK-ESCALATION-09` → `NOT_SUPPORTED` (+0.149% rel QLIKE, fails -2% floor, CI95 includes zero, Holm p=0.6365). Track B (modeled breach) evaluated in `FCLR-POOLED-001`, `FCLR-POOLED-ROBUST-002`, `FCLR-LIVE-ARCHIVE-01/02` → all `NOT_SUPPORTED`.
 
 **Three materially distinct routes, two+ source families, same gate blocked.** Per RESEARCH_PROMPT.md §16: "If the same gate remains blocked after three materially distinct documented routes spanning at least two independent source families/methods... create the smallest useful alternative experiment with a new ID." Per §5: "Do not prematurely conclude that no liquidation labels exist. Enumerate, test, and rank admissible sources." Per §10 priority #2: "Source feasibility map: test small unauthenticated requests for... direct liquidation history. Publish exact evidence of what is accessible."
 
 **The single highest-value unfinished work is a formal Track A source viability audit** — the ONLY path to either (a) unlock Track A with a new viable observed-liquidation source, or (b) formally close Track A and pivot to Track B with a new frozen protocol. This is NOT a re-run of any terminal campaign. It is a new experiment (FCLR-TRACKA-SOURCE-AUDIT-01) with a new ID.
 
-**Blockers: None.** No external trigger, no network required for source enumeration. Uses stdlib + pyarrow only. The audit is feasible TODAY on cached knowledge of free sources.
+**Blockers: None.** No external trigger, no network required for the heavy evaluation; source enumeration uses stdlib + pyarrow only. The audit is feasible TODAY on cached knowledge of free sources.
 
 ---
 
-## FOCUS CAMPAIGN (Mandatory — heavy work, non-avoidable)
+## FOCUS CAMPAIGN (Mandatory — heavy work, non-avoidable, gate-enforced)
 
 Execute **FCLR-TRACKA-SOURCE-AUDIT-01** in two phases, both `PENDING`:
 
-1. **SOURCE_ENUMERATION_PROBE** — Enumerate, test, and rank ALL admissible free sources for observed liquidation labels per RESEARCH_PROMPT.md §5, §15. Candidate families: Binance public archive (liquidationSnapshot?), Bybit public archive, OKX public archive, Hyperliquid (if any public historical liquidation endpoint), public GitHub/Zenodo/Hugging Face/institutional archives, Ironflow (already used — document why capped-sample design makes it incomplete per §15). For each: verify unauthenticated download path, actual history depth, schema, licensing, earliest/latest timestamp, cadence, symbol/venue coverage, known gaps, file hashes/ETags, rejection reason if inadmissible. Record in `research_state/data_source_registry.json` + per-source probe artifacts.
+1. **SOURCE_ENUMERATION_PROBE** — Enumerate, test, and rank ALL admissible free sources for observed liquidation labels per RESEARCH_PROMPT.md §5, §15. Candidate families: Binance public archive (liquidationSnapshot?), Bybit public archive, OKX public archive, Hyperliquid (if any public historical liquidation endpoint), public GitHub/Zenodo/Hugging Face/institutional archives, Ironflow (already used — document why the capped-sample design makes it incomplete per §15). For each: verify unauthenticated download path, actual history depth, schema, licensing, earliest/latest timestamp, cadence, symbol/venue coverage, known gaps, file hashes/ETags, rejection reason if inadmissible. Record in `research_state/data_source_registry.json` (update if exists, else create under `session_<UTC>/`) + per-source probe artifacts.
 
 2. **VIABILITY_DECISION_AND_PIVOT** — Based on audit evidence, make a frozen viability decision BEFORE inspecting any outcome:
    - **If a new viable Track A source is found:** freeze a new confirmatory protocol (FCLR-TRACKA-SOURCE-AUDIT-01-V2) with outcome-blind prereg, then execute the heavy evaluation on that source.
@@ -45,7 +47,7 @@ The gate binds the artifact family to the campaign number (`FCLR-TRACKA-SOURCE-A
 | 3 | `fclr_tracks01_viability_decision_<UTC>.json` **and** `.md` | Frozen viability decision BEFORE outcome inspection: either (a) NEW_TRACK_A_SOURCE_FOUND → name, access method, coverage, next protocol ID; or (b) TRACK_A_STRUCTURALLY_BLOCKED → evidence, Track B pivot protocol ID. Must include `outcome_data_inspected_before_freeze:false` and input sha256 assertions. |
 | 4 | `fclr_tracks01_pivot_prereg_<UTC>.json` **and** `.md` | **If Track A blocked:** outcome-blind prereg for new Track B experiment (modeled breach on best free mark-price data). Hypotheses, targets (hourly breach probability per coin, long/short separate), features (funding + RV + price-dislocation per §7), splits (chronological, 48h purge+embargo, non-overlapping 168h blocks), baselines (RV-only vs funding-conditioned), materiality floor (2% rel QLIKE/Brier), Holm family, alpha-spending. **If Track A viable:** prereg for confirmatory Track A on the new source. |
 | 5 | `evidence_audit_<UTC>.json` (+ `.md`) | Gate-critical alias — required by the generic new-heavy-session check (`evidence_audit_` prefix). |
-| 6 | `trigger_check_<UTC>.json` | Non-empty trigger check (required by the audit family). |
+| 6 | `trigger_check_<UTC>.json` | Non-empty trigger check (required by the tracks01 family). |
 
 ### Carry-Forward Bundles (pristine copies from `session_20261122T224500Z/`)
 Copy these into your new `session_<UTC>/` so older gate bindings stay satisfied:
@@ -86,13 +88,14 @@ python3 -m unittest \
   tests.test_fclr_starter_001_campaign_gate \
   tests.test_fclr_campaign_gate \
   tests.test_fclr_heavy_confirm_gate \
-  tests.test_pooled_robust_002_campaign_gate
+  tests.test_pooled_robust_002_campaign_gate \
+  tests.test_tracka_hardening_143
 
 # 3. Frozen 3-block domains exhausted (expected; not a blocker for tracks01)
 python3 scripts/next_campaign_status.py
 ```
 
-The gate fails closed if: this handoff lacks the markers, the newest on-disk session is not recorded here, the newest session lacks `fclr_tracks01_*` + `trigger_check_*.json`, or any required file is zero bytes.
+The gate fails closed if: this handoff lacks the markers, the newest on-disk session is not recorded here, the newest session lacks the full `fclr_tracks01_*` family + `evidence_audit_*.json` + `trigger_check_*.json`, or any required file is zero bytes.
 
 ---
 
@@ -113,12 +116,12 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert sha256 before r
 
 ## KEY FILES TO READ BEFORE STARTING
 
-- `research_state/experiment_frontier.json` — rank-0 entry will be updated to `FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z`.
-- `scripts/check_handoff_heavywork_gate.py` — gate enforcement (campaign id regex; tracks01 required set).
+- `research_state/experiment_frontier.json` — rank-0 entry is `FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z` (status READY_EXECUTE, last_verdict NOT_STARTED).
+- `scripts/check_handoff_heavywork_gate.py` — gate enforcement (`TRACKA_SOURCE_AUDIT_CAMPAIGN_RE`; `_tracks01_state`; `fclr_tracks01_*` required set; `tracks01` payload key).
 - `RESEARCH_PROMPT.md` §5 (source discovery), §15 (label admissibility), §16 (adaptive feasibility), §10 priority #2 (source feasibility map), §3.2 (primary question two halves).
 - `research_state/session_20261122T224500Z/fclr_risk09_evaluation_20261122T224500Z.md` — Track A result NOT_SUPPORTED.
 - `research_state/session_20261122T190000Z/fclr_pooled_robust002_evidence_audit_20261122T190000Z.md` — Track C result NOT_SUPPORTED_LEAKAGE_ROBUST_NULL.
-- `research_state/data_source_registry.json` — if exists, update; if not, create.
+- `research_state/data_source_registry.json` — if exists, update; if not, create under `session_<UTC>/`.
 
 ---
 
@@ -154,13 +157,14 @@ Then record your `session_<UTC>/` id in this handoff (append the id string `sess
 
 ## BOTTLENECK RESOLUTION (this handoff)
 
-- **Resolved:** The previous handoff declared "Single highest-value next task: None" and "Reopen only on NEW_OBSERVED_LIQUIDATION_SOURCE" — a prose/probe-only escape hatch that contradicts RESEARCH_PROMPT.md §16 (adaptive feasibility: create new experiment after 3 blocked routes) and §19 (each session must deliver substantive result or evidence-backed blocker + next valid task). This handoff replaces that escape hatch with a **mandatory, gate-enforced Track A source viability audit** (FCLR-TRACKA-SOURCE-AUDIT-01) that either unlocks Track A or formally closes it and pivots to Track B — the only scientifically honest path forward per the primary question's two halves.
+- **Resolved (primary bottleneck):** The previous handoff declared `FCLR-TRACKA-SOURCE-AUDIT-01` "gate-enforced", but `check_handoff_heavywork_gate.py` had **no binder** for it — no `TRACKA_SOURCE_AUDIT` regex, no `_tracks01_state`, no `fclr_tracks01_*` required set. A future agent could skip the entire heavy Track A source audit and the gate would still return `OK`. This handoff adds the missing binder: `TRACKA_SOURCE_AUDIT_CAMPAIGN_RE`, `TRACKA_SOURCE_AUDIT_REQUIRED`, `_tracks01_state`, the `tracks01` payload key, the enforcement block in `check()`, and `fclr_tracks` in `NEW_QUANT_PREFIXES`. Verified: pre-start sessions grandfathered (green now), post-start sessions without the full non-empty artifact set fail closed with `TRACKA_SOURCE_AUDIT_ARTIFACTS_MISSING` / `_EMPTY` / `_TRIGGER_CHECK_MISSING`.
+- **Resolved:** The previous handoff's "Single highest-value next task: None" / "Reopen only on NEW_OBSERVED_LIQUIDATION_SOURCE" prose/probe-only escape hatch (contradicting §16 adaptive feasibility and §19) is replaced by the mandatory, now gate-enforced source viability audit that either unlocks Track A or formally closes it and pivots to Track B.
 - **Resolved:** Root md+json count 499/500 at cap — all new artifacts go under `session_<UTC>/` only.
 - No campaign blockers; no external triggers pending; source enumeration is feasible TODAY on cached knowledge. Heavy work proceeds without idling.
 
 ---
 
-## HANDOFF GENERATED: 2026-11-22T22:51:07Z
+## HANDOFF GENERATED: 2026-11-22T23:46:00Z
 **Next session must use UTC > 20261122T225107Z** (campaign start gate).
 **Latest handoff session: session_20261122T224500Z** (completed risk09)
-**Rank-0 campaign: FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z** (this handoff)
+**Rank-0 campaign: FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z** (this handoff; now gate-enforced via `_tracks01_state`)

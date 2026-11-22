@@ -522,6 +522,41 @@ NEXT_SOURCE_VERIFY_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-TRACKA-SOURCE-AUDIT-01 hardening: the rank-0 campaign after Track A
+# observed-liquidation forecasting returns NOT_SUPPORTED on the ironflow capped
+# feed and the frozen + reachable-archive frontiers are exhausted. Per
+# RESEARCH_PROMPT.md §16 (three blocked routes -> new experiment) and §5/§10
+# priority #2 (enumerate/test/rank admissible free observed-liquidation sources),
+# the only honest path forward is a formal Track A source viability audit that
+# either unlocks a new observed-liquidation source or formally closes Track A
+# and pivots to a frozen Track B modeled-breach protocol. The prior handoff
+# CLAIMED this campaign was gate-enforced but no binder existed, so a future
+# session could skip the heavy source audit entirely and still pass with a
+# trigger-only or verify-and-stop session. This binder removes that bottleneck:
+# once the campaign starts, a post-start session cannot satisfy the gate with a
+# trigger-only, prose-only, source-probe-only, audit-only, or verify-and-stop
+# session. It must emit the source registry + probe triad, the outcome-blind
+# viability decision, the pivot prereg, the evidence audit, the gate-critical
+# evidence_audit_ alias, and a trigger check, with no zero-byte placeholders.
+# Sessions predating the campaign start are grandfathered so this handoff
+# refresh that first announces the (real) binding stays green.
+TRACKA_SOURCE_AUDIT_CAMPAIGN_RE = re.compile(
+    r"FCLR-TRACKA-SOURCE-AUDIT-(\d+)-(\d{8}T\d{6}Z)"
+)
+TRACKA_SOURCE_AUDIT_REQUIRED = (
+    ("fclr_tracks01_source_registry_", ".json"),
+    ("fclr_tracks01_source_registry_", ".md"),
+    ("fclr_tracks01_probe_", ".py"),
+    ("fclr_tracks01_probe_", ".json"),
+    ("fclr_tracks01_probe_", ".md"),
+    ("fclr_tracks01_viability_decision_", ".json"),
+    ("fclr_tracks01_viability_decision_", ".md"),
+    ("fclr_tracks01_pivot_prereg_", ".json"),
+    ("fclr_tracks01_pivot_prereg_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 # FCLR-POOLED-001 hardening: the *only* thing that ever blocked heavy work was
 # the broken "3 contiguous 30-day funding-backed blocks" framing that
 # next_campaign_status.py enforces across every cached domain. That framing is
@@ -635,6 +670,7 @@ NEW_QUANT_PREFIXES = (
     "fclr_next_source_verify", # FCLR-NEXT-SOURCE-VERIFY-01 materially-different free source + heavy 3-block design artifacts
     "fclr_pooled",          # FCLR-POOLED pooled chronological OOS funding-conditioned vol + liq-risk artifacts
     "fclr_pooled_audit",    # FCLR-POOLED-AUDIT pooled ironflow adversarial leakage/quality audit artifacts
+    "fclr_tracks",          # FCLR-TRACKA-SOURCE-AUDIT observed-liquidation source viability audit + pivot artifacts
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -1890,6 +1926,85 @@ def _next_source_verify_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _tracks01_state(handoff_text: str, latest_sid: str | None,
+                    latest_files: list[str],
+                    latest_dir: Path | None = None) -> dict:
+    """Return FCLR-TRACKA-SOURCE-AUDIT-01 non-avoidance state.
+
+    After the Track A source viability audit campaign starts, a post-start
+    session must emit the source registry + probe triad, the outcome-blind
+    viability decision, the pivot prereg, the evidence audit, the gate-critical
+    evidence_audit_ alias, and a trigger check. Trigger-only, prose-only,
+    source-probe-only, audit-only, verify-and-stop sessions and zero-byte
+    placeholders fail closed. Sessions predating the campaign start are
+    grandfathered so the handoff refresh that announces the campaign stays green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = TRACKA_SOURCE_AUDIT_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-TRACKA-SOURCE-AUDIT-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    def _matches(prefix: str, suffix: str) -> list[str]:
+        return sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+
+    # Ladder-aware: bind the artifact family to the campaign number in the
+    # handoff (01 -> fclr_tracks01_*, 02 -> fclr_tracks02_*, ...).
+    tag = f"tracks{int(m.group(1)):02d}"
+    family = tuple(
+        (prefix.replace("fclr_tracks01_", f"fclr_{tag}_"), suffix)
+        if prefix.startswith("fclr_tracks01_")
+        else (prefix, suffix)
+        for prefix, suffix in TRACKA_SOURCE_AUDIT_REQUIRED
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["artifact_family"] = tag
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, family):
+        matches = _matches(prefix, suffix)
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _pooled_state(handoff_text: str, latest_sid: str | None,
                   latest_files: list[str],
                   latest_dir: Path | None = None) -> dict:
@@ -2381,6 +2496,7 @@ def check(repo: Path = REPO) -> dict:
         "pooled": None,
         "pooled_audit": None,
         "pooled_robust_02": None,
+        "tracks01": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -2950,6 +3066,33 @@ def check(repo: Path = REPO) -> dict:
                 if not pr["has_trigger_check"]:
                     payload["failures"].append(
                         f"POOLED_ROBUST_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-TRACKA-SOURCE-AUDIT-01: after the Track A source viability
+            # audit campaign starts, require the source registry + probe triad,
+            # the outcome-blind viability decision, the pivot prereg, the
+            # evidence audit + gate alias, and a trigger check. Trigger-only,
+            # prose-only, source-probe-only, audit-only, verify-and-stop
+            # sessions and zero-byte placeholders fail closed, so a future
+            # session cannot dodge the heavy Track A unlock-or-pivot work.
+            ta = _tracks01_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["tracks01"] = ta
+            if ta["required"]:
+                if ta["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "TRACKA_SOURCE_AUDIT_ARTIFACTS_MISSING:"
+                        + ",".join(ta["missing_required_artifacts"])
+                    )
+                if ta["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "TRACKA_SOURCE_AUDIT_ARTIFACTS_EMPTY:"
+                        + ",".join(ta["empty_required_artifacts"])
+                    )
+                if not ta["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"TRACKA_SOURCE_AUDIT_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
