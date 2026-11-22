@@ -3,13 +3,57 @@
   "rank": 0,
   "status": "READY_EXECUTE",
   "program_status": "ACTIVE",
+  "task": "FCLR-LIQ-RISK-ESCALATION-09-20261122T193000Z",
+  "generated": "20261122T193000Z",
+  "refreshed": "2026-11-22T19:55:42Z",
+  "last_checked": "2026-11-22T19:55:42Z",
+  "last_verdict": "NOT_STARTED",
+  "next_action_heavy": "Execute FCLR-LIQ-RISK-ESCALATION-09: the FIRST confirmatory use of the observed ironflow liquidations bulk stream (Track A) for the repository's liquidation-risk pillar. FCLR-POOLED-ROBUST-002 confirmed the funding-conditioned VOLATILITY (QLIKE) null is leakage-robust, so the highest-value unfinished work is the other half of the primary question (RESEARCH_PROMPT.md \u00a73.2): do funding-conditioned features predict OBSERVED liquidation intensity? This is NOT a re-run of the modeled Track B breach proxy. Steps: (a) label-admissibility audit per \u00a715 (hourly coverage, capped-sample check, wallet-level dedup, and a market->coin identity map stripping the -PERP suffix; missing events are NOT zero); (b) outcome-blind prereg frozen before outcomes; (c) leakage-hardened design (48h purge+embargo, non-overlapping forward blocks, delisting-aware per-coin identity, survivors-vs-exited arm); (d) baseline (RV/persistence) vs funding-conditioned candidate on observed liquidation intensity (hourly event count and notional normalized by open interest), with QLIKE/Poisson-deviance for counts and Brier/log-loss + calibration for event occurrence; (e) per-coin block-bootstrap CI95 + Holm across the declared family + alpha-spending look; (f) independent stdlib recompute. Verdict may honestly be NOT_SUPPORTED, PARTIAL_POSITIVE_SIGNAL (incomplete labels), or SUPPORTED; never claim a complete observed-liquidation census from a capped feed. No risk overlay (\u00a79 gate still not passed).",
+  "next_unfinished_task": "FCLR-LIQ-RISK-ESCALATION-09-20261122T193000Z: produce, under research_state/session_<UTC>/ (UTC > 20261122T193000Z), all of: (a) fclr_risk09_prereg_<UTC>.{json,md} - outcome-blind freeze (outcome_data_inspected_before_freeze:false; input sha256 asserted; 48h purge+embargo; non-overlapping forward blocks; delisting-aware identity; baselines; materiality floor; Holm family; alpha-spending) frozen BEFORE inspecting any outcome; (b) fclr_risk09_power_<UTC>.{py,json,md} - observed-event sparsity/coverage + minimum-detectable-effect power audit for the rare observed-liquidation intensity target; (c) fclr_risk09_recompute_<UTC>.{py,json} - independent stdlib recompute from stored input hashes; (d) fclr_risk09_evaluation_<UTC>.{py,json,md} - heavy label-admissibility + leakage-hardened intensity evaluation (count + OI-normalized notional, RV-only vs funding-conditioned, block bootstrap, Holm); (e) evidence_audit_<UTC>.json (gate-critical for the generic heavy check); (f) non-empty trigger_check_<UTC>.json. Non-avoidance: no prose-only/trigger-only/source-probe-only/audit-only/verify-and-stop/placeholder sessions; carry forward the complete fclr_pooled001_* (13), fclr_pooled_audit001_* (11) and fclr_pooled_robust002_* (11) bundles into your session dir so the older gate bindings stay satisfied; root md+json cap 499/500 (all new artifacts under session_<UTC>/); no empty files; do NOT threshold-shop or relax the materiality floor after outcomes; preserve nulls honestly; do NOT re-run any terminal campaign; do NOT build an overlay; do NOT modify .github/workflows; do NOT overwrite research_state/research_protocol.md.",
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": "None. Uses no external trigger and requires NO new data source: the ironflow liquidations bulk parquet caches (research_state/data_cache/ironflow_bulk/liquidations, 18 months 2025-05..2026-10) are already on disk and can be joined to candles_1h/funding/open_interest by market->coin identity. The gate (FCLR-LIQ-RISK-ESCALATION, risk09 family) fails closed without the full heavy artifact set, so a verify-and-stop session cannot pass.",
+  "evidence": {
+   "observed_liquidations_bulk": "research_state/data_cache/ironflow_bulk/liquidations/ (18 monthly parquet + sha256 + accessed.json)",
+   "identity_map": "liquidations.market 'XXX-PERP' -> coin 'XXX'; join to funding/candles/open_interest on coin + UTC timestamp",
+   "admissibility_standard": "RESEARCH_PROMPT.md \u00a715 (coverage, completeness, capped-sample, incomplete-label design)",
+   "leakage_hardening": [
+    "d2_48h_purge_embargo",
+    "d10_non_overlapping_forward_blocks",
+    "d6_delisting_aware_identity",
+    "d7_survivors_vs_exited_arm"
+   ],
+   "materiality_floor": "frozen before outcomes; not relaxed",
+   "root_md_json_count": 499,
+   "root_cap": 500,
+   "all_new_artifacts_must_go_under_session_dir": true,
+   "gate_enforced": "scripts/check_handoff_heavywork_gate.py FCLR-LIQ-RISK-ESCALATION (risk09 family; start 20261122T193000Z; fails closed without full heavy artifact set)"
+  },
+  "phases": [
+   {
+    "phase": "LIQ_LABEL_ADMISSIBILITY",
+    "status": "PENDING",
+    "claim": "Audit observed-liquidation coverage/completeness and market->coin identity per RESEARCH_PROMPT.md \u00a715; freeze label-admissibility before outcomes."
+   },
+   {
+    "phase": "HEAVY_OBSERVED_LIQ_INTENSITY",
+    "status": "PENDING",
+    "claim": "Run leakage-hardened observed-liquidation intensity evaluation (power/MDE + recompute + evaluation triad) with block bootstrap + Holm + alpha-spending."
+   }
+  ],
+  "note": "RANK-0 ACTIVE as of 2026-11-22T19:55:42Z. Gate-enforced via FCLR-LIQ-RISK-ESCALATION in check_handoff_heavywork_gate.py (start UTC 20261122T193000Z; sessions at/before that UTC are grandfathered). Uses stdlib + pyarrow only; no network; no new source; no overlay."
+ },
+ {
+  "rank": 1,
+  "status": "SUPERSEDED_TERMINAL",
+  "program_status": "COMPLETE",
   "task": "FCLR-POOLED-ROBUST-002-20261122T180000Z",
   "generated": "20261122T180000Z",
-  "refreshed": "2026-11-22T17:56:12Z",
-  "last_checked": "2026-11-22T17:56:12Z",
-  "last_verdict": "NOT_STARTED",
+  "refreshed": "2026-11-22T19:55:42Z",
+  "last_checked": "2026-11-22T19:55:42Z",
+  "last_verdict": "NOT_SUPPORTED_LEAKAGE_ROBUST_NULL",
   "next_action_heavy": "Execute FCLR-POOLED-ROBUST-002: a HEAVY, outcome-blind, leakage-hardened RE-CONFIRMATION of the funding-conditioned volatility + liquidation-risk hypothesis on the SAME on-disk ironflow bulk panel (research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}, 18 months 2025-05..2026-10, ~15M aligned rows). This is NOT a re-run of FCLR-POOLED-001 and NOT a re-run of the FCLR-POOLED-AUDIT-001 audit: it applies ALL audit remediations SIMULTANEOUSLY inside one pre-registered design and asks whether the NOT_SUPPORTED verdict survives. Remediations: (d2) a real 48h purge+embargo on the chronological train/test boundary (the audit found only a 1h gap); (d10) non-overlapping forward-outcome windows (the audit found pairwise Jaccard 0.52..0.92 dependence); (d4) a 1% mark-oracle premium tolerance filter (the audit found 6.8% of rows above tolerance); (d6/d7) delisting-aware per-coin identity and a survivors-vs-exited sensitivity arm; (d9) per-month funding-tercile threshold with drift reported. Compare the funding-conditioned feature set vs the RV-only baseline under QLIKE (primary) and Brier/log-loss on the Track B modeled breach proxy (secondary, clearly labeled modeled, never observed liquidation), with a per-coin block-bootstrap CI95 and Holm correction across the declared family. Report as sequential confirmatory look k=2 with alpha-spending alpha_2 = 0.05/(2*3) = 0.00833 (RESEARCH_PROMPT.md \u00a717). Decision is symmetric: if NOT_SUPPORTED survives, the null is confirmed leakage-robust; if it flips, the earlier null was a leakage artifact. Either way the null/edge is preserved honestly. Do NOT build a risk overlay (\u00a79 gate did not pass). All artifacts under research_state/session_<UTC>/ with UTC > 20261122T180000Z, non-empty, no zero-byte placeholders. The gate (FCLR-POOLED-ROBUST) fails closed without the full heavy artifact set.",
-  "next_unfinished_task": "FCLR-POOLED-ROBUST-002-20261122T180000Z: produce, under research_state/session_<UTC>/ (UTC > 20261122T180000Z), all of: (a) fclr_pooled_robust002_prereg_<UTC>.{json,md} \u2014 outcome-blind freeze (outcome_data_inspected_before_freeze:false; input sha256 asserted; 48h purge+embargo, non-overlapping windows, mark/index tolerance, delisting-aware identity, baselines, 2% materiality floor, Holm family, alpha-spending k=2) frozen BEFORE inspecting any outcome; (b) fclr_pooled_robust002_robustness_<UTC>.{py,json,md} \u2014 heavy stdlib+pyarrow robustness recompute (48h embargo, non-overlapping 6h/24h/72h/168h forward windows, mark/index filter, survivors-vs-exited arm, per-coin block-bootstrap, QLIKE + Brier/log-loss vs RV-only, Holm-adjusted); (c) fclr_pooled_robust002_recompute_<UTC>.{py,json} \u2014 independent stdlib recompute from stored input hashes; (d) fclr_pooled_robust002_evidence_audit_<UTC>.{json,md}; (e) gate-critical evidence_audit_<UTC>.json alias; (f) non-empty trigger_check_<UTC>.json. Non-avoidance: no prose-only/trigger-only/source-probe-only/audit-only/verify-and-stop/placeholder sessions; root md+json cap 499/500 (all artifacts under session_<UTC>/); no empty files; do NOT threshold-shop or relax the 2% floor after outcomes; preserve nulls as NOT_SUPPORTED; do NOT re-run any terminal campaign (incl. FCLR-POOLED-001, FCLR-POOLED-AUDIT-001); do NOT build an overlay; do NOT modify .github/workflows; do NOT overwrite research_state/research_protocol.md.",
+  "next_unfinished_task": "",
   "resume_triggers": [],
   "trigger_status": {},
   "blockers": "None. Uses no external trigger and requires NO new data source: the ironflow bulk parquet caches (18 months, ~15M aligned rows) are already on disk. This campaign removes the prior bottleneck \u2014 the 2026-11-22T17:52Z handoff told future agents to 'verify green and stop', an inefficient escape hatch that would let the FCLR-POOLED-001 null stand without ever testing whether it survives the audit's own remediations. The gate (FCLR-POOLED-ROBUST) fails closed without the full heavy artifact set, so a verify-and-stop session cannot pass.",
@@ -34,16 +78,18 @@
   "phases": [
    {
     "phase": "ROBUST_PREREG_FREEZE",
-    "status": "PENDING",
+    "status": "COMPLETE",
     "claim": "Freeze outcome-blind prereg with all audit remediations and alpha-spending k=2 BEFORE inspecting outcomes."
    },
    {
     "phase": "HEAVY_LEAKAGE_HARDENED_RECONFIRM",
-    "status": "PENDING",
+    "status": "COMPLETE",
     "claim": "Run the heavy robustness recompute triad + independent stdlib recompute + evidence audit + trigger check."
    }
   ],
-  "note": "RANK-0 ACTIVE as of 2026-11-22T17:56:12Z. Gate-enforced via FCLR-POOLED-ROBUST in check_handoff_heavywork_gate.py (start UTC 20261122T180000Z; sessions at/before that UTC are grandfathered). Uses stdlib + pyarrow only; no network; no new source; no overlay."
+  "note": "COMPLETE under session_20261122T190000Z. All 11 fclr_pooled_robust002_* artifacts (prereg json+md, robustness py+json+md, recompute py+json, evidence_audit json+md) plus evidence_audit_ alias and non-empty trigger_check_ emitted. Independent stdlib recompute agrees within 1e-6 (54/54 sha256 verified). Decision NOT_SUPPORTED_LEAKAGE_ROBUST_NULL: the FCLR-POOLED-001 null survives all audit remediations (C2-B1 QLIKE +1.011%, fails the -2% floor, Holm primary p=0.6365 vs alpha_2=0.00833). Demoted to rank 1 SUPERSEDED_TERMINAL.",
+  "session": "session_20261122T190000Z",
+  "completed_session": "session_20261122T190000Z"
  },
  {
   "rank": 1,

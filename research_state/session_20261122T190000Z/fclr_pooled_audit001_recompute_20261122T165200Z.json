@@ -1,0 +1,82 @@
+{
+  "experiment_id": "FCLR-POOLED-AUDIT-001",
+  "campaign": "FCLR-POOLED-AUDIT-001-20261122T120000Z",
+  "session_utc": "20261122T165200Z",
+  "recompute_type": "independent_stdlib_recompute",
+  "software": "stdlib + pyarrow only; numpy/pandas/scipy not used",
+  "findings": {
+    "d3_recompute": {
+      "mean_corr_lag_strict": NaN,
+      "mean_corr_fwd_strict": NaN,
+      "n_markets_lag": 0,
+      "n_markets_fwd": 0,
+      "strict_exact_pairs_total": 43472,
+      "markets_with_ge20_strict_pairs": 0,
+      "strict_alignment_estimable": false,
+      "agrees_with_audit_publication_lead": false
+    },
+    "d8_recompute": {
+      "n_daily_rv_obs": 3643742,
+      "daily_stress_threshold_p99": 0.07996618765849535,
+      "n_stress_days": 36439,
+      "top_market_share_of_stress": 0.024671368588600126,
+      "top3_share": 0.06600071352122726,
+      "stress_not_single_coin_dominated": true,
+      "agrees_with_audit": true
+    },
+    "d67_recompute": {
+      "distinct_coins_all_months": 494,
+      "coins_first_month": 198,
+      "coins_last_month": 494,
+      "coins_absent_last_month": 0,
+      "coins_new_last_month": 296,
+      "survivor_coins": 198,
+      "survivor_share_last_month": 0.4008097165991903,
+      "agrees_with_audit_survivorship_bias_present": true
+    },
+    "d10_recompute": {
+      "train_median_positive_notional": 2148.875645,
+      "label_counts": {
+        "6h": 35727,
+        "24h": 52748,
+        "72h": 62372,
+        "168h": 68095
+      },
+      "pairwise_jaccard": {
+        "6h_vs_24h": 0.6773147797072875,
+        "6h_vs_72h": 0.5728051048547426,
+        "6h_vs_168h": 0.5246640722520008,
+        "24h_vs_72h": 0.8456999935868659,
+        "24h_vs_168h": 0.7746236874954108,
+        "72h_vs_168h": 0.9159556501945811
+      },
+      "non_independent_outcomes": true
+    },
+    "trackb_recompute": {
+      "breach_band": 0.05,
+      "test_market_hours_evaluated": 1305076,
+      "modeled_breach_count": 14258,
+      "modeled_breach_rate": 0.010925034250878877,
+      "by_tercile_rate": {
+        "low": 0.00416131000838647,
+        "mid": 0.00296428672737072,
+        "high": 0.008911726359383388,
+        "unlabeled": 0.028394108764733722
+      },
+      "high_tercile_above_low": true,
+      "label_kind": "modeled boundary-breach proxy (NOT observed liquidation)"
+    }
+  },
+  "verdicts": {
+    "d3_strict_exact_alignment": "not_estimable",
+    "d3_strict_exact_pairs_total": 43472,
+    "d3_markets_with_ge20_strict_pairs": 0,
+    "d8_no_single_coin_stress_dominance_reproduced": true,
+    "d67_survivorship_bias_reproduced": true,
+    "d10_non_independent_outcomes_reproduced": true,
+    "trackb_tercile_ordering_robust": true
+  },
+  "all_verified": true,
+  "source_script": "fclr_pooled_audit001_recompute_20261122T165200Z.py",
+  "source_script_sha256": "2549aaa43863cdc7864ad004c46f0947e3c75363974abb2b8952f36b641f200c"
+}
