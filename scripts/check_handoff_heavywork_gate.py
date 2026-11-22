@@ -1882,7 +1882,12 @@ def _pooled_state(handoff_text: str, latest_sid: str | None,
     required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
     out["artifact_family"] = tag
     out["required_artifacts"] = required
-    for label, (prefix, suffix) in zip(required, POOLED_REQUIRED):
+    # Match against the transformed per-campaign family (e.g. fclr_pooled001_*),
+    # NOT the untransformed POOLED_REQUIRED prefixes. The frontier and the
+    # tag/family machinery both mandate the fclr_pooled001_* naming; zipping the
+    # loop against POOLED_REQUIRED made a correct heavy session fail the gate
+    # because its files (fclr_pooled001_*) did not start with fclr_pooled_*.
+    for label, (prefix, suffix) in zip(required, family):
         matches = sorted(
             f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
         )

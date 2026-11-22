@@ -864,7 +864,7 @@
   "note": "FCLR-LIVE-ARCHIVE-02 COMPLETE under session_20261122T013000Z. Full fclr_live_archive02_* artifact set present and non-empty. Gate PASS reason=OK. Decision NOT_SUPPORTED; no further rank-0 campaign on current evidence base."
  },
  {
-  "rank": 0,
+  "rank": 2,
   "status": "SUPERSEDED_TERMINAL",
   "program_status": "COMPLETE",
   "task": "FCLR-NEXT-SOURCE-VERIFY-01-20261122T013100Z",
