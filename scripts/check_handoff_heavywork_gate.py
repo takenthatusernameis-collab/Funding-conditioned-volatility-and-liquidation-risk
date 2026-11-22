@@ -493,6 +493,35 @@ LIVE_ARCHIVE_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-NEXT-SOURCE-VERIFY-01 hardening: the sole rank-0 campaign after the
+# frozen + reachable-archive frontiers are both exhausted. Once this campaign
+# starts (start UTC 20261122T013100Z), a post-start session cannot satisfy the
+# gate with an arbitrary recompute_* artifact, a trigger-check-only session,
+# a source-probe-only session, or a verify-and-stop session. It must emit the
+# full FCLR-NEXT-SOURCE-VERIFY-01 artifact set: source registry +
+# verified-download evidence, outcome-blind prereg freeze, heavy 3-block
+# confirmatory evaluation triad (py+json+md), independent stdlib recompute
+# (py+json), evidence audit (json+md), gate-critical evidence_audit_ alias
+# (json), and non-empty trigger_check (json). Sessions predating the campaign
+# start are grandfathered so this handoff refresh that first announces the
+# campaign stays green.
+NEXT_SOURCE_VERIFY_CAMPAIGN_RE = re.compile(r"FCLR-NEXT-SOURCE-VERIFY-(\d+)-(\d{8}T\d{6}Z)")
+NEXT_SOURCE_VERIFY_REQUIRED = (
+    ("fclr_next_source_verify_source_registry_", ".json"),
+    ("fclr_next_source_verify_source_registry_", ".md"),
+    ("fclr_next_source_verify_prereg_", ".json"),
+    ("fclr_next_source_verify_prereg_", ".md"),
+    ("fclr_next_source_verify_eval_", ".py"),
+    ("fclr_next_source_verify_eval_", ".json"),
+    ("fclr_next_source_verify_eval_", ".md"),
+    ("fclr_next_source_verify_recompute_", ".py"),
+    ("fclr_next_source_verify_recompute_", ".json"),
+    ("fclr_next_source_verify_evidence_audit_", ".json"),
+    ("fclr_next_source_verify_evidence_audit_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 NEW_QUANT_PREFIXES = (
     "fclr_risk",
     "fclr_starter",
@@ -510,6 +539,7 @@ NEW_QUANT_PREFIXES = (
     "fclr_liq_contagion",   # FCLR-LIQ-CONTAGION cross-coin liquidation contagion + funding spillover artifacts
     "fclr_liq_contagion02", # FCLR-LIQ-CONTAGION-002 robustness-reconciliation artifacts (edge-set + materiality)
     "fclr_live_archive",    # FCLR-LIVE-ARCHIVE reachable free-archive source + heavy 3-block design artifacts
+    "fclr_next_source_verify", # FCLR-NEXT-SOURCE-VERIFY-01 materially-different free source + heavy 3-block design artifacts
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -1692,6 +1722,79 @@ def _live_archive_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _next_source_verify_state(handoff_text: str, latest_sid: str | None,
+                              latest_files: list[str],
+                              latest_dir: Path | None = None) -> dict:
+    """Return FCLR-NEXT-SOURCE-VERIFY-01 non-avoidance state.
+
+    After the materially-different free-source campaign starts (start UTC
+    20261122T013100Z), a post-start session cannot satisfy the gate with an
+    arbitrary recompute_* artifact, a trigger-check-only session, a
+    source-probe-only session, or a verify-and-stop session. It must emit the
+    full FCLR-NEXT-SOURCE-VERIFY-01 artifact set. Sessions predating the
+    campaign start are grandfathered so this handoff refresh stays green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = NEXT_SOURCE_VERIFY_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-NEXT-SOURCE-VERIFY-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    tag = f"next_source_verify{int(m.group(1)):02d}"
+    family = tuple(
+        (prefix.replace("fclr_next_source_verify_", f"fclr_{tag}_", 1), suffix)
+        if prefix.startswith("fclr_next_source_verify_")
+        else (prefix, suffix)
+        for prefix, suffix in NEXT_SOURCE_VERIFY_REQUIRED
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["artifact_family"] = tag
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, NEXT_SOURCE_VERIFY_REQUIRED):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _normalize_text(s: str) -> str:
     return "\n".join(line.rstrip() for line in s.replace("\r\n", "\n").split("\n")).strip()
 
@@ -1947,6 +2050,7 @@ def check(repo: Path = REPO) -> dict:
         "contagion": None,
         "contagion_002": None,
         "live_archive": None,
+        "next_source_verify": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -2409,6 +2513,32 @@ def check(repo: Path = REPO) -> dict:
                 if not la["has_trigger_check"]:
                     payload["failures"].append(
                         f"LIVE_ARCHIVE_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-NEXT-SOURCE-VERIFY-01: after the materially-different free
+            # source campaign starts, require the source registry +
+            # verified-download evidence, outcome-blind prereg freeze, heavy
+            # 3-block confirmatory evaluation triad, independent stdlib
+            # recompute, evidence audit, gate-critical evidence_audit_ alias,
+            # and trigger check. Zero-byte placeholders fail closed.
+            nsv = _next_source_verify_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["next_source_verify"] = nsv
+            if nsv["required"]:
+                if nsv["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "NEXT_SOURCE_VERIFY_ARTIFACTS_MISSING:"
+                        + ",".join(nsv["missing_required_artifacts"])
+                    )
+                if nsv["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "NEXT_SOURCE_VERIFY_ARTIFACTS_EMPTY:"
+                        + ",".join(nsv["empty_required_artifacts"])
+                    )
+                if not nsv["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"NEXT_SOURCE_VERIFY_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
