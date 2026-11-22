@@ -83,17 +83,17 @@
    {
     "phase": "SOURCE_REGISTRY_BULK_DATA",
     "status": "PENDING",
-    "claim": "Record the verified on-disk ironflow bulk data (research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}) as the data source: for each dataset record the parquet file paths, sha256, row counts, coin coverage, month span 2025-05..2026-10, and schema. Write fclr_pooled001_source_registry_<UTC>.{json,md}. Do NOT download new data; do NOT modify the caches. Stdlib + pyarrow only (pip install pyarrow if needed)."
+    "claim": "Record the verified on-disk ironflow bulk data (research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}) as the data source: for each dataset record the parquet file paths, sha256, row counts, coin coverage, month span 2025-05..2026-10, and schema. Write fclr_pooled_source_registry_<UTC>.{json,md}. Do NOT download new data; do NOT modify the caches. Stdlib + pyarrow only (pip install pyarrow if needed)."
    },
    {
     "phase": "PREREG_FREEZE_ON_BULK_DATA",
     "status": "PENDING",
-    "claim": "Freeze outcome-blind hypotheses, targets, features, chronological train/test split (with purge/embargo >= max horizon), per-coin block-bootstrap, baselines, 2% materiality floor, and decision gates BEFORE inspecting any outcome on the ironflow bulk data. outcome_data_inspected_before_freeze:false. Assert input file hashes and config hash. Write fclr_pooled001_prereg_<UTC>.{json,md}."
+    "claim": "Freeze outcome-blind hypotheses, targets, features, chronological train/test split (with purge/embargo >= max horizon), per-coin block-bootstrap, baselines, 2% materiality floor, and decision gates BEFORE inspecting any outcome on the ironflow bulk data. outcome_data_inspected_before_freeze:false. Assert input file hashes and config hash. Write fclr_pooled_prereg_<UTC>.{json,md}."
    },
    {
     "phase": "HEAVY_POOLED_OOS_CONFIRMATORY",
     "status": "PENDING",
-    "claim": "Execute the pooled chronologically-split OOS confirmatory design on the ironflow bulk data with non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261122T040000Z): evaluation triad fclr_pooled001_eval_<UTC>.{py,json,md} (funding-conditioned volatility + liquidation-risk, train/test chronological split, per-coin block-bootstrap, Diebold-Mariano / QLIKE / Brier where applicable), independent stdlib recompute fclr_pooled001_recompute_<UTC>.{py,json}, evidence audit fclr_pooled001_evidence_audit_<UTC>.{json,md} + gate alias evidence_audit_<UTC>.json, and trigger_check_<UTC>.json. No zero-byte placeholders; preserve nulls as NOT_SUPPORTED."
+    "claim": "Execute the pooled chronologically-split OOS confirmatory design on the ironflow bulk data with non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261122T040000Z): evaluation triad fclr_pooled_eval_<UTC>.{py,json,md} (funding-conditioned volatility + liquidation-risk, train/test chronological split, per-coin block-bootstrap, Diebold-Mariano / QLIKE / Brier where applicable), independent stdlib recompute fclr_pooled_recompute_<UTC>.{py,json}, evidence audit fclr_pooled_evidence_audit_<UTC>.{json,md} + gate alias evidence_audit_<UTC>.json, and trigger_check_<UTC>.json. No zero-byte placeholders; preserve nulls as NOT_SUPPORTED."
    }
   ],
   "note": "Sole rank-0 campaign after the NEXT-SOURCE-VERIFY and LIVE-ARCHIVE frontiers are both exhausted. Breaks the broken 3-contiguous-block deadlock by running a heavy pooled chronological OOS design on the already-on-disk ironflow bulk data (18 months, 342 coins, ~15M aligned rows). Gate-enforced via FCLR-POOLED-001 in check_handoff_heavywork_gate.py (pass reason=OK). All artifacts under research_state/session_<UTC>/ (root 499/500 cap). Stdlib + pyarrow only."
