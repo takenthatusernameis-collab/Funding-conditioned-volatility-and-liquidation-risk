@@ -1,0 +1,157 @@
+{
+  "symbols": {
+    "BTCUSDT": {
+      "kline_rows": 72,
+      "funding_rows": 186,
+      "assembled_rows": 71,
+      "files_sha256": {
+        "BTCUSDT-1h-2024-01-01.csv": "9f49f465824b4c0e38dd55ab09689e5dac24a597dcc6b98bfe171c6c0837e5cd",
+        "BTCUSDT-1h-2024-01-02.csv": "2f6de89f301a00b19ab75281d68ead3b1f83d52600f547d8c166a540ab95a833",
+        "BTCUSDT-fundingRate-2024-01.csv": "232a13d92487efef8ce0d645301abe611f56eacb70023194b97c038d7a8a2c9b",
+        "BTCUSDT-1h-2024-03-08.csv": "ab3b11117d08f60bef0d7753b21d9691b33d6f3face43b8a36bd0373598062fb",
+        "BTCUSDT-fundingRate-2024-03.csv": "1ac0fa4862ab12c59a4daefa330e0b0e23374feb86c5ca9a2733cd1fa1fe1c48"
+      }
+    },
+    "ETHUSDT": {
+      "kline_rows": 24,
+      "funding_rows": 93,
+      "assembled_rows": 23,
+      "files_sha256": {
+        "ETHUSDT-1h-2024-01-02.csv": "5469db0f3071b85fde30533f82c930c21e2c42c25a6aae7dad0e7345a70313f2",
+        "ETHUSDT-fundingRate-2024-01.csv": "90e05d0f18178405391dc095e8d6e5f0a3f8fc4b46683a39855540181496f7f3"
+      }
+    }
+  },
+  "blocks": {
+    "B1_2024-01": {
+      "block_id": "B1_2024-01",
+      "window": [
+        "2024-01-01T00:00:00+00:00",
+        "2024-01-31T23:59:59.999000+00:00"
+      ],
+      "symbols": {
+        "BTCUSDT": {
+          "n_rows": 48,
+          "h1": {
+            "rho": 0.44116062505980447,
+            "p": 4.999750012499375e-05,
+            "pass_alpha": true
+          },
+          "h2": {
+            "diff_mean": -0.8698485175858975,
+            "p": 0.10864456777161142,
+            "direction_consistent": null,
+            "n_opp": 26,
+            "n_same": 22
+          }
+        },
+        "ETHUSDT": {
+          "n_rows": 23,
+          "h1": {
+            "rho": 0.3745972071877342,
+            "p": 0.07934603269836508,
+            "pass_alpha": false
+          },
+          "h2": {
+            "diff_mean": -0.023310443052080188,
+            "p": 0.7486125693715314,
+            "direction_consistent": null,
+            "n_opp": 14,
+            "n_same": 9
+          }
+        }
+      }
+    },
+    "B2_2024-02": {
+      "block_id": "B2_2024-02",
+      "window": [
+        "2024-02-01T00:00:00+00:00",
+        "2024-02-29T23:59:59.999000+00:00"
+      ],
+      "symbols": {
+        "BTCUSDT": {
+          "n_rows": 0,
+          "status": "INCONCLUSIVE_TOO_FEW_ROWS",
+          "h1": {
+            "rho": null,
+            "p": null
+          },
+          "h2": {
+            "diff_mean": null,
+            "p": null,
+            "direction_consistent": null
+          }
+        },
+        "ETHUSDT": {
+          "n_rows": 0,
+          "status": "INCONCLUSIVE_TOO_FEW_ROWS",
+          "h1": {
+            "rho": null,
+            "p": null
+          },
+          "h2": {
+            "diff_mean": null,
+            "p": null,
+            "direction_consistent": null
+          }
+        }
+      }
+    },
+    "B3_2024-03": {
+      "block_id": "B3_2024-03",
+      "window": [
+        "2024-03-01T00:00:00+00:00",
+        "2024-03-31T23:59:59.999000+00:00"
+      ],
+      "symbols": {
+        "BTCUSDT": {
+          "n_rows": 23,
+          "h1": {
+            "rho": 0.2247583243126405,
+            "p": 0.3030848457577121,
+            "pass_alpha": false
+          },
+          "h2": {
+            "diff_mean": -0.00020255243078201243,
+            "p": 0.9028048597570122,
+            "direction_consistent": null,
+            "n_opp": 10,
+            "n_same": 13
+          }
+        },
+        "ETHUSDT": {
+          "n_rows": 0,
+          "status": "INCONCLUSIVE_TOO_FEW_ROWS",
+          "h1": {
+            "rho": null,
+            "p": null
+          },
+          "h2": {
+            "diff_mean": null,
+            "p": null,
+            "direction_consistent": null
+          }
+        }
+      }
+    }
+  },
+  "overall": {},
+  "h3_liquidation_absence": {
+    "confirmed": true,
+    "liquidation_columns_found": []
+  },
+  "aggregate": {
+    "h1_fisher_chi2": 27.262433751428706,
+    "h1_fisher_p": 0.00012929824544651456,
+    "h1_any_block_pass_alpha": true,
+    "h2_direction_consistent_all_blocks": true,
+    "h3_confirmed": true,
+    "any_admissible_block": true
+  },
+  "decision": "GO",
+  "decision_reason": "H1 passed in >=1 admissible block; H2 direction consistent; H3 absence confirmed.",
+  "prereg_design": "FCLR-NEXT-CONFIRM-001",
+  "prereg_status": "OUTCOME_BLIND",
+  "session_utc": "20261122T033000Z",
+  "generated_utc": "2026-11-22T03:30:00Z"
+}

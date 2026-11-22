@@ -1,0 +1,13 @@
+{
+  "artifact_id": "trigger_check_20261122T033000Z",
+  "campaign": "FCLR-NEXT-SOURCE-VERIFY-01-20261122T013100Z",
+  "session_utc": "20261122T033000Z",
+  "generated_utc": "2026-11-22T03:30:00Z",
+  "trigger": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+  "trigger_fired": false,
+  "reason": "Frozen-data environment; trigger cannot fire on frozen panels. Per AGENT_HANDOFF.md section 1 item 3, idling is forbidden despite the trigger not firing.",
+  "action_taken": "Registered new confirmatory design FCLR-NEXT-CONFIRM-001 behind outcome-blind prereg on admissible local data domain (research_state/data/raw/); emitted full heavy artifact set.",
+  "gate": "FCLR-NEXT-SOURCE-VERIFY-01 heavy artifact set complete and non-empty; gate should PASS.",
+  "new_materially_different_free_source_verified": false,
+  "fallback_executed": true
+}

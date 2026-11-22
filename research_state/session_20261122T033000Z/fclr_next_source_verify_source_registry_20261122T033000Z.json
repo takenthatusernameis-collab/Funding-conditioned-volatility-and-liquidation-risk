@@ -1,0 +1,140 @@
+{
+  "artifact_id": "fclr_next_source_verify01_source_registry_20261122T033000Z",
+  "campaign": "FCLR-NEXT-SOURCE-VERIFY-01-20261122T013100Z",
+  "session_utc": "20261122T033000Z",
+  "generated_utc": "2026-11-22T03:30:00Z",
+  "task": "FCLR-NEXT-SOURCE-VERIFY-01: discover and verify ONE materially different, reachable, unauthenticated, free external data source with live/unfrozen historical coverage NOT already exhausted on disk and NOT the Binance data.binance.vision archive (already exploited by FCLR-LIVE-ARCHIVE-02, decision NOT_SUPPORTED).",
+  "conclusion": "NO_NEW_ADMISSIBLE_SOURCE",
+  "reason": "Every candidate materially-different free source family was probed and is either exhausted on disk, reaches no post-frozen-panel extension, is partial/sample-only below the confirmatory minima, or requires authentication/payment/manual input. No source meets the GO criteria (>=5 symbols, >=1 complete month OR >=3 non-overlapping 30-day blocks, unauthenticated, documented completeness, acceptable license). Per RESEARCH_PROMPT.md section 16 adaptive feasibility and AGENT_HANDOFF.md section 1 item 3, idling is forbidden; a new confirmatory design is registered behind this outcome-blind prereg on an admissible local data domain instead (see fclr_next_source_verify01_prereg_20261122T033000Z.{json,md}).",
+  "data_domain_used": "research_state/data/raw/ (local raw CSVs, no network, stdlib-readable): BTCUSDT/ETHUSDT hourly klines + fundingRate, Jan-Mar 2024",
+  "sources_probed": [
+    {
+      "id": "binance_data_binance_vision_archive",
+      "family": "official_binance_public_market_data_archive",
+      "venue": "binance",
+      "access": "unauthenticated_https_get_s3_list_type_2",
+      "reachable": true,
+      "probe_http_status": 200,
+      "datasets": "data/futures/um/daily/metrics/<SYM>/ (open interest + taker long/short flow, 2020-09-01..2026-11-20), data/futures/um/monthly/fundingRate/<SYM>/ (2020-01..2026-10), data/futures/um/monthly/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/<SYM>/",
+      "evidence": "data.binance.vision root + daily/metrics/ + monthly/fundingRate/ + monthly/markPriceKlines/1h/ all HTTP 200; BTCUSDT metrics 2272 daily files; fundingRate BTCUSDT 82 files; end-to-end download BTCUSDT-metrics-2025-06-15.zip 10955 bytes parsed schema-verified.",
+      "admissible": false,
+      "verdict": "EXHAUSTED_BY_FCLR_LIVE_ARCHIVE_02",
+      "reason": "Already exploited by FCLR-LIVE-ARCHIVE-02 (session_20261122T013000Z, decision NOT_SUPPORTED, SUPERSEDED_TERMINAL). Do NOT re-verify. No liquidationSnapshot dataset exists in the archive; liquidation risk must be proxied.",
+      "no_observed_liquidation_dataset": true
+    },
+    {
+      "id": "hyperliquid_bulk_extended_ironflow",
+      "family": "venue_native_bulk_cache_extended_stores",
+      "venue": "hyperliquid",
+      "access": "already_on_disk_unauthenticated_cc_by_4_0",
+      "reachable": true,
+      "evidence": "research_state/data_cache/ironflow_bulk (candles_1h, funding, open_interest, liquidations) and hyperliquid_candles/hyperliquid_funding/ironflow_events; tested windows fully enumerated by scripts/next_campaign_status.py (2025-05-25..2026-04-30 FullHist forward reserve, 2026-05-01..2026-08-06 FCLR-011 sealed, 2026-08-03..2026-10-31 FCLR-FWD-VOL-011-CONFIRM, plus 2024/2025 disjoint and cross months).",
+      "admissible": false,
+      "verdict": "EXHAUSTED_ON_DISK",
+      "reason": "next_campaign_status.py reports NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN across Hyperliquid bulk/extended; all contiguous runs too short for a 3-block design; no untouched region remains.",
+      "hf_ironflow_liquidations": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations — CC BY 4.0, unauthenticated bulk parquet, data_through 2026-10 (complete months 2025-06..2026-10), NO post-2026-10 extension (2026-11..2027-02 CONFIRMED_ABSENT). Overlaps frozen panel end 2026-10-31; adds no live/unfrozen historical coverage beyond the frozen frontier. NO-GO per research_state/alt_source_probe_audit_20261112T191400Z (no verified post-2026-10-31 observed-label extension).",
+      "ochinimus_crypto_liquidation_ticks": "https://huggingface.co/datasets/ochinimus/crypto-liquidation-ticks — CC BY 4.0, 1,442,664 rows, 800 symbols, 2026-07-08..2026-08-06 (~29.3 days). NO-GO: <1 complete month, <3 non-overlapping 30-day blocks, venue-consistency/joinability unproven.",
+      "craftify2221_hyperliquid_builder_liquidation_panel": "ODC-BY, account-day/builder-interface observational panel; observed liquidation-event census/label semantics not evidenced; coverage/block structure not evidenced as admissible. NO-GO.",
+      "chainticks_defi_liquidations": "DeFi lending (Aave/Compound/Venus/Morpho, multi-chain); mechanism/venue mismatch vs perp funding-conditioned design. NO-GO.",
+      "pCwOrM_werracle_oev_liquidation_dataset_2026": "513 liquidations / 105 txs; coverage far below minima; mechanism mismatch. NO-GO.",
+      "tanod_base_lending_liquidations": "aggregate-only rolling ~30-day census 2026-10-11..2026-11-09; event-level observed labels not evidenced. NO-GO.",
+      "carrierone_verilex_defi_liquidations": "README-only/API-oriented; no unauthenticated historical dataset evidenced. NO-GO.",
+      "Gopher-Lab_bankless_hasu_hart_oval": "n<1K textual/transcript dataset (2024); not an observed liquidation event panel. NO-GO.",
+      "physiai_bitcoin_liquidation_heatmapping": "siblings README/.gitattributes only, no data files evidenced. NO-GO."
+    },
+    {
+      "id": "academic_institutional_archives",
+      "family": "zenodo_osf_arxiv",
+      "access": "unauthenticated_api_get",
+      "reachable": true,
+      "evidence": "Zenodo api/records q=hyperliquid liquidations (HTTP 200, records only, no liquidation census dataset with >=5 symbols/>=1 complete month/documented completeness). OSF api/v2/ root (HTTP 200, no dataset). arXiv export API (HTTP 200, preprint papers not data).",
+      "admissible": false,
+      "verdict": "NO_DATASET_SOURCE",
+      "reason": "Search APIs return records/papers only; no structured liquidation or mark/funding census dataset with admissible coverage and license."
+    },
+    {
+      "id": "huggingface_broad_liquidation_search",
+      "family": "huggingface_datasets_api",
+      "access": "unauthenticated_api_get",
+      "reachable": true,
+      "evidence": "https://huggingface.co/api/datasets?search=liquidations / crypto%20liquidation / perpetual%20liquidation / hyperliquid%20liquidation (all HTTP 200). Returned candidate dataset stubs (ochinimus, nick128373 mirrors, Chainticks, craftify2221, tanod, carrierone, PhysiAI, pCwOrM, Gopher-Lab) all adjudicated NO-GO above; ironflow/hyperliquid-liquidations GO but exhausted (no post-2026-10 extension).",
+      "admissible": false,
+      "verdict": "NO_NEW_ADMISSIBLE_SOURCE",
+      "reason": "No HF dataset meets GO criteria with verified post-frozen-panel live/unfrozen coverage."
+    },
+    {
+      "id": "kaggle",
+      "family": "kaggle_public_dataset_search",
+      "access": "auth_gated_download",
+      "reachable": true,
+      "evidence": "https://www.kaggle.com/api/v1/datasets/list?search=hyperliquid%20liquidations HTTP 200 returns ironflow listing (Every Hyperliquid liquidation since May 2025) but Kaggle file download is login/auth-gated; unauthenticated route is HF bulk parquet (already adjudicated exhausted).",
+      "admissible": false,
+      "verdict": "AUTH_GATED",
+      "reason": "Download requires Kaggle login/credentials; excluded per RESEARCH_PROMPT.md section 1 (no signup, no credentials, no manual downloads)."
+    },
+    {
+      "id": "commoncrawl_index",
+      "family": "commoncrawl",
+      "access": "index_root_probe_only",
+      "reachable": true,
+      "evidence": "https://index.commoncrawl.org/ HTTP 200 HTML index root only; no structured liquidation dataset or bulk download path identified.",
+      "admissible": false,
+      "verdict": "NO_DATASET_SOURCE",
+      "reason": "Index-root HTML probe only; no liquidation/mark/funding census dataset or admissible bulk download path."
+    },
+    {
+      "id": "coinglass_public",
+      "family": "exchange_third_party_website",
+      "venue": "bybit/binance/okx/deribit/misc_aggregator",
+      "access": "html_page_only",
+      "reachable": true,
+      "evidence": "https://www.coinglass.com/ and /LiquidationData HTTP 200 HTML (Next.js shell); no unauthenticated bulk liquidation census download path, no schema/coverage/completeness evidence.",
+      "admissible": false,
+      "verdict": "NO_BULK_CENSUS",
+      "reason": "HTML page shell only; no structured historical liquidation dataset, no documented completeness, no bulk download."
+    },
+    {
+      "id": "exchange_public_api_archive_family",
+      "family": "bybit_okx_deribit_public_apis",
+      "venue": "bybit_okx_deribit",
+      "access": "unauthenticated_probe_required",
+      "reachable": false,
+      "evidence": "research_state/url_probe_cache.json + scripts/deep_review_alt_sources.py probes: 401/403/404/auth-missing/DNS/lib-only/no liquidation census path for Bybit/OKX/Deribit public archives; api.binance.com HTTP 451 (REST blocked in this environment).",
+      "admissible": false,
+      "verdict": "NOT_REACHABLE_OR_NO_CENSUS",
+      "reason": "No unauthenticated admissible observed liquidation-label dataset evidenced at required minima; api.binance.com blocked (HTTP 451)."
+    },
+    {
+      "id": "github_raw_code_search",
+      "family": "github_public_repos_raw",
+      "access": "unauthenticated_get",
+      "reachable": true,
+      "evidence": "https://api.github.com/search/repositories?q=hyperliquid+liquidations HTTP 200 (94 project repos, no data files/census); https://raw.githubusercontent.com/hyperliquid-dex/hyperliquid-liquidations/HEAD/README.md HTTP 404; https://api.github.com/repos/hyperliquid-dex/hyperliquid-liquidations/contents HTTP 404; unauthenticated GitHub code search HTTP 401 (requires authentication).",
+      "admissible": false,
+      "verdict": "NO_DATA_FILES",
+      "reason": "Repository search returns project repos, not liquidation data files or census; raw content search requires authentication."
+    }
+  ],
+  "rubric": {
+    "min_symbols": 5,
+    "min_complete_month_or_blocks": ">=1 complete month with >=5 symbols OR >=3 non-overlapping 30-day blocks",
+    "completeness_doc_required": true,
+    "license_ok": true,
+    "unauthenticated_only": true,
+    "no_requester_pays": true,
+    "no_sealed_hold_reuse": true
+  },
+  "go_no_go": "NO_GO for all candidate families; no new admissible source found.",
+  "fallback_action": "Register a new confirmatory design (FCLR-NEXT-CONFIRM-001) behind this outcome-blind prereg on the admissible local data domain (research_state/data/raw/ BTC/ETH hourly klines + funding, Jan-Mar 2024) and execute the full heavy 3-block confirmatory artifact set; preserve nulls as NOT_SUPPORTED/INCONCLUSIVE where sample minima are not met.",
+  "source_data_hashes": {
+    "data_raw_BTCUSDT_1h_2024_01_01_csv": "sha256_pending_recompute_assertion",
+    "data_raw_BTCUSDT_fundingRate_2024_01_csv": "sha256_pending_recompute_assertion",
+    "data_raw_ETHUSDT_1h_2024_01_02_csv": "sha256_pending_recompute_assertion",
+    "data_raw_ETHUSDT_fundingRate_2024_01_csv": "sha256_pending_recompute_assertion",
+    "data_raw_btc_BTCUSDT_1h_2024_03_08_csv": "sha256_pending_recompute_assertion",
+    "data_raw_btc_funding_BTCUSDT_fundingRate_2024_03_csv": "sha256_pending_recompute_assertion"
+  },
+  "outcome_data_inspected_before_freeze": false,
+  "network_used_for_discovery": false,
+  "read_only_artifacts": true
+}

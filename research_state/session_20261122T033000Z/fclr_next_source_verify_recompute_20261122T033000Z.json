@@ -1,0 +1,201 @@
+{
+  "artifact_id": "fclr_next_source_verify01_recompute_20261122T033000Z",
+  "session_utc": "20261122T033000Z",
+  "symbols": {
+    "BTCUSDT": {
+      "kline_rows": 72,
+      "funding_rows": 186,
+      "assembled_rows": 71,
+      "files_sha256": {
+        "BTCUSDT-1h-2024-01-01.csv": "9f49f465824b4c0e38dd55ab09689e5dac24a597dcc6b98bfe171c6c0837e5cd",
+        "BTCUSDT-1h-2024-01-02.csv": "2f6de89f301a00b19ab75281d68ead3b1f83d52600f547d8c166a540ab95a833",
+        "BTCUSDT-fundingRate-2024-01.csv": "232a13d92487efef8ce0d645301abe611f56eacb70023194b97c038d7a8a2c9b",
+        "BTCUSDT-1h-2024-03-08.csv": "ab3b11117d08f60bef0d7753b21d9691b33d6f3face43b8a36bd0373598062fb",
+        "BTCUSDT-fundingRate-2024-03.csv": "1ac0fa4862ab12c59a4daefa330e0b0e23374feb86c5ca9a2733cd1fa1fe1c48"
+      }
+    },
+    "ETHUSDT": {
+      "kline_rows": 24,
+      "funding_rows": 93,
+      "assembled_rows": 23,
+      "files_sha256": {
+        "ETHUSDT-1h-2024-01-02.csv": "5469db0f3071b85fde30533f82c930c21e2c42c25a6aae7dad0e7345a70313f2",
+        "ETHUSDT-fundingRate-2024-01.csv": "90e05d0f18178405391dc095e8d6e5f0a3f8fc4b46683a39855540181496f7f3"
+      }
+    }
+  },
+  "blocks": {
+    "B1_2024-01": {
+      "block_id": "B1_2024-01",
+      "symbols": {
+        "BTCUSDT": {
+          "n_rows": 48,
+          "h1": {
+            "rho": 0.44116062505980447,
+            "p": 0.001697611028990263,
+            "pass_alpha": true
+          },
+          "h2": {
+            "diff_mean": -0.8698485175858975,
+            "p": null,
+            "direction_consistent": true,
+            "n_opp": 26,
+            "n_same": 22
+          }
+        },
+        "ETHUSDT": {
+          "n_rows": 23,
+          "h1": {
+            "rho": 0.3745972071877342,
+            "p": 0.07822291120811622,
+            "pass_alpha": false
+          },
+          "h2": {
+            "diff_mean": -0.023310443052080188,
+            "p": null,
+            "direction_consistent": true,
+            "n_opp": 14,
+            "n_same": 9
+          }
+        }
+      }
+    },
+    "B2_2024-02": {
+      "block_id": "B2_2024-02",
+      "symbols": {
+        "BTCUSDT": {
+          "n_rows": 0,
+          "status": "INCONCLUSIVE_TOO_FEW_ROWS",
+          "h1": {
+            "rho": null,
+            "p": null,
+            "pass_alpha": null
+          },
+          "h2": {
+            "diff_mean": null,
+            "p": null,
+            "direction_consistent": null
+          }
+        },
+        "ETHUSDT": {
+          "n_rows": 0,
+          "status": "INCONCLUSIVE_TOO_FEW_ROWS",
+          "h1": {
+            "rho": null,
+            "p": null,
+            "pass_alpha": null
+          },
+          "h2": {
+            "diff_mean": null,
+            "p": null,
+            "direction_consistent": null
+          }
+        }
+      }
+    },
+    "B3_2024-03": {
+      "block_id": "B3_2024-03",
+      "symbols": {
+        "BTCUSDT": {
+          "n_rows": 23,
+          "h1": {
+            "rho": 0.2247583243126405,
+            "p": 0.30251276851422926,
+            "pass_alpha": false
+          },
+          "h2": {
+            "diff_mean": -0.00020255243078201243,
+            "p": null,
+            "direction_consistent": true,
+            "n_opp": 10,
+            "n_same": 13
+          }
+        },
+        "ETHUSDT": {
+          "n_rows": 0,
+          "status": "INCONCLUSIVE_TOO_FEW_ROWS",
+          "h1": {
+            "rho": null,
+            "p": null,
+            "pass_alpha": null
+          },
+          "h2": {
+            "diff_mean": null,
+            "p": null,
+            "direction_consistent": null
+          }
+        }
+      }
+    }
+  },
+  "h3_liquidation_absence": {
+    "confirmed": true,
+    "liquidation_columns_found": []
+  },
+  "aggregate": {
+    "h1_fisher_chi2": 20.24471555578164,
+    "h1_fisher_p": 0.0025048179161219295,
+    "h1_any_block_pass_alpha": true,
+    "h2_direction_consistent_all_blocks": true,
+    "h3_confirmed": true,
+    "any_admissible_block": true
+  },
+  "decision": "GO",
+  "decision_reason": "H1 passed in >=1 admissible block; H2 direction consistent; H3 absence confirmed.",
+  "method": "independent_recompute_analytical_t_approx",
+  "agreement_with_eval": {
+    "symbol_counts": {
+      "BTCUSDT": {
+        "eval_assembled": 71,
+        "recompute_assembled": 71,
+        "match": true
+      },
+      "ETHUSDT": {
+        "eval_assembled": 23,
+        "recompute_assembled": 23,
+        "match": true
+      }
+    },
+    "block_rho": {
+      "B1_2024-01/BTCUSDT": {
+        "eval": 0.44116062505980447,
+        "recompute": 0.44116062505980447,
+        "match": true
+      },
+      "B1_2024-01/ETHUSDT": {
+        "eval": 0.3745972071877342,
+        "recompute": 0.3745972071877342,
+        "match": true
+      },
+      "B2_2024-02/BTCUSDT": {
+        "eval": null,
+        "recompute": null,
+        "match": true
+      },
+      "B2_2024-02/ETHUSDT": {
+        "eval": null,
+        "recompute": null,
+        "match": true
+      },
+      "B3_2024-03/BTCUSDT": {
+        "eval": 0.2247583243126405,
+        "recompute": 0.2247583243126405,
+        "match": true
+      },
+      "B3_2024-03/ETHUSDT": {
+        "eval": null,
+        "recompute": null,
+        "match": true
+      }
+    },
+    "decision_match": true,
+    "eval_decision": "GO",
+    "recompute_decision": "GO",
+    "b1_btcusdt_p_agreement": {
+      "eval_p": 4.999750012499375e-05,
+      "recompute_p": 0.001697611028990263,
+      "eval_sig": true,
+      "recompute_sig": true
+    }
+  }
+}
