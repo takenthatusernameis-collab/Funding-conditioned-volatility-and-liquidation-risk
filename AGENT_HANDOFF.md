@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T14:26:28Z (supersedes 2026-11-22T13:43:36Z)
+**Timestamp:** 2026-11-22T14:34:38Z (supersedes 2026-11-22T14:26:28Z)
 **Session type:** handoff refresh — single durable handoff; sole rank-0 ACTIVE campaign `FCLR-POOLED-AUDIT-001-20261122T120000Z` (NOT_STARTED), gate-enforced. Gate PASS reason=OK; root 499/500; 116/116 gate unittests pass; no blocked/inefficient sessions; no empty session dirs; latest disk session = latest recorded handoff session (`session_20261122T092003Z`).
 
 **Sole active campaign (rank-0, gate-enforced):** `FCLR-POOLED-AUDIT-001-20261122T120000Z` — **NOT_STARTED (ACTIVE)**. Adversarial leakage/quality audits on the pooled ironflow bulk panel, with optional Track B modeled boundary-breach labels. Executable today on data already on disk: no new source, no network, no external trigger. The prior `FCLR-POOLED-001-20261122T040000Z` is CONFIRMATORY_COMPLETE (executed under `session_20261122T092003Z`, decision NOT_SUPPORTED) and demoted to rank 1 SUPERSEDED_TERMINAL. No other rank-0 entry exists.
@@ -19,7 +19,7 @@ Repository focus (per repo name **Funding-conditioned-volatility-and-liquidation
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T14:26:28Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T14:34:38Z)
 
 > **READ THIS FIRST — THIS IS THE ONLY TASK YOU MAY START. DO NOT DEVIATE.**
 >
