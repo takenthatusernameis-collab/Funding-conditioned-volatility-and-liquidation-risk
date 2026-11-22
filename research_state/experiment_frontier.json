@@ -1,5 +1,51 @@
 [
  {
+  "rank": 0,
+  "status": "READY_EXECUTE",
+  "program_status": "ACTIVE",
+  "task": "FCLR-POOLED-ROBUST-002-20261122T180000Z",
+  "generated": "20261122T180000Z",
+  "refreshed": "2026-11-22T17:56:12Z",
+  "last_checked": "2026-11-22T17:56:12Z",
+  "last_verdict": "NOT_STARTED",
+  "next_action_heavy": "Execute FCLR-POOLED-ROBUST-002: a HEAVY, outcome-blind, leakage-hardened RE-CONFIRMATION of the funding-conditioned volatility + liquidation-risk hypothesis on the SAME on-disk ironflow bulk panel (research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}, 18 months 2025-05..2026-10, ~15M aligned rows). This is NOT a re-run of FCLR-POOLED-001 and NOT a re-run of the FCLR-POOLED-AUDIT-001 audit: it applies ALL audit remediations SIMULTANEOUSLY inside one pre-registered design and asks whether the NOT_SUPPORTED verdict survives. Remediations: (d2) a real 48h purge+embargo on the chronological train/test boundary (the audit found only a 1h gap); (d10) non-overlapping forward-outcome windows (the audit found pairwise Jaccard 0.52..0.92 dependence); (d4) a 1% mark-oracle premium tolerance filter (the audit found 6.8% of rows above tolerance); (d6/d7) delisting-aware per-coin identity and a survivors-vs-exited sensitivity arm; (d9) per-month funding-tercile threshold with drift reported. Compare the funding-conditioned feature set vs the RV-only baseline under QLIKE (primary) and Brier/log-loss on the Track B modeled breach proxy (secondary, clearly labeled modeled, never observed liquidation), with a per-coin block-bootstrap CI95 and Holm correction across the declared family. Report as sequential confirmatory look k=2 with alpha-spending alpha_2 = 0.05/(2*3) = 0.00833 (RESEARCH_PROMPT.md \u00a717). Decision is symmetric: if NOT_SUPPORTED survives, the null is confirmed leakage-robust; if it flips, the earlier null was a leakage artifact. Either way the null/edge is preserved honestly. Do NOT build a risk overlay (\u00a79 gate did not pass). All artifacts under research_state/session_<UTC>/ with UTC > 20261122T180000Z, non-empty, no zero-byte placeholders. The gate (FCLR-POOLED-ROBUST) fails closed without the full heavy artifact set.",
+  "next_unfinished_task": "FCLR-POOLED-ROBUST-002-20261122T180000Z: produce, under research_state/session_<UTC>/ (UTC > 20261122T180000Z), all of: (a) fclr_pooled_robust002_prereg_<UTC>.{json,md} \u2014 outcome-blind freeze (outcome_data_inspected_before_freeze:false; input sha256 asserted; 48h purge+embargo, non-overlapping windows, mark/index tolerance, delisting-aware identity, baselines, 2% materiality floor, Holm family, alpha-spending k=2) frozen BEFORE inspecting any outcome; (b) fclr_pooled_robust002_robustness_<UTC>.{py,json,md} \u2014 heavy stdlib+pyarrow robustness recompute (48h embargo, non-overlapping 6h/24h/72h/168h forward windows, mark/index filter, survivors-vs-exited arm, per-coin block-bootstrap, QLIKE + Brier/log-loss vs RV-only, Holm-adjusted); (c) fclr_pooled_robust002_recompute_<UTC>.{py,json} \u2014 independent stdlib recompute from stored input hashes; (d) fclr_pooled_robust002_evidence_audit_<UTC>.{json,md}; (e) gate-critical evidence_audit_<UTC>.json alias; (f) non-empty trigger_check_<UTC>.json. Non-avoidance: no prose-only/trigger-only/source-probe-only/audit-only/verify-and-stop/placeholder sessions; root md+json cap 499/500 (all artifacts under session_<UTC>/); no empty files; do NOT threshold-shop or relax the 2% floor after outcomes; preserve nulls as NOT_SUPPORTED; do NOT re-run any terminal campaign (incl. FCLR-POOLED-001, FCLR-POOLED-AUDIT-001); do NOT build an overlay; do NOT modify .github/workflows; do NOT overwrite research_state/research_protocol.md.",
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": "None. Uses no external trigger and requires NO new data source: the ironflow bulk parquet caches (18 months, ~15M aligned rows) are already on disk. This campaign removes the prior bottleneck \u2014 the 2026-11-22T17:52Z handoff told future agents to 'verify green and stop', an inefficient escape hatch that would let the FCLR-POOLED-001 null stand without ever testing whether it survives the audit's own remediations. The gate (FCLR-POOLED-ROBUST) fails closed without the full heavy artifact set, so a verify-and-stop session cannot pass.",
+  "evidence": {
+   "ironflow_bulk_cache": "research_state/data_cache/ironflow_bulk/",
+   "months": "2025-05 .. 2026-10 (18 months)",
+   "audit_remediations": [
+    "d2_48h_purge_embargo",
+    "d10_non_overlapping_forward_windows",
+    "d4_mark_index_1pct_tolerance_filter",
+    "d6_delisting_aware_identity",
+    "d7_survivors_vs_exited_arm",
+    "d9_per_month_threshold_drift_reported"
+   ],
+   "sequential_look": "k=2; alpha_2 = 0.05/(2*3) = 0.00833 (alpha-spending, RESEARCH_PROMPT.md \u00a717)",
+   "materiality_floor": "2% relative QLIKE reduction vs RV-only baseline (frozen, not relaxed)",
+   "root_md_json_count": 499,
+   "root_cap": 500,
+   "all_new_artifacts_must_go_under_session_dir": true,
+   "gate_enforced": "scripts/check_handoff_heavywork_gate.py FCLR-POOLED-ROBUST (fails closed without full heavy artifact set)"
+  },
+  "phases": [
+   {
+    "phase": "ROBUST_PREREG_FREEZE",
+    "status": "PENDING",
+    "claim": "Freeze outcome-blind prereg with all audit remediations and alpha-spending k=2 BEFORE inspecting outcomes."
+   },
+   {
+    "phase": "HEAVY_LEAKAGE_HARDENED_RECONFIRM",
+    "status": "PENDING",
+    "claim": "Run the heavy robustness recompute triad + independent stdlib recompute + evidence audit + trigger check."
+   }
+  ],
+  "note": "RANK-0 ACTIVE as of 2026-11-22T17:56:12Z. Gate-enforced via FCLR-POOLED-ROBUST in check_handoff_heavywork_gate.py (start UTC 20261122T180000Z; sessions at/before that UTC are grandfathered). Uses stdlib + pyarrow only; no network; no new source; no overlay."
+ },
+ {
   "rank": 1,
   "status": "SUPERSEDED_TERMINAL",
   "program_status": "COMPLETE",
@@ -908,22 +954,22 @@
    }
   ],
   "note": "SUPERSEDED_TERMINAL 2026-11-22T03:40:00Z. Executed under session_20261122T033000Z (decision GO on a small BTC/ETH Jan-Mar 2024 raw-CSV sample). Superseded by FCLR-POOLED-001-20261122T040000Z: the raw-CSV confirmatory was statistically underpowered (n=48 BTC rows, 2 of 3 blocks INCONCLUSIVE) and the real bottleneck was the broken '3 contiguous 30-day funding-backed blocks' framing, not the data. The ironflow bulk cache (18 months, 342 coins, ~15M aligned rows) supports a genuinely heavy pooled chronological OOS design. Do NOT re-run NEXT-SOURCE-VERIFY-01.",
-   "superseded_by": "FCLR-POOLED-001-20261122T040000Z"
+  "superseded_by": "FCLR-POOLED-001-20261122T040000Z"
  },
  {
-  "rank": 0,
-  "status": "READY_EXECUTE",
-  "program_status": "ACTIVE",
+  "rank": 1,
+  "status": "SUPERSEDED_TERMINAL",
+  "program_status": "COMPLETE",
   "task": "FCLR-POOLED-AUDIT-001-20261122T120000Z",
   "generated": "20261122T120000Z",
-  "refreshed": "2026-11-22T12:23:52Z",
-  "last_checked": "2026-11-22T12:23:52Z",
-  "last_verdict": null,
-  "next_action_heavy": "Execute FCLR-POOLED-AUDIT-001: run the adversarial leakage/quality audit of the pooled ironflow bulk panel (research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}, 18 months 2025-05..2026-10) with optional Track B modeled boundary-breach labels. This is the RESEARCH_PROMPT.md §10 priority-8 task and the §15 Track B liquidation-risk path (Track A observed labels exhausted: NO_NEW_ADMISSIBLE_SOURCE). Freeze an outcome-blind audit prereg BEFORE inspecting any outcome, then execute the heavy adversarial-audit triad per audit domain (timestamping, delisting/identity, missingness, survivorship, stress concentration, threshold drift, overlapping outcomes, future-row perturbation, embargo integrity, funding sign/timing, mark/index alignment) plus Track B modeled breach-label construction from public mark-price data + public margin parameters, clearly labeled as modeled breach proxy NEVER as observed liquidation. Emit non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261122T040000Z; session is post-start for this campaign once UTC > 20261122T110000Z): fclr_pooled_audit_prereg_<UTC>.{json,md}, fclr_pooled_audit_audit_<UTC>.{py,json,md}, fclr_pooled_audit_recompute_<UTC>.{py,json}, fclr_pooled_audit_evidence_audit_<UTC>.{json,md}, evidence_audit_<UTC>.json, trigger_check_<UTC>.json. No prose-only, trigger-only, source-probe-only, audit-only, verify-and-stop, or placeholder sessions; the gate (FCLR-POOLED-AUDIT-001 via POOLED_AUDIT_CAMPAIGN_RE) fails closed without the full heavy artifact set. No position-sizing/risk overlay may be built (forecast gate NOT_SUPPORTED per RESEARCH_PROMPT.md §9). Document the FCLR-POOLED-001 NOT_SUPPORTED null in research_state/negative_results_report.md (new session dir, different artifact family).",
-  "next_unfinished_task": "FCLR-POOLED-AUDIT-001-20261122T120000Z: (a) Source registry + verified bulk-data evidence (json+md) re-asserting the ironflow bulk parquet files read (paths, sha256, row counts, coin coverage, month span 2025-05..2026-10). (b) Outcome-blind audit prereg freeze (json+md): audit domains, Track B margin/leverage scenarios pre-registered before outcomes, outcome_data_inspected_before_freeze:false, input hashes asserted. (c) Heavy adversarial-audit implementation/result/report triad per domain (py+json+md), independent stdlib recompute (py+json), audit evidence package (json+md), gate-critical evidence_audit_ alias (json), non-empty trigger_check (json) — all non-empty under research_state/session_<UTC>/ (UTC > 20261122T040000Z). Non-avoidance constraints: no prose-only/trigger-only/source-probe-only/audit-only/verify-and-stop/placeholder sessions; root md+json cap 499/500 (all artifacts under session_<UTC>/); no empty files; no threshold-shopping or relaxing the 2% materiality floor after outcomes; preserve nulls as NOT_SUPPORTED; do NOT re-run any terminal campaign; do NOT modify .github/workflows; do NOT overwrite research_state/research_protocol.md; do NOT build a risk overlay; do NOT label Track B modeled breaches as observed liquidations.",
+  "refreshed": "2026-11-22T17:56:12Z",
+  "last_checked": "2026-11-22T17:56:12Z",
+  "last_verdict": "NOT_SUPPORTED",
+  "next_action_heavy": "Execute FCLR-POOLED-AUDIT-001: run the adversarial leakage/quality audit of the pooled ironflow bulk panel (research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}, 18 months 2025-05..2026-10) with optional Track B modeled boundary-breach labels. This is the RESEARCH_PROMPT.md \u00a710 priority-8 task and the \u00a715 Track B liquidation-risk path (Track A observed labels exhausted: NO_NEW_ADMISSIBLE_SOURCE). Freeze an outcome-blind audit prereg BEFORE inspecting any outcome, then execute the heavy adversarial-audit triad per audit domain (timestamping, delisting/identity, missingness, survivorship, stress concentration, threshold drift, overlapping outcomes, future-row perturbation, embargo integrity, funding sign/timing, mark/index alignment) plus Track B modeled breach-label construction from public mark-price data + public margin parameters, clearly labeled as modeled breach proxy NEVER as observed liquidation. Emit non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261122T040000Z; session is post-start for this campaign once UTC > 20261122T110000Z): fclr_pooled_audit_prereg_<UTC>.{json,md}, fclr_pooled_audit_audit_<UTC>.{py,json,md}, fclr_pooled_audit_recompute_<UTC>.{py,json}, fclr_pooled_audit_evidence_audit_<UTC>.{json,md}, evidence_audit_<UTC>.json, trigger_check_<UTC>.json. No prose-only, trigger-only, source-probe-only, audit-only, verify-and-stop, or placeholder sessions; the gate (FCLR-POOLED-AUDIT-001 via POOLED_AUDIT_CAMPAIGN_RE) fails closed without the full heavy artifact set. No position-sizing/risk overlay may be built (forecast gate NOT_SUPPORTED per RESEARCH_PROMPT.md \u00a79). Document the FCLR-POOLED-001 NOT_SUPPORTED null in research_state/negative_results_report.md (new session dir, different artifact family).",
+  "next_unfinished_task": "FCLR-POOLED-AUDIT-001-20261122T120000Z: (a) Source registry + verified bulk-data evidence (json+md) re-asserting the ironflow bulk parquet files read (paths, sha256, row counts, coin coverage, month span 2025-05..2026-10). (b) Outcome-blind audit prereg freeze (json+md): audit domains, Track B margin/leverage scenarios pre-registered before outcomes, outcome_data_inspected_before_freeze:false, input hashes asserted. (c) Heavy adversarial-audit implementation/result/report triad per domain (py+json+md), independent stdlib recompute (py+json), audit evidence package (json+md), gate-critical evidence_audit_ alias (json), non-empty trigger_check (json) \u2014 all non-empty under research_state/session_<UTC>/ (UTC > 20261122T040000Z). Non-avoidance constraints: no prose-only/trigger-only/source-probe-only/audit-only/verify-and-stop/placeholder sessions; root md+json cap 499/500 (all artifacts under session_<UTC>/); no empty files; no threshold-shopping or relaxing the 2% materiality floor after outcomes; preserve nulls as NOT_SUPPORTED; do NOT re-run any terminal campaign; do NOT modify .github/workflows; do NOT overwrite research_state/research_protocol.md; do NOT build a risk overlay; do NOT label Track B modeled breaches as observed liquidations.",
   "resume_triggers": [],
   "trigger_status": {},
-  "blockers": "None. Uses no external trigger and requires NO new data source: the ironflow bulk parquet caches are already on disk. Future agents cannot idle waiting for NEW_OBSERVED_LIQUIDATION_SOURCE — that trigger cannot fire on frozen data. The gate fails closed without the full heavy adversarial-audit artifact set.",
+  "blockers": "None. Uses no external trigger and requires NO new data source: the ironflow bulk parquet caches are already on disk. Future agents cannot idle waiting for NEW_OBSERVED_LIQUIDATION_SOURCE \u2014 that trigger cannot fire on frozen data. The gate fails closed without the full heavy adversarial-audit artifact set.",
   "evidence": {
    "ironflow_bulk_cache": "research_state/data_cache/ironflow_bulk/",
    "ironflow_bulk_datasets": [
@@ -942,15 +988,18 @@
   "phases": [
    {
     "phase": "AUDIT_PREREG_FREEZE",
-    "status": "PENDING",
+    "status": "COMPLETE",
     "claim": "Freeze outcome-blind adversarial-audit domains and Track B modeled boundary-breach scenarios BEFORE inspecting outcomes; assert ironflow bulk input hashes; write fclr_pooled_audit_prereg_<UTC>.{json,md}."
    },
    {
     "phase": "HEAVY_ADVERSARIAL_AUDIT",
-    "status": "PENDING",
-    "claim": "Execute adversarial-audit triad per domain (timestamping, delisting/identity, missingness, survivorship, stress concentration, threshold drift, overlapping outcomes, future-row perturbation, embargo integrity, funding sign/timing, mark/index alignment) plus Track B modeled breach labels from public mark price + public margin parameters; emit fclr_pooled_audit_audit_<UTC>.{py,json,md}, independent stdlib recompute fclr_pooled_audit_recompute_<UTC>.{py,json}, fclr_pooled_audit_evidence_audit_<UTC>.{json,md}, evidence_audit_<UTC>.json, trigger_check_<UTC>.json — all non-empty."
+    "status": "COMPLETE",
+    "claim": "Execute adversarial-audit triad per domain (timestamping, delisting/identity, missingness, survivorship, stress concentration, threshold drift, overlapping outcomes, future-row perturbation, embargo integrity, funding sign/timing, mark/index alignment) plus Track B modeled breach labels from public mark price + public margin parameters; emit fclr_pooled_audit_audit_<UTC>.{py,json,md}, independent stdlib recompute fclr_pooled_audit_recompute_<UTC>.{py,json}, fclr_pooled_audit_evidence_audit_<UTC>.{json,md}, evidence_audit_<UTC>.json, trigger_check_<UTC>.json \u2014 all non-empty."
    }
   ],
-  "note": "Sole rank-0 ACTIVE campaign. FCLR-POOLED-AUDIT-001 is the mandatory next heavy campaign; executable today on existing frozen data with no new source, no network, no external trigger. Forecast gate NOT_SUPPORTED so no risk overlay. Track A observed liquidation labels exhausted; Track B modeled breach proxy is the viable liquidation-risk path, clearly separated from observed labels."
+  "note": "COMPLETE under session_20261122T165200Z: all 11 fclr_pooled_audit001_* artifacts + evidence_audit_ + non-empty trigger_check_ present and non-empty; gate PASS reason=OK. Demoted to rank 1 SUPERSEDED_TERMINAL by the 2026-11-22T17:56:12Z handoff refresh; superseded as rank-0 by FCLR-POOLED-ROBUST-002-20261122T180000Z. No rank-0 ACTIVE entry may point at a finished campaign.",
+  "completed_session": "session_20261122T165200Z",
+  "completed_utc": "2026-11-22T16:52:00Z",
+  "superseded_by": "FCLR-POOLED-ROBUST-002-20261122T180000Z"
  }
 ]

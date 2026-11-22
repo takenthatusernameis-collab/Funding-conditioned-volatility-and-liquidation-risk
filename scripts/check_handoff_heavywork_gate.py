@@ -580,6 +580,41 @@ POOLED_AUDIT_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-POOLED-ROBUST-002 hardening: FCLR-POOLED-AUDIT-001 (the §10 priority-8
+# adversarial audit) found concrete quality gaps that could have manufactured OR
+# masked the FCLR-POOLED-001 NOT_SUPPORTED null: d2 only a 1-hour train/test gap
+# (no 48h purge+embargo), d10 overlapping forward outcomes (pairwise Jaccard
+# 0.52..0.92 dependence), d4 6.8% of rows above the 1% mark/index tolerance,
+# d6/d7 delisting/survivorship, d9 threshold drift. The prior handoff told future
+# agents to "verify green and stop" — an inefficient escape hatch that would let
+# the null stand without ever testing whether it survives a leakage-hardened
+# design. This campaign removes that bottleneck: a heavy, pre-registered,
+# leakage-hardened RE-CONFIRMATION on the same on-disk ironflow bulk panel that
+# applies ALL audit remediations simultaneously (48h purge+embargo, non-overlapping
+# forward-outcome windows, mark/index tolerance filter, delisting-aware identity,
+# per-coin block-bootstrap, Holm across the declared family) and reports it as a
+# sequential confirmatory look k=2 with alpha-spending. Once this campaign starts
+# (start UTC below), a post-start session cannot satisfy the gate with a trigger-
+# only, prose-only, source-probe-only, audit-only, verify-and-stop, or arbitrary
+# recompute_* session. It must emit the outcome-blind robustness prereg, the heavy
+# robustness recompute triad, the independent stdlib recompute, the evidence audit,
+# the gate-critical evidence_audit_ alias, and a non-empty trigger check. Sessions
+# predating the campaign start are grandfathered so this handoff refresh stays green.
+POOLED_ROBUST_CAMPAIGN_RE = re.compile(r"FCLR-POOLED-ROBUST-(\d+)-(\d{8}T\d{6}Z)")
+POOLED_ROBUST_REQUIRED = (
+    ("fclr_pooled_robust_prereg_", ".json"),
+    ("fclr_pooled_robust_prereg_", ".md"),
+    ("fclr_pooled_robust_robustness_", ".py"),
+    ("fclr_pooled_robust_robustness_", ".json"),
+    ("fclr_pooled_robust_robustness_", ".md"),
+    ("fclr_pooled_robust_recompute_", ".py"),
+    ("fclr_pooled_robust_recompute_", ".json"),
+    ("fclr_pooled_robust_evidence_audit_", ".json"),
+    ("fclr_pooled_robust_evidence_audit_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 NEW_QUANT_PREFIXES = (
     "fclr_risk",
     "fclr_starter",
@@ -2010,6 +2045,83 @@ def _pooled_audit_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _pooled_robust_state(handoff_text: str, latest_sid: str | None,
+                         latest_files: list[str],
+                         latest_dir: Path | None = None) -> dict:
+    """Return FCLR-POOLED-ROBUST non-avoidance state.
+
+    FCLR-POOLED-AUDIT-001 left concrete, disclosed quality gaps (d2 no 48h
+    purge+embargo; d10 overlapping outcomes; d4 mark/index tolerance; d6/d7
+    delisting/survivorship; d9 threshold drift). The next heavy campaign is a
+    leakage-hardened re-confirmation on the same on-disk ironflow bulk panel, not
+    another verify-and-stop status update. After it starts, a post-start session
+    must emit the outcome-blind robustness prereg, the heavy robustness recompute
+    triad, the independent stdlib recompute, the evidence audit, the gate-critical
+    evidence_audit_ alias, and a trigger check. Zero-byte and generic
+    recompute/audit placeholders fail closed. Pre-start sessions are grandfathered
+    so this handoff refresh remains green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = POOLED_ROBUST_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-POOLED-ROBUST-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    tag = f"pooled_robust{int(m.group(1)):03d}"
+    family = tuple(
+        (prefix.replace("fclr_pooled_robust_", f"fclr_{tag}_", 1), suffix)
+        if prefix.startswith("fclr_pooled_robust_")
+        else (prefix, suffix)
+        for prefix, suffix in POOLED_ROBUST_REQUIRED
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["artifact_family"] = tag
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, family):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _normalize_text(s: str) -> str:
     return "\n".join(line.rstrip() for line in s.replace("\r\n", "\n").split("\n")).strip()
 
@@ -2268,6 +2380,7 @@ def check(repo: Path = REPO) -> dict:
         "next_source_verify": None,
         "pooled": None,
         "pooled_audit": None,
+        "pooled_robust_02": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -2810,6 +2923,33 @@ def check(repo: Path = REPO) -> dict:
                 if not pa["has_trigger_check"]:
                     payload["failures"].append(
                         f"POOLED_AUDIT_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-POOLED-ROBUST-002: after the leakage-hardened re-confirmation
+            # campaign starts, require the outcome-blind robustness prereg + heavy
+            # robustness recompute triad + independent stdlib recompute + evidence
+            # audit + gate alias + trigger check. Generic recompute/audit/
+            # trigger-only/verify-and-stop sessions and zero-byte placeholders
+            # fail closed, so a future session cannot dodge the heavy leakage-
+            # hardened vol+liq-risk robustness work.
+            pr = _pooled_robust_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["pooled_robust_02"] = pr
+            if pr["required"]:
+                if pr["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "POOLED_ROBUST_ARTIFACTS_MISSING:"
+                        + ",".join(pr["missing_required_artifacts"])
+                    )
+                if pr["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "POOLED_ROBUST_ARTIFACTS_EMPTY:"
+                        + ",".join(pr["empty_required_artifacts"])
+                    )
+                if not pr["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"POOLED_ROBUST_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
