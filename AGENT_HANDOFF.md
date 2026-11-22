@@ -1,13 +1,13 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T14:34:38Z (supersedes 2026-11-22T14:26:28Z)
+**Timestamp:** 2026-11-22T14:36:15Z (supersedes 2026-11-22T14:34:38Z)
 **Session type:** handoff refresh — single durable handoff; sole rank-0 ACTIVE campaign `FCLR-POOLED-AUDIT-001-20261122T120000Z` (NOT_STARTED), gate-enforced. Gate PASS reason=OK; root 499/500; 116/116 gate unittests pass; no blocked/inefficient sessions; no empty session dirs; latest disk session = latest recorded handoff session (`session_20261122T092003Z`).
 
 **Sole active campaign (rank-0, gate-enforced):** `FCLR-POOLED-AUDIT-001-20261122T120000Z` — **NOT_STARTED (ACTIVE)**. Adversarial leakage/quality audits on the pooled ironflow bulk panel, with optional Track B modeled boundary-breach labels. Executable today on data already on disk: no new source, no network, no external trigger. The prior `FCLR-POOLED-001-20261122T040000Z` is CONFIRMATORY_COMPLETE (executed under `session_20261122T092003Z`, decision NOT_SUPPORTED) and demoted to rank 1 SUPERSEDED_TERMINAL. No other rank-0 entry exists.
 
 **Latest completed heavy session on disk:** `session_20261122T092003Z` — executed FCLR-POOLED-001 to completion with all 13 `fclr_pooled_*` artifacts (decision NOT_SUPPORTED; funding-conditioned features add no QLIKE improvement over RV-only baseline). All earlier sessions remain terminal/grandfathered.
 
-**Gate baseline (verified this session, 2026-11-22T14:26:28Z):** `python3 scripts/check_handoff_heavywork_gate.py` → `PASS ... reason=OK` (`latest_handoff=session_20261122T092003Z`, `latest_disk=session_20261122T092003Z`, `handoff_stale=False`, `pooled.required=True` 13/13 artifacts present, `root=499/500`); all 6 gate unittest modules (`test_tracka_hardening_143`, `test_tracka_hardening_144`, `test_active_campaign_gate`, `test_fclr_heavy_confirm_gate`, `test_fclr_campaign_gate`, `test_fclr_starter_001_campaign_gate`) → **116 tests, 0 failures**; `research_state` root md+json count = **499/500**; latest on-disk session = latest recorded in this handoff (`session_20261122T092003Z`); no empty session directories (60 session dirs scanned); no `fclr_pooled_audit*` artifacts on disk yet (campaign not started). On-disk ironflow bulk caches: candles_1h/funding/open_interest/liquidations each **18 parquet files + 18 sha256 sidecars + 18 accessed.json** (2025-05..2026-10, 54 files per dataset).
+**Gate baseline (verified this session, 2026-11-22T14:36:15Z):** `python3 scripts/check_handoff_heavywork_gate.py` → `PASS ... reason=OK` (`latest_handoff=session_20261122T092003Z`, `latest_disk=session_20261122T092003Z`, `handoff_stale=False`, `pooled.required=True` 13/13 artifacts present, `root=499/500`); all 6 gate unittest modules (`test_tracka_hardening_143`, `test_tracka_hardening_144`, `test_active_campaign_gate`, `test_fclr_heavy_confirm_gate`, `test_fclr_campaign_gate`, `test_fclr_starter_001_campaign_gate`) → **116 tests, 0 failures**; `research_state` root md+json count = **499/500**; latest on-disk session = latest recorded in this handoff (`session_20261122T092003Z`); no empty session directories (60 session dirs scanned); no `fclr_pooled_audit*` artifacts on disk yet (campaign not started). On-disk ironflow bulk caches: candles_1h/funding/open_interest/liquidations each **18 parquet files + 18 sha256 sidecars + 18 accessed.json** (2025-05..2026-10, 54 files per dataset).
 
 **Environment (verified):** Python 3.12.3 at `/usr/bin/python3`. `numpy`/`pandas`/`scipy` NOT installed (`ModuleNotFoundError`). `pyarrow` 26.0.1 installed — reads ironflow bulk parquet. Use stdlib + pyarrow only. Do NOT rely on numpy/pandas/scipy.
 
@@ -19,7 +19,7 @@ Repository focus (per repo name **Funding-conditioned-volatility-and-liquidation
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T14:34:38Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T14:36:15Z)
 
 > **READ THIS FIRST — THIS IS THE ONLY TASK YOU MAY START. DO NOT DEVIATE.**
 >
