@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T02:34:17Z (supersedes 2026-11-22T02:30:36Z)
+**Timestamp:** 2026-11-22T02:36:58Z (supersedes 2026-11-22T02:34:17Z)
 **Sole active campaign (rank-0, gate-enforced):** FCLR-NEXT-SOURCE-VERIFY-01-20261122T013100Z — **READY_EXECUTE (ACTIVE).** The frozen-data frontier is exhausted (`next_campaign_status.py`: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN across Binance 5-symbol cache, Hyperliquid bulk/extended stores, and all frozen panels). FCLR-LIVE-ARCHIVE-02 is executed and terminal (decision NOT_SUPPORTED, session_20261122T013000Z). The only path to new heavy work is a materially different, reachable, unauthenticated, free external data source with live/unfrozen historical coverage NOT already exhausted on disk — followed by a frozen outcome-blind prereg and a heavy 3-block confirmatory design.
 **Latest completed heavy session on disk:** session_20261122T013000Z (FCLR-LIVE-ARCHIVE-02 — recompute + evidence audit + alias + trigger check emitted; decision NOT_SUPPORTED). FCLR-LIVE-ARCHIVE-02 demoted to SUPERSEDED_TERMINAL in experiment_frontier.json (rank-0 moved to FCLR-NEXT-SOURCE-VERIFY-01). Prior heavy sessions remain terminal/grandfathered.
 **Gate baseline (verified this session):** `python3 scripts/check_handoff_heavywork_gate.py` → PASS reason=OK after this handoff refresh. **Bottleneck removed this session:** `experiment_frontier.json` entry FCLR-LIVE-ARCHIVE-02 carried non-rank-0 status `COMPLETE`, which is not a valid terminal status for non-rank-0 entries (valid: COMPLETED_VALIDATED/SUPERSEDED_TERMINAL/SUPERSEDED_BY_FCLR_HEAVY_CONFIRM/SUPERSEDED). This deadlocked `test_active_campaign_gate.py::test_frontier_rank0_is_active_heavy_campaign` (assertion `COMPLETE not in COMPLETED_STATUSES`). Fixed: status → `SUPERSEDED_TERMINAL`. **Second bottleneck removed this session:** `scripts/check_handoff_heavywork_gate.py` did NOT bind the active rank-0 campaign FCLR-NEXT-SOURCE-VERIFY-01 — it only enforced LIVE_ARCHIVE (already terminal via session_20261122T013000Z), leaving a "verify green and stop" escape hatch where a future session could pass the gate without doing NEXT-SOURCE-VERIFY-01 heavy work. Added `_next_source_verify_state` + `NEXT_SOURCE_VERIFY_CAMPAIGN_RE` + `NEXT_SOURCE_VERIFY_REQUIRED` to the gate (mirroring the LIVE_ARCHIVE enforcement), wired into `check()`, with campaign start UTC 20261122T013100Z. Sessions at/before 20261122T013100Z are grandfathered; any post-campaign session (UTC > 20261122T013100Z) must emit the full NEXT-SOURCE-VERIFY-01 artifact set (source registry + verified-download evidence, outcome-blind prereg freeze, heavy 3-block eval triad py+json+md, independent stdlib recompute py+json, evidence audit json+md, gate-critical evidence_audit_ alias json, non-empty trigger_check json) or the gate fails closed. `python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144 tests.test_active_campaign_gate tests.test_fclr_heavy_confirm_gate tests.test_fclr_campaign_gate tests.test_fclr_starter_001_campaign_gate` → 116 pass, 0 fail (5 skipped). **`test_active_campaign_gate` no longer deadlocked.**
@@ -12,19 +12,20 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T02:34:17Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T02:36:58Z)
 
 **STATUS: FCLR-NEXT-SOURCE-VERIFY-01 IS THE SOLE RANK-0 CAMPAIGN (READY_EXECUTE/ACTIVE, campaign start UTC 20261122T013100Z). HEAVY WORK IS MANDATORY; IDLING/VERIFY-AND-STOPPING IS FORBIDDEN. THE GATE FAILS CLOSED WITHOUT THE FULL ARTIFACT SET.**
 
 Repository focus (per repo name Funding-conditioned-volatility-and-liquidation-risk): every artifact must serve the funding-conditioned volatility and liquidation-risk research pillars — never drift into unrelated work.
 
-This handoff refresh (UTC 20261122T023417Z):
+This handoff refresh (UTC 20261122T023658Z):
 - Confirmed gate PASS (reason=OK) and all 6 gate-related unittest files → 116 pass, 0 fail (5 skipped).
 - Confirmed `next_campaign_status.py` → NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN across all frozen domains (Binance 5-symbol cache, Hyperliquid bulk/extended, mark+funding-only, 1.74M event panel).
 - Confirmed FCLR-LIVE-ARCHIVE-02 is SUPERSEDED_TERMINAL (session_20261122T013000Z, decision NOT_SUPPORTED); rank-0 moved to FCLR-NEXT-SOURCE-VERIFY-01-20261122T013100Z.
 - Confirmed data.binance.vision is reachable (HTTP 200) but ALREADY EXHAUSTED by FCLR-LIVE-ARCHIVE-02 — do NOT re-verify it.
 - Confirmed root research_state md+json count is 499/500 (at cap) — all new artifacts must go under research_state/session_<UTC>/.
 - **Bottleneck removed:** the handoff previously implied a post-campaign session existed at 02:30:36Z; no such session exists on disk (latest is session_20261122T013000Z, pre-campaign-start 013100Z, grandfathered). The NEXT-SOURCE-VERIFY-01 campaign has STARTED but NOT been executed. Any post-campaign session (UTC > 20261122T013100Z) must emit the full heavy artifact set or the gate fails closed.
+- **Timestamp refresh (UTC 20261122T023658Z):** re-verified gate PASS (reason=OK) and frozen-domain exhaustion; no new bottleneck. Initial task message re-timestamped for the next agentic session.
 
 **What the NEXT session must do (heavy work is mandatory; idling/verify-and-stopping is forbidden — the gate fails closed):**
 
