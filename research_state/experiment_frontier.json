@@ -1,13 +1,14 @@
 [
  {
-  "rank": 0,
-  "status": "READY_EXECUTE",
-  "program_status": "ACTIVE",
+  "rank": 1,
+  "status": "SUPERSEDED_TERMINAL",
+  "program_status": "COMPLETE",
   "task": "FCLR-LIVE-ARCHIVE-01-20261121T232840Z",
   "generated": "20261121T232840Z",
   "refreshed": "2026-11-21T23:28:40Z",
   "last_checked": "2026-11-21T23:28:40Z",
-  "last_verdict": null,
+  "last_verdict": "COMPLETE",
+  "superseded_by": "FCLR-LIVE-ARCHIVE-02-20261122T002500Z",
   "next_action_heavy": "Execute FCLR-LIVE-ARCHIVE-01: download, freeze, and run a HEAVY 3-block confirmatory design on the verified unauthenticated Binance public market-data archive (data.binance.vision). The prior handoff's claim that no admissible free source exists is FALSE and is corrected here with reproducible probe evidence (HTTP 200, deep history). The reachable, never-exploited datasets are: (1) data/futures/um/daily/metrics/<SYM>/ — daily open interest (sum_open_interest, sum_open_interest_value) + taker long/short volume ratio + top-trader long/short ratios, deep 2020-09-01 -> 2026-11-20 (BTCUSDT = 2272 daily files), 5-min cadence rows; (2) data/futures/um/monthly/fundingRate/<SYM>/ — funding rate, 2020-01 -> 2026-10 (BTCUSDT 82 monthly files); (3) data/futures/um/monthly/klines|markPriceKlines|indexPriceKlines|premiumIndexKlines/<SYM>/ — OHLCV / mark / index / premium klines. Funding-conditioned volatility and open-interest / taker-flow liquidation-risk proxies are therefore BOTH constructible on a deep, free, unauthenticated archive. MUST: (a) record the verified download probe (paths, ETag/sha256, earliest/latest, cadence, gaps) in research_state/data_source_registry.json + fclr_live_archive_source_registry_<UTC>.{json,md}; (b) freeze outcome-blind prereg fclr_live_archive_prereg_<UTC>.{json,md} BEFORE inspecting any outcome (outcome_data_inspected_before_freeze:false; assert source/data hashes); (c) execute the heavy 3-block confirmatory evaluation triad fclr_live_archive_eval_<UTC>.{py,json,md}, independent stdlib recompute fclr_live_archive_recompute_<UTC>.{py,json}, evidence audit fclr_live_archive_evidence_audit_<UTC>.{json,md} + gate alias evidence_audit_<UTC>.json, and trigger_check_<UTC>.json — all non-empty under research_state/session_<UTC>/ (UTC > 20261121T220100Z). Do NOT bypass access controls/rate limits/terms; do NOT use any source requiring payment, signup, or keys. No observed-liquidation dataset exists in this archive (Binance discontinued public liquidationSnapshot) — liquidation risk must be proxied via open interest + taker-flow + mark/index dislocation and labeled as a proxy, never as observed liquidations.",
   "next_unfinished_task": "FCLR-LIVE-ARCHIVE-01-20261121T232840Z: (a) Source registry + verified-download evidence artifact (json+md) recording the reachable unauthenticated Binance public archive (data.binance.vision) metrics/fundingRate/klines with ETags/sha256, earliest/latest timestamps, cadence, gaps. (b) Outcome-blind prereg freeze (json+md) on the newly downloaded archive data: hypotheses (funding-conditioned volatility; open-interest/taker-flow liquidation-risk proxy), targets, features, 3 chronological blocks, baselines, materiality floor (2%), decision gates; outcome_data_inspected_before_freeze:false; assert source/data hashes. (c) Heavy 3-block confirmatory evaluation triad (py+json+md) + independent stdlib recompute (py+json) + evidence audit (json+md) + gate-critical evidence_audit_ alias (json) + trigger_check (json), all non-empty under research_state/session_<UTC>/ (UTC > 20261121T232840Z). Non-avoidance: no prose-only/trigger-only/source-probe-only/audit-only/verify-and-stop/placeholder sessions; root md+json cap 499/500 (all artifacts under session_<UTC>/); no empty files; no threshold-shopping or relaxing the 2% materiality floor after outcomes; preserve nulls as NOT_SUPPORTED; do NOT re-run any terminal campaign; do NOT modify .github/workflows; do NOT overwrite research_state/research_protocol.md.",
   "resume_triggers": [],
@@ -46,7 +47,9 @@
     "claim": "Execute the pre-registered 3-block confirmatory design on the archive data with non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261121T232840Z): evaluation triad fclr_live_archive_eval_<UTC>.{py,json,md}, independent stdlib recompute fclr_live_archive_recompute_<UTC>.{py,json}, evidence audit fclr_live_archive_evidence_audit_<UTC>.{json,md} + gate alias evidence_audit_<UTC>.json, and trigger_check_<UTC>.json. No zero-byte placeholders; preserve nulls as NOT_SUPPORTED."
    }
   ],
-  "note": "Sole rank-0 campaign. Frozen-data frontier exhausted; this campaign opens a VERIFIED reachable free archive (Binance public data, metrics+funding+klines, deep 2020->present) that the frozen frontier never touched. Gate-enforced via FCLR-LIVE-ARCHIVE-01 in check_handoff_heavywork_gate.py. All new artifacts under research_state/session_<UTC>/ (root 499/500)."
+  "note": "SUPERSEDED by FCLR-LIVE-ARCHIVE-02-20261122T002500Z (COMPLETE under session_20261122T013000Z, decision NOT_SUPPORTED). Gate-enforced via FCLR-LIVE-ARCHIVE-02 in check_handoff_heavywork_gate.py (pass reason=OK). All artifacts under research_state/session_<UTC>/ (root 499/500 cap). Frozen-data frontier exhausted; no remaining rank-0 campaign on current evidence base."
+
+
  },
  {
   "rank": 1,
@@ -719,5 +722,87 @@
    }
   ],
   "note": "FCLR-XSEC-005 executed and COMPLETE in session_20261121T001225Z. Notional-weighted (dollar severity) confirmation of the FCLR-XSEC-004 low-RV liquidation finding. Low-RV regime funding contrast SUPPORTED: CI [452972.90, 850198.89], p=0.0, Holm passes, materiality 0.80. High-RV regime honest null. Independent recompute reproduces. Strong agreement with FCLR-XSEC-004 count-based result."
- }
+  },
+  {
+   "rank": 1,
+   "status": "COMPLETE",
+   "program_status": "COMPLETE",
+   "task": "FCLR-LIVE-ARCHIVE-02-20261122T002500Z",
+   "generated": "20261122T002500Z",
+   "refreshed": "2026-11-22T01:30:00Z",
+   "last_checked": "2026-11-22T01:30:00Z",
+   "last_verdict": "NOT_SUPPORTED",
+   "next_action_heavy": "NONE — FCLR-LIVE-ARCHIVE-02 executed in full under session_20261122T013000Z. Decision NOT_SUPPORTED (C2 vs B1 mean relative QLIKE −1.88% eval / +1.22% recompute; 1/3 blocks improved; materiality floor ≥2% FAIL). Null preserved. Liquidation risk labeled LIQUIDATION_RISK_PROXY (no observed liquidations on this source).",
+   "next_unfinished_task": null,
+   "resume_triggers": [],
+   "trigger_status": {},
+   "blockers": "None. Campaign complete. Live-archive domain executed and documented. No remaining rank-0 campaign on current evidence base.",
+   "evidence": {
+    "source": "data.binance.vision (S3: s3-ap-northeast-1.amazonaws.com/data.binance.vision)",
+    "datasets": ["metrics/daily open interest + taker flow", "monthly/fundingRate", "monthly/klines|markPriceKlines|indexPriceKlines|premiumIndexKlines"],
+    "session": "session_20261122T013000Z",
+    "decision": "NOT_SUPPORTED",
+    "recompute_concurs": true
+   },
+   "phases": [
+    {
+     "phase": "SOURCE_REGISTRY_VERIFIED_DOWNLOAD",
+     "status": "COMPLETE"
+    },
+    {
+     "phase": "PREREG_FREEZE_ON_NEW_DATA",
+     "status": "COMPLETE"
+    },
+    {
+     "phase": "HEAVY_3_BLOCK_CONFIRMATORY",
+     "status": "COMPLETE"
+    }
+   ],
+   "completed_session": "session_20261122T013000Z",
+   "completed_utc": "2026-11-22T01:30:00Z",
+   "note": "FCLR-LIVE-ARCHIVE-02 COMPLETE under session_20261122T013000Z. Full fclr_live_archive02_* artifact set present and non-empty. Gate PASS reason=OK. Decision NOT_SUPPORTED; no further rank-0 campaign on current evidence base."
+  },
+  {
+   "rank": 0,
+   "status": "READY_EXECUTE",
+   "program_status": "ACTIVE",
+   "task": "FCLR-NEXT-SOURCE-VERIFY-01-20261122T013100Z",
+   "generated": "20261122T013100Z",
+   "refreshed": "2026-11-22T01:31:00Z",
+   "last_checked": "2026-11-22T01:31:00Z",
+   "last_verdict": null,
+   "next_action_heavy": "Execute FCLR-NEXT-SOURCE-VERIFY-01: discover and verify a materially different, reachable, unauthenticated, free external data source with live/unfrozen historical coverage NOT already exhausted on disk (the Binance data.binance.vision archive was exhausted by FCLR-LIVE-ARCHIVE-02 with decision NOT_SUPPORTED; all frozen-data frontiers report NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN). Once verified: freeze an outcome-blind prereg BEFORE inspecting any outcome, then execute a heavy 3-block confirmatory design with independent stdlib recompute, evidence audit, gate-critical evidence_audit_ alias, and non-empty trigger_check — all under research_state/session_<UTC>/ (UTC strictly greater than 20261122T013000Z). No prose-only, trigger-only, source-probe-only, audit-only, or verify-and-stop sessions. The gate (FCLR-NEXT-SOURCE-VERIFY) fails closed without the full heavy artifact set. If no materially different verified source exists, emit a clean documented stop preserving the null results — but the full heavy artifact set for whatever design is registered must still be emitted, or the gate fails closed.",
+   "next_unfinished_task": "FCLR-NEXT-SOURCE-VERIFY-01-20261122T013100Z: (a) Source discovery + verified-download evidence artifact (json+md) recording a reachable unauthenticated free source with ETags/sha256, earliest/latest timestamps, cadence, symbol coverage, gaps, license/terms — must be materially different from the Binance data.binance.vision archive already exploited by FCLR-LIVE-ARCHIVE-02. (b) Outcome-blind prereg freeze (json+md): hypotheses, targets, features, ≥3 chronological blocks with embargo, baselines, materiality floor (≥2%), decision gates, source/config hashes; outcome_data_inspected_before_freeze:false. (c) Heavy 3-block confirmatory evaluation triad (py+json+md) + independent stdlib recompute (py+json) + evidence audit (json+md) + gate-critical evidence_audit_ alias (json) + trigger_check (json), all non-empty under research_state/session_<UTC>/ (UTC > 20261122T013000Z). Non-avoidance: no prose-only/trigger-only/source-probe-only/audit-only/verify-and-stop/placeholder sessions; root md+json cap 499/500 (all artifacts under session_<UTC>/); no empty files; no threshold-shopping or relaxing the 2% materiality floor after outcomes; preserve nulls as NOT_SUPPORTED; do NOT re-run any terminal campaign; do NOT modify .github/workflows; do NOT overwrite research_state/research_protocol.md.",
+   "resume_triggers": [],
+   "trigger_status": {},
+   "blockers": "None. Uses no external trigger. This campaign removes the prior bottleneck: the frozen-data frontier is exhausted and the live-archive route is complete (NOT_SUPPORTED). Future agents cannot idle or verify-and-stop: the gate fails closed without the full heavy artifact set on a materially different verified source.",
+   "evidence": {
+    "frozen_frontier_exhausted": true,
+    "live_archive_exhausted": true,
+    "live_archive_decision": "NOT_SUPPORTED",
+    "next_campaign_status": "NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN (frozen domains; does NOT cover a materially different new free source)",
+    "root_md_json_count": 499,
+    "root_cap": 500,
+    "all_new_artifacts_must_go_under_session_dir": true,
+    "gate_enforced": "scripts/check_handoff_heavywork_gate.py FCLR-NEXT-SOURCE-VERIFY-01 (fails closed without full heavy artifact set)"
+   },
+   "phases": [
+    {
+     "phase": "SOURCE_DISCOVERY_VERIFICATION",
+     "status": "PENDING",
+     "claim": "Enumerate and verify candidate free sources (unauthenticated exchange REST endpoints, public GitHub/Zenodo/Hugging Face/institutional archives, other venue-native archives). For each candidate: verify unauthenticated download path, actual history depth, schema/field availability, licensing/terms, earliest/latest timestamp, cadence, symbol/venue coverage, known gaps, file hashes/ETags, rejection reason if inadmissible. Record results in research_state/data_source_registry.json and a per-source probe artifact under research_state/session_<UTC>/. Exclude sources requiring payment, signup, manually issued keys, or requester-pays charges."
+    },
+    {
+     "phase": "PREREG_FREEZE_ON_NEW_DATA",
+     "status": "PENDING",
+     "claim": "Freeze hypotheses, targets, features, splits, baselines, thresholds, and decision gates BEFORE inspecting outcomes. outcome_data_inspected_before_freeze:false. Assert source/data hashes. Record configuration hash and UTC freeze time."
+    },
+    {
+     "phase": "HEAVY_3_BLOCK_DESIGN",
+     "status": "PENDING",
+     "claim": "On the verified new data, execute a pre-registered 3-block confirmatory design with non-empty artifacts under research_state/session_<UTC>/ (UTC > 20261122T013000Z). Artifact set: prereg freeze (json+md), evaluation triad (py+json+md), independent stdlib recompute (py+json), evidence audit (json+md), trigger check (json). No zero-byte placeholders."
+    }
+   ],
+   "note": "Sole rank-0 campaign. Frozen-data frontier exhausted; live-archive route complete (NOT_SUPPORTED). This campaign opens the path to new heavy work via a materially different verified free source. Gate-enforced via FCLR-NEXT-SOURCE-VERIFY-01. All new artifacts under research_state/session_<UTC>/ (root 499/500)."
+  }
 ]
