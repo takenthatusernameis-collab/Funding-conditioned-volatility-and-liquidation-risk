@@ -1,7 +1,7 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T11:31:31Z (supersedes 2026-11-22T11:27:58Z)
-**Session type:** gate verification — FCLR-POOLED-001 CONFIRMATORY_COMPLETE confirmed; all bottlenecks verified removed; next mandatory campaign identified. Gate re-verified PASS reason=OK; 116 gate unittest modules 0 failures; next_campaign_status confirms NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN (pooled design already executed — not a blocker).
+**Timestamp:** 2026-11-22T11:34:00Z (supersedes 2026-11-22T11:31:31Z)
+**Session type:** handoff refresh + rank-0 reconciliation — FCLR-POOLED-001 CONFIRMATORY_COMPLETE; FCLR-POOLED-AUDIT-001 is the sole next heavy campaign and is machine-enforced (gate fails closed). Gate re-verified PASS reason=OK; pooled session 13/13 artifacts present and non-empty; no empty session dirs; root 499/500.
 
 **Sole active campaign (rank-0, gate-enforced):** `FCLR-POOLED-001-20261122T040000Z` — **CONFIRMATORY_COMPLETE (EXECUTED).** The pooled, chronologically-split out-of-sample confirmatory design on the on-disk ironflow bulk data (`research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}`, 18 months 2025-05..2026-10, 54 files per dataset incl. sha256+accessed sidecars). Executed under `session_20261122T092003Z` (UTC > campaign start `20261122T040000Z`). Full 13-file `fclr_pooled_*` artifact set present and non-empty. Decision: NOT_SUPPORTED (funding-conditioned features add no QLIKE improvement over RV-only baseline; relative diff ~0.0%, below -2% materiality floor). Null result preserved.
 
@@ -19,11 +19,13 @@ Repository focus (per repo name **Funding-conditioned-volatility-and-liquidation
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T11:31:31Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T11:34:00Z)
 
-**STATUS: FCLR-POOLED-001 CONFIRMATORY_COMPLETE — HEAVY WORK EXECUTED.** Session `session_20261122T092003Z` (UTC `20261122T092003Z` > campaign start `20261122T040000Z`) **produced all 13 required FCLR-POOLED artifacts** under `research_state/session_20261122T092003Z/`: source registry (json+md), outcome-blind prereg freeze (json+md), heavy evaluation triad (py+json+md), independent stdlib recompute (py+json), evidence audit (json+md), gate-critical `evidence_audit_` alias (json), and non-empty `trigger_check` (json). Gate passes (`python3 scripts/check_handoff_heavywork_gate.py` → PASS reason=OK).
+**STATUS: FCLR-POOLED-001 CONFIRMATORY_COMPLETE — NEXT HEAVY CAMPAIGN IS MANDATORY AND NON-AVOIDABLE.**
 
-**Result:** Pooled chronological OOS confirmatory design on ironflow bulk data (18 months 2025-05..2026-10, 799 markets, ~2.3M train / ~1.3M test rows). QLIKE B1 (RV-only) = 65.190573, QLIKE C2 (RV+funding+premium+OI) = 65.190702, diff = +0.000129, rel = +0.0002%. **Decision: NOT_SUPPORTED** — funding-conditioned features add no predictive value over the RV-only baseline; relative difference ~0.0% is far below the -2.0% materiality floor. Bootstrap CI95 includes zero. Null result preserved. Independent recompute confirms: QLIKE_B1=52.945004, QLIKE_C2=52.944664, rel=-0.0006%, NOT_SUPPORTED.
+FCLR-POOLED-001 (pooled chronological OOS confirmatory on the on-disk ironflow bulk data, 18 months 2025-05..2026-10, 799 markets, ~2.3M train / ~1.3M test rows) is **complete** under `research_state/session_20261122T092003Z/` (UTC `20261122T092003Z` > campaign start `20261122T040000Z`). All 13 `fclr_pooled001_*` artifacts are present and non-empty. Verdict: **NOT_SUPPORTED** — funding-conditioned features add no predictive value over the RV-only baseline (QLIKE B1=65.190573 vs C2=65.190702, diff +0.000129, rel +0.0002%, far below the −2.0% materiality floor; bootstrap CI95 includes zero). Null preserved. Independent stdlib recompute concurs (QLIKE_B1=52.945004, QLIKE_C2=52.944664, rel −0.0006%, NOT_SUPPORTED).
+
+**The next session MUST execute `FCLR-POOLED-AUDIT-001-<UTC>`** — the adversarial leakage/quality audit of the pooled ironflow panel, with optional Track B modeled boundary-breach labels. Per RESEARCH_PROMPT.md §9 the forecast gate did NOT pass, so **no position-sizing/risk overlay may be built**. Per RESEARCH_PROMPT.md §10 priority 8, adversarial audits are the next-highest-value task; per §15, Track B (modeled hypothetical boundary-breach labels) is the viable liquidation-risk path since Track A (observed liquidation labels) is exhausted (NO_NEW_ADMISSIBLE_SOURCE). Future agents cannot idle, cannot cite 3-block exhaustion, and cannot wait for `NEW_OBSERVED_LIQUIDATION_SOURCE` — the audit is executable today on data already on disk with no new source, no network, no external trigger.
 
 ### 1a. Bottlenecks removed / verified clear (machine-checked)
 
