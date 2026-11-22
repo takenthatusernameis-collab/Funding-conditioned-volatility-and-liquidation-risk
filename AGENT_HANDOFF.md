@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T00:34:12Z (supersedes 2026-11-22T00:25:00Z)
+**Timestamp:** 2026-11-22T00:37:13Z (supersedes 2026-11-22T00:34:12Z)
 **Sole active campaign (rank-0, gate-enforced):** FCLR-LIVE-ARCHIVE-02-20261122T002500Z — download, prereg-freeze, and run a HEAVY 3-block confirmatory design on the VERIFIED, reachable, unauthenticated Binance public market-data archive (`data.binance.vision`). Ladder-increments the never-started FCLR-LIVE-ARCHIVE-01. Re-verified reachable from THIS runner at 2026-11-22T00:25Z (HTTP 200 root/metrics/funding).
 **Latest completed heavy session on disk:** session_20261121T220100Z (FCLR-FINAL-SYNTHESIS-01, COMPLETE — final synthesis report artifact set emitted). Prior completed heavy sessions (session_20261121T210000Z CONTAGION-002, session_20261121T193000Z CONTAGION-001) remain grandfathered/terminal.
 **Latest on-disk session (IN PROGRESS, INCOMPLETE):** session_20261122T003000Z — POST-campaign-start (UTC 20261122T003000Z > campaign start 20261122T002500Z). It downloaded real archive data (82 BTCUSDT metrics daily files 2025-06-01..2025-08-18 + 3 funding monthly files 2025-06..08; markPriceKlines 1h path 404'd — see download_manifest errors) and emitted source_registry + prereg + eval (decision NOT_SUPPORTED; C2-vs-B1 mean relative QLIKE −1.88%, 1/3 blocks improved, materiality floor ≥2% FAIL). It is MISSING the four remaining required artifact categories: independent stdlib recompute, evidence audit, evidence_audit_ alias, trigger_check.
@@ -13,7 +13,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T00:34:12Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T00:37:13Z)
 
 **PRIORITY-0 MISSION — COMPLETE THE FCLR-LIVE-ARCHIVE-02 HEAVY ARTIFACT SET.**
 
