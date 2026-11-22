@@ -1,28 +1,29 @@
-# AGENT HANDOFF — 2026-11-22T23:49:00Z
+# AGENT HANDOFF — 2026-11-22T23:51:00Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
+> Gate status as of this refresh: **PASS** (reason_code=OK, root=499/500, 112 unittests OK).
+> The gate passes today ONLY because the latest on-disk session (`session_20261122T224500Z`)
+> predates the rank-0 campaign start (`20261122T225107Z`). The instant a new
+> `session_<UTC>` with UTC > `20261122T225107Z` appears, the gate flips to REQUIRED and
+> demands the full `fclr_tracks01_*` heavy set (see below). There is no prereg-only,
+> audit-only, probe-only, trigger-only, or verify-and-stop escape hatch.
 
 ---
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-**Rank-0 campaign:** `FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z` — status `READY_EXECUTE`, program `ACTIVE`. Campaign start UTC `20261122T225107Z` has **ELAPSED**. Your new `session_<UTC>/` MUST have UTC **> `20261122T225107Z`** and MUST be recorded in this handoff (append the literal id `session_<UTC>`) before the gate will pass.
+**Repo-name priority → task.** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. The primary question (RESEARCH_PROMPT.md §3.2) has two halves: (1) volatility forecasting (Track C — CLOSED leakage-robust null) and (2) liquidation-risk forecasting (Track A observed + Track B modeled — both NOT_SUPPORTED across every terminal campaign). The unfinished, highest-value work is the **liquidation-risk half**: a formal Track A observed-liquidation source viability audit that either unlocks a new viable source or formally closes Track A and pivots to a frozen Track B modeled-breach protocol — AND runs the heavy quantitative evaluation in the SAME session.
 
-**This campaign is machine-enforced by the gate, and — as of this handoff — the gate now also requires the HEAVY QUANTITATIVE EVALUATION in the SAME session, not just a prereg.** `scripts/check_handoff_heavywork_gate.py::_tracks01_state` binds the `fclr_tracks01_*` artifact family to `FCLR-TRACKA-SOURCE-AUDIT-(N)`. A post-start session that stops at the source audit + pivot prereg (the old prereg-only escape hatch) now FAILS closed with `TRACKA_SOURCE_AUDIT_ARTIFACTS_MISSING`. It must produce the full artifact set below, including `fclr_tracks01_eval_*` (heavy evaluation) and `fclr_tracks01_recompute_*` (independent stdlib recompute). Zero-byte placeholders do not count.
+**Rank-0 campaign (execute this and nothing else first):** `FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z` — status `READY_EXECUTE`, program `ACTIVE`, last_verdict `NOT_STARTED`. Campaign start UTC `20261122T225107Z` has **ELAPSED** (current time 2026-11-22T23:51Z). Your new `session_<UTC>/` MUST have UTC **> `20261122T225107Z`** (choose the current wall-clock UTC at session start, which is already past the campaign start) and MUST be recorded in this handoff (append the literal id `session_<UTC>`) before the gate will pass. Do NOT pre-write a concrete future `session_<digits>` id here — only the real recorded ids `session_20261122T190000Z` and `session_20261122T224500Z` may appear as literal `session_<digits>` tokens, or the gate will treat a non-existent directory as the latest session and fail closed.
 
-**Why this campaign and nothing else (priority by repo name + frontier):**
-The repo name is **Funding-conditioned-volatility-and-liquidation-risk**. The primary question (§3.2) has two halves:
-1. **Volatility forecasting (Track C)** — CLOSED leakage-robust: `FCLR-POOLED-ROBUST-002` returned `NOT_SUPPORTED_LEAKAGE_ROBUST_NULL` (C2−B1 QLIKE = +1.011%, Holm primary p=0.6365 vs α₂=0.00833).
-2. **Liquidation-risk forecasting** — Track A (observed liquidations) evaluated in `FCLR-LIQ-RISK-ESCALATION-09` → `NOT_SUPPORTED` (+0.149% rel QLIKE, fails -2% floor, CI95 includes zero, Holm p=0.6365). Track B (modeled breach) evaluated in `FCLR-POOLED-001`, `FCLR-POOLED-ROBUST-002`, `FCLR-LIVE-ARCHIVE-01/02` → all `NOT_SUPPORTED`.
+**This campaign is machine-enforced and the heavy evaluation is non-deferrable.** `scripts/check_handoff_heavywork_gate.py::_tracks01_state` binds the `fclr_tracks01_*` artifact family to `FCLR-TRACKA-SOURCE-AUDIT-(N)`. A post-start session that stops at the source audit + pivot prereg (the old prereg-only escape hatch) FAILS closed with `TRACKA_SOURCE_AUDIT_ARTIFACTS_MISSING`. It must produce the full artifact set below, including `fclr_tracks01_eval_*` (heavy evaluation) and `fclr_tracks01_recompute_*` (independent stdlib recompute). Zero-byte placeholders fail closed with `TRACKA_SOURCE_AUDIT_ARTIFACTS_EMPTY`.
 
-**Three materially distinct routes, two+ source families, same gate blocked.** Per RESEARCH_PROMPT.md §16: "If the same gate remains blocked after three materially distinct documented routes spanning at least two independent source families/methods... create the smallest useful alternative experiment with a new ID." Per §5: "Do not prematurely conclude that no liquidation labels exist. Enumerate, test, and rank admissible sources." Per §10 priority #2: "Source feasibility map: test small unauthenticated requests for... direct liquidation history. Publish exact evidence of what is accessible."
+**Why this campaign (priority by repo name + frontier):** Per RESEARCH_PROMPT.md §16 (three blocked routes spanning ≥2 source families → new experiment), §5 (enumerate/test/rank admissible observed-liquidation sources), §10 priority #2 (source feasibility map). This is NOT a re-run of any terminal campaign — it is a new experiment (FCLR-TRACKA-SOURCE-AUDIT-01) with a new ID.
 
-**The single highest-value unfinished work is a formal Track A source viability audit FOLLOWED BY a heavy evaluation in the same session** — the ONLY path to either (a) unlock Track A with a new viable observed-liquidation source and confirm it, or (b) formally close Track A and pivot to Track B with a new frozen protocol AND run that heavy evaluation. This is NOT a re-run of any terminal campaign. It is a new experiment (FCLR-TRACKA-SOURCE-AUDIT-01) with a new ID.
-
-**Blockers: None.** No external trigger, no network required for the heavy evaluation; source enumeration uses stdlib + pyarrow only. The audit AND the heavy evaluation are feasible TODAY on the on-disk ironflow bulk panels (18 months, 342 coins) plus cached knowledge of free sources.
+**Blockers: None.** Source enumeration uses stdlib + pyarrow only (bounded unauthenticated probes); the heavy evaluation runs on the on-disk ironflow bulk panels (18 months, 342 coins) plus cached knowledge of free sources. No external trigger, no network for the heavy evaluation. The audit AND the heavy evaluation are feasible TODAY.
 
 ---
 
@@ -162,6 +163,7 @@ Then record your `session_<UTC>/` id in this handoff (append the id string `sess
 
 ## BOTTLENECK RESOLUTION (this handoff)
 
+- **Verified (2026-11-22T23:51:00Z refresh):** `python3 scripts/check_handoff_heavywork_gate.py` → `PASS reason_code=OK root=499/500`; 112 campaign-gate unittests OK (5 skipped). The `tracks01` binder is live and `required=false` today only because the latest on-disk session (`session_20261122T224500Z`) predates the campaign start (`20261122T225107Z`). Any post-start `session_<UTC>` is forced to emit the full `fclr_tracks01_*` set incl. `fclr_tracks01_eval_*` + `fclr_tracks01_recompute_*`; prereg-only/audit-only/zero-byte sessions fail closed. No blocked or inefficient session remains: the next session simply has not started yet.
 - **Resolved (primary bottleneck):** The prior handoff declared `FCLR-TRACKA-SOURCE-AUDIT-01` "gate-enforced", but `check_handoff_heavywork_gate.py` had **no binder** for it — no `TRACKA_SOURCE_AUDIT` regex, no `_tracks01_state`, no `fclr_tracks01_*` required set. A future agent could skip the entire heavy Track A source audit and the gate would still return `OK`. The previous refresh added the missing binder (`TRACKA_SOURCE_AUDIT_CAMPAIGN_RE`, `_tracks01_state`, `fclr_tracks01_*`, `tracks01` payload key, enforcement block, `fclr_tracks` in `NEW_QUANT_PREFIXES`).
 - **Resolved (this refresh — last remaining escape hatch):** Even with the binder, a post-start session could stop at the **pivot prereg** and defer the actual heavy quantitative evaluation to a later session — an audit-only / prereg-only escape hatch. This refresh extends `TRACKA_SOURCE_AUDIT_REQUIRED` with `fclr_tracks01_eval_` (py+json+md) and `fclr_tracks01_recompute_` (py+json), so the heavy evaluation and its independent recompute MUST run in the same session. Verified in an isolated temp repo: a prereg-only session now fails `TRACKA_SOURCE_AUDIT_ARTIFACTS_MISSING` (missing `fclr_tracks01_eval_*` + `fclr_tracks01_recompute_*`); the full heavy set passes.
 - **Resolved:** The previous handoff's "Single highest-value next task: None" / "Reopen only on NEW_OBSERVED_LIQUIDATION_SOURCE" prose/probe-only escape hatch (contradicting §16 adaptive feasibility and §19) is replaced by the mandatory, gate-enforced source viability audit + heavy evaluation that either unlocks Track A or formally closes it and pivots to Track B.
@@ -170,7 +172,7 @@ Then record your `session_<UTC>/` id in this handoff (append the id string `sess
 
 ---
 
-## HANDOFF GENERATED: 2026-11-22T23:49:00Z
-**Next session must use UTC > 20261122T225107Z** (campaign start gate).
-**Latest handoff session: session_20261122T224500Z** (completed risk09)
-**Rank-0 campaign: FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z** (this handoff; gate-enforced via `_tracks01_state`, now including the same-session heavy evaluation `fclr_tracks01_eval_*` + `fclr_tracks01_recompute_*`)
+## HANDOFF GENERATED: 2026-11-22T23:51:00Z
+**Next session must use UTC > 20261122T225107Z** (campaign start gate; campaign start has ELAPSED).
+**Latest handoff session: session_20261122T224500Z** (completed risk09; predates campaign start, so gate is green today).
+**Rank-0 campaign: FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z** (this handoff; gate-enforced via `_tracks01_state`, including the same-session heavy evaluation `fclr_tracks01_eval_*` + `fclr_tracks01_recompute_*`)
