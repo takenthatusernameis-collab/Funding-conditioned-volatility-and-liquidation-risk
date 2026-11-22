@@ -1,7 +1,7 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T11:21:05Z (supersedes 2026-11-22T10:56:54Z)
-**Session type:** gate verification — FCLR-POOLED-001 CONFIRMATORY_COMPLETE confirmed; all bottlenecks verified removed; next mandatory campaign identified.
+**Timestamp:** 2026-11-22T11:24:40Z (supersedes 2026-11-22T11:21:05Z)
+**Session type:** gate verification — FCLR-POOLED-001 CONFIRMATORY_COMPLETE confirmed; all bottlenecks verified removed; next mandatory campaign identified. Gate re-verified PASS reason=OK; 116 gate unittest modules 0 failures; next_campaign_status confirms NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN (pooled design already executed — not a blocker).
 
 **Sole active campaign (rank-0, gate-enforced):** `FCLR-POOLED-001-20261122T040000Z` — **CONFIRMATORY_COMPLETE (EXECUTED).** The pooled, chronologically-split out-of-sample confirmatory design on the on-disk ironflow bulk data (`research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}`, 18 months 2025-05..2026-10, 54 files per dataset incl. sha256+accessed sidecars). Executed under `session_20261122T092003Z` (UTC > campaign start `20261122T040000Z`). Full 13-file `fclr_pooled_*` artifact set present and non-empty. Decision: NOT_SUPPORTED (funding-conditioned features add no QLIKE improvement over RV-only baseline; relative diff ~0.0%, below -2% materiality floor). Null result preserved.
 
@@ -19,7 +19,7 @@ Repository focus (per repo name **Funding-conditioned-volatility-and-liquidation
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T11:21:05Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T11:24:40Z)
 
 **STATUS: FCLR-POOLED-001 CONFIRMATORY_COMPLETE — HEAVY WORK EXECUTED.** Session `session_20261122T092003Z` (UTC `20261122T092003Z` > campaign start `20261122T040000Z`) **produced all 13 required FCLR-POOLED artifacts** under `research_state/session_20261122T092003Z/`: source registry (json+md), outcome-blind prereg freeze (json+md), heavy evaluation triad (py+json+md), independent stdlib recompute (py+json), evidence audit (json+md), gate-critical `evidence_audit_` alias (json), and non-empty `trigger_check` (json). Gate passes (`python3 scripts/check_handoff_heavywork_gate.py` → PASS reason=OK).
 
