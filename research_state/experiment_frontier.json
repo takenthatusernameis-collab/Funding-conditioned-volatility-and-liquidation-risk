@@ -725,7 +725,7 @@
   },
   {
    "rank": 1,
-   "status": "COMPLETE",
+   "status": "SUPERSEDED_TERMINAL",
    "program_status": "COMPLETE",
    "task": "FCLR-LIVE-ARCHIVE-02-20261122T002500Z",
    "generated": "20261122T002500Z",
