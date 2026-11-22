@@ -538,8 +538,22 @@ NEXT_SOURCE_VERIFY_REQUIRED = (
 # session. It must emit the source registry + probe triad, the outcome-blind
 # viability decision, the pivot prereg, the evidence audit, the gate-critical
 # evidence_audit_ alias, and a trigger check, with no zero-byte placeholders.
-# Sessions predating the campaign start are grandfathered so this handoff
-# refresh that first announces the (real) binding stays green.
+#
+# FCLR-TRACKA-SOURCE-AUDIT-01 heavy-work hardening (2026-11-22T234900Z): the
+# first binder still let a post-start session stop at the pivot PREREG and defer
+# the actual heavy quantitative evaluation to a later session. That was the last
+# remaining "audit-only / prereg-only" escape hatch: an agent could enumerate
+# sources, freeze a prereg, and never run the heavy Track A (new source) or
+# Track B (modeled breach) evaluation. This amendment binds the heavy evaluation
+# itself into the same session: a post-start session must ALSO emit the
+# outcome-blind evaluation triad (fclr_tracks01_eval_ py+json+md) AND an
+# independent stdlib recompute (fclr_tracks01_recompute_ py+json), in addition
+# to the audit/registry/probe/viability/pivot set. Whichever branch the viability
+# decision selects (NEW_TRACK_A_SOURCE_FOUND -> heavy Track A confirm; or
+# TRACK_A_STRUCTURALLY_BLOCKED -> heavy Track B modeled-breach), the heavy
+# evaluation runs in THIS session and cannot be deferred. Zero-byte placeholders
+# fail closed. Sessions predating the campaign start are grandfathered so this
+# handoff refresh stays green.
 TRACKA_SOURCE_AUDIT_CAMPAIGN_RE = re.compile(
     r"FCLR-TRACKA-SOURCE-AUDIT-(\d+)-(\d{8}T\d{6}Z)"
 )
@@ -553,6 +567,11 @@ TRACKA_SOURCE_AUDIT_REQUIRED = (
     ("fclr_tracks01_viability_decision_", ".md"),
     ("fclr_tracks01_pivot_prereg_", ".json"),
     ("fclr_tracks01_pivot_prereg_", ".md"),
+    ("fclr_tracks01_eval_", ".py"),
+    ("fclr_tracks01_eval_", ".json"),
+    ("fclr_tracks01_eval_", ".md"),
+    ("fclr_tracks01_recompute_", ".py"),
+    ("fclr_tracks01_recompute_", ".json"),
     ("evidence_audit_", ".json"),
     ("trigger_check_", ".json"),
 )
@@ -1933,11 +1952,15 @@ def _tracks01_state(handoff_text: str, latest_sid: str | None,
 
     After the Track A source viability audit campaign starts, a post-start
     session must emit the source registry + probe triad, the outcome-blind
-    viability decision, the pivot prereg, the evidence audit, the gate-critical
+    viability decision, the pivot prereg, the HEAVY evaluation triad
+    (fclr_tracks01_eval_ py+json+md), the independent stdlib recompute
+    (fclr_tracks01_recompute_ py+json), the evidence audit, the gate-critical
     evidence_audit_ alias, and a trigger check. Trigger-only, prose-only,
-    source-probe-only, audit-only, verify-and-stop sessions and zero-byte
-    placeholders fail closed. Sessions predating the campaign start are
-    grandfathered so the handoff refresh that announces the campaign stays green.
+    source-probe-only, audit-only, prereg-only, verify-and-stop sessions and
+    zero-byte placeholders fail closed: the heavy quantitative evaluation runs
+    in the SAME session and cannot be deferred. Sessions predating the campaign
+    start are grandfathered so the handoff refresh that announces the campaign
+    stays green.
     """
     out = {
         "campaign_id": None,
