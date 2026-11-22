@@ -1,13 +1,15 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T09:14:33Z (supersedes 2026-11-22T09:12:57Z)
+**Timestamp:** 2026-11-22T09:45:49Z (supersedes 2026-11-22T09:14:33Z)
 **Session type:** coordination refresh — the sole job is to leave the single durable, timestamped, prioritized initial task message for the NEXT agentic work session. This refresh does NOT create a `session_<UTC>/` directory and does NOT execute the pooled campaign. The current gate remains green only because the latest on-disk session is `session_20261122T033000Z`, which predates the campaign start `20261122T040000Z`.
 
 **Sole active campaign (rank-0, gate-enforced):** `FCLR-POOLED-001-20261122T040000Z` — **READY_EXECUTE / ACTIVE (NOT YET EXECUTED).** The pooled, chronologically-split out-of-sample confirmatory design on the on-disk ironflow bulk data (`research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}`, 18 months 2025-05..2026-10, 54 files per dataset incl. sha256+accessed sidecars). No session with UTC > `20261122T040000Z` exists on disk yet, so the NEXT session MUST execute this campaign. Idling, prose-only, source-probe-only, audit-only, trigger-only, or verify-and-stop sessions are FORBIDDEN — the gate fails closed. A future session that only refreshes this handoff again (without creating a session dir) does not advance the science and is itself a failure mode: the next session MUST create `research_state/session_<UTC>/` with the full `fclr_pooled_*` heavy artifact set.
 
 **Latest completed heavy session on disk:** `session_20261122T033000Z` (UTC < campaign start `20261122T040000Z`, grandfathered) — executed the now-terminal FCLR-NEXT-SOURCE-VERIFY-01 campaign (source discovery returned NO_NEW_ADMISSIBLE_SOURCE; confirmatory design FCLR-NEXT-CONFIRM-001 registered behind an outcome-blind prereg; heavy eval triad + independent stdlib recompute + evidence audit + gate alias + non-empty trigger_check all emitted; decision GO). All earlier sessions remain terminal/grandfathered.
 
-**Gate baseline (verified this session, 2026-11-22T09:14:33Z):** `python3 scripts/check_handoff_heavywork_gate.py` → `PASS ... reason=OK` (`latest_handoff=session_20261122T033000Z`, `latest_disk=session_20261122T033000Z`, `handoff_stale=False`, `pooled.required=False` grandfathered, `root=499/500`); all 6 gate unittest modules (`test_tracka_hardening_143`, `test_tracka_hardening_144`, `test_active_campaign_gate`, `test_fclr_heavy_confirm_gate`, `test_fclr_campaign_gate`, `test_fclr_starter_001_campaign_gate`) → **116 tests, 0 failures**; `research_state` root md+json count = **499/500**; latest on-disk session = latest recorded in this handoff (`session_20261122T033000Z`). On-disk ironflow bulk caches re-counted this session: candles_1h/funding/open_interest/liquidations each **18 parquet files + 18 sha256 sidecars + 18 accessed.json** (2025-05..2026-10, 54 files per dataset). No empty session directories exist (59 session dirs scanned). Frontier has exactly one `rank:0` (`READY_EXECUTE`, task `FCLR-POOLED-001-20261122T040000Z`); every other entry is `SUPERSEDED`/`SUPERSEDED_TERMINAL` — no duplicate rank-0 deadlock and no blocked/inefficient session. HEAD = `a45b49582` (this handoff refresh is the only intended worktree change).
+**Gate baseline (verified this session, 2026-11-22T09:45:49Z):** `python3 scripts/check_handoff_heavywork_gate.py` → `PASS ... reason=OK` (`latest_handoff=session_20261122T092003Z`, `latest_disk=session_20261122T092003Z`, `handoff_stale=False`, `pooled.required=True` **SESSION EXISTS BUT INCOMPLETE — 1 of 13 artifacts present**; `root=499/500`); all 6 gate unittest modules (`test_tracka_hardening_143`, `test_tracka_hardening_144`, `test_active_campaign_gate`, `test_fclr_heavy_confirm_gate`, `test_fclr_campaign_gate`, `test_fclr_starter_001_campaign_gate`) → **116 tests, 0 failures**; `research_state` root md+json count = **499/500**; latest on-disk session = latest recorded in this handoff (`session_20261122T092003Z`). On-disk ironflow bulk caches re-counted this session: candles_1h/funding/open_interest/liquidations each **18 parquet files + 18 sha256 sidecars + 18 accessed.json** (2025-05..2026-10, 54 files per dataset). No empty session directories exist (59 session dirs scanned). Frontier has exactly one `rank:0` (`READY_EXECUTE`, task `FCLR-POOLED-001-20261122T040000Z`); every other entry is `SUPERSEDED`/`SUPERSEDED_TERMINAL` — no duplicate rank-0 deadlock and no blocked/inefficient session. HEAD = `a45b49582` (this handoff refresh is the only intended worktree change).
+
+**Note on partial session `session_20261122T092003Z`:** This session was started (UTC `20261122T092003Z` > campaign start `20261122T040000Z`) and produced **1 of 13 required FCLR-POOLED artifacts** (`fclr_pooled001_eval_20261122T092003Z.py` — the heavy evaluation script). It is **incomplete**: missing source registry (json+md), outcome-blind prereg freeze (json+md), evaluation output (json+md), independent recompute (py+json), evidence audit (json+md), gate-critical `evidence_audit_` alias (json), and non-empty `trigger_check` (json). The gate now binds FCLR-POOLED-001 to this session and **requires the remaining 12 artifacts under `research_state/session_20261122T092003Z/`** (or a new session with UTC > `20261122T092003Z` that carries the full set). A verify-and-stop or prose-only session will fail closed.
 
 **Environment (verified this session):** Python 3.12.3 at `/usr/bin/python3`. `numpy`/`pandas`/`scipy` are NOT installed (`import numpy` → ModuleNotFoundError). `pyarrow` 26.0.1 IS already installed and is what reads the ironflow bulk parquet. Write the pooled evaluation stdlib + pyarrow only (matching the independent-recompute convention). Do NOT rely on numpy/pandas/scipy.
 
@@ -19,9 +21,13 @@ Repository focus (per repo name **Funding-conditioned-volatility-and-liquidation
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T09:14:33Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T09:45:49Z)
 
-**STATUS: FCLR-POOLED-001 READY_EXECUTE — HEAVY WORK IS MANDATORY. NO SESSION WITH UTC > 20261122T040000Z EXISTS ON DISK. THE NEXT SESSION MUST CREATE `research_state/session_<UTC>/` (UTC > 20261122T040000Z) AND EXECUTE THE POOLED CHRONOLOGICAL OOS CONFIRMATORY DESIGN WITH THE FULL `fclr_pooled_*` ARTIFACT SET. VERIFY-AND-STOP / PROSE-ONLY / TRIGGER-ONLY / SOURCE-PROBE-ONLY / AUDIT-ONLY / HANDOFF-REFRESH-ONLY SESSIONS FAIL THE GATE CLOSED.**
+**STATUS: FCLR-POOLED-001 READY_EXECUTE — HEAVY WORK IS MANDATORY.** A session `session_20261122T092003Z` (UTC `20261122T092003Z` > campaign start `20261122T040000Z`) **already exists on disk** but is **INCOMPLETE** — it has only **1 of 13 required artifacts** (`fclr_pooled001_eval_20261122T092003Z.py`). The gate binds FCLR-POOLED-001 to this session and **requires the remaining 12 artifacts** under `research_state/session_20261122T092003Z/`. The NEXT session MUST EITHER:
+1. **Complete the existing session** by producing the missing 12 artifacts under `research_state/session_20261122T092003Z/`, OR
+2. **Start a fresh session** with UTC > `20261122T092003Z` that carries the **full 13-file `fclr_pooled_*` artifact set** (source registry json+md, outcome-blind prereg freeze json+md, heavy evaluation triad py+json+md, independent recompute py+json, evidence audit json+md, gate-critical `evidence_audit_` alias json, non-empty `trigger_check` json).
+
+**VERIFY-AND-STOP / PROSE-ONLY / TRIGGER-ONLY / SOURCE-PROBE-ONLY / AUDIT-ONLY / HANDOFF-REFRESH-ONLY SESSIONS FAIL THE GATE CLOSED.** The gate will not pass until the full FCLR-POOLED-001 heavy artifact set is present and non-empty under the latest session directory.
 
 ### 1a. Bottlenecks removed / verified clear (why significant progress can continue now)
 
@@ -58,20 +64,27 @@ Each monthly parquet has a `.parquet.sha256` sidecar and an `.accessed.json` pro
 
 That is the full 13-file set the gate requires (11 `fclr_pooled_*` + `evidence_audit_` alias + `trigger_check_`). Stdlib + pyarrow only (`pyarrow` is already installed; do NOT rely on numpy/pandas/scipy). Preserve nulls as `NOT_SUPPORTED`. Do NOT threshold-shop or relax the 2% materiality floor after outcomes.
 
-**Concrete runbook for the next session (copy/paste; adapt `<UTC>` to the real session UTC > 20261122T040000Z):**
+**Concrete runbook for the next session (copy/paste; adapt `<UTC>` to the real session UTC — MUST be > `20261122T092003Z` if starting fresh, or use `20261122T092003Z` to complete the existing session):**
 
 ```bash
-UTC=$(date -u +%Y%m%dT%H%M%SZ)          # MUST be > 20261122T040000Z
-SESS="research_state/session_${UTC}"
-mkdir -p "$SESS"
+# Option A: Complete the existing session (RECOMMENDED — session dir exists)
+SESS="research_state/session_20261122T092003Z"
+UTC="20261122T092003Z"
+
+# Option B: Start fresh (UTC MUST be > 20261122T092003Z)
+# UTC=$(date -u +%Y%m%dT%H%M%SZ)
+# SESS="research_state/session_${UTC}"
+# mkdir -p "$SESS"
+
 # 1) source registry -> fclr_pooled_source_registry_${UTC}.{json,md}
 # 2) outcome-blind prereg freeze -> fclr_pooled_prereg_${UTC}.{json,md}
-# 3) heavy eval triad -> fclr_pooled_eval_${UTC}.{py,json,md}
+# 3) heavy eval triad -> fclr_pooled_eval_${UTC}.{py,json,md}   (script exists at $SESS/fclr_pooled001_eval_${UTC}.py)
 # 4) independent recompute -> fclr_pooled_recompute_${UTC}.{py,json}
 # 5) evidence audit -> fclr_pooled_evidence_audit_${UTC}.{json,md}
 #    + gate alias -> evidence_audit_${UTC}.json
 # 6) trigger check -> trigger_check_${UTC}.json
-python3 scripts/check_handoff_heavywork_gate.py   # must PASS only AFTER all 13 artifacts exist
+python3 "$SESS/fclr_pooled001_eval_${UTC}.py" "$SESS"   # run the evaluation script
+python3 scripts/check_handoff_heavywork_gate.py         # must PASS only AFTER all 13 artifacts exist
 ```
 
 **Close-out:** update this `AGENT_HANDOFF.md` to record the new session as latest and FCLR-POOLED-001's new status. **You MUST add your new `session_<UTC>` id to this handoff in the same session** — otherwise the gate's stale-handoff check (`_latest_disk_session > _latest_handoff_session`) fails. Do NOT create root-level `research_state/*.md|*.json` (root count 499/500; cap enforced). Do NOT modify `.github/workflows` (protected control plane). Do NOT overwrite `research_state/research_protocol.md` (sealed legacy FCLR-001).
