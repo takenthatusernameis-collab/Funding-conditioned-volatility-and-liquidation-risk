@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T13:24:35Z (supersedes 2026-11-22T12:36:11Z)
+**Timestamp:** 2026-11-22T13:28:05Z (supersedes 2026-11-22T13:24:35Z)
 **Session type:** handoff refresh — FCLR-POOLED-001 CONFIRMATORY_COMPLETE executed under session_20261122T092003Z; experiment_frontier.json rank-0 stale-state demoted to rank 1 SUPERSEDES_TERMINAL/COMPLETE; sole rank-0 ACTIVE campaign is FCLR-POOLED-AUDIT-001-20261122T120000Z, machine-enforced (gate fails closed). Gate PASS reason=OK; pooled session 13/13 artifacts present and non-empty; no empty session dirs; root 499/500. Verified: exactly one rank:0 entry (ACTIVE = FCLR-POOLED-AUDIT-001), no blocked/inefficient sessions, gate POOLED_AUDIT_CAMPAIGN_RE armed (start UTC 20261122T110000Z, 11 required artifacts).
 
 **Sole active campaign (rank-0, gate-enforced):** `FCLR-POOLED-AUDIT-001-20261122T120000Z` — **NOT_STARTED (ACTIVE)**, adversarial leakage/quality audits on the pooled ironflow bulk panel with optional Track B modeled boundary-breach labels. `FCLR-POOLED-001-20261122T040000Z` — **CONFIRMATORY_COMPLETE (EXECUTED), demoted to rank 1 SUPERSEDED_TERMINAL** — the pooled, chronologically-split out-of-sample confirmatory design on the on-disk ironflow bulk data (`research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}`, 18 months 2025-05..2026-10, 54 files per dataset incl. sha256+accessed sidecars). Executed under `session_20261122T092003Z` (UTC > campaign start `20261122T040000Z`). Full 13-file `fclr_pooled_*` artifact set present and non-empty. Decision: NOT_SUPPORTED (funding-conditioned features add no QLIKE improvement over RV-only baseline; relative diff ~0.0%, below -2% materiality floor). Null result preserved.
@@ -19,7 +19,7 @@ Repository focus (per repo name **Funding-conditioned-volatility-and-liquidation
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T12:36:11Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T13:28:05Z)
 
 > **READ THIS FIRST — THIS IS THE ONLY TASK YOU MAY START.**
 > Repo = **Funding-conditioned-volatility-and-liquidation-risk**. Ranked by repo name, the single
