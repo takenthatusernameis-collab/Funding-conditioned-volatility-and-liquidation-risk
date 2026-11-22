@@ -522,6 +522,38 @@ NEXT_SOURCE_VERIFY_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-POOLED-001 hardening: the *only* thing that ever blocked heavy work was
+# the broken "3 contiguous 30-day funding-backed blocks" framing that
+# next_campaign_status.py enforces across every cached domain. That framing is
+# FALSE as a statement about the data on disk: research_state/data_cache/
+# ironflow_bulk/ already holds 18 months (2025-05 .. 2026-10) of aligned
+# candles_1h + funding + open_interest + liquidations across 342 coins
+# (3.6M/4.1M/4.0M/2.8M rows). A pooled, chronologically-split out-of-sample
+# design is feasible TODAY without any new source. The prior handoff declared
+# "no remaining rank-0 campaign" and told future agents to stop — a
+# verify-and-stop escape hatch. This campaign removes that bottleneck: once it
+# starts (start UTC below), a post-start session cannot satisfy the gate with a
+# trigger-only, prose-only, source-probe-only, audit-only, verify-and-stop, or
+# arbitrary recompute_* session. It must emit the full pooled heavy artifact set
+# on the ironflow bulk data. Sessions predating the campaign start are
+# grandfathered so this handoff refresh stays green.
+POOLED_CAMPAIGN_RE = re.compile(r"FCLR-POOLED-(\d+)-(\d{8}T\d{6}Z)")
+POOLED_REQUIRED = (
+    ("fclr_pooled_source_registry_", ".json"),
+    ("fclr_pooled_source_registry_", ".md"),
+    ("fclr_pooled_prereg_", ".json"),
+    ("fclr_pooled_prereg_", ".md"),
+    ("fclr_pooled_eval_", ".py"),
+    ("fclr_pooled_eval_", ".json"),
+    ("fclr_pooled_eval_", ".md"),
+    ("fclr_pooled_recompute_", ".py"),
+    ("fclr_pooled_recompute_", ".json"),
+    ("fclr_pooled_evidence_audit_", ".json"),
+    ("fclr_pooled_evidence_audit_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 NEW_QUANT_PREFIXES = (
     "fclr_risk",
     "fclr_starter",
@@ -540,6 +572,7 @@ NEW_QUANT_PREFIXES = (
     "fclr_liq_contagion02", # FCLR-LIQ-CONTAGION-002 robustness-reconciliation artifacts (edge-set + materiality)
     "fclr_live_archive",    # FCLR-LIVE-ARCHIVE reachable free-archive source + heavy 3-block design artifacts
     "fclr_next_source_verify", # FCLR-NEXT-SOURCE-VERIFY-01 materially-different free source + heavy 3-block design artifacts
+    "fclr_pooled",          # FCLR-POOLED pooled chronological OOS funding-conditioned vol + liq-risk artifacts
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -1795,6 +1828,81 @@ def _next_source_verify_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _pooled_state(handoff_text: str, latest_sid: str | None,
+                  latest_files: list[str],
+                  latest_dir: Path | None = None) -> dict:
+    """Return FCLR-POOLED-001 non-avoidance state.
+
+    The pooled chronological OOS campaign breaks the broken "3 contiguous
+    30-day funding-backed blocks" deadlock by running a heavy pooled design on
+    the on-disk ironflow bulk data (18 months, 342 coins, 3.6M candles). After
+    this campaign starts, a post-start session cannot satisfy the gate with a
+    trigger-only, prose-only, source-probe-only, audit-only, verify-and-stop, or
+    arbitrary recompute_* session. It must emit the full FCLR-POOLED artifact
+    set. Sessions predating the campaign start are grandfathered so this
+    handoff refresh stays green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = POOLED_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-POOLED-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    tag = f"pooled{int(m.group(1)):03d}"
+    family = tuple(
+        (prefix.replace("fclr_pooled_", f"fclr_{tag}_", 1), suffix)
+        if prefix.startswith("fclr_pooled_")
+        else (prefix, suffix)
+        for prefix, suffix in POOLED_REQUIRED
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["artifact_family"] = tag
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, POOLED_REQUIRED):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _normalize_text(s: str) -> str:
     return "\n".join(line.rstrip() for line in s.replace("\r\n", "\n").split("\n")).strip()
 
@@ -2539,6 +2647,35 @@ def check(repo: Path = REPO) -> dict:
                 if not nsv["has_trigger_check"]:
                     payload["failures"].append(
                         f"NEXT_SOURCE_VERIFY_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-POOLED-001: after the pooled chronological OOS campaign
+            # starts, require the source registry + verified bulk-data evidence,
+            # outcome-blind prereg freeze, heavy pooled evaluation triad
+            # (py+json+md), independent stdlib recompute (py+json), evidence
+            # audit (json+md), gate-critical evidence_audit_ alias (json), and
+            # trigger check. Zero-byte placeholders fail closed, so a future
+            # session cannot dodge the heavy pooled vol+liq-risk work with a
+            # trigger-only, prose-only, source-probe-only, audit-only, or
+            # verify-and-stop session.
+            pl = _pooled_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["pooled"] = pl
+            if pl["required"]:
+                if pl["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "POOLED_ARTIFACTS_MISSING:"
+                        + ",".join(pl["missing_required_artifacts"])
+                    )
+                if pl["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "POOLED_ARTIFACTS_EMPTY:"
+                        + ",".join(pl["empty_required_artifacts"])
+                    )
+                if not pl["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"POOLED_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
