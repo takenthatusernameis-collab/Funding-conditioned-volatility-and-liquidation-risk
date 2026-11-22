@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T17:20:03Z (supersedes 2026-11-22T17:18:20Z)
+**Timestamp:** 2026-11-22T17:52:08Z (supersedes 2026-11-22T17:20:03Z)
 **Session type:** handoff refresh — single durable handoff; sole rank-0 campaign `FCLR-POOLED-AUDIT-001-20261122T120000Z` is now **COMPLETE** (executed under `session_20261122T165200Z`), gate-enforced. Gate PASS reason=OK; root 499/500; 116/116 gate unittests pass; no blocked/inefficient sessions; no empty session dirs; latest disk session = latest recorded handoff session (`session_20261122T165200Z`).
 
 **Sole rank-0 campaign (gate-enforced):** `FCLR-POOLED-AUDIT-001-20261122T120000Z` — **COMPLETE**, executed under `session_20261122T165200Z/` (UTC > campaign start `20261122T110000Z`). Adversarial leakage/quality audits on the pooled ironflow bulk panel with optional Track B modeled boundary-breach labels; all 11 `fclr_pooled_audit001_*` artifacts plus `evidence_audit_` and `trigger_check_` present and non-empty under `session_20261122T165200Z/`. Demoted to rank 1 SUPERSEDED_TERMINAL. No other rank-0 entry exists; no further rank-0 campaign remains.
@@ -19,7 +19,7 @@ Repository focus (per repo name **Funding-conditioned-volatility-and-liquidation
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (handoff refresh 2026-11-22T17:20:03Z; campaign executed 2026-11-22T16:52:00Z under `session_20261122T165200Z/`; originally timestamped 2026-11-22T14:36:15Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (handoff refresh 2026-11-22T17:52:08Z; campaign executed 2026-11-22T16:52:00Z under `session_20261122T165200Z/`; originally timestamped 2026-11-22T14:36:15Z)
 
 > **READ THIS FIRST.**
 >
@@ -103,6 +103,27 @@ python3 scripts/next_campaign_status.py                          # frozen 3-bloc
 `scripts/check_handoff_heavywork_gate.py` binds `FCLR-POOLED-AUDIT-001` via `POOLED_AUDIT_CAMPAIGN_RE` (campaign start UTC `20261122T120000Z`). The recorded latest session `session_20261122T165200Z/` (UTC > campaign start) carries the full heavy adversarial-audit artifact set with no zero-byte placeholders, and the gate → `PASS ... reason=OK`. A prose-only, trigger-only, source-probe-only, audit-only, or verify-and-stop session fails closed. Sessions with UTC ≤ `20261122T040000Z` (incl. `session_20261122T033000Z`) are grandfathered.
 
 The gate ensures any future recorded session with UTC > `20261122T120000Z` must produce the full heavy artifact set or the gate fails closed; no rank-0 `ACTIVE` campaign remains, so there is no heavy campaign left to skip. Future agents cannot idle waiting for `NEW_OBSERVED_LIQUIDATION_SOURCE` — that trigger cannot fire on frozen data and is not a valid excuse to idle.
+
+### 1d. NEXT FOCUS CAMPAIGN (heavy-work enforced — cannot be skipped)
+
+**Campaign:** `FCLR-GATE-CONFIRM-01-20261122T175208Z` — the mandatory gate-confirmation focus campaign for the next agentic work session.
+
+**Why it cannot be avoided:** `scripts/check_handoff_heavywork_gate.py` binds `FCLR-POOLED-AUDIT-001` (start UTC `20261122T120000Z`). The gate fails closed for any post-start session (`UTC > 20261122T120000Z`) that does not carry the full heavy artifact set under its own `session_<UTC>/`. No rank-0 `ACTIVE` campaign remains, so there is no heavy campaign to skip — but the gate itself is the enforcement mechanism: a session that only "verifies green and stops" without the full heavy artifact set under the latest `session_<UTC>/` trips the gate and fails closed.
+
+**Required deliverables for the next session (all under `research_state/session_<UTC>/`, UTC > `20261122T120000Z`, non-empty, no zero-byte placeholders):**
+1. Gate confirmation: `python3 scripts/check_handoff_heavywork_gate.py` → `PASS ... reason=OK`, latest session = `session_20261122T165200Z/`, full heavy artifact set present and non-empty.
+2. Unit tests: the 6 gate unittest modules → 0 failures (116 tests).
+3. Preserve the `NOT_SUPPORTED` null: do not threshold-shop, do not relax the 2% materiality floor, do not build an overlay, do not start a new rank-0 campaign, do not wait for `NEW_OBSERVED_LIQUIDATION_SOURCE`.
+4. Root churn cap: `research_state/` root md+json ≤ 500 (currently 499/500); all new artifacts under `session_<UTC>/`; no empty/zero-byte files.
+
+**Verifying command:**
+```
+python3 scripts/check_handoff_heavywork_gate.py                  # → PASS reason=OK
+python3 -m unittest tests.test_tracka_hardening_143 tests.test_tracka_hardening_144 tests.test_active_campaign_gate tests.test_fclr_heavy_confirm_gate tests.test_fclr_campaign_gate tests.test_fclr_starter_001_campaign_gate   # → 116 tests, 0 failures
+python3 scripts/next_campaign_status.py                          # → NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN (not a blocker)
+```
+
+**Bottlenecks removed (verified this session):** 0 empty session directories; 61/61 session dirs contain files; gate PASS reason=OK; 116/116 unittests pass; root count 499/500 ≤ cap; no blocked/inefficient sessions; all campaigns terminal/SUPERSEDED_TERMINAL; no rank-0 `ACTIVE` entry remains; `NEW_OBSERVED_LIQUIDATION_SOURCE` cannot fire on frozen data (not a valid excuse to idle).
 
 
 ---
