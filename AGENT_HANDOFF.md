@@ -1,7 +1,7 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T12:30:28Z (supersedes 2026-11-22T12:30:03Z)
-**Session type:** handoff refresh + rank-0 resync — FCLR-POOLED-001 CONFIRMATORY_COMPLETE executed under session_20261122T092003Z; experiment_frontier.json rank-0 stale-state (READY_EXECUTE for the completed pooled task) demoted to rank 1 SUPERSEDED_TERMINAL/COMPLETE so no future agent re-runs it; sole rank-0 ACTIVE campaign is now FCLR-POOLED-AUDIT-001-20261122T120000Z, machine-enforced (gate fails closed). Gate PASS reason=OK; pooled session 13/13 artifacts present and non-empty; no empty session dirs; root 499/500.
+**Timestamp:** 2026-11-22T12:35:00Z (supersedes 2026-11-22T12:30:28Z)
+**Session type:** handoff refresh + rank-0 resync + initial-task sharpening — FCLR-POOLED-001 CONFIRMATORY_COMPLETE executed under session_20261122T092003Z; experiment_frontier.json rank-0 stale-state (READY_EXECUTE for the completed pooled task) demoted to rank 1 SUPERSEDES_TERMINAL/COMPLETE so no future agent re-runs it; sole rank-0 ACTIVE campaign is now FCLR-POOLED-AUDIT-001-20261122T120000Z, machine-enforced (gate fails closed). Gate PASS reason=OK; pooled session 13/13 artifacts present and non-empty; no empty session dirs; root 499/500. Verified this session: exactly one rank:0 entry (READY_EXECUTE/ACTIVE = FCLR-POOLED-AUDIT-001), no blocked/inefficient sessions, gate POOLED_AUDIT_CAMPAIGN_RE armed (start UTC 20261122T110000Z, 11 required artifacts).
 
 **Sole active campaign (rank-0, gate-enforced):** `FCLR-POOLED-AUDIT-001-20261122T120000Z` — **NOT_STARTED (ACTIVE)**, adversarial leakage/quality audits on the pooled ironflow bulk panel with optional Track B modeled boundary-breach labels. `FCLR-POOLED-001-20261122T040000Z` — **CONFIRMATORY_COMPLETE (EXECUTED), demoted to rank 1 SUPERSEDED_TERMINAL** — the pooled, chronologically-split out-of-sample confirmatory design on the on-disk ironflow bulk data (`research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}`, 18 months 2025-05..2026-10, 54 files per dataset incl. sha256+accessed sidecars). Executed under `session_20261122T092003Z` (UTC > campaign start `20261122T040000Z`). Full 13-file `fclr_pooled_*` artifact set present and non-empty. Decision: NOT_SUPPORTED (funding-conditioned features add no QLIKE improvement over RV-only baseline; relative diff ~0.0%, below -2% materiality floor). Null result preserved.
 
@@ -19,7 +19,24 @@ Repository focus (per repo name **Funding-conditioned-volatility-and-liquidation
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T12:30:28Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T12:35:00Z)
+
+> **READ THIS FIRST — THIS IS THE ONLY TASK YOU MAY START.**
+> Repo = **Funding-conditioned-volatility-and-liquidation-risk**. Ranked by repo name, the single
+> highest-value unfinished task is the **adversarial leakage/quality audit of the pooled
+> funding/volatility/liquidation panel**, because the pooled confirmatory forecast came back
+> **NOT_SUPPORTED** and the research program's next priority (§10 priority 8) is to attack the
+> result before any further modeling. Everything else is terminal.
+>
+> **DO:** execute campaign **`FCLR-POOLED-AUDIT-001-<UTC>`** under a new
+> `research_state/session_<UTC>/` with UTC > `20261122T110000Z`, producing the full
+> `fclr_pooled_audit_*` artifact set (see §1b). No new source, no network, no external trigger —
+> all inputs are already on disk (§4).
+> **DO NOT:** idle, wait for `NEW_OBSERVED_LIQUIDATION_SOURCE`, re-run any terminal campaign,
+> build a risk overlay (§9 gate NOT passed), write root-level `research_state/*.md|*.json`
+> (root=499/500, cap=500), or stop after prose/verify-only. The gate fails closed if you do (§1c).
+> **DONE WHEN:** `python3 scripts/check_handoff_heavywork_gate.py` → PASS with the new
+> `session_<UTC>/` recorded in this handoff, and all 6 gate unittest modules → 0 failures.
 
 **STATUS: FCLR-POOLED-001 CONFIRMATORY_COMPLETE — NEXT HEAVY CAMPAIGN IS MANDATORY AND NON-AVOIDABLE.**
 
