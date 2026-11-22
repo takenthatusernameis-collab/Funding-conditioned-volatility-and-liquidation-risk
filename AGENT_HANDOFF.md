@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-22T22:05:26Z
+# AGENT HANDOFF — 2026-11-22T22:43:26Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -14,7 +14,7 @@
 
 **Rank-0 campaign:** `FCLR-LIQ-RISK-ESCALATION-09-20261122T193000Z` — status
 `READY_EXECUTE`, program `ACTIVE`. Campaign start UTC `20261122T193000Z` has
-**ELAPSED** (now ~`20261122T220526Z`). Your new `session_<UTC>/` MUST have
+**ELAPSED** (now ~`20261122T224326Z`). Your new `session_<UTC>/` MUST have
 UTC **> `20261122T193000Z`** and MUST be recorded in this handoff before the
 gate will pass. The gate `FCLR-LIQ-RISK-ESCALATION` (risk09 family) fails closed
 for any post-start session that lacks the full heavy artifact set below.
@@ -71,7 +71,7 @@ every file below. Zero-byte placeholders fail closed.
 Copy these into your new `session_<UTC>/` so the older gate bindings stay
 satisfied: `fclr_pooled001_*` (11 artifacts), `fclr_pooled_audit001_*`
 (9 artifacts), `fclr_pooled_robust002_*` (9 artifacts). Verified on disk at
-2026-11-22T22:05:26Z via
+2026-11-22T22:43:26Z via
 `ls research_state/session_20261122T190000Z/<prefix>_* | wc -l`.
 
 ---
@@ -189,5 +189,5 @@ Then record your `session_<UTC>/` id in this handoff (append the id string
 
 ---
 
-**Handoff generated: 2026-11-22T22:05:26Z**
+**Handoff generated: 2026-11-22T22:43:26Z**
 **Next session must use UTC > 20261122T193000Z** (campaign start gate).
