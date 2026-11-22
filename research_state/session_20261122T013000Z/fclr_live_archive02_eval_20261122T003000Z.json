@@ -1,0 +1,98 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-02",
+  "session_utc": "2026-11-22T00:30:00Z",
+  "experiment_id": "FCLR-LIVE-ARCHIVE-02",
+  "data_source": "data.binance.vision (futures/um/daily/metrics, futures/um/monthly/fundingRate, futures/um/monthly/markPriceKlines/1h), BTCUSDT, unauthenticated",
+  "data_window": "2025-06-01 .. 2025-08-18",
+  "symbols": [
+    "BTCUSDT"
+  ],
+  "target": "next_24h_realized_variance (sum of squared 1h mark-price log returns, t+1..t+24)",
+  "eps": 1e-12,
+  "blocks": {
+    "train": "2025-06-01..2025-06-30",
+    "embargo": "2025-07-01..2025-07-07",
+    "test_block_1": "2025-07-08..2025-07-21",
+    "test_block_2": "2025-07-22..2025-08-04",
+    "test_block_3": "2025-08-05..2025-08-18"
+  },
+  "models": {
+    "B0": "persistence (pred=RV24h)",
+    "B1": "RV-only HAR OLS log(RV+eps) ~ log RV1h+log RV24h+log RV168h, train-only std, Duan smear",
+    "C2": "B1+signed funding+abs funding pct(90d,min30)+OI+taker vol ratio"
+  },
+  "materiality_floor_pct": 2.0,
+  "n_forecast_hours": 2017,
+  "aggregate": {
+    "mean_diff_C2_B1": -0.010479430279927667,
+    "mean_rel_C2_B1_pct": -1.8802492732219453,
+    "n_blocks": 3,
+    "n_improved": 1,
+    "materiality_pass": false,
+    "gate": "NOT_SUPPORTED"
+  },
+  "decision": "NOT_SUPPORTED",
+  "notes": "Libation risk is PROXIED (OI + taker imbalance + mark dislocation), never observed liquidations; no liquidationSnapshot dataset exists in archive. mark/index premium not downloaded -> recorded missing. stdlib-only.",
+  "outcome_data_inspected_before_freeze": false,
+  "prereg_artifact": "fclr_live_archive02_prereg_20261122T003000Z.json",
+  "source_registry_artifact": "fclr_live_archive02_source_registry_20261122T003000Z.json",
+  "block_results": {
+    "test_block_1": {
+      "n": 335,
+      "qlike_B0": 0.7333131583826343,
+      "qlike_B1": 0.3557555423870662,
+      "qlike_C2": 0.31146368005759817,
+      "diff_C2_B1": -0.044291862329468024,
+      "rel_C2_B1_pct": -12.450083569261153,
+      "diff_C1_B1": null,
+      "mae_B0": 0.00027041312956639993,
+      "rmse_B0": 0.00036092389628073043,
+      "mae_B1": 0.0002030433463452093,
+      "rmse_B1": 0.00025821656888736893,
+      "mae_C2": 0.00020088611485618042,
+      "rmse_C2": 0.0002469916958680436,
+      "y_true": 335,
+      "pred_B0": 335,
+      "pred_B1": 335,
+      "pred_C2": 335
+    },
+    "test_block_2": {
+      "n": 335,
+      "qlike_B0": 0.3025524445698927,
+      "qlike_B1": 0.1975237357426773,
+      "qlike_C2": 0.20482364903208744,
+      "diff_C2_B1": 0.007299913289410154,
+      "rel_C2_B1_pct": 3.6957144729786124,
+      "diff_C1_B1": null,
+      "mae_B0": 0.0001362760526909955,
+      "rmse_B0": 0.00018178427316335727,
+      "mae_B1": 0.00011385034444540975,
+      "rmse_B1": 0.00013677958836239026,
+      "mae_C2": 0.00011918313162400876,
+      "rmse_C2": 0.00014291838903806483,
+      "y_true": 335,
+      "pred_B0": 335,
+      "pred_B1": 335,
+      "pred_C2": 335
+    },
+    "test_block_3": {
+      "n": 335,
+      "qlike_B0": 0.46272561380313576,
+      "qlike_B1": 0.17836652909532835,
+      "qlike_C2": 0.18392018729560322,
+      "diff_C2_B1": 0.005553658200274869,
+      "rel_C2_B1_pct": 3.113621276616705,
+      "diff_C1_B1": null,
+      "mae_B0": 0.00016676294320746652,
+      "rmse_B0": 0.0002059114848788403,
+      "mae_B1": 0.0001239000106882653,
+      "rmse_B1": 0.0001439213626159725,
+      "mae_C2": 0.00012625579328765917,
+      "rmse_C2": 0.00014570549815533514,
+      "y_true": 335,
+      "pred_B0": 335,
+      "pred_B1": 335,
+      "pred_C2": 335
+    }
+  }
+}

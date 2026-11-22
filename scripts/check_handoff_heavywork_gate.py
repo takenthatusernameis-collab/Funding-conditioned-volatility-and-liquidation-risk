@@ -1653,15 +1653,20 @@ def _live_archive_state(handoff_text: str, latest_sid: str | None,
 
     # Ladder-aware: bind the artifact family to the campaign number in the
     # handoff (01 -> fclr_live_archive01_*, 02 -> fclr_live_archive02_*, ...).
+    # The base LIVE_ARCHIVE_REQUIRED prefixes are numberless
+    # (fclr_live_archive_source_registry_, ...), so the ladder must inject the
+    # campaign number after the ``fclr_live_archive`` stem. The previous code
+    # replaced ``fclr_live_archive01_`` (which never matched the numberless
+    # base), so a FCLR-LIVE-ARCHIVE-02 session that correctly wrote
+    # ``fclr_live_archive02_*`` files deadlocked forever against an impossible
+    # ``fclr_live_archive_*`` demand. The shared non-campaign prefixes
+    # (evidence_audit_, trigger_check_) are left untouched.
     tag = f"live_archive{int(m.group(1)):02d}"
     family = tuple(
-        (prefix.replace("fclr_live_archive01_", f"fclr_{tag}_"), suffix)
+        (prefix.replace("fclr_live_archive_", f"fclr_{tag}_", 1), suffix)
+        if prefix.startswith("fclr_live_archive_")
+        else (prefix, suffix)
         for prefix, suffix in LIVE_ARCHIVE_REQUIRED
-        if prefix.startswith("fclr_live_archive01_")
-    )
-    family += tuple(
-        (prefix, suffix) for prefix, suffix in LIVE_ARCHIVE_REQUIRED
-        if not prefix.startswith("fclr_live_archive01_")
     )
     required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
     out["artifact_family"] = tag

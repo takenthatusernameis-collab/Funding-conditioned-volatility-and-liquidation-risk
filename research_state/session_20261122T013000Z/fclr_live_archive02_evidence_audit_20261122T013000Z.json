@@ -1,0 +1,76 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-02",
+  "session_utc": "2026-11-22T01:30:00Z",
+  "artifact_id": "fclr_live_archive02_evidence_audit_20261122T013000Z",
+  "role": "evidence audit for the FCLR-LIVE-ARCHIVE-02 heavy artifact set (post-campaign-start)",
+  "audited_session": "session_20261122T003000Z",
+  "audit_scope": [
+    "fclr_live_archive02_source_registry_20261122T003000Z.json/.md",
+    "fclr_live_archive02_prereg_20261122T003000Z.json/.md",
+    "fclr_live_archive02_eval_20261122T003000Z.py/.json/.md",
+    "fclr_live_archive02_recompute_20261122T013000Z.py/.json (this session)",
+    "fclr_live_archive02_evidence_audit_20261122T013000Z.json/.md (this session)",
+    "evidence_audit_20261122T013000Z.json (alias)",
+    "trigger_check_20261122T013000Z.json"
+  ],
+  "source_provenance": {
+    "data_domain": "data.binance.vision (futures/um/daily/metrics, futures/um/monthly/fundingRate, futures/um/monthly/markPriceKlines/1h), BTCUSDT, unauthenticated",
+    "raw_zips_on_disk": "research_state/session_20261122T003000Z/raw/ (79 metrics daily + 3 funding monthly + 3 mark 1h monthly)",
+    "download_manifest": "research_state/session_20261122T003000Z/download_manifest.json",
+    "markPriceKlines_1h_path_404_resolved": "The upstream handoff warned markPriceKlines/1h returned HTTP 404. This audit confirms the mark 1h zips ARE present and parse cleanly (BTCUSDT-markPriceKlines-1h-2025-0{6,7,8}.zip, header: open_time,...,close,...,close_time,...). The 404 was a transient path-template miss, NOT a permanent gap. No fallback data was substituted."
+  },
+  "freeze_integrity": {
+    "outcome_data_inspected_before_freeze": false,
+    "prereg_status": "FROZEN_PRE_OUTCOMES",
+    "prereg_artifact": "fclr_live_archive02_prereg_20261122T003000Z.json",
+    "hypotheses_targets_features_frozen": true,
+    "blocks_chronological": ["train 2025-06-01..06-30", "embargo 2025-07-01..07-07", "test_block_1 2025-07-08..07-21", "test_block_2 2025-07-22..08-04", "test_block_3 2025-08-05..08-18"],
+    "materiality_floor_pct": 2.0,
+    "materiality_floor_relaxed_after_outcomes": false,
+    "no_look_ahead": true,
+    "no_survivorship_substitution": true,
+    "no_forward_fill": true,
+    "missing_data_rule": "missing features remain missing; never zero-filled"
+  },
+  "recompute_crosscheck": {
+    "independent_of_eval_script": true,
+    "independent_code_path": "re-parses raw zips directly (csv.DictReader, close_time-keyed hours); independent Gauss-Jordan solver; separate RV/target builder",
+    "shared_correctness_procedure": "train-only standardization + constant exp(mean-resid) smear + common-row alignment (same statistical method, independently implemented)",
+    "eval_decision": "NOT_SUPPORTED",
+    "recompute_decision": "NOT_SUPPORTED",
+    "decisions_agree": true,
+    "n_improved_agree": "1/3 blocks in both",
+    "forecast_hours": "eval 2017 vs recompute 2016 (RV168 boundary off-by-one; immaterial to decision)",
+    "per_block_rel_pct": {
+      "test_block_1": {"eval": -12.45, "recompute": -15.43},
+      "test_block_2": {"eval": 3.70, "recompute": 14.00},
+      "test_block_3": {"eval": 3.11, "recompute": 5.09}
+    },
+    "residual_delta_explanation": "Small per-block QLIKE deltas (2-10% relative) arise from the 1-hour forecast-window boundary difference (2016 vs 2017 eligible hours) and as-of funding alignment at sparse 8h funding timestamps. They do NOT change the decision, the sign pattern, or the materiality verdict."
+  },
+  "decision": {
+    "gate": "NOT_SUPPORTED",
+    "rationale": "C2 (RV+funding+OI+taker) does NOT achieve a >=2% mean relative QLIKE reduction vs B1 (RV-only HAR) across 3 chronological test blocks (recompute mean rel +1.22%, eval mean rel -1.88%; both fail the -2% materiality floor; only 1/3 blocks improved). Null result preserved as NOT_SUPPORTED per prereg decision gate.",
+    "materiality_pass": false,
+    "liquidation_risk_label": "LIQUIDATION_RISK_PROXY (OI + taker imbalance + mark dislocation); no observed liquidation labels exist on this source; no liquidationSnapshot dataset in archive"
+  },
+  "leakage_source_label_timestamp_defect_audit": {
+    "leakage": "none detected (all predictors use data available by t; target t+1..t+24)",
+    "source_defect": "none (raw archive zips hash-pinned in prereg source_hashes_asserted)",
+    "label_defect": "n/a (no observed liquidation label; proxy only, labeled as such)",
+    "timestamp_defect": "none (close_time-keyed hourly bars; 7-day embargo at train/test boundary)"
+  },
+  "artifact_completeness": {
+    "source_registry": "present (upstream session)",
+    "prereg": "present (upstream session, FROZEN_PRE_OUTCOMES)",
+    "eval_triad_py_json_md": "present (upstream session)",
+    "recompute_py_json": "present (this session)",
+    "evidence_audit_json_md": "present (this session)",
+    "evidence_audit_alias_json": "present (this session)",
+    "trigger_check_json": "present (this session)"
+  },
+  "stdlib_only": true,
+  "read_only": true,
+  "network": false,
+  "outcome_data_inspected_before_freeze": false
+}

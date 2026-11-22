@@ -1,0 +1,94 @@
+{
+  "aggregate": {
+    "gate": "NOT_SUPPORTED",
+    "materiality_pass": false,
+    "mean_rel_C2_B1_pct": 1.219722954071689,
+    "n_blocks": 3,
+    "n_improved": 1
+  },
+  "artifact_id": "fclr_live_archive02_recompute_20261122T013000Z",
+  "blocks": {
+    "test_block_1": {
+      "diff_C2_B1": -0.054816139817992826,
+      "mae_B0": 0.0002701840512143258,
+      "mae_B1": 0.00020314180428549785,
+      "mae_C2": 0.00019973489894037585,
+      "n": 336,
+      "qlike_B0": 0.7316726506914474,
+      "qlike_B1": 0.3552318295622995,
+      "qlike_C2": 0.30041568974430666,
+      "rel_C2_B1_pct": -15.431089011796825,
+      "rmse_B0": 0.00036054088769762565,
+      "rmse_B1": 0.00025856306527693003,
+      "rmse_C2": 0.00024447920333193785
+    },
+    "test_block_2": {
+      "diff_C2_B1": 0.027558066883848126,
+      "mae_B0": 0.00013639663280838596,
+      "mae_B1": 0.00011360037727230234,
+      "mae_C2": 0.00013023401630035472,
+      "n": 336,
+      "qlike_B0": 0.3032228531396134,
+      "qlike_B1": 0.1968607857741389,
+      "qlike_C2": 0.22441885265798703,
+      "rel_C2_B1_pct": 13.998758958254834,
+      "rmse_B0": 0.00018176961566071024,
+      "rmse_B1": 0.00013639431069168383,
+      "rmse_C2": 0.00015464191848847198
+    },
+    "test_block_3": {
+      "diff_C2_B1": 0.009043828253273267,
+      "mae_B0": 0.00016638925377512748,
+      "mae_B1": 0.000123577575324587,
+      "mae_C2": 0.00012820603860418483,
+      "n": 336,
+      "qlike_B0": 0.4613725941638493,
+      "qlike_B1": 0.17762604692470088,
+      "qlike_C2": 0.18666987517797415,
+      "rel_C2_B1_pct": 5.091498915757057,
+      "rmse_B0": 0.00020561712771954453,
+      "rmse_B1": 0.0001436245443952592,
+      "rmse_C2": 0.00015043525518250689
+    }
+  },
+  "campaign": "FCLR-LIVE-ARCHIVE-02",
+  "cross_check_vs_eval": {
+    "blocks": {
+      "test_block_1": {
+        "abs_delta_rel_pct": 2.981005442535672,
+        "eval_qlike_C2": 0.31146368005759817,
+        "eval_rel_pct": -12.450083569261153,
+        "recompute_qlike_C2": 0.30041568974430666,
+        "recompute_rel_pct": -15.431089011796825
+      },
+      "test_block_2": {
+        "abs_delta_rel_pct": 10.30304448527622,
+        "eval_qlike_C2": 0.20482364903208744,
+        "eval_rel_pct": 3.6957144729786124,
+        "recompute_qlike_C2": 0.22441885265798703,
+        "recompute_rel_pct": 13.998758958254834
+      },
+      "test_block_3": {
+        "abs_delta_rel_pct": 1.9778776391403525,
+        "eval_qlike_C2": 0.18392018729560322,
+        "eval_rel_pct": 3.113621276616705,
+        "recompute_qlike_C2": 0.18666987517797415,
+        "recompute_rel_pct": 5.091498915757057
+      }
+    },
+    "decisions_agree": true,
+    "eval_decision": "NOT_SUPPORTED",
+    "eval_present": true,
+    "recompute_decision": "NOT_SUPPORTED"
+  },
+  "data_source": "raw archive zips under session_20261122T003000Z/raw (re-parsed directly)",
+  "liquidation_label_rule": "LIQUIDATION_RISK_PROXY; no observed liquidations on this source",
+  "method": "independent hourly-close/log-return rebuild; trailing RV; next-24h RV target; Gauss-Jordan OLS with train-only standardization + constant exp(mean-resid) smear",
+  "n_forecast_hours_total": 2016,
+  "n_train_rows_B1": 552,
+  "n_train_rows_C2": 487,
+  "outcome_data_inspected_before_freeze": false,
+  "role": "INDEPENDENT stdlib recompute / cross-check of eval",
+  "session_utc": "20261122T013000Z",
+  "stdlib_only": true
+}

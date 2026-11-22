@@ -1,0 +1,104 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-02",
+  "campaign_start_utc": "2026-11-22T00:25:00Z",
+  "session_utc": "2026-11-22T00:30:00Z",
+  "artifact_id": "fclr_live_archive02_source_registry_20261122T003000Z",
+  "generated_at": "2026-11-22T00:30:00Z",
+  "source": {
+    "id": "binance_public_archive_metrics_funding",
+    "type": "market_data_archive",
+    "venue": "binance",
+    "base_url": "https://data.binance.vision",
+    "s3_bucket": "s3-ap-northeast-1.amazonaws.com/data.binance.vision",
+    "access": "unauthenticated",
+    "auth_required": false,
+    "payment_required": false,
+    "signup_required": false,
+    "terms_url": "https://data.binance.vision/terms-of-use.html",
+    "access_method": "HTTPS GET (no API key, no signed request, no account)",
+    "rate_limits": "honor source rate limits; bounded downloads with retries used",
+    "reachability_verified_at": "2026-11-22T00:25:00Z",
+    "reachability_evidence": [
+      {"probe": "GET https://data.binance.vision/ (root)", "status": 200, "verified_at": "2026-11-22T00:25:00Z"},
+      {"probe": "GET https://data.binance.vision/?delimiter=/&prefix=data/futures/um/daily/metrics/BTCUSDT/", "status": 200, "verified_at": "2026-11-22T00:25:00Z"},
+      {"probe": "GET https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2024-01.zip", "status": 200, "verified_at": "2026-11-22T00:25:00Z"},
+      {"probe": "S3 list-type=2 data/futures/um/daily/metrics/BTCUSDT/", "status": 200, "keys": 2272, "coverage": "2020-09-01 .. 2026-11-20", "verified_at": "2026-11-22T00:25:00Z"}
+    ],
+    "api_rest_blocked": "https://api.binance.com returns HTTP 451 (not used)"
+  },
+  "datasets": [
+    {
+      "kind": "futures_um_daily_metrics",
+      "path_template": "data/futures/um/daily/metrics/{SYM}/{SYM}-metrics-{YYYY-MM-DD}.zip",
+      "symbol": "BTCUSDT",
+      "fields": ["create_time","symbol","sum_open_interest","sum_open_interest_value","count_toptrader_long_short_ratio","sum_toptrader_long_short_ratio","count_long_short_ratio","sum_taker_long_short_vol_ratio"],
+      "units": "create_time UTC (YYYY-MM-DD HH:MM:SS); sum_open_interest in contracts; sum_open_interest_value in quote asset; ratios unitless",
+      "cadence": "daily file, 288 intraday rows at 5-min intervals (00:00..23:55)",
+      "schema_verified_by_download": true,
+      "sample_download": {
+        "file": "BTCUSDT-metrics-2025-06-15.zip",
+        "bytes": 10955,
+        "etag": "ed393b1e09b8fe1d2a8615fe76735d31",
+        "sha256": "8f6627d563531aa27c801d0085722f438865211052afa32d9b89752ddc7bd7e5",
+        "inner_csv": "BTCUSDT-metrics-2025-06-15.csv",
+        "inner_rows": 288,
+        "first_row_create_time": "2025-06-15 00:00:00",
+        "last_row_create_time": "2025-06-15 23:55:00",
+        "sample_sum_open_interest": "78235.7970000000000000",
+        "sample_sum_taker_long_short_vol_ratio": "0.57948200"
+      },
+      "download_window": "2025-06-01 .. 2025-08-18 (79 daily files)",
+      "coverage_archive": "2020-09-01 .. 2026-11-20 (2272 daily files for BTCUSDT)",
+      "track_assignment": "Track C volatility / liquidation-risk proxy (Open Interest + taker flow imbalance)",
+      "liquidation_label": "NOT available; no liquidationSnapshot dataset in this archive. Liquidation risk is PROXIED (see proxy definition below), never labeled as observed liquidations.",
+      "inadmissible_for_observed_liquidations": true,
+      "terms": "Binance public market data; unauthenticated; no redistribution restriction observed for research use; terms at /terms-of-use.html"
+    },
+    {
+      "kind": "futures_um_monthly_fundingRate",
+      "path_template": "data/futures/um/monthly/fundingRate/{SYM}/{SYM}-fundingRate-{YYYY-MM}.zip",
+      "symbol": "BTCUSDT",
+      "archive_coverage": "2020-01 .. 2026-10 (82 monthly files for BTCUSDT)",
+      "download_window": "2025-06 .. 2025-08 (3 monthly files)",
+      "sample_download": {
+        "file": "BTCUSDT-fundingRate-2025-06.zip",
+        "bytes": 946,
+        "etag": "d611a86336a7a11159b456358423e953",
+        "sha256_prefix": "d611a863"
+      },
+      "track_assignment": "Track C funding feature (signed funding rate)"
+    },
+    {
+      "kind": "futures_um_monthly_markPriceKlines_1h",
+      "path_template": "data/futures/um/monthly/markPriceKlines/{SYM}/1h/{SYM}-1h-{YYYY-MM}.zip",
+      "symbol": "BTCUSDT",
+      "interval": "1h",
+      "archive_coverage": "deep history (2020 onward)",
+      "download_window": "2025-06 .. 2025-08 (3 monthly files)",
+      "sample_download": {
+        "file": "BTCUSDT-1h-2025-06.zip",
+        "bytes": 20653,
+        "etag": "84f300a289ee336b9df19ef64aa6c9fa",
+        "sha256_prefix": "af4ef458",
+        "inner_csv": "BTCUSDT-1h-2025-06.csv"
+      },
+      "track_assignment": "Track C target construction (forward realized variance from mark-price log returns)"
+    }
+  ],
+  "proxy_definition": {
+    "liquidation_risk_proxy": "high open interest + extreme taker long/short volume imbalance + mark-to-index dislocation, computed causally from archive data; labeled explicitly as a MODELED PROXY, never as observed liquidations",
+    "never_observed_liquidation": true
+  },
+  "download_manifest": "research_state/session_20261122T003000Z/download_manifest.json",
+  "raw_extracts": "research_state/session_20261122T003000Z/raw/",
+  "admissibility": {
+    "unauthenticated": true,
+    "no_credentials": true,
+    "no_payment": true,
+    "no_signup": true,
+    "historical_depth": true,
+    "schema_verified": true,
+    "admissible_for_research": true,
+    "admissible_for_track_a_observed_liquidations": false
+  }
+}
