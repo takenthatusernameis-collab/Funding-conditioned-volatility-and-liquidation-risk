@@ -1,0 +1,34 @@
+{
+  "experiment_id": "FCLR-POOLED-AUDIT-001",
+  "campaign": "FCLR-POOLED-AUDIT-001-20261122T120000Z",
+  "session_utc": "20261122T165200Z",
+  "trigger_type": "campaign_start_pooled_audit_heavy_work",
+  "trigger_fired": true,
+  "trigger_utc": "20261122T120000Z",
+  "status": "EXECUTED",
+  "artifact_family": "fclr_pooled_audit001_*",
+  "artifacts_complete": 11,
+  "audit_domains": [
+    "d1_future_row_perturbation",
+    "d2_split_embargo",
+    "d3_funding_sign_timing",
+    "d4_mark_index_alignment",
+    "d5_missingness_preservation",
+    "d6_delisting_symbol_migration",
+    "d7_survivorship",
+    "d8_stress_concentration",
+    "d9_threshold_drift",
+    "d10_overlapping_outcomes",
+    "trackb_modeled_boundary_breach"
+  ],
+  "decision": "audit_complete_nulls_preserved",
+  "no_new_source_required": true,
+  "no_network_used": true,
+  "stdlib_pyarrow_only": true,
+  "bottlenecks_removed": [
+    "no_external_trigger_needed_ironflow_bulk_on_disk",
+    "no_new_data_source_required",
+    "pooled_panel_available_for_adversarial_audit",
+    "track_b_modeled_breach_path_viable_without_observed_liquidation_labels"
+  ]
+}

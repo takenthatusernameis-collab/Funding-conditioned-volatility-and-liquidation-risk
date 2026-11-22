@@ -1,0 +1,9 @@
+{
+  "experiment_id": "FCLR-POOLED-AUDIT-001",
+  "campaign": "FCLR-POOLED-AUDIT-001-20261122T120000Z",
+  "session_utc": "20261122T165200Z",
+  "evidence_type": "evidence_audit_alias",
+  "points_to": "fclr_pooled_audit001_evidence_audit_20261122T165200Z.json",
+  "sha256": "05fea20545a31a047f6e1eaeebda784d5bef3ae7277763a1581772aa98b24b9e",
+  "gate_critical": true
+}
