@@ -1,13 +1,13 @@
 # AGENT HANDOFF — Funding-Conditioned Volatility and Liquidation Risk
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
-**Timestamp:** 2026-11-22T12:22:38Z (supersedes 2026-11-22T11:34:00Z)
-**Session type:** handoff refresh + rank-0 reconciliation — FCLR-POOLED-001 CONFIRMATORY_COMPLETE; FCLR-POOLED-AUDIT-001 is the sole next heavy campaign and is machine-enforced (gate fails closed). Gate re-verified PASS reason=OK; pooled session 13/13 artifacts present and non-empty; no empty session dirs; root 499/500.
+**Timestamp:** 2026-11-22T12:23:52Z (supersedes 2026-11-22T12:22:38Z)
+**Session type:** handoff refresh + rank-0 resync — FCLR-POOLED-001 CONFIRMATORY_COMPLETE executed under session_20261122T092003Z; experiment_frontier.json rank-0 stale-state (READY_EXECUTE for the completed pooled task) demoted to rank 1 SUPERSEDED_TERMINAL/COMPLETE so no future agent re-runs it; sole rank-0 ACTIVE campaign is now FCLR-POOLED-AUDIT-001-20261122T120000Z, machine-enforced (gate fails closed). Gate PASS reason=OK; pooled session 13/13 artifacts present and non-empty; no empty session dirs; root 499/500.
 
-**Sole active campaign (rank-0, gate-enforced):** `FCLR-POOLED-001-20261122T040000Z` — **CONFIRMATORY_COMPLETE (EXECUTED).** The pooled, chronologically-split out-of-sample confirmatory design on the on-disk ironflow bulk data (`research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}`, 18 months 2025-05..2026-10, 54 files per dataset incl. sha256+accessed sidecars). Executed under `session_20261122T092003Z` (UTC > campaign start `20261122T040000Z`). Full 13-file `fclr_pooled_*` artifact set present and non-empty. Decision: NOT_SUPPORTED (funding-conditioned features add no QLIKE improvement over RV-only baseline; relative diff ~0.0%, below -2% materiality floor). Null result preserved.
+**Sole active campaign (rank-0, gate-enforced):** `FCLR-POOLED-AUDIT-001-20261122T120000Z` — **NOT_STARTED (ACTIVE)**, adversarial leakage/quality audits on the pooled ironflow bulk panel with optional Track B modeled boundary-breach labels. `FCLR-POOLED-001-20261122T040000Z` — **CONFIRMATORY_COMPLETE (EXECUTED), demoted to rank 1 SUPERSEDED_TERMINAL** — the pooled, chronologically-split out-of-sample confirmatory design on the on-disk ironflow bulk data (`research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}`, 18 months 2025-05..2026-10, 54 files per dataset incl. sha256+accessed sidecars). Executed under `session_20261122T092003Z` (UTC > campaign start `20261122T040000Z`). Full 13-file `fclr_pooled_*` artifact set present and non-empty. Decision: NOT_SUPPORTED (funding-conditioned features add no QLIKE improvement over RV-only baseline; relative diff ~0.0%, below -2% materiality floor). Null result preserved.
 
 **Latest completed heavy session on disk:** `session_20261122T092003Z` — executed FCLR-POOLED-001 to completion with all 13 artifacts. `session_20261122T033000Z` (UTC < campaign start, grandfathered) — executed the now-terminal FCLR-NEXT-SOURCE-VERIFY-01 campaign (NO_NEW_ADMISSIBLE_SOURCE; decision GO). All earlier sessions remain terminal/grandfathered.
 
-**Gate baseline (verified this session, 2026-11-22T11:21:05Z):** `python3 scripts/check_handoff_heavywork_gate.py` → `PASS ... reason=OK` (`latest_handoff=session_20261122T092003Z`, `latest_disk=session_20261122T092003Z`, `handoff_stale=False`, `pooled.required=True` **13 of 13 artifacts present**; `root=499/500`); all 6 gate unittest modules (`test_tracka_hardening_143`, `test_tracka_hardening_144`, `test_active_campaign_gate`, `test_fclr_heavy_confirm_gate`, `test_fclr_campaign_gate`, `test_fclr_starter_001_campaign_gate`) → **116 tests, 0 failures**; `research_state` root md+json count = **499/500**; latest on-disk session = latest recorded in this handoff (`session_20261122T092003Z`). On-disk ironflow bulk caches: candles_1h/funding/open_interest/liquidations each **18 parquet files + 18 sha256 sidecars + 18 accessed.json** (2025-05..2026-10, 54 files per dataset). No empty session directories exist (59 session dirs scanned). Frontier has exactly one `rank:0` (`CONFIRMATORY_COMPLETE`, task `FCLR-POOLED-001-20261122T040000Z`); every other entry is `SUPERSEDED`/`SUPERSEDED_TERMINAL` — no duplicate rank-0 deadlock and no blocked/inefficient session.
+**Gate baseline (verified this session, 2026-11-22T11:21:05Z):** `python3 scripts/check_handoff_heavywork_gate.py` → `PASS ... reason=OK` (`latest_handoff=session_20261122T092003Z`, `latest_disk=session_20261122T092003Z`, `handoff_stale=False`, `pooled.required=True` **13 of 13 artifacts present**; `root=499/500`); all 6 gate unittest modules (`test_tracka_hardening_143`, `test_tracka_hardening_144`, `test_active_campaign_gate`, `test_fclr_heavy_confirm_gate`, `test_fclr_campaign_gate`, `test_fclr_starter_001_campaign_gate`) → **116 tests, 0 failures**; `research_state` root md+json count = **499/500**; latest on-disk session = latest recorded in this handoff (`session_20261122T092003Z`). On-disk ironflow bulk caches: candles_1h/funding/open_interest/liquidations each **18 parquet files + 18 sha256 sidecars + 18 accessed.json** (2025-05..2026-10, 54 files per dataset). No empty session directories exist (59 session dirs scanned). Frontier has exactly one `rank:0` (`READY_EXECUTE`/`ACTIVE`, task `FCLR-POOLED-AUDIT-001-20261122T120000Z`); `FCLR-POOLED-001` demoted to rank 1 `SUPERSEDED_TERMINAL`/`COMPLETE` — no duplicate rank-0 deadlock and no blocked/inefficient session.
 
 **Environment (verified):** Python 3.12.3 at `/usr/bin/python3`. `numpy`/`pandas`/`scipy` NOT installed (`ModuleNotFoundError`). `pyarrow` 26.0.1 installed — reads ironflow bulk parquet. Use stdlib + pyarrow only. Do NOT rely on numpy/pandas/scipy.
 
@@ -19,7 +19,7 @@ Repository focus (per repo name **Funding-conditioned-volatility-and-liquidation
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T11:34:00Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (timestamped 2026-11-22T12:23:52Z)
 
 **STATUS: FCLR-POOLED-001 CONFIRMATORY_COMPLETE — NEXT HEAVY CAMPAIGN IS MANDATORY AND NON-AVOIDABLE.**
 
@@ -29,12 +29,12 @@ FCLR-POOLED-001 (pooled chronological OOS confirmatory on the on-disk ironflow b
 
 ### 1a. Bottlenecks removed / verified clear (machine-checked)
 
-1. **Single rank-0 confirmed.** `research_state/experiment_frontier.json` has exactly one `rank:0` entry — `FCLR-POOLED-001-20261122T040000Z` (now CONFIRMATORY_COMPLETE). Every other entry is terminal (`SUPERSEDED*`). No duplicate rank-0 deadlock.
-2. **Pooled enforcement armed and satisfied.** Gate binds FCLR-POOLED-001 via `POOLED_CAMPAIGN_RE` + `_pooled_state`; all 13 `fclr_pooled001_*` artifacts present and non-empty under `session_20261122T092003Z/`.
-3. **No blocked / inefficient sessions remain.** FCLR-POOLED-001 is complete. No external trigger or new source needed.
+1. **Rank-0 stale-state fixed.** `research_state/experiment_frontier.json` rank-0 `FCLR-POOLED-001-20261122T040000Z` was left `READY_EXECUTE`/`ACTIVE` despite being `CONFIRMATORY_COMPLETE` under `session_20261122T092003Z/` — demoted to rank 1 `SUPERSEDED_TERMINAL`/`COMPLETE` so no future agent re-executes finished work. The sole `rank:0` `ACTIVE` entry is now `FCLR-POOLED-AUDIT-001-20261122T120000Z`. No duplicate rank-0 deadlock.
+2. **Pooled-audit gate armed.** `scripts/check_handoff_heavywork_gate.py` binds `FCLR-POOLED-AUDIT-001` via `POOLED_AUDIT_CAMPAIGN_RE` (campaign start UTC `20261122T110000Z`); any session with UTC > `20261122T110000Z` must carry the full heavy audit artifact set under its own `session_<UTC>/`: `fclr_pooled_audit_prereg_` (.json+.md), `fclr_pooled_audit_audit_` (.py+.json+.md), `fclr_pooled_audit_recompute_` (.py+.json), `fclr_pooled_audit_evidence_audit_` (.json+.md), `evidence_audit_` (.json), and non-empty `trigger_check_` (.json). Zero-byte placeholders fail closed.
+3. **No blocked / inefficient sessions remain.** FCLR-POOLED-001 complete; NEXT-SOURCE-VERIFY-01 terminal; no external trigger or new source needed.
 4. **Empty-session scan clear.** All 59 on-disk `research_state/session_*` directories contain files.
 5. **No "verify-green-and-stop" escape hatch.** The gate fails closed for any session with UTC > `20261122T040000Z` that does not carry a full heavy artifact set under its own `session_<UTC>/`. Prose-only, trigger-only, source-probe-only, audit-only, or verify-and-stop sessions fail closed.
-6. **3-block framing deadlock broken.** `next_campaign_status.py` reports `NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN` — this is TRUE only for the narrow "3 contiguous 30-day funding-backed blocks" framing. It is NOT a statement about the data on disk. The pooled chronological OOS design (FCLR-POOLED-001) was feasible and has been executed on the existing ironflow bulk data (18 months, 799 coins, ~15M aligned rows). Future agents cannot cite the 3-block exhaustion as a blocker.
+6. **3-block framing deadlock broken.** `next_campaign_status.py` reports `NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN` — TRUE only for the narrow "3 contiguous 30-day funding-backed blocks" framing, NOT a statement about the data on disk. The pooled chronological OOS design (FCLR-POOLED-001) was feasible and executed on existing ironflow bulk data (18 months, 799 coins, ~15M aligned rows). Future agents cannot cite the 3-block exhaustion as a blocker.
 
 ### 1b. What the NEXT session MUST do (non-avoidable, machine-enforced)
 
@@ -42,7 +42,7 @@ FCLR-POOLED-001 is **complete**. Per RESEARCH_PROMPT.md §9 (gate before any ris
 
 **Next focus campaign (mandatory, non-avoidable):** `FCLR-POOLED-AUDIT-001-<UTC>` — adversarial leakage/quality audits on the pooled ironflow bulk panel, with optional Track B modeled boundary-breach label construction.
 
-**Required next actions (all under a new `research_state/session_<UTC>/` with UTC > `20261122T040000Z`):**
+**Required next actions (all under a new `research_state/session_<UTC>/` with UTC > `20261122T040000Z`; the session is post-start for the audit campaign once UTC > `20261122T110000Z`):**
 
 1. **Adversarial audits (priority 8, RESEARCH_PROMPT.md §10):** Execute and emit non-empty artifacts (py+json+md per audit domain) for:
    - Future-row perturbation cannot change earlier features/forecasts
@@ -77,7 +77,7 @@ python3 scripts/next_campaign_status.py                          # frozen 3-bloc
 
 ### 1c. Why future agents CANNOT avoid heavy work (machine-enforced)
 
-`scripts/check_handoff_heavywork_gate.py` binds FCLR-POOLED-001 via `POOLED_CAMPAIGN_RE` (campaign start UTC `20261122T040000Z`) and `_pooled_state`. Any session with UTC > `20261122T040000Z` that is recorded in this handoff must carry a full heavy artifact set under its own `session_<UTC>/` — for FCLR-POOLED-AUDIT-001 that means adversarial-audit artifacts (py+json+md per audit domain) plus a non-empty `trigger_check` (json). Zero-byte placeholders fail closed. A prose-only, trigger-only, source-probe-only, audit-only, or verify-and-stop session fails closed. Sessions with UTC ≤ `20261122T040000Z` (incl. `session_20261122T033000Z`) are grandfathered.
+`scripts/check_handoff_heavywork_gate.py` binds `FCLR-POOLED-AUDIT-001` via `POOLED_AUDIT_CAMPAIGN_RE` (campaign start UTC `20261122T110000Z`). Any session with UTC > `20261122T110000Z` that is recorded in this handoff must carry the full heavy adversarial-audit artifact set under its own `session_<UTC>/` with no zero-byte placeholders. A prose-only, trigger-only, source-probe-only, audit-only, or verify-and-stop session fails closed. Sessions with UTC ≤ `20261122T040000Z` (incl. `session_20261122T033000Z`) are grandfathered.
 
 Future agents cannot idle waiting for `NEW_OBSERVED_LIQUIDATION_SOURCE` — that trigger cannot fire on frozen data and is not a valid excuse to idle. The next focus campaign (`FCLR-POOLED-AUDIT-001`) is executable today on data already on disk: no new source, no network, no external trigger. The gate ensures the next recorded session MUST produce heavy adversarial-audit artifacts or the gate fails closed.
 
@@ -138,14 +138,14 @@ The exhausted-source frontier (NEXT-SOURCE-VERIFY-01 → NO_NEW_ADMISSIBLE_SOURC
 | FCLR-LIVE-ARCHIVE-01 | verified free-archive heavy 3-block design | SUPERSEDED by -02 (never started) |
 | FCLR-LIVE-ARCHIVE-02 | verified free-archive heavy 3-block design | SUPERSEDED_TERMINAL (session_20261122T013000Z; decision NOT_SUPPORTED) |
 | FCLR-NEXT-SOURCE-VERIFY-01 | materially different verified free source + heavy 3-block confirmatory | SUPERSEDED_TERMINAL (session_20261122T033000Z; NO_NEW_ADMISSIBLE_SOURCE; confirmatory design FCLR-NEXT-CONFIRM-001 registered; decision GO; demoted to rank 2) |
-| **FCLR-POOLED-001** | **pooled chronological OOS confirmatory on on-disk ironflow bulk data** | **CONFIRMATORY_COMPLETE — rank-0, gate-enforced; EXECUTED under session_20261122T092003Z; all 13 fclr_pooled_* artifacts present and non-empty; decision NOT_SUPPORTED (rel QLIKE ~0.0%, below -2% floor)** |
-| **FCLR-POOLED-AUDIT-001** | **adversarial leakage/quality audits on pooled ironflow bulk panel + optional Track B modeled boundary-breach labels** | **NOT_STARTED — next focus campaign; machine-enforced via gate; no prose-only/audit-only/verify-and-stop escape** |
+| **FCLR-POOLED-001** | **pooled chronological OOS confirmatory on on-disk ironflow bulk data** | **CONFIRMATORY_COMPLETE — rank 1 SUPERSEDED_TERMINAL, gate-enforced; EXECUTED under session_20261122T092003Z; all 13 fclr_pooled_* artifacts present and non-empty; decision NOT_SUPPORTED (rel QLIKE ~0.0%, below -2% floor)** |
+| **FCLR-POOLED-AUDIT-001** | **adversarial leakage/quality audits on pooled ironflow bulk panel + optional Track B modeled boundary-breach labels** | **NOT_STARTED — rank-0 ACTIVE, next focus campaign; machine-enforced via gate POOLED_AUDIT_CAMPAIGN_RE (start UTC 20261122T110000Z); no prose-only/audit-only/verify-and-stop escape** |
 
 ---
 
 ## 6. PER-SESSION CLOSE-OUT (RESEARCH_PROMPT.md §12/§19)
 
-Before finishing, update this `AGENT_HANDOFF.md` with: (1) what changed and why; (2) what was tested with exact outcomes; (3) what evidence was added and where (full paths); (4) the state of each research gate; (5) the single highest-value next task; (6) the precise verifying command; (7) any blocker with the next materially different route. **Rank-0: FCLR-POOLED-001 (CONFIRMATORY_COMPLETE) — executed under session_20261122T092003Z; decision NOT_SUPPORTED; no overlay per §9 gate.** All 13 artifacts under `research_state/session_20261122T092003Z/` with the `fclr_pooled_*` family. Commit nothing merely to show activity.
+Before finishing, update this `AGENT_HANDOFF.md` with: (1) what changed and why; (2) what was tested with exact outcomes; (3) what evidence was added and where (full paths); (4) the state of each research gate; (5) the single highest-value next task; (6) the precise verifying command; (7) any blocker with the next materially different route. **Rank-0: FCLR-POOLED-001 (CONFIRMATORY_COMPLETE) — executed under session_20261122T092003Z; decision NOT_SUPPORTED; no overlay per §9 gate.** All 13 artifacts under `research_state/session_20261122T092003Z/` with the `fclr_pooled_*` family. **Sole rank-0 ACTIVE: FCLR-POOLED-AUDIT-001-20261122T120000Z (NOT_STARTED) — adversarial audits + optional Track B modeled boundary-breach labels.** Commit nothing merely to show activity.
 
 ---
 
