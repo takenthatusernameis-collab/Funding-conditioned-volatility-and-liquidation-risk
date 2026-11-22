@@ -1,0 +1,841 @@
+{
+  "generated_at": "2026-11-22T00:30:00Z",
+  "source": "https://data.binance.vision",
+  "symbol": "BTCUSDT",
+  "files": [
+    {
+      "kind": "fundingRate",
+      "month": "2025-06",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2025-06.zip",
+      "status": 200,
+      "bytes": 946,
+      "etag": "\"d611a86336a7a11159b456358423e953\"",
+      "sha256": "a1f4a40953740fa83ee9ad97776ff8325d1958654a67f1325614071a983819d4",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-fundingRate-2025-06.zip"
+    },
+    {
+      "kind": "fundingRate",
+      "month": "2025-07",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2025-07.zip",
+      "status": 200,
+      "bytes": 796,
+      "etag": "\"965a3150a74cc2a67a36d645275f59d2\"",
+      "sha256": "b097dff828f6e43fece23db0d3cb98042a9d7bc19693b8cbfd051d88eb973b7b",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-fundingRate-2025-07.zip"
+    },
+    {
+      "kind": "fundingRate",
+      "month": "2025-08",
+      "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2025-08.zip",
+      "status": 200,
+      "bytes": 927,
+      "etag": "\"8f3acfc0e4a1ca2f353e3d4556e01299\"",
+      "sha256": "1180129860b6e196e8d70bb9719e81573aa6b4acb423ba5ee7f82f10c836f7ab",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-fundingRate-2025-08.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-01",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-01.zip",
+      "status": 200,
+      "bytes": 11099,
+      "etag": "\"b67a8495959befcbef71902b6e441b41\"",
+      "sha256": "fda1c94f9c08a3ae76ab819c5fa8b3c92b0d99d6360bfbfe7a653b45c7fa5de2",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-01.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-02",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-02.zip",
+      "status": 200,
+      "bytes": 11233,
+      "etag": "\"8d99e26e1fb1b4a175538220130d96d6\"",
+      "sha256": "2f468d6c07755654e4faa79341399038a4a338c87f4cc60c52b3fced8300a8e5",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-02.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-03",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-03.zip",
+      "status": 200,
+      "bytes": 11256,
+      "etag": "\"9496cb6a1fb37805fd817f3da32a0f72\"",
+      "sha256": "0487af6dc36446394672e3b290500505c37f32fc9a29657e7878f1fba53d4f99",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-03.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-04",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-04.zip",
+      "status": 200,
+      "bytes": 11109,
+      "etag": "\"339aa0fc26d9a11dcf61502c098ac7ec\"",
+      "sha256": "72b04a204e22809d0c9f2f07c81cd909230bda3883bea71a1517885be8095a91",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-04.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-05",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-05.zip",
+      "status": 200,
+      "bytes": 11215,
+      "etag": "\"5e75494b57326c84d84c62955c9baf47\"",
+      "sha256": "24aa76633ff7f7e90d614baa395f99de72502349a60751f11a18b98afc9b7db0",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-05.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-06",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-06.zip",
+      "status": 200,
+      "bytes": 11311,
+      "etag": "\"e62911d4805d537186b76ea493609b70\"",
+      "sha256": "ac5422cdc0430a98cd8207f4c24fe6e7fb4dc28fe2b42f66dfd750aa9e5e953e",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-06.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-07",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-07.zip",
+      "status": 200,
+      "bytes": 10983,
+      "etag": "\"8084da612da25ed0bf3cb266fdad8b29\"",
+      "sha256": "604899e47eb0641c3d5a00b8b11cc72af1a70c8dec4c3bf96132097607467fd8",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-07.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-08",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-08.zip",
+      "status": 200,
+      "bytes": 10935,
+      "etag": "\"86694a623556b8ff799d0d881bcd9982\"",
+      "sha256": "42d094c34a133097e6c708d3cc4e265465806316528d5197ac567f27e66bf12f",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-08.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-09",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-09.zip",
+      "status": 200,
+      "bytes": 11183,
+      "etag": "\"945d823c0930ead8d830852f78a3143c\"",
+      "sha256": "fad34343101dd419557ea809fc718f848bdb681d2e98beeb082073862c350a2e",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-09.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-10",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-10.zip",
+      "status": 200,
+      "bytes": 11055,
+      "etag": "\"cb95ffdae204552591db37d35a849981\"",
+      "sha256": "9c873f8313ca2fc4c08a125b7882c731002cdae69df9cd163a2bd1fe8593fa0f",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-10.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-11",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-11.zip",
+      "status": 200,
+      "bytes": 11042,
+      "etag": "\"23767ac2de04cf392437f44490606b89\"",
+      "sha256": "d9bc1ba23ecea9aaeef6c8d22b49c4071ef7fb23fbd1e19380e21853d9336abe",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-11.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-12",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-12.zip",
+      "status": 200,
+      "bytes": 11234,
+      "etag": "\"4a2c1e381e33ade58064c7df65f02364\"",
+      "sha256": "1a22d5c98c5a28e26c730f67d80a6d19c3bd15efd53599ff2a4f6e4c3d810973",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-12.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-13",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-13.zip",
+      "status": 200,
+      "bytes": 11272,
+      "etag": "\"360ebe0d7635fbc41f2d5092d6ee4158\"",
+      "sha256": "c5ac56ddb1b0325a33c7f94fdc4bea218bc7e2786382fb20ef8a83bcce4b5690",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-13.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-14",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-14.zip",
+      "status": 200,
+      "bytes": 10979,
+      "etag": "\"b6e97e26df018be1b3cc871628a4a407\"",
+      "sha256": "f3472d95a72ded40957a9f3bff63b41f5bfd79b53a51ad3ef5726cc3711e6725",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-14.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-15",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-15.zip",
+      "status": 200,
+      "bytes": 10955,
+      "etag": "\"ed393b1e09b8fe1d2a8615fe76735d31\"",
+      "sha256": "8f6627d563531aa27c801d0085722f438865211052afa32d9b89752ddc7bd7e5",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-15.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-16",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-16.zip",
+      "status": 200,
+      "bytes": 11238,
+      "etag": "\"1ee1f06333094026fd9c54aea7d6570d\"",
+      "sha256": "dd5e8a1f97b3fc8bbbdbe3cdfebe9b7cec60a6ff16bf1c8c52a16028585de48a",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-16.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-17",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-17.zip",
+      "status": 200,
+      "bytes": 11277,
+      "etag": "\"eaba1b140d47b50f11ce2102357af832\"",
+      "sha256": "8d99d29b27001dddd213af7daa1667d8c9dd4e4b7bb8ccb697581d8ea48b54e6",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-17.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-18",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-18.zip",
+      "status": 200,
+      "bytes": 11135,
+      "etag": "\"a26510893abfb6334819756f55232052\"",
+      "sha256": "c96fb927cd117ae369c71dcd4cc93fb286b65657c71d150d16d586f4c2762b66",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-18.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-19",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-19.zip",
+      "status": 200,
+      "bytes": 10973,
+      "etag": "\"d94d06f0008bf63a3a31cf468171560c\"",
+      "sha256": "dde6fef43803476b4668966dc5c9606ff087d5040a89fc6ad36e4a32b741e018",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-19.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-20",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-20.zip",
+      "status": 200,
+      "bytes": 11195,
+      "etag": "\"fdf9766014e118273b6e15073e3deea2\"",
+      "sha256": "1a50f4606f97c9b72c44da5e0d36fb1c10dd25a195934c4c408f97dc939b88f0",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-20.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-21",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-21.zip",
+      "status": 200,
+      "bytes": 11101,
+      "etag": "\"e93fd8a16da1c2898007e7bd77d1b8f9\"",
+      "sha256": "2f1e0d934f287229854eae6be55f85b1d462e4f9815aff574f11b3f794361643",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-21.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-22",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-22.zip",
+      "status": 200,
+      "bytes": 11301,
+      "etag": "\"1338e46e25a5e66f942fbc74129ea526\"",
+      "sha256": "af6841cb05030e406f20982389ed603d4d3b000d48bc73884ab29288892f9982",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-22.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-23",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-23.zip",
+      "status": 200,
+      "bytes": 11285,
+      "etag": "\"ae612f7e7a6c9750f91e5877eaecc4e4\"",
+      "sha256": "59d2b07163c791405fe0f459b5cb04d4786549feacec9b3502020e0514420177",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-23.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-24",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-24.zip",
+      "status": 200,
+      "bytes": 11134,
+      "etag": "\"8ce93624d43bf6e7e42af15f6c238be5\"",
+      "sha256": "3531fe46815e556485499cc329ab53853e4e110302c35e45ef350b2fc246a452",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-24.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-25",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-25.zip",
+      "status": 200,
+      "bytes": 11094,
+      "etag": "\"e40c9310f3208d14b979ce6500b785ff\"",
+      "sha256": "dcee172850cb403339254d3bfe17852bcb9e88d52ab363b782f850711d4e2218",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-25.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-26",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-26.zip",
+      "status": 200,
+      "bytes": 11002,
+      "etag": "\"9b11985e7446b6a1eadcc70f2c760e03\"",
+      "sha256": "c2b731a4bd4ee6abfa287f9a887f616f2c8bfb964459420123f4ef1ca04bcb8d",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-26.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-27",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-27.zip",
+      "status": 200,
+      "bytes": 11068,
+      "etag": "\"1cbc37e078f26e409d13427578e6f0cc\"",
+      "sha256": "3f5084784d92ca066122546aa2d43500562d8407c3e41ccc50b03e862cfa1cca",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-27.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-28",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-28.zip",
+      "status": 200,
+      "bytes": 10826,
+      "etag": "\"ffb3b7f0e61e2d183aeb285a4d3e5d6c\"",
+      "sha256": "da13c1b0418074ca3dde50fde90693d636289e1d99a5bd76255561220b297889",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-28.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-29",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-29.zip",
+      "status": 200,
+      "bytes": 11080,
+      "etag": "\"b3fe042d672de4fc4b09f576637c05bc\"",
+      "sha256": "5f8f43a9ccaa0658a6d22b85fef0e1acd1c4840c96e4850793b6cf0493512934",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-29.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-06-30",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-06-30.zip",
+      "status": 200,
+      "bytes": 11114,
+      "etag": "\"552a5e70f856984f24506ad4c2e6814d\"",
+      "sha256": "3c7918254644ad60cf7ef65ab0ddc5da783f935746e0f7f71b5f68b978c3a2e2",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-06-30.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-01",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-01.zip",
+      "status": 200,
+      "bytes": 11046,
+      "etag": "\"a4c87526d0b451ea67c5a4425180cc06\"",
+      "sha256": "dfd51f9204b97499ea033c56c534deae530e40885b715a7b5b12c0748bdec7b0",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-01.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-02",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-02.zip",
+      "status": 200,
+      "bytes": 11285,
+      "etag": "\"91d152bc295611cc53c691edf96b12cf\"",
+      "sha256": "2e03389c9870e9fdea4e7f36eb3232374c8c960cb89805097a1267b548c74085",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-02.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-03",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-03.zip",
+      "status": 200,
+      "bytes": 11030,
+      "etag": "\"3c61048f5763aa05f517e61c46e23d3b\"",
+      "sha256": "31ee055a4b439ff7b6363402f443fca73571428a3e116dfddf355d06bd071aee",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-03.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-04",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-04.zip",
+      "status": 200,
+      "bytes": 11090,
+      "etag": "\"6d5c948bd6098531a6c9faec4d8b57b1\"",
+      "sha256": "f8e6a3ea523bdf1ec01838a4e7121af5232ac03f53398c01cbbe3e7536d942b5",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-04.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-05",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-05.zip",
+      "status": 200,
+      "bytes": 10828,
+      "etag": "\"de9b222f006cf62b1559b86edf015e35\"",
+      "sha256": "fe50b9bb864d92c508fb1d323e182f02fc0911bd4465dbdf5bcda27497158c45",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-05.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-06",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-06.zip",
+      "status": 200,
+      "bytes": 10866,
+      "etag": "\"b50e95a516959a7877bc2c51fb93ef88\"",
+      "sha256": "2b09ccb5ab50bb10a027d3593fb20e3f8f62998ba009fbb02ec2de67c1de3c1e",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-06.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-07",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-07.zip",
+      "status": 200,
+      "bytes": 11083,
+      "etag": "\"1461afdff1adf7eb24628bb2c623bc53\"",
+      "sha256": "9171970da658319c0c1d0bf0b36cc2de3856123411784a2b9403b1d922932929",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-07.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-08",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-08.zip",
+      "status": 200,
+      "bytes": 11002,
+      "etag": "\"d1aecb59383d1acb3f7616e974469474\"",
+      "sha256": "5c8843e4515e9cf9aaaf31f96d96292881c61b0ca4fe54aa4246e8e7196951d4",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-08.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-09",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-09.zip",
+      "status": 200,
+      "bytes": 11197,
+      "etag": "\"4cb123c1ab55593254196fedfca3c0cb\"",
+      "sha256": "35ad34a7aad41ba7141aafdeeb3d52664cbbea42e4e99e7b96069cb9e3a979dc",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-09.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-10",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-10.zip",
+      "status": 200,
+      "bytes": 11050,
+      "etag": "\"11cecfd8ad444f1955d78c648eafd0ab\"",
+      "sha256": "28476a2f6cbc7e9321bcfc48c6bf8ae907a8e7598ec3455001295ed303175607",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-10.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-11",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-11.zip",
+      "status": 200,
+      "bytes": 11167,
+      "etag": "\"e5ae503f138247d428884331f2aee71a\"",
+      "sha256": "4baf5391f54e0f62fda37dae9eb523017abacb74775b031831c867495200e9cf",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-11.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-12",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-12.zip",
+      "status": 200,
+      "bytes": 10887,
+      "etag": "\"d731fd8959a137894ed828eee3c7a406\"",
+      "sha256": "bb95bb9d7aef2caeb80f46cf17674658c983f6a869200ec7a377e0fef4caba69",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-12.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-13",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-13.zip",
+      "status": 200,
+      "bytes": 10952,
+      "etag": "\"667a8382f68274ae97195206af65cc5c\"",
+      "sha256": "8c5cf1bca50c15d00441d480bf62855ee76df1fbfd1606e4e1e9a1c553ac2907",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-13.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-14",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-14.zip",
+      "status": 200,
+      "bytes": 11243,
+      "etag": "\"7c80b9d8855a03c7d9c876a39b542d33\"",
+      "sha256": "0219c7e10ad77e4ac1ec7f961a2437b60fa2a0ca5c87df553400072881b7af25",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-14.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-15",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-15.zip",
+      "status": 200,
+      "bytes": 11398,
+      "etag": "\"850e29905f7d6d3126ffcf14b0a47a71\"",
+      "sha256": "83718bd5040f896df20fb028b0ae1b910c304baa433a928925ffff3a34e25715",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-15.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-16",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-16.zip",
+      "status": 200,
+      "bytes": 11252,
+      "etag": "\"370f08b58b3d729bb542030b657930b8\"",
+      "sha256": "dfa7f73836269ac488c38292c32d7c40f01ff7ccf85c90f418122d8d3edc219d",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-16.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-17",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-17.zip",
+      "status": 200,
+      "bytes": 11141,
+      "etag": "\"e93a8e9cbbafde2fa1b9cfa61a3e4eca\"",
+      "sha256": "de59b083850cef6223ae75bcf3cbb4c83d760ac85bcf6d52abd60c05f7b5873d",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-17.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-18",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-18.zip",
+      "status": 200,
+      "bytes": 11163,
+      "etag": "\"5449432547de03ad75f98d702afea905\"",
+      "sha256": "a4dd9c5ae725c206c266b144f4324124177cb0d934f4982779df4af7772efd14",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-18.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-19",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-19.zip",
+      "status": 200,
+      "bytes": 10975,
+      "etag": "\"848aad8fd707c687c7026467d8a37083\"",
+      "sha256": "7c88228d9d6ef9abe42005e1e852fbaa2cbead4289cb14255d2138fad6673ec3",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-19.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-20",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-20.zip",
+      "status": 200,
+      "bytes": 11053,
+      "etag": "\"012b28c5fd3f3e107a34a85430835ea7\"",
+      "sha256": "03479bff91dedfbaae72bd552e5af7f752793eca79cd1569b0688f4766fcad8f",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-20.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-21",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-21.zip",
+      "status": 200,
+      "bytes": 11009,
+      "etag": "\"fc8a4a0bdc727bb9840173ab3975e577\"",
+      "sha256": "85da59bb11b817440cbf71bfc1aebe951a8835bd9c284f86dfa2f62046635faf",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-21.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-22",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-22.zip",
+      "status": 200,
+      "bytes": 11157,
+      "etag": "\"ff9cf17154826974fdb85c8f867d7d2c\"",
+      "sha256": "a4d71e1f572ed75a678c5e6b7b2fd636c642cc6bd9b310818cc149f5b881a944",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-22.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-23",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-23.zip",
+      "status": 200,
+      "bytes": 11282,
+      "etag": "\"fcfd9ba6886db578a96ec6cf4a85dc1d\"",
+      "sha256": "a364ece93c5db148e43b88bc6c1e7d91ef33b1497cfd1a2c896dbeb4e9a473dc",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-23.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-24",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-24.zip",
+      "status": 200,
+      "bytes": 11222,
+      "etag": "\"206abcd2f6b6da1e04a0b60428e45065\"",
+      "sha256": "2d5e497b81648f8894d82bb43a1ff57c5dcaaa408847c0a6ee8a1562605c3518",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-24.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-25",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-25.zip",
+      "status": 200,
+      "bytes": 11530,
+      "etag": "\"125724a5da4d3479aad6eca1a0eab03e\"",
+      "sha256": "4b6ee1c968947dde67effcae615e996528034910035558e7d8a1ae6fc19969a9",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-25.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-26",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-26.zip",
+      "status": 200,
+      "bytes": 11108,
+      "etag": "\"a413b4dc8472d12f242fe5ae28734eab\"",
+      "sha256": "b50ae5527797eddac2ab3d60d8230c3ac3be65337d56de5709e35d1c8b788703",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-26.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-27",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-27.zip",
+      "status": 200,
+      "bytes": 11007,
+      "etag": "\"751a66ef56fadb355509b176731b07da\"",
+      "sha256": "8d8dd9d4c065be690161e2eeff73704f858fe70474be470fe86396778903ec7d",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-27.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-28",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-28.zip",
+      "status": 200,
+      "bytes": 11115,
+      "etag": "\"4518174f29398c24a6908e24a6f1d3ae\"",
+      "sha256": "ad824b4f7905020d42a270d89bfeb848e41f4c12dc7ef48dce055201f4a23a45",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-28.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-29",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-29.zip",
+      "status": 200,
+      "bytes": 11173,
+      "etag": "\"c87609a2d9aa9bc541231e37ec6bdfa0\"",
+      "sha256": "464bf7658de9145f23d11f87d45e070fe263f3b154e3516566c8db23625ec45f",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-29.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-30",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-30.zip",
+      "status": 200,
+      "bytes": 11108,
+      "etag": "\"49d92e179a2b18654f94ed3e1fcbdf90\"",
+      "sha256": "13c493e8b670c2292455735c4a6508a4ddd8fee80cbf6397721a1fea604c719b",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-30.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-07-31",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-07-31.zip",
+      "status": 200,
+      "bytes": 11233,
+      "etag": "\"e07e8abd80a7948787df95cfaf84b9c7\"",
+      "sha256": "0e268ffe67e34d3ae0d527cb0c9c4c9deb760ea4d6304ffb4ad1b66e52cd0bc5",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-07-31.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-01",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-01.zip",
+      "status": 200,
+      "bytes": 11353,
+      "etag": "\"5bdcb173eea2ff18c0ab3ea34eee7cf6\"",
+      "sha256": "4ea029938bf8d078626b456884513c9328f0e3335e92ede01e6280b5fa660ea8",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-01.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-02",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-02.zip",
+      "status": 200,
+      "bytes": 11196,
+      "etag": "\"2935c7c47808d3b566f18ab465b937f0\"",
+      "sha256": "5ef345490553e02285a1cde7f53ace0da5a1266c6d9262826690d045d85b2c87",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-02.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-03",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-03.zip",
+      "status": 200,
+      "bytes": 11012,
+      "etag": "\"45c87e8ca307bf96f1fec8f612c09913\"",
+      "sha256": "087b6520a05d04c02576b85aaeb6dee03b2a0925ddc3569afe5182477ec16da3",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-03.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-04",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-04.zip",
+      "status": 200,
+      "bytes": 11056,
+      "etag": "\"ef2e1a20871ea7be4619e94e08bb7a6f\"",
+      "sha256": "d146aaeb3c08ea8fb4c620987df4101c4e1cdffddd4fadbfb374eeabbce89fa4",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-04.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-05",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-05.zip",
+      "status": 200,
+      "bytes": 11094,
+      "etag": "\"d579af93368ccecd6c5732d9846bdd57\"",
+      "sha256": "b086e939d5d4c5c42eaa999c2ea9016ef89c9f6d8207bb0fba2e50a3d76412a7",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-05.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-06",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-06.zip",
+      "status": 200,
+      "bytes": 11091,
+      "etag": "\"e51f96fe6b9f484203cc458a6bf281b8\"",
+      "sha256": "26c8cfbb01897430814a48e2a4e9b161fec633e171bb03c2cf313afd7b14d212",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-06.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-07",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-07.zip",
+      "status": 200,
+      "bytes": 11235,
+      "etag": "\"f6b91f570aa224d935de1e0120561901\"",
+      "sha256": "ad270667ff293bcc721e10c54c26ee9705b47c6ebe8dacf75939fe89b6232710",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-07.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-08",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-08.zip",
+      "status": 200,
+      "bytes": 11151,
+      "etag": "\"9ca106d786494c3a38ea926dfa7b5801\"",
+      "sha256": "c14708b860fb0a1b5ff9af55d157adbded51ebe8d3a42afa4301a076997c62de",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-08.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-09",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-09.zip",
+      "status": 200,
+      "bytes": 11124,
+      "etag": "\"814c9b487649d940600571fd8d55f779\"",
+      "sha256": "40b8d7e4a494506a9d3fceab63a993b275e326ef030647e3ad21ca9b60378df5",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-09.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-10",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-10.zip",
+      "status": 200,
+      "bytes": 11262,
+      "etag": "\"e25cdb256c5d4072b02c32a30771c040\"",
+      "sha256": "3c4e2ca94ce6717f6f27ff2d1f691619b90174ccf9bc6e722a9562e12455e943",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-10.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-11",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-11.zip",
+      "status": 200,
+      "bytes": 11471,
+      "etag": "\"96a9b0900d266299883e8693777dfbde\"",
+      "sha256": "f0e3675a629c54e7dbcd9665d2288e4ee45d62e2bbc0f2050648cfa5dd6079b5",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-11.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-12",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-12.zip",
+      "status": 200,
+      "bytes": 11135,
+      "etag": "\"90604721b7f0384d158203312c3f0302\"",
+      "sha256": "a06a9c011a177f939ed8f356dacf3016b05c1e08c9dd272d69e2cf5f74bbdef1",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-12.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-13",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-13.zip",
+      "status": 200,
+      "bytes": 11419,
+      "etag": "\"174d0c49642d376a2579ddf3d3b864d7\"",
+      "sha256": "58dff9b0785b2fc18d53641802b68fed3560f94a2b73ca78c12c6440f0ef64af",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-13.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-14",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-14.zip",
+      "status": 200,
+      "bytes": 11376,
+      "etag": "\"2d80eae492fef6e4457222c3adc4231d\"",
+      "sha256": "4b183b7d11b3ace25196a3218226a6baefc572eb6df65ff22a259a0a6e0ed532",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-14.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-15",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-15.zip",
+      "status": 200,
+      "bytes": 11295,
+      "etag": "\"f80c09f9b566c422d4bfbe30dcc52eaf\"",
+      "sha256": "a95d7aa8f3a8b4c4ab2b9666ef691d0e8e63e6813cfb26f31ad2957694d98182",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-15.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-16",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-16.zip",
+      "status": 200,
+      "bytes": 11067,
+      "etag": "\"3133810ed667f8a73953ab335670f30d\"",
+      "sha256": "934cb9e18ab420ec1468d09d2156fc5cd8878d4ff3df74413b3ee806faeb3ac8",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-16.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-17",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-17.zip",
+      "status": 200,
+      "bytes": 11059,
+      "etag": "\"356804cae198a0b58a1f1f0c4d57f8e2\"",
+      "sha256": "9c2116945cb1b6753dbf4abfb5452b1062ce70b53319cb8a5f831f187eb166b2",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-17.zip"
+    },
+    {
+      "kind": "metrics",
+      "day": "2025-08-18",
+      "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2025-08-18.zip",
+      "status": 200,
+      "bytes": 11288,
+      "etag": "\"c897c64a8922013cd2e1b05432f47a3d\"",
+      "sha256": "49acbb7e51474e684d34a3940bb6edc7a3a3f12da758c3198ef8abfa2704d866",
+      "saved": "/home/runner/work/Funding-conditioned-volatility-and-liquidation-risk/Funding-conditioned-volatility-and-liquidation-risk/research_state/session_20261122T003000Z/raw/BTCUSDT-metrics-2025-08-18.zip"
+    }
+  ],
+  "errors": [
+    {
+      "url": "https://data.binance.vision/data/futures/um/monthly/markPriceKlines/BTCUSDT/1h/BTCUSDT-markPriceKlines-1h-2025-06.zip",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/monthly/markPriceKlines/BTCUSDT/1h/BTCUSDT-markPriceKlines-1h-2025-07.zip",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "url": "https://data.binance.vision/data/futures/um/monthly/markPriceKlines/BTCUSDT/1h/BTCUSDT-markPriceKlines-1h-2025-08.zip",
+      "error": "HTTP Error 404: Not Found"
+    }
+  ]
+}
