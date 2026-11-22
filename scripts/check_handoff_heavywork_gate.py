@@ -554,6 +554,32 @@ POOLED_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-POOLED-AUDIT-001 hardening: FCLR-POOLED-001 returned NOT_SUPPORTED, so
+# the next focus is the RESEARCH_PROMPT.md §10 priority-8 adversarial audit of
+# the pooled ironflow panel: timestamping, delisting/identity, missingness,
+# survivorship, stress concentration, threshold drift, and overlapping outcomes.
+# Once this campaign starts (start UTC 20261122T110000Z), a post-start session
+# cannot satisfy the gate with a trigger-only, prose-only, source-probe-only,
+# generic-audit-only, or verify-and-stop session. It must emit the outcome-blind
+# audit prereg, the heavy adversarial-audit implementation/result/report triad,
+# the independent stdlib recompute, the audit evidence package, the gate-critical
+# evidence_audit_ alias, and a non-empty trigger check. Sessions predating the
+# campaign start (including the completed pooled session) are grandfathered.
+POOLED_AUDIT_CAMPAIGN_RE = re.compile(r"FCLR-POOLED-AUDIT-(\d+)-(\d{8}T\d{6}Z)")
+POOLED_AUDIT_REQUIRED = (
+    ("fclr_pooled_audit_prereg_", ".json"),
+    ("fclr_pooled_audit_prereg_", ".md"),
+    ("fclr_pooled_audit_audit_", ".py"),
+    ("fclr_pooled_audit_audit_", ".json"),
+    ("fclr_pooled_audit_audit_", ".md"),
+    ("fclr_pooled_audit_recompute_", ".py"),
+    ("fclr_pooled_audit_recompute_", ".json"),
+    ("fclr_pooled_audit_evidence_audit_", ".json"),
+    ("fclr_pooled_audit_evidence_audit_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 NEW_QUANT_PREFIXES = (
     "fclr_risk",
     "fclr_starter",
@@ -573,6 +599,7 @@ NEW_QUANT_PREFIXES = (
     "fclr_live_archive",    # FCLR-LIVE-ARCHIVE reachable free-archive source + heavy 3-block design artifacts
     "fclr_next_source_verify", # FCLR-NEXT-SOURCE-VERIFY-01 materially-different free source + heavy 3-block design artifacts
     "fclr_pooled",          # FCLR-POOLED pooled chronological OOS funding-conditioned vol + liq-risk artifacts
+    "fclr_pooled_audit",    # FCLR-POOLED-AUDIT pooled ironflow adversarial leakage/quality audit artifacts
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -1908,6 +1935,81 @@ def _pooled_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _pooled_audit_state(handoff_text: str, latest_sid: str | None,
+                        latest_files: list[str],
+                        latest_dir: Path | None = None) -> dict:
+    """Return FCLR-POOLED-AUDIT non-avoidance state.
+
+    FCLR-POOLED-001 is complete with an honest NOT_SUPPORTED verdict. The next
+    heavy campaign is an adversarial leakage/quality audit of that pooled panel,
+    not another prose-only status update. After it starts, a post-start session
+    must emit the outcome-blind audit prereg, the audit implementation/result/
+    report triad, the independent stdlib recompute, the audit evidence package,
+    the gate-critical evidence_audit_ alias, and a trigger check. Zero-byte and
+    generic recompute/audit placeholders fail closed. Pre-start sessions are
+    grandfathered so this handoff refresh remains green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = POOLED_AUDIT_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-POOLED-AUDIT-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    tag = f"pooled_audit{int(m.group(1)):03d}"
+    family = tuple(
+        (prefix.replace("fclr_pooled_audit_", f"fclr_{tag}_", 1), suffix)
+        if prefix.startswith("fclr_pooled_audit_")
+        else (prefix, suffix)
+        for prefix, suffix in POOLED_AUDIT_REQUIRED
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["artifact_family"] = tag
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, family):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _normalize_text(s: str) -> str:
     return "\n".join(line.rstrip() for line in s.replace("\r\n", "\n").split("\n")).strip()
 
@@ -2164,6 +2266,8 @@ def check(repo: Path = REPO) -> dict:
         "contagion_002": None,
         "live_archive": None,
         "next_source_verify": None,
+        "pooled": None,
+        "pooled_audit": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -2681,6 +2785,31 @@ def check(repo: Path = REPO) -> dict:
                 if not pl["has_trigger_check"]:
                     payload["failures"].append(
                         f"POOLED_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-POOLED-AUDIT-001: after the adversarial pooled-panel audit
+            # starts, require the outcome-blind audit prereg + heavy audit
+            # triad + independent stdlib recompute + evidence package + gate
+            # alias + trigger check. Generic recompute/audit/trigger-only
+            # sessions and zero-byte placeholders fail closed.
+            pa = _pooled_audit_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["pooled_audit"] = pa
+            if pa["required"]:
+                if pa["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "POOLED_AUDIT_ARTIFACTS_MISSING:"
+                        + ",".join(pa["missing_required_artifacts"])
+                    )
+                if pa["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "POOLED_AUDIT_ARTIFACTS_EMPTY:"
+                        + ",".join(pa["empty_required_artifacts"])
+                    )
+                if not pa["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"POOLED_AUDIT_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
