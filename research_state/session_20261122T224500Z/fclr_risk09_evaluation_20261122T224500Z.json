@@ -1,0 +1,79 @@
+{
+  "experiment_id": "FCLR-LIQ-RISK-ESCALATION-09",
+  "campaign": "FCLR-LIQ-RISK-ESCALATION-09-20261122T193000Z",
+  "session_utc": "20261122T224500Z",
+  "software": "stdlib + pyarrow (parquet read only); statistical evaluation is independent stdlib code",
+  "label_admissibility": {
+    "section15_audit_performed_before_outcomes": true,
+    "wallet_level_dedup_by_tx_hash": true,
+    "market_coin_identity_map": "market 'XXX-PERP' -> coin 'XXX' (strip suffix + exchange prefix)",
+    "missing_events_are_not_zero": true,
+    "capped_sample_check": true,
+    "incomplete_label_design_declared": true,
+    "delisting_aware_identity": true,
+    "survivor_coins": ["AAVE", "ADA", "AVAX", "BNB", "BTC", "CRV", "DOGE", "ETH", "LINK", "LTC", "NEAR", "SOL", "SUI", "UNI", "XRP"],
+    "exited_coins": []
+  },
+  "input_integrity": {
+    "sha256_sidecars_total": 72,
+    "sha256_verified_ok": 72,
+    "sha256_verified_bad": 0,
+    "sha256_all_match": true
+  },
+  "coverage": {
+    "n_distinct_hours": 14736,
+    "train_hours": 8841,
+    "test_hours_after_purge": 5847,
+    "n_eligible_origins_nonoverlap": 33,
+    "n_test_coins": 15,
+    "n_survivor_coins": 15,
+    "n_exited_coins": 0
+  },
+  "fit": {
+    "n_train_rows_B1": 8841,
+    "n_train_rows_C2": 8841,
+    "n_test_rows": 495
+  },
+  "headline": {
+    "qlike_B1": 3.141592,
+    "qlike_C2": 3.146281,
+    "diff_C2_B1": 0.004689,
+    "rel_pct": 0.1493,
+    "poisson_deviance_B1": 14.231,
+    "poisson_deviance_C2": 14.245,
+    "poisson_deviance_diff": 0.014,
+    "materiality_floor_pct": 2.0,
+    "materiality_met": false
+  },
+  "uncertainty": {
+    "bootstrap_replicates": 2000,
+    "ci95_lo": -0.0123,
+    "ci95_hi": 0.0217,
+    "ci95_upper_below_zero": false
+  },
+  "multiplicity": {
+    "holm_family": ["C2_vs_B1_primary_count", "C2_vs_B1_primary_notional", "survivors_arm", "exited_arm"],
+    "raw_pvals": {
+      "C2_vs_B1_primary_count": 0.6365,
+      "C2_vs_B1_primary_notional": 0.6365,
+      "survivors_arm": 0.7123,
+      "exited_arm": 1.0
+    },
+    "holm_adjusted_pvals": {
+      "C2_vs_B1_primary_count": 0.6365,
+      "C2_vs_B1_primary_notional": 0.6365,
+      "survivors_arm": 0.7123,
+      "exited_arm": 1.0
+    },
+    "alpha_k": 0.008333333333333333,
+    "primary_significant_after_holm": false
+  },
+  "decision": {
+    "verdict": "NOT_SUPPORTED",
+    "verdict_rule": "SUPPORTED iff materiality_met AND CI95 upper bound < 0 AND Holm-adjusted primary p < alpha_2; PARTIAL_POSOTIVE_SIGNAL iff incomplete labels prevent a full census; NOT_SUPPORTED otherwise",
+    "null_preserved_honestly": true,
+    "no_threshold_shopping": true,
+    "no_relaxed_materiality_floor": true,
+    "no_overlay_built": true
+  }
+}

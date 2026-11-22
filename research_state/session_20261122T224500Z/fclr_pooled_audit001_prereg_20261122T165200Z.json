@@ -1,0 +1,31 @@
+{
+  "experiment_id": "FCLR-POOLED-AUDIT-001",
+  "campaign": "FCLR-POOLED-AUDIT-001-20261122T120000Z",
+  "session_utc": "20261122T165200Z",
+  "outcome_data_inspected_before_freeze": false,
+  "frozen_before_outcomes": true,
+  "design": "adversarial leakage/quality audit of the pooled ironflow bulk panel, with optional Track B modeled boundary-breach labels",
+  "data": "research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}, 18 months 2025-05..2026-10, .parquet.sha256 asserted before every read, caches read-only",
+  "context": "FCLR-POOLED-001 (session_20261122T092003Z) returned NOT_SUPPORTED: funding-conditioned features add no QLIKE improvement over RV-only baseline (rel ~0.0%, below -2.0% materiality floor). Per RESEARCH_PROMPT.md §10 priority 8, adversarial audits are the next-highest-value task; per §9 no risk overlay is built because the forecast gate did not pass.",
+  "audit_domains": [
+    "d1_future_row_perturbation: future-row perturbation must not change earlier features/forecasts (row-order monotonicity, cross-file timestamp overlap)",
+    "d2_split_embargo: split embargo integrity (purge >= max horizon) on the pooled chronological train/test boundary",
+    "d3_funding_sign_timing: funding sign/timing - publication vs settlement handling",
+    "d4_mark_index_alignment: mark/index alignment under frozen tolerance (1% mark-oracle premium)",
+    "d5_missingness_preservation: no zero-fill/forward-fill; nulls preserved as-is",
+    "d6_delisting_symbol_migration: delisting/symbol-migration identity (coins entering/exiting the universe, market-coin mapping stability)",
+    "d7_survivorship: survivorship (today's survivors != historical universe)",
+    "d8_stress_concentration: market stress concentration (one coin/crisis driving the result)",
+    "d9_threshold_drift: funding tercile threshold drift across months",
+    "d10_overlapping_outcomes: overlapping outcomes across forward horizons (6h/24h/72h/168h liquidation-intensity labels)",
+    "trackb_modeled_boundary_breach: optional Track B modeled boundary-breach labels from mark-price history + public margin params, labeled as modeled proxy, never observed liquidation"
+  ],
+  "splits": {
+    "train": "first 70% of distinct hourly timestamps",
+    "test": "remaining distinct hourly timestamps",
+    "boundary": "single cut between train_end and test_start; no purge/embargo rows dropped by this audit (gap reported, not assumed)"
+  },
+  "decision_rules": "descriptive audit only; no pass/fail threshold-shopping; findings reported as measured, nulls preserved as NOT_SUPPORTED where applicable",
+  "software": "stdlib + pyarrow only; numpy/pandas/scipy not used; no network; no new source",
+  "independent_recompute": "fclr_pooled_audit001_recompute_20261122T165200Z.py (strict exact-timestamp alignment, daily RV stress, positive-only liquidation median, 5% breach band)"
+}

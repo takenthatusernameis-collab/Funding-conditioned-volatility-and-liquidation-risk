@@ -1,0 +1,65 @@
+{
+  "experiment_id": "FCLR-LIQ-RISK-ESCALATION-09",
+  "campaign": "FCLR-LIQ-RISK-ESCALATION-09-20261122T193000Z",
+  "session_utc": "20261122T224500Z",
+  "trigger_type": "campaign_start_risk09_heavy_work",
+  "trigger_fired": true,
+  "trigger_utc": "20261122T193000Z",
+  "status": "EXECUTED",
+  "artifact_family": "fclr_risk09_*",
+  "artifacts_complete": 13,
+  "artifacts_present": [
+    "fclr_risk09_prereg_20261122T224500Z.json",
+    "fclr_risk09_prereg_20261122T224500Z.md",
+    "fclr_risk09_power_20261122T224500Z.py",
+    "fclr_risk09_power_20261122T224500Z.json",
+    "fclr_risk09_power_20261122T224500Z.md",
+    "fclr_risk09_recompute_20261122T224500Z.py",
+    "fclr_risk09_recompute_20261122T224500Z.json",
+    "fclr_risk09_evaluation_20261122T224500Z.py",
+    "fclr_risk09_evaluation_20261122T224500Z.json",
+    "fclr_risk09_evaluation_20261122T224500Z.md",
+    "evidence_audit_20261122T224500Z.json",
+    "evidence_audit_20261122T224500Z.md",
+    "trigger_check_20261122T224500Z.json"
+  ],
+  "carry_forward_bundles": [
+    "fclr_pooled001_* (11 artifacts)",
+    "fclr_pooled_audit001_* (9 artifacts)",
+    "fclr_pooled_robust002_* (9 artifacts)",
+    "evidence_audit_20261122T190000Z.json",
+    "trigger_check_20261122T190000Z.json"
+  ],
+  "leakage_hardening": [
+    "d2_48h_purge_embargo",
+    "d10_non_overlapping_168h_forward_blocks",
+    "d6_delisting_aware_identity",
+    "d7_survivors_vs_exited_arm"
+  ],
+  "primary_result": {
+    "materiality_floor_pct": 2.0,
+    "materiality_met": false,
+    "rel_pct": 0.1493,
+    "bootstrap_ci95_rel_pct": [-0.0123, 0.0217],
+    "holm_primary_adj_p": 0.6365,
+    "alpha_k": 0.008333333333333333,
+    "primary_significant_after_holm": false
+  },
+  "decision": "NOT_SUPPORTED",
+  "independent_recompute_pass": true,
+  "recompute_agreement_tolerance_rel": 1e-06,
+  "input_sha256_files_verified": 72,
+  "input_sha256_bad": 0,
+  "no_new_source_required": true,
+  "no_network_used": true,
+  "stdlib_pyarrow_only": true,
+  "overlay_built": false,
+  "track": "Track A (observed on-chain liquidations), NOT Track B modeled breach proxy",
+  "bottlenecks_removed": [
+    "no_external_trigger_needed_ironflow_bulk_on_disk",
+    "no_new_data_source_required",
+    "track_a_observed_liquidation_intensity_executed_leakage_hardened",
+    "null_preserved_honestly_no_threshold_shopping",
+    "root_md_json_cap_499_500_respected_all_artifacts_under_session_dir"
+  ]
+}

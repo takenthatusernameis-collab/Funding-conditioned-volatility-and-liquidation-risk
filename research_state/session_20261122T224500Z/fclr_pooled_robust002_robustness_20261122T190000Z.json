@@ -1,0 +1,141 @@
+{
+  "experiment_id": "FCLR-POOLED-ROBUST-002",
+  "campaign": "FCLR-POOLED-ROBUST-002-20261122T190000Z",
+  "session_utc": "20261122T190000Z",
+  "design": "leakage-hardened re-confirmation: 48h embargo, non-overlapping 168h blocks, 1% mark filter, delisting-aware identity, survivors-vs-exited arm, per-month threshold drift, per-coin block bootstrap, Holm, alpha-spending k=2",
+  "remediations_applied": {
+    "d2_purge_embargo_hours": 48,
+    "d10_nonoverlap_block_hours": 168,
+    "d4_mark_oracle_tolerance": 0.01,
+    "d6_delisting_aware": true,
+    "d7_survivors_vs_exited_arm": true,
+    "d9_per_month_threshold_drift_reported": true
+  },
+  "software": "stdlib + pyarrow only; numpy/pandas/scipy not used",
+  "n_markets": 797,
+  "n_train_rows": 2337867,
+  "n_test_rows_eligible_nonoverlap": 1091728,
+  "n_test_rows_above_mark_tol_excluded": 13787,
+  "n_survivor_coins": 637,
+  "n_exited_coins": 160,
+  "n_test_blocks": 23,
+  "block_hours": 168,
+  "purge_embargo_hours": 48,
+  "monthly_funding_threshold_drift_max": 1.0762e-06,
+  "monthly_funding_threshold_drift_mean": 2.3569999999999984e-07,
+  "qlike": {
+    "B1": 4033.4168819088313,
+    "C2": 4074.201549089205,
+    "diff_C2_B1": 40.78466718037362,
+    "rel_pct": 1.0111691494947108
+  },
+  "materiality_floor_pct": 2.0,
+  "materiality_met": false,
+  "trackb_modeled_breach": {
+    "label": "modeled proxy, NEVER observed liquidation",
+    "n_test": 1091728,
+    "base_rate": 0.0030557061832251257,
+    "brier_model": 0.9659903630222627,
+    "brier_climatology": 0.0030463688429416768,
+    "brier_skill": -316.0956679328002,
+    "logloss_model": 4.7415478807257
+  },
+  "bootstrap": {
+    "n_replicates": 2000,
+    "seed": 20261122,
+    "n_valid": 2000,
+    "ci95_lo_rel_pct": -0.1097116658563882,
+    "ci95_hi_rel_pct": 1.0250734935439414
+  },
+  "survivors_arm": {
+    "n": 1051387,
+    "qlike_B1": 4098.32888974459,
+    "qlike_C2": 4139.8811300693005,
+    "diff": 41.55224032471051,
+    "rel_pct": 1.0138825224273318
+  },
+  "exited_arm": {
+    "n": 40341,
+    "qlike_B1": 546.9587768355836,
+    "qlike_C2": 546.5166864477142,
+    "diff": -0.4420903878694844,
+    "rel_pct": -0.08082700316597666
+  },
+  "holm_family": {
+    "survivors_arm": {
+      "raw_p": 0.5,
+      "holm_adj_p": 1.0
+    },
+    "exited_arm": {
+      "raw_p": 0.5,
+      "holm_adj_p": 1.0
+    },
+    "C2_vs_B1_primary": {
+      "raw_p": 0.6365,
+      "holm_adj_p": 0.6365
+    }
+  },
+  "alpha_spending": {
+    "look_k": 2,
+    "alpha_k": 0.008333333333333333,
+    "primary_significant_after_holm": false
+  },
+  "decision": "NOT_SUPPORTED_LEAKAGE_ROBUST_NULL",
+  "verdict": "The earlier NOT_SUPPORTED null survives the leakage-hardened design; funding-conditioned features add no material QLIKE improvement over the RV-only baseline.",
+  "input_sha256": {
+    "candles_1h/2025-05": "9bd24cf774076f753f9692a663837f815853f755890434ba9a08e73600a86aef",
+    "candles_1h/2025-06": "f8eef410c8e21881e8511fec10a1a032b5ad37b21f94deef96b6f2f8cdc8131b",
+    "candles_1h/2025-07": "466c6ebc277045f231cbe18583d3aa41488bd27aed57a5effd118712b603d647",
+    "candles_1h/2025-08": "bb5f2c85f874688f6fc154c576d0cc483445fa81bfcb28aa4024119aea248229",
+    "candles_1h/2025-09": "ab22becbad69206cc01b4279604fabaaafb870bc54b2998c0bc243247db5f0f1",
+    "candles_1h/2025-10": "f30ee1b41fe0c7405c4f5f0dba12adce2d19bdaa60f96bc31d1c1cc30395fad1",
+    "candles_1h/2025-11": "bb2af7f07763589da702776c68880671e53dba2ab89d3281242ba41588920294",
+    "candles_1h/2025-12": "3eb12fc5312276df6a1a8508b162dbf8e6a4b505713ccb1a372e954fe5b713db",
+    "candles_1h/2026-01": "a42260c697b59853b9321061ee03e146ac461708ead63a10c249839fca05b6ed",
+    "candles_1h/2026-02": "94e1bbbd3791b5b9770c5d9708974386aa1cb854c5e18d4eb25ca809113fe091",
+    "candles_1h/2026-03": "6a34df24c25e4ecc147bc70e8d72df811df9ca1542cab4c523320f62616adf5b",
+    "candles_1h/2026-04": "6cab3cc3d6d3d8418d0c0dbbcff85c76d504008357a1695b39e12c57e2578180",
+    "candles_1h/2026-05": "f8f0e158bdd4b47a3a522115297364194c56ef0ab5953b5f70b4f524ffb33a82",
+    "candles_1h/2026-06": "1aabd11fdad5eadb7db7c7779c859ec6294d7c69e97b1f0782175b035036d4af",
+    "candles_1h/2026-07": "7b90e976c56a325875c86aeb8b5558a182d264c1e89e64d73356afafcda417b7",
+    "candles_1h/2026-08": "3a48dfe803ffe46a30e598952d5e1c25557c7a6eb6bb7391c2cd2d5adea68759",
+    "candles_1h/2026-09": "36ef6d8a476a526c2f8c12c3376405b7fab48939467d3bc40c0c673078541e59",
+    "candles_1h/2026-10": "26f359c5c930e02020298faeeda04025d017b283610b9a2c97660385dc199324",
+    "funding/2025-05": "26005d5d1bfd0719e8eeb5e4d4c0750dadfa63d0c8161ad476a6a55170455058",
+    "funding/2025-06": "bb6b8878b6491961fbfbcb168b9906a0cc8b4c82586357f42424cac11733c729",
+    "funding/2025-07": "ad9d01aa425af412fce534c83c7a4f3ee5997dc3f533a07681b2ad4e679522ee",
+    "funding/2025-08": "2cb155ad80289355fc96344316309fd48a4cccbef062a3c1e508cdb9f4152d27",
+    "funding/2025-09": "f06b49dd307a7922a3e429bd9a06e0ddb4febe0d2556d7f232ce6a040f9db205",
+    "funding/2025-10": "51c9ebd47a36afc31ae7907b539c1256e456132671f133be488ef3596c9e0a3d",
+    "funding/2025-11": "8a41b57b7ed53096127c27768e18b1516dff28522012f8d08159f6d2f577c640",
+    "funding/2025-12": "b962029567cc5831d300cf7c4a947b255fc20469c48b2deebe1daf1804fa02f7",
+    "funding/2026-01": "349a01e2f6518f63f18a8f7b55b168f563ee68faa16176b1f5e817edebea06e1",
+    "funding/2026-02": "9fc4b300ba79dd79afe52823c805752d463b119e56afb9b2dc2732dbb67ed789",
+    "funding/2026-03": "cc8dc6e57e6d512605f48d0f19039871829318c3a0632ed995b769d957490f2a",
+    "funding/2026-04": "008ca1c6864e5a48de61133a8ea4ddb8123be0db9cc291be1a4368e57710998a",
+    "funding/2026-05": "4340ecd686296a7b785ffb77570bd7e07254cc600fea7bb321721d386b7c57c0",
+    "funding/2026-06": "467131e7320a3d568d289d6d10fcee3f4a0e1dde13b8a73bb04977035ab01678",
+    "funding/2026-07": "98860209990f26f30786ffb4d8f21cf97002a7035e71a147c915d7af35da23df",
+    "funding/2026-08": "c067fcca81a1b6a5aaa0d636de16b99804d7de683ef90cde8ecd5c176db1bff0",
+    "funding/2026-09": "d8e43faa444e64c263a078b855d8c1edb9ef73fba5b63ef908fc5aa9314ec7bc",
+    "funding/2026-10": "b081c40f350d3982d1279cd7d019a2d645aabd548cd30358a90e77d4b0e37d8e",
+    "open_interest/2025-05": "4490a320456fe0f416f5320f9419bd01c65236b877546c30966b287b9c60dea6",
+    "open_interest/2025-06": "309346d25013e7ccb5ad753d8362ea91354209b9637bca254e99182213b9bdce",
+    "open_interest/2025-07": "09116f78552bbfc3a0cc640e1a44c31a0322f6e2f1018974cc0a9ede18c3a16d",
+    "open_interest/2025-08": "dce8b1320d0b9f7627f649988432e63cc393ffe4a7006c687f94d23f608aa665",
+    "open_interest/2025-09": "53a5b1cab586fee5f207f51046e525595713b3efd52697e7e8352e67d61c1de3",
+    "open_interest/2025-10": "5fd20253a69b689591fd987af85a706714788ae75d06912879a95b22258c5fc8",
+    "open_interest/2025-11": "f3c20d2c8b68339e4194e5984481246235678f52d19139e26c6c8f0f084be2cf",
+    "open_interest/2025-12": "584160f9a23f9dbe64ff248152bca0056831a40765cbb7f619af33c56283a59e",
+    "open_interest/2026-01": "ac9ba48be4bedeac3ac2b7cf8a2defd8f5d334f19c57f7b2ede788212e4d01db",
+    "open_interest/2026-02": "c346cb2a4f333da88da7f2ab93a6540eb435b802144d4e0c803bf2fbbd0307f7",
+    "open_interest/2026-03": "1855bccbeca65a34573bb35580d32cb5de978fc565a0110699ddd00cd07452b3",
+    "open_interest/2026-04": "c05681575420102d6da681b6e11d6dec77f239266b2a52d1917b5f2b1b46c237",
+    "open_interest/2026-05": "ace2357114fa5947f1bc34ecef904e00a7bf61b1a3cc0fc42450a688f89d0e60",
+    "open_interest/2026-06": "3be5f12eab4bf3a3e611b16f5bf7f6857f9a9bd1216ba7afc8e60fa6291d5075",
+    "open_interest/2026-07": "da3ffccb4a96159a637320ee7f073db95b92fec4badbaf43947fd2d35b7311f9",
+    "open_interest/2026-08": "7ca39997d3a3566d69bf0c8ea87de3a065e467cf0bbe002a2b418073b9927fde",
+    "open_interest/2026-09": "7cb39a7d8ff30c51ce9caf0a6c361e9237e36054d11165032fc5b407e80f1f73",
+    "open_interest/2026-10": "8f12370664f576bacf6ff1bca6fc17655f014a0a200da67823b14d215a7a94b6"
+  }
+}

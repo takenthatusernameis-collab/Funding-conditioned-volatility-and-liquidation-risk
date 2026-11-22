@@ -1,0 +1,58 @@
+{
+  "experiment_id": "FCLR-POOLED-ROBUST-002",
+  "campaign": "FCLR-POOLED-ROBUST-002-20261122T180000Z",
+  "session_utc": "20261122T190000Z",
+  "trigger_type": "campaign_start_pooled_robust_heavy_work",
+  "trigger_fired": true,
+  "trigger_utc": "20261122T180000Z",
+  "status": "EXECUTED",
+  "artifact_family": "fclr_pooled_robust002_*",
+  "artifacts_complete": 11,
+  "artifacts_present": [
+    "fclr_pooled_robust002_prereg_20261122T190000Z.json",
+    "fclr_pooled_robust002_prereg_20261122T190000Z.md",
+    "fclr_pooled_robust002_robustness_20261122T190000Z.py",
+    "fclr_pooled_robust002_robustness_20261122T190000Z.json",
+    "fclr_pooled_robust002_robustness_20261122T190000Z.md",
+    "fclr_pooled_robust002_recompute_20261122T190000Z.py",
+    "fclr_pooled_robust002_recompute_20261122T190000Z.json",
+    "fclr_pooled_robust002_evidence_audit_20261122T190000Z.json",
+    "fclr_pooled_robust002_evidence_audit_20261122T190000Z.md",
+    "evidence_audit_20261122T190000Z.json"
+  ],
+  "remediations_applied": [
+    "d2_48h_purge_embargo",
+    "d10_non_overlapping_168h_forward_blocks",
+    "d4_mark_oracle_1pct_tolerance_filter",
+    "d6_delisting_aware_identity",
+    "d7_survivors_vs_exited_arm",
+    "d9_per_month_threshold_drift_reported"
+  ],
+  "primary_result": {
+    "qlike_B1": 4033.4168819088313,
+    "qlike_C2": 4074.201549089205,
+    "diff_C2_B1": 40.78466718037362,
+    "rel_pct": 1.0111691494947108,
+    "materiality_floor_pct": 2.0,
+    "materiality_met": false,
+    "bootstrap_ci95_rel_pct": [-0.1097116658563882, 1.0250734935439414],
+    "holm_primary_adj_p": 0.6365,
+    "alpha_k": 0.008333333333333333,
+    "primary_significant_after_holm": false
+  },
+  "decision": "NOT_SUPPORTED_LEAKAGE_ROBUST_NULL",
+  "independent_recompute_pass": true,
+  "recompute_agreement_tolerance_rel": 1e-06,
+  "input_sha256_files_verified": 54,
+  "input_sha256_bad": 0,
+  "no_new_source_required": true,
+  "no_network_used": true,
+  "stdlib_pyarrow_only": true,
+  "overlay_built": false,
+  "bottlenecks_removed": [
+    "no_external_trigger_needed_ironflow_bulk_on_disk",
+    "no_new_data_source_required",
+    "leakage_hardened_reconfirmation_executed_with_all_audit_remediations",
+    "null_preserved_honestly_no_threshold_shopping"
+  ]
+}

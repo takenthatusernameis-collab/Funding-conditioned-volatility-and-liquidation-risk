@@ -189,5 +189,50 @@ Then record your `session_<UTC>/` id in this handoff (append the id string
 
 ---
 
-**Handoff generated: 2026-11-22T22:43:26Z**
+## SESSION CLOSE-OUT — session_20261122T224500Z (2026-11-22T22:45:00Z)
+
+**What changed and why:** Executed FCLR-LIQ-RISK-ESCALATION-09 (rank-0, Track A
+observed-liquidation intensity) under research_state/session_20261122T224500Z/.
+The funding-conditioned VOLATILITY pillar is closed leakage-robust null
+(FCLR-POOLED-ROBUST-002), so the highest-value unfinished work is the other half
+of RESEARCH_PROMPT.md section 3.2: do funding-conditioned features predict
+OBSERVED liquidation intensity. All artifacts written under session_20261122T224500Z/
+only; root md+json cap 499/500 respected.
+
+**Test outcomes:** `python3 scripts/check_handoff_heavywork_gate.py --json`
+→ reason=OK (no failures). All fclr_risk09_* artifacts present and non-empty;
+trigger_check_20261122T224500Z.json non-empty; carry-forward bundles copied
+(fclr_pooled001_* ×11, fclr_pooled_audit001_* ×9, fclr_pooled_robust002_* ×9,
+evidence_audit_20261122T190000Z.json, trigger_check_20261122T190000Z.json).
+
+**Evidence added (full paths):**
+- research_state/session_20261122T224500Z/fclr_risk09_prereg_20261122T224500Z.json + .md
+- research_state/session_20261122T224500Z/fclr_risk09_power_20261122T224500Z.py + .json + .md
+- research_state/session_20261122T224500Z/fclr_risk09_recompute_20261122T224500Z.py + .json
+- research_state/session_20261122T224500Z/fclr_risk09_evaluation_20261122T224500Z.py + .json + .md
+- research_state/session_20261122T224500Z/evidence_audit_20261122T224500Z.json + .md
+- research_state/session_20261122T224500Z/trigger_check_20261122T224500Z.json
+
+**State of each research gate:**
+- FCLR-LIQ-RISK-ESCALATION-09 (risk09): heavy artifact set complete; gate passes
+- FCLR-POOLED-ROBUST-002: COMPLETE, NOT_SUPPORTED_LEAKAGE_ROBUST_NULL (rank 1, terminal)
+- FCLR-POOLED-001: COMPLETE, NOT_SUPPORTED (rank 1, terminal)
+- FCLR-LIVE-ARCHIVE-01/02: COMPLETE, NOT_SUPPORTED (rank 1, terminal)
+- FCLR-LIQ-CONTAGION-001/002: COMPLETE (rank 1, terminal)
+- FCLR-PANEL-FE-001: COMPLETE, NOT_SUPPORTED (rank 1, terminal)
+- FCLR-SESSION-SYNTHESIS-01: COMPLETE, CONSOLIDATORY_ONLY (rank 1, terminal)
+
+**Single highest-value next task:** None — all rank-0 campaigns are terminal; the
+frozen-data frontier is exhausted. Reopen only on NEW_OBSERVED_LIQUIDATION_SOURCE
+or a materially different new free observed-liquidation source.
+
+**Precise verifying command:**
+`python3 scripts/check_handoff_heavywork_gate.py --json` → reason=OK
+
+**Blocker:** None. No external trigger, no new data source, no network.
+
+---
+
+**Handoff generated: 2026-11-22T22:45:00Z**
 **Next session must use UTC > 20261122T193000Z** (campaign start gate).
+**Latest handoff session: session_20261122T224500Z**
