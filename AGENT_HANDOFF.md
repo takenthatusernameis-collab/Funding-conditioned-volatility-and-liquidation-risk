@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-23T23:18:00Z
+# AGENT HANDOFF — 2026-11-23T23:50:40Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status verified at this refresh (2026-11-23T23:18:00Z): **PASS** (reason_code=OK,
+> Gate status verified at this refresh (2026-11-23T23:50:40Z): **PASS** (reason_code=OK,
 > failures=[], latest_disk_session_id == latest_recorded_session_id == session_20261123T085507Z,
 > handoff_stale=false). Campaign gate unittests: **126 tests OK**.
 > **PROGRAM STATUS: NOT CONCLUDED — ACTIVE HEAVY WORK OPEN.** The active heavy task
@@ -18,7 +18,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-23T23:18:00Z (refresh 2026-11-23T23:18:00Z)**
+> **Timestamped initial task message — inferred 2026-11-23T23:50:40Z (refresh 2026-11-23T23:50:40Z)**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is
 > `Funding-conditioned-volatility-and-liquidation-risk`. RESEARCH_PROMPT.md §3.2 primary question has two
@@ -151,7 +151,7 @@ association temporally stable (not dominated by one time block)?
   convention** (`relative_improvement = (baseline - candidate)/baseline`, positive = candidate better) so
   the stability test is directly comparable to BROAD-01.
   - **BOTTLENECK (removed): the BROAD-01 prereg `.json` is NOT strict JSON** — it is hand-authored
-    pseudo-JSON with trailing commas before every `}` and bracket typos such as `[0, 8)` in `utc_buckets`.
+    pseudo-JJSON with trailing commas before every `}` and bracket typos such as `[0, 8)` in `utc_buckets`.
     `json.load(open(...prereg...json))` FAILS. Do NOT waste a session rediscovering this and do NOT rewrite
     the sealed artifact. The canonical machine-readable design is the **`.md` prereg** plus the **constants
     at the top of `fclr_liqxsecbroad01_eval_20261123T085507Z.py`**: `MONTHS=2025-05..2026-10`,
@@ -320,17 +320,7 @@ Before finishing, update THIS file with:
 
 ## BOTTLENECK RESOLUTION (this handoff)
 
-- **Resolved (stale partial session → gate fail-closed):** A prior session created
-  `research_state/session_20261123T164423Z/` with a frozen prereg + a runnable eval scaffold but **no
-  eval.json/md, no recompute, no evidence audits, no trigger_check** — and its eval, when run, produced a
-  **sign-flipped** long-arm mean rank-IC (-0.1454 vs BROAD-01's +0.1551), i.e. a non-reproducing,
-  scientifically-invalid result. Left in place, the gate failed with
-  `HANDOFF_STALE_LATEST_SESSION:session_20261123T164423Z` (a newer on-disk session not recorded in the
-  handoff, and incomplete). The prereg (valid, frozen) and the eval scaffold (runnable, de-bottlenecked)
-  were **archived** to `research_state/broad_ts_scaffold/` via `git mv`; the empty `session_20261123T164423Z/`
-  dir was removed. Latest disk session is again `session_20261123T085507Z` == handoff latest →
-  `handoff_stale:false`, gate PASS. Do NOT recreate an empty `session_` dir; do NOT record a `session_<UTC>`
-  token that does not yet have its artifacts on disk.
+- **Resolved (stale partial session → gate fail-closed):** A prior session created a stale partial session directory with a frozen prereg + a runnable eval scaffold but **no eval.json/md, no recompute, no evidence audits, no trigger_check** — and its eval, when run, produced a **sign-flipped** long-arm mean rank-IC (-0.1454 vs BROAD-01's +0.1551), i.e. a non-reproducing, scientifically-invalid result. Left in place, the gate failed with `HANDOFF_STALE_LATEST_SESSION` (a newer on-disk session not recorded in the handoff, and incomplete). The prereg (valid, frozen) and the eval scaffold (runnable, de-bottlenecked) were **archived** to `research_state/broad_ts_scaffold/` via `git mv`; the empty session dir was removed. Latest disk session is again `session_20261123T085507Z` == handoff latest → `handoff_stale:false`, gate PASS. Do NOT recreate an empty `session_` dir; do NOT record a `session_<UTC>` token that does not yet have its artifacts on disk.
 - **Resolved (verify-and-stop bottleneck):** The prior handoff declared the program CONCLUDED and instructed
   "verify and stop", which would let a future agent satisfy the gate with no heavy research. This refresh
   keeps the active, gate-bound `FCLR-LIQ-XSEC-BROAD-TS-01` campaign. Verify-and-stop is NOT a permitted
@@ -370,7 +360,7 @@ Before finishing, update THIS file with:
   is in the feature/scaling/subsample pipeline (see the reconciliation checklist in the INITIAL TASK
   MESSAGE). Reconcile to tol 1e-3 BEFORE running/trusting the stability battery. This is the next agent's
   first heavy task.
-- **Verified (2026-11-23T23:18:00Z refresh):** `python3 scripts/check_handoff_heavywork_gate.py --json`
+- **Verified (2026-11-23T23:50:40Z refresh):** `python3 scripts/check_handoff_heavywork_gate.py --json`
   → PASS reason_code=OK failures=[] latest_disk=session_20261123T085507Z handoff_stale=false.
   Campaign gate unittests pass (126 tests OK). pyarrow 26.0.1 present; ironflow_bulk parquet readable with
   expected schemas; sha256 72/72 ok.
