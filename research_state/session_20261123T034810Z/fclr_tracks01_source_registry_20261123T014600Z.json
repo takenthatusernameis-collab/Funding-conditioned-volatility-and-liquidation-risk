@@ -1,0 +1,152 @@
+{
+  "experiment_id": "FCLR-TRACKA-SOURCE-AUDIT-01",
+  "campaign": "FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z",
+  "session_utc": "20261123T014600Z",
+  "phase": "SOURCE_ENUMERATION_PROBE",
+  "source": "fclr_tracks01_source_registry",
+  "registry_kind": "track_a_observed_liquidation_source_viability",
+  "method": "bounded unauthenticated GET probes (stdlib urllib); no auth; no payment; no signup; no manual download; bounded retry budget with exponential backoff; live endpoints probed 2026-11-23T01:49:35Z",
+  "decision_inputs_sha256": {
+    "fclr_tracks01_probe_20261123T014600Z.json": "d3baafa75f91fa7f5f2de93798206dfe2c8f9268f3f59f1c457c39bbfb84e040",
+    "ironflow_bulk_liquidations_2025-05.parquet": "840bc18b1ec0df9c559e0bf2bff042c36642308f038268922c3dff6c8edb99f3",
+    "research_state/data_source_registry.json": "root registry consulted; not rewritten (root cap 499/500)"
+  },
+  "candidates": [
+    {
+      "name": "Binance public market-data archive",
+      "base_url": "https://data.binance.vision",
+      "family": "exchange_official_archive",
+      "purpose_track_a": "observed liquidation labels via liquidationSnapshot",
+      "purpose_track_b": "mark-price / index / premium klines + fundingRate + metrics (OI + taker long/short flow) for Track B modeled-breach features",
+      "access_proof": {
+        "unauthenticated": true,
+        "http_status_root": 200,
+        "http_status_metrics_zip": 200,
+        "http_status_fundingrate_zip": 200,
+        "http_status_liquidationSnapshot_daily": 404,
+        "http_status_liquidationSnapshot_monthly": 404,
+        "note": "BTCUSDT-metrics-2026-01-01.zip and BTCUSDT-fundingRate-2026-01.zip returned real PK zip payloads (HTTP 200); liquidationSnapshot paths return S3 NoSuchKey (404)."
+      },
+      "history_depth": "metrics 2020-09 .. 2026-11; fundingRate 2020-01 .. 2026-10; klines/markPriceKlines/indexPriceKlines/premiumIndexKlines deep (per on-disk inputs table AGENT_HANDOFF.md)",
+      "schema": "metrics: create_time,symbol,sum_open_interest,sum_open_interest_value,count_toptrader_long_short_ratio,sum_toptrader_long_short_ratio,count_long_short_ratio,sum_taker_long_short_vol_ratio; fundingRate: symbol,fundingRate,fundingTime; klines: open/high/low/close/volume OHLCV",
+      "license": "Binance public market-data archive (free, unauthenticated)",
+      "symbol_coverage": "all USD\u24c8-M perpetuals in archive",
+      "cadence": "metrics daily; fundingRate per funding interval (8h); klines 1m..1w",
+      "gaps": "none reported for metrics/funding; liquidationSnapshot entirely absent",
+      "admissible_track_a_observed_liquidation": false,
+      "rejection_reason": "No liquidationSnapshot (daily or monthly) exists in the public archive (HTTP 404). Cannot construct observed-liquidation labels from Binance archive alone."
+    },
+    {
+      "name": "Bybit public REST API (v5, linear)",
+      "base_url": "https://api.bybit.com",
+      "family": "exchange_public_rest",
+      "purpose_track_a": "historical liquidation history",
+      "purpose_track_b": "historical funding / klines",
+      "access_proof": {
+        "unauthenticated": false,
+        "http_status_kline": 403,
+        "http_status_funding_history": 403,
+        "http_status_liquidation": 403,
+        "note": "All three endpoints return HTTP 403 (CloudFront blocks the distribution in this environment). No credentials available and none will be requested (RESEARCH_PROMPT.md section 1)."
+      },
+      "history_depth": "not determinable (all endpoints blocked)",
+      "schema": "not determinable",
+      "license": "Bybit public API terms",
+      "symbol_coverage": "not determinable",
+      "cadence": "not determinable",
+      "gaps": "entirely inaccessible without credentials / from this network",
+      "admissible_track_a_observed_liquidation": false,
+      "rejection_reason": "403 Forbidden on all probed endpoints; not an unauthenticated source in this environment. Excluded per RESEARCH_PROMPT.md section 1 (no credentials, no bypass)."
+    },
+    {
+      "name": "OKX public REST API (v5)",
+      "base_url": "https://www.okx.com",
+      "family": "exchange_public_rest",
+      "purpose_track_a": "public liquidation history",
+      "purpose_track_b": "candles + funding rate",
+      "access_proof": {
+        "unauthenticated": true,
+        "http_status_candles": 200,
+        "http_status_funding_rate": 200,
+        "http_status_liquidation": 404,
+        "note": "candles and funding-rate return JSON code 0 (HTTP 200); /api/v5/public/liquidation returns 404."
+      },
+      "history_depth": "candles/funding recent window probed (2 rows); deep history not established in this session",
+      "schema": "candles: [ts,open,high,low,close,volume,volCcy,volCcyQuote,confirm]; funding-rate: instId,fundingRate,fundingTime,impactValue,instType",
+      "license": "OKX public API terms",
+      "symbol_coverage": "BTC-USDT-SWAP probed",
+      "cadence": "candles 1H probed; funding per interval",
+      "gaps": "liquidation endpoint does not exist (404)",
+      "admissible_track_a_observed_liquidation": false,
+      "rejection_reason": "No public liquidation endpoint (HTTP 404). Cannot construct observed-liquidation labels."
+    },
+    {
+      "name": "Hyperliquid public API",
+      "base_url": "https://api.hyperliquid.xyz",
+      "family": "exchange_public_rest",
+      "purpose_track_a": "any unauthenticated historical liquidation endpoint with deep history",
+      "purpose_track_b": "not used",
+      "access_proof": {
+        "unauthenticated": true,
+        "http_status_info_get": 405,
+        "note": "GET /info returns HTTP 405 Method Not Allowed (POST with a JSON body required). No historical liquidation endpoint discovered in a bounded GET probe."
+      },
+      "history_depth": "not determinable",
+      "schema": "not determinable",
+      "license": "Hyperliquid API terms",
+      "symbol_coverage": "not determinable",
+      "cadence": "not determinable",
+      "gaps": "no verified unauthenticated historical liquidation endpoint with deep history (per on-disk inputs table)",
+      "admissible_track_a_observed_liquidation": false,
+      "rejection_reason": "No verified unauthenticated historical liquidation endpoint with deep history; GET probe method-not-allowed. Excluded."
+    },
+    {
+      "name": "Ironflow / Hugging Face liquidations archive",
+      "base_url": "https://huggingface.co/datasets/ironflow/hyperliquid-liquidations",
+      "family": "institutional_archive",
+      "purpose_track_a": "observed liquidation events (Hyperliquid), CC BY 4.0",
+      "purpose_track_b": "not used",
+      "access_proof": {
+        "unauthenticated": true,
+        "http_status_parquet": 200,
+        "note": "GET .../data/events/2025-05.parquet?download=true returned HTTP 200 with PAR1 parquet magic bytes (real file, ~complete object). on-disk accessed.json sidecar records license CC-BY-4.0, unauthenticated, requester_pays=false."
+      },
+      "history_depth": "on-disk ironflow bulk liquidations: 18 monthly parquet, 2025-05 .. 2026-10, 2.85M rows",
+      "schema": "timestamp,market,issuer,wallet,position_side,size,notional_usd,avg_price,fills,block,tx_hash (per on-disk inputs table)",
+      "license": "CC BY 4.0",
+      "symbol_coverage": "Hyperliquid perp markets; on-disk survivor coins AAVE, ADA, AVAX, BNB, BTC, CRV, DOGE, ETH, LINK, LTC, NEAR, SOL, SUI, UNI, XRP",
+      "cadence": "event-level",
+      "gaps": "CAPPED SAMPLE \u2014 not a complete liquidation census (RESEARCH_PROMPT.md section 15, AGENT_HANDOFF.md on-disk inputs). Absence from this feed cannot be labeled 'no liquidation'.",
+      "admissible_track_a_observed_liquidation": false,
+      "rejection_reason": "Serves real observed liquidation events but is a capped-sample feed, not a complete census. Per RESEARCH_PROMPT.md section 15 it cannot support a binary observed-liquidation target or be treated as a complete Track A label source; at most a partial positive signal with an explicit incomplete-label design."
+    },
+    {
+      "name": "Public GitHub / Zenodo / Hugging Face / institutional archives (generic)",
+      "base_url": null,
+      "family": "public_archive",
+      "purpose_track_a": "downloadable historical liquidation/event records without signup or keys",
+      "purpose_track_b": "not used",
+      "access_proof": {
+        "unauthenticated": true,
+        "note": "Candidate family enumerated per RESEARCH_PROMPT.md section 5. No specific URL verified admissible in this session."
+      },
+      "history_depth": "none verified",
+      "schema": "none verified",
+      "license": "varies",
+      "symbol_coverage": "none verified",
+      "cadence": "none verified",
+      "gaps": "no verified source",
+      "admissible_track_a_observed_liquidation": false,
+      "rejection_reason": "No verified unauthenticated historical observed-liquidation path with defensible coverage in this session."
+    }
+  ],
+  "ironflow_bulk_note": "On-disk ironflow bulk liquidations (research_state/data_cache/ironflow_bulk/liquidations/, 18 monthly parquet, 2.85M rows, 2025-05..2026-10) is the capped-sample feed referenced above. It is NOT substituted for a complete census. sha256 sidecars verified for the on-disk cache; caches not mutated.",
+  "counts": {
+    "n_candidates_enumerated": 6,
+    "n_admissible_track_a_complete_census": 0,
+    "n_admissible_track_b_mark_price_funding": 2,
+    "n_inadmissible_track_a": 6
+  },
+  "conclusion": "No free, unauthenticated source provides a complete observed-liquidation census with defensible provenance and adequate coverage. Track A observed-liquidation labeling is structurally blocked. See fclr_tracks01_viability_decision_20261123T014600Z.json for the frozen viability decision and the Track B pivot.",
+  "generated_utc": "2026-11-23T01:49:35Z"
+}
