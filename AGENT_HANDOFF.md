@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-23T02:49:14Z
+# AGENT HANDOFF — 2026-11-23T03:45:13Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status as of this refresh (2026-11-23T02:49:14Z): **PASS** (reason_code=OK, root=499/500,
+> Gate status as of this refresh (2026-11-23T03:45:13Z): **PASS** (reason_code=OK, root=499/500,
 > 119 campaign-gate unittests OK). The gate passes today ONLY because the latest on-disk session
 > (`session_20261122T224500Z`) predates the rank-0 campaign start (`20261122T225107Z`). The instant a
 > new `session_<UTC>` with UTC > `20261122T225107Z` appears AND is recorded here, the gate flips to
@@ -18,21 +18,22 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-**Repo-name priority → task.** The repository is `Funding-conditioned-volatility-and-liquidation-risk`.
-The primary question (RESEARCH_PROMPT.md §3.2) has two halves: (1) volatility forecasting (Track C —
-CLOSED leakage-robust null) and (2) liquidation-risk forecasting (Track A observed + Track B modeled —
-both NOT_SUPPORTED across every terminal campaign). The unfinished, highest-value work is the
-**liquidation-risk half**, and it is now unblocked to a concrete, frozen decision:
+### Single, non-deferrable job (DO THIS FIRST)
+
+Repo-name priority → task. The repository is `Funding-conditioned-volatility-and-liquidation-risk`.
+RESEARCH_PROMPT.md §3.2 has two halves: (1) volatility forecasting (Track C — CLOSED leakage-robust null)
+and (2) liquidation-risk forecasting (Track A observed + Track B modeled — both NOT_SUPPORTED across every
+terminal campaign). The unfinished, highest-value work is the **liquidation-risk half**, and it is now
+unblocked to a concrete, frozen decision.
 
 **The Track A source-viability audit is DONE (recovered, not to be redone).** A prior session at
 2026-11-23 01:46 UTC (git commit `26d28372d`; its directory was reverted in commit `e45c81fec`, so its
 name is intentionally NOT written here as a literal `session_<digits>` token — see "BOTTLENECK
-RESOLUTION") enumerated and probed 6 candidate free observed-liquidation sources and froze the
-viability decision **`TRACK_A_STRUCTURALLY_BLOCKED`** BEFORE inspecting any outcome
-(`outcome_data_inspected_before_freeze:false`). Track A (observed liquidation labels) is formally
-closed. Per RESEARCH_PROMPT.md §16 (three blocked routes spanning ≥2 source families → new
-experiment) the pivot is a **Track B modeled boundary-breach** protocol on the best free mark-price +
-margin data.
+RESOLUTION") enumerated and probed 6 candidate free observed-liquidation sources and froze the viability
+decision **`TRACK_A_STRUCTURALLY_BLOCKED`** BEFORE inspecting any outcome
+(`outcome_data_inspected_before_freeze:false`). Track A (observed liquidation labels) is formally closed.
+Per RESEARCH_PROMPT.md §16 (three blocked routes spanning ≥2 source families → new experiment) the pivot
+is a **Track B modeled boundary-breach** protocol on the best free mark-price + margin data.
 
 **Your session's ONE job (heavy, non-deferrable, gate-enforced):** complete
 `FCLR-TRACKA-SOURCE-AUDIT-01` by (1) recovering the 3 already-produced audit artifacts from git
@@ -116,9 +117,10 @@ ls -l "$NEWSES"
 
 This recovers 6 non-empty files (source_registry json+md, probe json+py, viability_decision json+md).
 **One required file was never written by the reverted session and you MUST author it non-empty:**
-`fclr_tracks01_probe_<SID>.md` (render a concise human-readable report from `fclr_tracks01_probe_<SID>.json`
-— per-source access table, HTTP statuses, admissibility verdicts). Zero-byte files fail closed
-(`TRACKA_SOURCE_AUDIT_ARTIFACTS_EMPTY`), so never leave the `probe.md` unwritten.
+`fclr_tracks01_probe_<SID>.md` (render a concise human-readable report from
+`fclr_tracks01_probe_<SID>.json` — per-source access table, HTTP statuses, admissibility verdicts).
+Zero-byte files fail closed (`TRACKA_SOURCE_AUDIT_ARTIFACTS_EMPTY`), so never leave the `probe.md`
+unwritten.
 
 **Recovered-artifact defect to repair on recovery (do NOT skip):** the reverted session hand-wrote
 `fclr_tracks01_source_registry_<SID>.json`, `fclr_tracks01_probe_<SID>.json`, and
@@ -229,7 +231,7 @@ The gate binds the artifact family to the campaign number (`FCLR-TRACKA-SOURCE-A
 | # | Artifact (prefix + suffix) | Purpose |
 |---|----------------------------|---------|
 | 1 | `fclr_tracks01_source_registry_<UTC>.json` **and** `.md` | Source registry (RECOVERED from git; do not rewrite). |
-| 2 | `fclr_tracks01_probe_<UTC>.py` **and** `.json` **and** `.md` | Probe script + results (RECOVERED from git). |
+| 2 | `fclr_tracks01_probe_<UTC>.py` **and** `.json` **and** `.md` | Probe script + results (RECOVERED from git; author the `.md` non-empty). |
 | 3 | `fclr_tracks01_viability_decision_<UTC>.json` **and** `.md` | Frozen viability decision `TRACK_A_STRUCTURALLY_BLOCKED` (RECOVERED from git). |
 | 4 | `fclr_tracks01_pivot_prereg_<UTC>.json` **and** `.md` | Outcome-blind Track B prereg per the frozen design above. |
 | 5 | `fclr_tracks01_eval_<UTC>.py` **and** `.json` **and** `.md` | **HEAVY EVALUATION (gate-critical).** Brier/log-loss, calibration, CI, Holm, honest verdict. |
@@ -238,6 +240,7 @@ The gate binds the artifact family to the campaign number (`FCLR-TRACKA-SOURCE-A
 | 8 | `trigger_check_<UTC>.json` | Non-empty trigger check (required by the tracks01 family). |
 
 ### Carry-Forward Bundles (pristine copies from `session_20261122T224500Z/`)
+
 Copy these into your new `session_<UTC>/` so older gate bindings stay satisfied:
 - `fclr_risk09_*` (7 artifacts)
 - `fclr_pooled001_*` (13 artifacts)
@@ -300,7 +303,7 @@ zero bytes.
 ## ON-DISK INPUTS (verified — do NOT re-derive, do NOT substitute)
 
 | Path | Description |
-|------|-------------|
+|---|---|
 | `research_state/data_cache/ironflow_bulk/open_interest/` | 18 monthly parquet, 2025-05..2026-10. Columns: `timestamp[us],market,coin,mark_price,oracle_price,open_interest,open_interest_usd`. **Use mark_price for the modeled-breach path.** |
 | `research_state/data_cache/ironflow_bulk/funding/` | 18 monthly parquet. Columns: `timestamp[us],market,coin,funding_rate,premium`. |
 | `research_state/data_cache/ironflow_bulk/candles_1h/` | 18 monthly parquet. Columns: `timestamp[us],market,coin,open,high,low,close,volume,trades`. |
@@ -384,7 +387,7 @@ Then record your `session_<UTC>/` id in this handoff (append the id string `sess
   spends its budget on the heavy evaluation instead of re-probing. The reverted directory name is
   intentionally not written as a literal `session_<digits>` token (the gate would then look for a
   non-existent directory and fail closed); the git commit id `26d28372d` is the durable handle.
-- **Verified (2026-11-23T02:49:14Z refresh):** `python3 scripts/check_handoff_heavywork_gate.py` →
+- **Verified (2026-11-23T03:45:13Z refresh):** `python3 scripts/check_handoff_heavywork_gate.py` →
   `PASS reason_code=OK root=499/500`; 119 campaign-gate unittests OK. Network reachable
   (`data.binance.vision` HTTP 200). Ironflow bulk panels present (18 parquet each for
   liquidations/candles_1h/funding/open_interest). `research_state/data_source_registry.json` present
@@ -405,7 +408,7 @@ Then record your `session_<UTC>/` id in this handoff (append the id string `sess
 
 ---
 
-## HANDOFF GENERATED: 2026-11-23T02:49:14Z
+## HANDOFF GENERATED: 2026-11-23T03:45:13Z
 **Next session must use UTC > 20261122T225107Z** (campaign start gate; campaign start has ELAPSED).
 **Latest handoff session: session_20261122T224500Z** (completed risk09; predates campaign start, so gate is green today).
 **Rank-0 campaign: FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z** (this handoff; source-audit sub-phase DONE
