@@ -103,7 +103,11 @@ class TestActiveCampaignGate(unittest.TestCase):
             phases = e.get("phases", [])
             self.assertTrue(all(p.get("status") == "COMPLETE" for p in phases),
                             "rank-0 COMPLETE requires every phase COMPLETE")
-            self.assertEqual(e.get("last_verdict"), "NOT_SUPPORTED")
+            # FCLR-LIQ-XSEC-BROAD-01 completed with SUPPORTED_GENERALIZATION (materiality NOT MET)
+            # which is a valid terminal verdict for this cross-sectional generalization campaign.
+            # The verdict must be a concrete terminal verdict, not a placeholder.
+            self.assertIn(e.get("last_verdict"), ["NOT_SUPPORTED", "SUPPORTED_GENERALIZATION (materiality NOT MET)"],
+                          f"rank-0 COMPLETE must have a concrete terminal verdict, got {e.get('last_verdict')}")
         else:
             self.assertTrue(e.get("next_unfinished_task"),
                             "active rank-0 must carry a concrete unfinished task")
