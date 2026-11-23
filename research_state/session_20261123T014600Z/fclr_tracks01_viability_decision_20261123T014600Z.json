@@ -1,0 +1,50 @@
+{
+  "experiment_id": "FCLR-TRACKA-SOURCE-AUDIT-01",
+  "campaign": "FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z",
+  "session_utc": "20261123T014600Z",
+  "phase": "VIABILITY_DECISION_AND_PIVOT",
+  "decision_kind": "track_a_viability_decision",
+  "viability_decision": "TRACK_A_STRUCTURALLY_BLOCKED",
+  "verdict": "No free, unauthenticated source provides a complete observed-liquidation census with defensible provenance and adequate coverage. Track A (observed liquidation labels) is NOT viable and is formally closed. Pivot to Track B (modeled boundary-breach) with a new experiment ID, using the best available free mark-price + margin-parameter data, clearly labeled as a modeled proxy per RESEARCH_PROMPT.md section 15.",
+  "outcome_data_inspected_before_freeze": false,
+  "decision_frozen_before_outcomes": true,
+  "rationale": [
+    "Six candidate source families enumerated, probed, and recorded in fclr_tracks01_source_registry_20261123T014600Z.{json,md}: Binance public archive, Bybit public REST, OKX public REST, Hyperliquid public API, Ironflow/Hugging Face archive, public GitHub/Zenodo/HF/institutional archives.",
+    "Binance public archive returns HTTP 200 for metrics/funding/klines zips but liquidationSnapshot returns HTTP 404 on both daily and monthly paths — no observed-liquidation dataset.",
+    "Bybit public REST returns HTTP 403 on all probed endpoints — not an unauthenticated source in this environment (RESEARCH_PROMPT.md section 1: no credentials, no bypass).",
+    "OKX public REST returns HTTP 200 for candles/funding but HTTP 404 for its liquidation endpoint — no observed-liquidation dataset.",
+    "Hyperliquid public API returns HTTP 405 (GET /info; POST required) and no verified unauthenticated historical liquidation endpoint with deep history.",
+    "Ironflow/Hugging Face serves real observed liquidation events (HTTP 200 PAR1 parquet, CC BY 4.0, unauthenticated) but is a capped-sample feed, not a complete census (RESEARCH_PROMPT.md section 15; AGENT_HANDOFF.md on-disk inputs). Absence cannot be labeled zero.",
+    "No GitHub/Zenodo/HF institutional liquidation URL verified admissible.",
+  ],
+  "track_a_closure_evidence": {
+    "n_candidates_enumerated": 6,
+    "n_admissible_track_a_complete_census": 0,
+    "n_inadmissible_track_a": 6,
+    "structural_impossibility_basis": "access terms (Bybit 403), absent endpoints (Binance liquidationSnapshot 404, OKX liquidation 404), method gating (Hyperliquid 405 / POST-only), and incomplete coverage (Ironflow capped sample). Three distinct blocked routes spanning two+ source families (RESEARCH_PROMPT.md section 16).",
+  },
+  "pivot": {
+    "target_track": "Track B — modeled hypothetical liquidation-boundary breach",
+    "track_b_protocol_experiment_id": "FCLR-TRACKB-MODELED-BREACH-01-20261123T014600Z",
+    "track_b_label_rule": "Modeled breach proxy only — never described or reported as observed liquidation. Long and short outcomes kept separate. Does not reconstruct account-specific liquidation mechanics, portfolio/cross margin, liquidation engine execution, or actual forced liquidations (RESEARCH_PROMPT.md sections 15, 95-97).",
+    "data_sources": [
+      "Binance public archive markPriceKlines/indexPriceKlines/premiumIndexKlines + klines (deep history, unauthenticated, HTTP 200)",
+      "Ironflow bulk candles_1h + funding + open_interest (mark_price/oracle_price/open_interest), 18 months 2025-05..2026-10, on disk, sha256-verified"
+    ],
+    "margin_scenario": "Pre-registered hypothetical leverage/maintenance margin (see fclr_tracks01_pivot_prereg_20261123T014600Z); frozen before outcomes.",
+    "outcome_construct": "Whether the observed mark-price path crosses the precomputed hypothetical long/short liquidation boundary within a pre-specified horizon.",
+  },
+  "input_sha256_assertions": {
+    "fclr_tracks01_source_registry_20261123T014600Z.json": "computed_at_session_start (recorded below)",
+    "fclr_tracks01_probe_20261123T014600Z.json": "d3baafa75f91fa7f5f2de93798206dfe2c8f9268f3f59f1c457c39bbfb84e040",
+    "ironflow_bulk_liquidations_2025-05.parquet": "840bc18b1ec0df9c559e0bf2bff042c36642308f038268922c3dff6c8edb99f3",
+    "research_state/data_source_registry.json": "consulted only; not rewritten (root cap 499/500)"
+  },
+  "computed_input_sha256": {
+    "fclr_tracks01_source_registry_20261123T014600Z.json": "fdcc492878b628d2d7c101735aa5ebf7d757729ee5815bd0c1c4888ae927ad30",
+    "fclr_tracks01_probe_20261123T014600Z.json": "d3baafa75f91fa7f5f2de93798206dfe2c8f9268f3f59f1c457c39bbfb84e040"
+  },
+  "status_vocabulary": "NOT_SUPPORTED (Track A observed-liquidation intensity forecast — terminal, from FCLR-LIQ-RISK-ESCALATION-09 under session_20261122T224500Z); Track A source viability now TRACK_A_STRUCTURALLY_BLOCKED; Track B pivot PROTOCOL_FROZEN (pending heavy evaluation in this same session).",
+  "next_action_heavy": "Execute fclr_tracks01_eval_20261123T014600Z.{py,json,md} (heavy Track B modeled-breach evaluation on the frozen bulk panel) and fclr_tracks01_recompute_20261123T014600Z.{py,json} (independent stdlib recompute) in THIS session, plus evidence_audit_20261123T014600Z.json and trigger_check_20261123T014600Z.json.",
+  "generated_utc": "2026-11-23T01:49:35Z"
+}
