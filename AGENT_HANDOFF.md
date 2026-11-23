@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-23T14:36:36Z
+# AGENT HANDOFF — 2026-11-23T14:41:56Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -15,7 +15,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-23T14:36:36Z (refresh 2026-11-23T14:36:36Z)**
+> **Timestamped initial task message — inferred 2026-11-23T14:41:56Z (refresh 2026-11-23T14:41:56Z)**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is
 > `Funding-conditioned-volatility-and-liquidation-risk`. RESEARCH_PROMPT.md §3.2 primary
