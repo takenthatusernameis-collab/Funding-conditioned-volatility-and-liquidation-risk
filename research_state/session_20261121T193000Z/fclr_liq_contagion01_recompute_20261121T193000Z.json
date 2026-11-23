@@ -24,7 +24,7 @@
     {
       "src": "ETH",
       "tgt": "LINK",
-      "granger_f": 105.09100923953923,
+      "granger_f": 105.09100923953967,
       "empirical_p": 0.0
     },
     {
@@ -36,7 +36,7 @@
     {
       "src": "SOL",
       "tgt": "LINK",
-      "granger_f": 61.35679405781795,
+      "granger_f": 61.35679405781753,
       "empirical_p": 0.0
     },
     {
@@ -48,7 +48,7 @@
     {
       "src": "ETH",
       "tgt": "LTC",
-      "granger_f": 55.985532576146916,
+      "granger_f": 55.985532576146625,
       "empirical_p": 0.0
     },
     {
@@ -66,13 +66,13 @@
     {
       "src": "ETH",
       "tgt": "ADA",
-      "granger_f": 50.80907150171537,
+      "granger_f": 50.80907150171496,
       "empirical_p": 0.0
     },
     {
       "src": "XRP",
       "tgt": "SUI",
-      "granger_f": 50.506260237885236,
+      "granger_f": 50.5062602378848,
       "empirical_p": 0.0
     },
     {

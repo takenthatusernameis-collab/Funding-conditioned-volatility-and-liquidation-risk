@@ -35,16 +35,16 @@
     {
       "src": "AAVE",
       "tgt": "ADA",
-      "f_stat": 9.35583144217723,
-      "p_value": 2.8689067503632423e-10,
+      "f_stat": 9.355831442176443,
+      "p_value": 2.868906750369522e-10,
       "n_obs": 14088,
       "bonferroni_significant": true
     },
     {
       "src": "AAVE",
       "tgt": "AVAX",
-      "f_stat": 10.547702861276099,
-      "p_value": 1.0272319107246415e-11,
+      "f_stat": 10.547702861275768,
+      "p_value": 1.0272319107261893e-11,
       "n_obs": 14069,
       "bonferroni_significant": true
     },
@@ -59,16 +59,16 @@
     {
       "src": "AAVE",
       "tgt": "BTC",
-      "f_stat": 2.494933154499165,
-      "p_value": 0.020540413790843186,
+      "f_stat": 2.4949331544996336,
+      "p_value": 0.020540413790817773,
       "n_obs": 14085,
       "bonferroni_significant": false
     },
     {
       "src": "AAVE",
       "tgt": "CRV",
-      "f_stat": 6.222931781226758,
-      "p_value": 1.5435362181350622e-06,
+      "f_stat": 6.2229317812271825,
+      "p_value": 1.5435362181328465e-06,
       "n_obs": 14073,
       "bonferroni_significant": true
     },
@@ -83,8 +83,8 @@
     {
       "src": "AAVE",
       "tgt": "ETH",
-      "f_stat": 17.74521807202596,
-      "p_value": 1.3440500536913493e-20,
+      "f_stat": 17.745218072026418,
+      "p_value": 1.3440500536895963e-20,
       "n_obs": 14088,
       "bonferroni_significant": true
     },
@@ -99,8 +99,8 @@
     {
       "src": "AAVE",
       "tgt": "LTC",
-      "f_stat": 11.129005109066346,
-      "p_value": 2.008190354397956e-12,
+      "f_stat": 11.12900510906581,
+      "p_value": 2.00819035440091e-12,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
@@ -115,8 +115,8 @@
     {
       "src": "AAVE",
       "tgt": "SOL",
-      "f_stat": 5.58696880115427,
-      "p_value": 8.450340896482782e-06,
+      "f_stat": 5.586968801154588,
+      "p_value": 8.450340896475611e-06,
       "n_obs": 14088,
       "bonferroni_significant": true
     },
@@ -139,8 +139,8 @@
     {
       "src": "AAVE",
       "tgt": "XRP",
-      "f_stat": 7.526628241323315,
-      "p_value": 4.483672532870378e-08,
+      "f_stat": 7.52662824132304,
+      "p_value": 4.483672532873734e-08,
       "n_obs": 14068,
       "bonferroni_significant": true
     },
@@ -163,24 +163,24 @@
     {
       "src": "ADA",
       "tgt": "BNB",
-      "f_stat": 9.953818816905338,
-      "p_value": 5.4146868558892164e-11,
+      "f_stat": 9.953818816904956,
+      "p_value": 5.414686855895007e-11,
       "n_obs": 14070,
       "bonferroni_significant": true
     },
     {
       "src": "ADA",
       "tgt": "BTC",
-      "f_stat": 2.5511548358820333,
-      "p_value": 0.018041959489266172,
+      "f_stat": 2.5511548358825014,
+      "p_value": 0.018041959489246195,
       "n_obs": 14094,
       "bonferroni_significant": false
     },
     {
       "src": "ADA",
       "tgt": "CRV",
-      "f_stat": 6.233385646498026,
-      "p_value": 1.5007380931590333e-06,
+      "f_stat": 6.23338564649845,
+      "p_value": 1.5007380931573274e-06,
       "n_obs": 14080,
       "bonferroni_significant": true
     },
@@ -195,8 +195,8 @@
     {
       "src": "ADA",
       "tgt": "ETH",
-      "f_stat": 20.22973110895102,
-      "p_value": 1.0671386303963418e-23,
+      "f_stat": 20.229731108950563,
+      "p_value": 1.0671386303979772e-23,
       "n_obs": 14097,
       "bonferroni_significant": true
     },
@@ -211,8 +211,8 @@
     {
       "src": "ADA",
       "tgt": "LTC",
-      "f_stat": 30.677789120858016,
-      "p_value": 8.235173593699804e-37,
+      "f_stat": 30.67778912085747,
+      "p_value": 8.235173593712503e-37,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
@@ -227,8 +227,8 @@
     {
       "src": "ADA",
       "tgt": "SOL",
-      "f_stat": 7.978901711077093,
-      "p_value": 1.2960759658896287e-08,
+      "f_stat": 7.978901711076774,
+      "p_value": 1.2960759658907605e-08,
       "n_obs": 14100,
       "bonferroni_significant": true
     },
@@ -251,8 +251,8 @@
     {
       "src": "ADA",
       "tgt": "XRP",
-      "f_stat": 10.34692382024094,
-      "p_value": 1.803069893943274e-11,
+      "f_stat": 10.346923820240667,
+      "p_value": 1.803069893944665e-11,
       "n_obs": 14068,
       "bonferroni_significant": true
     },
@@ -323,8 +323,8 @@
     {
       "src": "AVAX",
       "tgt": "LTC",
-      "f_stat": 37.74571515943576,
-      "p_value": 1.0365603607768062e-45,
+      "f_stat": 37.745715159435214,
+      "p_value": 1.0365603607784159e-45,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
@@ -339,8 +339,8 @@
     {
       "src": "AVAX",
       "tgt": "SOL",
-      "f_stat": 5.320529453555937,
-      "p_value": 1.7117862609359507e-05,
+      "f_stat": 5.32052945355562,
+      "p_value": 1.7117862609370983e-05,
       "n_obs": 14069,
       "bonferroni_significant": true
     },
@@ -363,24 +363,24 @@
     {
       "src": "AVAX",
       "tgt": "XRP",
-      "f_stat": 8.06247028805158,
-      "p_value": 1.0299118875074201e-08,
+      "f_stat": 8.062470288051305,
+      "p_value": 1.0299118875082034e-08,
       "n_obs": 14068,
       "bonferroni_significant": true
     },
     {
       "src": "BNB",
       "tgt": "AAVE",
-      "f_stat": 5.689989975194981,
-      "p_value": 6.425180124641691e-06,
+      "f_stat": 5.689989975195333,
+      "p_value": 6.4251801246374205e-06,
       "n_obs": 14061,
       "bonferroni_significant": true
     },
     {
       "src": "BNB",
       "tgt": "ADA",
-      "f_stat": 3.8044965890674387,
-      "p_value": 0.0008620598643980612,
+      "f_stat": 3.804496589067832,
+      "p_value": 0.0008620598643972069,
       "n_obs": 14070,
       "bonferroni_significant": false
     },
@@ -403,16 +403,16 @@
     {
       "src": "BNB",
       "tgt": "CRV",
-      "f_stat": 1.7213832345566622,
-      "p_value": 0.1115789814483437,
+      "f_stat": 1.721383234557505,
+      "p_value": 0.11157898144815095,
       "n_obs": 14046,
       "bonferroni_significant": false
     },
     {
       "src": "BNB",
       "tgt": "DOGE",
-      "f_stat": 1.4290752912596685,
-      "p_value": 0.1990509373835293,
+      "f_stat": 1.4290752912601474,
+      "p_value": 0.19905093738334825,
       "n_obs": 14032,
       "bonferroni_significant": false
     },
@@ -427,8 +427,8 @@
     {
       "src": "BNB",
       "tgt": "LINK",
-      "f_stat": 3.5133250870521926,
-      "p_value": 0.001784334973818453,
+      "f_stat": 3.5133250870517974,
+      "p_value": 0.001784334973820208,
       "n_obs": 14072,
       "bonferroni_significant": false
     },
@@ -483,16 +483,16 @@
     {
       "src": "BTC",
       "tgt": "AAVE",
-      "f_stat": 13.728919662021566,
-      "p_value": 1.2872606408990204e-15,
+      "f_stat": 13.728919662022275,
+      "p_value": 1.2872606408971277e-15,
       "n_obs": 14085,
       "bonferroni_significant": true
     },
     {
       "src": "BTC",
       "tgt": "ADA",
-      "f_stat": 9.21926187520085,
-      "p_value": 4.1944517228299644e-10,
+      "f_stat": 9.219261875200454,
+      "p_value": 4.1944517228345977e-10,
       "n_obs": 14094,
       "bonferroni_significant": true
     },
@@ -515,24 +515,24 @@
     {
       "src": "BTC",
       "tgt": "CRV",
-      "f_stat": 20.427390973591447,
-      "p_value": 6.044296700147644e-24,
+      "f_stat": 20.42739097359187,
+      "p_value": 6.04429670014029e-24,
       "n_obs": 14070,
       "bonferroni_significant": true
     },
     {
       "src": "BTC",
       "tgt": "DOGE",
-      "f_stat": 12.082750305186018,
-      "p_value": 1.3656387205863388e-13,
+      "f_stat": 12.0827503051865,
+      "p_value": 1.365638720584459e-13,
       "n_obs": 14042,
       "bonferroni_significant": true
     },
     {
       "src": "BTC",
       "tgt": "ETH",
-      "f_stat": 9.402170390021356,
-      "p_value": 2.5216970937210764e-10,
+      "f_stat": 9.402170390021814,
+      "p_value": 2.521697093717866e-10,
       "n_obs": 14096,
       "bonferroni_significant": true
     },
@@ -547,24 +547,24 @@
     {
       "src": "BTC",
       "tgt": "LTC",
-      "f_stat": 16.744498585939667,
-      "p_value": 2.365321238295617e-19,
+      "f_stat": 16.744498585939674,
+      "p_value": 2.365321238295619e-19,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
     {
       "src": "BTC",
       "tgt": "NEAR",
-      "f_stat": 8.154357665656873,
-      "p_value": 7.996288117068207e-09,
+      "f_stat": 8.15435766565642,
+      "p_value": 7.996288117073618e-09,
       "n_obs": 14079,
       "bonferroni_significant": true
     },
     {
       "src": "BTC",
       "tgt": "SOL",
-      "f_stat": 6.812854661498415,
-      "p_value": 3.1367306177233683e-07,
+      "f_stat": 6.812854661498733,
+      "p_value": 3.1367306177206806e-07,
       "n_obs": 14090,
       "bonferroni_significant": true
     },
@@ -587,8 +587,8 @@
     {
       "src": "BTC",
       "tgt": "XRP",
-      "f_stat": 1.8939748914764183,
-      "p_value": 0.07784333807377046,
+      "f_stat": 1.8939748914761447,
+      "p_value": 0.07784333807381558,
       "n_obs": 14068,
       "bonferroni_significant": false
     },
@@ -611,8 +611,8 @@
     {
       "src": "CRV",
       "tgt": "AVAX",
-      "f_stat": 15.606713217913125,
-      "p_value": 6.116833874611e-18,
+      "f_stat": 15.606713217912793,
+      "p_value": 6.116833874620353e-18,
       "n_obs": 14069,
       "bonferroni_significant": true
     },
@@ -643,8 +643,8 @@
     {
       "src": "CRV",
       "tgt": "ETH",
-      "f_stat": 21.4048939628871,
-      "p_value": 3.619232301438822e-25,
+      "f_stat": 21.404893962887567,
+      "p_value": 3.6192323014361253e-25,
       "n_obs": 14073,
       "bonferroni_significant": true
     },
@@ -659,24 +659,24 @@
     {
       "src": "CRV",
       "tgt": "LTC",
-      "f_stat": 28.375659221500463,
-      "p_value": 6.4789684257392114e-34,
+      "f_stat": 28.375659221499646,
+      "p_value": 6.478968425754158e-34,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
     {
       "src": "CRV",
       "tgt": "NEAR",
-      "f_stat": 6.033220365489617,
-      "p_value": 2.568553578628502e-06,
+      "f_stat": 6.0332203654900685,
+      "p_value": 2.568553578624852e-06,
       "n_obs": 14053,
       "bonferroni_significant": true
     },
     {
       "src": "CRV",
       "tgt": "SOL",
-      "f_stat": 11.216447862883992,
-      "p_value": 1.569966088957442e-12,
+      "f_stat": 11.21644786288367,
+      "p_value": 1.5699660889585872e-12,
       "n_obs": 14081,
       "bonferroni_significant": true
     },
@@ -699,48 +699,48 @@
     {
       "src": "CRV",
       "tgt": "XRP",
-      "f_stat": 13.408759788397637,
-      "p_value": 3.1957781199829235e-15,
+      "f_stat": 13.408759788397088,
+      "p_value": 3.1957781199879083e-15,
       "n_obs": 14068,
       "bonferroni_significant": true
     },
     {
       "src": "DOGE",
       "tgt": "AAVE",
-      "f_stat": 26.424708881897914,
-      "p_value": 1.8342788515193763e-31,
+      "f_stat": 26.42470888189827,
+      "p_value": 1.834278851517497e-31,
       "n_obs": 14042,
       "bonferroni_significant": true
     },
     {
       "src": "DOGE",
       "tgt": "ADA",
-      "f_stat": 10.823322643616944,
-      "p_value": 4.74089471359161e-12,
+      "f_stat": 10.823322643616153,
+      "p_value": 4.7408947136021175e-12,
       "n_obs": 14042,
       "bonferroni_significant": true
     },
     {
       "src": "DOGE",
       "tgt": "AVAX",
-      "f_stat": 2.3100413494251386,
-      "p_value": 0.031294054935493684,
+      "f_stat": 2.3100413494244845,
+      "p_value": 0.03129405493554129,
       "n_obs": 14042,
       "bonferroni_significant": false
     },
     {
       "src": "DOGE",
       "tgt": "BNB",
-      "f_stat": 11.27791291397484,
-      "p_value": 1.3209414332125535e-12,
+      "f_stat": 11.277912913975223,
+      "p_value": 1.320941433211112e-12,
       "n_obs": 14032,
       "bonferroni_significant": true
     },
     {
       "src": "DOGE",
       "tgt": "BTC",
-      "f_stat": 3.7020506737040537,
-      "p_value": 0.0011148339070631687,
+      "f_stat": 3.7020506737035856,
+      "p_value": 0.0011148339070644773,
       "n_obs": 14042,
       "bonferroni_significant": false
     },
@@ -787,8 +787,8 @@
     {
       "src": "DOGE",
       "tgt": "SOL",
-      "f_stat": 8.07470305940031,
-      "p_value": 9.958715516499314e-09,
+      "f_stat": 8.07470305939999,
+      "p_value": 9.958715516508082e-09,
       "n_obs": 14042,
       "bonferroni_significant": true
     },
@@ -811,8 +811,8 @@
     {
       "src": "DOGE",
       "tgt": "XRP",
-      "f_stat": 9.298374672387517,
-      "p_value": 3.3667299311212056e-10,
+      "f_stat": 9.29837467238779,
+      "p_value": 3.3667299311186656e-10,
       "n_obs": 14042,
       "bonferroni_significant": true
     },
@@ -827,8 +827,8 @@
     {
       "src": "ETH",
       "tgt": "ADA",
-      "f_stat": 50.72645385111102,
-      "p_value": 4.619843260912339e-62,
+      "f_stat": 50.726453851111415,
+      "p_value": 4.619843260908721e-62,
       "n_obs": 14097,
       "bonferroni_significant": true
     },
@@ -843,8 +843,8 @@
     {
       "src": "ETH",
       "tgt": "BNB",
-      "f_stat": 21.94469496499891,
-      "p_value": 7.636210598923732e-26,
+      "f_stat": 21.944694964999297,
+      "p_value": 7.636210598915074e-26,
       "n_obs": 14072,
       "bonferroni_significant": true
     },
@@ -867,8 +867,8 @@
     {
       "src": "ETH",
       "tgt": "DOGE",
-      "f_stat": 45.838767607457875,
-      "p_value": 6.620009061834278e-56,
+      "f_stat": 45.83876760745738,
+      "p_value": 6.6200090618441805e-56,
       "n_obs": 14042,
       "bonferroni_significant": true
     },
@@ -883,16 +883,16 @@
     {
       "src": "ETH",
       "tgt": "LTC",
-      "f_stat": 55.81283674566977,
-      "p_value": 1.856938811208239e-68,
+      "f_stat": 55.81283674566951,
+      "p_value": 1.8569388112097014e-68,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
     {
       "src": "ETH",
       "tgt": "NEAR",
-      "f_stat": 6.924369554514816,
-      "p_value": 2.3173840634039506e-07,
+      "f_stat": 6.924369554514365,
+      "p_value": 2.3173840634067945e-07,
       "n_obs": 14080,
       "bonferroni_significant": true
     },
@@ -907,8 +907,8 @@
     {
       "src": "ETH",
       "tgt": "SUI",
-      "f_stat": 54.581544954628235,
-      "p_value": 6.529007165075154e-67,
+      "f_stat": 54.58154495462781,
+      "p_value": 6.52900716508027e-67,
       "n_obs": 14081,
       "bonferroni_significant": true
     },
@@ -923,32 +923,32 @@
     {
       "src": "ETH",
       "tgt": "XRP",
-      "f_stat": 8.363518727528442,
-      "p_value": 4.491403197602484e-09,
+      "f_stat": 8.363518727528444,
+      "p_value": 4.491403197602454e-09,
       "n_obs": 14068,
       "bonferroni_significant": true
     },
     {
       "src": "LINK",
       "tgt": "AAVE",
-      "f_stat": 18.14047859801188,
-      "p_value": 4.326269986349579e-21,
+      "f_stat": 18.140478598011523,
+      "p_value": 4.326269986354077e-21,
       "n_obs": 14066,
       "bonferroni_significant": true
     },
     {
       "src": "LINK",
       "tgt": "ADA",
-      "f_stat": 2.5850437917833755,
-      "p_value": 0.016679418247918004,
+      "f_stat": 2.5850437917841607,
+      "p_value": 0.016679418247887753,
       "n_obs": 14075,
       "bonferroni_significant": false
     },
     {
       "src": "LINK",
       "tgt": "AVAX",
-      "f_stat": 24.49091981595663,
-      "p_value": 4.9122944759401465e-29,
+      "f_stat": 24.490919815957295,
+      "p_value": 4.912294475932673e-29,
       "n_obs": 14051,
       "bonferroni_significant": true
     },
@@ -963,8 +963,8 @@
     {
       "src": "LINK",
       "tgt": "BTC",
-      "f_stat": 2.913583349085124,
-      "p_value": 0.007693032981935121,
+      "f_stat": 2.913583349085592,
+      "p_value": 0.007693032981931306,
       "n_obs": 14077,
       "bonferroni_significant": false
     },
@@ -979,40 +979,40 @@
     {
       "src": "LINK",
       "tgt": "DOGE",
-      "f_stat": 6.283395464654792,
-      "p_value": 1.3119069066270413e-06,
+      "f_stat": 6.283395464655273,
+      "p_value": 1.3119069066251842e-06,
       "n_obs": 14037,
       "bonferroni_significant": true
     },
     {
       "src": "LINK",
       "tgt": "ETH",
-      "f_stat": 24.228013746206596,
-      "p_value": 1.0491194602007796e-28,
+      "f_stat": 24.228013746207054,
+      "p_value": 1.0491194601993678e-28,
       "n_obs": 14080,
       "bonferroni_significant": true
     },
     {
       "src": "LINK",
       "tgt": "LTC",
-      "f_stat": 14.694411009243153,
-      "p_value": 8.256456432561504e-17,
+      "f_stat": 14.694411009242884,
+      "p_value": 8.256456432567678e-17,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
     {
       "src": "LINK",
       "tgt": "NEAR",
-      "f_stat": 6.621298584217976,
-      "p_value": 5.270729437755926e-07,
+      "f_stat": 6.621298584218876,
+      "p_value": 5.270729437743105e-07,
       "n_obs": 14078,
       "bonferroni_significant": true
     },
     {
       "src": "LINK",
       "tgt": "SOL",
-      "f_stat": 7.820638200723942,
-      "p_value": 2.0024203355379164e-08,
+      "f_stat": 7.820638200724261,
+      "p_value": 2.002420335534938e-08,
       "n_obs": 14071,
       "bonferroni_significant": true
     },
@@ -1027,8 +1027,8 @@
     {
       "src": "LINK",
       "tgt": "UNI",
-      "f_stat": 11.633281036759659,
-      "p_value": 4.854072880487475e-13,
+      "f_stat": 11.633281036760126,
+      "p_value": 4.85407288048107e-13,
       "n_obs": 14060,
       "bonferroni_significant": true
     },
@@ -1043,16 +1043,16 @@
     {
       "src": "LTC",
       "tgt": "AAVE",
-      "f_stat": 17.478675812166863,
-      "p_value": 2.887838429717526e-20,
+      "f_stat": 17.478675812166507,
+      "p_value": 2.887838429719676e-20,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
     {
       "src": "LTC",
       "tgt": "ADA",
-      "f_stat": 13.788996970428228,
-      "p_value": 1.0856357427268642e-15,
+      "f_stat": 13.788996970427437,
+      "p_value": 1.0856357427292939e-15,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
@@ -1091,8 +1091,8 @@
     {
       "src": "LTC",
       "tgt": "DOGE",
-      "f_stat": 8.007914329203722,
-      "p_value": 1.1968418200093084e-08,
+      "f_stat": 8.007914329203238,
+      "p_value": 1.1968418200110397e-08,
       "n_obs": 14037,
       "bonferroni_significant": true
     },
@@ -1123,8 +1123,8 @@
     {
       "src": "LTC",
       "tgt": "SOL",
-      "f_stat": 6.672174498566486,
-      "p_value": 4.593022312354747e-07,
+      "f_stat": 6.672174498567439,
+      "p_value": 4.593022312345237e-07,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
@@ -1147,16 +1147,16 @@
     {
       "src": "LTC",
       "tgt": "XRP",
-      "f_stat": 7.715031018258335,
-      "p_value": 2.675843693771351e-08,
+      "f_stat": 7.71503101825806,
+      "p_value": 2.675843693773258e-08,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
     {
       "src": "NEAR",
       "tgt": "AAVE",
-      "f_stat": 1.1451022648667484,
-      "p_value": 0.3330455040781761,
+      "f_stat": 1.1451022648670985,
+      "p_value": 0.33304550407797623,
       "n_obs": 14068,
       "bonferroni_significant": false
     },
@@ -1187,16 +1187,16 @@
     {
       "src": "NEAR",
       "tgt": "BTC",
-      "f_stat": 2.589219742574127,
-      "p_value": 0.016518488989962905,
+      "f_stat": 2.589219742573659,
+      "p_value": 0.0165184889899835,
       "n_obs": 14079,
       "bonferroni_significant": false
     },
     {
       "src": "NEAR",
       "tgt": "CRV",
-      "f_stat": 7.662664450460262,
-      "p_value": 3.088944528169772e-08,
+      "f_stat": 7.66266445045984,
+      "p_value": 3.088944528174275e-08,
       "n_obs": 14053,
       "bonferroni_significant": true
     },
@@ -1227,8 +1227,8 @@
     {
       "src": "NEAR",
       "tgt": "LTC",
-      "f_stat": 1.7683255872098724,
-      "p_value": 0.10129300324957256,
+      "f_stat": 1.7683255872093386,
+      "p_value": 0.1012930032496802,
       "n_obs": 14039,
       "bonferroni_significant": false
     },
@@ -1243,8 +1243,8 @@
     {
       "src": "NEAR",
       "tgt": "SUI",
-      "f_stat": 2.7835430797836618,
-      "p_value": 0.010477327275856128,
+      "f_stat": 2.783543079782841,
+      "p_value": 0.010477327275876325,
       "n_obs": 14062,
       "bonferroni_significant": false
     },
@@ -1259,32 +1259,32 @@
     {
       "src": "NEAR",
       "tgt": "XRP",
-      "f_stat": 6.1449976636564365,
-      "p_value": 1.9031374054115599e-06,
+      "f_stat": 6.144997663655889,
+      "p_value": 1.9031374054143504e-06,
       "n_obs": 14052,
       "bonferroni_significant": true
     },
     {
       "src": "SOL",
       "tgt": "AAVE",
-      "f_stat": 33.16616358666682,
-      "p_value": 6.059265996436688e-40,
+      "f_stat": 33.16616358666645,
+      "p_value": 6.059265996443252e-40,
       "n_obs": 14088,
       "bonferroni_significant": true
     },
     {
       "src": "SOL",
       "tgt": "ADA",
-      "f_stat": 24.607235537970254,
-      "p_value": 3.5057560496862343e-29,
+      "f_stat": 24.607235537970652,
+      "p_value": 3.5057560496822025e-29,
       "n_obs": 14100,
       "bonferroni_significant": true
     },
     {
       "src": "SOL",
       "tgt": "AVAX",
-      "f_stat": 16.73945966759727,
-      "p_value": 2.3988426540410635e-19,
+      "f_stat": 16.739459667596606,
+      "p_value": 2.3988426540465303e-19,
       "n_obs": 14069,
       "bonferroni_significant": true
     },
@@ -1307,8 +1307,8 @@
     {
       "src": "SOL",
       "tgt": "CRV",
-      "f_stat": 45.10051064261869,
-      "p_value": 5.6123816324316904e-55,
+      "f_stat": 45.10051064261825,
+      "p_value": 5.612381632440514e-55,
       "n_obs": 14081,
       "bonferroni_significant": true
     },
@@ -1331,32 +1331,32 @@
     {
       "src": "SOL",
       "tgt": "LINK",
-      "f_stat": 61.151801013231875,
-      "p_value": 3.60836078618868e-75,
+      "f_stat": 61.15180101323147,
+      "p_value": 3.60836078619441e-75,
       "n_obs": 14071,
       "bonferroni_significant": true
     },
     {
       "src": "SOL",
       "tgt": "LTC",
-      "f_stat": 38.074574859915145,
-      "p_value": 3.993167082931728e-46,
+      "f_stat": 38.074574859914605,
+      "p_value": 3.993167082941092e-46,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
     {
       "src": "SOL",
       "tgt": "NEAR",
-      "f_stat": 6.125206830618903,
-      "p_value": 2.006929900941946e-06,
+      "f_stat": 6.125206830619352,
+      "p_value": 2.006929900939084e-06,
       "n_obs": 14073,
       "bonferroni_significant": true
     },
     {
       "src": "SOL",
       "tgt": "SUI",
-      "f_stat": 28.22135598592214,
-      "p_value": 1.0113312559372443e-33,
+      "f_stat": 28.221355985921722,
+      "p_value": 1.0113312559380139e-33,
       "n_obs": 14081,
       "bonferroni_significant": true
     },
@@ -1371,16 +1371,16 @@
     {
       "src": "SOL",
       "tgt": "XRP",
-      "f_stat": 3.793430716271473,
-      "p_value": 0.0008863905488122598,
+      "f_stat": 3.7934307162711987,
+      "p_value": 0.0008863905488128727,
       "n_obs": 14068,
       "bonferroni_significant": false
     },
     {
       "src": "SUI",
       "tgt": "AAVE",
-      "f_stat": 18.38139835528578,
-      "p_value": 2.1663184702164754e-21,
+      "f_stat": 18.381398355285423,
+      "p_value": 2.166318470218098e-21,
       "n_obs": 14081,
       "bonferroni_significant": true
     },
@@ -1395,8 +1395,8 @@
     {
       "src": "SUI",
       "tgt": "AVAX",
-      "f_stat": 20.112142037796033,
-      "p_value": 1.4975798807517222e-23,
+      "f_stat": 20.112142037796364,
+      "p_value": 1.4975798807494138e-23,
       "n_obs": 14069,
       "bonferroni_significant": true
     },
@@ -1419,16 +1419,16 @@
     {
       "src": "SUI",
       "tgt": "CRV",
-      "f_stat": 6.0970887838547485,
-      "p_value": 2.1642264965880805e-06,
+      "f_stat": 6.097088783855171,
+      "p_value": 2.1642264965856156e-06,
       "n_obs": 14072,
       "bonferroni_significant": true
     },
     {
       "src": "SUI",
       "tgt": "DOGE",
-      "f_stat": 7.789051505049644,
-      "p_value": 2.183974400079264e-08,
+      "f_stat": 7.789051505049162,
+      "p_value": 2.1839744000821516e-08,
       "n_obs": 14042,
       "bonferroni_significant": true
     },
@@ -1451,8 +1451,8 @@
     {
       "src": "SUI",
       "tgt": "LTC",
-      "f_stat": 5.717017609617301,
-      "p_value": 5.979092038272369e-06,
+      "f_stat": 5.717017609616765,
+      "p_value": 5.979092038280648e-06,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
@@ -1499,8 +1499,8 @@
     {
       "src": "UNI",
       "tgt": "ADA",
-      "f_stat": 4.92827364383101,
-      "p_value": 4.8008369846919954e-05,
+      "f_stat": 4.928273643831798,
+      "p_value": 4.800836984682161e-05,
       "n_obs": 14079,
       "bonferroni_significant": false
     },
@@ -1531,8 +1531,8 @@
     {
       "src": "UNI",
       "tgt": "CRV",
-      "f_stat": 8.19482182480869,
-      "p_value": 7.152724794356659e-09,
+      "f_stat": 8.194821824808688,
+      "p_value": 7.152724794356658e-09,
       "n_obs": 14070,
       "bonferroni_significant": true
     },
@@ -1547,8 +1547,8 @@
     {
       "src": "UNI",
       "tgt": "ETH",
-      "f_stat": 13.715463658061749,
-      "p_value": 1.3374883577644716e-15,
+      "f_stat": 13.715463658062665,
+      "p_value": 1.3374883577614946e-15,
       "n_obs": 14079,
       "bonferroni_significant": true
     },
@@ -1563,8 +1563,8 @@
     {
       "src": "UNI",
       "tgt": "LTC",
-      "f_stat": 3.0344272865875186,
-      "p_value": 0.005757482734969415,
+      "f_stat": 3.034427286586716,
+      "p_value": 0.005757482734980159,
       "n_obs": 14039,
       "bonferroni_significant": false
     },
@@ -1579,8 +1579,8 @@
     {
       "src": "UNI",
       "tgt": "SOL",
-      "f_stat": 6.255743886082952,
-      "p_value": 1.4131533449592369e-06,
+      "f_stat": 6.255743886083271,
+      "p_value": 1.4131533449582673e-06,
       "n_obs": 14079,
       "bonferroni_significant": true
     },
@@ -1595,16 +1595,16 @@
     {
       "src": "UNI",
       "tgt": "XRP",
-      "f_stat": 4.021377879314976,
-      "p_value": 0.0004982644613385339,
+      "f_stat": 4.021377879314702,
+      "p_value": 0.0004982644613388808,
       "n_obs": 14068,
       "bonferroni_significant": false
     },
     {
       "src": "XRP",
       "tgt": "AAVE",
-      "f_stat": 40.22987563344353,
-      "p_value": 7.677842806247352e-49,
+      "f_stat": 40.22987563344317,
+      "p_value": 7.677842806255036e-49,
       "n_obs": 14068,
       "bonferroni_significant": true
     },
@@ -1627,8 +1627,8 @@
     {
       "src": "XRP",
       "tgt": "BNB",
-      "f_stat": 22.80776681647228,
-      "p_value": 6.33850273682648e-27,
+      "f_stat": 22.807766816472665,
+      "p_value": 6.338502736821704e-27,
       "n_obs": 14045,
       "bonferroni_significant": true
     },
@@ -1643,8 +1643,8 @@
     {
       "src": "XRP",
       "tgt": "CRV",
-      "f_stat": 72.45805656276782,
-      "p_value": 2.38737426739339e-89,
+      "f_stat": 72.45805656276738,
+      "p_value": 2.387374267396429e-89,
       "n_obs": 14068,
       "bonferroni_significant": true
     },
@@ -1667,32 +1667,32 @@
     {
       "src": "XRP",
       "tgt": "LINK",
-      "f_stat": 59.52840940210983,
-      "p_value": 3.9629233482425806e-73,
+      "f_stat": 59.52840940211064,
+      "p_value": 3.9629233482331714e-73,
       "n_obs": 14050,
       "bonferroni_significant": true
     },
     {
       "src": "XRP",
       "tgt": "LTC",
-      "f_stat": 63.54727645507993,
-      "p_value": 3.564282119665338e-78,
+      "f_stat": 63.54727645507939,
+      "p_value": 3.5642821196709786e-78,
       "n_obs": 14039,
       "bonferroni_significant": true
     },
     {
       "src": "XRP",
       "tgt": "NEAR",
-      "f_stat": 9.195075881592935,
-      "p_value": 4.486766567057699e-10,
+      "f_stat": 9.195075881593384,
+      "p_value": 4.4867665670521317e-10,
       "n_obs": 14052,
       "bonferroni_significant": true
     },
     {
       "src": "XRP",
       "tgt": "SOL",
-      "f_stat": 13.156832173698406,
-      "p_value": 6.531136006431219e-15,
+      "f_stat": 13.156832173698724,
+      "p_value": 6.531136006425381e-15,
       "n_obs": 14068,
       "bonferroni_significant": true
     },
@@ -1707,8 +1707,8 @@
     {
       "src": "XRP",
       "tgt": "UNI",
-      "f_stat": 38.63695153754006,
-      "p_value": 7.799140975896919e-47,
+      "f_stat": 38.63695153753959,
+      "p_value": 7.799140975907579e-47,
       "n_obs": 14068,
       "bonferroni_significant": true
     }
@@ -3411,8 +3411,8 @@
     {
       "src": "CRV",
       "tgt": "ETH",
-      "f_stat": 21.4048939628871,
-      "p_value": 3.619232301438822e-25,
+      "f_stat": 21.404893962887567,
+      "p_value": 3.6192323014361253e-25,
       "empirical_p": 0.0
     },
     {
@@ -3432,8 +3432,8 @@
     {
       "src": "BTC",
       "tgt": "DOGE",
-      "f_stat": 12.082750305186018,
-      "p_value": 1.3656387205863388e-13,
+      "f_stat": 12.0827503051865,
+      "p_value": 1.365638720584459e-13,
       "empirical_p": 0.0
     },
     {
@@ -3446,22 +3446,22 @@
     {
       "src": "BTC",
       "tgt": "ETH",
-      "f_stat": 9.402170390021356,
-      "p_value": 2.5216970937210764e-10,
+      "f_stat": 9.402170390021814,
+      "p_value": 2.521697093717866e-10,
       "empirical_p": 0.0
     },
     {
       "src": "ETH",
       "tgt": "XRP",
-      "f_stat": 8.363518727528442,
-      "p_value": 4.491403197602484e-09,
+      "f_stat": 8.363518727528444,
+      "p_value": 4.491403197602454e-09,
       "empirical_p": 0.0
     },
     {
       "src": "BTC",
       "tgt": "NEAR",
-      "f_stat": 8.154357665656873,
-      "p_value": 7.996288117068207e-09,
+      "f_stat": 8.15435766565642,
+      "p_value": 7.996288117073618e-09,
       "empirical_p": 0.0
     },
     {
@@ -3481,8 +3481,8 @@
       "funding_diff_mean": 1.2113613669409606e-05,
       "max_abs_corr": 0.09722441211382786,
       "lag_at_best": 1,
-      "granger_f": 22.34913169897553,
-      "granger_p": 2.468373418440028e-26
+      "granger_f": 22.349131698974702,
+      "granger_p": 2.468373418446773e-26
     },
     {
       "src": "AAVE",
@@ -3492,8 +3492,8 @@
       "funding_diff_mean": 2.7784844939528964e-05,
       "max_abs_corr": 0.1263339738017567,
       "lag_at_best": 9,
-      "granger_f": 3.2668308339525103,
-      "granger_p": 0.0033929089111831737
+      "granger_f": 3.26683083395244,
+      "granger_p": 0.003392908911183933
     },
     {
       "src": "AAVE",
@@ -3503,8 +3503,8 @@
       "funding_diff_mean": 1.2113026268202915e-05,
       "max_abs_corr": 0.10199874774747533,
       "lag_at_best": 1,
-      "granger_f": 55.5216729443427,
-      "granger_p": 5.433827095971722e-68
+      "granger_f": 55.521672944343344,
+      "granger_p": 5.433827095961436e-68
     },
     {
       "src": "AAVE",
@@ -3525,8 +3525,8 @@
       "funding_diff_mean": 1.2112778406725382e-05,
       "max_abs_corr": 0.08349255178359534,
       "lag_at_best": 1,
-      "granger_f": 0.8283700719009561,
-      "granger_p": 0.5476630912348638
+      "granger_f": 0.8283700719004925,
+      "granger_p": 0.5476630912352217
     },
     {
       "src": "AAVE",
@@ -3536,8 +3536,8 @@
       "funding_diff_mean": 2.7784844939528964e-05,
       "max_abs_corr": 0.024882781057212307,
       "lag_at_best": 9,
-      "granger_f": 0.3874733252695417,
-      "granger_p": 0.8874004551422898
+      "granger_f": 0.3874733252695416,
+      "granger_p": 0.8874004551422899
     },
     {
       "src": "AAVE",
@@ -3547,8 +3547,8 @@
       "funding_diff_mean": 1.2113521040434716e-05,
       "max_abs_corr": 0.07456796781400231,
       "lag_at_best": 1,
-      "granger_f": 5.531706339510698,
-      "granger_p": 9.804764457781326e-06
+      "granger_f": 5.531706339510436,
+      "granger_p": 9.804764457788146e-06
     },
     {
       "src": "AAVE",
@@ -3569,8 +3569,8 @@
       "funding_diff_mean": 1.2113150079987206e-05,
       "max_abs_corr": 0.1159819263932717,
       "lag_at_best": 1,
-      "granger_f": 23.376480408272737,
-      "granger_p": 1.2783868639674366e-27
+      "granger_f": 23.376480408272293,
+      "granger_p": 1.2783868639690658e-27
     },
     {
       "src": "AAVE",
@@ -3602,8 +3602,8 @@
       "funding_diff_mean": 2.7784844939528964e-05,
       "max_abs_corr": 0.09448163752389113,
       "lag_at_best": 9,
-      "granger_f": 2.9937953371328994,
-      "granger_p": 0.006532379312430003
+      "granger_f": 2.9937953371329504,
+      "granger_p": 0.0065323793124290605
     },
     {
       "src": "AAVE",
@@ -3613,8 +3613,8 @@
       "funding_diff_mean": 1.2113613669409606e-05,
       "max_abs_corr": 0.09182843226238385,
       "lag_at_best": 1,
-      "granger_f": 36.882745539306505,
-      "granger_p": 1.4003300107874627e-44
+      "granger_f": 36.88274553930707,
+      "granger_p": 1.4003300107855268e-44
     },
     {
       "src": "AAVE",
@@ -3635,8 +3635,8 @@
       "funding_diff_mean": 1.211293335734294e-05,
       "max_abs_corr": 0.10660912474910042,
       "lag_at_best": 1,
-      "granger_f": 21.72463942913269,
-      "granger_p": 1.4920684260382431e-25
+      "granger_f": 21.724639429133088,
+      "granger_p": 1.4920684260362078e-25
     },
     {
       "src": "AAVE",
@@ -3668,8 +3668,8 @@
       "funding_diff_mean": 2.7784844939528964e-05,
       "max_abs_corr": 0.27654680500470735,
       "lag_at_best": 9,
-      "granger_f": 6.867656766488738,
-      "granger_p": 3.286635660703536e-07
+      "granger_f": 6.867656766488737,
+      "granger_p": 3.2866356607035355e-07
     },
     {
       "src": "AAVE",
@@ -3679,8 +3679,8 @@
       "funding_diff_mean": 1.2112995302872692e-05,
       "max_abs_corr": 0.04107519736792749,
       "lag_at_best": 1,
-      "granger_f": 4.365789208345758,
-      "granger_p": 0.00020684716549195496
+      "granger_f": 4.365789208345222,
+      "granger_p": 0.00020684716549219514
     },
     {
       "src": "AAVE",
@@ -3723,8 +3723,8 @@
       "funding_diff_mean": 1.2113397466027182e-05,
       "max_abs_corr": 0.10496723577187386,
       "lag_at_best": 1,
-      "granger_f": 3.169918061151144,
-      "granger_p": 0.004149999814853097
+      "granger_f": 3.1699180611509075,
+      "granger_p": 0.00414999981485596
     },
     {
       "src": "AAVE",
@@ -3745,8 +3745,8 @@
       "funding_diff_mean": 1.2113335649184527e-05,
       "max_abs_corr": 0.07700205397154024,
       "lag_at_best": 1,
-      "granger_f": 9.295793848862791,
-      "granger_p": 3.410888011554891e-10
+      "granger_f": 9.295793848862559,
+      "granger_p": 3.4108880115570903e-10
     },
     {
       "src": "AAVE",
@@ -3756,8 +3756,8 @@
       "funding_diff_mean": 2.7784844939528964e-05,
       "max_abs_corr": 0.12040492914514368,
       "lag_at_best": 9,
-      "granger_f": 2.851228440738772,
-      "granger_p": 0.009153049626046239
+      "granger_f": 2.851228440738717,
+      "granger_p": 0.009153049626047523
     },
     {
       "src": "AAVE",
@@ -3767,8 +3767,8 @@
       "funding_diff_mean": 1.2112995302872692e-05,
       "max_abs_corr": 0.09099840919680613,
       "lag_at_best": 1,
-      "granger_f": 23.651027914658798,
-      "granger_p": 5.793040087836463e-28
+      "granger_f": 23.65102791465775,
+      "granger_p": 5.793040087856253e-28
     },
     {
       "src": "AAVE",
@@ -3778,8 +3778,8 @@
       "funding_diff_mean": 2.7784844939528964e-05,
       "max_abs_corr": 0.13409839384816993,
       "lag_at_best": 9,
-      "granger_f": 4.878082474828538,
-      "granger_p": 5.996237448119453e-05
+      "granger_f": 4.878082474828486,
+      "granger_p": 5.996237448120388e-05
     },
     {
       "src": "ADA",
@@ -3789,8 +3789,8 @@
       "funding_diff_mean": -2.0821419791666668e-05,
       "max_abs_corr": 0.2143017668642616,
       "lag_at_best": 1,
-      "granger_f": 18.65417814835119,
-      "granger_p": 1.1179705284258627e-21
+      "granger_f": 18.654178148351495,
+      "granger_p": 1.1179705284248792e-21
     },
     {
       "src": "ADA",
@@ -3811,8 +3811,8 @@
       "funding_diff_mean": 1.3048374531116798e-05,
       "max_abs_corr": 0.21254753683505337,
       "lag_at_best": 1,
-      "granger_f": 76.03773219513859,
-      "granger_p": 6.502406550234484e-91
+      "granger_f": 76.03773219513847,
+      "granger_p": 6.502406550237063e-91
     },
     {
       "src": "ADA",
@@ -3822,8 +3822,8 @@
       "funding_diff_mean": -2.082191944475921e-05,
       "max_abs_corr": 0.10450903894828932,
       "lag_at_best": 1,
-      "granger_f": 3.299035249613146,
-      "granger_p": 0.00303475688638473
+      "granger_f": 3.299035249613419,
+      "granger_p": 0.003034756886382208
     },
     {
       "src": "ADA",
@@ -3833,8 +3833,8 @@
       "funding_diff_mean": -1.762522517985612e-05,
       "max_abs_corr": 0.16350479188936629,
       "lag_at_best": 1,
-      "granger_f": 1.1261155663452047,
-      "granger_p": 0.34561236273809265
+      "granger_f": 1.126115566345219,
+      "granger_p": 0.3456123627380843
     },
     {
       "src": "ADA",
@@ -3866,8 +3866,8 @@
       "funding_diff_mean": -1.7817148168498167e-05,
       "max_abs_corr": 0.12784546010218237,
       "lag_at_best": 1,
-      "granger_f": 0.3404251125861093,
-      "granger_p": 0.9153889526337141
+      "granger_f": 0.34042511258609576,
+      "granger_p": 0.9153889526337218
     },
     {
       "src": "ADA",
@@ -3877,8 +3877,8 @@
       "funding_diff_mean": 1.3048622226962459e-05,
       "max_abs_corr": 0.14672996330634608,
       "lag_at_best": 1,
-      "granger_f": 9.444765353168899,
-      "granger_p": 2.4713875653009597e-10
+      "granger_f": 9.444765353168693,
+      "granger_p": 2.471387565302351e-10
     },
     {
       "src": "ADA",
@@ -3899,8 +3899,8 @@
       "funding_diff_mean": -1.7743561759425496e-05,
       "max_abs_corr": 0.12140869163642858,
       "lag_at_best": 15,
-      "granger_f": 0.5563323090833623,
-      "granger_p": 0.765116822828234
+      "granger_f": 0.5563323090833477,
+      "granger_p": 0.7651168228282452
     },
     {
       "src": "ADA",
@@ -3932,8 +3932,8 @@
       "funding_diff_mean": -1.7507877522123895e-05,
       "max_abs_corr": 0.40806412791364555,
       "lag_at_best": 17,
-      "granger_f": 1.0204716840440857,
-      "granger_p": 0.4108704405299591
+      "granger_f": 1.0204716840440684,
+      "granger_p": 0.41087044052997457
     },
     {
       "src": "ADA",
@@ -3943,8 +3943,8 @@
       "funding_diff_mean": 1.306996628997868e-05,
       "max_abs_corr": 0.22955347286673852,
       "lag_at_best": 1,
-      "granger_f": 6.192050392752282,
-      "granger_p": 1.7442416958514107e-06
+      "granger_f": 6.192050392752455,
+      "granger_p": 1.744241695850617e-06
     },
     {
       "src": "ADA",
@@ -3965,8 +3965,8 @@
       "funding_diff_mean": -1.75582e-05,
       "max_abs_corr": 0.11845124533500714,
       "lag_at_best": 1,
-      "granger_f": 0.4339357686289716,
-      "granger_p": 0.8562968395646167
+      "granger_f": 0.43393576862893507,
+      "granger_p": 0.856296839564642
     },
     {
       "src": "ADA",
@@ -3976,8 +3976,8 @@
       "funding_diff_mean": 1.308479690237129e-05,
       "max_abs_corr": 0.2249522352110187,
       "lag_at_best": 1,
-      "granger_f": 32.918985688876376,
-      "granger_p": 4.523625571295293e-39
+      "granger_f": 32.91898568887618,
+      "granger_p": 4.52362557129768e-39
     },
     {
       "src": "ADA",
@@ -3987,8 +3987,8 @@
       "funding_diff_mean": -2.082077854315123e-05,
       "max_abs_corr": 0.10702285990497339,
       "lag_at_best": 1,
-      "granger_f": 2.698520057564351,
-      "granger_p": 0.012820025083575366
+      "granger_f": 2.6985200575645525,
+      "granger_p": 0.01282002508357076
     },
     {
       "src": "ADA",
@@ -3998,8 +3998,8 @@
       "funding_diff_mean": -1.7743561759425496e-05,
       "max_abs_corr": 0.10413876030760492,
       "lag_at_best": 1,
-      "granger_f": 0.33461959274706726,
-      "granger_p": 0.9186454191541568
+      "granger_f": 0.33461959274708086,
+      "granger_p": 0.9186454191541493
     },
     {
       "src": "ADA",
@@ -4009,8 +4009,8 @@
       "funding_diff_mean": 1.3012338795488404e-05,
       "max_abs_corr": 0.16785822613548562,
       "lag_at_best": 1,
-      "granger_f": 38.00634943941384,
-      "granger_p": 2.6947779896313272e-45
+      "granger_f": 38.006349439413974,
+      "granger_p": 2.6947779896306103e-45
     },
     {
       "src": "ADA",
@@ -4020,8 +4020,8 @@
       "funding_diff_mean": -2.0812173506111364e-05,
       "max_abs_corr": 0.10075469811754437,
       "lag_at_best": 1,
-      "granger_f": 2.2348441747724985,
-      "granger_p": 0.03707935721130011
+      "granger_f": 2.234844174772775,
+      "granger_p": 0.03707935721127703
     },
     {
       "src": "ADA",
@@ -4042,8 +4042,8 @@
       "funding_diff_mean": 1.3048622226962459e-05,
       "max_abs_corr": 0.19901904303189918,
       "lag_at_best": 1,
-      "granger_f": 14.461714092990182,
-      "granger_p": 2.0381488499164713e-16
+      "granger_f": 14.461714092990343,
+      "granger_p": 2.038148849915537e-16
     },
     {
       "src": "ADA",
@@ -4053,8 +4053,8 @@
       "funding_diff_mean": -2.081329944444445e-05,
       "max_abs_corr": 0.1639785675028847,
       "lag_at_best": 1,
-      "granger_f": 6.0954111867012655,
-      "granger_p": 2.1986618122194715e-06
+      "granger_f": 6.095411186701444,
+      "granger_p": 2.1986618122184195e-06
     },
     {
       "src": "ADA",
@@ -4064,8 +4064,8 @@
       "funding_diff_mean": -1.7591449721706863e-05,
       "max_abs_corr": 0.10357504871976257,
       "lag_at_best": 1,
-      "granger_f": 0.3645486953420531,
-      "granger_p": 0.9013122083092039
+      "granger_f": 0.36454869534208223,
+      "granger_p": 0.9013122083091863
     },
     {
       "src": "ADA",
@@ -4075,8 +4075,8 @@
       "funding_diff_mean": 1.3089931196581198e-05,
       "max_abs_corr": 0.20578794031748554,
       "lag_at_best": 1,
-      "granger_f": 55.76497694121822,
-      "granger_p": 8.424374035530368e-67
+      "granger_f": 55.76497694121782,
+      "granger_p": 8.424374035539888e-67
     },
     {
       "src": "ADA",
@@ -4086,8 +4086,8 @@
       "funding_diff_mean": -2.0812173506111364e-05,
       "max_abs_corr": 0.060131012848057344,
       "lag_at_best": 2,
-      "granger_f": 2.2566513044374332,
-      "granger_p": 0.03531624135675697
+      "granger_f": 2.2566513044378382,
+      "granger_p": 0.03531624135672528
     },
     {
       "src": "ADA",
@@ -4097,8 +4097,8 @@
       "funding_diff_mean": -1.7765086799276673e-05,
       "max_abs_corr": 0.27179315114122893,
       "lag_at_best": 14,
-      "granger_f": 2.4150544767399915,
-      "granger_p": 0.025956038896938507
+      "granger_f": 2.41505447673997,
+      "granger_p": 0.025956038896939704
     },
     {
       "src": "ADA",
@@ -4108,8 +4108,8 @@
       "funding_diff_mean": 1.3048622226962459e-05,
       "max_abs_corr": 0.19794421223009834,
       "lag_at_best": 1,
-      "granger_f": 77.27173399090692,
-      "granger_p": 2.3213817012846276e-92
+      "granger_f": 77.27173399090677,
+      "granger_p": 2.321381701285613e-92
     },
     {
       "src": "ADA",
@@ -4119,8 +4119,8 @@
       "funding_diff_mean": -2.0821063381237978e-05,
       "max_abs_corr": 0.06561263682384559,
       "lag_at_best": 1,
-      "granger_f": 1.0579352492913667,
-      "granger_p": 0.3854863646642986
+      "granger_f": 1.057935249291601,
+      "granger_p": 0.3854863646640434
     },
     {
       "src": "ADA",
@@ -4141,8 +4141,8 @@
       "funding_diff_mean": 1.302528544371143e-05,
       "max_abs_corr": 0.18869962502955956,
       "lag_at_best": 1,
-      "granger_f": 33.19299895826105,
-      "granger_p": 2.0732709324197843e-39
+      "granger_f": 33.19299895826094,
+      "granger_p": 2.0732709324203327e-39
     },
     {
       "src": "ADA",
@@ -4240,8 +4240,8 @@
       "funding_diff_mean": 1.306159925341297e-05,
       "max_abs_corr": 0.23222517717813795,
       "lag_at_best": 1,
-      "granger_f": 20.411145323119552,
-      "granger_p": 1.0342760050393158e-23
+      "granger_f": 20.411145323119758,
+      "granger_p": 1.0342760050387085e-23
     },
     {
       "src": "AVAX",
@@ -4273,8 +4273,8 @@
       "funding_diff_mean": -9.799770107729318e-06,
       "max_abs_corr": 0.15190349919417181,
       "lag_at_best": 1,
-      "granger_f": 17.13575342741756,
-      "granger_p": 8.363827451960251e-20
+      "granger_f": 17.135753427417793,
+      "granger_p": 8.363827451955992e-20
     },
     {
       "src": "AVAX",
@@ -4284,8 +4284,8 @@
       "funding_diff_mean": 1.6908748580301687e-05,
       "max_abs_corr": 0.18726754713761562,
       "lag_at_best": 1,
-      "granger_f": 28.824077688025387,
-      "granger_p": 5.028641674914019e-34
+      "granger_f": 28.824077688025483,
+      "granger_p": 5.028641674912818e-34
     },
     {
       "src": "AVAX",
@@ -4295,8 +4295,8 @@
       "funding_diff_mean": -9.799770107729318e-06,
       "max_abs_corr": 0.048320588474349474,
       "lag_at_best": 22,
-      "granger_f": 4.3771758089123045,
-      "granger_p": 0.00020149884698828123
+      "granger_f": 4.377175808912079,
+      "granger_p": 0.00020149884698836919
     },
     {
       "src": "AVAX",
@@ -4306,8 +4306,8 @@
       "funding_diff_mean": 1.693191380156076e-05,
       "max_abs_corr": 0.11236652616718046,
       "lag_at_best": 1,
-      "granger_f": 9.31879414678583,
-      "granger_p": 3.5221643302238506e-10
+      "granger_f": 9.318794146785917,
+      "granger_p": 3.522164330223029e-10
     },
     {
       "src": "AVAX",
@@ -4339,8 +4339,8 @@
       "funding_diff_mean": -9.799770107729318e-06,
       "max_abs_corr": 0.17938727064546856,
       "lag_at_best": 2,
-      "granger_f": 34.136862736215974,
-      "granger_p": 5.060996302617188e-41
+      "granger_f": 34.13686273621574,
+      "granger_p": 5.060996302619862e-41
     },
     {
       "src": "AVAX",
@@ -4350,8 +4350,8 @@
       "funding_diff_mean": 1.6908748580301687e-05,
       "max_abs_corr": 0.18644073191233032,
       "lag_at_best": 1,
-      "granger_f": 19.42549652967511,
-      "granger_p": 1.7258228232829074e-22
+      "granger_f": 19.425496529674955,
+      "granger_p": 1.7258228232836792e-22
     },
     {
       "src": "AVAX",
@@ -4383,8 +4383,8 @@
       "funding_diff_mean": -9.799770107729318e-06,
       "max_abs_corr": 0.14787405441003137,
       "lag_at_best": 1,
-      "granger_f": 5.791276235066307,
-      "granger_p": 4.944312047884529e-06
+      "granger_f": 5.7912762350664915,
+      "granger_p": 4.944312047882199e-06
     },
     {
       "src": "AVAX",
@@ -4405,8 +4405,8 @@
       "funding_diff_mean": -9.799770107729318e-06,
       "max_abs_corr": 0.1341036290920175,
       "lag_at_best": 1,
-      "granger_f": 12.787654281400888,
-      "granger_p": 1.9433068644591863e-14
+      "granger_f": 12.787654281401153,
+      "granger_p": 1.943306864458226e-14
     },
     {
       "src": "AVAX",
@@ -4416,8 +4416,8 @@
       "funding_diff_mean": 1.6926978485523387e-05,
       "max_abs_corr": 0.18433430934245965,
       "lag_at_best": 1,
-      "granger_f": 45.57212845039242,
-      "granger_p": 1.9752777131937713e-54
+      "granger_f": 45.57212845039226,
+      "granger_p": 1.9752777131946635e-54
     },
     {
       "src": "AVAX",
@@ -4449,8 +4449,8 @@
       "funding_diff_mean": -9.799770107729318e-06,
       "max_abs_corr": 0.07896103483850091,
       "lag_at_best": 1,
-      "granger_f": 2.738844161149109,
-      "granger_p": 0.011657813941068606
+      "granger_f": 2.7388441611494763,
+      "granger_p": 0.011657813941058984
     },
     {
       "src": "AVAX",
@@ -4460,8 +4460,8 @@
       "funding_diff_mean": 1.6925007435440787e-05,
       "max_abs_corr": 0.18465437188565506,
       "lag_at_best": 1,
-      "granger_f": 145.4884274655425,
-      "granger_p": 4.6439426118181623e-169
+      "granger_f": 145.48842746554234,
+      "granger_p": 4.6439426118202687e-169
     },
     {
       "src": "AVAX",
@@ -4471,8 +4471,8 @@
       "funding_diff_mean": -9.799770107729318e-06,
       "max_abs_corr": 0.10374132789476496,
       "lag_at_best": 1,
-      "granger_f": 1.3068776862700984,
-      "granger_p": 0.25008501597147614
+      "granger_f": 1.3068776862698637,
+      "granger_p": 0.25008501597154
     },
     {
       "src": "AVAX",
@@ -4482,8 +4482,8 @@
       "funding_diff_mean": 1.6908748580301687e-05,
       "max_abs_corr": 0.18541550776023857,
       "lag_at_best": 1,
-      "granger_f": 6.113004944608093,
-      "granger_p": 2.1593205278937128e-06
+      "granger_f": 6.113004944608188,
+      "granger_p": 2.159320527893167e-06
     },
     {
       "src": "AVAX",
@@ -4493,8 +4493,8 @@
       "funding_diff_mean": -9.799770107729318e-06,
       "max_abs_corr": 0.10073060483964434,
       "lag_at_best": 1,
-      "granger_f": 5.589228908072162,
-      "granger_p": 8.461988881163054e-06
+      "granger_f": 5.589228908071916,
+      "granger_p": 8.461988881171348e-06
     },
     {
       "src": "AVAX",
@@ -4526,8 +4526,8 @@
       "funding_diff_mean": 1.6908748580301687e-05,
       "max_abs_corr": 0.20434452683278467,
       "lag_at_best": 1,
-      "granger_f": 46.57158192069583,
-      "granger_p": 1.2024831226450195e-55
+      "granger_f": 46.57158192069582,
+      "granger_p": 1.2024831226450535e-55
     },
     {
       "src": "AVAX",
@@ -4537,8 +4537,8 @@
       "funding_diff_mean": -9.799972311715483e-06,
       "max_abs_corr": 0.07345677122771999,
       "lag_at_best": 1,
-      "granger_f": 2.0461682344682472,
-      "granger_p": 0.05617507070533437
+      "granger_f": 2.0461682344684298,
+      "granger_p": 0.056175070705312094
     },
     {
       "src": "AVAX",
@@ -4548,8 +4548,8 @@
       "funding_diff_mean": 1.6908748580301687e-05,
       "max_abs_corr": 0.1622672544515507,
       "lag_at_best": 1,
-      "granger_f": 12.423261122009757,
-      "granger_p": 6.281991116295964e-14
+      "granger_f": 12.423261122009574,
+      "granger_p": 6.281991116299223e-14
     },
     {
       "src": "BNB",
@@ -4614,8 +4614,8 @@
       "funding_diff_mean": 1.5939792853058893e-05,
       "max_abs_corr": 0.13537031113191583,
       "lag_at_best": 1,
-      "granger_f": 15.474276727652956,
-      "granger_p": 1.3556665726643675e-17
+      "granger_f": 15.474276727653054,
+      "granger_p": 1.35566657266399e-17
     },
     {
       "src": "BNB",
@@ -4647,8 +4647,8 @@
       "funding_diff_mean": 3.031374345847556e-06,
       "max_abs_corr": 0.06116062004423822,
       "lag_at_best": 2,
-      "granger_f": 2.984452603401531,
-      "granger_p": 0.00650027388770704
+      "granger_f": 2.984452603401322,
+      "granger_p": 0.0065002738877096705
     },
     {
       "src": "BNB",
@@ -4691,8 +4691,8 @@
       "funding_diff_mean": 3.0426883676943467e-06,
       "max_abs_corr": 0.09498968082595219,
       "lag_at_best": 14,
-      "granger_f": 9.779080515200052,
-      "granger_p": 8.97635788233613e-11
+      "granger_f": 9.779080515200812,
+      "granger_p": 8.9763578823171e-11
     },
     {
       "src": "BNB",
@@ -4757,8 +4757,8 @@
       "funding_diff_mean": 3.0426883676943467e-06,
       "max_abs_corr": 0.04189720389618544,
       "lag_at_best": 2,
-      "granger_f": 2.7485022627211215,
-      "granger_p": 0.011391174544259761
+      "granger_f": 2.7485022627206974,
+      "granger_p": 0.01139117454426962
     },
     {
       "src": "BNB",
@@ -4779,8 +4779,8 @@
       "funding_diff_mean": 3.040082380772144e-06,
       "max_abs_corr": 0.1541037686298976,
       "lag_at_best": 2,
-      "granger_f": 45.63175391074079,
-      "granger_p": 1.8266460005518975e-55
+      "granger_f": 45.631753910741054,
+      "granger_p": 1.8266460005505058e-55
     },
     {
       "src": "BNB",
@@ -4790,8 +4790,8 @@
       "funding_diff_mean": 1.5939792853058893e-05,
       "max_abs_corr": 0.1294389808431087,
       "lag_at_best": 1,
-      "granger_f": 10.281893165066535,
-      "granger_p": 2.5837050658191553e-11
+      "granger_f": 10.281893165066377,
+      "granger_p": 2.5837050658202927e-11
     },
     {
       "src": "BNB",
@@ -4801,8 +4801,8 @@
       "funding_diff_mean": 3.0352970446149487e-06,
       "max_abs_corr": 0.09434817559261079,
       "lag_at_best": 2,
-      "granger_f": 13.177992322813397,
-      "granger_p": 6.35808697283241e-15
+      "granger_f": 13.177992322813802,
+      "granger_p": 6.358086972825294e-15
     },
     {
       "src": "BNB",
@@ -4823,8 +4823,8 @@
       "funding_diff_mean": 3.0352970446149487e-06,
       "max_abs_corr": 0.0190291713594303,
       "lag_at_best": 2,
-      "granger_f": 1.5044930877772884,
-      "granger_p": 0.17218775891331897
+      "granger_f": 1.5044930877769573,
+      "granger_p": 0.1721877589133598
     },
     {
       "src": "BNB",
@@ -4834,8 +4834,8 @@
       "funding_diff_mean": 1.5939792853058893e-05,
       "max_abs_corr": 0.12707043943568694,
       "lag_at_best": 1,
-      "granger_f": 2.055278382114664,
-      "granger_p": 0.055260447356396104
+      "granger_f": 2.0552783821145426,
+      "granger_p": 0.055260447356410655
     },
     {
       "src": "BNB",
@@ -4856,8 +4856,8 @@
       "funding_diff_mean": 1.5939792853058893e-05,
       "max_abs_corr": 0.15350496973842578,
       "lag_at_best": 1,
-      "granger_f": 9.62221827927024,
-      "granger_p": 1.5941187675330177e-10
+      "granger_f": 9.622218279270374,
+      "granger_p": 1.5941187675324317e-10
     },
     {
       "src": "BTC",
@@ -4900,8 +4900,8 @@
       "funding_diff_mean": 1.0829673447394736e-05,
       "max_abs_corr": 0.1601650013579742,
       "lag_at_best": 1,
-      "granger_f": 29.07050528840036,
-      "granger_p": 1.1514393661475204e-34
+      "granger_f": 29.070505288399804,
+      "granger_p": 1.1514393661492336e-34
     },
     {
       "src": "BTC",
@@ -4911,8 +4911,8 @@
       "funding_diff_mean": 1.2500000000000002e-05,
       "max_abs_corr": 0.0786295458218966,
       "lag_at_best": 1,
-      "granger_f": 2.6805846228163306,
-      "granger_p": 0.01351094184029503
+      "granger_f": 2.6805846228162613,
+      "granger_p": 0.01351094184029616
     },
     {
       "src": "BTC",
@@ -4922,8 +4922,8 @@
       "funding_diff_mean": 1.9177034723877636e-05,
       "max_abs_corr": 0.10154885324590582,
       "lag_at_best": 1,
-      "granger_f": 1.0126448921931896,
-      "granger_p": 0.4150239304114252
+      "granger_f": 1.0126448921931406,
+      "granger_p": 0.41502393041145447
     },
     {
       "src": "BTC",
@@ -4933,8 +4933,8 @@
       "funding_diff_mean": 1.0828534587135546e-05,
       "max_abs_corr": 0.16019511620902044,
       "lag_at_best": 1,
-      "granger_f": 16.56325713893527,
-      "granger_p": 4.349170603306612e-19
+      "granger_f": 16.563257138935516,
+      "granger_p": 4.34917060330349e-19
     },
     {
       "src": "BTC",
@@ -4955,8 +4955,8 @@
       "funding_diff_mean": 1.9177034723877636e-05,
       "max_abs_corr": 0.10342738498535879,
       "lag_at_best": 1,
-      "granger_f": 2.4415782257998657,
-      "granger_p": 0.0234419546779166
+      "granger_f": 2.441578225799817,
+      "granger_p": 0.02344195467791907
     },
     {
       "src": "BTC",
@@ -5010,8 +5010,8 @@
       "funding_diff_mean": 1.2500000000000002e-05,
       "max_abs_corr": 0.21550133130929097,
       "lag_at_best": 1,
-      "granger_f": 10.89301018113895,
-      "granger_p": 5.2454112342261515e-12
+      "granger_f": 10.893010181139045,
+      "granger_p": 5.245411234224796e-12
     },
     {
       "src": "BTC",
@@ -5032,8 +5032,8 @@
       "funding_diff_mean": 1.0844212794199667e-05,
       "max_abs_corr": 0.1616824283712803,
       "lag_at_best": 1,
-      "granger_f": 27.749179131382725,
-      "granger_p": 5.161636209532341e-33
+      "granger_f": 27.749179131382512,
+      "granger_p": 5.161636209534874e-33
     },
     {
       "src": "BTC",
@@ -5043,8 +5043,8 @@
       "funding_diff_mean": 1.2500000000000004e-05,
       "max_abs_corr": 0.12425162826622521,
       "lag_at_best": 1,
-      "granger_f": 5.632808830088051,
-      "granger_p": 8.033391502063669e-06
+      "granger_f": 5.6328088300881625,
+      "granger_p": 8.033391502061663e-06
     },
     {
       "src": "BTC",
@@ -5054,8 +5054,8 @@
       "funding_diff_mean": 1.918500254574384e-05,
       "max_abs_corr": 0.08315619612912903,
       "lag_at_best": 1,
-      "granger_f": 0.702701128938221,
-      "granger_p": 0.647468420556985
+      "granger_f": 0.7027011289382817,
+      "granger_p": 0.6474684205569359
     },
     {
       "src": "BTC",
@@ -5109,8 +5109,8 @@
       "funding_diff_mean": 1.25e-05,
       "max_abs_corr": 0.12254774381195009,
       "lag_at_best": 1,
-      "granger_f": 1.4576734021567364,
-      "granger_p": 0.1888608384580568
+      "granger_f": 1.4576734021566269,
+      "granger_p": 0.18886083845809631
     },
     {
       "src": "BTC",
@@ -5120,8 +5120,8 @@
       "funding_diff_mean": 1.9177034723877636e-05,
       "max_abs_corr": 0.08434413051460743,
       "lag_at_best": 1,
-      "granger_f": 1.4082960631417767,
-      "granger_p": 0.2074582565389125
+      "granger_f": 1.408296063141844,
+      "granger_p": 0.20745825653889913
     },
     {
       "src": "BTC",
@@ -5131,8 +5131,8 @@
       "funding_diff_mean": 1.085242306919643e-05,
       "max_abs_corr": 0.15499925457056243,
       "lag_at_best": 1,
-      "granger_f": 41.253899117439595,
-      "granger_p": 7.067286255732843e-50
+      "granger_f": 41.2538991174396,
+      "granger_p": 7.067286255732743e-50
     },
     {
       "src": "BTC",
@@ -5164,8 +5164,8 @@
       "funding_diff_mean": 1.0853689626001782e-05,
       "max_abs_corr": 0.07457351324265966,
       "lag_at_best": 1,
-      "granger_f": 7.319294082672464,
-      "granger_p": 8.031333071294236e-08
+      "granger_f": 7.3192940826727915,
+      "granger_p": 8.031333071287001e-08
     },
     {
       "src": "BTC",
@@ -5175,8 +5175,8 @@
       "funding_diff_mean": 1.25e-05,
       "max_abs_corr": 0.07247738907662947,
       "lag_at_best": 1,
-      "granger_f": 0.8619036530669094,
-      "granger_p": 0.5221715652572219
+      "granger_f": 0.8619036530670487,
+      "granger_p": 0.5221715652571175
     },
     {
       "src": "BTC",
@@ -5186,8 +5186,8 @@
       "funding_diff_mean": 1.9177034723877636e-05,
       "max_abs_corr": 0.13055886466934977,
       "lag_at_best": 1,
-      "granger_f": 3.480789110281065,
-      "granger_p": 0.001980781289437233
+      "granger_f": 3.4807891102811364,
+      "granger_p": 0.0019807812894367515
     },
     {
       "src": "BTC",
@@ -5208,8 +5208,8 @@
       "funding_diff_mean": 1.2500000000000004e-05,
       "max_abs_corr": 0.12733424753208616,
       "lag_at_best": 1,
-      "granger_f": 1.1787440532400602,
-      "granger_p": 0.3145846777496858
+      "granger_f": 1.1787440532399962,
+      "granger_p": 0.3145846777497206
     },
     {
       "src": "BTC",
@@ -5230,8 +5230,8 @@
       "funding_diff_mean": 1.0827629666295885e-05,
       "max_abs_corr": 0.1555591452985977,
       "lag_at_best": 1,
-      "granger_f": 40.15168088048399,
-      "granger_p": 1.6681245642291432e-48
+      "granger_f": 40.15168088048341,
+      "granger_p": 1.6681245642318937e-48
     },
     {
       "src": "BTC",
@@ -5252,8 +5252,8 @@
       "funding_diff_mean": 1.9177034723877636e-05,
       "max_abs_corr": 0.0821399945766946,
       "lag_at_best": 1,
-      "granger_f": 0.9519183095272103,
-      "granger_p": 0.4564992514906451
+      "granger_f": 0.9519183095272925,
+      "granger_p": 0.4564992514905871
     },
     {
       "src": "BTC",
@@ -5263,8 +5263,8 @@
       "funding_diff_mean": 1.0827629666295885e-05,
       "max_abs_corr": 0.14484660325104537,
       "lag_at_best": 1,
-      "granger_f": 34.14526185617987,
-      "granger_p": 5.273608501018812e-41
+      "granger_f": 34.14526185617959,
+      "granger_p": 5.273608501023042e-41
     },
     {
       "src": "BTC",
@@ -5296,8 +5296,8 @@
       "funding_diff_mean": 1.0828348558708962e-05,
       "max_abs_corr": 0.1363888633873429,
       "lag_at_best": 1,
-      "granger_f": 5.258752949578617,
-      "granger_p": 2.0305437540951142e-05
+      "granger_f": 5.258752949578425,
+      "granger_p": 2.0305437540959904e-05
     },
     {
       "src": "BTC",
@@ -5329,8 +5329,8 @@
       "funding_diff_mean": 6.452736890140848e-06,
       "max_abs_corr": 0.15330076930791128,
       "lag_at_best": 1,
-      "granger_f": 6.989932381526453,
-      "granger_p": 1.9684798533662192e-07
+      "granger_f": 6.989932381526187,
+      "granger_p": 1.968479853368022e-07
     },
     {
       "src": "CRV",
@@ -5373,8 +5373,8 @@
       "funding_diff_mean": 8.073800000000002e-06,
       "max_abs_corr": 0.42545520791476377,
       "lag_at_best": 9,
-      "granger_f": 0.3258343112566675,
-      "granger_p": 0.9234961310571235
+      "granger_f": 0.32583431125665535,
+      "granger_p": 0.9234961310571299
     },
     {
       "src": "CRV",
@@ -5384,8 +5384,8 @@
       "funding_diff_mean": 1.871590906905595e-05,
       "max_abs_corr": 0.16767607055834097,
       "lag_at_best": 1,
-      "granger_f": 2.5502912871776307,
-      "granger_p": 0.018167490828399635
+      "granger_f": 2.5502912871775405,
+      "granger_p": 0.018167490828403125
     },
     {
       "src": "CRV",
@@ -5395,8 +5395,8 @@
       "funding_diff_mean": 6.452736890140848e-06,
       "max_abs_corr": 0.0830464101862328,
       "lag_at_best": 1,
-      "granger_f": 3.0842743337947507,
-      "granger_p": 0.005116463884221624
+      "granger_f": 3.0842743337945078,
+      "granger_p": 0.005116463884223427
     },
     {
       "src": "CRV",
@@ -5417,7 +5417,7 @@
       "funding_diff_mean": 1.873088716319825e-05,
       "max_abs_corr": 0.1641211212696369,
       "lag_at_best": 1,
-      "granger_f": 15.594528228226514,
+      "granger_f": 15.594528228226515,
       "granger_p": 8.491847190874573e-18
     },
     {
@@ -5472,8 +5472,8 @@
       "funding_diff_mean": 8.073800000000002e-06,
       "max_abs_corr": 0.18662186508827167,
       "lag_at_best": 17,
-      "granger_f": 0.6077216522966608,
-      "granger_p": 0.7242698631111244
+      "granger_f": 0.607721652296647,
+      "granger_p": 0.7242698631111355
     },
     {
       "src": "CRV",
@@ -5483,8 +5483,8 @@
       "funding_diff_mean": 1.8729522536136667e-05,
       "max_abs_corr": 0.14926395411217022,
       "lag_at_best": 1,
-      "granger_f": 16.8598419360812,
-      "granger_p": 2.398365960885324e-19
+      "granger_f": 16.859841936081196,
+      "granger_p": 2.39836596088534e-19
     },
     {
       "src": "CRV",
@@ -5494,8 +5494,8 @@
       "funding_diff_mean": 6.450175679945833e-06,
       "max_abs_corr": 0.0665340481561528,
       "lag_at_best": 7,
-      "granger_f": 3.717942877301893,
-      "granger_p": 0.0010751468965351182
+      "granger_f": 3.7179428773020615,
+      "granger_p": 0.0010751468965346776
     },
     {
       "src": "CRV",
@@ -5560,8 +5560,8 @@
       "funding_diff_mean": 6.452736890140848e-06,
       "max_abs_corr": 0.0923109924647943,
       "lag_at_best": 1,
-      "granger_f": 2.1737594754031098,
-      "granger_p": 0.04246930485241249
+      "granger_f": 2.1737594754028207,
+      "granger_p": 0.04246930485242378
     },
     {
       "src": "CRV",
@@ -5604,8 +5604,8 @@
       "funding_diff_mean": 8.073800000000002e-06,
       "max_abs_corr": 0.18134933251333626,
       "lag_at_best": 9,
-      "granger_f": 0.8005956273593565,
-      "granger_p": 0.5696539484792636
+      "granger_f": 0.8005956273593431,
+      "granger_p": 0.5696539484792736
     },
     {
       "src": "CRV",
@@ -5626,8 +5626,8 @@
       "funding_diff_mean": 6.452736890140848e-06,
       "max_abs_corr": 0.07178156219801916,
       "lag_at_best": 1,
-      "granger_f": 2.8054846710027785,
-      "granger_p": 0.009965175741516622
+      "granger_f": 2.80548467100258,
+      "granger_p": 0.009965175741520286
     },
     {
       "src": "CRV",
@@ -5637,8 +5637,8 @@
       "funding_diff_mean": 8.073800000000002e-06,
       "max_abs_corr": 0.35335732585778473,
       "lag_at_best": 7,
-      "granger_f": 1.0093143217086498,
-      "granger_p": 0.41808553231525925
+      "granger_f": 1.009314321708625,
+      "granger_p": 0.41808553231527334
     },
     {
       "src": "CRV",
@@ -5648,8 +5648,8 @@
       "funding_diff_mean": 1.875280279182238e-05,
       "max_abs_corr": 0.16524927075941603,
       "lag_at_best": 1,
-      "granger_f": 33.27020762595605,
-      "granger_p": 1.77768545038443e-39
+      "granger_f": 33.27020762595619,
+      "granger_p": 1.7776854503839786e-39
     },
     {
       "src": "CRV",
@@ -5703,8 +5703,8 @@
       "funding_diff_mean": 8.073800000000002e-06,
       "max_abs_corr": 0.24342715661718825,
       "lag_at_best": 17,
-      "granger_f": 0.7004786026675791,
-      "granger_p": 0.6493385509461027
+      "granger_f": 0.700478602667557,
+      "granger_p": 0.6493385509461206
     },
     {
       "src": "CRV",
@@ -5725,8 +5725,8 @@
       "funding_diff_mean": 6.452736890140848e-06,
       "max_abs_corr": 0.029874394213990598,
       "lag_at_best": 1,
-      "granger_f": 1.2316832193984144,
-      "granger_p": 0.2863917383940696
+      "granger_f": 1.2316832193981286,
+      "granger_p": 0.28639173839425147
     },
     {
       "src": "CRV",
@@ -5747,8 +5747,8 @@
       "funding_diff_mean": 1.8729522536136667e-05,
       "max_abs_corr": 0.16413868291119635,
       "lag_at_best": 1,
-      "granger_f": 48.41396791194955,
-      "granger_p": 6.778130237250524e-58
+      "granger_f": 48.41396791194975,
+      "granger_p": 6.778130237246892e-58
     },
     {
       "src": "CRV",
@@ -5758,8 +5758,8 @@
       "funding_diff_mean": 6.45255421455939e-06,
       "max_abs_corr": 0.10797574798856986,
       "lag_at_best": 7,
-      "granger_f": 4.847725093148859,
-      "granger_p": 5.964923180069248e-05
+      "granger_f": 4.847725093148858,
+      "granger_p": 5.964923180069249e-05
     },
     {
       "src": "CRV",
@@ -5780,8 +5780,8 @@
       "funding_diff_mean": 1.873088716319825e-05,
       "max_abs_corr": 0.1528743097300487,
       "lag_at_best": 1,
-      "granger_f": 18.523537160626404,
-      "granger_p": 2.1885547690523285e-21
+      "granger_f": 18.52353716062622,
+      "granger_p": 2.1885547690534182e-21
     },
     {
       "src": "DOGE",
@@ -5802,8 +5802,8 @@
       "funding_diff_mean": -3.2612e-06,
       "max_abs_corr": 0.1605139952713619,
       "lag_at_best": 10,
-      "granger_f": 1.475497345815326,
-      "granger_p": 0.18385049752175245
+      "granger_f": 1.4754973458153122,
+      "granger_p": 0.1838504975217574
     },
     {
       "src": "DOGE",
@@ -5846,8 +5846,8 @@
       "funding_diff_mean": 1.633427548956316e-05,
       "max_abs_corr": 0.15370495267762477,
       "lag_at_best": 1,
-      "granger_f": 24.922105759388646,
-      "granger_p": 2.9776459148689596e-29
+      "granger_f": 24.922105759388746,
+      "granger_p": 2.977645914868192e-29
     },
     {
       "src": "DOGE",
@@ -5879,8 +5879,8 @@
       "funding_diff_mean": 1.633427548956316e-05,
       "max_abs_corr": 0.15268870121290773,
       "lag_at_best": 1,
-      "granger_f": 5.556029657635668,
-      "granger_p": 9.46522664679682e-06
+      "granger_f": 5.556029657635416,
+      "granger_p": 9.465226646803366e-06
     },
     {
       "src": "DOGE",
@@ -5901,8 +5901,8 @@
       "funding_diff_mean": -3.2612e-06,
       "max_abs_corr": 0.14872912014870796,
       "lag_at_best": 1,
-      "granger_f": 1.2525066976323893,
-      "granger_p": 0.27741242803352073
+      "granger_f": 1.2525066976324042,
+      "granger_p": 0.27741242803351335
     },
     {
       "src": "DOGE",
@@ -5934,8 +5934,8 @@
       "funding_diff_mean": -3.2612e-06,
       "max_abs_corr": 0.13849712469376407,
       "lag_at_best": 10,
-      "granger_f": 2.136106044664851,
-      "granger_p": 0.04744336673751869
+      "granger_f": 2.136106044664826,
+      "granger_p": 0.04744336673752131
     },
     {
       "src": "DOGE",
@@ -5945,8 +5945,8 @@
       "funding_diff_mean": 1.633427548956316e-05,
       "max_abs_corr": 0.14482128649364676,
       "lag_at_best": 1,
-      "granger_f": 6.927139025221572,
-      "granger_p": 2.4202819240689563e-07
+      "granger_f": 6.9271390252216625,
+      "granger_p": 2.420281924068388e-07
     },
     {
       "src": "DOGE",
@@ -5967,8 +5967,8 @@
       "funding_diff_mean": -3.2612e-06,
       "max_abs_corr": 0.15333895351093252,
       "lag_at_best": 3,
-      "granger_f": 3.550885574625281,
-      "granger_p": 0.0018037644259229011
+      "granger_f": 3.550885574625302,
+      "granger_p": 0.0018037644259228072
     },
     {
       "src": "DOGE",
@@ -5989,8 +5989,8 @@
       "funding_diff_mean": -4.79699935580352e-06,
       "max_abs_corr": 0.14569390991417439,
       "lag_at_best": 1,
-      "granger_f": 15.933097907796771,
-      "granger_p": 2.6384385090770398e-18
+      "granger_f": 15.933097907797007,
+      "granger_p": 2.638438509074547e-18
     },
     {
       "src": "DOGE",
@@ -6044,8 +6044,8 @@
       "funding_diff_mean": 1.6338405471779408e-05,
       "max_abs_corr": 0.1522315635280026,
       "lag_at_best": 1,
-      "granger_f": 15.849715131519183,
-      "granger_p": 4.1075454273118926e-18
+      "granger_f": 15.849715131519337,
+      "granger_p": 4.107545427310062e-18
     },
     {
       "src": "DOGE",
@@ -6099,7 +6099,7 @@
       "funding_diff_mean": -3.2612e-06,
       "max_abs_corr": 0.08718465615918124,
       "lag_at_best": 1,
-      "granger_f": 0.9027300929667186,
+      "granger_f": 0.9027300929667187,
       "granger_p": 0.4923039636210458
     },
     {
@@ -6121,8 +6121,8 @@
       "funding_diff_mean": -4.79699935580352e-06,
       "max_abs_corr": 0.06119837886282551,
       "lag_at_best": 3,
-      "granger_f": 6.776044616118292,
-      "granger_p": 3.517928490361417e-07
+      "granger_f": 6.776044616118038,
+      "granger_p": 3.5179284903628696e-07
     },
     {
       "src": "DOGE",
@@ -6154,8 +6154,8 @@
       "funding_diff_mean": -4.79699935580352e-06,
       "max_abs_corr": 0.06593063415003543,
       "lag_at_best": 1,
-      "granger_f": 1.3240135284720531,
-      "granger_p": 0.24236288728159752
+      "granger_f": 1.3240135284720533,
+      "granger_p": 0.24236288728159758
     },
     {
       "src": "DOGE",
@@ -6176,8 +6176,8 @@
       "funding_diff_mean": 1.633427548956316e-05,
       "max_abs_corr": 0.15266575439105573,
       "lag_at_best": 1,
-      "granger_f": 5.867354035129875,
-      "granger_p": 4.147187605785797e-06
+      "granger_f": 5.867354035130037,
+      "granger_p": 4.147187605783864e-06
     },
     {
       "src": "DOGE",
@@ -6187,8 +6187,8 @@
       "funding_diff_mean": -4.79699935580352e-06,
       "max_abs_corr": 0.02041985286025565,
       "lag_at_best": 1,
-      "granger_f": 4.409539377068347,
-      "granger_p": 0.00018565325554448705
+      "granger_f": 4.409539377068635,
+      "granger_p": 0.0001856532555444197
     },
     {
       "src": "DOGE",
@@ -6220,8 +6220,8 @@
       "funding_diff_mean": -4.79699935580352e-06,
       "max_abs_corr": 0.07852984449558037,
       "lag_at_best": 1,
-      "granger_f": 0.8631406359726032,
-      "granger_p": 0.5211326469750996
+      "granger_f": 0.8631406359723709,
+      "granger_p": 0.5211326469752748
     },
     {
       "src": "DOGE",
@@ -6231,8 +6231,8 @@
       "funding_diff_mean": -3.2612e-06,
       "max_abs_corr": 0.1588852531173549,
       "lag_at_best": 10,
-      "granger_f": 2.913437350441085,
-      "granger_p": 0.008205538591397398
+      "granger_f": 2.9134373504411077,
+      "granger_p": 0.008205538591393228
     },
     {
       "src": "DOGE",
@@ -6264,8 +6264,8 @@
       "funding_diff_mean": 5.280200000000002e-06,
       "max_abs_corr": 0.12088646886217842,
       "lag_at_best": 16,
-      "granger_f": 0.509344056113454,
-      "granger_p": 0.8015346557464836
+      "granger_f": 0.5093440561134351,
+      "granger_p": 0.8015346557464981
     },
     {
       "src": "ETH",
@@ -6286,8 +6286,8 @@
       "funding_diff_mean": 3.389810099247463e-06,
       "max_abs_corr": 0.15800941465815002,
       "lag_at_best": 1,
-      "granger_f": 7.986579695660386,
-      "granger_p": 1.2925771278691241e-08
+      "granger_f": 7.986579695660096,
+      "granger_p": 1.2925771278696944e-08
     },
     {
       "src": "ETH",
@@ -6297,8 +6297,8 @@
       "funding_diff_mean": 5.280200000000002e-06,
       "max_abs_corr": 0.22977537724895403,
       "lag_at_best": 12,
-      "granger_f": 0.7343959905937426,
-      "granger_p": 0.6220196920506251
+      "granger_f": 0.7343959905937272,
+      "granger_p": 0.6220196920506372
     },
     {
       "src": "ETH",
@@ -6308,8 +6308,8 @@
       "funding_diff_mean": 1.5973404372897645e-05,
       "max_abs_corr": 0.15861629965761714,
       "lag_at_best": 1,
-      "granger_f": 13.912262169283167,
-      "granger_p": 9.959416572634566e-16
+      "granger_f": 13.912262169283164,
+      "granger_p": 9.959416572634704e-16
     },
     {
       "src": "ETH",
@@ -6319,8 +6319,8 @@
       "funding_diff_mean": 3.385263408767901e-06,
       "max_abs_corr": 0.16680133235461267,
       "lag_at_best": 1,
-      "granger_f": 11.496845164651761,
-      "granger_p": 7.422434777626355e-13
+      "granger_f": 11.496845164651297,
+      "granger_p": 7.422434777633356e-13
     },
     {
       "src": "ETH",
@@ -6330,8 +6330,8 @@
       "funding_diff_mean": 5.280200000000002e-06,
       "max_abs_corr": 0.07093669455942571,
       "lag_at_best": 2,
-      "granger_f": 1.0081663508207237,
-      "granger_p": 0.41864154450194707
+      "granger_f": 1.0081663508207503,
+      "granger_p": 0.41864154450192953
     },
     {
       "src": "ETH",
@@ -6341,8 +6341,8 @@
       "funding_diff_mean": 1.5981893310875845e-05,
       "max_abs_corr": 0.11554178483412747,
       "lag_at_best": 1,
-      "granger_f": 16.586555539083676,
-      "granger_p": 5.440448863079816e-19
+      "granger_f": 16.586555539083587,
+      "granger_p": 5.44044886308114e-19
     },
     {
       "src": "ETH",
@@ -6363,8 +6363,8 @@
       "funding_diff_mean": 5.280200000000002e-06,
       "max_abs_corr": 0.14603401300672328,
       "lag_at_best": 4,
-      "granger_f": 3.2160334255063603,
-      "granger_p": 0.003994731732815981
+      "granger_f": 3.216033425506314,
+      "granger_p": 0.00399473173281442
     },
     {
       "src": "ETH",
@@ -6396,8 +6396,8 @@
       "funding_diff_mean": 5.280200000000002e-06,
       "max_abs_corr": 0.06631925806899422,
       "lag_at_best": 2,
-      "granger_f": 0.8097765265261235,
-      "granger_p": 0.562426975828658
+      "granger_f": 0.8097765265261497,
+      "granger_p": 0.5624269758286373
     },
     {
       "src": "ETH",
@@ -6407,8 +6407,8 @@
       "funding_diff_mean": 1.5975909834094734e-05,
       "max_abs_corr": 0.14607944619825303,
       "lag_at_best": 1,
-      "granger_f": 4.3512569237201655,
-      "granger_p": 0.00021903021129484536
+      "granger_f": 4.3512569237200145,
+      "granger_p": 0.00021903021129493272
     },
     {
       "src": "ETH",
@@ -6440,8 +6440,8 @@
       "funding_diff_mean": 1.597854533653846e-05,
       "max_abs_corr": 0.1340694785275762,
       "lag_at_best": 6,
-      "granger_f": 16.507992220642027,
-      "granger_p": 6.783102833298091e-19
+      "granger_f": 16.507992220642024,
+      "granger_p": 6.783102833298185e-19
     },
     {
       "src": "ETH",
@@ -6484,8 +6484,8 @@
       "funding_diff_mean": 3.390840396773489e-06,
       "max_abs_corr": 0.17347178874182292,
       "lag_at_best": 1,
-      "granger_f": 24.545312930142956,
-      "granger_p": 5.08367226815343e-29
+      "granger_f": 24.545312930142664,
+      "granger_p": 5.083672268157633e-29
     },
     {
       "src": "ETH",
@@ -6506,8 +6506,8 @@
       "funding_diff_mean": 1.59961170531401e-05,
       "max_abs_corr": 0.1566836944620885,
       "lag_at_best": 1,
-      "granger_f": 13.671863258814518,
-      "granger_p": 1.9573303446089444e-15
+      "granger_f": 13.671863258814595,
+      "granger_p": 1.9573303446085228e-15
     },
     {
       "src": "ETH",
@@ -6528,8 +6528,8 @@
       "funding_diff_mean": 5.280200000000002e-06,
       "max_abs_corr": 0.1262843261492391,
       "lag_at_best": 2,
-      "granger_f": 3.322891952972271,
-      "granger_p": 0.003095296635322491
+      "granger_f": 3.3228919529722987,
+      "granger_p": 0.003095296635322273
     },
     {
       "src": "ETH",
@@ -6550,8 +6550,8 @@
       "funding_diff_mean": 3.3904284125599637e-06,
       "max_abs_corr": 0.0741292684320972,
       "lag_at_best": 1,
-      "granger_f": 4.555132950089037,
-      "granger_p": 0.00012743489462146217
+      "granger_f": 4.555132950088732,
+      "granger_p": 0.00012743489462156352
     },
     {
       "src": "ETH",
@@ -6561,7 +6561,7 @@
       "funding_diff_mean": 5.280200000000002e-06,
       "max_abs_corr": 0.05251759637720777,
       "lag_at_best": 22,
-      "granger_f": 0.3397128608233455,
+      "granger_f": 0.33971286082334556,
       "granger_p": 0.9158946063495381
     },
     {
@@ -6583,8 +6583,8 @@
       "funding_diff_mean": 3.388985051827604e-06,
       "max_abs_corr": 0.17239210967795485,
       "lag_at_best": 1,
-      "granger_f": 7.089052119605742,
-      "granger_p": 1.5018340356512238e-07
+      "granger_f": 7.089052119605993,
+      "granger_p": 1.5018340356505586e-07
     },
     {
       "src": "ETH",
@@ -6638,8 +6638,8 @@
       "funding_diff_mean": 1.5974239125210288e-05,
       "max_abs_corr": 0.13658678265118682,
       "lag_at_best": 1,
-      "granger_f": 5.4490538000642745,
-      "granger_p": 1.2619185133428159e-05
+      "granger_f": 5.449053800064506,
+      "granger_p": 1.2619185133420383e-05
     },
     {
       "src": "ETH",
@@ -6715,8 +6715,8 @@
       "funding_diff_mean": 1.2040268620801036e-05,
       "max_abs_corr": 0.21991137986548268,
       "lag_at_best": 1,
-      "granger_f": 28.03962901345503,
-      "granger_p": 1.8259193003102794e-33
+      "granger_f": 28.039629013454686,
+      "granger_p": 1.825919300312075e-33
     },
     {
       "src": "LINK",
@@ -6737,8 +6737,8 @@
       "funding_diff_mean": 1.2040602485273949e-05,
       "max_abs_corr": 0.11343493266883965,
       "lag_at_best": 1,
-      "granger_f": 4.025535911899989,
-      "granger_p": 0.0004935203287025644
+      "granger_f": 4.025535911900315,
+      "granger_p": 0.0004935203287019583
     },
     {
       "src": "LINK",
@@ -6748,8 +6748,8 @@
       "funding_diff_mean": 2.5035830261593346e-05,
       "max_abs_corr": 0.17473265862852203,
       "lag_at_best": 1,
-      "granger_f": 0.9818892272289133,
-      "granger_p": 0.4358536302897411
+      "granger_f": 0.9818892272288495,
+      "granger_p": 0.4358536302897851
     },
     {
       "src": "LINK",
@@ -6770,8 +6770,8 @@
       "funding_diff_mean": 2.5035830261593346e-05,
       "max_abs_corr": 0.16556926076055428,
       "lag_at_best": 1,
-      "granger_f": 2.439999983526658,
-      "granger_p": 0.023665768354451933
+      "granger_f": 2.439999983526612,
+      "granger_p": 0.023665768354454157
     },
     {
       "src": "LINK",
@@ -6836,8 +6836,8 @@
       "funding_diff_mean": 2.5035830261593346e-05,
       "max_abs_corr": 0.190243648084522,
       "lag_at_best": 1,
-      "granger_f": 1.213397049332575,
-      "granger_p": 0.29631722800579585
+      "granger_f": 1.2133970493325166,
+      "granger_p": 0.29631722800582594
     },
     {
       "src": "LINK",
@@ -6847,8 +6847,8 @@
       "funding_diff_mean": 1.2039226820977664e-05,
       "max_abs_corr": 0.18568698837201136,
       "lag_at_best": 15,
-      "granger_f": 2.9113772526143795,
-      "granger_p": 0.007737247187188533
+      "granger_f": 2.9113772526146735,
+      "granger_p": 0.007737247187183293
     },
     {
       "src": "LINK",
@@ -6880,8 +6880,8 @@
       "funding_diff_mean": 2.5035830261593346e-05,
       "max_abs_corr": 0.15721754150500578,
       "lag_at_best": 1,
-      "granger_f": 6.443617649662085,
-      "granger_p": 9.970017032909415e-07
+      "granger_f": 6.443617649662134,
+      "granger_p": 9.970017032908168e-07
     },
     {
       "src": "LINK",
@@ -6902,8 +6902,8 @@
       "funding_diff_mean": 2.5035830261593346e-05,
       "max_abs_corr": 0.1683068335498801,
       "lag_at_best": 1,
-      "granger_f": 4.040267218086845,
-      "granger_p": 0.0005015462216130965
+      "granger_f": 4.040267218086892,
+      "granger_p": 0.0005015462216130389
     },
     {
       "src": "LINK",
@@ -6924,8 +6924,8 @@
       "funding_diff_mean": 2.5035830261593346e-05,
       "max_abs_corr": 0.12859680174165414,
       "lag_at_best": 1,
-      "granger_f": 4.947433995214032,
-      "granger_p": 4.981751222065238e-05
+      "granger_f": 4.947433995214033,
+      "granger_p": 4.981751222065231e-05
     },
     {
       "src": "LINK",
@@ -6946,8 +6946,8 @@
       "funding_diff_mean": 2.5035830261593346e-05,
       "max_abs_corr": 0.1619297721459774,
       "lag_at_best": 1,
-      "granger_f": 3.529061666921333,
-      "granger_p": 0.0017852103803836685
+      "granger_f": 3.5290616669213697,
+      "granger_p": 0.0017852103803835057
     },
     {
       "src": "LINK",
@@ -6968,8 +6968,8 @@
       "funding_diff_mean": 2.5035830261593346e-05,
       "max_abs_corr": 0.1577752115946492,
       "lag_at_best": 1,
-      "granger_f": 0.1584940236790774,
-      "granger_p": 0.9873723965089272
+      "granger_f": 0.15849402367901874,
+      "granger_p": 0.9873723965089396
     },
     {
       "src": "LINK",
@@ -6979,8 +6979,8 @@
       "funding_diff_mean": 1.2040045774761678e-05,
       "max_abs_corr": 0.038122725744522246,
       "lag_at_best": 1,
-      "granger_f": 5.885248147775388,
-      "granger_p": 3.825660013418341e-06
+      "granger_f": 5.8852481477751395,
+      "granger_p": 3.825660013420882e-06
     },
     {
       "src": "LINK",
@@ -7001,8 +7001,8 @@
       "funding_diff_mean": 1.203967388421734e-05,
       "max_abs_corr": 0.07590559378077676,
       "lag_at_best": 5,
-      "granger_f": 4.844898715973755,
-      "granger_p": 5.9787389947472616e-05
+      "granger_f": 4.8448987159740176,
+      "granger_p": 5.978738994743166e-05
     },
     {
       "src": "LINK",
@@ -7045,8 +7045,8 @@
       "funding_diff_mean": 1.1311846387772791e-05,
       "max_abs_corr": 0.1289634381572391,
       "lag_at_best": 1,
-      "granger_f": 6.025572490931034,
-      "granger_p": 2.6269380137750867e-06
+      "granger_f": 6.025572490931349,
+      "granger_p": 2.6269380137716385e-06
     },
     {
       "src": "LTC",
@@ -7056,8 +7056,8 @@
       "funding_diff_mean": 3.3534202526002975e-05,
       "max_abs_corr": 0.07578897587778524,
       "lag_at_best": 13,
-      "granger_f": 0.8804432792912533,
-      "granger_p": 0.5084208469218221
+      "granger_f": 0.8804432792912282,
+      "granger_p": 0.5084208469218408
     },
     {
       "src": "LTC",
@@ -7067,8 +7067,8 @@
       "funding_diff_mean": 1.1311846387772791e-05,
       "max_abs_corr": 0.12743555127401254,
       "lag_at_best": 1,
-      "granger_f": 22.64974697012228,
-      "granger_p": 1.0331650519052408e-26
+      "granger_f": 22.649746970121864,
+      "granger_p": 1.0331650519066735e-26
     },
     {
       "src": "LTC",
@@ -7089,8 +7089,8 @@
       "funding_diff_mean": 1.1311378168348049e-05,
       "max_abs_corr": 0.07935258128230356,
       "lag_at_best": 9,
-      "granger_f": 4.157166278271614,
-      "granger_p": 0.00035293578384548556
+      "granger_f": 4.157166278271889,
+      "granger_p": 0.00035293578384523814
     },
     {
       "src": "LTC",
@@ -7111,8 +7111,8 @@
       "funding_diff_mean": 1.1311846387772791e-05,
       "max_abs_corr": 0.0711727128283598,
       "lag_at_best": 1,
-      "granger_f": 2.3257428968146305,
-      "granger_p": 0.030211291059148777
+      "granger_f": 2.3257428968149436,
+      "granger_p": 0.030211291059134494
     },
     {
       "src": "LTC",
@@ -7155,8 +7155,8 @@
       "funding_diff_mean": 1.1311659144275473e-05,
       "max_abs_corr": 0.09056782808692897,
       "lag_at_best": 1,
-      "granger_f": 3.3973802235800092,
-      "granger_p": 0.002377993581021092
+      "granger_f": 3.397380223580293,
+      "granger_p": 0.0023779935810197754
     },
     {
       "src": "LTC",
@@ -7177,8 +7177,8 @@
       "funding_diff_mean": 1.1311846387772791e-05,
       "max_abs_corr": 0.11100237163194876,
       "lag_at_best": 1,
-      "granger_f": 5.364926291697084,
-      "granger_p": 1.5246206266832827e-05
+      "granger_f": 5.364926291696636,
+      "granger_p": 1.5246206266851956e-05
     },
     {
       "src": "LTC",
@@ -7188,8 +7188,8 @@
       "funding_diff_mean": 3.3534202526002975e-05,
       "max_abs_corr": 0.11746511373030083,
       "lag_at_best": 13,
-      "granger_f": 1.0205908620843231,
-      "granger_p": 0.4100300063919415
+      "granger_f": 1.020590862084284,
+      "granger_p": 0.41003000639196696
     },
     {
       "src": "LTC",
@@ -7232,8 +7232,8 @@
       "funding_diff_mean": 3.3534202526002975e-05,
       "max_abs_corr": 0.06132552494768911,
       "lag_at_best": 13,
-      "granger_f": 1.8796741687052991,
-      "granger_p": 0.08102764317169323
+      "granger_f": 1.8796741687052456,
+      "granger_p": 0.08102764317170238
     },
     {
       "src": "LTC",
@@ -7309,8 +7309,8 @@
       "funding_diff_mean": 1.1311846387772791e-05,
       "max_abs_corr": 0.11497097217552717,
       "lag_at_best": 7,
-      "granger_f": 9.185807685342875,
-      "granger_p": 4.6268150956625177e-10
+      "granger_f": 9.185807685343358,
+      "granger_p": 4.626815095656445e-10
     },
     {
       "src": "LTC",
@@ -7353,8 +7353,8 @@
       "funding_diff_mean": 1.4845077144082337e-05,
       "max_abs_corr": 0.16580661190931772,
       "lag_at_best": 1,
-      "granger_f": 2.852449067918887,
-      "granger_p": 0.00895600162150477
+      "granger_f": 2.8524490679190397,
+      "granger_p": 0.00895600162150085
     },
     {
       "src": "NEAR",
@@ -7364,8 +7364,8 @@
       "funding_diff_mean": 6.136710282337493e-06,
       "max_abs_corr": 0.06194539962516249,
       "lag_at_best": 2,
-      "granger_f": 4.426976726217298,
-      "granger_p": 0.00017787973445581486
+      "granger_f": 4.42697672621689,
+      "granger_p": 0.00017787973445601053
     },
     {
       "src": "NEAR",
@@ -7375,8 +7375,8 @@
       "funding_diff_mean": 7.503452947719691e-06,
       "max_abs_corr": 0.09518188583005652,
       "lag_at_best": 18,
-      "granger_f": 2.851034509943878,
-      "granger_p": 0.009124322100904534
+      "granger_f": 2.8510345099439247,
+      "granger_p": 0.009124322100904622
     },
     {
       "src": "NEAR",
@@ -7419,8 +7419,8 @@
       "funding_diff_mean": 1.4845077144082337e-05,
       "max_abs_corr": 0.10960393164137076,
       "lag_at_best": 1,
-      "granger_f": 67.21661499175745,
-      "granger_p": 1.821724366310034e-80
+      "granger_f": 67.21661499175774,
+      "granger_p": 1.8217243663085914e-80
     },
     {
       "src": "NEAR",
@@ -7463,8 +7463,8 @@
       "funding_diff_mean": 6.13706304319286e-06,
       "max_abs_corr": 0.06169566742555765,
       "lag_at_best": 1,
-      "granger_f": 0.7867617083293095,
-      "granger_p": 0.5801478392776072
+      "granger_f": 0.7867617083295695,
+      "granger_p": 0.580147839277402
     },
     {
       "src": "NEAR",
@@ -7474,8 +7474,8 @@
       "funding_diff_mean": 7.503452947719691e-06,
       "max_abs_corr": 0.09612555362768918,
       "lag_at_best": 1,
-      "granger_f": 2.2775979189983886,
-      "granger_p": 0.03407082294754141
+      "granger_f": 2.2775979189984366,
+      "granger_p": 0.034070822947538264
     },
     {
       "src": "NEAR",
@@ -7485,8 +7485,8 @@
       "funding_diff_mean": 1.4845077144082337e-05,
       "max_abs_corr": 0.09402724062479895,
       "lag_at_best": 1,
-      "granger_f": 17.902869090488682,
-      "granger_p": 1.2479202683351742e-20
+      "granger_f": 17.902869090488586,
+      "granger_p": 1.247920268335522e-20
     },
     {
       "src": "NEAR",
@@ -7551,8 +7551,8 @@
       "funding_diff_mean": 1.4845077144082337e-05,
       "max_abs_corr": 0.09932731993830213,
       "lag_at_best": 1,
-      "granger_f": 21.505592426740655,
-      "granger_p": 4.692075653495728e-25
+      "granger_f": 21.505592426740858,
+      "granger_p": 4.69207565349297e-25
     },
     {
       "src": "NEAR",
@@ -7573,8 +7573,8 @@
       "funding_diff_mean": 7.503440022234577e-06,
       "max_abs_corr": 0.07875217130040131,
       "lag_at_best": 2,
-      "granger_f": 1.9876457742348015,
-      "granger_p": 0.06425005780158555
+      "granger_f": 1.9876457742348388,
+      "granger_p": 0.06425005780157478
     },
     {
       "src": "NEAR",
@@ -7584,8 +7584,8 @@
       "funding_diff_mean": 1.4845077144082337e-05,
       "max_abs_corr": 0.10694767612531673,
       "lag_at_best": 1,
-      "granger_f": 33.712425014098095,
-      "granger_p": 4.8643447063916614e-40
+      "granger_f": 33.71242501409824,
+      "granger_p": 4.8643447063897454e-40
     },
     {
       "src": "NEAR",
@@ -7617,8 +7617,8 @@
       "funding_diff_mean": 1.484608318318319e-05,
       "max_abs_corr": 0.10842717867580308,
       "lag_at_best": 1,
-      "granger_f": 18.22900338907384,
-      "granger_p": 4.967111736729965e-21
+      "granger_f": 18.22900338907399,
+      "granger_p": 4.967111736727851e-21
     },
     {
       "src": "NEAR",
@@ -7639,8 +7639,8 @@
       "funding_diff_mean": 7.5036091825307975e-06,
       "max_abs_corr": 0.14861045689261576,
       "lag_at_best": 2,
-      "granger_f": 6.957180073270388,
-      "granger_p": 2.522290100563593e-07
+      "granger_f": 6.957180073270308,
+      "granger_p": 2.5222901005641317e-07
     },
     {
       "src": "NEAR",
@@ -7650,8 +7650,8 @@
       "funding_diff_mean": 1.484608318318319e-05,
       "max_abs_corr": 0.13036392168137684,
       "lag_at_best": 1,
-      "granger_f": 5.066726444071872,
-      "granger_p": 3.425243150843087e-05
+      "granger_f": 5.066726444071754,
+      "granger_p": 3.425243150844131e-05
     },
     {
       "src": "NEAR",
@@ -7661,8 +7661,8 @@
       "funding_diff_mean": 6.136533832413976e-06,
       "max_abs_corr": 0.026654940400172644,
       "lag_at_best": 2,
-      "granger_f": 0.8802285235438854,
-      "granger_p": 0.5083196672232271
+      "granger_f": 0.8802285235434322,
+      "granger_p": 0.5083196672235646
     },
     {
       "src": "NEAR",
@@ -7672,8 +7672,8 @@
       "funding_diff_mean": 7.503491810584961e-06,
       "max_abs_corr": 0.10799965358274485,
       "lag_at_best": 2,
-      "granger_f": 1.6395164859481777,
-      "granger_p": 0.13239559991463046
+      "granger_f": 1.639516485948219,
+      "granger_p": 0.13239559991462269
     },
     {
       "src": "NEAR",
@@ -7716,8 +7716,8 @@
       "funding_diff_mean": 1.4845077144082337e-05,
       "max_abs_corr": 0.09563372287813778,
       "lag_at_best": 1,
-      "granger_f": 7.527013465647354,
-      "granger_p": 4.7595085021483476e-08
+      "granger_f": 7.527013465647517,
+      "granger_p": 4.7595085021462274e-08
     },
     {
       "src": "NEAR",
@@ -7738,8 +7738,8 @@
       "funding_diff_mean": 7.503491810584961e-06,
       "max_abs_corr": 0.09171469183237256,
       "lag_at_best": 1,
-      "granger_f": 2.645926773440507,
-      "granger_p": 0.014737320109858856
+      "granger_f": 2.645926773440447,
+      "granger_p": 0.014737320109861207
     },
     {
       "src": "NEAR",
@@ -7782,8 +7782,8 @@
       "funding_diff_mean": 1.4845077144082337e-05,
       "max_abs_corr": 0.08320665933587025,
       "lag_at_best": 1,
-      "granger_f": 28.691608338578938,
-      "granger_p": 6.95015573361555e-34
+      "granger_f": 28.69160833857904,
+      "granger_p": 6.9501557336135955e-34
     },
     {
       "src": "SOL",
@@ -7793,8 +7793,8 @@
       "funding_diff_mean": 8.572681866414023e-06,
       "max_abs_corr": 0.1712398792302297,
       "lag_at_best": 1,
-      "granger_f": 10.054907084370843,
-      "granger_p": 4.159275651259866e-11
+      "granger_f": 10.054907084370482,
+      "granger_p": 4.1592756512644716e-11
     },
     {
       "src": "SOL",
@@ -7826,7 +7826,7 @@
       "funding_diff_mean": 1.7055410472686103e-05,
       "max_abs_corr": 0.16093014972923458,
       "lag_at_best": 1,
-      "granger_f": 9.893573038078918,
+      "granger_f": 9.893573038078916,
       "granger_p": 7.530578414837807e-11
     },
     {
@@ -7859,8 +7859,8 @@
       "funding_diff_mean": 8.573921549269033e-06,
       "max_abs_corr": 0.11852021308103561,
       "lag_at_best": 1,
-      "granger_f": 8.663952491830132,
-      "granger_p": 1.9846318144867604e-09
+      "granger_f": 8.663952491830361,
+      "granger_p": 1.984631814485511e-09
     },
     {
       "src": "SOL",
@@ -7892,7 +7892,7 @@
       "funding_diff_mean": 1.7055410472686103e-05,
       "max_abs_corr": 0.20685841508251052,
       "lag_at_best": 1,
-      "granger_f": 3.84814037314804,
+      "granger_f": 3.8481403731480404,
       "granger_p": 0.0007876818273579143
     },
     {
@@ -7914,8 +7914,8 @@
       "funding_diff_mean": 1.7057990710846788e-05,
       "max_abs_corr": 0.19015598699716535,
       "lag_at_best": 1,
-      "granger_f": 11.227975646743532,
-      "granger_p": 1.877602021884079e-12
+      "granger_f": 11.227975646743655,
+      "granger_p": 1.8776020218833712e-12
     },
     {
       "src": "SOL",
@@ -7947,8 +7947,8 @@
       "funding_diff_mean": 8.574541392045455e-06,
       "max_abs_corr": 0.15652222479149716,
       "lag_at_best": 1,
-      "granger_f": 11.779813755677198,
-      "granger_p": 3.2960529959481464e-13
+      "granger_f": 11.779813755676823,
+      "granger_p": 3.296052995951654e-13
     },
     {
       "src": "SOL",
@@ -7958,8 +7958,8 @@
       "funding_diff_mean": 1.7055410472686103e-05,
       "max_abs_corr": 0.23174879238912124,
       "lag_at_best": 1,
-      "granger_f": 4.328191109572455,
-      "granger_p": 0.00023355842101242886
+      "granger_f": 4.328191109572379,
+      "granger_p": 0.00023355842101246721
     },
     {
       "src": "SOL",
@@ -7969,8 +7969,8 @@
       "funding_diff_mean": 8.574922857956164e-06,
       "max_abs_corr": 0.15676872487410914,
       "lag_at_best": 1,
-      "granger_f": 11.149846799301395,
-      "granger_p": 1.938579307985883e-12
+      "granger_f": 11.149846799301718,
+      "granger_p": 1.9385793079837126e-12
     },
     {
       "src": "SOL",
@@ -7991,8 +7991,8 @@
       "funding_diff_mean": 8.568207584830339e-06,
       "max_abs_corr": 0.15486065116399564,
       "lag_at_best": 1,
-      "granger_f": 6.654228146761321,
-      "granger_p": 4.859023283144352e-07
+      "granger_f": 6.654228146761591,
+      "granger_p": 4.859023283141882e-07
     },
     {
       "src": "SOL",
@@ -8013,8 +8013,8 @@
       "funding_diff_mean": 8.575295256166984e-06,
       "max_abs_corr": 0.02284909365909647,
       "lag_at_best": 2,
-      "granger_f": 2.8264112050309516,
-      "granger_p": 0.009476132689926064
+      "granger_f": 2.826411205031297,
+      "granger_p": 0.009476132689921184
     },
     {
       "src": "SOL",
@@ -8024,8 +8024,8 @@
       "funding_diff_mean": 1.7055410472686103e-05,
       "max_abs_corr": 0.08510631376911662,
       "lag_at_best": 1,
-      "granger_f": 2.580963678928524,
-      "granger_p": 0.016961770525213474
+      "granger_f": 2.5809636789284163,
+      "granger_p": 0.016961770525215566
     },
     {
       "src": "SOL",
@@ -8035,8 +8035,8 @@
       "funding_diff_mean": 8.571635561243838e-06,
       "max_abs_corr": 0.08660544608651809,
       "lag_at_best": 1,
-      "granger_f": 1.0167679240807013,
-      "granger_p": 0.4120819283574113
+      "granger_f": 1.0167679240810095,
+      "granger_p": 0.4120819283572079
     },
     {
       "src": "SOL",
@@ -8046,8 +8046,8 @@
       "funding_diff_mean": 1.7055410472686103e-05,
       "max_abs_corr": 0.15812453444784802,
       "lag_at_best": 1,
-      "granger_f": 10.931028712227192,
-      "granger_p": 4.276504510260651e-12
+      "granger_f": 10.931028712227313,
+      "granger_p": 4.276504510259039e-12
     },
     {
       "src": "SOL",
@@ -8057,8 +8057,8 @@
       "funding_diff_mean": 8.573109624502183e-06,
       "max_abs_corr": 0.058117151351887955,
       "lag_at_best": 2,
-      "granger_f": 6.234161099095234,
-      "granger_p": 1.5076403149650853e-06
+      "granger_f": 6.234161099094997,
+      "granger_p": 1.5076403149660416e-06
     },
     {
       "src": "SOL",
@@ -8068,8 +8068,8 @@
       "funding_diff_mean": 1.7055410472686103e-05,
       "max_abs_corr": 0.15435946360232372,
       "lag_at_best": 1,
-      "granger_f": 16.15804061393008,
-      "granger_p": 1.9866550201355968e-18
+      "granger_f": 16.158040613929984,
+      "granger_p": 1.9866550201363718e-18
     },
     {
       "src": "SOL",
@@ -8101,8 +8101,8 @@
       "funding_diff_mean": 9.792658855786547e-06,
       "max_abs_corr": 0.08529512007347051,
       "lag_at_best": 1,
-      "granger_f": 12.98727821790499,
-      "granger_p": 1.0718055161434361e-14
+      "granger_f": 12.987278217905361,
+      "granger_p": 1.071805516142315e-14
     },
     {
       "src": "SUI",
@@ -8112,8 +8112,8 @@
       "funding_diff_mean": 2.285581765968868e-05,
       "max_abs_corr": 0.18257241546881453,
       "lag_at_best": 1,
-      "granger_f": 15.495952120017193,
-      "granger_p": 2.0609525518562532e-17
+      "granger_f": 15.495952120017106,
+      "granger_p": 2.0609525518566754e-17
     },
     {
       "src": "SUI",
@@ -8134,8 +8134,8 @@
       "funding_diff_mean": 2.285581765968868e-05,
       "max_abs_corr": 0.1356787181160139,
       "lag_at_best": 1,
-      "granger_f": 1.5395310934509783,
-      "granger_p": 0.16136085416218396
+      "granger_f": 1.539531093450914,
+      "granger_p": 0.16136085416220652
     },
     {
       "src": "SUI",
@@ -8156,8 +8156,8 @@
       "funding_diff_mean": 2.285581765968868e-05,
       "max_abs_corr": 0.12842116338787934,
       "lag_at_best": 1,
-      "granger_f": 8.019251221635491,
-      "granger_p": 1.4533817955599141e-08
+      "granger_f": 8.019251221635228,
+      "granger_p": 1.4533817955608937e-08
     },
     {
       "src": "SUI",
@@ -8178,8 +8178,8 @@
       "funding_diff_mean": 2.285581765968868e-05,
       "max_abs_corr": 0.4619576112304705,
       "lag_at_best": 4,
-      "granger_f": 23.874373543391542,
-      "granger_p": 2.5184393824858782e-27
+      "granger_f": 23.87437354339154,
+      "granger_p": 2.518439382485877e-27
     },
     {
       "src": "SUI",
@@ -8211,8 +8211,8 @@
       "funding_diff_mean": 9.790663109181754e-06,
       "max_abs_corr": 0.12958338329831276,
       "lag_at_best": 5,
-      "granger_f": 14.83619200617674,
-      "granger_p": 5.619063083043405e-17
+      "granger_f": 14.836192006177225,
+      "granger_p": 5.619063083036101e-17
     },
     {
       "src": "SUI",
@@ -8222,8 +8222,8 @@
       "funding_diff_mean": 2.285581765968868e-05,
       "max_abs_corr": 0.1597637859252393,
       "lag_at_best": 1,
-      "granger_f": 3.52099323099639,
-      "granger_p": 0.001813024637337516
+      "granger_f": 3.52099323099646,
+      "granger_p": 0.0018130246373372048
     },
     {
       "src": "SUI",
@@ -8233,8 +8233,8 @@
       "funding_diff_mean": 9.78398931767797e-06,
       "max_abs_corr": 0.09120784320182983,
       "lag_at_best": 1,
-      "granger_f": 2.041246050966222,
-      "granger_p": 0.05675550722180742
+      "granger_f": 2.04124605096645,
+      "granger_p": 0.05675550722177975
     },
     {
       "src": "SUI",
@@ -8244,8 +8244,8 @@
       "funding_diff_mean": 2.285581765968868e-05,
       "max_abs_corr": 0.16151114706543593,
       "lag_at_best": 1,
-      "granger_f": 1.3000160229920685,
-      "granger_p": 0.253735178583875
+      "granger_f": 1.3000160229919968,
+      "granger_p": 0.2537351785839059
     },
     {
       "src": "SUI",
@@ -8277,8 +8277,8 @@
       "funding_diff_mean": 9.787997532180045e-06,
       "max_abs_corr": 0.0987695601124617,
       "lag_at_best": 1,
-      "granger_f": 1.6860810599033673,
-      "granger_p": 0.11993474576274805
+      "granger_f": 1.6860810599030298,
+      "granger_p": 0.11993474576279023
     },
     {
       "src": "SUI",
@@ -8299,8 +8299,8 @@
       "funding_diff_mean": 9.78332012976347e-06,
       "max_abs_corr": 0.10311892651093975,
       "lag_at_best": 1,
-      "granger_f": 5.188743013013504,
-      "granger_p": 2.4282541306654532e-05
+      "granger_f": 5.188743013012927,
+      "granger_p": 2.428254130669144e-05
     },
     {
       "src": "SUI",
@@ -8354,8 +8354,8 @@
       "funding_diff_mean": 2.285581765968868e-05,
       "max_abs_corr": 0.12154460124326491,
       "lag_at_best": 1,
-      "granger_f": 9.397887118409583,
-      "granger_p": 3.5026580247145176e-10
+      "granger_f": 9.397887118409542,
+      "granger_p": 3.502658024714859e-10
     },
     {
       "src": "SUI",
@@ -8398,8 +8398,8 @@
       "funding_diff_mean": 2.285581765968868e-05,
       "max_abs_corr": 0.1863509860444662,
       "lag_at_best": 1,
-      "granger_f": 12.42323688355983,
-      "granger_p": 9.215051668352138e-14
+      "granger_f": 12.42323688355979,
+      "granger_p": 9.215051668353066e-14
     },
     {
       "src": "UNI",
@@ -8409,8 +8409,8 @@
       "funding_diff_mean": -1.0691755207499714e-05,
       "max_abs_corr": 0.050420438191633096,
       "lag_at_best": 1,
-      "granger_f": 0.6567011586874568,
-      "granger_p": 0.6847660971455258
+      "granger_f": 0.6567011586877224,
+      "granger_p": 0.6847660971453103
     },
     {
       "src": "UNI",
@@ -8497,8 +8497,8 @@
       "funding_diff_mean": 1.6575434758443784e-05,
       "max_abs_corr": 0.11499483839091934,
       "lag_at_best": 1,
-      "granger_f": 146.97823675479094,
-      "granger_p": 2.902627318655455e-171
+      "granger_f": 146.97823675479063,
+      "granger_p": 2.90262731865776e-171
     },
     {
       "src": "UNI",
@@ -8541,8 +8541,8 @@
       "funding_diff_mean": -1.0691755207499714e-05,
       "max_abs_corr": 0.07030016055375009,
       "lag_at_best": 1,
-      "granger_f": 2.6581972546874644,
-      "granger_p": 0.014089109041450144
+      "granger_f": 2.658197254687039,
+      "granger_p": 0.01408910904145987
     },
     {
       "src": "UNI",
@@ -8552,8 +8552,8 @@
       "funding_diff_mean": -4.134240825688073e-06,
       "max_abs_corr": 0.14566184405261995,
       "lag_at_best": 8,
-      "granger_f": 0.5837927348538593,
-      "granger_p": 0.7434219524057277
+      "granger_f": 0.5837927348538716,
+      "granger_p": 0.743421952405718
     },
     {
       "src": "UNI",
@@ -8596,8 +8596,8 @@
       "funding_diff_mean": 1.6575434758443784e-05,
       "max_abs_corr": 0.10197305607650801,
       "lag_at_best": 1,
-      "granger_f": 42.97040242127225,
-      "granger_p": 2.4481316505839017e-51
+      "granger_f": 42.97040242127235,
+      "granger_p": 2.448131650583315e-51
     },
     {
       "src": "UNI",
@@ -8629,8 +8629,8 @@
       "funding_diff_mean": 1.6575434758443784e-05,
       "max_abs_corr": 0.1134453870285456,
       "lag_at_best": 1,
-      "granger_f": 41.3465521230274,
-      "granger_p": 2.3125897660511096e-49
+      "granger_f": 41.346552123027614,
+      "granger_p": 2.3125897660497076e-49
     },
     {
       "src": "UNI",
@@ -8662,8 +8662,8 @@
       "funding_diff_mean": 1.6575434758443784e-05,
       "max_abs_corr": 0.1261343730488223,
       "lag_at_best": 1,
-      "granger_f": 34.92525419821821,
-      "granger_p": 1.585717655523766e-41
+      "granger_f": 34.92525419821835,
+      "granger_p": 1.585717655523141e-41
     },
     {
       "src": "UNI",
@@ -8695,8 +8695,8 @@
       "funding_diff_mean": 1.6575434758443784e-05,
       "max_abs_corr": 0.10803615383872789,
       "lag_at_best": 1,
-      "granger_f": 42.5418394805999,
-      "granger_p": 8.126014971502084e-51
+      "granger_f": 42.54183948059971,
+      "granger_p": 8.126014971506438e-51
     },
     {
       "src": "UNI",
@@ -8706,8 +8706,8 @@
       "funding_diff_mean": -1.0693273905569564e-05,
       "max_abs_corr": 0.1082584634339221,
       "lag_at_best": 1,
-      "granger_f": 7.898676297519689,
-      "granger_p": 1.6495389327900196e-08
+      "granger_f": 7.898676297519856,
+      "granger_p": 1.6495389327892547e-08
     },
     {
       "src": "UNI",
@@ -8717,8 +8717,8 @@
       "funding_diff_mean": -4.1057360629921255e-06,
       "max_abs_corr": 0.055021392103515504,
       "lag_at_best": 14,
-      "granger_f": 1.07238677661547,
-      "granger_p": 0.3776449212369849
+      "granger_f": 1.0723867766154906,
+      "granger_p": 0.3776449212369692
     },
     {
       "src": "UNI",
@@ -8750,8 +8750,8 @@
       "funding_diff_mean": -4.1088166405023555e-06,
       "max_abs_corr": 0.13343125939411463,
       "lag_at_best": 7,
-      "granger_f": 1.169943324125533,
-      "granger_p": 0.32060348991904286
+      "granger_f": 1.1699433241255197,
+      "granger_p": 0.32060348991904875
     },
     {
       "src": "UNI",
@@ -8805,8 +8805,8 @@
       "funding_diff_mean": -1.0691755207499714e-05,
       "max_abs_corr": 0.09195402769080349,
       "lag_at_best": 1,
-      "granger_f": 6.1781055361996815,
-      "granger_p": 1.7619870424133155e-06
+      "granger_f": 6.17810553619939,
+      "granger_p": 1.7619870424148732e-06
     },
     {
       "src": "UNI",
@@ -8816,8 +8816,8 @@
       "funding_diff_mean": -4.134240825688073e-06,
       "max_abs_corr": 0.1069182198448958,
       "lag_at_best": 8,
-      "granger_f": 0.10896455768563243,
-      "granger_p": 0.9954014075157517
+      "granger_f": 0.10896455768560903,
+      "granger_p": 0.9954014075157545
     },
     {
       "src": "UNI",
@@ -8838,8 +8838,8 @@
       "funding_diff_mean": -1.0692477486551448e-05,
       "max_abs_corr": 0.09373335637978192,
       "lag_at_best": 1,
-      "granger_f": 4.768116798729567,
-      "granger_p": 7.341062421590549e-05
+      "granger_f": 4.768116798729765,
+      "granger_p": 7.341062421583987e-05
     },
     {
       "src": "UNI",
@@ -8849,8 +8849,8 @@
       "funding_diff_mean": -4.132781929555896e-06,
       "max_abs_corr": 0.07770686757382327,
       "lag_at_best": 1,
-      "granger_f": 0.08539147369620996,
-      "granger_p": 0.9976670614403002
+      "granger_f": 0.08539147369619088,
+      "granger_p": 0.9976670614403017
     },
     {
       "src": "UNI",
@@ -8871,8 +8871,8 @@
       "funding_diff_mean": -1.0948383835203943e-05,
       "max_abs_corr": 0.11481603325279564,
       "lag_at_best": 1,
-      "granger_f": 3.367778268335523,
-      "granger_p": 0.0025678071543837277
+      "granger_f": 3.3677782683357416,
+      "granger_p": 0.002567807154382342
     },
     {
       "src": "XRP",
@@ -8893,8 +8893,8 @@
       "funding_diff_mean": 1.6124093004905098e-05,
       "max_abs_corr": 0.296403237933162,
       "lag_at_best": 1,
-      "granger_f": 142.5347638814864,
-      "granger_p": 1.9423708697132176e-166
+      "granger_f": 142.53476388148655,
+      "granger_p": 1.9423708697126254e-166
     },
     {
       "src": "XRP",
@@ -8926,8 +8926,8 @@
       "funding_diff_mean": 1.6124093004905098e-05,
       "max_abs_corr": 0.30309241364692063,
       "lag_at_best": 1,
-      "granger_f": 86.24328824281315,
-      "granger_p": 7.462821953425229e-103
+      "granger_f": 86.24328824281324,
+      "granger_p": 7.462821953423092e-103
     },
     {
       "src": "XRP",
@@ -8937,8 +8937,8 @@
       "funding_diff_mean": -1.0948383835203943e-05,
       "max_abs_corr": 0.1255613343147648,
       "lag_at_best": 2,
-      "granger_f": 9.605687211218745,
-      "granger_p": 1.4998085297291958e-10
+      "granger_f": 9.60568721121837,
+      "granger_p": 1.499808529730761e-10
     },
     {
       "src": "XRP",
@@ -8959,8 +8959,8 @@
       "funding_diff_mean": 1.6124093004905098e-05,
       "max_abs_corr": 0.2972607842606981,
       "lag_at_best": 1,
-      "granger_f": 59.26177348450409,
-      "granger_p": 5.33968055368363e-71
+      "granger_f": 59.26177348450379,
+      "granger_p": 5.3396805536880506e-71
     },
     {
       "src": "XRP",
@@ -8970,8 +8970,8 @@
       "funding_diff_mean": -1.0948383835203943e-05,
       "max_abs_corr": 0.03826188522215638,
       "lag_at_best": 3,
-      "granger_f": 2.145514589412144,
-      "granger_p": 0.04522624121537882
+      "granger_f": 2.145514589412008,
+      "granger_p": 0.04522624121539236
     },
     {
       "src": "XRP",
@@ -8992,8 +8992,8 @@
       "funding_diff_mean": 1.6068692909013244e-05,
       "max_abs_corr": 0.2345265243269593,
       "lag_at_best": 1,
-      "granger_f": 44.43216668159167,
-      "granger_p": 4.0907951344290845e-53
+      "granger_f": 44.43216668159178,
+      "granger_p": 4.0907951344278146e-53
     },
     {
       "src": "XRP",
@@ -9003,8 +9003,8 @@
       "funding_diff_mean": -1.0948383835203943e-05,
       "max_abs_corr": 0.1029702307914805,
       "lag_at_best": 1,
-      "granger_f": 4.834601176168013,
-      "granger_p": 6.196139433474628e-05
+      "granger_f": 4.834601176167859,
+      "granger_p": 6.196139433477132e-05
     },
     {
       "src": "XRP",
@@ -9025,8 +9025,8 @@
       "funding_diff_mean": 1.6124093004905098e-05,
       "max_abs_corr": 0.2464278125029472,
       "lag_at_best": 1,
-      "granger_f": 17.595789009257697,
-      "granger_p": 2.962421578120459e-20
+      "granger_f": 17.59578900925799,
+      "granger_p": 2.9624215781181987e-20
     },
     {
       "src": "XRP",
@@ -9047,8 +9047,8 @@
       "funding_diff_mean": -8.576892619392183e-06,
       "max_abs_corr": 0.18754468745374828,
       "lag_at_best": 1,
-      "granger_f": 2.2894145431330055,
-      "granger_p": 0.033122242720321445
+      "granger_f": 2.289414543133005,
+      "granger_p": 0.03312224272032144
     },
     {
       "src": "XRP",
@@ -9102,8 +9102,8 @@
       "funding_diff_mean": -1.0948383835203943e-05,
       "max_abs_corr": 0.13434536707667954,
       "lag_at_best": 1,
-      "granger_f": 4.185167459749352,
-      "granger_p": 0.00033074704317652333
+      "granger_f": 4.185167459749488,
+      "granger_p": 0.00033074704317640776
     },
     {
       "src": "XRP",
@@ -9124,8 +9124,8 @@
       "funding_diff_mean": 1.6124093004905098e-05,
       "max_abs_corr": 0.2719448675711693,
       "lag_at_best": 1,
-      "granger_f": 26.09158130378248,
-      "granger_p": 1.0771976701226334e-30
+      "granger_f": 26.09158130378234,
+      "granger_p": 1.0771976701229116e-30
     },
     {
       "src": "XRP",
@@ -9135,8 +9135,8 @@
       "funding_diff_mean": -1.0948383835203943e-05,
       "max_abs_corr": 0.10888618504679184,
       "lag_at_best": 1,
-      "granger_f": 3.6360631869396496,
-      "granger_p": 0.0013217885271897645
+      "granger_f": 3.6360631869394004,
+      "granger_p": 0.0013217885271905895
     },
     {
       "src": "XRP",
@@ -9146,8 +9146,8 @@
       "funding_diff_mean": -8.590110750605324e-06,
       "max_abs_corr": 0.13992295510546662,
       "lag_at_best": 1,
-      "granger_f": 3.2555634209262947,
-      "granger_p": 0.003453755254163457
+      "granger_f": 3.2555634209263355,
+      "granger_p": 0.0034537552541631395
     },
     {
       "src": "XRP",
@@ -9157,8 +9157,8 @@
       "funding_diff_mean": 1.610163547766617e-05,
       "max_abs_corr": 0.2943929253802703,
       "lag_at_best": 1,
-      "granger_f": 94.65659013565052,
-      "granger_p": 1.3747717577140164e-112
+      "granger_f": 94.65659013565032,
+      "granger_p": 1.374771757714809e-112
     },
     {
       "src": "XRP",
@@ -9168,8 +9168,8 @@
       "funding_diff_mean": -1.0951809718985606e-05,
       "max_abs_corr": 0.130051565314023,
       "lag_at_best": 1,
-      "granger_f": 4.841947080478142,
-      "granger_p": 6.0789136200149124e-05
+      "granger_f": 4.841947080478438,
+      "granger_p": 6.078913620010675e-05
     },
     {
       "src": "XRP",
@@ -9179,8 +9179,8 @@
       "funding_diff_mean": -8.590110750605324e-06,
       "max_abs_corr": 0.16012483626010485,
       "lag_at_best": 1,
-      "granger_f": 4.503924902035433,
-      "granger_p": 0.00015296897257756098
+      "granger_f": 4.503924902035383,
+      "granger_p": 0.00015296897257759319
     },
     {
       "src": "XRP",
@@ -9201,8 +9201,8 @@
       "funding_diff_mean": -1.0948383835203943e-05,
       "max_abs_corr": 0.09310131806648665,
       "lag_at_best": 1,
-      "granger_f": 6.865811107975876,
-      "granger_p": 2.779660528065394e-07
+      "granger_f": 6.865811107975614,
+      "granger_p": 2.779660528067353e-07
     },
     {
       "src": "XRP",
@@ -9223,8 +9223,8 @@
       "funding_diff_mean": 1.610009664601581e-05,
       "max_abs_corr": 0.2875011817537967,
       "lag_at_best": 1,
-      "granger_f": 118.94839962929568,
-      "granger_p": 3.040352094483261e-140
+      "granger_f": 118.94839962929514,
+      "granger_p": 3.040352094487772e-140
     },
     {
       "src": "XRP",
@@ -9267,8 +9267,8 @@
       "funding_diff_mean": -1.0948383835203943e-05,
       "max_abs_corr": 0.11496473974446578,
       "lag_at_best": 1,
-      "granger_f": 6.664952666182166,
-      "granger_p": 4.78470727363586e-07
+      "granger_f": 6.664952666182025,
+      "granger_p": 4.78470727363769e-07
     },
     {
       "src": "XRP",
@@ -9289,8 +9289,8 @@
       "funding_diff_mean": 1.6124093004905098e-05,
       "max_abs_corr": 0.28390801657414727,
       "lag_at_best": 1,
-      "granger_f": 70.63823749858473,
-      "granger_p": 1.5372309095650634e-84
+      "granger_f": 70.63823749858481,
+      "granger_p": 1.5372309095650668e-84
     },
     {
       "src": "XRP",
@@ -9300,8 +9300,8 @@
       "funding_diff_mean": -1.0948383835203943e-05,
       "max_abs_corr": 0.043175382921440526,
       "lag_at_best": 3,
-      "granger_f": 2.726375735656065,
-      "granger_p": 0.012020062456113725
+      "granger_f": 2.7263757356562204,
+      "granger_p": 0.012020062456110064
     },
     {
       "src": "XRP",
@@ -9322,8 +9322,8 @@
       "funding_diff_mean": 1.6124093004905098e-05,
       "max_abs_corr": 0.28408928879373047,
       "lag_at_best": 1,
-      "granger_f": 126.91375666390476,
-      "granger_p": 3.5673491929384367e-149
+      "granger_f": 126.91375666390464,
+      "granger_p": 3.567349192939507e-149
     }
   ],
   "n_tercile_pairs": 112,
@@ -9333,8 +9333,8 @@
     {
       "src": "AAVE",
       "tgt": "ADA",
-      "granger_f": 1.9240577511771038,
-      "granger_p": 0.07352874027996045,
+      "granger_f": 1.9240577511770405,
+      "granger_p": 0.07352874027997221,
       "n_obs": 1939
     },
     {
@@ -9347,8 +9347,8 @@
     {
       "src": "AAVE",
       "tgt": "BNB",
-      "granger_f": 1.8178240398612584,
-      "granger_p": 0.09192101739804652,
+      "granger_f": 1.8178240398611991,
+      "granger_p": 0.09192101739805789,
       "n_obs": 1934
     },
     {
@@ -9361,57 +9361,57 @@
     {
       "src": "AAVE",
       "tgt": "CRV",
-      "granger_f": 3.435742014434635,
-      "granger_p": 0.0022313395084194642,
+      "granger_f": 3.43574201443483,
+      "granger_p": 0.002231339508418396,
       "n_obs": 1936
     },
     {
       "src": "AAVE",
       "tgt": "DOGE",
-      "granger_f": 2.686313260636741,
-      "granger_p": 0.013398338140017913,
+      "granger_f": 2.686313260636879,
+      "granger_p": 0.013398338140013375,
       "n_obs": 1931
     },
     {
       "src": "AAVE",
       "tgt": "ETH",
-      "granger_f": 1.7847593007997071,
-      "granger_p": 0.0984458110947049,
+      "granger_f": 1.784759300799669,
+      "granger_p": 0.09844581109471204,
       "n_obs": 1939
     },
     {
       "src": "AAVE",
       "tgt": "LINK",
-      "granger_f": 2.673662155512617,
-      "granger_p": 0.013797656134044864,
+      "granger_f": 2.6736621555127296,
+      "granger_p": 0.013797656134042541,
       "n_obs": 1936
     },
     {
       "src": "AAVE",
       "tgt": "LTC",
-      "granger_f": 1.246734249022583,
-      "granger_p": 0.2792566850750595,
+      "granger_f": 1.2467342490226596,
+      "granger_p": 0.2792566850750259,
       "n_obs": 1931
     },
     {
       "src": "AAVE",
       "tgt": "NEAR",
-      "granger_f": 0.9868898682618157,
-      "granger_p": 0.43239524801920104,
+      "granger_f": 0.9868898682618571,
+      "granger_p": 0.43239524801917306,
       "n_obs": 1937
     },
     {
       "src": "AAVE",
       "tgt": "SOL",
-      "granger_f": 1.0233707231720524,
-      "granger_p": 0.40804061258964297,
+      "granger_f": 1.0233707231719986,
+      "granger_p": 0.4080406125896561,
       "n_obs": 1939
     },
     {
       "src": "AAVE",
       "tgt": "SUI",
-      "granger_f": 3.1571694396816206,
-      "granger_p": 0.004389481940520049,
+      "granger_f": 3.1571694396815584,
+      "granger_p": 0.0043894819405245495,
       "n_obs": 1936
     },
     {
@@ -9424,22 +9424,22 @@
     {
       "src": "AAVE",
       "tgt": "XRP",
-      "granger_f": 1.2180180454967422,
-      "granger_p": 0.29383563160976034,
+      "granger_f": 1.2180180454966947,
+      "granger_p": 0.2938356316097745,
       "n_obs": 1933
     },
     {
       "src": "ADA",
       "tgt": "AAVE",
-      "granger_f": 0.6510349863381927,
+      "granger_f": 0.6510349863381925,
       "granger_p": 0.6893521198130192,
       "n_obs": 1648
     },
     {
       "src": "ADA",
       "tgt": "AVAX",
-      "granger_f": 2.6877058516578147,
-      "granger_p": 0.013401040764809781,
+      "granger_f": 2.687705851657856,
+      "granger_p": 0.013401040764807696,
       "n_obs": 1647
     },
     {
@@ -9452,15 +9452,15 @@
     {
       "src": "ADA",
       "tgt": "BTC",
-      "granger_f": 1.0171020954093173,
-      "granger_p": 0.4122266216373168,
+      "granger_f": 1.0171020954092755,
+      "granger_p": 0.4122266216373678,
       "n_obs": 1649
     },
     {
       "src": "ADA",
       "tgt": "CRV",
-      "granger_f": 2.14516252932692,
-      "granger_p": 0.045713508101854275,
+      "granger_f": 2.1451625293268073,
+      "granger_p": 0.04571350810186556,
       "n_obs": 1648
     },
     {
@@ -9480,71 +9480,71 @@
     {
       "src": "ADA",
       "tgt": "LINK",
-      "granger_f": 1.4600433327319895,
-      "granger_p": 0.18828491079048643,
+      "granger_f": 1.4600433327320372,
+      "granger_p": 0.18828491079046916,
       "n_obs": 1646
     },
     {
       "src": "ADA",
       "tgt": "LTC",
-      "granger_f": 0.8372930739866178,
-      "granger_p": 0.5409717514908808,
+      "granger_f": 0.8372930739867502,
+      "granger_p": 0.5409717514907797,
       "n_obs": 1644
     },
     {
       "src": "ADA",
       "tgt": "NEAR",
-      "granger_f": 0.9219817279856524,
-      "granger_p": 0.47792356565870253,
+      "granger_f": 0.921981727985693,
+      "granger_p": 0.4779235656586729,
       "n_obs": 1646
     },
     {
       "src": "ADA",
       "tgt": "SOL",
-      "granger_f": 1.039338458419811,
-      "granger_p": 0.3977350433135265,
+      "granger_f": 1.0393384584197118,
+      "granger_p": 0.39773504331358084,
       "n_obs": 1649
     },
     {
       "src": "ADA",
       "tgt": "SUI",
-      "granger_f": 2.0702814841316224,
-      "granger_p": 0.053817897486889206,
+      "granger_f": 2.0702814841316757,
+      "granger_p": 0.05381789748688306,
       "n_obs": 1648
     },
     {
       "src": "ADA",
       "tgt": "UNI",
-      "granger_f": 1.0709103844213819,
-      "granger_p": 0.3777488320350312,
+      "granger_f": 1.0709103844214147,
+      "granger_p": 0.37774883203501103,
       "n_obs": 1648
     },
     {
       "src": "ADA",
       "tgt": "XRP",
-      "granger_f": 1.2276451898482814,
-      "granger_p": 0.28898029677116954,
+      "granger_f": 1.2276451898482816,
+      "granger_p": 0.28898029677116965,
       "n_obs": 1647
     },
     {
       "src": "AVAX",
       "tgt": "AAVE",
-      "granger_f": 1.1620077702473033,
-      "granger_p": 0.32401986382168163,
+      "granger_f": 1.1620077702473985,
+      "granger_p": 0.32401986382162856,
       "n_obs": 1678
     },
     {
       "src": "AVAX",
       "tgt": "ADA",
-      "granger_f": 1.0198811233741278,
-      "granger_p": 0.41038936628591205,
+      "granger_f": 1.0198811233741814,
+      "granger_p": 0.4103893662858771,
       "n_obs": 1678
     },
     {
       "src": "AVAX",
       "tgt": "BNB",
-      "granger_f": 1.587973226635015,
-      "granger_p": 0.1467655805717818,
+      "granger_f": 1.5879732266350661,
+      "granger_p": 0.14676558057176214,
       "n_obs": 1673
     },
     {
@@ -9557,22 +9557,22 @@
     {
       "src": "AVAX",
       "tgt": "CRV",
-      "granger_f": 1.0292384059129187,
-      "granger_p": 0.40426738188438704,
+      "granger_f": 1.0292384059128064,
+      "granger_p": 0.40426738188446004,
       "n_obs": 1678
     },
     {
       "src": "AVAX",
       "tgt": "DOGE",
-      "granger_f": 0.9403744582899892,
-      "granger_p": 0.4647650852517785,
+      "granger_f": 0.9403744582900491,
+      "granger_p": 0.4647650852517361,
       "n_obs": 1672
     },
     {
       "src": "AVAX",
       "tgt": "ETH",
-      "granger_f": 0.8372992836730557,
-      "granger_p": 0.5409628538417112,
+      "granger_f": 0.8372992836730908,
+      "granger_p": 0.5409628538416846,
       "n_obs": 1678
     },
     {
@@ -9585,15 +9585,15 @@
     {
       "src": "AVAX",
       "tgt": "LTC",
-      "granger_f": 1.0507375703853745,
-      "granger_p": 0.3904325975254612,
+      "granger_f": 1.0507375703854083,
+      "granger_p": 0.39043259752543985,
       "n_obs": 1670
     },
     {
       "src": "AVAX",
       "tgt": "NEAR",
-      "granger_f": 2.877939273307633,
-      "granger_p": 0.00857922480068397,
+      "granger_f": 2.87793927330767,
+      "granger_p": 0.008579224800683365,
       "n_obs": 1675
     },
     {
@@ -9606,28 +9606,28 @@
     {
       "src": "AVAX",
       "tgt": "SUI",
-      "granger_f": 0.9800791175021437,
-      "granger_p": 0.4370918374369176,
+      "granger_f": 0.9800791175020364,
+      "granger_p": 0.43709183743699076,
       "n_obs": 1678
     },
     {
       "src": "AVAX",
       "tgt": "UNI",
-      "granger_f": 1.8378988155230043,
-      "granger_p": 0.08824849417841595,
+      "granger_f": 1.837898815522933,
+      "granger_p": 0.088248494178429,
       "n_obs": 1678
     },
     {
       "src": "AVAX",
       "tgt": "XRP",
-      "granger_f": 0.534800133301514,
-      "granger_p": 0.782121888674941,
+      "granger_f": 0.5348001333015991,
+      "granger_p": 0.7821218886748749,
       "n_obs": 1677
     },
     {
       "src": "BNB",
       "tgt": "AAVE",
-      "granger_f": 0.8282238478063813,
+      "granger_f": 0.828223847806381,
       "granger_p": 0.5479877649871495,
       "n_obs": 1326
     },
@@ -9655,43 +9655,43 @@
     {
       "src": "BNB",
       "tgt": "CRV",
-      "granger_f": 0.8374015804695865,
-      "granger_p": 0.5409377413851626,
+      "granger_f": 0.8374015804696318,
+      "granger_p": 0.5409377413851285,
       "n_obs": 1326
     },
     {
       "src": "BNB",
       "tgt": "DOGE",
-      "granger_f": 0.7479532623103348,
-      "granger_p": 0.6110897879516834,
+      "granger_f": 0.7479532623103822,
+      "granger_p": 0.6110897879516459,
       "n_obs": 1325
     },
     {
       "src": "BNB",
       "tgt": "ETH",
-      "granger_f": 0.43226909245817813,
-      "granger_p": 0.8576871686908629,
+      "granger_f": 0.4322690924581494,
+      "granger_p": 0.8576871686908827,
       "n_obs": 1327
     },
     {
       "src": "BNB",
       "tgt": "LINK",
-      "granger_f": 0.7117613803360879,
-      "granger_p": 0.6401725372272354,
+      "granger_f": 0.7117613803360492,
+      "granger_p": 0.6401725372272669,
       "n_obs": 1327
     },
     {
       "src": "BNB",
       "tgt": "LTC",
-      "granger_f": 0.46788706964540844,
-      "granger_p": 0.8324576173471323,
+      "granger_f": 0.46788706964538074,
+      "granger_p": 0.8324576173471523,
       "n_obs": 1326
     },
     {
       "src": "BNB",
       "tgt": "NEAR",
-      "granger_f": 1.198921080836986,
-      "granger_p": 0.3040968563699987,
+      "granger_f": 1.1989210808369026,
+      "granger_p": 0.3040968563700339,
       "n_obs": 1327
     },
     {
@@ -9718,8 +9718,8 @@
     {
       "src": "BNB",
       "tgt": "XRP",
-      "granger_f": 0.6824970990265544,
-      "granger_p": 0.663844601849112,
+      "granger_f": 0.6824970990265911,
+      "granger_p": 0.6638446018490822,
       "n_obs": 1326
     },
     {
@@ -9732,22 +9732,22 @@
     {
       "src": "BTC",
       "tgt": "ADA",
-      "granger_f": 1.710663220009248,
-      "granger_p": 0.11415407930785271,
+      "granger_f": 1.7106632200086787,
+      "granger_p": 0.11415407930795993,
       "n_obs": 6679
     },
     {
       "src": "BTC",
       "tgt": "AVAX",
-      "granger_f": 1.4830755930900403,
-      "granger_p": 0.1795594800409308,
+      "granger_f": 1.4830755930903599,
+      "granger_p": 0.17955948004082015,
       "n_obs": 6670
     },
     {
       "src": "BTC",
       "tgt": "BNB",
-      "granger_f": 0.7448119283934469,
-      "granger_p": 0.6135162599773909,
+      "granger_f": 0.7448119283932519,
+      "granger_p": 0.6135162599775468,
       "n_obs": 6665
     },
     {
@@ -9760,8 +9760,8 @@
     {
       "src": "BTC",
       "tgt": "DOGE",
-      "granger_f": 1.0755187759481142,
-      "granger_p": 0.37451223675495054,
+      "granger_f": 1.0755187759478848,
+      "granger_p": 0.37451223675511125,
       "n_obs": 6651
     },
     {
@@ -9774,15 +9774,15 @@
     {
       "src": "BTC",
       "tgt": "LINK",
-      "granger_f": 1.5920878771653306,
-      "granger_p": 0.14499684864711854,
+      "granger_f": 1.5920878771655191,
+      "granger_p": 0.14499684864706416,
       "n_obs": 6668
     },
     {
       "src": "BTC",
       "tgt": "LTC",
-      "granger_f": 1.8953607341562326,
-      "granger_p": 0.07770644859095993,
+      "granger_f": 1.8953607341559762,
+      "granger_p": 0.0777064485910022,
       "n_obs": 6650
     },
     {
@@ -9802,8 +9802,8 @@
     {
       "src": "BTC",
       "tgt": "SUI",
-      "granger_f": 0.6507022266555599,
-      "granger_p": 0.6896334311288067,
+      "granger_f": 0.6507022266557595,
+      "granger_p": 0.6896334311286445,
       "n_obs": 6676
     },
     {
@@ -9823,78 +9823,78 @@
     {
       "src": "CRV",
       "tgt": "AAVE",
-      "granger_f": 3.350937671104993,
-      "granger_p": 0.0027601174347008425,
+      "granger_f": 3.3509376711050436,
+      "granger_p": 0.002760117434700662,
       "n_obs": 1667
     },
     {
       "src": "CRV",
       "tgt": "ADA",
-      "granger_f": 2.6202928024813334,
-      "granger_p": 0.01566204693478218,
+      "granger_f": 2.620292802481278,
+      "granger_p": 0.01566204693478199,
       "n_obs": 1668
     },
     {
       "src": "CRV",
       "tgt": "AVAX",
-      "granger_f": 2.8973463189947024,
-      "granger_p": 0.008195986270719557,
+      "granger_f": 2.897346318994744,
+      "granger_p": 0.008195986270718252,
       "n_obs": 1667
     },
     {
       "src": "CRV",
       "tgt": "BNB",
-      "granger_f": 0.45007557363096007,
-      "granger_p": 0.8452679580893843,
+      "granger_f": 0.45007557363085915,
+      "granger_p": 0.8452679580894559,
       "n_obs": 1664
     },
     {
       "src": "CRV",
       "tgt": "BTC",
-      "granger_f": 1.7231918161922442,
-      "granger_p": 0.11183181457926919,
+      "granger_f": 1.723191816192244,
+      "granger_p": 0.11183181457926916,
       "n_obs": 1667
     },
     {
       "src": "CRV",
       "tgt": "DOGE",
-      "granger_f": 2.6472759547390243,
-      "granger_p": 0.01471582695814374,
+      "granger_f": 2.647275954739024,
+      "granger_p": 0.014715826958143729,
       "n_obs": 1661
     },
     {
       "src": "CRV",
       "tgt": "ETH",
-      "granger_f": 1.357583256814108,
-      "granger_p": 0.22835838993485516,
+      "granger_f": 1.3575832568141082,
+      "granger_p": 0.22835838993485524,
       "n_obs": 1667
     },
     {
       "src": "CRV",
       "tgt": "LINK",
-      "granger_f": 2.8435682005823204,
-      "granger_p": 0.009304771816688196,
+      "granger_f": 2.8435682005824208,
+      "granger_p": 0.009304771816687001,
       "n_obs": 1664
     },
     {
       "src": "CRV",
       "tgt": "LTC",
-      "granger_f": 3.0894015993495842,
-      "granger_p": 0.005190290679376621,
+      "granger_f": 3.0894015993496198,
+      "granger_p": 0.005190290679375769,
       "n_obs": 1661
     },
     {
       "src": "CRV",
       "tgt": "NEAR",
-      "granger_f": 1.1356744062837767,
-      "granger_p": 0.3389457530439157,
+      "granger_f": 1.1356744062837292,
+      "granger_p": 0.3389457530439431,
       "n_obs": 1666
     },
     {
       "src": "CRV",
       "tgt": "SOL",
-      "granger_f": 1.494965743265773,
-      "granger_p": 0.1760491423085026,
+      "granger_f": 1.4949657432657248,
+      "granger_p": 0.176049142308519,
       "n_obs": 1668
     },
     {
@@ -9921,29 +9921,29 @@
     {
       "src": "DOGE",
       "tgt": "AAVE",
-      "granger_f": 0.4638274226267147,
-      "granger_p": 0.8354549017430889,
+      "granger_f": 0.46382742262683496,
+      "granger_p": 0.8354549017430023,
       "n_obs": 2107
     },
     {
       "src": "DOGE",
       "tgt": "ADA",
-      "granger_f": 0.7706471751386332,
-      "granger_p": 0.5929660054518731,
+      "granger_f": 0.7706471751387014,
+      "granger_p": 0.592966005451819,
       "n_obs": 2107
     },
     {
       "src": "DOGE",
       "tgt": "AVAX",
-      "granger_f": 1.0000905612210131,
-      "granger_p": 0.4234507146110875,
+      "granger_f": 1.000090561221117,
+      "granger_p": 0.423450714611051,
       "n_obs": 2107
     },
     {
       "src": "DOGE",
       "tgt": "BNB",
-      "granger_f": 1.4647227172954258,
-      "granger_p": 0.1864374519254885,
+      "granger_f": 1.4647227172953625,
+      "granger_p": 0.1864374519255192,
       "n_obs": 2103
     },
     {
@@ -9977,8 +9977,8 @@
     {
       "src": "DOGE",
       "tgt": "LTC",
-      "granger_f": 0.711289568651503,
-      "granger_p": 0.6405313403031032,
+      "granger_f": 0.7112895686514189,
+      "granger_p": 0.6405313403031709,
       "n_obs": 2105
     },
     {
@@ -9991,8 +9991,8 @@
     {
       "src": "DOGE",
       "tgt": "SOL",
-      "granger_f": 0.5954991828211555,
-      "granger_p": 0.734185345070238,
+      "granger_f": 0.595499182821098,
+      "granger_p": 0.734185345070284,
       "n_obs": 2107
     },
     {
@@ -10005,43 +10005,43 @@
     {
       "src": "DOGE",
       "tgt": "UNI",
-      "granger_f": 0.8267652542676394,
-      "granger_p": 0.5490241971800962,
+      "granger_f": 0.8267652542675961,
+      "granger_p": 0.5490241971801296,
       "n_obs": 2107
     },
     {
       "src": "DOGE",
       "tgt": "XRP",
-      "granger_f": 0.2714936183698543,
-      "granger_p": 0.950404832279554,
+      "granger_f": 0.27149361836975255,
+      "granger_p": 0.9504048322795988,
       "n_obs": 2107
     },
     {
       "src": "ETH",
       "tgt": "AAVE",
-      "granger_f": 3.285833312589471,
-      "granger_p": 0.0031473342904344967,
+      "granger_f": 3.2858333125896153,
+      "granger_p": 0.003147334290432782,
       "n_obs": 5613
     },
     {
       "src": "ETH",
       "tgt": "ADA",
-      "granger_f": 6.013239900723335,
-      "granger_p": 2.78582472804242e-06,
+      "granger_f": 6.01323990072317,
+      "granger_p": 2.785824728043635e-06,
       "n_obs": 5614
     },
     {
       "src": "ETH",
       "tgt": "AVAX",
-      "granger_f": 6.281279469504234,
-      "granger_p": 1.3602675668107242e-06,
+      "granger_f": 6.28127946950437,
+      "granger_p": 1.360267566810355e-06,
       "n_obs": 5609
     },
     {
       "src": "ETH",
       "tgt": "BNB",
-      "granger_f": 8.215869402369325,
-      "granger_p": 7.131728327715252e-09,
+      "granger_f": 8.215869402369492,
+      "granger_p": 7.131728327711066e-09,
       "n_obs": 5603
     },
     {
@@ -10068,28 +10068,28 @@
     {
       "src": "ETH",
       "tgt": "LINK",
-      "granger_f": 7.097477710546893,
+      "granger_f": 7.097477710546891,
       "granger_p": 1.5062113315816987e-07,
       "n_obs": 5607
     },
     {
       "src": "ETH",
       "tgt": "LTC",
-      "granger_f": 5.051410783141793,
-      "granger_p": 3.542858368480009e-05,
+      "granger_f": 5.051410783141902,
+      "granger_p": 3.542858368479048e-05,
       "n_obs": 5599
     },
     {
       "src": "ETH",
       "tgt": "NEAR",
-      "granger_f": 7.8587235036221275,
-      "granger_p": 1.8959255635087734e-08,
+      "granger_f": 7.858723503622342,
+      "granger_p": 1.8959255635076617e-08,
       "n_obs": 5608
     },
     {
       "src": "ETH",
       "tgt": "SOL",
-      "granger_f": 2.3289895588994898,
+      "granger_f": 2.3289895588994893,
       "granger_p": 0.030069163595754962,
       "n_obs": 5614
     },
@@ -10103,8 +10103,8 @@
     {
       "src": "ETH",
       "tgt": "UNI",
-      "granger_f": 4.835742975079272,
-      "granger_p": 6.218280848513744e-05,
+      "granger_f": 4.8357429750791665,
+      "granger_p": 6.218280848515439e-05,
       "n_obs": 5610
     },
     {
@@ -10117,29 +10117,29 @@
     {
       "src": "LINK",
       "tgt": "AAVE",
-      "granger_f": 0.03164304852486486,
-      "granger_p": 0.9998667703029089,
+      "granger_f": 0.03164304852491273,
+      "granger_p": 0.9998667703029084,
       "n_obs": 1748
     },
     {
       "src": "LINK",
       "tgt": "ADA",
-      "granger_f": 0.5846887197030505,
-      "granger_p": 0.7428211907013058,
+      "granger_f": 0.5846887197029966,
+      "granger_p": 0.7428211907013484,
       "n_obs": 1748
     },
     {
       "src": "LINK",
       "tgt": "AVAX",
-      "granger_f": 1.1208606045519984,
-      "granger_p": 0.3475316845853971,
+      "granger_f": 1.1208606045519547,
+      "granger_p": 0.3475316845854107,
       "n_obs": 1747
     },
     {
       "src": "LINK",
       "tgt": "BNB",
-      "granger_f": 2.95607079561083,
-      "granger_p": 0.007122333038900629,
+      "granger_f": 2.956070795610775,
+      "granger_p": 0.0071223330389019865,
       "n_obs": 1746
     },
     {
@@ -10152,8 +10152,8 @@
     {
       "src": "LINK",
       "tgt": "CRV",
-      "granger_f": 1.197540087440384,
-      "granger_p": 0.3046426502202514,
+      "granger_f": 1.1975400874403255,
+      "granger_p": 0.30464265022028786,
       "n_obs": 1747
     },
     {
@@ -10166,15 +10166,15 @@
     {
       "src": "LINK",
       "tgt": "ETH",
-      "granger_f": 0.7088785056172829,
-      "granger_p": 0.6424862423751877,
+      "granger_f": 0.7088785056172137,
+      "granger_p": 0.6424862423752435,
       "n_obs": 1751
     },
     {
       "src": "LINK",
       "tgt": "LTC",
-      "granger_f": 0.5389136409007097,
-      "granger_p": 0.77893028204305,
+      "granger_f": 0.5389136409008144,
+      "granger_p": 0.7789302820429684,
       "n_obs": 1744
     },
     {
@@ -10194,22 +10194,22 @@
     {
       "src": "LINK",
       "tgt": "SUI",
-      "granger_f": 0.9315434311232801,
-      "granger_p": 0.47104079083594874,
+      "granger_f": 0.9315434311232246,
+      "granger_p": 0.4710407908359884,
       "n_obs": 1748
     },
     {
       "src": "LINK",
       "tgt": "UNI",
-      "granger_f": 1.3089812219314731,
-      "granger_p": 0.24966818141873934,
+      "granger_f": 1.3089812219314358,
+      "granger_p": 0.24966818141875627,
       "n_obs": 1748
     },
     {
       "src": "LINK",
       "tgt": "XRP",
-      "granger_f": 0.6919510743669998,
-      "granger_p": 0.6561795638724264,
+      "granger_f": 0.6919510743670437,
+      "granger_p": 0.656179563872391,
       "n_obs": 1746
     },
     {
@@ -10222,36 +10222,36 @@
     {
       "src": "LTC",
       "tgt": "ADA",
-      "granger_f": 0.9958508117839846,
-      "granger_p": 0.4265451548077386,
+      "granger_f": 0.995850811784025,
+      "granger_p": 0.4265451548077107,
       "n_obs": 1200
     },
     {
       "src": "LTC",
       "tgt": "AVAX",
-      "granger_f": 1.173077089696136,
-      "granger_p": 0.3181328849140332,
+      "granger_f": 1.1730770896961966,
+      "granger_p": 0.3181328849139995,
       "n_obs": 1200
     },
     {
       "src": "LTC",
       "tgt": "BNB",
-      "granger_f": 0.6577284158360175,
-      "granger_p": 0.6839220933256462,
+      "granger_f": 0.6577284158360567,
+      "granger_p": 0.6839220933256147,
       "n_obs": 1199
     },
     {
       "src": "LTC",
       "tgt": "BTC",
-      "granger_f": 0.7649769732302238,
-      "granger_p": 0.597535450993731,
+      "granger_f": 0.7649769732301882,
+      "granger_p": 0.5975354509937594,
       "n_obs": 1200
     },
     {
       "src": "LTC",
       "tgt": "CRV",
-      "granger_f": 1.647053314701327,
-      "granger_p": 0.13076742622408288,
+      "granger_f": 1.6470533147012854,
+      "granger_p": 0.13076742622409382,
       "n_obs": 1200
     },
     {
@@ -10271,15 +10271,15 @@
     {
       "src": "LTC",
       "tgt": "LINK",
-      "granger_f": 1.1616857688933422,
-      "granger_p": 0.3244332166503741,
+      "granger_f": 1.1616857688933073,
+      "granger_p": 0.3244332166503936,
       "n_obs": 1200
     },
     {
       "src": "LTC",
       "tgt": "NEAR",
-      "granger_f": 0.6475915021298667,
-      "granger_p": 0.6921362396969157,
+      "granger_f": 0.6475915021298956,
+      "granger_p": 0.6921362396968924,
       "n_obs": 1200
     },
     {
@@ -10292,14 +10292,14 @@
     {
       "src": "LTC",
       "tgt": "SUI",
-      "granger_f": 1.3589388775474023,
-      "granger_p": 0.22807019219920052,
+      "granger_f": 1.3589388775474025,
+      "granger_p": 0.2280701921992002,
       "n_obs": 1200
     },
     {
       "src": "LTC",
       "tgt": "UNI",
-      "granger_f": 0.24052091647523455,
+      "granger_f": 0.2405209164752346,
       "granger_p": 0.9630838872192475,
       "n_obs": 1200
     },
@@ -10313,36 +10313,36 @@
     {
       "src": "NEAR",
       "tgt": "AAVE",
-      "granger_f": 4.976898672477422,
-      "granger_p": 4.5080979830603666e-05,
+      "granger_f": 4.9768986724774855,
+      "granger_p": 4.508097983059624e-05,
       "n_obs": 2210
     },
     {
       "src": "NEAR",
       "tgt": "ADA",
-      "granger_f": 4.928011113385196,
-      "granger_p": 5.115692028379745e-05,
+      "granger_f": 4.928011113385265,
+      "granger_p": 5.115692028378616e-05,
       "n_obs": 2213
     },
     {
       "src": "NEAR",
       "tgt": "AVAX",
-      "granger_f": 5.011703726552762,
-      "granger_p": 4.119500318349621e-05,
+      "granger_f": 5.011703726552706,
+      "granger_p": 4.119500318350552e-05,
       "n_obs": 2209
     },
     {
       "src": "NEAR",
       "tgt": "BNB",
-      "granger_f": 2.5098772034945287,
-      "granger_p": 0.02009039787539005,
+      "granger_f": 2.5098772034945966,
+      "granger_p": 0.020090397875387838,
       "n_obs": 2212
     },
     {
       "src": "NEAR",
       "tgt": "BTC",
-      "granger_f": 0.12672172232938936,
-      "granger_p": 0.9930815183261237,
+      "granger_f": 0.12672172232944107,
+      "granger_p": 0.993081518326116,
       "n_obs": 2214
     },
     {
@@ -10355,29 +10355,29 @@
     {
       "src": "NEAR",
       "tgt": "DOGE",
-      "granger_f": 5.366581630432107,
-      "granger_p": 1.6364001175449282e-05,
+      "granger_f": 5.366581630432027,
+      "granger_p": 1.636400117545265e-05,
       "n_obs": 2202
     },
     {
       "src": "NEAR",
       "tgt": "ETH",
-      "granger_f": 4.167806248049744,
-      "granger_p": 0.0003581259980482294,
+      "granger_f": 4.1678062480497,
+      "granger_p": 0.0003581259980482666,
       "n_obs": 2215
     },
     {
       "src": "NEAR",
       "tgt": "LINK",
-      "granger_f": 5.734151291432679,
-      "granger_p": 6.239976840519825e-06,
+      "granger_f": 5.734151291432482,
+      "granger_p": 6.239976840523052e-06,
       "n_obs": 2214
     },
     {
       "src": "NEAR",
       "tgt": "LTC",
-      "granger_f": 2.9992533403471735,
-      "granger_p": 0.006388553728838252,
+      "granger_f": 2.999253340347262,
+      "granger_p": 0.006388553728837023,
       "n_obs": 2203
     },
     {
@@ -10390,64 +10390,64 @@
     {
       "src": "NEAR",
       "tgt": "SUI",
-      "granger_f": 6.670995850508662,
-      "granger_p": 5.215031085221747e-07,
+      "granger_f": 6.670995850508589,
+      "granger_p": 5.215031085222753e-07,
       "n_obs": 2210
     },
     {
       "src": "NEAR",
       "tgt": "UNI",
-      "granger_f": 0.8308857680220867,
-      "granger_p": 0.5458418507514586,
+      "granger_f": 0.8308857680221309,
+      "granger_p": 0.5458418507514253,
       "n_obs": 2210
     },
     {
       "src": "NEAR",
       "tgt": "XRP",
-      "granger_f": 3.437762298460859,
-      "granger_p": 0.0022103255336495486,
+      "granger_f": 3.4377622984608585,
+      "granger_p": 0.002210325533649556,
       "n_obs": 2208
     },
     {
       "src": "SOL",
       "tgt": "AAVE",
-      "granger_f": 0.8734257060413205,
-      "granger_p": 0.5134257623964401,
+      "granger_f": 0.873425706041179,
+      "granger_p": 0.5134257623965464,
       "n_obs": 5456
     },
     {
       "src": "SOL",
       "tgt": "ADA",
-      "granger_f": 2.019921880556816,
-      "granger_p": 0.05954866240414722,
+      "granger_f": 2.019921880556501,
+      "granger_p": 0.05954866240418571,
       "n_obs": 5457
     },
     {
       "src": "SOL",
       "tgt": "AVAX",
-      "granger_f": 2.178498134328085,
-      "granger_p": 0.04209162357886682,
+      "granger_f": 2.1784981343279535,
+      "granger_p": 0.042091623578877996,
       "n_obs": 5448
     },
     {
       "src": "SOL",
       "tgt": "BNB",
-      "granger_f": 5.826125784471015,
-      "granger_p": 4.592350158678553e-06,
+      "granger_f": 5.826125784470852,
+      "granger_p": 4.592350158681097e-06,
       "n_obs": 5445
     },
     {
       "src": "SOL",
       "tgt": "BTC",
-      "granger_f": 2.2666851278570856,
-      "granger_p": 0.034591179086617185,
+      "granger_f": 2.266685127856983,
+      "granger_p": 0.03459117908662497,
       "n_obs": 5455
     },
     {
       "src": "SOL",
       "tgt": "CRV",
-      "granger_f": 1.96888836632458,
-      "granger_p": 0.06646671710092393,
+      "granger_f": 1.9688883663247505,
+      "granger_p": 0.06646671710089962,
       "n_obs": 5452
     },
     {
@@ -10467,22 +10467,22 @@
     {
       "src": "SOL",
       "tgt": "LINK",
-      "granger_f": 2.6001396139382122,
-      "granger_p": 0.016168549378365166,
+      "granger_f": 2.6001396139385227,
+      "granger_p": 0.016168549378351948,
       "n_obs": 5448
     },
     {
       "src": "SOL",
       "tgt": "LTC",
-      "granger_f": 1.597690615277351,
-      "granger_p": 0.14343243431669092,
+      "granger_f": 1.5976906152772457,
+      "granger_p": 0.1434324343167212,
       "n_obs": 5438
     },
     {
       "src": "SOL",
       "tgt": "NEAR",
-      "granger_f": 6.627547672003118,
-      "granger_p": 5.372772861195088e-07,
+      "granger_f": 6.627547672002808,
+      "granger_p": 5.372772861199579e-07,
       "n_obs": 5450
     },
     {
@@ -10495,15 +10495,15 @@
     {
       "src": "SOL",
       "tgt": "UNI",
-      "granger_f": 3.1168764886402345,
-      "granger_p": 0.004747252033460686,
+      "granger_f": 3.11687648864003,
+      "granger_p": 0.004747252033463004,
       "n_obs": 5453
     },
     {
       "src": "SOL",
       "tgt": "XRP",
-      "granger_f": 0.7055853447646342,
-      "granger_p": 0.6451211346862197,
+      "granger_f": 0.7055853447647485,
+      "granger_p": 0.6451211346861272,
       "n_obs": 5448
     },
     {
@@ -10516,15 +10516,15 @@
     {
       "src": "SUI",
       "tgt": "ADA",
-      "granger_f": 0.5215929471437766,
-      "granger_p": 0.7923487762059385,
+      "granger_f": 0.5215929471440073,
+      "granger_p": 0.7923487762057613,
       "n_obs": 2492
     },
     {
       "src": "SUI",
       "tgt": "AVAX",
-      "granger_f": 0.2611297932837474,
-      "granger_p": 0.9548818729545414,
+      "granger_f": 0.26112979328380753,
+      "granger_p": 0.9548818729545161,
       "n_obs": 2490
     },
     {
@@ -10551,15 +10551,15 @@
     {
       "src": "SUI",
       "tgt": "DOGE",
-      "granger_f": 0.33252425919623163,
-      "granger_p": 0.9200701697238731,
+      "granger_f": 0.33252425919623174,
+      "granger_p": 0.920070169723873,
       "n_obs": 2485
     },
     {
       "src": "SUI",
       "tgt": "ETH",
-      "granger_f": 0.23322393382525303,
-      "granger_p": 0.9658536183288926,
+      "granger_f": 0.23322393382520484,
+      "granger_p": 0.9658536183289103,
       "n_obs": 2492
     },
     {
@@ -10572,8 +10572,8 @@
     {
       "src": "SUI",
       "tgt": "LTC",
-      "granger_f": 0.4867471219224092,
-      "granger_p": 0.8186799664067765,
+      "granger_f": 0.486747121922556,
+      "granger_p": 0.8186799664066675,
       "n_obs": 2487
     },
     {
@@ -10586,43 +10586,43 @@
     {
       "src": "SUI",
       "tgt": "SOL",
-      "granger_f": 0.3984175569556951,
-      "granger_p": 0.8804309735538913,
+      "granger_f": 0.3984175569558323,
+      "granger_p": 0.8804309735538022,
       "n_obs": 2492
     },
     {
       "src": "SUI",
       "tgt": "UNI",
-      "granger_f": 1.9159951211967114,
-      "granger_p": 0.07466418023944972,
+      "granger_f": 1.9159951211967647,
+      "granger_p": 0.07466418023944286,
       "n_obs": 2491
     },
     {
       "src": "SUI",
       "tgt": "XRP",
-      "granger_f": 0.37531922382587385,
-      "granger_p": 0.8950520008191694,
+      "granger_f": 0.37531922382581484,
+      "granger_p": 0.8950520008192058,
       "n_obs": 2490
     },
     {
       "src": "UNI",
       "tgt": "AAVE",
-      "granger_f": 3.507995348130035,
-      "granger_p": 0.0018799797672292302,
+      "granger_f": 3.5079953481299393,
+      "granger_p": 0.001879979767229665,
       "n_obs": 1681
     },
     {
       "src": "UNI",
       "tgt": "ADA",
-      "granger_f": 3.4132335462568015,
-      "granger_p": 0.0023705769760729747,
+      "granger_f": 3.4132335462568024,
+      "granger_p": 0.002370576976072975,
       "n_obs": 1681
     },
     {
       "src": "UNI",
       "tgt": "AVAX",
-      "granger_f": 3.149423543681749,
-      "granger_p": 0.00449255867712463,
+      "granger_f": 3.149423543681621,
+      "granger_p": 0.004492558677124515,
       "n_obs": 1678
     },
     {
@@ -10635,22 +10635,22 @@
     {
       "src": "UNI",
       "tgt": "BTC",
-      "granger_f": 0.266392554964608,
-      "granger_p": 0.9526127102448148,
+      "granger_f": 0.2663925549646507,
+      "granger_p": 0.9526127102447962,
       "n_obs": 1681
     },
     {
       "src": "UNI",
       "tgt": "CRV",
-      "granger_f": 4.340128113514273,
-      "granger_p": 0.0002354347716645566,
+      "granger_f": 4.340128113514329,
+      "granger_p": 0.00023543477166451803,
       "n_obs": 1679
     },
     {
       "src": "UNI",
       "tgt": "DOGE",
-      "granger_f": 3.8896919015513864,
-      "granger_p": 0.0007313091724303681,
+      "granger_f": 3.8896919015512648,
+      "granger_p": 0.0007313091724305992,
       "n_obs": 1671
     },
     {
@@ -10663,22 +10663,22 @@
     {
       "src": "UNI",
       "tgt": "LINK",
-      "granger_f": 3.2805785873687077,
-      "granger_p": 0.0032732857857602424,
+      "granger_f": 3.2805785873686584,
+      "granger_p": 0.003273285785760617,
       "n_obs": 1680
     },
     {
       "src": "UNI",
       "tgt": "LTC",
-      "granger_f": 1.479972879531872,
-      "granger_p": 0.18120974980391757,
+      "granger_f": 1.4799728795319422,
+      "granger_p": 0.18120974980389754,
       "n_obs": 1673
     },
     {
       "src": "UNI",
       "tgt": "NEAR",
-      "granger_f": 0.3848177509729329,
-      "granger_p": 0.8890879018813909,
+      "granger_f": 0.38481775097297144,
+      "granger_p": 0.8890879018813668,
       "n_obs": 1680
     },
     {
@@ -10691,8 +10691,8 @@
     {
       "src": "UNI",
       "tgt": "SUI",
-      "granger_f": 6.436893514204508,
-      "granger_p": 1.014995138309033e-06,
+      "granger_f": 6.436893514204397,
+      "granger_p": 1.0149951383093834e-06,
       "n_obs": 1681
     },
     {
@@ -10705,8 +10705,8 @@
     {
       "src": "XRP",
       "tgt": "AAVE",
-      "granger_f": 1.1017946201800357,
-      "granger_p": 0.35855160517655515,
+      "granger_f": 1.1017946201801454,
+      "granger_p": 0.3585516051765231,
       "n_obs": 4229
     },
     {
@@ -10740,15 +10740,15 @@
     {
       "src": "XRP",
       "tgt": "CRV",
-      "granger_f": 1.2917545162988835,
-      "granger_p": 0.25722473049496486,
+      "granger_f": 1.291754516299159,
+      "granger_p": 0.25722473049480743,
       "n_obs": 4229
     },
     {
       "src": "XRP",
       "tgt": "DOGE",
-      "granger_f": 1.6343955164209387,
-      "granger_p": 0.13334856991352823,
+      "granger_f": 1.6343955164207917,
+      "granger_p": 0.13334856991357127,
       "n_obs": 4221
     },
     {
@@ -10761,36 +10761,36 @@
     {
       "src": "XRP",
       "tgt": "LINK",
-      "granger_f": 1.3549889559651975,
-      "granger_p": 0.22902050198864687,
+      "granger_f": 1.354988955965077,
+      "granger_p": 0.22902050198869817,
       "n_obs": 4226
     },
     {
       "src": "XRP",
       "tgt": "LTC",
-      "granger_f": 1.2186737133738466,
-      "granger_p": 0.2931996905413662,
+      "granger_f": 1.2186737133740113,
+      "granger_p": 0.29319969054128847,
       "n_obs": 4221
     },
     {
       "src": "XRP",
       "tgt": "NEAR",
-      "granger_f": 5.210979635403751,
-      "granger_p": 2.3574377270404463e-05,
+      "granger_f": 5.21097963540335,
+      "granger_p": 2.357437727042923e-05,
       "n_obs": 4226
     },
     {
       "src": "XRP",
       "tgt": "SOL",
-      "granger_f": 0.6468461134400485,
-      "granger_p": 0.6927587377207132,
+      "granger_f": 0.6468461134401523,
+      "granger_p": 0.6927587377206295,
       "n_obs": 4229
     },
     {
       "src": "XRP",
       "tgt": "SUI",
-      "granger_f": 1.5718648465218674,
-      "granger_p": 0.1510434725110021,
+      "granger_f": 1.571864846521996,
+      "granger_p": 0.15104347251095107,
       "n_obs": 4229
     },
     {
