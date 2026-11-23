@@ -576,6 +576,43 @@ TRACKA_SOURCE_AUDIT_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-LIQ-XSEC-BROAD-TS-01 hardening: FCLR-LIQ-XSEC-BROAD-01 (session_20261123T085507Z)
+# returned SUPPORTED_GENERALIZATION for the regime-conditioned cross-sectional
+# funding -> next-hour observed liquidation-intensity association on the broad
+# 342-coin ironflow_bulk universe, but its prereg never tested TEMPORAL STABILITY
+# of the per-block rank-IC series. RESEARCH_PROMPT.md §17 promotion condition #4
+# requires that skill "is not dominated by ... one time block", and the sibling
+# FCLR-LIQ-CONTAGION-002 campaign was created precisely to close the same gap for
+# the contagion hypothesis (rolling-window edge-set stability). The BROAD-01
+# SUPPORTED finding is the ONLY liquidation-risk result ever marked SUPPORTED, and
+# it was declared the "durable final answer" without ever being asked whether it
+# survives a rolling holdout. That is a prose-only / verify-and-stop escape hatch:
+# a future agent could stop at "verify green" and never test whether the
+# generalization holds across time. This campaign removes that bottleneck: once
+# it starts, a post-start session cannot satisfy the gate with a trigger-only,
+# prose-only, audit-only, prereg-only, verify-and-stop, or arbitrary recompute_*
+# session. It must emit the outcome-blind temporal-stability prereg, the heavy
+# rolling-window evaluation triad, the independent stdlib recompute, the evidence
+# audit, the gate-critical evidence_audit_ alias, and a trigger check, with no
+# zero-byte placeholders. Sessions predating the campaign start are grandfathered
+# so this handoff refresh stays green.
+BROAD_TS_CAMPAIGN_RE = re.compile(
+    r"FCLR-LIQ-XSEC-BROAD-TS-(\d+)-(\d{8}T\d{6}Z)"
+)
+BROAD_TS_REQUIRED = (
+    ("fclr_liqxsecbroad01_ts_prereg_", ".json"),
+    ("fclr_liqxsecbroad01_ts_prereg_", ".md"),
+    ("fclr_liqxsecbroad01_ts_eval_", ".py"),
+    ("fclr_liqxsecbroad01_ts_eval_", ".json"),
+    ("fclr_liqxsecbroad01_ts_eval_", ".md"),
+    ("fclr_liqxsecbroad01_ts_recompute_", ".py"),
+    ("fclr_liqxsecbroad01_ts_recompute_", ".json"),
+    ("fclr_liqxsecbroad01_ts_evidence_audit_", ".json"),
+    ("fclr_liqxsecbroad01_ts_evidence_audit_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 # FCLR-LIQ-XSEC-BROAD-01 hardening: the SUPPORTED regime-conditioned
 # cross-sectional funding -> next-hour observed liquidation intensity findings
 # (FCLR-XSEC-004/005/006) were established on the 15-coin combined
@@ -2135,6 +2172,77 @@ def _liq_xsec_broad_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _broad_ts_state(handoff_text: str, latest_sid: str | None,
+                    latest_files: list[str],
+                    latest_dir: Path | None = None) -> dict:
+    """Return FCLR-LIQ-XSEC-BROAD-TS-01 non-avoidance state.
+
+    After the temporal-stability campaign starts, a post-start session cannot
+    satisfy the gate with a trigger-only, prose-only, audit-only, prereg-only,
+    verify-and-stop, or arbitrary recompute_* session. It must emit the
+    outcome-blind temporal-stability prereg, the heavy rolling-window evaluation
+    triad, the independent stdlib recompute, the evidence audit, the gate-critical
+    evidence_audit_ alias, and a trigger check, with no zero-byte placeholders.
+    Sessions predating the campaign start are grandfathered so this handoff
+    refresh stays green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = BROAD_TS_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-LIQ-XSEC-BROAD-TS-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    def _matches(prefix: str, suffix: str) -> list[str]:
+        return sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in BROAD_TS_REQUIRED]
+    out["artifact_family"] = "liqxsecbroad01_ts"
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, BROAD_TS_REQUIRED):
+        matches = _matches(prefix, suffix)
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _pooled_state(handoff_text: str, latest_sid: str | None,
                   latest_files: list[str],
                   latest_dir: Path | None = None) -> dict:
@@ -2628,6 +2736,7 @@ def check(repo: Path = REPO) -> dict:
         "pooled_robust_02": None,
         "tracks01": None,
         "liq_xsec_broad": None,
+        "broad_ts_01": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -3253,6 +3362,37 @@ def check(repo: Path = REPO) -> dict:
                 if not lb["has_trigger_check"]:
                     payload["failures"].append(
                         f"LIQ_XSEC_BROAD_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-LIQ-XSEC-BROAD-TS-01: after the temporal-stability campaign
+            # starts, a post-start session cannot satisfy the gate with a trigger-
+            # only, prose-only, audit-only, prereg-only, verify-and-stop, or
+            # arbitrary recompute_* session. It must emit the outcome-blind
+            # temporal-stability prereg, the heavy rolling-window evaluation triad,
+            # the independent stdlib recompute, the evidence audit, the gate-
+            # critical evidence_audit_ alias, and a trigger check, with no zero-
+            # byte placeholders. This closes the last escape hatch for the ONLY
+            # SUPPORTED liquidation-risk finding (BROAD-01 SUPPORTED_GENERALIZATION),
+            # whose prereg never tested whether the per-block rank-IC series is
+            # stable across rolling holdouts (RESEARCH_PROMPT.md §17 cond #4).
+            bt = _broad_ts_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["broad_ts_01"] = bt
+            if bt["required"]:
+                if bt["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "BROAD_TS_ARTIFACTS_MISSING:"
+                        + ",".join(bt["missing_required_artifacts"])
+                    )
+                if bt["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "BROAD_TS_ARTIFACTS_EMPTY:"
+                        + ",".join(bt["empty_required_artifacts"])
+                    )
+                if not bt["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"BROAD_TS_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
