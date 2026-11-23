@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-23T08:43:16Z
+# AGENT HANDOFF — 2026-11-23T08:46:19Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status as of this refresh (2026-11-23T08:43:16Z): **PASS** (reason_code=OK, root=499/500).
+> Gate status as of this refresh (2026-11-23T08:46:19Z): **PASS** (reason_code=OK, root=499/500).
 > The prior heavy session `session_20261123T043600Z` COMPLETED the full `FCLR-TRACKA-SOURCE-AUDIT-01`
 > heavy set (Track B modeled-breach evaluation `fclr_tracks01_eval_*` py+json+md + independent
 > `fclr_tracks01_recompute_*` py+json + recovered source_registry/probe/viability_decision triad +
@@ -16,16 +16,16 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-23T08:43:16Z (refresh time)**
+> **Timestamped initial task message — inferred 2026-11-23T08:46:19Z (refresh time)**
 >
 > **Your ONE job, non-deferrable, gate-enforced:** create `research_state/session_<UTC>/` with UTC
 > **> 20261123T080000Z** (use current wall-clock UTC at session start) and execute
 > **`FCLR-LIQ-XSEC-BROAD-01`** to completion — a pre-registered, leakage-hardened, broad-universe
-> (468-coin on-disk ironflow_bulk) cross-sectional test of whether the regime-conditioned
+> (342-coin on-disk ironflow_bulk) cross-sectional test of whether the regime-conditioned
 > funding → next-hour observed-liquidation-intensity association that was SUPPORTED on the narrow
 > 15-coin combined panel (FCLR-XSEC-004 count / FCLR-XSEC-005 notional-weighted / FCLR-XSEC-006
 > UTC-session-bucket, all `promotable:false`) **GENERALIZES** to the full on-disk ironflow_bulk
-> liquidation universe (2025-05..2026-10, 2.85M liquidation rows across 468 markets). Walk-forward
+> liquidation universe (2025-05..2026-10, 2.85M liquidation rows across 342 coins). Walk-forward
 > with per-coin block bootstrap (>=2,000 deterministic-seed replicates), placebo/permutation null,
 > leave-one-instrument-out, Holm across the declared family, and an independent stdlib recompute
 > using ONE explicit sign convention so the recompute asserts `all_checks_match:true`.
@@ -106,7 +106,7 @@ Execute **FCLR-LIQ-XSEC-BROAD-01-20261123T080000Z** to completion in ONE `sessio
 
 1. **SOURCE REGISTRY (on-disk, no network)** — write `fclr_liqxsecbroad01_source_registry_*`
    (json+md) recording the ironflow_bulk parquet files actually read: paths, sha256, row counts, coin
-   coverage (**verified on-disk at refresh: 468 distinct markets in `liquidations`, 2,849,452 rows
+   coverage (**verified on-disk at refresh: 342 distinct coins in `liquidations`, 2,849,452 rows
    across 18 monthly files, span 2025-05-25..2026-10-31**; funding/OI/candles_1h likewise 18 files
    each), month span 2025-05..2026-10, schemas
    (`liquidations`: timestamp[ms],market,issuer,wallet,position_side,size,notional_usd,avg_price,
@@ -290,7 +290,7 @@ here, the newest session lacks the full `fclr_liqxsecbroad01_*` family (includin
 
 | Path | Description |
 |---|---|
-| `research_state/data_cache/ironflow_bulk/liquidations/` | 18 monthly parquet, 2025-05..2026-10. **Capped-sample feed — not a complete census (per §15).** Columns: `timestamp[ms],market,issuer,wallet,position_side,size,notional_usd,avg_price,fills,block,tx_hash`. **Verified at refresh: 2,849,452 rows across 18 files, 468 distinct `market` instruments, span 2025-05-25 14:36:58 UTC .. 2026-10-31 23:30:10 UTC. There is NO `coin` column — the instrument key is `market`.** |
+| `research_state/data_cache/ironflow_bulk/liquidations/` | 18 monthly parquet, 2025-05..2026-10. **Capped-sample feed — not a complete census (per §15).** Columns: `timestamp[ms],market,issuer,wallet,position_side,size,notional_usd,avg_price,fills,block,tx_hash`. **Verified at refresh: 2,849,452 rows across 18 files, 342 distinct coins, span 2025-05-25 14:36:58 UTC .. 2026-10-31 23:30:10 UTC. There is NO `coin` column — the instrument key is `market`.** |
 | `research_state/data_cache/ironflow_bulk/funding/` | 18 monthly parquet. Columns: `timestamp[us],market,coin,dex,funding_rate,premium`. |
 | `research_state/data_cache/ironflow_bulk/open_interest/` | 18 monthly parquet. Columns: `timestamp[us],market,coin,dex,mark_price,oracle_price,open_interest,open_interest_usd`. |
 | `research_state/data_cache/ironflow_bulk/candles_1h/` | 18 monthly parquet. Columns: `timestamp[us],market,coin,dex,market_class,open,high,low,close,volume,trades`. |
@@ -380,7 +380,7 @@ Then record your `session_<UTC>/` id in this handoff (append the id string `sess
 
 ---
 
-## HANDOFF GENERATED: 2026-11-23T08:41:53Z
+## HANDOFF GENERATED: 2026-11-23T08:46:19Z
 **Next session must use UTC > 20261123T080000Z** (campaign start gate; the current session
 `session_20261123T043600Z` is grandfathered, so this refresh is green until a newer session appears).
 **Latest handoff session: session_20261123T043600Z** (completed FCLR-TRACKA-SOURCE-AUDIT-01 heavy set:
