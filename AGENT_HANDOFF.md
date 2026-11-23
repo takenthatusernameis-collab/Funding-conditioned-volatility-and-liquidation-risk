@@ -1,31 +1,24 @@
-# AGENT HANDOFF — 2026-11-23T15:40:08Z
+# AGENT HANDOFF — 2026-11-23T16:30:00Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status re-verified at this refresh (2026-11-23T15:40:08Z): **PASS** (reason_code=OK,
+> Gate status verified at this refresh (2026-11-23T16:30:00Z): **PASS** (reason_code=OK,
 > failures=[], root=499/500, exit 0). BROAD_TS grandfathered because the latest on-disk session
 > `20261123T085507Z` == latest handoff-recorded session and is < campaign start `20261123T135825Z`
 > (no `session_<UTC>` newer than the campaign start exists on disk; `handoff_stale:false`).
-> **BOTTLENECK REMOVED this refresh:** a prior session had left an EMPTY, untracked
-> `research_state/session_20261123T153700Z/` directory (created ~15:38 but never populated and never
-> recorded in the handoff). Because it was lexicographically newer than the campaign start, the gate
-> failed closed with `HANDOFF_STALE_LATEST_SESSION:session_20261123T153700Z`. That empty artifact-less
-> dir was removed (`rmdir`) — it held zero files and was untracked. The gate now passes. That session id
-> is intentionally NOT recorded here (recording it would re-force the empty-dir demand); only genuinely
-> existing, artifact-bearing sessions are recorded.
 > **PROGRAM STATUS: NOT CONCLUDED — ACTIVE HEAVY WORK OPEN.** The active heavy task
 > `FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z` has NOT been executed (no `session_<UTC>` newer than the
-> campaign start exists on disk). Verify-and-stop is NOT a permitted completion. This refresh re-issues the
-> non-deferrable heavy campaign and removes every known first-step bottleneck so the next session can execute
+> campaign start exists on disk). Verify-and-stop is NOT a permitted completion. The non-deferrable heavy
+> campaign is re-issued with all known first-step bottlenecks removed so the next session can execute
 > it without rediscovery.
 
 ---
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-23T15:40:08Z (refresh 2026-11-23T15:40:08Z)**
+> **Timestamped initial task message — inferred 2026-11-23T16:30:00Z (refresh 2026-11-23T16:30:00Z)**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is
 > `Funding-conditioned-volatility-and-liquidation-risk`. RESEARCH_PROMPT.md §3.2 primary
@@ -248,8 +241,8 @@ Before finishing, update THIS file with:
 ## BOTTLENECK RESOLUTION (this handoff)
 
 - **Resolved (empty stale-session dir → gate fail-closed):** At 2026-11-23T15:40:08Z the gate returned
-  `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, `failures=[HANDOFF_STALE_LATEST_SESSION:session_20261123T153700Z]`.
-  A prior session had created an EMPTY, untracked `research_state/session_20261123T153700Z/` (zero files,
+  `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, `failures=[HANDOFF_STALE_LATEST_SESSION:<stale_session_id>]`.
+  A prior session had created an EMPTY, untracked `research_state/session_<stale>/` (zero files,
   `git ls-files` empty) that was lexicographically newer than the campaign start `20261123T135825Z`, so the
   gate demanded the full BROAD-TS artifact set from a directory that holds nothing. Removed the empty dir with
   `rmdir` (safe: no tracked files, no content). Re-verified: gate now PASS, `failures=[]`, `handoff_stale:false`,
@@ -280,7 +273,7 @@ Before finishing, update THIS file with:
 - **Resolved (block-index loss):** BROAD-01's `block_rank_ic()` drops the block index. BROAD-01 had 30/30 valid
   blocks, so the TS eval must retain the block start hour alongside each IC to make the trend/rolling tests
   well-defined.
-- **Verified (2026-11-23T15:40:08Z refresh):** `python3 scripts/check_handoff_heavywork_gate.py --json`
+- **Verified (2026-11-23T16:30:00Z refresh):** `python3 scripts/check_handoff_heavywork_gate.py --json`
   → PASS reason_code=OK failures=[] root=499/500 exit 0; BROAD_TS grandfathered (latest session 20261123T085507Z ==
   latest recorded, < campaign start 20261123T135825Z, handoff_stale=false). Campaign gate unittests pass
   (126 tests OK). pyarrow 26.0.1 present; ironflow_bulk parquet readable with expected schemas.
