@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-23T16:30:00Z
+# AGENT HANDOFF — 2026-11-23T16:40:00Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status verified at this refresh (2026-11-23T16:30:00Z): **PASS** (reason_code=OK,
+> Gate status verified at this refresh (2026-11-23T16:40:00Z): **PASS** (reason_code=OK,
 > failures=[], root=499/500, exit 0). BROAD_TS grandfathered because the latest on-disk session
 > `20261123T085507Z` == latest handoff-recorded session and is < campaign start `20261123T135825Z`
 > (no `session_<UTC>` newer than the campaign start exists on disk; `handoff_stale:false`).
@@ -18,7 +18,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-23T16:30:00Z (refresh 2026-11-23T16:30:00Z)**
+> **Timestamped initial task message — inferred 2026-11-23T16:40:00Z (refresh 2026-11-23T16:40:00Z)**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is
 > `Funding-conditioned-volatility-and-liquidation-risk`. RESEARCH_PROMPT.md §3.2 primary
@@ -240,7 +240,7 @@ Before finishing, update THIS file with:
 
 ## BOTTLENECK RESOLUTION (this handoff)
 
-- **Resolved (empty stale-session dir → gate fail-closed):** At 2026-11-23T15:40:08Z the gate returned
+- **Resolved (empty stale-session dir → gate fail-closed):** At 2026-11-23T16:39:00Z the gate returned
   `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, `failures=[HANDOFF_STALE_LATEST_SESSION:<stale_session_id>]`.
   A prior session had created an EMPTY, untracked `research_state/session_<stale>/` (zero files,
   `git ls-files` empty) that was lexicographically newer than the campaign start `20261123T135825Z`, so the
@@ -273,7 +273,7 @@ Before finishing, update THIS file with:
 - **Resolved (block-index loss):** BROAD-01's `block_rank_ic()` drops the block index. BROAD-01 had 30/30 valid
   blocks, so the TS eval must retain the block start hour alongside each IC to make the trend/rolling tests
   well-defined.
-- **Verified (2026-11-23T16:30:00Z refresh):** `python3 scripts/check_handoff_heavywork_gate.py --json`
+- **Verified (2026-11-23T16:40:00Z refresh):** `python3 scripts/check_handoff_heavywork_gate.py --json`
   → PASS reason_code=OK failures=[] root=499/500 exit 0; BROAD_TS grandfathered (latest session 20261123T085507Z ==
   latest recorded, < campaign start 20261123T135825Z, handoff_stale=false). Campaign gate unittests pass
   (126 tests OK). pyarrow 26.0.1 present; ironflow_bulk parquet readable with expected schemas.
