@@ -1,9 +1,0 @@
-{
-  "experiment_id": "FCLR-POOLED-ROBUST-002",
-  "campaign": "FCLR-POOLED-ROBUST-002-20261122T180000Z",
-  "session_utc": "20261122T190000Z",
-  "evidence_type": "evidence_audit_alias",
-  "points_to": "fclr_pooled_robust002_evidence_audit_20261122T190000Z.json",
-  "sha256": "f4ff1222b506b6b4a58bdbaddeca5ccaf05933fac29c2d8fd1587dfb6c844ca2",
-  "gate_critical": true
-}
