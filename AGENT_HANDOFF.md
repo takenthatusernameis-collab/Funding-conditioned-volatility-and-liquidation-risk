@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-23T15:29:35Z
+# AGENT HANDOFF — 2026-11-23T15:38:33Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status re-verified at this refresh (2026-11-23T15:29:35Z): **PASS** (reason_code=OK, root=499/500,
+> Gate status re-verified at this refresh (2026-11-23T15:38:33Z): **PASS** (reason_code=OK, root=499/500,
 > BROAD_TS grandfathered because the latest on-disk session `20261123T085507Z` < campaign start
 > `20261123T135825Z`).
 > **PROGRAM STATUS: NOT CONCLUDED — ACTIVE HEAVY WORK OPEN.** The active heavy task
@@ -17,7 +17,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-23T15:29:35Z (refresh 2026-11-23T15:29:35Z)**
+> **Timestamped initial task message — inferred 2026-11-23T15:38:33Z (refresh 2026-11-23T15:38:33Z)**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is
 > `Funding-conditioned-volatility-and-liquidation-risk`. RESEARCH_PROMPT.md §3.2 primary
