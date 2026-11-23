@@ -1128,6 +1128,135 @@ class TestTrackaSourceAuditCampaignGate(unittest.TestCase):
         self.assertTrue(res["pass"], res["failures"])
 
 
+class TestLiqXsecBroadCampaignGate(unittest.TestCase):
+    """FCLR-LIQ-XSEC-BROAD-01: once the broad-universe (342-coin ironflow_bulk)
+    cross-sectional liquidation-risk generalization campaign starts, a post-start
+    session cannot dodge the heavy work with a source-probe-only, audit-only,
+    prereg-only, verify-and-stop, or arbitrary recompute_* session. It must emit
+    the on-disk source registry, the outcome-blind prereg, the HEAVY evaluation
+    triad (fclr_liqxsecbroad01_eval_ py+json+md), the independent stdlib recompute
+    (fclr_liqxsecbroad01_recompute_ py+json), the gate-critical evidence_audit_
+    alias, and a trigger check, with no zero-byte placeholders. Sessions predating
+    the campaign are grandfathered so the refresh that announces it stays green.
+
+    This class pins the binder for the ACTIVE rank-0 campaign: without it the
+    broad-universe generalization test had no regression coverage, so a refactor
+    or a future agent could silently drop fclr_liqxsecbroad01_eval_ /
+    fclr_liqxsecbroad01_recompute_ from the required set and re-open the
+    prereg-only / verify-and-stop escape hatch."""
+
+    START = "20261123T080000Z"
+
+    def _repo(self, latest_sid="session_20261123T120000Z"):
+        tmp = Path(tempfile.mkdtemp(prefix="fclr143lb_"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        repo = tmp / "repo"
+        sdir = repo / "research_state" / latest_sid
+        sdir.mkdir(parents=True)
+        # Carry-forward Phase-B/C bundle so only the liqxsecbroad contract is tested.
+        base = repo / "research_state" / "session_20261116T035833Z"
+        base.mkdir()
+        for name in (
+            "rca011_feature_attribution_x.json",
+            "rca011_impl_crosscheck_x.json",
+            "rca011_sealed_bridge_x.md",
+            "prereg_template_trigger_gated_x.json",
+            "program_power_synthesis_x.md",
+        ):
+            (base / name).write_text("x")
+        (repo / "AGENT_HANDOFF.md").write_text(
+            "# AGENT HANDOFF\n\n## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION\n"
+            f"Campaign FCLR-LIQ-XSEC-BROAD-01-{self.START}\n"
+            f"Latest session: research_state/{latest_sid}/\n"
+        )
+        return repo, sdir
+
+    def _write_family(self, sdir, sid, skip=(), content="x"):
+        for prefix, suffix in gate.LIQ_XSEC_BROAD_REQUIRED:
+            if any(prefix == s for s in skip):
+                continue
+            (sdir / f"{prefix}{sid}{suffix}").write_text(content)
+
+    def test_binder_pins_eval_and_recompute_in_required_set(self):
+        # Structural pin: the active campaign's required set MUST include the
+        # heavy eval triad and the independent recompute, so a refactor that
+        # drops them (re-opening the prereg-only hatch) fails this assertion.
+        prefixes = [p for p, _ in gate.LIQ_XSEC_BROAD_REQUIRED]
+        self.assertIn("fclr_liqxsecbroad01_eval_", prefixes)
+        self.assertIn("fclr_liqxsecbroad01_recompute_", prefixes)
+
+    def test_post_start_source_probe_only_fails_closed(self):
+        # Light set (registry + prereg + evidence audit) WITHOUT the heavy eval
+        # triad or the independent recompute must fail closed.
+        repo, sdir = self._repo()
+        self._write_family(
+            sdir, "20261123T120000Z",
+            skip=("fclr_liqxsecbroad01_eval_", "fclr_liqxsecbroad01_recompute_"),
+        )
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["liq_xsec_broad"]["required"])
+        missing = res["liq_xsec_broad"]["missing_required_artifacts"]
+        self.assertTrue(any("fclr_liqxsecbroad01_eval_" in m for m in missing))
+        self.assertTrue(any("fclr_liqxsecbroad01_recompute_" in m for m in missing))
+        self.assertTrue(any(f.startswith("LIQ_XSEC_BROAD_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_missing_eval_fails_closed(self):
+        # Everything EXCEPT the heavy evaluation -> fail closed. The heavy
+        # generalization evaluation cannot be deferred to a later session.
+        repo, sdir = self._repo()
+        self._write_family(sdir, "20261123T120000Z", skip=("fclr_liqxsecbroad01_eval_",))
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["liq_xsec_broad"]["required"])
+        self.assertTrue(any("fclr_liqxsecbroad01_eval_" in m
+                            for m in res["liq_xsec_broad"]["missing_required_artifacts"]))
+        self.assertTrue(any(f.startswith("LIQ_XSEC_BROAD_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_missing_recompute_fails_closed(self):
+        repo, sdir = self._repo()
+        self._write_family(sdir, "20261123T120000Z",
+                           skip=("fclr_liqxsecbroad01_recompute_",))
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["liq_xsec_broad"]["required"])
+        self.assertTrue(any("fclr_liqxsecbroad01_recompute_" in m
+                            for m in res["liq_xsec_broad"]["missing_required_artifacts"]))
+        self.assertTrue(any(f.startswith("LIQ_XSEC_BROAD_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_empty_files_fail_closed(self):
+        # Zero-byte placeholders for the full set must fail closed.
+        repo, sdir = self._repo()
+        self._write_family(sdir, "20261123T120000Z", content="")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["liq_xsec_broad"]["required"])
+        self.assertTrue(res["liq_xsec_broad"]["empty_required_artifacts"])
+        self.assertTrue(any(f.startswith("LIQ_XSEC_BROAD_ARTIFACTS_EMPTY")
+                            for f in res["failures"]))
+
+    def test_post_start_full_heavy_set_passes(self):
+        repo, sdir = self._repo()
+        self._write_family(sdir, "20261123T120000Z")
+        res = gate.check(repo)
+        self.assertTrue(res["pass"], res["failures"])
+        self.assertTrue(res["liq_xsec_broad"]["required"])
+        self.assertTrue(res["liq_xsec_broad"]["pass"])
+        self.assertEqual(res["liq_xsec_broad"]["missing_required_artifacts"], [])
+        self.assertEqual(res["liq_xsec_broad"]["empty_required_artifacts"], [])
+
+    def test_pre_start_session_is_grandfathered(self):
+        repo, sdir = self._repo(latest_sid="session_20261123T000000Z")
+        (sdir / "evidence_audit_x.md").write_text("x")
+        (sdir / "recompute_generic_x.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["liq_xsec_broad"]["required"])
+        self.assertTrue(res["pass"], res["failures"])
+
+
 class TestHandoffGateCliContract(unittest.TestCase):
     def test_cli_json_pass_shape(self):
         import subprocess

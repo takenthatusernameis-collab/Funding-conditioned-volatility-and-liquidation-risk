@@ -576,6 +576,40 @@ TRACKA_SOURCE_AUDIT_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-LIQ-XSEC-BROAD-01 hardening: the SUPPORTED regime-conditioned
+# cross-sectional funding -> next-hour observed liquidation intensity findings
+# (FCLR-XSEC-004/005/006) were established on the 15-coin combined
+# metpie+ironflow panel and flagged promotable=false precisely because they had
+# not been shown to GENERALIZE beyond that narrow universe. The on-disk
+# ironflow_bulk archive holds 18 months (2025-05..2026-10) of observed
+# liquidations + funding + open_interest + candles across 342 coins that has
+# NEVER been used for a confirmatory broad-universe cross-sectional study. Once
+# this campaign starts (start UTC below), a post-start session cannot satisfy the
+# gate with a trigger-only, prose-only, source-probe-only, audit-only, prereg-
+# only, verify-and-stop, or arbitrary recompute_* session. It must emit the
+# outcome-blind source registry + prereg, the HEAVY broad-universe evaluation
+# triad, the independent stdlib recompute, the evidence audit, the gate-critical
+# evidence_audit_ alias, and a non-empty trigger check. Sessions predating the
+# campaign start are grandfathered so this handoff refresh stays green.
+LIQ_XSEC_BROAD_CAMPAIGN_RE = re.compile(
+    r"FCLR-LIQ-XSEC-BROAD-(\d+)-(\d{8}T\d{6}Z)"
+)
+LIQ_XSEC_BROAD_REQUIRED = (
+    ("fclr_liqxsecbroad01_source_registry_", ".json"),
+    ("fclr_liqxsecbroad01_source_registry_", ".md"),
+    ("fclr_liqxsecbroad01_prereg_", ".json"),
+    ("fclr_liqxsecbroad01_prereg_", ".md"),
+    ("fclr_liqxsecbroad01_eval_", ".py"),
+    ("fclr_liqxsecbroad01_eval_", ".json"),
+    ("fclr_liqxsecbroad01_eval_", ".md"),
+    ("fclr_liqxsecbroad01_recompute_", ".py"),
+    ("fclr_liqxsecbroad01_recompute_", ".json"),
+    ("fclr_liqxsecbroad01_evidence_audit_", ".json"),
+    ("fclr_liqxsecbroad01_evidence_audit_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 # FCLR-POOLED-001 hardening: the *only* thing that ever blocked heavy work was
 # the broken "3 contiguous 30-day funding-backed blocks" framing that
 # next_campaign_status.py enforces across every cached domain. That framing is
@@ -690,6 +724,7 @@ NEW_QUANT_PREFIXES = (
     "fclr_pooled",          # FCLR-POOLED pooled chronological OOS funding-conditioned vol + liq-risk artifacts
     "fclr_pooled_audit",    # FCLR-POOLED-AUDIT pooled ironflow adversarial leakage/quality audit artifacts
     "fclr_tracks",          # FCLR-TRACKA-SOURCE-AUDIT observed-liquidation source viability audit + pivot artifacts
+    "fclr_liqxsecbroad",    # FCLR-LIQ-XSEC-BROAD broad-universe cross-sectional liquidation-risk generalization artifacts
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -2028,6 +2063,78 @@ def _tracks01_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
+def _liq_xsec_broad_state(handoff_text: str, latest_sid: str | None,
+                         latest_files: list[str],
+                         latest_dir: Path | None = None) -> dict:
+    """Return FCLR-LIQ-XSEC-BROAD-01 non-avoidance state.
+
+    After the broad-universe cross-sectional liquidation-risk generalization
+    campaign starts, a post-start session must emit the on-disk source registry,
+    the outcome-blind prereg, the HEAVY evaluation triad
+    (fclr_liqxsecbroad01_eval_ py+json+md), the independent stdlib recompute
+    (fclr_liqxsecbroad01_recompute_ py+json), the evidence audit, the gate-
+    critical evidence_audit_ alias, and a trigger check. Trigger-only, prose-only,
+    source-probe-only, audit-only, prereg-only, verify-and-stop sessions and
+    zero-byte placeholders fail closed. Sessions predating the campaign start are
+    grandfathered so the handoff refresh that announces the campaign stays green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = LIQ_XSEC_BROAD_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-LIQ-XSEC-BROAD-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    def _matches(prefix: str, suffix: str) -> list[str]:
+        return sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in LIQ_XSEC_BROAD_REQUIRED]
+    out["artifact_family"] = "liqxsecbroad01"
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, LIQ_XSEC_BROAD_REQUIRED):
+        matches = _matches(prefix, suffix)
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
 def _pooled_state(handoff_text: str, latest_sid: str | None,
                   latest_files: list[str],
                   latest_dir: Path | None = None) -> dict:
@@ -2520,6 +2627,7 @@ def check(repo: Path = REPO) -> dict:
         "pooled_audit": None,
         "pooled_robust_02": None,
         "tracks01": None,
+        "liq_xsec_broad": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -3116,6 +3224,35 @@ def check(repo: Path = REPO) -> dict:
                 if not ta["has_trigger_check"]:
                     payload["failures"].append(
                         f"TRACKA_SOURCE_AUDIT_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-LIQ-XSEC-BROAD-01: after the broad-universe (342-coin
+            # ironflow_bulk) cross-sectional liquidation-risk generalization
+            # campaign starts, require the on-disk source registry + outcome-blind
+            # prereg + HEAVY evaluation triad + independent stdlib recompute +
+            # evidence audit + gate alias + trigger check. Trigger-only, prose-only,
+            # source-probe-only, audit-only, prereg-only, verify-and-stop sessions
+            # and zero-byte placeholders fail closed, so a future session cannot
+            # dodge the heavy broad-universe generalization test. Sessions predating
+            # the campaign start are grandfathered so this refresh stays green.
+            lb = _liq_xsec_broad_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["liq_xsec_broad"] = lb
+            if lb["required"]:
+                if lb["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "LIQ_XSEC_BROAD_ARTIFACTS_MISSING:"
+                        + ",".join(lb["missing_required_artifacts"])
+                    )
+                if lb["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "LIQ_XSEC_BROAD_ARTIFACTS_EMPTY:"
+                        + ",".join(lb["empty_required_artifacts"])
+                    )
+                if not lb["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"LIQ_XSEC_BROAD_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
