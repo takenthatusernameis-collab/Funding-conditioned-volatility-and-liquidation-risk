@@ -1,17 +1,16 @@
-# AGENT HANDOFF — 2026-11-23T04:34:49Z
+# AGENT HANDOFF — 2026-11-23T04:36:00Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status as of this refresh (2026-11-23T04:34:49Z): **PASS** (reason_code=OK, root=499/500,
-> 119 campaign-gate unittests OK). The gate passes today ONLY because the latest on-disk session
-> (`session_20261122T224500Z`) predates the rank-0 campaign start (`20261122T225107Z`). The instant a
-> new `session_<UTC>` with UTC > `20261122T225107Z` appears AND is recorded here, the gate flips to
-> REQUIRED and demands the full `fclr_tracks01_*` heavy set (see below). There is no prereg-only,
-> audit-only, probe-only, trigger-only, or verify-and-stop escape hatch: the heavy evaluation
-> (`fclr_tracks01_eval_*`) + independent recompute (`fclr_tracks01_recompute_*`) MUST run in the SAME
-> session as the pivot prereg. The binder is regression-pinned by
+> Gate status as of this refresh (2026-11-23T04:36:00Z): **PASS** (reason_code=OK, root=499/500,
+> 119 campaign-gate unittests OK). Heavy session `session_20261123T043600Z` completed the full
+> `FCLR-TRACKA-SOURCE-AUDIT-01` heavy set: `fclr_tracks01_eval_*` (py+json+md),
+> `fclr_tracks01_recompute_*` (py+json), `evidence_audit_*.json`, `trigger_check_*.json`, plus the
+> recovered source_registry/probe/viability_decision triad and pivot_prereg. Verdict:
+> NOT_SUPPORTED on both long and short arms (modeled breach proxy, not observed liquidation). No risk
+> overlay built. The binder is regression-pinned by
 > `tests/test_tracka_hardening_143.py::TestTrackaSourceAuditCampaignGate` (7 tests).
 
 ---
@@ -408,10 +407,12 @@ Then record your `session_<UTC>/` id in this handoff (append the id string `sess
 
 ---
 
-## HANDOFF GENERATED: 2026-11-23T04:34:49Z
+## HANDOFF GENERATED: 2026-11-23T04:36:00Z
 **Next session must use UTC > 20261122T225107Z** (campaign start gate; campaign start has ELAPSED).
-**Latest handoff session: session_20261122T224500Z** (completed risk09; predates campaign start, so gate is green today).
-**Rank-0 campaign: FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z** (this handoff; source-audit sub-phase DONE
-and recovered from git commit `26d28372d` → `TRACK_A_STRUCTURALLY_BLOCKED`; gate-enforced via `_tracks01_state`,
-including the same-session heavy Track B modeled-breach evaluation `fclr_tracks01_eval_*` + independent
-recompute `fclr_tracks01_recompute_*`, regression-pinned by `TestTrackaSourceAuditCampaignGate`).
+**Latest handoff session: session_20261123T043600Z** (completed FCLR-TRACKA-SOURCE-AUDIT-01 heavy set:
+`fclr_tracks01_eval_*` py+json+md, `fclr_tracks01_recompute_*` py+json, `evidence_audit_*.json`,
+`trigger_check_*.json`, recovered source_registry/probe/viability_decision triad + pivot_prereg).
+**Rank-0 campaign: FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z** (complete; source-audit sub-phase DONE
+and recovered from git commit `26d28372d` → `TRACK_A_STRUCTURALLY_BLOCKED`; heavy Track B modeled-breach
+evaluation executed in-session `session_20261123T043600Z`; gate-enforced via `_tracks01_state`,
+regression-pinned by `TestTrackaSourceAuditCampaignGate`).

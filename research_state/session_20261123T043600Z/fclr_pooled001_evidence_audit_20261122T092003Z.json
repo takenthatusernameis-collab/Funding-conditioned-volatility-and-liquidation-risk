@@ -1,0 +1,77 @@
+{
+  "experiment_id": "FCLR-POOLED-001",
+  "campaign": "FCLR-POOLED-001-20261122T040000Z",
+  "session_utc": "20261122T092003Z",
+  "audit_type": "evidence_audit",
+  "outcome_data_inspected_before_freeze": false,
+  "data_source": "research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest,liquidations}",
+  "data_months": "2025-05..2026-10 (18 months)",
+  "n_markets_eval": 799,
+  "n_train_rows_eval": 2337867,
+  "n_test_rows_eval": 1296472,
+  "n_markets_recompute": 798,
+  "n_train_rows_recompute": 2131219,
+  "n_test_rows_recompute": 1142884,
+  "qlike_eval": {
+    "B1": 65.19057302547614,
+    "C2": 65.19070167418262,
+    "diff": 0.00012864870647888438,
+    "rel_pct": 0.00019734249985593644
+  },
+  "qlike_recompute": {
+    "B1": 52.94500399801239,
+    "C2": 52.94466356446163,
+    "diff": -0.00034043355076107673,
+    "rel_pct": -0.0006429946643763724
+  },
+  "decision_eval": "NOT_SUPPORTED",
+  "decision_recompute": "NOT_SUPPORTED",
+  "materiality_floor_pct": 2.0,
+  "bootstrap_eval": {
+    "n_replicates": 2000,
+    "seed": 20261122,
+    "se": 3.987549914124196e-06,
+    "ci95_lo": -7.736469154306924e-06,
+    "ci95_hi": 7.823529567685394e-06,
+    "n_valid": 2000
+  },
+  "bootstrap_recompute": {
+    "n_replicates": 2000,
+    "seed": 20261899,
+    "se": 3.6468101067970313e-06,
+    "ci95_lo": -9.193195694146006e-06,
+    "ci95_hi": 5.439528548978334e-06,
+    "n_valid": 2000
+  },
+  "diebold_mariano_eval": {
+    "stat": 0.12185359567982887,
+    "mean_loss_diff": 4.908900093509022e-07
+  },
+  "diebold_mariano_recompute": {
+    "stat": -0.3738457315156628,
+    "mean_loss_diff": -1.3142128380045111e-06
+  },
+  "liquidation_risk_eval": {
+    "liq_median_train": 0.0,
+    "brier_model": 0.0533995609039296,
+    "brier_climatology": 0.05351043756487848,
+    "brier_skill": 0.0020720567050951486,
+    "n_test": 1296472
+  },
+  "artifact_hashes": {
+    "fclr_pooled001_source_registry_20261122T092003Z.json": "3cd2b1715ddcbdb745294358a557d3607d27e5f97f5443ff484814bbfeb6da73",
+    "fclr_pooled001_source_registry_20261122T092003Z.md": "a83f098f43c653b8b64ed4f78426208f43a0afb7d7b53ae65ad1d81249e8b990",
+    "fclr_pooled001_prereg_20261122T092003Z.json": "3dd8aec8eed5ad5e98e27194268a03eea1d27c67e4439af34525f76224e91f96",
+    "fclr_pooled001_prereg_20261122T092003Z.md": "838c61b2c91dee4c024a27f8239cc9dd645763f3b1be752d61bc98b660e3e295",
+    "fclr_pooled001_eval_20261122T092003Z.py": "663ac2d0b503c7b0a0edd2fd6f7ebe00faccf8f71775b8878efcd6c5d5525665",
+    "fclr_pooled001_eval_20261122T092003Z.json": "e9ec56baef669c304c9454156d1572a6640edcd24e21c7ae9d67eea8549221c1",
+    "fclr_pooled001_eval_20261122T092003Z.md": "d8b94174cf475f8e5744d4489bba54f16910c00999e2ab5489a353be3b81f9ec",
+    "fclr_pooled001_recompute_20261122T092003Z.py": "c3299b77e82fcdf4591b98b0c3decb1d527dca4266a419f3154448e268d90e13",
+    "fclr_pooled001_recompute_20261122T092003Z.json": "a8bbb2ea617d13cba6a04b6fe003d13f245122716d19a540f0ca7637d4a58867"
+  },
+  "sha256_asserted": true,
+  "nulls_preserved": "NOT_SUPPORTED where applicable",
+  "no_threshold_shopping": true,
+  "software": "stdlib + pyarrow only; numpy/pandas/scipy not used",
+  "audit_verdict": "CONSISTENT \u2014 eval and independent recompute agree: NOT_SUPPORTED (rel QLIKE ~0.0%, far below -2% materiality floor)"
+}

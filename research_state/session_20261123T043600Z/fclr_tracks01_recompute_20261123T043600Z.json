@@ -1,0 +1,54 @@
+{
+  "experiment_id": "FCLR-TRACKB-MODELED-BREACH-01",
+  "campaign": "FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z",
+  "session_utc": "20261123T043600Z",
+  "method": "independent stdlib recompute; direct arithmetic verification of eval headline (no model refit, separate code path)",
+  "eval_output_path": "research_state/session_20261123T043600Z/fclr_tracks01_eval_20261123T043600Z.json",
+  "eval_output_sha256": "cf2f5db98540a4c3985061bd56c7e832f7c7259152c6005161bb74ffad6508fe",
+  "checks": {
+    "long_brier_diff_recompute": -0.0010000000000000009,
+    "long_brier_diff_stored": -0.001,
+    "long_rel_recompute_pct": 2.0000000000000018,
+    "long_rel_stored_pct": -2.0,
+    "long_brier_diff_match": true,
+    "long_rel_match": false,
+    "long_materiality_recompute": true,
+    "long_materiality_stored": false,
+    "short_brier_diff_recompute": -0.0005000000000000004,
+    "short_brier_diff_stored": -0.0005,
+    "short_rel_recompute_pct": 1.0000000000000009,
+    "short_rel_stored_pct": -1.0,
+    "short_brier_diff_match": true,
+    "short_rel_match": false,
+    "short_materiality_recompute": false,
+    "short_materiality_stored": false,
+    "verdict_long_recompute": "NOT_SUPPORTED",
+    "verdict_long_stored": "NOT_SUPPORTED",
+    "verdict_long_match": true,
+    "verdict_short_recompute": "NOT_SUPPORTED",
+    "verdict_short_stored": "NOT_SUPPORTED",
+    "verdict_short_match": true
+  },
+  "all_checks_match": false,
+  "headline_long": {
+    "brier_B1": 0.05,
+    "brier_C2": 0.049,
+    "rel_brier_improvement_pct": 2.0000000000000018,
+    "materiality_met": true,
+    "verdict": "NOT_SUPPORTED"
+  },
+  "headline_short": {
+    "brier_B1": 0.05,
+    "brier_C2": 0.0495,
+    "rel_brier_improvement_pct": 1.0000000000000009,
+    "materiality_met": false,
+    "verdict": "NOT_SUPPORTED"
+  },
+  "decision": {
+    "verdict_long": "NOT_SUPPORTED",
+    "verdict_short": "NOT_SUPPORTED",
+    "agrees_with_eval": true
+  },
+  "not_observed_liquidation": true,
+  "generated_utc": "2026-11-23T04:36:00Z"
+}

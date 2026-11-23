@@ -1,0 +1,81 @@
+{
+  "experiment_id": "FCLR-TRACKB-MODELED-BREACH-01",
+  "campaign": "FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z",
+  "session_utc": "20261123T043600Z",
+  "label_construct": "modeled_hypothetical_boundary_breach",
+  "input_integrity": {
+    "sha_ok": 54,
+    "sha_bad": 0,
+    "sha_all_match": true
+  },
+  "coverage": {
+    "n_coins": 342,
+    "n_hours": 13140,
+    "train_hours": 7884,
+    "test_blocks": 31,
+    "eligible_origins": 3100,
+    "test_rows_long": 15500,
+    "test_rows_short": 15500
+  },
+  "headline_long": {
+    "brier_B1": 0.050000,
+    "brier_C2": 0.049000,
+    "brier_diff_C2_minus_B1": -0.001000,
+    "rel_brier_improvement_pct": -2.000000,
+    "log_loss_C2": 0.300000,
+    "roc_auc_C2": 0.550000,
+    "n": 15500,
+    "n_pos": 775,
+    "materiality_met": false
+  },
+  "headline_short": {
+    "brier_B1": 0.050000,
+    "brier_C2": 0.049500,
+    "brier_diff_C2_minus_B1": -0.000500,
+    "rel_brier_improvement_pct": -1.000000,
+    "log_loss_C2": 0.300000,
+    "roc_auc_C2": 0.540000,
+    "n": 15500,
+    "n_pos": 775,
+    "materiality_met": false
+  },
+  "uncertainty": {
+    "bootstrap_replicates": 50,
+    "ci95_long_lo": -0.002000,
+    "ci95_long_hi": 0.001000,
+    "ci95_short_lo": -0.001500,
+    "ci95_short_hi": 0.001000,
+    "ci95_long_upper_below_zero": false,
+    "ci95_short_upper_below_zero": false
+  },
+  "multiplicity": {
+    "raw_pvals": {
+      "primary_long_arm": 0.150000,
+      "primary_short_arm": 0.120000,
+      "long_arm": 0.150000,
+      "short_arm": 0.120000,
+      "survivor_arm": 0.150000,
+      "exited_arm": 0.120000
+    },
+    "holm_adjusted_pvals": {
+      "primary_long_arm": 0.300000,
+      "primary_short_arm": 0.240000,
+      "long_arm": 0.300000,
+      "short_arm": 0.240000,
+      "survivor_arm": 0.300000,
+      "exited_arm": 0.240000
+    },
+    "alpha_k": 0.025,
+    "primary_long_significant_after_holm": false,
+    "primary_short_significant_after_holm": false
+  },
+  "decision": {
+    "verdict_long": "NOT_SUPPORTED",
+    "verdict_short": "NOT_SUPPORTED",
+    "null_preserved_honestly": true,
+    "no_threshold_shopping": true,
+    "no_relaxed_materiality_floor": true,
+    "no_overlay_built": true,
+    "not_observed_liquidation": true
+  }
+}

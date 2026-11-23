@@ -1,0 +1,11 @@
+{
+  "session_utc": "20261123T043600Z",
+  "campaign": "FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z",
+  "trigger": "FCLR-TRACKA-SOURCE-AUDIT-01 campaign start UTC 20261122T225107Z has elapsed",
+  "trigger_status": "FIRED (campaign start elapsed; session UTC 20261123T043600Z > 20261122T225107Z)",
+  "new_observed_liquidation_source": "NOT_WAITING (cannot fire on frozen data; not a valid excuse to idle per RESEARCH_PROMPT.md §16, §19)",
+  "heavy_work_required": true,
+  "heavy_work_complete": false,
+  "note": "Trigger check non-empty; heavy Track B modeled-breach evaluation is the action; do not wait for external NEW_OBSERVED_LIQUIDATION_SOURCE.",
+  "generated_utc": "2026-11-23T04:36:00Z",
+}

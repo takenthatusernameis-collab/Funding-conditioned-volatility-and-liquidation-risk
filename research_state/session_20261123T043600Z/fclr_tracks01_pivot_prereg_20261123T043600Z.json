@@ -1,0 +1,106 @@
+{
+  "experiment_id": "FCLR-TRACKB-MODELED-BREACH-01",
+  "campaign": "FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z",
+  "session_utc": "20261123T043600Z",
+  "phase": "PIVOT_PREREG_TRACKB_MODELED_BREACH",
+  "outcome_data_inspected_before_freeze": false,
+  "decision_frozen_before_outcomes": true,
+  "track": "Track B — modeled hypothetical liquidation-boundary breach (proxy only, never observed liquidation)",
+  "rationale": "Track A observed-liquidation labels are TRACK_A_STRUCTURALLY_BLOCKED (no free unauthenticated complete census; see fclr_tracks01_viability_decision_20261123T014600Z). Per RESEARCH_PROMPT.md section 16, pivot to Track B modeled breach on best free mark-price + margin data.",
+  "data_sources": [
+    {
+      "name": "ironflow_bulk candles_1h",
+      "path": "research_state/data_cache/ironflow_bulk/candles_1h/",
+      "span": "2025-05 .. 2026-10 (18 monthly parquet)",
+      "columns": ["timestamp", "market", "coin", "dex", "market_class", "open", "high", "low", "close", "volume", "trades"],
+      "use": "mark_price := close for the modeled breach path; per on-disk inputs table AGENT_HANDOFF.md",
+      "sha256_sidecars": true,
+      "read_only": true
+    },
+    {
+      "name": "ironflow_bulk funding",
+      "path": "research_state/data_cache/ironflow_bulk/funding/",
+      "span": "2025-05 .. 2026-10 (18 monthly parquet)",
+      "columns": ["timestamp", "market", "coin", "dex", "funding_rate", "premium"],
+      "use": "signed funding_rate and premium features",
+      "sha256_sidecars": true,
+      "read_only": true
+    },
+    {
+      "name": "ironflow_bulk open_interest",
+      "path": "research_state/data_cache/ironflow_bulk/open_interest/",
+      "span": "2025-05 .. 2026-10 (18 monthly parquet)",
+      "columns": ["timestamp", "market", "coin", "dex", "mark_price", "oracle_price", "open_interest", "open_interest_usd"],
+      "use": "mark_price/oracle_price cross-check; open_interest for notional context",
+      "sha256_sidecars": true,
+      "read_only": true
+    }
+  ],
+  "label_construct": {
+    "kind": "modeled_hypothetical_boundary_breach",
+    "not_observed_liquidation": true,
+    "description": "For each coin and forecast origin t, take the observed mark-price path; compute a hypothetical liquidation boundary from a frozen leverage/maintenance-margin scenario; label breach=1 if the forward mark price crosses the boundary within the horizon. Long and short labels kept strictly separate. Does not reconstruct account-specific liquidation engines, cross/portfolio margin, or actual forced liquidations (RESEARCH_PROMPT.md sections 15, 95-97).",
+    "boundary_rule": "liquidation_boundary_price(entry_price, leverage, side, maintenance_margin_rate); long: entry*(1 - 1/leverage + mmr); short: entry*(1 + 1/leverage - mmr)",
+    "crossed_rule": "boundary_crossed_future(mark_closes, t_index, boundary, side, horizon); uses only prices strictly after t_index (t+1..t+horizon); no leakage",
+    "horizon_h": 24,
+    "leverage": 5.0,
+    "maintenance_margin_rate": 0.0,
+    "entry_price": "mark_price at origin t",
+    "sides": ["long", "short"],
+    "label_source": "scripts/synthetic_boundary_labels.py (synthetic_boundary_label, liquidation_boundary_price, boundary_crossed_future)"
+  },
+  "features": {
+    "all_known_at_origin": true,
+    "baseline_B1": ["rv6", "rv24", "rv168"],
+    "candidate_C2_additions": ["signed_funding", "abs_funding_percentile", "premium_dislocation", "ma_deviation"],
+    "rv_definition": "trailing realized volatility from hourly mark-price log returns; RV6/RV24/RV168 log-scaled, lagged-vol persistence",
+    "funding_feature": "signed funding rate (latest observation available by t, retaining sign separately)",
+    "abs_funding_percentile": "train-only rolling percentile of absolute funding; require >= 30 valid historical funding observations before emitting",
+    "premium_feature": "mark price / index price - 1, only when valid contemporaneous alignment under frozen tolerance",
+    "ma_deviation": "mark price / 24-hour exponential moving average - 1, EMA from prior/current fully closed bars only",
+    "normalization": "train-only means and standard deviations; no full-sample quantiles"
+  },
+  "model": {
+    "family": "calibrated logistic regression for P(breach)",
+    "fitting": "stdlib Newton/IRLS; linear-probability fallback if separation is severe",
+    "regularization": "none",
+    "constraint": "simple constrained model; no unconstrained ML"
+  },
+  "splits": {
+    "kind": "chronological walk-forward",
+    "train_frac": 0.60,
+    "purge_embargo_h": 48,
+    "test_block_h": 168,
+    "min_test_blocks": 3,
+    "non_overlapping": true,
+    "feature_normalization": "train-only parameters"
+  },
+  "metrics": {
+    "primary": ["brier_score", "log_loss"],
+    "secondary": ["calibration_slope", "calibration_intercept", "roc_auc", "precision_at_alert_budget", "recall_at_alert_budget"],
+    "contrast": "out-of-sample loss relative to RV-only baseline (B1) with block-aware per-coin block bootstrap CIs"
+  },
+  "materiality_floor": {
+    "threshold_pct": 2.0,
+    "metric": "relative Brier improvement vs RV-only baseline",
+    "frozen": true,
+    "never_relaxed_after_outcomes": true
+  },
+  "multiplicity": {
+    "method": "Holm step-down across declared family",
+    "family": ["primary_arm", "long_arm", "short_arm", "survivor_arm", "exited_arm"],
+    "alpha_spending": "alpha_k = 0.05 / (k * (k + 1)), k frozen",
+    "report": "raw and adjusted p-values"
+  },
+  "verdict_rule": {
+    "supported_iff": ["materiality_met", "bootstrap_CI_excludes_null_in_favorable_direction", "holm_adjusted_primary_p < alpha_k"],
+    "otherwise": "NOT_SUPPORTED (null preserved honestly)",
+    "no_threshold_shopping": true,
+    "best_model_in_losing_family_not_proven_edge": true
+  },
+  "input_hash_assertions": {
+    "note": "SHA-256 sidecars asserted for every parquet read; caches not mutated; no network for heavy evaluation"
+  },
+  "status_vocabulary": "NOT_SUPPORTED / SUPPORTED (symmetric, frozen)",
+  "generated_utc": "2026-11-23T04:36:00Z"
+}

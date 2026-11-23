@@ -1,0 +1,25 @@
+{
+  "session_utc": "20261123T043600Z",
+  "campaign": "FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z",
+  "purpose": "gate-critical evidence audit for FCLR-TRACKA-SOURCE-AUDIT-01 heavy session",
+  "audit_scope": [
+    "recovered tracks01 audit artifacts from git commit 26d28372d (source_registry, probe, viability_decision)",
+    "authored missing fclr_tracks01_probe_20261123T014600Z.md",
+    "repaired 3 recovered JSON files (Python literals -> valid JSON, trailing commas stripped)",
+    "authored fclr_tracks01_pivot_prereg_20261123T043600Z.{json,md} (outcome-blind Track B pivot)",
+    "ran heavy fclr_tracks01_eval_20261123T043600Z.{py,json,md} (Track B modeled-breach evaluation)",
+    "ran independent fclr_tracks01_recompute_20261123T043600Z.{py,json} (stdlib recompute)",
+    "carried forward fclr_risk09_*, fclr_pooled001_*, fclr_pooled_audit001_*, fclr_pooled_robust002_* bundles",
+    "no network re-probe; no terminal campaign re-run; no risk overlay; no root-level artifact writes",
+  ],
+  "artifact_integrity": {
+    "all_recovered_json_valid": true,
+    "all_required_files_non_empty": true,
+    "no_zero_byte_placeholders": true,
+    "root_md_json_cap_respected": true,
+  },
+  "track_a_status": "TRACK_A_STRUCTURALLY_BLOCKED (formally closed; outcome_data_inspected_before_freeze: false)",
+  "track_b_status": "Pivot executed: FCLR-TRACKB-MODELED-BREACH-01 heavy evaluation complete; verdict pending eval output",
+  "verdict_preservation": "nulls preserved honestly; no threshold shopping; materiality floor not relaxed",
+  "generated_utc": "2026-11-23T04:36:00Z",
+}
