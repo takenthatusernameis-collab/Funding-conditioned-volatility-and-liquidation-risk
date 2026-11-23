@@ -267,7 +267,50 @@ python3 scripts/next_campaign_status.py
 (frozen data frontier exhausted; NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data).
 
 ---
-## HANDOFF GENERATED: 2026-11-23T11:26:45Z (refresh) / SESSION CLOSE-OUT VERIFIED: 2026-11-23T11:37:58Z
+
+## SESSION CLOSE-OUT — VERIFY-AND-STOP (2026-11-23T12:40:31Z)
+
+This is an additional verification session confirming the program remains CONCLUDED. No new research artifacts were created (root md+json count unchanged at 499/500). Verified outcomes recorded below.
+
+**1. What changed and why:**
+- Refreshed AGENT_HANDOFF.md to record this verify-and-stop session's exact test outcomes.
+- No campaign executed, no new heavy work, no new root-level research_state artifacts.
+
+**2. Exact test outcomes with paths:**
+- Heavy-work gate: `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS, reason_code=OK,
+  root=499/500, handoff_stale=false, latest session session_20261123T085507Z present on disk.
+- Campaign gate unittests:
+  `python3 -m unittest tests.test_active_campaign_gate tests.test_fclr_starter_001_campaign_gate
+  tests.test_fclr_campaign_gate tests.test_fclr_heavy_confirm_gate tests.test_pooled_robust_002_campaign_gate
+  tests.test_tracka_hardening_143` → Ran 126 tests, OK (skipped=5).
+- Frozen 3-block domains exhausted:
+  `python3 scripts/next_campaign_status.py` → CAMPAIGN STATUS: no feasible 3-block design in ANY domain
+  (NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN).
+
+**3. Evidence added and full paths:** none — program complete; no new evidence artifacts.
+
+**4. State of each research gate:**
+- Heavy-work gate: SATISFIED (PASS, reason_code=OK).
+- All campaign gate binders (tracked in check_handoff_heavywork_gate.py): PASS / not required (no post-start
+  campaign binds; latest session session_20261123T085507Z satisfies LIQ_XSEC_BROAD).
+- Forecast gate: NOT PASSED on any primary target (no promotable forecast skill; materiality floor NOT MET).
+
+**5. Single highest-value next task:** NONE — program concluded under current constraints.
+
+**6. Precise verifying command:**
+```
+python3 scripts/check_handoff_heavywork_gate.py --json
+python3 -m unittest tests.test_active_campaign_gate tests.test_fclr_starter_001_campaign_gate \
+  tests.test_fclr_campaign_gate tests.test_fclr_heavy_confirm_gate tests.test_pooled_robust_002_campaign_gate \
+  tests.test_tracka_hardening_143
+python3 scripts/next_campaign_status.py
+```
+
+**7. Blocker / next materially different route:** None — program complete; no feasible route remains
+(frozen data frontier exhausted; NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data).
+
+---
+## HANDOFF GENERATED: 2026-11-23T11:26:45Z (refresh) / SESSION CLOSE-OUT VERIFIED: 2026-11-23T11:37:58Z / SESSION CLOSE-OUT VERIFIED: 2026-11-23T12:40:31Z
 **Latest handoff session: session_20261123T085507Z** (completed FCLR-LIQ-XSEC-BROAD-01 heavy set:
 broad-universe generalization test of the regime-conditioned cross-sectional funding → next-hour
 observed-liquidation-intensity findings; verdict SUPPORTED_GENERALIZATION for rank-ordering
