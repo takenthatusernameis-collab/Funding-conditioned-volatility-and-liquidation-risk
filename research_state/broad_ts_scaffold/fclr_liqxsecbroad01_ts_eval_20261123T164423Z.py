@@ -76,9 +76,17 @@ def sha256_file(p: Path) -> str:
     return h.hexdigest()
 
 
+def _hkey(ts) -> int:
+    if isinstance(ts, (int, float)):
+        return int(ts // 3600) * 3600
+    dt = ts.to_pydatetime() if hasattr(ts, "to_pydatetime") else ts
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return int(dt.timestamp() // 3600) * 3600
+
+
 def add_hk(df, ts_col):
-    ts = pd.to_datetime(df[ts_col])
-    df["hk"] = (ts.dt.floor("h").astype("int64") // 1_000_000_000).astype("int64")
+    df["hk"] = [_hkey(v) for v in df[ts_col].to_list()]
     return df
 
 
@@ -143,14 +151,12 @@ def poisson_deviance(y, p):
 
 
 def ols_fit(X, y):
-    X_int = np.column_stack([np.ones(X.shape[0]), X])
-    beta, _, _, _ = np.linalg.lstsq(X_int, y, rcond=None)
+    beta, _, _, _ = np.linalg.lstsq(X, y, rcond=None)
     return beta
 
 
 def ols_predict(X, beta):
-    X_int = np.column_stack([np.ones(X.shape[0]), X])
-    return X_int @ beta
+    return X @ beta
 
 
 def percentile_rank(vals, v):
@@ -347,22 +353,23 @@ def main():
         return (v - m) / s if s > 0 else np.zeros_like(v)
 
     def abs_fund_pct_vec(df):
-        out = np.zeros(len(df))
+        out = np.full(len(df), 0.5)
+        coin_arr = df["coin"].values
+        fund_arr = df["fund"].values.astype(float)
+        abs_fund_arr = np.abs(fund_arr)
         for coin in test_coins:
-            mask = df["coin"] == coin
-            if not mask.any():
-                continue
             funds = abs_fund_train[coin]
             if len(funds) < 30:
-                out[mask] = 0.5
                 continue
-            for idx in df.index[mask]:
-                rec = series_df[(series_df["coin"] == coin) & (series_df["hk"] == df.loc[idx, "hk"])]
-                if len(rec) == 0:
-                    out[idx] = 0.5
-                    continue
-                target = abs(rec["fund"].values[0])
-                out[idx] = percentile_rank(funds, target)
+            srt = np.sort(funds)
+            mask = coin_arr == coin
+            if not mask.any():
+                continue
+            targets = abs_fund_arr[mask]
+            lo = np.searchsorted(srt, targets, side="left")
+            hi = np.searchsorted(srt, targets, side="right")
+            pct = (lo + hi) / (2.0 * len(srt))
+            out[mask] = pct
         return out
 
     series_df["z_rv24"] = z_vec(series_df, "rv24")
@@ -370,7 +377,7 @@ def main():
     series_df["z_fund"] = z_vec(series_df, "fund")
     series_df["z_prem"] = z_vec(series_df, "prem")
     series_df["z_oi"] = z_vec(series_df, "oi")
-    series_df["z_dislocation"] = z_vec(series_df, "dislociation")
+    series_df["z_dislocation"] = z_vec(series_df, "dislocation")
     series_df["z_ma_dev"] = z_vec(series_df, "ma_dev")
     series_df["abs_fund_pct"] = abs_fund_pct_vec(series_df)
     print("  done", flush=True)
@@ -386,60 +393,33 @@ def main():
     liq_noti_s = liq_notional_short
 
     eligible_set = set(eligible_origins)
-    test_records = []
-    for coin in test_coins:
-        coin_series = series_df[series_df["coin"] == coin].set_index("hk")
-        for origin_hk in eligible_origins:
-            if origin_hk not in coin_series.index:
-                continue
-            rec = coin_series.loc[origin_hk]
-            wh = origin_hk + HORIZON_H * 3600
-            cnt_l = liq_count_l.get((coin, wh), 0)
-            noti_l = liq_noti_l.get((coin, wh), 0.0)
-            cnt_s = liq_count_s.get((coin, wh), 0)
-            noti_s = liq_noti_s.get((coin, wh), 0.0)
-            test_records.append({
-                "coin": coin, "hk": origin_hk,
-                "rv24": float(rec["rv24"]), "rv168": float(rec["rv168"]),
-                "fund": float(rec["fund"]), "prem": float(rec["prem"]), "oi": float(rec["oi"]),
-                "dislocation": float(rec["dislocation"]), "ma_dev": float(rec["ma_dev"]),
-                "z_rv24": float(rec["z_rv24"]), "z_rv168": float(rec["z_rv168"]),
-                "z_fund": float(rec["z_fund"]), "abs_fund_pct": float(rec["abs_fund_pct"]),
-                "z_prem": float(rec["z_prem"]), "z_oi": float(rec["z_oi"]),
-                "z_dislocation": float(rec["z_dislocation"]), "z_ma_dev": float(rec["z_ma_dev"]),
-                "fwd_cnt_long": int(cnt_l), "fwd_noti_long": float(noti_l),
-                "fwd_cnt_short": int(cnt_s), "fwd_noti_short": float(noti_s),
-                "is_survivor": coin in survivor_coins,
-                "block": block_of.get(origin_hk),
-                "block_start_h": block_start_of.get(origin_hk),
-            })
-    test_df = pd.DataFrame(test_records)
+    feat_cols = ["rv24", "rv168", "fund", "prem", "oi", "dislocation", "ma_dev",
+                 "z_rv24", "z_rv168", "z_fund", "abs_fund_pct", "z_prem", "z_oi",
+                 "z_dislocation", "z_ma_dev"]
+    el = pd.DataFrame({"hk": eligible_origins})
+    el["block"] = el["hk"].map(block_of)
+    el["block_start_h"] = el["hk"].map(block_start_of)
+    sk = series_df[["coin", "hk"] + feat_cols]
+    sk = sk[sk["hk"].isin(eligible_set)]
+    test_df = el.merge(sk, on="hk", how="inner")
+    test_df["wh"] = test_df["hk"] + HORIZON_H * 3600
+    test_df["fwd_cnt_long"] = [liq_count_l.get((c, w), 0) for c, w in zip(test_df["coin"], test_df["wh"])]
+    test_df["fwd_noti_long"] = [liq_noti_l.get((c, w), 0.0) for c, w in zip(test_df["coin"], test_df["wh"])]
+    test_df["fwd_cnt_short"] = [liq_count_s.get((c, w), 0) for c, w in zip(test_df["coin"], test_df["wh"])]
+    test_df["fwd_noti_short"] = [liq_noti_s.get((c, w), 0.0) for c, w in zip(test_df["coin"], test_df["wh"])]
+    test_df["is_survivor"] = test_df["coin"].isin(survivor_coins)
+    test_df = test_df.drop(columns=["wh"])
     n_test_rows = len(test_df)
 
     train_df = series_df[series_df["hk"].isin(train_hours)].copy()
     train_sub = train_df.iloc[::TRAIN_SUBSAMPLE].copy()
-    train_records = []
-    for _, rec in train_sub.iterrows():
-        coin = rec["coin"]
-        hk = int(rec["hk"])
-        wh = hk + HORIZON_H * 3600
-        cnt_l = liq_count_l.get((coin, wh), 0)
-        noti_l = liq_noti_l.get((coin, wh), 0.0)
-        cnt_s = liq_count_s.get((coin, wh), 0)
-        noti_s = liq_noti_s.get((coin, wh), 0.0)
-        train_records.append({
-            "coin": coin, "hk": hk,
-            "rv24": float(rec["rv24"]), "rv168": float(rec["rv168"]),
-            "fund": float(rec["fund"]), "prem": float(rec["prem"]), "oi": float(rec["oi"]),
-            "dislocation": float(rec["dislocation"]), "ma_dev": float(rec["ma_dev"]),
-            "z_rv24": float(rec["z_rv24"]), "z_rv168": float(rec["z_rv168"]),
-            "z_fund": float(rec["z_fund"]), "abs_fund_pct": float(rec["abs_fund_pct"]),
-            "z_prem": float(rec["z_prem"]), "z_oi": float(rec["z_oi"]),
-            "z_dislocation": float(rec["z_dislocation"]), "z_ma_dev": float(rec["z_ma_dev"]),
-            "fwd_cnt_long": int(cnt_l), "fwd_noti_long": float(noti_l),
-            "fwd_cnt_short": int(cnt_s), "fwd_noti_short": float(noti_s),
-        })
-    train_df_full = pd.DataFrame(train_records)
+    train_sub = train_sub.reset_index(drop=True)
+    train_sub["wh"] = train_sub["hk"] + HORIZON_H * 3600
+    train_sub["fwd_cnt_long"] = [liq_count_l.get((c, w), 0) for c, w in zip(train_sub["coin"], train_sub["wh"])]
+    train_sub["fwd_noti_long"] = [liq_noti_l.get((c, w), 0.0) for c, w in zip(train_sub["coin"], train_sub["wh"])]
+    train_sub["fwd_cnt_short"] = [liq_count_s.get((c, w), 0) for c, w in zip(train_sub["coin"], train_sub["wh"])]
+    train_sub["fwd_noti_short"] = [liq_noti_s.get((c, w), 0.0) for c, w in zip(train_sub["coin"], train_sub["wh"])]
+    train_df_full = train_sub.drop(columns=["wh"])
     print(f"  test rows: {n_test_rows}, train rows (subsampled): {len(train_df_full)}", flush=True)
 
     print("Step 8: Fit OLS models on train", flush=True)
@@ -479,10 +459,10 @@ def main():
 
     print("Step 9: Predict on test + per-block rank-IC with block start hours", flush=True)
 
-    def predict_side(df, feat_fn, beta, smear):
-        fi = df["fwd_noti_long"].values.astype(float)
+    def predict_side(df, feat_fn, beta, smear, side_key="fwd_noti_long"):
+        fi = df[side_key].values.astype(float)
         fi = np.where(fi <= 0, 1.0, fi)
-        pred = np.exp(ols_predict(feat_fn(df), beta)) * smear
+        pred = np.exp(np.clip(ols_predict(feat_fn(df), beta), -50.0, 50.0)) * smear
         return pd.DataFrame({
             "coin": df["coin"].values,
             "hk": df["hk"].values,
@@ -492,10 +472,10 @@ def main():
             "pred": pred,
         })
 
-    pred_B1_l = predict_side(test_df, b1_X, beta_B1_l, smear_B1_l)
-    pred_C2_l = predict_side(test_df, c2_X, beta_C2_l, smear_C2_l)
-    pred_B1_s = predict_side(test_df, b1_X, beta_B1_s, smear_B1_s)
-    pred_C2_s = predict_side(test_df, c2_X, beta_C2_s, smear_C2_s)
+    pred_B1_l = predict_side(test_df, b1_X, beta_B1_l, smear_B1_l, "fwd_noti_long")
+    pred_C2_l = predict_side(test_df, c2_X, beta_C2_l, smear_C2_l, "fwd_noti_long")
+    pred_B1_s = predict_side(test_df, b1_X, beta_B1_s, smear_B1_s, "fwd_noti_long")
+    pred_C2_s = predict_side(test_df, c2_X, beta_C2_s, smear_C2_s, "fwd_noti_long")
 
     def block_rank_ic_with_hours(pred_df, min_coins=5):
         results = []
@@ -530,31 +510,19 @@ def main():
     n_blocks_C2 = len(ic_C2_l)
     n_blocks_C2_s = len(ic_C2_s)
 
-    pred_map_C2_l = {(r["coin"], int(r["hk"])): float(r["pred"]) for _, r in pred_C2_l.iterrows()}
-    pred_map_B1_l = {(r["coin"], int(r["hk"])): float(r["pred"]) for _, r in pred_B1_l.iterrows()}
-    pred_map_C2_s = {(r["coin"], int(r["hk"])): float(r["pred"]) for _, r in pred_C2_s.iterrows()}
-    pred_map_B1_s = {(r["coin"], int(r["hk"])): float(r["pred"]) for _, r in pred_B1_s.iterrows()}
-
-    def deviance_aligned(pred_map, side_key):
-        ys = []
-        ps = []
-        for _, r in test_df.iterrows():
-            key = (r["coin"], int(r["hk"]))
-            if key not in pred_map:
-                continue
-            fi = float(r[side_key])
-            if fi <= 0:
-                fi = 1.0
-            ys.append(fi)
-            ps.append(pred_map[key])
-        ys = np.array(ys)
-        ps = np.array(ps)
+    def deviance_aligned(pred_df, side_key):
+        m = test_df[["coin", "hk", side_key]].merge(
+            pred_df[["coin", "hk", "pred"]], on=["coin", "hk"], how="inner"
+        )
+        ys = m[side_key].values.astype(float)
+        ys = np.where(ys <= 0, 1.0, ys)
+        ps = m["pred"].values.astype(float)
         return qlike(ys, ps), poisson_deviance(ys, ps), len(ys)
 
-    qB1_l, devB1_l, n_dev_l = deviance_aligned(pred_map_B1_l, "fwd_noti_long")
-    qC2_l, devC2_l, _ = deviance_aligned(pred_map_C2_l, "fwd_noti_long")
-    qB1_s, devB1_s, n_dev_s = deviance_aligned(pred_map_B1_s, "fwd_noti_short")
-    qC2_s, devC2_s, _ = deviance_aligned(pred_map_C2_s, "fwd_noti_short")
+    qB1_l, devB1_l, n_dev_l = deviance_aligned(pred_B1_l, "fwd_noti_long")
+    qC2_l, devC2_l, _ = deviance_aligned(pred_C2_l, "fwd_noti_long")
+    qB1_s, devB1_s, n_dev_s = deviance_aligned(pred_B1_s, "fwd_noti_short")
+    qC2_s, devC2_s, _ = deviance_aligned(pred_C2_s, "fwd_noti_short")
 
     rel_imp_l = (devB1_l - devC2_l) / devB1_l if devB1_l > 0 else float("nan")
     rel_imp_s = (devB1_s - devC2_s) / devB1_s if devB1_s > 0 else float("nan")
@@ -612,29 +580,26 @@ def main():
     print("Step 12: Leave-one-block-out range of mean rank-IC (long arm)", flush=True)
     loic_values = []
     for bi in block_indices:
-        kept = ic_C2_l[[i for i, b in enumerate(block_indices) if b != bi] and np.isfinite(ic_C2_l)]
         kept = ic_C2_l[[i for i in range(len(ic_C2_l)) if block_indices[i] != bi]]
         kept = kept[np.isfinite(kept)]
         loic_values.append(float(np.mean(kept)) if len(kept) > 0 else float("nan"))
     loic_valid_arr = np.array([v for v in loic_values if np.isfinite(v)])
     loic_range = float(np.max(loic_valid_arr) - np.min(loic_valid_arr)) if len(loic_valid_arr) > 0 else float("nan")
-    print(f"  LOOIC range: [{np.min(loic_valid_arr):.6f}, {np.max(loic_valid_arr):.6f}] range={loic_range:.6f}", flush=True)
+    loic_min = float(np.min(loic_valid_arr)) if len(loic_valid_arr) > 0 else float("nan")
+    loic_max = float(np.max(loic_valid_arr)) if len(loic_valid_arr) > 0 else float("nan")
+    print(f"  LOOIC range: [{loic_min:.6f}, {loic_max:.6f}] range={loic_range:.6f}", flush=True)
 
     print("Step 13: Leave-one-instrument-out (8 subsets)", flush=True)
     coins_in_test = sorted(test_df["coin"].unique())
-    coin_groups = test_df.groupby("coin")
+    loio_base = test_df[["coin", "hk", "fwd_noti_long"]].merge(
+        pred_C2_l[["coin", "hk", "pred"]], on=["coin", "hk"], how="inner"
+    )
 
     def loio_subset(heldout):
-        keep_coins = [c for c in coins_in_test if c not in heldout]
-        xs = []
-        ys = []
-        for c in keep_coins:
-            grp = test_df[test_df["coin"] == c]
-            for _, r in grp.iterrows():
-                key = (c, int(r["hk"]))
-                if key in pred_map_C2_l:
-                    xs.append(pred_map_C2_l[key])
-                    ys.append(float(r["fwd_noti_long"]))
+        sub = loio_base[~loio_base["coin"].isin(heldout)]
+        xs = sub["pred"].values.astype(float)
+        ys = np.where(sub["fwd_noti_long"].values.astype(float) <= 0, 1.0,
+                      sub["fwd_noti_long"].values.astype(float))
         if len(xs) < 5:
             return float("nan")
         return spearman_rank_ic(xs, ys)
@@ -871,8 +836,8 @@ def main():
             "gap_ci95_hi": gap_ci_hi,
             "gap_ci_excludes_sign_reversal": gap_ci_excludes_sign_reversal,
             "looic_range": loic_range,
-            "looic_min": float(np.min(loic_valid_arr)) if len(loic_valid_arr) > 0 else float("nan"),
-            "looic_max": float(np.max(loic_valid_arr)) if len(loic_valid_arr) > 0 else float("nan"),
+            "looic_min": loic_min,
+            "looic_max": loic_max,
             "rv_tercile_frac_positive": rv_tercile_frac_positive,
             "utc_frac_positive": utc_frac_positive,
             "utc_buckets_positive": utc_buckets_positive,
@@ -942,7 +907,7 @@ def main():
         f"- Rolling {ROLLING_WINDOW}-block rank-IC: min={roll_min:.6f} median={roll_median:.6f} max={roll_max:.6f} CI95=[{roll_ci_lo:.6f},{roll_ci_hi:.6f}]",
         f"- Ordered-block trend: rho={trend_rho:.6f} p_two_sided={trend_p_two_sided:.6f} alpha={TREND_ALPHA:.6f} not_reject={trend_not_reject_stationarity}",
         f"- First-half vs second-half gap: {gap:.6f} CI95=[{gap_ci_lo:.6f},{gap_ci_hi:.6f}] excludes_sign_reversal={gap_ci_excludes_sign_reversal}",
-        f"- LOOIC range: {loic_range:.6f} [{np.min(loic_valid_arr):.6f}, {np.max(loic_valid_arr):.6f}]",
+        f"- LOOIC range: {loic_range:.6f} [{loic_min:.6f}, {loic_max:.6f}]",
         f"- RV-tercile frac positive: {rv_tercile_frac_positive:.4f}",
         f"- UTC-bucket frac positive: {utc_frac_positive:.4f} ({utc_buckets_positive}/{utc_buckets_total})",
         "",
