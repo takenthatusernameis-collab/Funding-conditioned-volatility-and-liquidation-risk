@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-23T14:00:00Z
+# AGENT HANDOFF — 2026-11-23T14:36:36Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status as of this refresh (2026-11-23T14:00:00Z): **PASS** (reason_code=OK, root=499/500).
+> Gate status as of this refresh (2026-11-23T14:36:36Z): **PASS** (reason_code=OK, root=499/500).
 > **PROGRAM STATUS: NOT CONCLUDED — ACTIVE HEAVY WORK OPEN.** The prior handoff wrongly declared
 > the program CONCLUDED and told the next session to "verify and stop". That was the last
 > structural bottleneck: it would let a future agent idle forever on the ONLY SUPPORTED
@@ -15,7 +15,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-23T13:58:25Z (refresh 2026-11-23T14:00:00Z)**
+> **Timestamped initial task message — inferred 2026-11-23T14:36:36Z (refresh 2026-11-23T14:36:36Z)**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is
 > `Funding-conditioned-volatility-and-liquidation-risk`. RESEARCH_PROMPT.md §3.2 primary
@@ -81,10 +81,20 @@ liquidation-intensity association temporally stable (not dominated by one time b
   and `.accessed.json` sidecars — assert sha256 before reading; caches are read-only.
 - The per-block rank-IC series and walk-forward split definition frozen in
   `research_state/session_20261123T085507Z/fclr_liqxsecbroad01_prereg_20261123T085507Z.json`
-  (60% train, 48h purge+embargo, 168h non-overlapping test blocks, 30 valid blocks) and
-  `fclr_liqxsecbroad01_eval_20261123T085507Z.json`. **Reuse the SAME block boundaries and sign
+  and `fclr_liqxsecbroad01_eval_20261123T085507Z.json`. **Reuse the SAME block boundaries and sign
   convention** (`relative_improvement = (baseline - candidate)/baseline`, positive = candidate better)
   so the stability test is directly comparable to BROAD-01.
+  - **BOTTLENECK (removed by this refresh): the BROAD-01 prereg `.json` is NOT strict JSON** — it is
+    a hand-authored pseudo-JSON with trailing commas before every `}` and bracket typos such as
+    `[0, 8)` in `utc_buckets`. `json.load(open(...prereg...json))` FAILS (`Expecting property name...`
+    at line 18, then `Expecting ',' delimiter` at line 38). Do NOT waste a session rediscovering this
+    and do NOT rewrite the sealed artifact. The canonical machine-readable design is the **`.md`
+    prereg** plus the **constants at the top of `fclr_liqxsecbroad01_eval_20261123T085507Z.py`**:
+    `TRAIN_FRAC=0.60`, `PURGE_EMBARGO_H=48`, `BLOCK_H=168`, `HORIZON_H=1`, `N_BOOT=2000`,
+    `N_PERM=1000`, `N_LOIO=8`, `LOIO_PASS_THRESHOLD=6`, `SEED=20261123`, `ALPHA_K=0.05/(2*3)`,
+    `MATERIALITY_PCT=2.0`. Copy that eval script as the starting point for the TS eval, change
+    `SESSION_UTC`, and dump the per-block `ic_C2_l / ic_B1_l / ic_C2_s / ic_B1_s` series (BROAD-01
+    stored only their means in JSON; the series is re-derivable from the script).
 
 **Outcome-blind design (freeze BEFORE computing any stability metric):**
 1. Reuse BROAD-01's 30 non-overlapping 168h test blocks; compute the per-block cross-sectional
@@ -226,7 +236,12 @@ Before finishing, update THIS file with:
 - **Retired (completed campaign binder):** BROAD-01 is complete; its heavy artifacts live in
   `session_20261123T085507Z/`. The BROAD-01 binder is retired (its campaign id is referred to
   without the UTC suffix so the gate does not re-demand BROAD-01 artifacts from the TS session).
-- **Verified (2026-11-23T14:00:00Z refresh):** `python3 scripts/check_handoff_heavywork_gate.py --json`
+- **Resolved (unparseable frozen prereg):** `session_20261123T085507Z/fclr_liqxsecbroad01_prereg_20261123T085507Z.json`
+  is hand-authored pseudo-JSON (trailing commas, `[0, 8)` bracket typos) and fails `json.load`.
+  The TS session must NOT parse it; use the `.md` prereg and the constants block in
+  `fclr_liqxsecbroad01_eval_20261123T085507Z.py` (see FOCUS CAMPAIGN → Frozen inputs). This removes a
+  guaranteed first-step failure for the next agent without mutating the sealed BROAD-01 artifact.
+- **Verified (2026-11-23T14:36:36Z refresh):** `python3 scripts/check_handoff_heavywork_gate.py --json`
   → PASS reason_code=OK root=499/500; BROAD_TS grandfathered (latest session 20261123T085507Z <
   campaign start 20261123T135825Z). All campaign gate unittests pass.
 
