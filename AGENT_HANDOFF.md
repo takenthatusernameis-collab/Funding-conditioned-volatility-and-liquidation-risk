@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-23T08:46:19Z
+# AGENT HANDOFF — 2026-11-23T08:49:56Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status as of this refresh (2026-11-23T08:46:19Z): **PASS** (reason_code=OK, root=499/500).
+> Gate status as of this refresh (2026-11-23T08:49:56Z): **PASS** (reason_code=OK, root=499/500).
 > The prior heavy session `session_20261123T043600Z` COMPLETED the full `FCLR-TRACKA-SOURCE-AUDIT-01`
 > heavy set (Track B modeled-breach evaluation `fclr_tracks01_eval_*` py+json+md + independent
 > `fclr_tracks01_recompute_*` py+json + recovered source_registry/probe/viability_decision triad +
@@ -16,7 +16,24 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-23T08:46:19Z (refresh time)**
+> **Timestamped initial task message — inferred 2026-11-23T08:49:56Z (refresh time)**
+>
+> **REPO-NAME PRIORITY → TASK:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`.
+> RESEARCH_PROMPT.md §3.2 half 2 is **liquidation-risk forecasting**. As of this refresh the honest
+> state of that half is:
+> - **Track C (volatility):** CLOSED leakage-robust null across every claim-worthy panel (H1_primary
+>   NOT_SUPPORTED; FCLR-011 PASS does not generalize forward; FCLR-FWD-VOL-011-CONFIRM NOT_REPLICATED).
+> - **Track A (observed liquidations):** `TRACK_A_STRUCTURALLY_BLOCKED` (source audit complete, frozen
+>   outcome-blind; `outcome_data_inspected_before_freeze:false`).
+> - **Track B (modeled boundary breach):** NOT_SUPPORTED on the just-completed `FCLR-TRACKA-SOURCE-AUDIT-01`
+>   (session_20261123T043600Z; rel Brier -2.00% long / -1.00% short; CI95 upper includes 0;
+>   Holm-adjusted p 0.30/0.24 > alpha_k 0.025).
+> - **The ONLY liquidation-risk results ever marked SUPPORTED** are the *regime-conditioned
+>   cross-sectional* funding → next-hour observed-liquidation-intensity findings: FCLR-XSEC-004
+>   (count, low-RV regime), FCLR-XSEC-005 (notional-weighted, low-RV regime), FCLR-XSEC-006 (all three
+>   UTC session buckets). All three are flagged `promotable:false` / EXPLORATORY_ONLY **precisely
+>   because they were established on the narrow 15-coin combined metpie+ironflow panel and never shown
+>   to GENERALIZE.** That is the unfinished, highest-value work on the liquidation-risk half.
 >
 > **Your ONE job, non-deferrable, gate-enforced:** create `research_state/session_<UTC>/` with UTC
 > **> 20261123T080000Z** (use current wall-clock UTC at session start) and execute
@@ -380,7 +397,7 @@ Then record your `session_<UTC>/` id in this handoff (append the id string `sess
 
 ---
 
-## HANDOFF GENERATED: 2026-11-23T08:46:19Z
+## HANDOFF GENERATED: 2026-11-23T08:49:56Z
 **Next session must use UTC > 20261123T080000Z** (campaign start gate; the current session
 `session_20261123T043600Z` is grandfathered, so this refresh is green until a newer session appears).
 **Latest handoff session: session_20261123T043600Z** (completed FCLR-TRACKA-SOURCE-AUDIT-01 heavy set:
