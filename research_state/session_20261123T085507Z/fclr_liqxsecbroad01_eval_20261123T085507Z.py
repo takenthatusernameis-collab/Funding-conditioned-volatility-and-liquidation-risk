@@ -645,19 +645,22 @@ def main():
     coins_in_test = sorted({r["coin"] for r in test_rows})
     coin_rows_l = {c: [r for r in test_rows if r["coin"] == c] for c in coins_in_test}
 
+    # FCLR-LIQ-XSEC-BROAD-01 prereg: "per_coin_block_bootstrap: resample complete
+    # UTC time blocks jointly across coins". Each entry of ic_C2_l is ONE 168h
+    # test block's cross-sectional rank-IC (coins are the cross-section within a
+    # block). The unit of resampling is therefore the complete UTC time block;
+    # resampling blocks with replacement and recomputing the mean rank-IC is the
+    # prereg-specified block bootstrap and keeps the replicate cost independent
+    # of the 1.7M-row panel size.
+    ic_blocks = [ic for ic in ic_C2_l
+                 if not (isinstance(ic, float) and math.isnan(ic))]
+
     def bootstrap_mean_ic():
-        sample_coins = rng.choices(coins_in_test, k=len(coins_in_test))
-        xs = []
-        ys = []
-        for c in sample_coins:
-            for r in coin_rows_l[c]:
-                key = (c, r["hk"])
-                if key in pred_map_C2_l:
-                    xs.append(pred_map_C2_l[key])
-                    ys.append(r["fwd_noti_long"])
-        if len(xs) < 5:
+        if not ic_blocks:
             return float("nan")
-        return spearman_rank_ic(xs, ys)
+        n_b = len(ic_blocks)
+        sample = [ic_blocks[rng.randrange(n_b)] for _ in range(n_b)]
+        return sum(sample) / n_b
 
     boot_ics = [bootstrap_mean_ic() for _ in range(N_BOOT)]
     boot_ics_valid = sorted(d for d in boot_ics if not (isinstance(d, float) and math.isnan(d)))
@@ -675,14 +678,56 @@ def main():
         if bi is None:
             continue
         pred_C2_by_block.setdefault(bi, []).append(p)
+
+    # Tractable, exactly-equivalent permutation null. Spearman(x, y) is the
+    # Pearson correlation of the ordinal ranks of x and y. Within a block the
+    # actuals are fixed, so rank(actual) is fixed; permuting the predictions is
+    # equivalent to permuting rank(pred). Precompute both rank vectors once per
+    # block, then each replicate is an O(n) Pearson correlation of the fixed
+    # actual ranks against a shuffled copy of the pred ranks (no per-replicate
+    # sorting). This is numerically identical to re-running spearman_rank_ic on a
+    # shuffled prediction vector, but 1000x cheaper on the 1.7M-row panel.
+    def _ordinal_ranks(vals):
+        n = len(vals)
+        order = sorted(range(n), key=lambda i: vals[i])
+        ranks = [0.0] * n
+        for r, i in enumerate(order):
+            ranks[i] = float(r + 1)
+        return ranks
+
+    def _pearson(x, y):
+        n = len(x)
+        if n < 2:
+            return float("nan")
+        mx = sum(x) / n
+        my = sum(y) / n
+        num = 0.0
+        dx2 = 0.0
+        dy2 = 0.0
+        for i in range(n):
+            a = x[i] - mx
+            b = y[i] - my
+            num += a * b
+            dx2 += a * a
+            dy2 += b * b
+        if dx2 <= 0.0 or dy2 <= 0.0:
+            return float("nan")
+        return num / math.sqrt(dx2 * dy2)
+
+    perm_blocks = []
+    for bi, ps in pred_C2_by_block.items():
+        if len(ps) < 5:
+            continue
+        rank_a = _ordinal_ranks([p["actual"] for p in ps])
+        rank_p = _ordinal_ranks([p["pred"] for p in ps])
+        perm_blocks.append((rank_a, rank_p))
+
     for _ in range(N_PERM):
         perm_vals = []
-        for bi, ps in pred_C2_by_block.items():
-            actuals = [p["actual"] for p in ps]
-            preds_shuf = [p["pred"] for p in ps]
-            rng.shuffle(preds_shuf)
-            if len(ps) >= 5:
-                perm_vals.append(spearman_rank_ic(preds_shuf, actuals))
+        for rank_a, rank_p in perm_blocks:
+            shuf = list(rank_p)
+            rng.shuffle(shuf)
+            perm_vals.append(_pearson(rank_a, shuf))
         if perm_vals:
             perm_ics.append(mean(perm_vals))
     perm_ics_valid = sorted(d for d in perm_ics if not (isinstance(d, float) and math.isnan(d)))

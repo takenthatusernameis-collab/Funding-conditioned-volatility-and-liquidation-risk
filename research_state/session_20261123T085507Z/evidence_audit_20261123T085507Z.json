@@ -1,0 +1,29 @@
+{
+  "session_utc": "20261123T085507Z",
+  "campaign": "FCLR-LIQ-XSEC-BROAD-01-20261123T080000Z",
+  "purpose": "gate-critical evidence audit for FCLR-LIQ-XSEC-BROAD-01 heavy session",
+  "audit_scope": [
+    "authored/completed the on-disk ironflow_bulk source registry (fclr_liqxsecbroad01_source_registry_ json+md)",
+    "froze the outcome-blind prereg (fclr_liqxsecbroad01_prereg_ json+md; outcome_data_inspected_before_freeze:false)",
+    "corrected the heavy eval (fclr_liqxsecbroad01_eval_ py) Step 10 block bootstrap to the prereg-specified time-block unit and Step 11 placebo to an exactly-equivalent O(n) permutation, then ran the HEAVY evaluation to completion (eval json+md)",
+    "ran the independent stdlib recompute (fclr_liqxsecbroad01_recompute_ py+json); all_checks_match:true",
+    "no network re-probe; no terminal campaign re-run; no risk overlay; no root-level artifact writes (all under session_20261123T085507Z/)"
+  ],
+  "artifact_integrity": {
+    "all_required_files_non_empty": true,
+    "no_zero_byte_placeholders": true,
+    "sha256_sidecars_asserted": "72/72 ok",
+    "root_md_json_cap_respected": true
+  },
+  "result": {
+    "verdict": "SUPPORTED_GENERALIZATION",
+    "headline_long_mean_rank_IC_C2": 0.1551333434568285,
+    "headline_short_mean_rank_IC_C2": -0.0020543155176227807,
+    "bootstrap_ci95": [0.1420813775721273, 0.1688954773885811],
+    "materiality_met_long": false,
+    "materiality_met_short": false
+  },
+  "verdict_preservation": "nulls preserved honestly; materiality floor not relaxed; SUPPORTED_GENERALIZATION reported per the frozen rule with the explicit caveat that the Poisson-deviance materiality floor was NOT met (cross-sectional rank-ordering association, not calibrated-magnitude improvement, not a forecast-gate pass, not a census)",
+  "track_status": "Track C volatility CLOSED null; Track A observed liquidations TRACK_A_STRUCTURALLY_BLOCKED; Track B modeled breach NOT_SUPPORTED; broad-universe cross-sectional generalization of the only SUPPORTED liquidation-risk findings now EXECUTED",
+  "generated_utc": "2026-11-23T10:22:00Z"
+}

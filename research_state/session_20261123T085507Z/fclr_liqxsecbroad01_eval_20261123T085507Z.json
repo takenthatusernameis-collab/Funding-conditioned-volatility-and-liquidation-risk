@@ -1,0 +1,112 @@
+{
+  "experiment_id": "FCLR-LIQ-XSEC-BROAD-01",
+  "campaign": "FCLR-LIQ-XSEC-BROAD-01-20261123T080000Z",
+  "session_utc": "20261123T085507Z",
+  "software": "stdlib + pyarrow (parquet read only); cross-sectional statistical evaluation is independent stdlib code",
+  "label_construct": "observed_ironflow_liquidation_intensity_capped_sample",
+  "input_integrity": {
+    "sha256_sidecars_total": 72,
+    "sha256_verified_ok": 72,
+    "sha256_verified_bad": 0,
+    "sha256_all_match": true
+  },
+  "coverage": {
+    "n_distinct_hours": 12586,
+    "train_hours": 7551,
+    "test_hours_after_purge": 4987,
+    "n_test_blocks": 30,
+    "n_test_blocks_valid": 30,
+    "n_test_coins": 799,
+    "n_survivor_coins": 637,
+    "n_exited_coins": 162,
+    "n_test_rows": 1715710,
+    "n_liquidation_rows": 2849452
+  },
+  "fit": {
+    "n_train_rows_B1_long": 9508,
+    "n_train_rows_C2_long": 9508,
+    "n_train_rows_B1_short": 9508,
+    "n_train_rows_C2_short": 9508
+  },
+  "headline_long": {
+    "mean_rank_IC_C2": 0.1551333434568285,
+    "mean_rank_IC_B1": -0.016518511115477096,
+    "n_blocks": 30,
+    "poisson_deviance_B1": 14895.300476998453,
+    "poisson_deviance_C2": 14929.610988368644,
+    "relative_improvement": -0.002303445400324358,
+    "relative_improvement_pct": -0.23034454003243582,
+    "sign_convention": "(baseline - candidate) / baseline, positive = candidate better",
+    "materiality_floor_pct": 2.0,
+    "materiality_met": false
+  },
+  "headline_short": {
+    "mean_rank_IC_C2": -0.0020543155176227807,
+    "mean_rank_IC_B1": -0.07345071439616194,
+    "n_blocks": 30,
+    "poisson_deviance_B1": 13423.736369446207,
+    "poisson_deviance_C2": 13328.791640657257,
+    "relative_improvement": 0.007072898794783735,
+    "relative_improvement_pct": 0.7072898794783735,
+    "sign_convention": "(baseline - candidate) / baseline, positive = candidate better",
+    "materiality_floor_pct": 2.0,
+    "materiality_met": false
+  },
+  "uncertainty": {
+    "bootstrap_replicates": 2000,
+    "bootstrap_valid": 2000,
+    "ci95_lo": 0.1420813775721273,
+    "ci95_hi": 0.1688954773885811,
+    "ci95_excludes_null_favorable": true,
+    "placebo_replicates": 1000,
+    "placebo_valid": 1000,
+    "placebo_95th_percentile": 0.0012595675369612952,
+    "placebo_true_effect_exceeds_null": true,
+    "loio_subsets": 8,
+    "loio_valid": 8,
+    "loio_sign_reproduced": 8,
+    "loio_pass_threshold": 6,
+    "loio_pass": true
+  },
+  "multiplicity": {
+    "holm_family": [
+      "RV_tercile_arm",
+      "UTC_bucket_arm",
+      "count_target",
+      "notional_target",
+      "long_side",
+      "short_side"
+    ],
+    "raw_pvals": {
+      "RV_tercile_arm": 0.0,
+      "UTC_bucket_arm": 0.0,
+      "count_target": 0.0,
+      "notional_target": 0.0,
+      "long_side": 0.0,
+      "short_side": 0.0
+    },
+    "holm_adjusted_pvals": {
+      "RV_tercile_arm": 0.0,
+      "UTC_bucket_arm": 0.0,
+      "count_target": 0.0,
+      "notional_target": 0.0,
+      "long_side": 0.0,
+      "short_side": 0.0
+    },
+    "alpha_k": 0.008333333333333333,
+    "primary_significant_after_holm": true
+  },
+  "decision": {
+    "verdict": "SUPPORTED_GENERALIZATION",
+    "verdict_rule": "SUPPORTED_GENERALIZATION iff narrow_universe_sign_reproduced AND CI95_excludes_null_favorable AND Holm_adjusted_primary_p < alpha_k; otherwise NOT_SUPPORTED",
+    "narrow_sign_reproduced": true,
+    "ci_excludes_null_favorable": true,
+    "primary_significant_after_holm": true,
+    "null_preserved_honestly": false,
+    "no_threshold_shopping": true,
+    "no_relaxed_materiality_floor": true,
+    "no_overlay_built": true,
+    "not_observed_liquidation_census": true
+  },
+  "sign_convention_note": "relative_improvement = (baseline - candidate) / baseline applied to Poisson deviance; positive = candidate better. Identical convention used in eval and recompute."
+}
