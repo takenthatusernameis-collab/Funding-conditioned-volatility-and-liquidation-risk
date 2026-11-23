@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-23T03:45:13Z
+# AGENT HANDOFF — 2026-11-23T04:34:49Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status as of this refresh (2026-11-23T03:45:13Z): **PASS** (reason_code=OK, root=499/500,
+> Gate status as of this refresh (2026-11-23T04:34:49Z): **PASS** (reason_code=OK, root=499/500,
 > 119 campaign-gate unittests OK). The gate passes today ONLY because the latest on-disk session
 > (`session_20261122T224500Z`) predates the rank-0 campaign start (`20261122T225107Z`). The instant a
 > new `session_<UTC>` with UTC > `20261122T225107Z` appears AND is recorded here, the gate flips to
@@ -408,7 +408,7 @@ Then record your `session_<UTC>/` id in this handoff (append the id string `sess
 
 ---
 
-## HANDOFF GENERATED: 2026-11-23T03:45:13Z
+## HANDOFF GENERATED: 2026-11-23T04:34:49Z
 **Next session must use UTC > 20261122T225107Z** (campaign start gate; campaign start has ELAPSED).
 **Latest handoff session: session_20261122T224500Z** (completed risk09; predates campaign start, so gate is green today).
 **Rank-0 campaign: FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z** (this handoff; source-audit sub-phase DONE
