@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-23T08:41:53Z
+# AGENT HANDOFF — 2026-11-23T08:43:16Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status as of this refresh (2026-11-23T08:41:53Z): **PASS** (reason_code=OK, root=499/500).
+> Gate status as of this refresh (2026-11-23T08:43:16Z): **PASS** (reason_code=OK, root=499/500).
 > The prior heavy session `session_20261123T043600Z` COMPLETED the full `FCLR-TRACKA-SOURCE-AUDIT-01`
 > heavy set (Track B modeled-breach evaluation `fclr_tracks01_eval_*` py+json+md + independent
 > `fclr_tracks01_recompute_*` py+json + recovered source_registry/probe/viability_decision triad +
@@ -15,6 +15,37 @@
 ---
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
+
+> **Timestamped initial task message — inferred 2026-11-23T08:43:16Z (refresh time)**
+>
+> **Your ONE job, non-deferrable, gate-enforced:** create `research_state/session_<UTC>/` with UTC
+> **> 20261123T080000Z** (use current wall-clock UTC at session start) and execute
+> **`FCLR-LIQ-XSEC-BROAD-01`** to completion — a pre-registered, leakage-hardened, broad-universe
+> (468-coin on-disk ironflow_bulk) cross-sectional test of whether the regime-conditioned
+> funding → next-hour observed-liquidation-intensity association that was SUPPORTED on the narrow
+> 15-coin combined panel (FCLR-XSEC-004 count / FCLR-XSEC-005 notional-weighted / FCLR-XSEC-006
+> UTC-session-bucket, all `promotable:false`) **GENERALIZES** to the full on-disk ironflow_bulk
+> liquidation universe (2025-05..2026-10, 2.85M liquidation rows across 468 markets). Walk-forward
+> with per-coin block bootstrap (>=2,000 deterministic-seed replicates), placebo/permutation null,
+> leave-one-instrument-out, Holm across the declared family, and an independent stdlib recompute
+> using ONE explicit sign convention so the recompute asserts `all_checks_match:true`.
+>
+> **Mandatory artifact set (all non-empty, prefix `fclr_liqxsecbroad01_`):** source registry
+> (json+md), outcome-blind prereg (json+md, `outcome_data_inspected_before_freeze:false`,
+> hash-bound panel sha256), HEAVY evaluation triad (py+json+md), independent recompute (py+json),
+> evidence audit (json+md), gate-critical `evidence_audit_<UTC>.json` alias, non-empty
+> `trigger_check_<UTC>.json`. The gate fails closed with `LIQ_XSEC_BROAD_ARTIFACTS_MISSING` /
+> `..._ARTIFACTS_EMPTY` if the eval triad or recompute is missing or zero-byte.
+>
+> **Do NOT:** re-run any terminal campaign; stop at the prereg; emit zero-byte placeholders;
+> re-probe the network (source audit is frozen); build a risk overlay (§9); or describe the
+> result as anything other than a broad-universe generalization test of a cross-sectional
+> *association* (NOT a time-series forecast gate pass; NOT an observed-liquidation census — the
+> ironflow feed is capped-sample per §15, absence ≠ zero).
+>
+> **Blockers: None.** The 18 ironflow_bulk monthly parquet sets (liquidations/funding/
+> open_interest/candles_1h, each with `.sha256` + `.accessed.json` sidecars) are on disk and
+> unmodified; the heavy evaluation is feasible TODAY in pure stdlib + pyarrow, no network.
 
 ### Single, non-deferrable job (DO THIS FIRST)
 
@@ -75,9 +106,16 @@ Execute **FCLR-LIQ-XSEC-BROAD-01-20261123T080000Z** to completion in ONE `sessio
 
 1. **SOURCE REGISTRY (on-disk, no network)** — write `fclr_liqxsecbroad01_source_registry_*`
    (json+md) recording the ironflow_bulk parquet files actually read: paths, sha256, row counts, coin
-   coverage (expect ~342 coins), month span 2025-05..2026-10, schemas
-   (`liquidations`, `funding`, `open_interest`, `candles_1h`). Assert sha256 before reading; do NOT
-   mutate caches.
+   coverage (**verified on-disk at refresh: 468 distinct markets in `liquidations`, 2,849,452 rows
+   across 18 monthly files, span 2025-05-25..2026-10-31**; funding/OI/candles_1h likewise 18 files
+   each), month span 2025-05..2026-10, schemas
+   (`liquidations`: timestamp[ms],market,issuer,wallet,position_side,size,notional_usd,avg_price,
+   fills,block,tx_hash — **note: there is NO `coin` column; the instrument key is `market`**;
+   `funding`: timestamp[us],market,coin,dex,funding_rate,premium;
+   `open_interest`: timestamp[us],market,coin,dex,mark_price,oracle_price,open_interest,
+   open_interest_usd;
+   `candles_1h`: timestamp[us],market,coin,dex,market_class,open,high,low,close,volume,trades).
+   Assert sha256 before reading; do NOT mutate caches.
 2. **PREREG FREEZE (outcome-blind, frozen BEFORE outcomes)** — write
    `fclr_liqxsecbroad01_prereg_*` (json+md). Must state
    `outcome_data_inspected_before_freeze:false` and hash-bind its inputs (panel sha256). Freeze every
@@ -252,15 +290,15 @@ here, the newest session lacks the full `fclr_liqxsecbroad01_*` family (includin
 
 | Path | Description |
 |---|---|
-| `research_state/data_cache/ironflow_bulk/liquidations/` | 18 monthly parquet, 2025-05..2026-10. **Capped-sample feed — not a complete census (per §15).** Columns: `timestamp[ms],market,issuer,wallet,position_side,size,notional_usd,avg_price,fills,block,tx_hash`. |
-| `research_state/data_cache/ironflow_bulk/funding/` | 18 monthly parquet. Columns: `timestamp[us],market,coin,funding_rate,premium`. |
-| `research_state/data_cache/ironflow_bulk/open_interest/` | 18 monthly parquet. Columns: `timestamp[us],market,coin,mark_price,oracle_price,open_interest,open_interest_usd`. |
-| `research_state/data_cache/ironflow_bulk/candles_1h/` | 18 monthly parquet. Columns: `timestamp[us],market,coin,open,high,low,close,volume,trades`. |
+| `research_state/data_cache/ironflow_bulk/liquidations/` | 18 monthly parquet, 2025-05..2026-10. **Capped-sample feed — not a complete census (per §15).** Columns: `timestamp[ms],market,issuer,wallet,position_side,size,notional_usd,avg_price,fills,block,tx_hash`. **Verified at refresh: 2,849,452 rows across 18 files, 468 distinct `market` instruments, span 2025-05-25 14:36:58 UTC .. 2026-10-31 23:30:10 UTC. There is NO `coin` column — the instrument key is `market`.** |
+| `research_state/data_cache/ironflow_bulk/funding/` | 18 monthly parquet. Columns: `timestamp[us],market,coin,dex,funding_rate,premium`. |
+| `research_state/data_cache/ironflow_bulk/open_interest/` | 18 monthly parquet. Columns: `timestamp[us],market,coin,dex,mark_price,oracle_price,open_interest,open_interest_usd`. |
+| `research_state/data_cache/ironflow_bulk/candles_1h/` | 18 monthly parquet. Columns: `timestamp[us],market,coin,dex,market_class,open,high,low,close,volume,trades`. |
 | `research_state/fclr_liq_combined_panel_20261115T181405Z.parquet` | Frozen 15-coin combined metpie+ironflow panel (sha256 `81a100d5d0625832bebabaabea13b786e15319577721cfe8507da5b779ec7f14`), 1,740,415 rows, 2025-03-22..2026-10-31. The NARROW universe whose SUPPORTED findings (XSEC-004/005/006) you are testing for generalization. |
 
 Each parquet has `.sha256` and `.accessed.json` sidecars. Assert sha256 before reading; do NOT mutate
-caches. Data scale: ~145K funding rows + ~145K OI rows per month × 18 months; ~35K candle rows/month;
-~15K liquidation rows/month. The heavy evaluation must stay tractable in pure stdlib + pyarrow
+caches. Data scale: ~158K liquidation rows/month; ~230K funding + ~220K OI + ~200K candle rows/month
+across the broad universe. The heavy evaluation must stay tractable in pure stdlib + pyarrow
 (chronological split, 168h test blocks, per-coin series — see the risk09 template pattern).
 
 ---
