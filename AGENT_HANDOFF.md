@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-23T08:31:12Z
+# AGENT HANDOFF — 2026-11-23T08:41:53Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> Gate status as of this refresh (2026-11-23T08:31:12Z): **PASS** (reason_code=OK, root=499/500).
+> Gate status as of this refresh (2026-11-23T08:41:53Z): **PASS** (reason_code=OK, root=499/500).
 > The prior heavy session `session_20261123T043600Z` COMPLETED the full `FCLR-TRACKA-SOURCE-AUDIT-01`
 > heavy set (Track B modeled-breach evaluation `fclr_tracks01_eval_*` py+json+md + independent
 > `fclr_tracks01_recompute_*` py+json + recovered source_registry/probe/viability_decision triad +
@@ -342,7 +342,7 @@ Then record your `session_<UTC>/` id in this handoff (append the id string `sess
 
 ---
 
-## HANDOFF GENERATED: 2026-11-23T08:31:12Z
+## HANDOFF GENERATED: 2026-11-23T08:41:53Z
 **Next session must use UTC > 20261123T080000Z** (campaign start gate; the current session
 `session_20261123T043600Z` is grandfathered, so this refresh is green until a newer session appears).
 **Latest handoff session: session_20261123T043600Z** (completed FCLR-TRACKA-SOURCE-AUDIT-01 heavy set:
