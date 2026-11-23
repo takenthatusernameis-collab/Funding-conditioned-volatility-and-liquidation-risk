@@ -999,6 +999,135 @@ class TestContagionCampaignGate(unittest.TestCase):
         self.assertTrue(res["pass"], res["failures"])
 
 
+class TestTrackaSourceAuditCampaignGate(unittest.TestCase):
+    """FCLR-TRACKA-SOURCE-AUDIT-01: once the Track A source viability audit
+    campaign starts, a post-start session cannot dodge the heavy unlock-or-pivot
+    work with a source-probe-only, audit-only, prereg-only, or verify-and-stop
+    session. It must emit the source registry + probe triad, the outcome-blind
+    viability decision, the pivot prereg, the HEAVY evaluation triad
+    (fclr_tracks01_eval_ py+json+md), the independent stdlib recompute
+    (fclr_tracks01_recompute_ py+json), the gate-critical evidence_audit_ alias,
+    and a trigger check, with no zero-byte placeholders. Sessions predating the
+    campaign are grandfathered.
+
+    This class pins the binder for the ACTIVE rank-0 campaign: before it existed
+    the tracks01 enforcement had no regression coverage, so a refactor or a future
+    agent could silently drop fclr_tracks01_eval_ / fclr_tracks01_recompute_ from
+    the required set and re-open the prereg-only heavy-work escape hatch. These
+    tests fail loudly if that ever happens."""
+
+    START = "20261122T225107Z"
+
+    def _repo(self, latest_sid="session_20261123T000000Z"):
+        tmp = Path(tempfile.mkdtemp(prefix="fclr143ta01_"))
+        self.addCleanup(shutil.rmtree, tmp, ignore_errors=True)
+        repo = tmp / "repo"
+        sdir = repo / "research_state" / latest_sid
+        sdir.mkdir(parents=True)
+        # Carry-forward Phase-B/C bundle so only the tracks01 contract is tested.
+        base = repo / "research_state" / "session_20261116T035833Z"
+        base.mkdir()
+        for name in (
+            "rca011_feature_attribution_x.json",
+            "rca011_impl_crosscheck_x.json",
+            "rca011_sealed_bridge_x.md",
+            "prereg_template_trigger_gated_x.json",
+            "program_power_synthesis_x.md",
+        ):
+            (base / name).write_text("x")
+        (repo / "AGENT_HANDOFF.md").write_text(
+            "# AGENT HANDOFF\n\n## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION\n"
+            f"Campaign FCLR-TRACKA-SOURCE-AUDIT-01-{self.START}\n"
+            f"Latest session: research_state/{latest_sid}/\n"
+        )
+        return repo, sdir
+
+    def _write_family(self, sdir, sid, skip=(), content="x"):
+        for prefix, suffix in gate.TRACKA_SOURCE_AUDIT_REQUIRED:
+            if any(prefix == s for s in skip):
+                continue
+            (sdir / f"{prefix}{sid}{suffix}").write_text(content)
+
+    def test_binder_pins_eval_and_recompute_in_required_set(self):
+        # Structural pin: the active campaign's required set MUST include the
+        # heavy eval triad and the independent recompute, so a refactor that
+        # drops them (re-opening the prereg-only hatch) fails this assertion.
+        prefixes = [p for p, _ in gate.TRACKA_SOURCE_AUDIT_REQUIRED]
+        self.assertIn("fclr_tracks01_eval_", prefixes)
+        self.assertIn("fclr_tracks01_recompute_", prefixes)
+
+    def test_post_start_source_probe_only_fails_closed(self):
+        # Light audit set (registry + probe + viability + pivot prereg) WITHOUT
+        # the heavy eval triad or the independent recompute must fail closed.
+        repo, sdir = self._repo()
+        self._write_family(
+            sdir, "20261123T000000Z",
+            skip=("fclr_tracks01_eval_", "fclr_tracks01_recompute_"),
+        )
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["tracks01"]["required"])
+        missing = res["tracks01"]["missing_required_artifacts"]
+        self.assertTrue(any("fclr_tracks01_eval_" in m for m in missing))
+        self.assertTrue(any("fclr_tracks01_recompute_" in m for m in missing))
+        self.assertTrue(any(f.startswith("TRACKA_SOURCE_AUDIT_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_missing_eval_fails_closed(self):
+        # Everything EXCEPT the heavy evaluation -> fail closed. This is the
+        # prereg-only escape hatch: the heavy eval cannot be deferred to a later
+        # session; it must run in the SAME session.
+        repo, sdir = self._repo()
+        self._write_family(sdir, "20261123T000000Z", skip=("fclr_tracks01_eval_",))
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["tracks01"]["required"])
+        self.assertTrue(any("fclr_tracks01_eval_" in m
+                            for m in res["tracks01"]["missing_required_artifacts"]))
+        self.assertTrue(any(f.startswith("TRACKA_SOURCE_AUDIT_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_missing_recompute_fails_closed(self):
+        repo, sdir = self._repo()
+        self._write_family(sdir, "20261123T000000Z", skip=("fclr_tracks01_recompute_",))
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["tracks01"]["required"])
+        self.assertTrue(any("fclr_tracks01_recompute_" in m
+                            for m in res["tracks01"]["missing_required_artifacts"]))
+        self.assertTrue(any(f.startswith("TRACKA_SOURCE_AUDIT_ARTIFACTS_MISSING")
+                            for f in res["failures"]))
+
+    def test_post_start_empty_files_fail_closed(self):
+        # Zero-byte placeholders for the full set must fail closed.
+        repo, sdir = self._repo()
+        self._write_family(sdir, "20261123T000000Z", content="")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["tracks01"]["required"])
+        self.assertTrue(res["tracks01"]["empty_required_artifacts"])
+        self.assertTrue(any(f.startswith("TRACKA_SOURCE_AUDIT_ARTIFACTS_EMPTY")
+                            for f in res["failures"]))
+
+    def test_post_start_full_heavy_set_passes(self):
+        repo, sdir = self._repo()
+        self._write_family(sdir, "20261123T000000Z")
+        res = gate.check(repo)
+        self.assertTrue(res["pass"], res["failures"])
+        self.assertTrue(res["tracks01"]["required"])
+        self.assertTrue(res["tracks01"]["pass"])
+        self.assertEqual(res["tracks01"]["missing_required_artifacts"], [])
+        self.assertEqual(res["tracks01"]["empty_required_artifacts"], [])
+
+    def test_pre_start_session_is_grandfathered(self):
+        repo, sdir = self._repo(latest_sid="session_20261122T200000Z")
+        (sdir / "evidence_audit_x.md").write_text("x")
+        (sdir / "recompute_generic_x.json").write_text("{}")
+        res = gate.check(repo)
+        self.assertFalse(res["tracks01"]["required"])
+        self.assertTrue(res["pass"], res["failures"])
+
+
 class TestHandoffGateCliContract(unittest.TestCase):
     def test_cli_json_pass_shape(self):
         import subprocess
