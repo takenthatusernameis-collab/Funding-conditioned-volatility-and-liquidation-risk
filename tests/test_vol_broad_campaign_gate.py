@@ -19,6 +19,8 @@ re-open the prereg-only / verify-and-stop escape hatch.
 """
 from __future__ import annotations
 
+import hashlib
+import json
 import shutil
 import sys
 import tempfile
@@ -47,11 +49,92 @@ class TestVolBroadCampaignGate(unittest.TestCase):
         )
         return repo, sdir
 
-    def _write_family(self, sdir, sid, skip=(), content="x"):
+    def _write_family(self, sdir, sid, skip=(), content=None):
+        payloads = {}
         for prefix, suffix in gate.VOL_BROAD_REQUIRED:
             if any(prefix == s for s in skip):
                 continue
-            (sdir / f"{prefix}{sid}{suffix}").write_text(content)
+            path = sdir / f"{prefix}{sid}{suffix}"
+            if content is not None:
+                path.write_text(content)
+                continue
+            if suffix != ".json":
+                path.write_text("x")
+                continue
+            common = {
+                "experiment_id": "FCLR-VOL-BROAD-01",
+                "session_id": f"session_{sid}",
+            }
+            if prefix == "fclr_volbroad01_source_registry_":
+                payload = {
+                    **common,
+                    "datasets": {
+                        "candles_1h": {"files": 18},
+                        "funding": {"files": 18},
+                        "open_interest": {"files": 18},
+                    },
+                    "sha256_sidecars_asserted": True,
+                    "input_sha256": {
+                        "candles_1h": "a" * 64,
+                        "funding": "b" * 64,
+                        "open_interest": "c" * 64,
+                    },
+                    "file_count": 54,
+                }
+            elif prefix == "fclr_volbroad01_prereg_":
+                registry = payloads["fclr_volbroad01_source_registry_"]
+                payload = {
+                    **common,
+                    "frozen_before_outcomes": True,
+                    "outcome_data_inspected_before_freeze": False,
+                    "design": {"walk_forward": True},
+                    "train_frac": 0.60,
+                    "purge_embargo_h": 48,
+                    "materiality_floor_rel_qlike": 0.02,
+                    "source_registry_sha256": hashlib.sha256(
+                        registry["path"].read_bytes()
+                    ).hexdigest(),
+                }
+            elif prefix == "fclr_volbroad01_eval_":
+                payload = {
+                    **common,
+                    "status": "NOT_SUPPORTED",
+                    "holdout_opened": True,
+                    "n_forecasts": 1000,
+                    "n_test_blocks": 30,
+                    "metrics": {
+                        "baseline": {"qlike": 0.25, "mse": 0.02},
+                        "candidate": {"qlike": 0.25, "mse": 0.02},
+                    },
+                    "materiality_met": False,
+                    "verdict": "NOT_SUPPORTED",
+                }
+            elif prefix == "fclr_volbroad01_recompute_":
+                payload = {**common, "all_checks_match": True, "n_checks": 12}
+            elif prefix == "fclr_volbroad01_evidence_audit_":
+                payload = {
+                    **common,
+                    "audit_pass": True,
+                    "unresolved_blockers": [],
+                    "verdict": "NOT_SUPPORTED",
+                }
+            elif prefix == "evidence_audit_":
+                payload = {
+                    **common,
+                    "audit_pass": True,
+                    "verdict": "NOT_SUPPORTED",
+                }
+            elif prefix == "trigger_check_":
+                payload = {
+                    **common,
+                    "external_trigger_required": False,
+                    "trigger_source": "FROZEN_IRONFLOW_BULK",
+                    "fired": False,
+                }
+            else:
+                payload = common
+            path.write_text(json.dumps(payload))
+            payloads[prefix] = {"path": path, "payload": payload}
 
     def test_binder_pins_eval_and_recompute_in_required_set(self):
         prefixes = [p for p, _ in gate.VOL_BROAD_REQUIRED]
@@ -123,6 +206,40 @@ class TestVolBroadCampaignGate(unittest.TestCase):
         self.assertTrue(any(f.startswith("VOL_BROAD_ARTIFACTS_EMPTY")
                             for f in res["failures"]))
 
+    def test_post_start_nonempty_placeholders_fail_closed(self):
+        repo, sdir = self._repo()
+        self._write_family(sdir, "20261124T040000Z", content="x")
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertTrue(res["vol_broad"]["content_failures"])
+        self.assertTrue(any(f.startswith("VOL_BROAD_CONTENT_INVALID")
+                            for f in res["failures"]))
+
+    def test_post_start_unmatched_recompute_fails_closed(self):
+        repo, sdir = self._repo()
+        self._write_family(sdir, "20261124T040000Z")
+        recompute = next(sdir.glob("fclr_volbroad01_recompute_*.json"))
+        payload = json.loads(recompute.read_text())
+        payload["all_checks_match"] = False
+        recompute.write_text(json.dumps(payload))
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertIn("RECOMPUTE_NOT_MATCHED", res["vol_broad"]["content_failures"])
+
+    def test_post_start_unfrozen_prereg_fails_closed(self):
+        repo, sdir = self._repo()
+        self._write_family(sdir, "20261124T040000Z")
+        prereg = next(sdir.glob("fclr_volbroad01_prereg_*.json"))
+        payload = json.loads(prereg.read_text())
+        payload["outcome_data_inspected_before_freeze"] = True
+        prereg.write_text(json.dumps(payload))
+        res = gate.check(repo)
+        self.assertFalse(res["pass"])
+        self.assertIn(
+            "PREREG_OUTCOME_INSPECTION_FLAG",
+            res["vol_broad"]["content_failures"],
+        )
+
     def test_post_start_full_heavy_set_passes(self):
         repo, sdir = self._repo()
         self._write_family(sdir, "20261124T040000Z")
@@ -132,6 +249,7 @@ class TestVolBroadCampaignGate(unittest.TestCase):
         self.assertTrue(res["vol_broad"]["pass"])
         self.assertEqual(res["vol_broad"]["missing_required_artifacts"], [])
         self.assertEqual(res["vol_broad"]["empty_required_artifacts"], [])
+        self.assertEqual(res["vol_broad"]["content_failures"], [])
 
     def test_pre_start_session_is_grandfathered(self):
         repo, sdir = self._repo(latest_sid="session_20261124T010000Z")
