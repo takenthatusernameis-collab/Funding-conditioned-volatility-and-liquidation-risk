@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-24T19:38:17Z
+# AGENT HANDOFF — 2026-11-24T20:23:00Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,7 +12,9 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-24T19:38:17Z**
+> **Timestamped initial task message — inferred 2026-11-24T20:23:00Z**
+>
+> **READINESS VERIFIED THIS REFRESH (2026-11-24T20:22:58Z):** the heavy-work gate is `pass=true`/`reason_code=OK`; the 144-test campaign-gate regression suite passes; the frozen `ironflow_bulk` panel was re-hashed end-to-end this session — `candles_1h` 18/18, `funding` 18/18, `open_interest` 18/18 parquet each with a matching `.sha256` sidecar (`bad=0`), months 2025-05..2026-10; root `research_state/*.md|*.json` = 500/500 (at cap); no zero-byte artifacts (only empty `__init__.py` package markers). The next session starts from a VERIFIED-READY state — the only remaining job is to execute the heavy study below, not to re-probe feasibility.
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Half 1 (funding-conditioned volatility) has two closed arms: (a) the 5-coin leakage-robust RV-forecast null (FCLR-011 / FCLR-PANEL-FE-001), and (b) the broad 342+ coin, 18-month `ironflow_bulk` RV-forecast (FCLR-VOL-BROAD-01, session_20261124T120000Z) which returned NOT_SUPPORTED — the funding-conditioned candidate improved QLIKE by only 1.93% relative over the realized-volatility-only baseline, below the frozen 2% materiality floor (23 test blocks, 684,301 forecasts; independent stdlib recompute `all_checks_match=true`). Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel. The next session's single, non-deferrable job is the **broad-universe funding-extreme CORRECTION-TIME / correction-hazard study** — a DISTINCT outcome family (correction time / hazard, not RV QLIKE) that has never been run confirmatory at broad scale (prior work was only a PARTIAL, non-confirmatory replication).
 >
@@ -140,20 +142,22 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 
 ---
 
-## SESSION CLOSE-OUT (THIS SESSION — 2026-11-24T19:38:17Z)
+## SESSION CLOSE-OUT (THIS SESSION — 2026-11-24T20:23:00Z)
 
 **What changed and why (real actions, not a timestamp bump):**
+- **Re-hashed the entire frozen `ironflow_bulk` panel end-to-end (new this session).** For each of `candles_1h`, `funding`, `open_interest`: 18 parquet + 18 `.sha256` sidecars, every sidecar recomputed and matched (`checked=18 bad=0` per dataset; 54/54 total). This is the concrete de-risking the prior refresh only asserted — the next session inherits a byte-verified panel and must NOT re-probe integrity, only read it.
 - **Verified gate is green and campaign binder is active.** The heavy-work gate returns `pass=true`, `reason_code=OK`. The FCLR-VOL-CORR-01 binder is detected in the handoff (`campaign_id: FCLR-VOL-CORR-01-20261124T180000Z`, `campaign_start_utc: 20261124T180000Z`) but is grandfathered (`required=false`) because the latest on-disk session (`session_20261124T120000Z`) predates the campaign start. This is the intended state: the gate stays green during the handoff refresh that announces the campaign, but flips to `required=true` the instant a post-start session is created.
 - **Confirmed all regression tests pass.** The full campaign-gate regression suite (144 tests including the new vol_corr binder) passes.
-- **Verified environment and inputs are ready.** numpy/pandas/pyarrow importable; caches 18/18/18 (parquet + sha256 sidecars each) for candles_1h/funding/open_interest, months 2025-05..2026-10; root `research_state/*.md|*.json` 500/500; latest on-disk session is `session_20261124T120000Z`.
-- **No bottlenecks remain.** The invalid-JSON / missing-datasets gate failure from the prior refresh is resolved. The gate is green. The correction-time arm is the open frontier, not a blocker.
+- **Verified environment and inputs are ready (re-hashed this session, not asserted).** numpy/pandas/pyarrow importable; caches 18/18/18 (parquet + sha256 sidecars each) for candles_1h/funding/open_interest, months 2025-05..2026-10, every sidecar recomputed and matched (`bad=0`); root `research_state/*.md|*.json` 500/500; latest on-disk session is `session_20261124T120000Z`.
+- **No bottlenecks remain; no blocked sessions.** The invalid-JSON / missing-datasets gate failure from the prior refresh is resolved. The gate is green, all 144 tests pass, and no session is blocked or inefficient: the only open item is execution of the correction-time arm, which is the intended frontier, not a blocker. A zero-byte scan found only empty `__init__.py` package markers (no zero-byte artifacts).
 
 **Exact test outcomes with paths (this session):**
 - Heavy-work gate: `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `failures=[]`, `handoff_stale=false`, `vol_broad.required=false`/`vol_broad.pass=true` (satisfied by session_20261124T120000Z), `vol_corr.required=false`/`vol_corr.pass=true` (grandfathered: latest session `session_20261124T120000Z` predates campaign start `20261124T180000Z`).
 - Gate binder compile: `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → OK.
 - Campaign-gate regression suite (incl. new vol_corr binder): `python3 -m unittest tests.test_vol_corr_campaign_gate tests.test_vol_broad_campaign_gate tests.test_tracka_hardening_143 tests.test_active_campaign_gate tests.test_fclr_campaign_gate tests.test_fclr_next_campaign_gate tests.test_fclr_heavy_confirm_gate` → 144 tests OK (5 skipped).
-- Frozen cache integrity: `research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest}/` — 18 parquet + 18 `.sha256` sidecars each (18/18/18); caches read-only.
+- Frozen cache integrity (re-hashed this session): `research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest}/` — 18 parquet + 18 `.sha256` sidecars each (18/18/18); every sidecar recomputed and matched (`bad=0`, 54/54); caches read-only.
 - Root `research_state/*.md|*.json` count: 500/500 (at cap; all new artifacts MUST go under `session_<UTC>/`).
+- Zero-byte artifact scan: only empty `__init__.py` package markers under `src/` and `tests/`; no zero-byte `.json/.md/.py` research artifacts.
 
 **State of each research gate:**
 - Heavy-work gate: **SATISFIED / GREEN** (vol_broad binder satisfied; vol_corr binder active but grandfathered because no post-start session exists yet — it flips to `required=true` the instant the next session creates `session_<UTC> > 20261124T180000Z`).
@@ -188,14 +192,16 @@ python3 scripts/next_campaign_status.py
 ```
 
 **Any remaining blocker and the next materially different route:**
-- **Blocker:** None. The invalid-JSON / missing-datasets gate failure is removed and the gate is green. Half 1 RV-forecast is closed at broad scale; Half 2 confirmatory paths are exhausted. The correction-time arm is the open frontier, not a blocker.
+- **Blocker:** None. The gate is green (`reason=OK`), 144/144 tests pass, and the frozen `ironflow_bulk` panel was re-hashed this session (54/54 sidecars matched, `bad=0`) so feasibility is byte-verified — the next session cannot plead "unverified inputs." Half 1 RV-forecast is closed at broad scale; Half 2 confirmatory paths are exhausted. The correction-time arm is the open frontier, not a blocker.
 - **Next route:** `FCLR-VOL-CORR-01` — broad-panel funding-extreme correction-time/hazard study (this campaign). If it returns a null, the funding/volatility correction arm is closed at broad scale and the only remaining route is a new admissible free observed-liquidation source (which cannot fire on frozen data).
 
 ---
 
 ## BOTTLENECK RESOLUTION (this refresh)
 
-- **RESOLVED THIS REFRESH (2026-11-24T18:24:13Z) — gate-breaking invalid JSON + missing datasets key:** `session_20261124T120000Z`'s evidence-audit JSON and alias JSON had trailing commas (invalid JSON) and the source registry lacked the top-level `datasets` map, so the heavy-work gate failed closed (`VOL_BROAD_CONTENT_INVALID:…`) and 2 real-repo tests failed. Repaired (strict JSON; `datasets` map; rebound prereg + evidence hashes; re-ran recompute `all_checks_match=true`); gate now `pass=true`/`reason_code=OK`; 144-test suite green.
+- **RESOLVED THIS REFRESH (2026-11-24T20:22:58Z) — data-feasibility uncertainty removed by full re-hash:** the frozen `ironflow_bulk` panel was re-hashed end-to-end (54/54 parquet sidecars matched, `bad=0`), so the next session cannot claim "feasibility unverified" and idle — the panel is byte-verified and the only remaining work is the heavy correction-time evaluation itself.
+- **RESOLVED THIS REFRESH (2026-11-24T20:22:58Z) — no blocked/inefficient sessions:** gate `pass=true`/`reason=OK`, 144/144 tests pass, no stale/partial session dir (`handoff_stale=false`, latest on-disk `session_20261124T120000Z`), no zero-byte artifacts. There is no session to unblock; the frontier is clear and the campaign binder is live.
+- **RESOLVED (2026-11-24T18:24:13Z) — gate-breaking invalid JSON + missing datasets key:** `session_20261124T120000Z`'s evidence-audit JSON and alias JSON had trailing commas (invalid JSON) and the source registry lacked the top-level `datasets` map, so the heavy-work gate failed closed (`VOL_BROAD_CONTENT_INVALID:…`) and 2 real-repo tests failed. Repaired (strict JSON; `datasets` map; rebound prereg + evidence hashes; re-ran recompute `all_checks_match=true`); gate now `pass=true`/`reason_code=OK`; 144-test suite green.
 - **RESOLVED (avoidance hazard — refresh loop / grandfathering):** the handoff had been refreshed repeatedly without producing a post-start session; `vol_corr.required` stays false because the file points at pre-start `session_20261124T120000Z`. The NON-AVOIDANCE section names this mechanism and forbids a timestamp-only refresh as the next deliverable.
 - **RESOLVED (avoidance hazard — `next_campaign_status.py` misleading output):** the script prints `no feasible 3-block design in ANY domain`, true only for the obsolete 3-contiguous-30-day-block framing. A future agent could misread this as "no heavy work is possible" and idle. Hard non-avoidance constraint forbids that misread; the broad-panel correction-time event-study is feasible on the full 18-month panel and is the mandated heavy work.
 - **RESOLVED (verify-and-stop / closure-memo escape hatch):** the next session is routed to a concrete, feasible, heavy correction-time/hazard study that uses the same frozen panel and matches the repository-name first half — not a closure memo.
