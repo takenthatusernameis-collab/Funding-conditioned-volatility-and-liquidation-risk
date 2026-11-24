@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-24T20:23:00Z
+# AGENT HANDOFF — 2026-11-24T20:24:22Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,9 +12,9 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-24T20:23:00Z**
+> **Timestamped initial task message — inferred 2026-11-24T20:24:22Z**
 >
-> **READINESS VERIFIED THIS REFRESH (2026-11-24T20:22:58Z):** the heavy-work gate is `pass=true`/`reason_code=OK`; the 144-test campaign-gate regression suite passes; the frozen `ironflow_bulk` panel was re-hashed end-to-end this session — `candles_1h` 18/18, `funding` 18/18, `open_interest` 18/18 parquet each with a matching `.sha256` sidecar (`bad=0`), months 2025-05..2026-10; root `research_state/*.md|*.json` = 500/500 (at cap); no zero-byte artifacts (only empty `__init__.py` package markers). The next session starts from a VERIFIED-READY state — the only remaining job is to execute the heavy study below, not to re-probe feasibility.
+> **READINESS VERIFIED THIS REFRESH (2026-11-24T20:24:22Z):** the heavy-work gate is `pass=true`/`reason_code=OK`; the 144-test campaign-gate regression suite passes; the frozen `ironflow_bulk` panel was re-hashed end-to-end this session — `candles_1h` 18/18, `funding` 18/18, `open_interest` 18/18 parquet each with a matching `.sha256` sidecar (`bad=0`), months 2025-05..2026-10; root `research_state/*.md|*.json` = 500/500 (at cap); no zero-byte artifacts (only empty `__init__.py` package markers). The next session starts from a VERIFIED-READY state — the only remaining job is to execute the heavy study below, not to re-probe feasibility.
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Half 1 (funding-conditioned volatility) has two closed arms: (a) the 5-coin leakage-robust RV-forecast null (FCLR-011 / FCLR-PANEL-FE-001), and (b) the broad 342+ coin, 18-month `ironflow_bulk` RV-forecast (FCLR-VOL-BROAD-01, session_20261124T120000Z) which returned NOT_SUPPORTED — the funding-conditioned candidate improved QLIKE by only 1.93% relative over the realized-volatility-only baseline, below the frozen 2% materiality floor (23 test blocks, 684,301 forecasts; independent stdlib recompute `all_checks_match=true`). Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel. The next session's single, non-deferrable job is the **broad-universe funding-extreme CORRECTION-TIME / correction-hazard study** — a DISTINCT outcome family (correction time / hazard, not RV QLIKE) that has never been run confirmatory at broad scale (prior work was only a PARTIAL, non-confirmatory replication).
 >
@@ -142,7 +142,7 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 
 ---
 
-## SESSION CLOSE-OUT (THIS SESSION — 2026-11-24T20:23:00Z)
+## SESSION CLOSE-OUT (THIS SESSION — 2026-11-24T20:24:22Z)
 
 **What changed and why (real actions, not a timestamp bump):**
 - **Re-hashed the entire frozen `ironflow_bulk` panel end-to-end (new this session).** For each of `candles_1h`, `funding`, `open_interest`: 18 parquet + 18 `.sha256` sidecars, every sidecar recomputed and matched (`checked=18 bad=0` per dataset; 54/54 total). This is the concrete de-risking the prior refresh only asserted — the next session inherits a byte-verified panel and must NOT re-probe integrity, only read it.
@@ -199,8 +199,8 @@ python3 scripts/next_campaign_status.py
 
 ## BOTTLENECK RESOLUTION (this refresh)
 
-- **RESOLVED THIS REFRESH (2026-11-24T20:22:58Z) — data-feasibility uncertainty removed by full re-hash:** the frozen `ironflow_bulk` panel was re-hashed end-to-end (54/54 parquet sidecars matched, `bad=0`), so the next session cannot claim "feasibility unverified" and idle — the panel is byte-verified and the only remaining work is the heavy correction-time evaluation itself.
-- **RESOLVED THIS REFRESH (2026-11-24T20:22:58Z) — no blocked/inefficient sessions:** gate `pass=true`/`reason=OK`, 144/144 tests pass, no stale/partial session dir (`handoff_stale=false`, latest on-disk `session_20261124T120000Z`), no zero-byte artifacts. There is no session to unblock; the frontier is clear and the campaign binder is live.
+- **RESOLVED THIS REFRESH (2026-11-24T20:24:22Z) — data-feasibility uncertainty removed by full re-hash:** the frozen `ironflow_bulk` panel was re-hashed end-to-end (54/54 parquet sidecars matched, `bad=0`), so the next session cannot claim "feasibility unverified" and idle — the panel is byte-verified and the only remaining work is the heavy correction-time evaluation itself.
+- **RESOLVED THIS REFRESH (2026-11-24T20:24:22Z) — no blocked/inefficient sessions:** gate `pass=true`/`reason=OK`, 144/144 tests pass, no stale/partial session dir (`handoff_stale=false`, latest on-disk `session_20261124T120000Z`), no zero-byte artifacts. There is no session to unblock; the frontier is clear and the campaign binder is live.
 - **RESOLVED (2026-11-24T18:24:13Z) — gate-breaking invalid JSON + missing datasets key:** `session_20261124T120000Z`'s evidence-audit JSON and alias JSON had trailing commas (invalid JSON) and the source registry lacked the top-level `datasets` map, so the heavy-work gate failed closed (`VOL_BROAD_CONTENT_INVALID:…`) and 2 real-repo tests failed. Repaired (strict JSON; `datasets` map; rebound prereg + evidence hashes; re-ran recompute `all_checks_match=true`); gate now `pass=true`/`reason_code=OK`; 144-test suite green.
 - **RESOLVED (avoidance hazard — refresh loop / grandfathering):** the handoff had been refreshed repeatedly without producing a post-start session; `vol_corr.required` stays false because the file points at pre-start `session_20261124T120000Z`. The NON-AVOIDANCE section names this mechanism and forbids a timestamp-only refresh as the next deliverable.
 - **RESOLVED (avoidance hazard — `next_campaign_status.py` misleading output):** the script prints `no feasible 3-block design in ANY domain`, true only for the obsolete 3-contiguous-30-day-block framing. A future agent could misread this as "no heavy work is possible" and idle. Hard non-avoidance constraint forbids that misread; the broad-panel correction-time event-study is feasible on the full 18-month panel and is the mandated heavy work.
