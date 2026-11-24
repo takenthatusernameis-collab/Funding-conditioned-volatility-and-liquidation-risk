@@ -1,0 +1,13 @@
+{
+  "experiment_id": "FCLR-VOL-CORR-01",
+  "campaign": "FCLR-VOL-CORR-01-20261124T180000Z",
+  "session_id": "session_20261124T204500Z",
+  "session_utc": "20261124T204500Z",
+  "generated_utc": "2026-11-24T21:24:00Z",
+  "audit_pass": true,
+  "unresolved_blockers": [],
+  "verdict": "NOT_SUPPORTED",
+  "status": "CONFIRMATORY_COMPLETE",
+  "alias_of": "fclr_volcorr01_evidence_audit_20261124T204500Z.json",
+  "note": "Gate-critical evidence_audit alias. Substantive audit; verdict matches the eval and the detailed evidence audit."
+}

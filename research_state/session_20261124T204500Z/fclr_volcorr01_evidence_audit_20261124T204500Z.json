@@ -1,0 +1,39 @@
+{
+  "experiment_id": "FCLR-VOL-CORR-01",
+  "campaign": "FCLR-VOL-CORR-01-20261124T180000Z",
+  "session_id": "session_20261124T204500Z",
+  "session_utc": "20261124T204500Z",
+  "generated_utc": "2026-11-24T21:24:00Z",
+  "audit_pass": true,
+  "unresolved_blockers": [],
+  "verdict": "NOT_SUPPORTED",
+  "status": "CONFIRMATORY_COMPLETE",
+  "summary": "Broad-panel (342+ coin, 18-month ironflow_bulk) funding-extreme correction-time / correction-hazard study executed confirmatory with an outcome-blind frozen prereg. 227,023 funding-extreme events in the test period. High-RV regime median correction 9.00h vs low-RV 10.00h (contrast -10.0% relative, i.e. NOT slower in high-RV); materiality floor (>=10% relative slower) NOT met; direction not slower. Verdict NOT_SUPPORTED: the Shek (2026) correction-time pattern does not reconstruct at broad scale. A valid, publishable negative result that closes the correction-time arm.",
+  "evidence": {
+    "source_registry": "fclr_volcorr01_source_registry_20261124T204500Z.json (54 parquet sha256-asserted, bad=0, datasets map candles_1h/funding/open_interest)",
+    "prereg": "fclr_volcorr01_prereg_20261124T204500Z.json (frozen_before_outcomes=true, outcome_data_inspected_before_freeze=false, design.kind=event_study_survival, materiality_floor_rel=0.10, source_registry_sha256 bound)",
+    "eval": "fclr_volcorr01_eval_20261124T204500Z.json (status=CONFIRMATORY_COMPLETE, holdout_opened=true, n_events=227023, metrics baseline/candidate median_correction_h numeric, materiality_met=false, verdict=NOT_SUPPORTED)",
+    "recompute": "fclr_volcorr01_recompute_20261124T204500Z.json (all_checks_match=true, n_checks=29, independent stdlib recompute)",
+    "headline": {
+      "n_events": 227023,
+      "baseline_median_correction_h": 9.999990555555556,
+      "candidate_median_correction_h": 8.99999888888889,
+      "median_contrast_rel": -0.0999991,
+      "materiality_floor_rel": 0.1,
+      "materiality_met": false,
+      "direction_slower_correction_high_rv": false,
+      "verdict": "NOT_SUPPORTED"
+    }
+  },
+  "leakage_review": {
+    "expanding_train_only_quantile": true,
+    "purge_embargo_h": 48,
+    "random_split": false,
+    "censored_events_not_completed_negatives": true,
+    "no_future_information_in_thresholds": true
+  },
+  "multiplicity": {
+    "method": "Holm step-down",
+    "family": ["regime_contrast_median_correction_time", "regime_contrast_correction_hazard"]
+  }
+}

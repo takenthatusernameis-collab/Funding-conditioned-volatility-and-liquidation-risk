@@ -1,0 +1,124 @@
+{
+  "experiment_id": "FCLR-VOL-CORR-01",
+  "campaign": "FCLR-VOL-CORR-01-20261124T180000Z",
+  "session_utc": "20261124T204500Z",
+  "session_id": "session_20261124T204500Z",
+  "phase": "HEAVY_CORRECTION_EVAL_AND_RECOMPUTE",
+  "status": "CONFIRMATORY_COMPLETE",
+  "holdout_opened": true,
+  "n_events": 227023,
+  "metrics": {
+    "baseline": {
+      "median_correction_h": 9.999990555555556,
+      "mean_correction_h": 24.611466325633998,
+      "n_events": 25289,
+      "n_corrected": 22989,
+      "n_censored": 2300
+    },
+    "candidate": {
+      "median_correction_h": 8.99999888888889,
+      "mean_correction_h": 24.0866209896876,
+      "n_events": 25260,
+      "n_corrected": 21646,
+      "n_censored": 3614
+    }
+  },
+  "regimes": {
+    "low": {
+      "n": 25289,
+      "corrected": 22989,
+      "censored": 2300,
+      "median_correction_h": 9.999990555555556,
+      "mean_correction_h": 24.611466325633998,
+      "correction_rate": 0.9090513662066512,
+      "median_ci": {
+        "lo": 9.000007222222223,
+        "hi": 9.999998611111112,
+        "n_boot": 2000
+      }
+    },
+    "middle": {
+      "n": 24600,
+      "corrected": 21790,
+      "censored": 2810,
+      "median_correction_h": 9.000003194444444,
+      "mean_correction_h": 23.649150817372902,
+      "correction_rate": 0.8857723577235772,
+      "median_ci": {
+        "lo": 8.999995968750001,
+        "hi": 9.000013618055556,
+        "n_boot": 2000
+      }
+    },
+    "high": {
+      "n": 25260,
+      "corrected": 21646,
+      "censored": 3614,
+      "median_correction_h": 8.99999888888889,
+      "mean_correction_h": 24.0866209896876,
+      "correction_rate": 0.8569279493269992,
+      "median_ci": {
+        "lo": 8.999990833333333,
+        "hi": 9.000008059027778,
+        "n_boot": 2000
+      }
+    },
+    "missing": {
+      "n": 151874,
+      "corrected": 169,
+      "censored": 151705,
+      "median_correction_h": 4.999988055555555,
+      "mean_correction_h": 12.4497047156476,
+      "correction_rate": 0.0011127645284907226,
+      "median_ci": {
+        "lo": 3.9999940486111107,
+        "hi": 6.0000025,
+        "n_boot": 2000
+      }
+    }
+  },
+  "median_contrast_rel": -0.09999926111041324,
+  "high_median_correction_h": 8.99999888888889,
+  "low_median_correction_h": 9.999990555555556,
+  "high_mean_correction_h": 24.0866209896876,
+  "low_mean_correction_h": 24.611466325633998,
+  "log_rank_chi2": 3.9394446064005377,
+  "log_rank_p_two_sided": 0.04716634712510681,
+  "holm_p_hazard": 0.09433269425021362,
+  "holm_p_median": 0.09433269425021362,
+  "materiality_floor_rel": 0.1,
+  "materiality_met": false,
+  "direction_slower_correction_high_rv": false,
+  "direction_lower_hazard_high_rv": false,
+  "verdict": "NOT_SUPPORTED",
+  "design": {
+    "kind": "event_study_survival",
+    "event_definition": "funding extreme (|funding_rate| >= expanding train-only quantile per coin)",
+    "correction_definition": "first subsequent hour |funding_rate| returns inside pre-extreme band within frozen horizon",
+    "max_follow_hours": 168,
+    "quantile_level": 0.95,
+    "min_history": 30,
+    "rv_window_hours": 24,
+    "purge_embargo_h": 48,
+    "train_frac": 0.6,
+    "regime_split": "RV tercile (high vs low realized-volatility regime), train-only thresholds",
+    "inference": [
+      "cluster-robust CR1 by coin",
+      "Driscoll-Kraay HAC",
+      "Holm step-down over declared family"
+    ],
+    "multiplicity_family": [
+      "regime_contrast_median_correction_time",
+      "regime_contrast_correction_hazard"
+    ]
+  },
+  "paper_claim": {
+    "source": "Shek (2026) 'Limits to Coordination: Funding Drag in Crypto Perpetual Funding Rates' (SSRN 7529458)",
+    "events": 1696,
+    "contracts": 18,
+    "median_high_rv_hours": 27.0,
+    "median_low_rv_hours": 3.0,
+    "claim": "lower correction hazard with higher realized volatility"
+  },
+  "generated_utc": "2026-11-24T21:23:28Z"
+}

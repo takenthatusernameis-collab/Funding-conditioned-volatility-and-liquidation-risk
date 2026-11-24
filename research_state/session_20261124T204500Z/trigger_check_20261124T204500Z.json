@@ -1,0 +1,12 @@
+{
+  "experiment_id": "FCLR-VOL-CORR-01",
+  "campaign": "FCLR-VOL-CORR-01-20261124T180000Z",
+  "session_id": "session_20261124T204500Z",
+  "session_utc": "20261124T204500Z",
+  "generated_utc": "2026-11-24T21:24:00Z",
+  "external_trigger_required": false,
+  "trigger_source": "FROZEN_IRONFLOW_BULK",
+  "fired": false,
+  "reason": "The correction-time study runs entirely on the frozen ironflow_bulk panel (sha256-asserted, read-only). No external liquidation source is required and NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data.",
+  "new_observed_liquidation_source_fired": false
+}

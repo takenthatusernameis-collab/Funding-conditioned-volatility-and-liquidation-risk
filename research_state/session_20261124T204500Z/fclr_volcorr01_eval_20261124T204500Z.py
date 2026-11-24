@@ -234,8 +234,8 @@ def run() -> dict:
             hit_positions = np.flatnonzero(inside_mask)
             if hit_positions.size > 0:
                 first_hit = hit_positions[0]
-                delta_us = (future_ts[first_hit] - event_ts).astype("timedelta64[us]").item()
-                correction_hours[ev_i] = delta_us / 1e6 / 3600.0
+                delta_h = (pd.Timestamp(future_ts[first_hit]) - event_ts).total_seconds() / 3600.0
+                correction_hours[ev_i] = delta_h
                 censored[ev_i] = False
 
     events["time_to_correction_hours"] = correction_hours

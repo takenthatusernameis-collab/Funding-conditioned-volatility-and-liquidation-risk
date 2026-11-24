@@ -3,13 +3,72 @@
     "rank": 0,
     "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
+    "task": "FCLR-VOL-STRESS-01-20261124T213000Z",
+    "generated": "20261124T213000Z",
+    "refreshed": "2026-11-24T21:28:00Z",
+    "last_checked": "2026-11-24T21:28:00Z",
+    "last_verdict": null,
+    "next_action_heavy": "Execute FCLR-VOL-STRESS-01 - a HEAVY, confirmatory, broad-universe (342+ coin, 18-month ironflow_bulk) study of the PRIMARY research question's volatility-STRESS sub-target (RESEARCH_PROMPT.md section 3.1 'future realized volatility or volatility stress'; section 7 target 1): does the funding / price feature set improve out-of-sample forecasts of a realized-volatility TAIL / STRESS event (next-24h realized variance exceeding a train-only high quantile) beyond a realized-volatility-only baseline, judged on Brier / log-loss / calibration with a frozen materiality floor? Repo-name priority: the repository leads with 'Funding-conditioned-volatility'; the mean QLIKE forecast arm (FCLR-VOL-BROAD-01) and the correction-time / hazard arm (FCLR-VOL-CORR-01) are BOTH closed NOT_SUPPORTED at broad scale, so the remaining repo-name frontier is the volatility-STRESS classification estimand, a DISTINCT outcome family (tail exceedance, not mean QLIKE, not correction-time) that has never been tested confirmatory at broad scale. This is NOT a status memo, NOT a probe, NOT a trigger-check-only session, NOT a verify-and-stop session, and NOT a timestamp-only handoff refresh.",
+    "next_unfinished_task": "Produce the complete FCLR-VOL-STRESS-01 artifact set under one fresh research_state/session_<UTC>/ (UTC strictly > 20261124T213000Z), prefix fclr_volstress01_, all non-empty, no zero-byte placeholders: (1) fclr_volstress01_source_registry_{json,md} - sha256-asserted ironflow_bulk candles_1h/funding/open_interest inventory with a top-level datasets map, input_integrity.sha256_all_match=true, sha256_verified_bad=0, >=54 files each with 64-hex sha256 and sha_match not false; (2) fclr_volstress01_prereg_{json,md} - outcome-blind frozen prereg (outcome_data_inspected_before_freeze:false, frozen_before_outcomes:true, design.kind in {forecast,classification,stress,tail,exceedance,walk_forward}, materiality_floor_rel > 0, source_registry_sha256 == sha256 of the source-registry JSON): stress event = next-24h realized variance > expanding train-only high quantile per coin; baseline = RV-only; candidate = RV + funding + price-dislocation; (3) fclr_volstress01_eval_{py,json,md} - the heavy stress-forecast evaluation triad (status in {CONFIRMATORY_COMPLETE,NOT_SUPPORTED,PROMOTED,INCONCLUSIVE}, holdout_opened:true, integer n_events>=1, metrics.{baseline,candidate}.brier numeric, boolean materiality_met, verdict); (4) fclr_volstress01_recompute_{py,json} - independent stdlib recompute (all_checks_match:true, integer n_checks); (5) fclr_volstress01_evidence_audit_{json,md}; (6) evidence_audit_<UTC>.json - gate-critical alias (audit_pass:true, verdict == eval verdict); (7) trigger_check_<UTC>.json - non-empty (external_trigger_required:false, trigger_source:'FROZEN_IRONFLOW_BULK', fired:false). Record the real session id here (READY_EXECUTE -> COMPLETED_VALIDATED) and update AGENT_HANDOFF.md only after the artifacts exist. Do NOT write a future/non-existent session id into AGENT_HANDOFF.md before its artifacts exist.",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None external. Frozen ironflow_bulk panel only; no network. Do NOT re-run FCLR-VOL-BROAD-01 or FCLR-VOL-CORR-01 (both closed NOT_SUPPORTED); do NOT build a risk overlay (section 9 forecast gate not passed); do NOT wait for NEW_OBSERVED_LIQUIDATION_SOURCE; do NOT add root-level research_state files (root *.md|*.json at cap 500 - all new artifacts MUST go under session_<UTC>/); do NOT threshold-shop after outcomes; do NOT relabel exploratory as confirmatory; do NOT misread scripts/next_campaign_status.py (old 3-block framing) as 'no feasible work'.",
+    "evidence": {
+      "ironflow_bulk_cache": "research_state/data_cache/ironflow_bulk/",
+      "months": "2025-05 .. 2026-10 (18 months)",
+      "datasets": [
+        "candles_1h",
+        "funding",
+        "open_interest"
+      ],
+      "funding_schema": "timestamp, market, coin, dex, funding_rate, premium",
+      "candles_schema": "timestamp, market, coin, dex, market_class, open, high, low, close, volume, trades",
+      "prior_closed_arms": [
+        "FCLR-VOL-BROAD-01 (mean log-RV QLIKE) NOT_SUPPORTED (session_20261124T120000Z)",
+        "FCLR-VOL-CORR-01 (correction-time / hazard) NOT_SUPPORTED (session_20261124T204500Z)"
+      ],
+      "root_md_json_count": 500,
+      "root_cap": 500,
+      "all_new_artifacts_must_go_under_session_dir": true,
+      "gate_enforced": "AGENT_HANDOFF.md FOCUS CAMPAIGN section; scripts/check_handoff_heavywork_gate.py (VOL_STRESS_CAMPAIGN_RE / _vol_stress_state / VOL_STRESS_REQUIRED: fclr_volstress01_source_registry_ json+md, prereg_ json+md, eval_ py+json+md, recompute_ py+json, evidence_audit_ json+md, evidence_audit_ json alias, trigger_check_ json)"
+    },
+    "phases": [
+      {
+        "phase": "SOURCE_REGISTRY_ON_DISK",
+        "status": "NOT_STARTED",
+        "claim": "Record ironflow_bulk candles_1h/funding/open_interest parquet read (paths, sha256, rows, coins, month span, schemas) with an explicit datasets map; assert every .sha256 sidecar; caches read-only."
+      },
+      {
+        "phase": "PREREG_FREEZE_ON_BROAD_UNIVERSE",
+        "status": "NOT_STARTED",
+        "claim": "Freeze the outcome-blind stress-forecast hypotheses, stress-event definition (expanding train-only high RV quantile), RV-only baseline, funding+price candidate, materiality floor, and symmetric verdict (outcome_data_inspected_before_freeze:false)."
+      },
+      {
+        "phase": "HEAVY_STRESS_EVAL_AND_RECOMPUTE",
+        "status": "NOT_STARTED",
+        "claim": "Execute the heavy stress-forecast evaluation triad + independent stdlib recompute + evidence audit + gate alias + trigger check under one fresh session_<UTC>/ (UTC > 20261124T213000Z). All artifacts non-empty."
+      }
+    ],
+    "note": "ACTIVE rank-0 as of 2026-11-24T21:28:00Z. Promoted after FCLR-VOL-CORR-01 closed NOT_SUPPORTED. Directly addresses the repository-name first half (funding-conditioned volatility) via the volatility-STRESS classification estimand that has never been tested confirmatory at broad scale; a null is a valid, strong negative result. Stdlib + numpy + pandas + pyarrow only; no network; no overlay; no track-adulteration.",
+    "session": null,
+    "completed_session": null,
+    "supersedes": "FCLR-VOL-CORR-01-20261124T180000Z",
+    "carry_forward_bundles": [
+      "session_20261124T204500Z/"
+    ],
+    "completed_utc": null
+  },
+  {
+    "rank": 1,
+    "status": "COMPLETED_VALIDATED",
+    "program_status": "COMPLETE",
     "task": "FCLR-VOL-CORR-01-20261124T180000Z",
     "generated": "20261124T180000Z",
-    "refreshed": "2026-11-24T20:23:00Z",
-    "last_checked": "2026-11-24T20:23:00Z",
-    "last_verdict": null,
-    "next_action_heavy": "Execute FCLR-VOL-CORR-01 - a HEAVY, confirmatory, broad-universe (342+ coin, 18-month ironflow_bulk) study of the Shek (2026) funding-extreme CORRECTION-TIME / correction-hazard pattern and its dependence on the realized-volatility regime (RESEARCH_PROMPT.md section 3 secondary question). Repo-name priority: the repository leads with 'Funding-conditioned-volatility'; the broad RV-forecast arm (FCLR-VOL-BROAD-01) is now closed NOT_SUPPORTED, so the remaining repo-name frontier is the OTHER funding/volatility estimand - how fast funding extremes correct and whether that correction hazard is lower in high-volatility regimes - which has never been tested confirmatory at broad scale (prior work was only a PARTIAL, non-confirmatory replication). This is a DISTINCT outcome family (correction time / hazard, not RV QLIKE), so it is not a re-run of a terminal endpoint. This is NOT a status memo, NOT a probe, NOT a trigger-check-only session, NOT a verify-and-stop session, and NOT a timestamp-only handoff refresh.",
-    "next_unfinished_task": "Produce the complete FCLR-VOL-CORR-01 artifact set under one fresh research_state/session_<UTC>/ (UTC strictly > 20261124T180000Z), prefix fclr_volcorr01_, all non-empty, no zero-byte placeholders: (1) fclr_volcorr01_source_registry_{json,md} - sha256-asserted ironflow_bulk candles_1h/funding/open_interest inventory with a top-level datasets map ({candles_1h,funding,open_interest}), input_integrity.sha256_all_match=true, sha256_verified_bad=0, >=54 files each with 64-hex sha256 and sha_match not false; (2) fclr_volcorr01_prereg_{json,md} - outcome-blind frozen prereg (outcome_data_inspected_before_freeze:false, frozen_before_outcomes:true, design.kind in {event_study, survival, hazard, correction}, a frozen materiality floor > 0, source_registry_sha256 == sha256 of the source-registry JSON): event definition = funding extreme on an expanding train-only quantile of |funding_rate|; correction = first return to the pre-extreme funding band within a frozen horizon; regime split = realized-volatility tercile (high vs low); primary estimand = median/mean correction time and correction hazard by regime; (3) fclr_volcorr01_eval_{py,json,md} - the heavy event-study/survival evaluation triad (status in {CONFIRMATORY_COMPLETE,NOT_SUPPORTED,PROMOTED,INCONCLUSIVE}, holdout_opened:true, integer n_events>=1, metrics.{baseline,candidate}.median_correction_h numeric, boolean materiality_met, verdict); (4) fclr_volcorr01_recompute_{py,json} - independent stdlib recompute from stored input hashes/config (all_checks_match:true, integer n_checks); (5) fclr_volcorr01_evidence_audit_{json,md}; (6) evidence_audit_<UTC>.json - gate-critical alias (audit_pass:true, verdict == eval verdict); (7) trigger_check_<UTC>.json - non-empty (external_trigger_required:false, trigger_source:'FROZEN_IRONFLOW_BULK', fired:false). Record the real session id here (READY_EXECUTE -> COMPLETED_VALIDATED) and update AGENT_HANDOFF.md only after the artifacts exist. Do NOT write a future/non-existent session id into the handoff before its artifacts exist.",
+    "refreshed": "2026-11-24T21:28:00Z",
+    "last_checked": "2026-11-24T21:28:00Z",
+    "last_verdict": "NOT_SUPPORTED",
+    "next_action_heavy": "NONE - FCLR-VOL-CORR-01 COMPLETED under session_20261124T204500Z. Verdict NOT_SUPPORTED: broad-panel (342+ coin, 18-month ironflow_bulk) funding-extreme correction-time / hazard study (227,023 events) found high-RV median correction 9.00h vs low-RV 10.00h (contrast -10.0% relative, NOT slower in high-RV); the frozen >=10% relative slower-correction materiality floor was NOT met. The Shek (2026) correction-time pattern does not reconstruct at broad scale. Half 1 (funding-conditioned volatility) is now closed at broad scale on BOTH arms (mean QLIKE and correction-time). Rank-0 retired; FCLR-VOL-STRESS-01 promoted to rank-0 READY_EXECUTE.",
+    "next_unfinished_task": null,
     "resume_triggers": [],
     "trigger_status": {},
     "blockers": "None external. Frozen ironflow_bulk panel only; no network. Do NOT re-run FCLR-VOL-BROAD-01 (closed NOT_SUPPORTED) or any terminal campaign; do NOT build a risk overlay (section 9 forecast gate not passed); do NOT wait for NEW_OBSERVED_LIQUIDATION_SOURCE; do NOT add root-level research_state files (root *.md|*.json at cap 500 - all new artifacts MUST go under session_<UTC>/); do NOT threshold-shop after outcomes; do NOT relabel exploratory as confirmatory; do NOT misread scripts/next_campaign_status.py (old 3-block framing) as 'no feasible work'.",
@@ -47,17 +106,19 @@
         "claim": "Execute the heavy event-study/survival evaluation triad + independent stdlib recompute + evidence audit + gate alias + trigger check under one fresh session_<UTC>/ (UTC > 20261124T180000Z). All artifacts non-empty."
       }
     ],
-    "note": "ACTIVE rank-0 as of 2026-11-24T18:15:13Z. Promoted from AGENT_HANDOFF.md INITIAL TASK MESSAGE. Directly addresses the repository-name first half (funding-conditioned volatility) via the correction-time/hazard estimand that has never been tested confirmatory at broad scale; a null is a valid, strong negative result. Stdlib + numpy + pandas + pyarrow only; no network; no overlay; no track-adulteration. | Readiness re-verified 2026-11-24T20:22:58Z: gate reason=OK, 144/144 tests pass, ironflow_bulk re-hashed 54/54 sidecars bad=0. Status remains READY_EXECUTE (no artifacts produced; no promotion).",
-    "session": null,
-    "completed_session": null,
+    "note": "COMPLETED under session_20261124T204500Z. Verdict NOT_SUPPORTED (high-RV median 9.00h vs low-RV 10.00h; materiality floor not met; independent stdlib recompute all_checks_match=true, n_checks=29). Artifacts: fclr_volcorr01_source_registry/prereg/eval/recompute/evidence_audit + evidence_audit alias + trigger_check, all non-empty. Demoted to rank 1 COMPLETED_VALIDATED; superseded by FCLR-VOL-STRESS-01.",
+    "session": "session_20261124T204500Z",
+    "completed_session": "session_20261124T204500Z",
     "supersedes": "FCLR-VOL-BROAD-01-20261124T035500Z",
     "carry_forward_bundles": [
       "research_state/session_20261124T120000Z/"
     ],
-    "completed_utc": null
+    "completed_utc": "2026-11-24T21:23:00Z",
+    "superseded_by": "FCLR-VOL-STRESS-01-20261124T213000Z",
+    "superseded_utc": "2026-11-24T21:28:00Z"
   },
   {
-    "rank": 1,
+    "rank": 2,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-BROAD-01-20261124T035500Z",
@@ -175,10 +236,10 @@
       "research_state/session_20261123T085507Z/"
     ],
     "completed_utc": "2026-11-24T01:51:14Z",
-    "rank": 2
+    "rank": 3
   },
   {
-    "rank": 1,
+    "rank": 4,
     "status": "SUPERSEDED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025653Z",
@@ -230,7 +291,7 @@
     "superseded_utc": "2026-11-24T03:56:48Z"
   },
   {
-    "rank": 3,
+    "rank": 5,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIQ-XSEC-BROAD-01-20261123T080000Z",
@@ -316,7 +377,7 @@
     "superseded_by": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z"
   },
   {
-    "rank": 4,
+    "rank": 6,
     "status": "SUPERSEDED_TERMINAL",
     "program_status": "COMPLETE",
     "task": "FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z",
