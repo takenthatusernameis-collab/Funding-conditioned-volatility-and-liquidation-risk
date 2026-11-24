@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-24T09:35:41Z
+# AGENT HANDOFF — 2026-11-24T09:38:16Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,7 +12,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-24T09:35:41Z**
+> **Timestamped initial task message — inferred 2026-11-24T09:38:16Z**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel (Track A STRUCTURALLY_BLOCKED on a capped-sample feed; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; the broad cross-sectional rank-ordering association is SUPPORTED_GENERALIZATION but NOT_STABLE and its 2% Poisson-deviance materiality floor is NOT MET). Half 1 (funding-conditioned volatility) is only closed on a **5-coin** panel. The next session's single, non-deferrable job is to run the **broad-universe funding-conditioned volatility forecast** at the same 342+ coin scale that produced the only SUPPORTED liquidation-risk result.
 >
@@ -147,7 +147,7 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 - **Re-confirmed runtime environment is ready:** numpy 2.5.5, pandas 3.1.1, pyarrow 26.0.1 all import cleanly (installed in the prior session; persist on this host). `requirements.txt` already lists numpy/pandas/scipy/pyarrow/requests.
 - **Re-confirmed frozen inputs are present and intact:** each of `candles_1h`, `funding`, `open_interest` has 18 `.parquet` + 18 `.sha256` sidecars (18/18/18), months 2025-05..2026-10. Caches are read-only; assert sha256 before reading.
 - **No stale empty session directory** exists (`find research_state -maxdepth 1 -type d -name 'session_*' -empty` → empty); `HANDOFF_STALE_LATEST_SESSION` cannot trigger.
-- **Refreshed timestamp to 2026-11-24T09:35:41Z.** Campaign ID, prereg design, frozen inputs, models, metrics, materiality floor, and required artifact set are unchanged from the 04:05:21Z / 06:38:38Z / 06:41:22Z / 06:43:25Z / 07:47:48Z / 08:34:20Z / 08:47:16Z refreshes (they were already correct and complete).
+- **Refreshed timestamp to 2026-11-24T09:38:16Z.** Campaign ID, prereg design, frozen inputs, models, metrics, materiality floor, and required artifact set are unchanged from the 04:05:21Z / 06:38:38Z / 06:41:22Z / 06:43:25Z / 07:47:48Z / 08:34:20Z / 08:47:16Z / 09:35:41Z refreshes (they were already correct and complete).
 
 **Exact test outcomes with paths:**
 - Heavy-work gate: `python3 scripts/check_handoff_heavywork_gate.py --json` → `reason_code=OK`, `pass=true`, exit 0 (`vol_broad.campaign_id=FCLR-VOL-BROAD-01-20261124T035500Z`, `required=false` via grandfathering because the latest on-disk session `session_20261124T015114Z` predates the campaign start `20261124T035500Z`, `content_failures=[]`, `failures=[]`).
