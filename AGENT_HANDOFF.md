@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-24T06:41:22Z
+# AGENT HANDOFF — 2026-11-24T06:43:25Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,7 +12,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-24T06:41:22Z**
+> **Timestamped initial task message — inferred 2026-11-24T06:43:25Z**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel (Track A STRUCTURALLY_BLOCKED on a capped-sample feed; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; the broad cross-sectional rank-ordering association is SUPPORTED_GENERALIZATION but NOT_STABLE and its 2% Poisson-deviance materiality floor is NOT MET). Half 1 (funding-conditioned volatility) is only closed on a **5-coin** panel. The next session's single, non-deferrable job is to run the **broad-universe funding-conditioned volatility forecast** at the same 342+ coin scale that produced the only SUPPORTED liquidation-risk result.
 >
@@ -141,10 +141,10 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 ## SESSION CLOSE-OUT REQUIREMENTS (THIS SESSION)
 
 **What changed and why:**
-- Independently verified the prior handoff (2026-11-24T06:38:38Z) is accurate and the rank-0 campaign `FCLR-VOL-BROAD-01-20261124T035500Z` is genuinely executable — no structural bottlenecks block the heavy broad-panel volatility work.
+- Independently verified the prior handoff (2026-11-24T06:41:22Z) is accurate and the rank-0 campaign `FCLR-VOL-BROAD-01-20261124T035500Z` is genuinely executable — no structural bottlenecks block the heavy broad-panel volatility work.
 - Re-prioritized by repository name: `Funding-conditioned-volatility-and-liquidation-risk` leads with the volatility half. Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel; Half 1 (funding-conditioned volatility) is only closed on a 5-coin panel (FCLR-011 / FCLR-PANEL-FE-001). The unfinished repo-name frontier is a broad-scale volatility forecast on the same 342+ coin, 18-month panel that produced the only SUPPORTED liquidation-risk result.
 - **Resolved the one real environment bottleneck:** `numpy`, `pandas`, and `pyarrow` were NOT importable at session start (`ModuleNotFoundError: No module named 'numpy'`), which would have made the heavy walk-forward evaluation impossible for the next agent. Ran `python3 -m pip install --quiet numpy pandas pyarrow` (exit 0); now numpy 2.5.5, pandas 3.1.1, pyarrow 26.0.1 import cleanly. `requirements.txt` (numpy/pandas/scipy/pyarrow/requests) covers the full need. The next agent does not need to re-run setup unless it starts from a clean clone.
-- Refreshes the timestamp to 2026-11-24T06:41:22Z. Campaign ID, prereg design, frozen inputs, models, metrics, materiality floor, and required artifact set are unchanged from the 04:05:21Z / 06:38:38Z refreshes (they were already correct and complete).
+- Refreshes the timestamp to 2026-11-24T06:43:25Z. Campaign ID, prereg design, frozen inputs, models, metrics, materiality floor, and required artifact set are unchanged from the 04:05:21Z / 06:38:38Z / 06:41:22Z refreshes (they were already correct and complete).
 
 **Exact test outcomes with paths:**
 - Heavy-work gate: `python3 scripts/check_handoff_heavywork_gate.py` → `[PASS] ... reason=OK` exit 0 (SATISFIED; `vol_broad.campaign_id=FCLR-VOL-BROAD-01-20261124T035500Z`, `required=false` via grandfathering because the latest on-disk session `session_20261124T015114Z` predates the campaign start `20261124T035500Z`, `pass=true`, `failures=[]`).
