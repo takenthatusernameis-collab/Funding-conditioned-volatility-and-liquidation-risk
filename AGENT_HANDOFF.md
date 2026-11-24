@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-24T03:55:53Z
+# AGENT HANDOFF — 2026-11-24T03:59:19Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,7 +12,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-24T03:55:53Z**
+> **Timestamped initial task message — inferred 2026-11-24T03:59:19Z**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel (Track A STRUCTURALLY_BLOCKED on a capped-sample feed; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; the broad cross-sectional rank-ordering association is SUPPORTED_GENERALIZATION but NOT_STABLE and its 2% Poisson-deviance materiality floor is NOT MET). Half 1 (funding-conditioned volatility) is only closed on a **5-coin** panel. The next session's single, non-deferrable job is to run the **broad-universe funding-conditioned volatility forecast** at the same 342+ coin scale that produced the only SUPPORTED liquidation-risk result.
 >
@@ -141,23 +141,27 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 ## SESSION CLOSE-OUT REQUIREMENTS (THIS SESSION)
 
 **What changed and why:**
-- Refreshed `AGENT_HANDOFF.md` as the sole durable handoff after the prior heavy session completed.
-- Re-prioritized by repository name: Half 2 (liquidation risk) is confirmatory-exhausted; Half 1 (funding-conditioned volatility) is only closed on a 5-coin panel. The unfinished repo-name frontier is a broad-scale volatility forecast.
-- Promoted rank-0 to `FCLR-VOL-BROAD-01-20261124T035500Z`; demoted the earlier program-closure synthesis plan to SUPERSEDED (deferred until after the broad volatility test).
-- Added a machine-checked heavy-work binder (`VOL_BROAD_*`) so a future session cannot dodge the heavy broad-panel volatility work with a trigger-only, audit-only, prereg-only, or verify-and-stop session.
+- Independently verified the prior handoff (2026-11-24T03:55:53Z) is accurate and the rank-0 campaign `FCLR-VOL-BROAD-01-20261124T035500Z` is genuinely executable — no bottlenecks block the heavy broad-panel volatility work.
+- Re-prioritized by repository name: `Funding-conditioned-volatility-and-liquidation-risk` leads with the volatility half. Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel; Half 1 (funding-conditioned volatility) is only closed on a 5-coin panel (FCLR-011 / FCLR-PANEL-FE-001). The unfinished repo-name frontier is a broad-scale volatility forecast on the same 342+ coin, 18-month panel that produced the only SUPPORTED liquidation-risk result.
+- Refreshed the timestamp to 2026-11-24T03:59:19Z. Campaign ID, prereg design, frozen inputs, models, metrics, materiality floor, and required artifact set are unchanged from the 03:55:53Z refresh (they were already correct and complete).
 
 **Exact test outcomes with paths:**
-- Heavy-work gate: `python3 scripts/check_handoff_heavywork_gate.py --json` → `reason=OK` (SATISFIED; new campaign grandfathered because the latest on-disk session predates its start).
+- Heavy-work gate: `python3 scripts/check_handoff_heavywork_gate.py` → `[PASS] reason=OK` (SATISFIED; `vol_broad.campaign_id=FCLR-VOL-BROAD-01-20261124T035500Z`, `required=false` via grandfathering because the latest on-disk session `session_20261124T015114Z` predates the campaign start `20261124T035500Z`, `pass=true`, `failures=[]`).
 - Gate binder compile: `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → OK.
+- Campaign-gate regression suite: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_active_campaign_gate tests.test_fclr_campaign_gate` → 107 tests OK.
+- Frozen cache integrity: `research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest}/` — 18 parquet each, 18 `.sha256` sidecars each; spot-checked 6 files (2025-05, 2025-06 per dataset) — all sha256 match.
+- Runtime deps: numpy 2.5.5, pandas 3.1.1, pyarrow 26.0.1 — all importable.
+- Root `research_state/*.md|*.json` count: 500/500 (at cap; all new artifacts MUST go under `session_<UTC>/`).
+- `next_campaign_status.py`: reports `no feasible 3-block design in ANY domain` — this is the OLD 3-contiguous-30-day-block framing and does NOT assess the broad-panel walk-forward design (60% train / 48h purge / 168h blocks on the 18-month panel). Context only; not a blocker.
 
 **State of each research gate:**
-- Heavy-work gate: **SATISFIED** (new rank-0 binder active; refresh green via grandfathering).
-- Forecast gate (§9): **NOT PASSED** (no broad-scale volatility skill; materiality floor not met).
-- Half 1 (volatility): **BROAD-SCALE TEST OPEN** (5-coin null only).
-- Half 2 (liquidation risk): **CONFIRMATORY EXHAUSTED** (Track A blocked; Track B/C null; cross-sectional NOT_STABLE + materiality floor unmet).
+- Heavy-work gate: **SATISFIED** (rank-0 `VOL_BROAD_*` binder active; refresh green via grandfathering).
+- Forecast gate (§9): **NOT PASSED** (no broad-scale volatility skill; 2% QLIKE materiality floor not met on any prior arm).
+- Half 1 (volatility): **BROAD-SCALE TEST OPEN** (5-coin null only; this campaign closes it at broad scale).
+- Half 2 (liquidation risk): **CONFIRMATORY EXHAUSTED** (Track A structurally blocked on capped-sample feed; Track B/C NOT_SUPPORTED; cross-sectional SUPPORTED_GENERALIZATION but NOT_STABLE + materiality floor unmet).
 
 **Single highest-value next task:**
-Execute `FCLR-VOL-BROAD-01-20261124T035500Z` — a heavy, confirmatory, broad-panel funding-conditioned realized-volatility forecast with a frozen outcome-blind prereg, walk-forward evaluation, independent stdlib recompute, evidence audit, gate alias, and trigger check, all under one fresh `session_<UTC>/`.
+Execute `FCLR-VOL-BROAD-01-20261124T035500Z` — a HEAVY, confirmatory, broad-panel funding-conditioned realized-volatility forecast with a frozen outcome-blind prereg, walk-forward evaluation, independent stdlib recompute, evidence audit, gate-critical alias, and trigger check, all under one fresh `session_<UTC>/` (UTC strictly > `20261124T035500Z`).
 
 **Precise verifying commands:**
 ```bash
@@ -181,7 +185,7 @@ python3 scripts/next_campaign_status.py
 ```
 
 **Any remaining blocker and the next materially different route:**
-- **Blocker:** Half 2 confirmatory paths are exhausted on the frozen panel; Half 1 has only a 5-coin null. No broad-scale volatility forecast exists.
+- **Blocker:** None found this session. Half 2 confirmatory paths are exhausted on the frozen panel; Half 1 has only a 5-coin null. No broad-scale volatility forecast exists — this is the open frontier, not a blocker.
 - **Next route:** `FCLR-VOL-BROAD-01` — broad-panel funding-conditioned volatility forecast (this campaign). If it returns a null, Half 1 is closed at broad scale and the only remaining route is a new admissible free observed-liquidation source (which cannot fire on frozen data).
 
 ---
@@ -190,9 +194,10 @@ python3 scripts/next_campaign_status.py
 
 - **RESOLVED (verify-and-stop / closure-memo escape hatch):** the prior plan routed the next session to a program-closure synthesis. That would let a future agent end the program by writing documents instead of running heavy science. Replaced with a concrete, feasible, heavy broad-panel volatility forecast that uses the same frozen panel and matches the repository-name first half.
 - **RESOLVED (no feasible heavy work on frozen data):** the broad `ironflow_bulk` panel (candles + funding + open_interest) has never been used for a direct RV forecast; a walk-forward, leakage-hardened, fixed-effects design is feasible today without any new source.
-- **RESOLVED (gate not binding the active frontier):** added `VOL_BROAD_CAMPAIGN_RE` / `_vol_broad_state` / `VOL_BROAD_REQUIRED` and wired them into `check()`; a post-start session cannot pass with a trigger-only/audit-only/prereg-only/verify-and-stop session.
-- **RESOLVED (root churn cap):** root `research_state/*.md|*.json` is at 500; all new artifacts must go under `session_<UTC>/`.
-- **OPEN (next frontier execution):** `FCLR-VOL-BROAD-01-20261124T035500Z` must be executed — all required artifacts under one fresh `session_<UTC>/`, no zero-byte placeholders, all in one session.
+- **RESOLVED (gate not binding the active frontier):** added `VOL_BROAD_CAMPAIGN_RE` / `_vol_broad_state` / `VOL_BROAD_REQUIRED` and wired them into `check()`; a post-start session cannot pass with a trigger-only/audit-only/prereg-only/verify-and-stop session. Independently confirmed active this session: `vol_broad.campaign_id=FCLR-VOL-BROAD-01-20261124T035500Z`, `pass=true`.
+- **RESOLVED (root churn cap):** root `research_state/*.md|*.json` is at 500; all new artifacts must go under `session_<UTC>/`. Independently confirmed: `root=500/500`.
+- **RESOLVED (frozen cache accessibility):** independently verified 18 parquet + 18 sha256 sidecars per dataset (candles_1h, funding, open_interest); spot-checked 6 files — all hashes match; caches read-only.
+- **OPEN (next frontier execution):** `FCLR-VOL-BROAD-01-20261124T035500Z` must be executed — all required artifacts under one fresh `session_<UTC>/`, no zero-byte placeholders, all in one session. This is the next agent's single, non-deferrable job.
 
 ---
 
