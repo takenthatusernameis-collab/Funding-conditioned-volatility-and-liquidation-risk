@@ -1,18 +1,17 @@
 [
   {
-    "rank": 0,
-    "status": "READY_EXECUTE",
-    "program_status": "ACTIVE",
+    "status": "COMPLETED_VALIDATED",
+    "program_status": "COMPLETE",
     "task": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z",
     "generated": "20261123T135825Z",
     "refreshed": "2026-11-24T00:20:14Z",
     "last_checked": "2026-11-24T00:20:14Z",
-    "last_verdict": null,
-    "next_action_heavy": "FIDELITY-AUDIT-AND-EXECUTE FCLR-LIQ-XSEC-BROAD-TS-01. The archived scaffold under research_state/broad_ts_scaffold/ now fails closed on bad input hashes or unreconciled headlines. It reproduces BROAD-01 coverage (1,715,710 test rows; 9,508 train rows; 30 blocks; 72/72 hashes) but NOT the sealed headline: long mean rank-IC 0.149461001148287 vs 0.1551333434568285; long B1 Poisson deviance 14896.850709 vs 14895.300477. A pre-outcome fit-input capture found 9,506/9,508 feature rows bit-identical, two log(RV168) values differing by at most 4.44e-16, and 9,504/9,508 targets bit-identical. The ill-conditioned fit amplifies these machine-epsilon differences. DO NOT relax the 1e-3 tolerance or ship the archived NOT_STABLE. In a fresh session_<UTC> after 20261123T135825Z, capture BROAD-01 rows_in and scaffold training rows via monkeypatched ols/ols_fit (inspect.currentframe().f_back), compare coin/hk then exact X/y, and reconcile the differing rows through direct pyarrow/scalar paths. Require bit-identical fit inputs where feasible and headline reproduction within 1e-3. Then fix the descriptive RV-tercile and Asian/European/US UTC implementation to match the frozen prereg, run the complete long-arm stability battery, independent stdlib recompute, and evidence audits. If exact reconciliation is impossible, record BROAD01_FIDELITY_BLOCKED with row-level evidence and do not fabricate a stability verdict.",
-    "next_unfinished_task": "FCLR-LIQ-XSEC-BROAD-TS-01 bit-level fidelity reconciliation + execution. Under a fresh research_state/session_<UTC>/ (UTC strictly > 20261123T135825Z), using the frozen scaffold prereg and eval: (1) capture and compare BROAD-01/scaffold fit inputs before outcomes; reconcile the two log(RV168) and four target values differing at machine epsilon; (2) require long mean rank-IC +0.1551 and long B1 deviance 14895 within 1e-3, ideally with bit-identical X/y; (3) align per-regime and Holm implementations to the frozen prereg; (4) emit fclr_liqxsecbroad01_ts_prereg json+md, fidelity_audit json+md, eval py+json+md (including ic_C2_l/ic_B1_l/ic_C2_s/ic_B1_s with block_start_h and fidelity_reconciliation.reconciled:true), recompute py+json (all_checks_match:true), ts evidence_audit json+md, evidence_audit json alias, and non-empty trigger_check json. Then record the session id in AGENT_HANDOFF.md and run the verification commands. If fidelity is impossible, record BROAD01_FIDELITY_BLOCKED with exact evidence; never ship a non-reconciled STABLE/NOT_STABLE verdict.",
+    "last_verdict": "NOT_STABLE",
+    "next_action_heavy": "NONE — BROAD-TS campaign COMPLETED under session_20261124T015114Z/. Verdict NOT_STABLE (temporal stability fails RESEARCH_PROMPT.md §17 condition #4). Heavy-work gate SATISFIED. Forecast gate NOT PASSED. Rank-0 retired; closure campaign FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025653Z promoted to rank-0 READY_EXECUTE.",
+    "next_unfinished_task": null,
     "resume_triggers": [],
     "trigger_status": {},
-    "blockers": "None external. The blocker is internal BROAD-01 fidelity: two log(RV168) fit values differ by at most 4.44e-16 and four targets differ by at most 1.78e-15, which the ill-conditioned fit amplifies to long mean rank-IC 0.149461 vs 0.155133 and B1 deviance 14896.850709 vs 14895.300477. This is resolvable offline with row-level scalar reconciliation on the frozen ironflow_bulk panel using stdlib + numpy + pandas + pyarrow only; no network, new source, overlay, or external trigger. Do NOT relax the 1e-3 tolerance, ship the archived NOT_STABLE, or wait for NEW_OBSERVED_LIQUIDATION_SOURCE.",
+    "blockers": "None — all confirmatory liquidation-risk tracks exhausted on frozen ironflow_bulk panel. Track A STRUCTURALLY_BLOCKED; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; cross-sectional SUPPORTED_GENERALIZATION but NOT_STABLE + materiality floor NOT MET. No further heavy confirmatory work feasible without a new observed-liquidation source (NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data). Next route: formal program closure + negative-results synthesis (rank-0 closure campaign, session=null pending artifact materialization).",
     "evidence": {
       "ironflow_bulk_cache": "research_state/data_cache/ironflow_bulk/",
       "months": "2025-05 .. 2026-10 (18 months)",
@@ -54,11 +53,61 @@
     ],
     "note": "ACTIVE rank-0 as of 2026-11-23T15:29:35Z. Activates the dormant BROAD_TS binder to force heavy temporal-stability work on the ONLY SUPPORTED liquidation-risk finding (BROAD-01), closing the verify-and-stop escape hatch. RESEARCH_PROMPT.md section 17 condition #4. Stdlib + pyarrow only; no network; no overlay; no track-adulteration.",
     "session": null,
-    "completed_session": null,
+    "completed_session": "session_20261124T015114Z",
     "supersedes": "FCLR-LIQ-XSEC-BROAD-01-20261123T080000Z",
     "carry_forward_bundles": [
       "research_state/session_20261123T085507Z/"
     ],
+    "completed_utc": "2026-11-24T01:51:14Z"
+  },
+  {
+    "rank": 0,
+    "status": "READY_EXECUTE",
+    "program_status": "ACTIVE",
+    "task": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025653Z",
+    "generated": "20261124T025653Z",
+    "refreshed": "2026-11-24T02:56:53Z",
+    "last_checked": "2026-11-24T02:56:53Z",
+    "last_verdict": null,
+    "next_action_heavy": "Execute FCLR-LIQ-RISK-PROGRAM-CLOSURE-01 — formal confirmatory-program closure with complete negative-results synthesis under a fresh research_state/session_<UTC>/ (UTC strictly > 20261124T02:56:53Z). This is HEAVY WORK — not a status memo, not a probe, not a trigger-check-only session. All confirmatory liquidation-risk tracks are exhausted on the frozen ironflow_bulk panel (2025-05..2026-10, 2,849,452 liquidation rows, 342 coins, 799 test markets): Track A STRUCTURALLY_BLOCKED; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; cross-sectional rank ordering SUPPORTED_GENERALIZATION but NOT_STABLE, materiality floor NOT MET; Shek 2026 replication PARTIAL_REPLICATION, non-confirmatory.",
+    "next_unfinished_task": "Produce the complete closure artifact set under research_state/session_<UTC>/, prefix fclr_liq_risk_program_closure_, all non-empty, no zero-byte placeholders: (1) fclr_liq_risk_program_closure_protocol_freeze.{json,md} — outcome-blind closure protocol freeze (hash-bound to RESEARCH_PROMPT.md §13/§19/§20), outcome_data_inspected_before_freeze:false, input sha256 assertions. (2) fclr_liq_risk_program_closure_synthesis_report.{json,md} — complete negative-results synthesis across all tracks/hypotheses/experiments with exact verdicts, CIs, artifact paths, evidence. (3) fclr_liq_risk_program_closure_frontier_exhaustion_audit.{json,md} — audit proving no feasible confirmatory design remains on admissible frozen data (§16 three-blocked-routes rule, two+ source families/methods). (4) fclr_liq_risk_program_closure_negative_results_preservation.{json,md} — all nulls/failed/inconclusive outcomes preserved with explanations (§19). (5) fclr_liq_risk_program_closure_meta_analysis.{py,json,md} — quantitative meta-analysis triad (family-wide multiplicity, Holm-adjusted outcomes, per-track verdict table). (6) fclr_liq_risk_program_closure_recompute.{py,json} — independent stdlib recompute reproducing headline verdicts from stored input hashes/configuration (all_checks_match:true). (7) evidence_audit_{UTC}.json + .md — gate-critical evidence audit alias. (8) trigger_check_{UTC}.json — non-empty trigger check (NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data). Then record the real session id in experiment_frontier.json (promote READY_EXECUTE → COMPLETED_VALIDATED upon artifact completion) and update AGENT_HANDOFF.md after artifacts exist. Do NOT write a future/non-existent session id into AGENT_HANDOFF.md before artifacts exist.",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None external. All confirmatory liquidation-risk tracks exhausted on frozen panel. Do NOT re-run BROAD-TS; do NOT re-run BROAD-01; do NOT build a risk overlay (§9 gate not passed); do NOT claim forecast gate pass from cross-sectional association; do NOT wait for NEW_OBSERVED_LIQUIDATION_SOURCE; do NOT add root-level research-state files (499/500 cap); do NOT relabel exploratory as confirmatory; do NOT threshold-shop after outcomes. Root research_state/*.md|*.json count at cap (499/500) — all new artifacts MUST go under session_<UTC>/ or another nested directory.",
+    "evidence": {
+      "ironflow_bulk_cache": "research_state/data_cache/ironflow_bulk/",
+      "months": "2025-05 .. 2026-10 (18 months)",
+      "n_coins": "342 coins (2025-05 liquidations); 799 test markets in BROAD-01",
+      "datasets": [
+        "liquidations",
+        "funding",
+        "open_interest",
+        "candles_1h"
+      ],
+      "source_campaign": "FCLR-LIQ-XSEC-BROAD-TS-01 (COMPLETED, session_20261124T015114Z, NOT_STABLE)",
+      "root_md_json_count": 499,
+      "root_cap": 500,
+      "all_new_artifacts_must_go_under_session_dir": true,
+      "gate_enforced": "AGENT_HANDOFF.md FOCUS CAMPAIGN section; scripts/check_handoff_heavywork_gate.py (BROAD_TS binder satisfied; closure campaign binds eight mandatory artifact categories under same session; fail-closed if any category missing or zero-byte)",
+      "on_disk_inputs": {
+        "fclr_final_structural_closure_20261124T025751": "CLOSED_TERMINAL, 71 rows, 0 §17 promotion met",
+        "resume_trigger_registry": "Four reopen triggers (GATE4_BRANCH_1, NEW_OBSERVED_LIQUIDATION_SOURCE, HL_LABEL_EXTENSION, EXPANSION_ROBUSTNESS_REDO); all status=OPEN, do_not_act_until_satisfied=true",
+        "negative_results_report": "research_state/negative_results_report.md — nulls preserved (FCLR-001/002/003/009/014, Track B, Track C)",
+        "final_synthesis_report": "research_state/final_synthesis_report.md — historical (2026-11-10), superseded by active closure campaign"
+      }
+    },
+    "phases": [
+      {
+        "phase": "FORMAL_PROGRAM_CLOSURE",
+        "status": "NOT_STARTED",
+        "claim": "Outcome-blind closure protocol freeze + complete negative-results synthesis + frontier exhaustion audit + negative-results preservation + quantitative meta-analysis + independent recompute + evidence audit + trigger check, all eight artifact categories under one fresh session_<UTC>/."
+      }
+    ],
+    "note": "ACTIVE rank-0 as of 2026-11-24T02:56:53Z. Promoted from AGENT_HANDOFF.md INITIAL TASK MESSAGE. Formal program closure + negative-results synthesis is the honest endpoint: the confirmatory program has exhausted all feasible paths on admissible frozen data. Stdlib + numpy + pandas + pyarrow only; no network; no overlay; no track-adulteration.",
+    "session": null,
+    "completed_session": null,
+    "supersedes": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z",
+    "carry_forward_bundles": [],
     "completed_utc": null
   },
   {
