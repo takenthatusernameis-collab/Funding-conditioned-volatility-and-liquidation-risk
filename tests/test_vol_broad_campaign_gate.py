@@ -74,12 +74,20 @@ class TestVolBroadCampaignGate(unittest.TestCase):
                         "open_interest": {"files": 18},
                     },
                     "sha256_sidecars_asserted": True,
-                    "input_sha256": {
-                        "candles_1h": "a" * 64,
-                        "funding": "b" * 64,
-                        "open_interest": "c" * 64,
+                    "input_integrity": {
+                        "sha256_all_match": True,
+                        "sha256_verified_bad": 0,
                     },
-                    "file_count": 54,
+                    "files": [
+                        {
+                            "path": f"research_state/data_cache/ironflow_bulk/{i % 3}/part-{i}.parquet",
+                            "sha256": hashlib.sha256(
+                                f"volbroad-file-{i}".encode()
+                            ).hexdigest(),
+                            "sha_match": True,
+                        }
+                        for i in range(54)
+                    ],
                 }
             elif prefix == "fclr_volbroad01_prereg_":
                 registry = payloads["fclr_volbroad01_source_registry_"]
@@ -87,7 +95,12 @@ class TestVolBroadCampaignGate(unittest.TestCase):
                     **common,
                     "frozen_before_outcomes": True,
                     "outcome_data_inspected_before_freeze": False,
-                    "design": {"walk_forward": True},
+                    "design": {
+                        "kind": "walk_forward",
+                        "train_frac": 0.60,
+                        "purge_embargo_h": 48,
+                        "block_h": 168,
+                    },
                     "train_frac": 0.60,
                     "purge_embargo_h": 48,
                     "materiality_floor_rel_qlike": 0.02,
