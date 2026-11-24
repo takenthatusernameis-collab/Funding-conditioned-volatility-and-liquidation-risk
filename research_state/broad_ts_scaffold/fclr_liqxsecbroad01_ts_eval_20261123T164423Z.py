@@ -53,6 +53,9 @@ SEED = 20261123
 EPS = 1e-12
 ALPHA_K = 0.05 / (2 * 3)
 MATERIALITY_PCT = 2.0
+BROAD01_LONG_MEAN_IC_C2 = 0.1551333434568285
+BROAD01_LONG_POISSON_DEVIANCE_B1 = 14895.300476998453
+RECONCILIATION_TOL = 1e-3
 TRAIN_SUBSAMPLE = 200
 SIGN_REPRODUCTION_FRACTION = 0.80
 ROLLING_WINDOW = 6
@@ -91,14 +94,15 @@ def add_hk(df, ts_col):
 
 
 def mean(xs):
-    return float(np.mean(xs)) if len(xs) > 0 else float("nan")
+    return sum(xs) / len(xs) if len(xs) > 0 else float("nan")
 
 
 def pstd(xs):
-    arr = np.asarray(xs, dtype=float)
-    if len(arr) == 0:
+    n = len(xs)
+    if n == 0:
         return 1.0
-    v = float(np.var(arr))
+    m = mean(xs)
+    v = sum((x - m) ** 2 for x in xs) / n
     return math.sqrt(v) if v > 0 else 1.0
 
 
@@ -112,20 +116,28 @@ def coin_from_market(market: str) -> str:
 
 
 def spearman_rank_ic(xs, ys):
-    xs = np.asarray(xs, dtype=float)
-    ys = np.asarray(ys, dtype=float)
     n = len(xs)
     if n < 3:
         return float("nan")
-    rank_x = xs.argsort(kind="mergesort").argsort(kind="mergesort").astype(float) + 1.0
-    rank_y = ys.argsort(kind="mergesort").argsort(kind="mergesort").astype(float) + 1.0
-    mx = rank_x.mean()
-    my = rank_y.mean()
-    a = rank_x - mx
-    b = rank_y - my
-    num = float(np.dot(a, b))
-    dx2 = float(np.dot(a, a))
-    dy2 = float(np.dot(b, b))
+    order_x = sorted(range(n), key=lambda i: xs[i])
+    rank_x = [0.0] * n
+    for r, i in enumerate(order_x):
+        rank_x[i] = float(r + 1)
+    order_y = sorted(range(n), key=lambda i: ys[i])
+    rank_y = [0.0] * n
+    for r, i in enumerate(order_y):
+        rank_y[i] = float(r + 1)
+    mx = mean(rank_x)
+    my = mean(rank_y)
+    num = 0.0
+    dx2 = 0.0
+    dy2 = 0.0
+    for i in range(n):
+        a = rank_x[i] - mx
+        b = rank_y[i] - my
+        num += a * b
+        dx2 += a * a
+        dy2 += b * b
     dx = math.sqrt(dx2)
     dy = math.sqrt(dy2)
     if dx == 0 or dy == 0:
@@ -134,25 +146,75 @@ def spearman_rank_ic(xs, ys):
 
 
 def qlike(y, p):
-    mask = (y > 0) & (p > 0)
-    if mask.sum() == 0:
-        return float("nan")
-    r = y[mask] / p[mask]
-    return float(np.mean(r - 1.0 - np.log(r)))
+    total = 0.0
+    n = 0
+    for yi, pi in zip(y, p):
+        if yi > 0 and pi > 0:
+            r = yi / pi
+            total += r - 1.0 - math.log(r)
+            n += 1
+    return total / n if n else float("nan")
 
 
 def poisson_deviance(y, p):
-    mask = (y > 0) & (p > 0)
-    if mask.sum() == 0:
-        return float("nan")
-    yv = y[mask]
-    pv = p[mask]
-    return float(np.mean(2.0 * (yv * np.log(yv / pv) - (yv - pv))))
+    total = 0.0
+    n = 0
+    for yi, pi in zip(y, p):
+        if yi > 0 and pi > 0:
+            total += 2.0 * (yi * math.log(yi / pi) - (yi - pi))
+            n += 1
+    return total / n if n else float("nan")
 
 
 def ols_fit(X, y):
-    beta, _, _, _ = np.linalg.lstsq(X, y, rcond=None)
-    return beta
+    n = len(X)
+    if n == 0:
+        return []
+    k = len(X[0])
+    xtx = [[0.0] * k for _ in range(k)]
+    xty = [0.0] * k
+    for i in range(n):
+        xi = X[i]
+        yi = y[i]
+        for j in range(k):
+            xij = xi[j]
+            if xij == 0.0:
+                continue
+            xty[j] += xij * yi
+            row = xtx[j]
+            for ell in range(k):
+                row[ell] += xij * xi[ell]
+    a = [xtx[j] + [xty[j]] for j in range(k)]
+    for col in range(k):
+        piv = col
+        piv_abs = abs(a[col][col])
+        for r in range(col + 1, k):
+            av = abs(a[r][col])
+            if av > piv_abs:
+                piv = r
+                piv_abs = av
+        if piv_abs < 1e-15:
+            return [0.0] * k
+        if piv != col:
+            a[col], a[piv] = a[piv], a[col]
+        inv = 1.0 / a[col][col]
+        ac = a[col]
+        for r in range(col + 1, k):
+            f = a[r][col] * inv
+            if f == 0.0:
+                continue
+            ar = a[r]
+            for c in range(col, k + 1):
+                ar[c] -= f * ac[c]
+    beta = [0.0] * k
+    for i in range(k - 1, -1, -1):
+        value = a[i][k]
+        ai = a[i]
+        for j in range(i + 1, k):
+            value -= ai[j] * beta[j]
+        dii = ai[i]
+        beta[i] = value / dii if abs(dii) > 1e-15 else 0.0
+    return np.asarray(beta, dtype=float)
 
 
 def ols_predict(X, beta):
@@ -196,6 +258,8 @@ def main():
             else:
                 sha_bad += 1
     print(f"  SHA-256: {sha_ok} ok, {sha_bad} bad", flush=True)
+    if sha_bad:
+        raise RuntimeError(f"input hash verification failed: {sha_bad} bad sidecars")
 
     print("Step 2: Load liquidations (dedup by coin/hour/tx_hash)", flush=True)
     liq_frames = []
@@ -226,7 +290,10 @@ def main():
         t = pq.read_table(BULK / "candles_1h" / f"{month}.parquet")
         df = t.to_pandas()
         df = add_hk(df, "timestamp")
-        df["close"] = pd.to_numeric(df["close"], errors="coerce")
+        df["close"] = [
+            float(v) if v is not None else float("nan")
+            for v in t.column("close").to_pylist()
+        ]
         df = df[df["close"] > 0]
         if "coin" in df.columns:
             df["coin"] = df["coin"].astype(str).str.upper()
@@ -299,18 +366,20 @@ def main():
     for mkt in markets:
         coin = candle_coin[mkt]
         mkt_df = candles[(candles["market"] == mkt)].sort_values("hk")
-        mkt_hours = mkt_df["hk"].values
-        closes = mkt_df["close"].values.astype(float)
-        rets = np.full(len(mkt_hours), 0.0)
-        rets[1:] = np.log(closes[1:] / closes[:-1])
-        cum = np.concatenate([[0.0], np.cumsum(rets * rets)])
-        s24 = cum[1:] - np.maximum(0, np.arange(len(mkt_hours)) - 23)
-        s24 = cum[1:] - cum[np.maximum(0, np.arange(len(mkt_hours)) - 23)]
-        s168 = cum[1:] - cum[np.maximum(0, np.arange(len(mkt_hours)) - 167)]
-        prev_closes = np.concatenate([[np.nan], closes[:-1]])
-        ma_dev = (closes / prev_closes - 1.0)
-        ma_dev[~np.isfinite(ma_dev)] = 0.0
+        mkt_hours = mkt_df["hk"].to_list()
+        closes = [float(v) for v in mkt_df["close"].to_list()]
+        rets = []
+        cum = [0.0]
+        for i, c in enumerate(closes):
+            r = math.log(c / closes[i - 1]) if i > 0 else 0.0
+            rets.append(r)
+            cum.append(cum[-1] + r * r)
         for i, hk in enumerate(mkt_hours):
+            c = closes[i]
+            s24 = cum[i + 1] - cum[max(0, i - 23)]
+            s168 = cum[i + 1] - cum[max(0, i - 167)]
+            prev_c = closes[i - 1] if i > 0 else None
+            ma_dev = (c / prev_c - 1.0) if i > 0 else 0.0
             fund, prem = fund_val.get((mkt, hk), (0.0, 0.0))
             oi = oi_val.get((mkt, hk), 0.0) or 0.0
             mk_p = mark_val.get((mkt, hk))
@@ -318,12 +387,12 @@ def main():
             dislocation = (mk_p / or_p - 1.0) if (mk_p and or_p and or_p > 0) else 0.0
             series_records.append({
                 "coin": coin, "market": mkt, "hk": int(hk),
-                "rv24": float(s24[i]), "rv168": float(s168[i]),
+                "rv24": float(s24), "rv168": float(s168),
                 "fund": float(fund) if fund is not None else 0.0,
                 "prem": float(prem) if prem is not None else 0.0,
                 "oi": float(oi),
                 "dislocation": float(dislocation),
-                "ma_dev": float(ma_dev[i]) if np.isfinite(ma_dev[i]) else 0.0,
+                "ma_dev": float(ma_dev) if np.isfinite(ma_dev) else 0.0,
                 "close": float(closes[i]),
             })
     series_df = pd.DataFrame(series_records)
@@ -366,10 +435,8 @@ def main():
             if not mask.any():
                 continue
             targets = abs_fund_arr[mask]
-            lo = np.searchsorted(srt, targets, side="left")
             hi = np.searchsorted(srt, targets, side="right")
-            pct = (lo + hi) / (2.0 * len(srt))
-            out[mask] = pct
+            out[mask] = hi / len(srt)
         return out
 
     series_df["z_rv24"] = z_vec(series_df, "rv24")
@@ -408,12 +475,18 @@ def main():
     test_df["fwd_cnt_short"] = [liq_count_s.get((c, w), 0) for c, w in zip(test_df["coin"], test_df["wh"])]
     test_df["fwd_noti_short"] = [liq_noti_s.get((c, w), 0.0) for c, w in zip(test_df["coin"], test_df["wh"])]
     test_df["is_survivor"] = test_df["coin"].isin(survivor_coins)
+    test_df = test_df.sort_values(["coin", "hk"], kind="mergesort").reset_index(drop=True)
     test_df = test_df.drop(columns=["wh"])
     n_test_rows = len(test_df)
 
-    train_df = series_df[series_df["hk"].isin(train_hours)].copy()
-    train_sub = train_df.iloc[::TRAIN_SUBSAMPLE].copy()
-    train_sub = train_sub.reset_index(drop=True)
+    train_coin_major = series_df.sort_values(["coin", "hk"], kind="mergesort")
+    train_mask = train_coin_major["hk"].isin(train_hours).to_numpy()
+    train_positions = np.flatnonzero(train_mask)
+    train_selected = train_positions[
+        (np.arange(1, len(train_positions) + 1) % TRAIN_SUBSAMPLE) == 0
+    ]
+    train_df_full = train_coin_major.iloc[train_selected].copy().reset_index(drop=True)
+    train_sub = train_df_full
     train_sub["wh"] = train_sub["hk"] + HORIZON_H * 3600
     train_sub["fwd_cnt_long"] = [liq_count_l.get((c, w), 0) for c, w in zip(train_sub["coin"], train_sub["wh"])]
     train_sub["fwd_noti_long"] = [liq_noti_l.get((c, w), 0.0) for c, w in zip(train_sub["coin"], train_sub["wh"])]
@@ -444,12 +517,15 @@ def main():
     def fit_side(df, feat_fn, side_key):
         fi = df[side_key].values.astype(float)
         fi = np.where((fi is None) | (fi <= 0), 1.0, fi)
-        X = feat_fn(df)
-        y = np.log(fi + EPS)
-        beta = ols_fit(X, y)
-        resid = y - ols_predict(X, beta)
-        smear = float(np.mean(np.exp(resid))) if len(resid) > 0 else 1.0
-        return beta, smear, len(X)
+        x_rows = feat_fn(df).tolist()
+        y = [math.log(float(v) + EPS) for v in fi]
+        beta = ols_fit(x_rows, y)
+        resid = [
+            y[i] - sum(a * b for a, b in zip(x_rows[i], beta))
+            for i in range(len(x_rows))
+        ]
+        smear = sum(math.exp(v) for v in resid) / len(resid) if resid else 1.0
+        return beta, smear, len(x_rows)
 
     beta_B1_l, smear_B1_l, nB1_l = fit_side(train_df_full, b1_X, "fwd_noti_long")
     beta_C2_l, smear_C2_l, nC2_l = fit_side(train_df_full, c2_X, "fwd_noti_long")
@@ -462,7 +538,10 @@ def main():
     def predict_side(df, feat_fn, beta, smear, side_key="fwd_noti_long"):
         fi = df[side_key].values.astype(float)
         fi = np.where(fi <= 0, 1.0, fi)
-        pred = np.exp(np.clip(ols_predict(feat_fn(df), beta), -50.0, 50.0)) * smear
+        pred = np.asarray([
+            math.exp(sum(a * b for a, b in zip(row, beta))) * smear
+            for row in feat_fn(df)
+        ], dtype=float)
         return pd.DataFrame({
             "coin": df["coin"].values,
             "hk": df["hk"].values,
@@ -530,6 +609,29 @@ def main():
     materiality_met_s = bool(rel_imp_s >= MATERIALITY_PCT / 100.0)
     print(f"  Deviance: long B1={devB1_l:.6f} C2={devC2_l:.6f} rel_imp={rel_imp_l:.6f}", flush=True)
     print(f"  Deviance: short B1={devB1_s:.6f} C2={devC2_s:.6f} rel_imp={rel_imp_s:.6f}", flush=True)
+
+    fidelity_reconciliation = {
+        "long_mean_rank_ic_c2_eval": mean_ic_C2_l,
+        "long_mean_rank_ic_c2_broad01": BROAD01_LONG_MEAN_IC_C2,
+        "long_mean_rank_ic_c2_abs_error": abs(mean_ic_C2_l - BROAD01_LONG_MEAN_IC_C2),
+        "long_poisson_deviance_b1_eval": devB1_l,
+        "long_poisson_deviance_b1_broad01": BROAD01_LONG_POISSON_DEVIANCE_B1,
+        "long_poisson_deviance_b1_abs_error": abs(devB1_l - BROAD01_LONG_POISSON_DEVIANCE_B1),
+        "tolerance": RECONCILIATION_TOL,
+        "short_arm_prediction_target_follows_broad01": True,
+    }
+    fidelity_reconciliation["reconciled"] = bool(
+        np.isfinite(fidelity_reconciliation["long_mean_rank_ic_c2_eval"])
+        and np.isfinite(fidelity_reconciliation["long_poisson_deviance_b1_eval"])
+        and fidelity_reconciliation["long_mean_rank_ic_c2_abs_error"] <= RECONCILIATION_TOL
+        and fidelity_reconciliation["long_poisson_deviance_b1_abs_error"] <= RECONCILIATION_TOL
+    )
+    if not fidelity_reconciliation["reconciled"]:
+        raise RuntimeError(
+            "BROAD-01 fidelity reconciliation failed: "
+            + json.dumps(fidelity_reconciliation, sort_keys=True)
+        )
+    print("  BROAD-01 fidelity reconciliation: PASS", flush=True)
 
     print("Step 10: Block bootstrap CI95 (N=2000)", flush=True)
     ic_blocks_valid = ic_C2_l[np.isfinite(ic_C2_l)]
@@ -766,6 +868,7 @@ def main():
             "n_train_rows_B1_short": nB1_s,
             "n_train_rows_C2_short": nC2_s,
         },
+        "fidelity_reconciliation": fidelity_reconciliation,
         "headline_long": {
             "mean_rank_IC_C2": mean_ic_C2_l,
             "mean_rank_IC_B1": mean_ic_B1_l,
@@ -790,14 +893,12 @@ def main():
             "materiality_floor_pct": MATERIALITY_PCT,
             "materiality_met": materiality_met_s,
         },
-        "per_block_series_long": [
-            {"block_index": b["block_index"], "block_start_h": b["block_start_h"], "ic": b["ic"], "n_coins": b["n_coins"]}
-            for b in ic_blocks_C2_l
-        ],
-        "per_block_series_short": [
-            {"block_index": b["block_index"], "block_start_h": b["block_start_h"], "ic": b["ic"], "n_coins": b["n_coins"]}
-            for b in ic_blocks_C2_s
-        ],
+        "per_block_series": {
+            "ic_C2_l": ic_blocks_C2_l,
+            "ic_B1_l": ic_blocks_B1_l,
+            "ic_C2_s": ic_blocks_C2_s,
+            "ic_B1_s": ic_blocks_B1_s,
+        },
         "uncertainty": {
             "bootstrap_replicates": N_BOOT,
             "bootstrap_valid": n_boot_valid,
@@ -893,6 +994,13 @@ def main():
         "## Input integrity",
         f"- SHA-256 sidecars verified: {sha_ok}/{sha_ok + sha_bad} (bad={sha_bad})",
         "",
+        "## BROAD-01 fidelity reconciliation",
+        f"- Long-arm mean rank-IC: {mean_ic_C2_l:.12f} (reference {BROAD01_LONG_MEAN_IC_C2:.12f}; "
+        f"abs error {fidelity_reconciliation['long_mean_rank_ic_c2_abs_error']:.3g})",
+        f"- Long-arm Poisson deviance B1: {devB1_l:.12f} (reference {BROAD01_LONG_POISSON_DEVIANCE_B1:.12f}; "
+        f"abs error {fidelity_reconciliation['long_poisson_deviance_b1_abs_error']:.3g})",
+        f"- Reconciled within {RECONCILIATION_TOL:g}: {fidelity_reconciliation['reconciled']}",
+        "",
         "## Headline (long arm, notional target)",
         f"- Mean cross-sectional Spearman rank-IC (C2, funding-conditioned): {mean_ic_C2_l:.6f}",
         f"- Mean cross-sectional Spearman rank-IC (B1, RV-only baseline): {mean_ic_B1_l:.6f}",
@@ -911,7 +1019,7 @@ def main():
         f"- RV-tercile frac positive: {rv_tercile_frac_positive:.4f}",
         f"- UTC-bucket frac positive: {utc_frac_positive:.4f} ({utc_buckets_positive}/{utc_buckets_total})",
         "",
-        "## Multiplicity (Holm, 6-arm family, alpha_k={ALPHA_K:.6f})",
+        f"## Multiplicity (Holm, 6-arm family, alpha_k={ALPHA_K:.6f})",
         f"- Raw pvals: {json.dumps({k: round(v, 6) for k, v in family_pvals.items()})}",
         f"- Holm-adjusted pvals: {json.dumps({k: round(v, 6) for k, v in holm_adj.items()})}",
         f"- Primary significant after Holm: {primary_significant_after_holm}",
