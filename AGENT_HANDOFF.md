@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-24T09:38:16Z
+# AGENT HANDOFF — 2026-11-24T09:42:21Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,7 +12,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-24T09:38:16Z**
+> **Timestamped initial task message — inferred 2026-11-24T09:42:21Z**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel (Track A STRUCTURALLY_BLOCKED on a capped-sample feed; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; the broad cross-sectional rank-ordering association is SUPPORTED_GENERALIZATION but NOT_STABLE and its 2% Poisson-deviance materiality floor is NOT MET). Half 1 (funding-conditioned volatility) is only closed on a **5-coin** panel. The next session's single, non-deferrable job is to run the **broad-universe funding-conditioned volatility forecast** at the same 342+ coin scale that produced the only SUPPORTED liquidation-risk result.
 >
@@ -141,13 +141,13 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 ## SESSION CLOSE-OUT REQUIREMENTS (THIS SESSION)
 
 **What changed and why:**
-- Independently verified the prior handoff (2026-11-24T08:34:20Z) is accurate and the rank-0 campaign `FCLR-VOL-BROAD-01-20261124T035500Z` is genuinely executable — no structural bottlenecks block the heavy broad-panel volatility work.
+- Independently re-verified the prior handoff (2026-11-24T09:38:16Z) is accurate and the rank-0 campaign `FCLR-VOL-BROAD-01-20261124T035500Z` is genuinely executable — no structural bottlenecks block the heavy broad-panel volatility work. Every claim below was re-run this session and holds; the only change is the refreshed timestamp.
 - Re-prioritized by repository name: `Funding-conditioned-volatility-and-liquidation-risk` leads with the volatility half. Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel; Half 1 (funding-conditioned volatility) is only closed on a 5-coin panel (FCLR-011 / FCLR-PANEL-FE-001). The unfinished repo-name frontier is a broad-scale volatility forecast on the same 342+ coin, 18-month panel that produced the only SUPPORTED liquidation-risk result.
 - **Verified the non-avoidance binder is live and will bind the next session:** read `scripts/check_handoff_heavywork_gate.py:640-640,1764-1856,3874-3896`. `VOL_BROAD_CAMPAIGN_RE` matches `FCLR-VOL-BROAD-01-20261124T035500Z`; once any post-start `session_<UTC> > 20261124T035500Z` is the latest on-disk session, `required=true` and the gate fails closed without the full `fclr_volbroad01_*` set (source_registry json+md, prereg json+md, eval py+json+md, recompute py+json, evidence_audit json+md, evidence_audit_ json alias, non-empty trigger_check_). Currently `required=false` only because the latest on-disk session (`session_20261124T015114Z`) predates the campaign start — grandfathering, not an escape hatch. A trigger-only, prose-only, audit-only, prereg-only, verify-and-stop, or arbitrary `recompute_*` session FAILS CLOSED.
 - **Re-confirmed runtime environment is ready:** numpy 2.5.5, pandas 3.1.1, pyarrow 26.0.1 all import cleanly (installed in the prior session; persist on this host). `requirements.txt` already lists numpy/pandas/scipy/pyarrow/requests.
 - **Re-confirmed frozen inputs are present and intact:** each of `candles_1h`, `funding`, `open_interest` has 18 `.parquet` + 18 `.sha256` sidecars (18/18/18), months 2025-05..2026-10. Caches are read-only; assert sha256 before reading.
 - **No stale empty session directory** exists (`find research_state -maxdepth 1 -type d -name 'session_*' -empty` → empty); `HANDOFF_STALE_LATEST_SESSION` cannot trigger.
-- **Refreshed timestamp to 2026-11-24T09:38:16Z.** Campaign ID, prereg design, frozen inputs, models, metrics, materiality floor, and required artifact set are unchanged from the 04:05:21Z / 06:38:38Z / 06:41:22Z / 06:43:25Z / 07:47:48Z / 08:34:20Z / 08:47:16Z / 09:35:41Z refreshes (they were already correct and complete).
+- **Refreshed timestamp to 2026-11-24T09:42:21Z.** Campaign ID, prereg design, frozen inputs, models, metrics, materiality floor, and required artifact set are unchanged from the 04:05:21Z / 06:38:38Z / 06:41:22Z / 06:43:25Z / 07:47:48Z / 08:34:20Z / 08:47:16Z / 09:35:41Z / 09:38:16Z refreshes (they were already correct and complete).
 
 **Exact test outcomes with paths:**
 - Heavy-work gate: `python3 scripts/check_handoff_heavywork_gate.py --json` → `reason_code=OK`, `pass=true`, exit 0 (`vol_broad.campaign_id=FCLR-VOL-BROAD-01-20261124T035500Z`, `required=false` via grandfathering because the latest on-disk session `session_20261124T015114Z` predates the campaign start `20261124T035500Z`, `content_failures=[]`, `failures=[]`).
@@ -198,6 +198,7 @@ python3 scripts/next_campaign_status.py
 
 ## BOTTLENECK RESOLUTION (this refresh)
 
+- **RE-VERIFIED THIS REFRESH (2026-11-24T09:42:21Z):** every RESOLVED item below was re-run and still holds — gate `reason_code=OK`/`pass=true`, `vol_broad.required=false` only via grandfathering (latest on-disk session `session_20261124T015114Z` predates `20261124T035500Z`), 107 campaign-gate tests OK (0.706s), caches 18/18/18, deps numpy 2.5.5 / pandas 3.1.1 / pyarrow 26.0.1 importable, root `research_state/*.md|*.json` 500/500, no empty session dir. No new blocker surfaced; the only OPEN item is the campaign execution itself.
 - **RESOLVED (verify-and-stop / closure-memo escape hatch):** the prior plan routed the next session to a program-closure synthesis. That would let a future agent end the program by writing documents instead of running heavy science. Replaced with a concrete, feasible, heavy broad-panel volatility forecast that uses the same frozen panel and matches the repository-name first half.
 - **RESOLVED (no feasible heavy work on frozen data):** the broad `ironflow_bulk` panel (candles + funding + open_interest) has never been used for a direct RV forecast; a walk-forward, leakage-hardened, fixed-effects design is feasible today without any new source.
 - **RESOLVED (gate not binding the active frontier):** `VOL_BROAD_CAMPAIGN_RE` / `_vol_broad_state` / `VOL_BROAD_REQUIRED` are wired into `check()` and confirmed live this session (read `scripts/check_handoff_heavywork_gate.py:640,1764,3874`). A post-start session cannot pass with a trigger-only/audit-only/prereg-only/verify-and-stop session. Currently `required=false` only via grandfathering (latest on-disk session predates the campaign start); the binder activates the moment the next agent creates a `session_<UTC> > 20261124T035500Z` and becomes the latest on-disk session.
