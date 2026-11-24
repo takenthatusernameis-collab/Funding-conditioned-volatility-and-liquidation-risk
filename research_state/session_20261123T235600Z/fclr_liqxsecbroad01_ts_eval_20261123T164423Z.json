@@ -1,0 +1,507 @@
+{
+  "experiment_id": "FCLR-LIQ-XSEC-BROAD-TS-01",
+  "campaign": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z",
+  "session_utc": "20261123T164423Z",
+  "software": "numpy + pandas + pyarrow (parquet read only); cross-sectional statistical evaluation is independent stdlib/numpy code",
+  "label_construct": "observed_ironflow_liquidation_intensity_capped_sample",
+  "label_caveat": "ironflow liquidations are a capped-sample feed (not a complete census per RESEARCH_PROMPT.md section 15); absence != zero; claims restricted to presence/intensity ordering",
+  "input_integrity": {
+    "sha256_sidecars_total": 72,
+    "sha256_verified_ok": 72,
+    "sha256_verified_bad": 0,
+    "sha256_all_match": true
+  },
+  "coverage": {
+    "n_distinct_hours": 12586,
+    "train_hours": 7551,
+    "test_hours_after_purge": 4987,
+    "n_test_blocks": 30,
+    "n_test_blocks_valid": 30,
+    "n_test_coins": 799,
+    "n_survivor_coins": 637,
+    "n_exited_coins": 162,
+    "n_test_rows": 1715710,
+    "n_liquidation_rows": 2849452
+  },
+  "fit": {
+    "n_train_rows_B1_long": 9509,
+    "n_train_rows_C2_long": 9509,
+    "n_train_rows_B1_short": 9509,
+    "n_train_rows_C2_short": 9509
+  },
+  "headline_long": {
+    "mean_rank_IC_C2": -0.14544372108685832,
+    "mean_rank_IC_B1": -0.15912236611195194,
+    "n_blocks": 30,
+    "poisson_deviance_B1": 13322.576514143586,
+    "poisson_deviance_C2": 13183.94218065168,
+    "relative_improvement": 0.010405970147345591,
+    "relative_improvement_pct": 1.0405970147345591,
+    "sign_convention": "(baseline - candidate) / baseline, positive = candidate better",
+    "materiality_floor_pct": 2.0,
+    "materiality_met": false
+  },
+  "headline_short": {
+    "mean_rank_IC_C2": -0.1091492427265288,
+    "mean_rank_IC_B1": -0.15354624742191697,
+    "n_blocks": 30,
+    "poisson_deviance_B1": 8537.454174820714,
+    "poisson_deviance_C2": 4.463354943541091e+18,
+    "relative_improvement": -522796942993232.8,
+    "relative_improvement_pct": -5.227969429932328e+16,
+    "sign_convention": "(baseline - candidate) / baseline, positive = candidate better",
+    "materiality_floor_pct": 2.0,
+    "materiality_met": false
+  },
+  "per_block_series_long": [
+    {
+      "block_index": 0,
+      "block_start_h": 1775538000,
+      "ic": -0.23294162191809864,
+      "n_coins": 57977
+    },
+    {
+      "block_index": 1,
+      "block_start_h": 1776142800,
+      "ic": -0.14189813467267526,
+      "n_coins": 57940
+    },
+    {
+      "block_index": 2,
+      "block_start_h": 1776747600,
+      "ic": -0.01764555121996394,
+      "n_coins": 56807
+    },
+    {
+      "block_index": 3,
+      "block_start_h": 1777352400,
+      "ic": -0.03153884283718892,
+      "n_coins": 57025
+    },
+    {
+      "block_index": 4,
+      "block_start_h": 1777957200,
+      "ic": -0.12778456778679353,
+      "n_coins": 58245
+    },
+    {
+      "block_index": 5,
+      "block_start_h": 1778562000,
+      "ic": -0.17490254383337925,
+      "n_coins": 58374
+    },
+    {
+      "block_index": 6,
+      "block_start_h": 1779166800,
+      "ic": -0.04622098000640813,
+      "n_coins": 59449
+    },
+    {
+      "block_index": 7,
+      "block_start_h": 1779771600,
+      "ic": 0.0023234416824088272,
+      "n_coins": 58623
+    },
+    {
+      "block_index": 8,
+      "block_start_h": 1780376400,
+      "ic": -0.3055666943465442,
+      "n_coins": 59691
+    },
+    {
+      "block_index": 9,
+      "block_start_h": 1780981200,
+      "ic": -0.0021114078697095275,
+      "n_coins": 57365
+    },
+    {
+      "block_index": 10,
+      "block_start_h": 1781586000,
+      "ic": -0.2452333488221272,
+      "n_coins": 54894
+    },
+    {
+      "block_index": 11,
+      "block_start_h": 1782190800,
+      "ic": -0.3819224799681446,
+      "n_coins": 54559
+    },
+    {
+      "block_index": 12,
+      "block_start_h": 1782795600,
+      "ic": -0.015112101823878532,
+      "n_coins": 52869
+    },
+    {
+      "block_index": 13,
+      "block_start_h": 1783400400,
+      "ic": -0.26454700683785437,
+      "n_coins": 52122
+    },
+    {
+      "block_index": 14,
+      "block_start_h": 1784005200,
+      "ic": -0.18291780822797574,
+      "n_coins": 52486
+    },
+    {
+      "block_index": 15,
+      "block_start_h": 1784610000,
+      "ic": -0.09042041729449586,
+      "n_coins": 52847
+    },
+    {
+      "block_index": 16,
+      "block_start_h": 1785214800,
+      "ic": -0.4808966240392692,
+      "n_coins": 53212
+    },
+    {
+      "block_index": 17,
+      "block_start_h": 1785819600,
+      "ic": -0.009317727795384055,
+      "n_coins": 53978
+    },
+    {
+      "block_index": 18,
+      "block_start_h": 1786424400,
+      "ic": -0.19925083758111434,
+      "n_coins": 54881
+    },
+    {
+      "block_index": 19,
+      "block_start_h": 1787029200,
+      "ic": -0.052351933663854225,
+      "n_coins": 60693
+    },
+    {
+      "block_index": 20,
+      "block_start_h": 1787634000,
+      "ic": -0.058512268942912365,
+      "n_coins": 60228
+    },
+    {
+      "block_index": 21,
+      "block_start_h": 1788238800,
+      "ic": -0.13700047300979587,
+      "n_coins": 58897
+    },
+    {
+      "block_index": 22,
+      "block_start_h": 1788843600,
+      "ic": -0.2591011716891048,
+      "n_coins": 59176
+    },
+    {
+      "block_index": 23,
+      "block_start_h": 1789448400,
+      "ic": 0.07738253176383582,
+      "n_coins": 60671
+    },
+    {
+      "block_index": 24,
+      "block_start_h": 1790053200,
+      "ic": -0.1807387761652818,
+      "n_coins": 61336
+    },
+    {
+      "block_index": 25,
+      "block_start_h": 1790658000,
+      "ic": -0.35016010311927415,
+      "n_coins": 60824
+    },
+    {
+      "block_index": 26,
+      "block_start_h": 1791262800,
+      "ic": -0.16149199403584813,
+      "n_coins": 61331
+    },
+    {
+      "block_index": 27,
+      "block_start_h": 1791867600,
+      "ic": -0.30085233143888696,
+      "n_coins": 62345
+    },
+    {
+      "block_index": 28,
+      "block_start_h": 1792472400,
+      "ic": -0.11886640741403731,
+      "n_coins": 62639
+    },
+    {
+      "block_index": 29,
+      "block_start_h": 1793077200,
+      "ic": 0.12628655030800662,
+      "n_coins": 44226
+    }
+  ],
+  "per_block_series_short": [
+    {
+      "block_index": 0,
+      "block_start_h": 1775538000,
+      "ic": -0.12093416387510142,
+      "n_coins": 57977
+    },
+    {
+      "block_index": 1,
+      "block_start_h": 1776142800,
+      "ic": -0.0844732631201623,
+      "n_coins": 57940
+    },
+    {
+      "block_index": 2,
+      "block_start_h": 1776747600,
+      "ic": -0.0018506838495666294,
+      "n_coins": 56807
+    },
+    {
+      "block_index": 3,
+      "block_start_h": 1777352400,
+      "ic": -0.03499922174617909,
+      "n_coins": 57025
+    },
+    {
+      "block_index": 4,
+      "block_start_h": 1777957200,
+      "ic": -0.10777472892949322,
+      "n_coins": 58245
+    },
+    {
+      "block_index": 5,
+      "block_start_h": 1778562000,
+      "ic": -0.10372768581513091,
+      "n_coins": 58374
+    },
+    {
+      "block_index": 6,
+      "block_start_h": 1779166800,
+      "ic": -0.024152238244865905,
+      "n_coins": 59449
+    },
+    {
+      "block_index": 7,
+      "block_start_h": 1779771600,
+      "ic": 0.0246885836365083,
+      "n_coins": 58623
+    },
+    {
+      "block_index": 8,
+      "block_start_h": 1780376400,
+      "ic": -0.15277128735296755,
+      "n_coins": 59691
+    },
+    {
+      "block_index": 9,
+      "block_start_h": 1780981200,
+      "ic": -0.04048805255568469,
+      "n_coins": 57365
+    },
+    {
+      "block_index": 10,
+      "block_start_h": 1781586000,
+      "ic": -0.16803447513590372,
+      "n_coins": 54894
+    },
+    {
+      "block_index": 11,
+      "block_start_h": 1782190800,
+      "ic": -0.3106213203686443,
+      "n_coins": 54559
+    },
+    {
+      "block_index": 12,
+      "block_start_h": 1782795600,
+      "ic": -0.06303236201249336,
+      "n_coins": 52869
+    },
+    {
+      "block_index": 13,
+      "block_start_h": 1783400400,
+      "ic": -0.16015348389284356,
+      "n_coins": 52122
+    },
+    {
+      "block_index": 14,
+      "block_start_h": 1784005200,
+      "ic": -0.16890835670226598,
+      "n_coins": 52486
+    },
+    {
+      "block_index": 15,
+      "block_start_h": 1784610000,
+      "ic": -0.08209322575713579,
+      "n_coins": 52847
+    },
+    {
+      "block_index": 16,
+      "block_start_h": 1785214800,
+      "ic": -0.3644408962824071,
+      "n_coins": 53212
+    },
+    {
+      "block_index": 17,
+      "block_start_h": 1785819600,
+      "ic": -0.07795252306007965,
+      "n_coins": 53978
+    },
+    {
+      "block_index": 18,
+      "block_start_h": 1786424400,
+      "ic": -0.16722025787352768,
+      "n_coins": 54881
+    },
+    {
+      "block_index": 19,
+      "block_start_h": 1787029200,
+      "ic": -0.08089889706605977,
+      "n_coins": 60693
+    },
+    {
+      "block_index": 20,
+      "block_start_h": 1787634000,
+      "ic": -0.010591710003843824,
+      "n_coins": 60228
+    },
+    {
+      "block_index": 21,
+      "block_start_h": 1788238800,
+      "ic": -0.10517386518232694,
+      "n_coins": 58897
+    },
+    {
+      "block_index": 22,
+      "block_start_h": 1788843600,
+      "ic": -0.18956616264942217,
+      "n_coins": 59176
+    },
+    {
+      "block_index": 23,
+      "block_start_h": 1789448400,
+      "ic": 0.022363732986025276,
+      "n_coins": 60671
+    },
+    {
+      "block_index": 24,
+      "block_start_h": 1790053200,
+      "ic": -0.14746474095031184,
+      "n_coins": 61336
+    },
+    {
+      "block_index": 25,
+      "block_start_h": 1790658000,
+      "ic": -0.2947381617570194,
+      "n_coins": 60824
+    },
+    {
+      "block_index": 26,
+      "block_start_h": 1791262800,
+      "ic": -0.11274242614868173,
+      "n_coins": 61331
+    },
+    {
+      "block_index": 27,
+      "block_start_h": 1791867600,
+      "ic": -0.21216617021815076,
+      "n_coins": 62345
+    },
+    {
+      "block_index": 28,
+      "block_start_h": 1792472400,
+      "ic": -0.06827126699050615,
+      "n_coins": 62639
+    },
+    {
+      "block_index": 29,
+      "block_start_h": 1793077200,
+      "ic": 0.13371202912237826,
+      "n_coins": 44226
+    }
+  ],
+  "uncertainty": {
+    "bootstrap_replicates": 2000,
+    "bootstrap_valid": 2000,
+    "ci95_lo": -0.19421073760144625,
+    "ci95_hi": -0.09745094433063403,
+    "ci95_excludes_null_favorable": false,
+    "placebo_replicates": 1000,
+    "placebo_valid": 1000,
+    "placebo_95th_percentile": 0.0012401899082131298,
+    "placebo_true_effect_exceeds_null": false,
+    "loio_subsets": 8,
+    "loio_valid": 8,
+    "loio_sign_reproduced": 8,
+    "loio_pass_threshold": 6,
+    "loio_pass": true
+  },
+  "stability_battery": {
+    "sign_reproduction_fraction_long_arm": 0.1,
+    "n_blocks_positive_long_arm": 3,
+    "sign_reproduction_threshold": 0.8,
+    "sign_reproduced_long_arm": false,
+    "rolling_window": 6,
+    "rolling_min": -0.2359694063652697,
+    "rolling_median": -0.15793709852466586,
+    "rolling_max": -0.06596150733355415,
+    "rolling_ci95_lo": -0.3156907005680808,
+    "rolling_ci95_hi": 0.008257902883452413,
+    "trend_rho": -0.055839822024471644,
+    "trend_p_two_sided": 0.7762237762237763,
+    "trend_alpha": 0.008333333333333333,
+    "trend_not_reject_stationarity": true,
+    "first_half_mean": -0.14453464323255552,
+    "second_half_mean": -0.1463527989411611,
+    "first_second_half_gap": -0.0018181557086055788,
+    "gap_ci95_lo": -0.09721036288063062,
+    "gap_ci95_hi": 0.09828085233688208,
+    "gap_ci_excludes_sign_reversal": false,
+    "looic_range": 0.020937350839561247,
+    "looic_min": -0.15481373044530194,
+    "looic_max": -0.1338763796057407,
+    "rv_tercile_frac_positive": 0.1,
+    "utc_frac_positive": 0.0,
+    "utc_buckets_positive": 0,
+    "utc_buckets_total": 1
+  },
+  "multiplicity": {
+    "holm_family": [
+      "trend_test_long_arm",
+      "first_second_half_gap_long_arm",
+      "loio_range_long_arm",
+      "rolling_mean_min_long_arm",
+      "per_regime_rv_tercile_long_arm",
+      "per_regime_utc_bucket_long_arm"
+    ],
+    "raw_pvals": {
+      "trend_test_long_arm": 0.7762237762237763,
+      "first_second_half_gap_long_arm": 0.512,
+      "loio_range_long_arm": 1.0,
+      "rolling_mean_min_long_arm": 1.0,
+      "per_regime_rv_tercile_long_arm": 1.0,
+      "per_regime_utc_bucket_long_arm": 1.0
+    },
+    "holm_adjusted_pvals": {
+      "first_second_half_gap_long_arm": 1.0,
+      "trend_test_long_arm": 1.0,
+      "loio_range_long_arm": 1.0,
+      "rolling_mean_min_long_arm": 1.0,
+      "per_regime_rv_tercile_long_arm": 1.0,
+      "per_regime_utc_bucket_long_arm": 1.0
+    },
+    "alpha_k": 0.008333333333333333,
+    "primary_significant_after_holm": false
+  },
+  "decision": {
+    "verdict": "NOT_STABLE",
+    "verdict_rule": "STABLE iff (long arm) sign reproduced in >= 0.80 of blocks AND first/second-half gap CI excludes sign reversal AND ordered-block trend test does not reject stationarity at frozen alpha_k; otherwise NOT_STABLE.",
+    "sign_reproduced": false,
+    "gap_ci_excludes_sign_reversal": false,
+    "trend_not_reject_stationarity": true,
+    "null_preserved_honestly": true,
+    "no_threshold_shopping": true,
+    "no_relaxed_materiality_floor": true,
+    "no_overlay_built": true,
+    "not_a_time_series_forecast_gate": true,
+    "not_observed_liquidation_census": true
+  },
+  "sign_convention_note": "relative_improvement = (baseline - candidate) / baseline applied to Poisson deviance; positive = candidate better. Identical convention used in eval and recompute."
+}
