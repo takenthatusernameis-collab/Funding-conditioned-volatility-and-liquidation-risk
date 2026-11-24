@@ -7,7 +7,7 @@
   "eval_output_path": "research_state/session_20261124T120000Z/fclr_volbroad01_eval_20261124T120000Z.json",
   "eval_output_sha256": "7f7d48f0d8b9649fae2ddaf6467f10bb8c8cc56df133630bced92a38a8cc98aa",
   "source_registry_path": "research_state/session_20261124T120000Z/fclr_volbroad01_source_registry_20261124T120000Z.json",
-  "source_registry_file_sha256": "2a085fb9de762b6080ee8f4fcf4b30906d8a0a98301fff4aa3e49a7d1b25dcc8",
+  "source_registry_file_sha256": "dae8bf2ab9a1310090127054c1b6e6d5c415b00e91dab668148e7eec3dc6af44",
   "sign_convention": "(baseline - candidate) / baseline, positive = candidate better",
   "used_identically_in_eval_and_recompute": true,
   "checks": {

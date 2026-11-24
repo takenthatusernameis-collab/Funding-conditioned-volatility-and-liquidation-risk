@@ -117,7 +117,7 @@
     "used_identically_in_eval_and_recompute": true
   },
   "input_hash_assertions": {
-    "source_registry_sha256": "2a085fb9de762b6080ee8f4fcf4b30906d8a0a98301fff4aa3e49a7d1b25dcc8",
+    "source_registry_sha256": "dae8bf2ab9a1310090127054c1b6e6d5c415b00e91dab668148e7eec3dc6af44",
     "source_registry_path": "research_state/session_20261124T120000Z/fclr_volbroad01_source_registry_20261124T120000Z.json",
     "sha256_sidecars_asserted_before_every_read": true,
     "caches_read_only_not_mutated": true,

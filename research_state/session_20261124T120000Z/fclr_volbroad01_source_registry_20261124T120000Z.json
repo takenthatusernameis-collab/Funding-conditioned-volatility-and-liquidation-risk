@@ -15,6 +15,26 @@
     "panel_sha256": "8b414cc362bb76aa52e8d6bb639cf69c7934841d1e1bfb5552d18b0ac81a2fc9",
     "panel_hash_method": "sha256 of concatenated dataset|month|sha256|rows across all parquet files (dataset|month sorted)"
   },
+  "datasets": {
+    "candles_1h": {
+      "files": 18,
+      "rows": 3643742,
+      "sha256_sidecars": 18,
+      "role": "frozen ironflow_bulk input (read-only, sha256-asserted)"
+    },
+    "funding": {
+      "files": 18,
+      "rows": 4104648,
+      "sha256_sidecars": 18,
+      "role": "frozen ironflow_bulk input (read-only, sha256-asserted)"
+    },
+    "open_interest": {
+      "files": 18,
+      "rows": 3977432,
+      "sha256_sidecars": 18,
+      "role": "frozen ironflow_bulk input (read-only, sha256-asserted)"
+    }
+  },
   "coverage": {
     "month_span": "2025-05 .. 2026-10 (18 months)",
     "datasets": [

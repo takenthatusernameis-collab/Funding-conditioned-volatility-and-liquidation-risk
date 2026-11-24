@@ -19,18 +19,29 @@
     "n_timestamps": 12419,
     "n_test_blocks_168h": 23,
     "n_forecasts": 684301,
-    "note": "broad 342+ coin universe; panel uses the intersection of coins with funding/OI coverage.",
+    "note": "broad 342+ coin universe; panel uses the intersection of coins with funding/OI coverage."
   },
   "design": {
     "kind": "walk_forward",
-    "train_frac": 0.60,
+    "train_frac": 0.6,
     "purge_embargo_h": 48,
     "block_h": 168,
-    "horizon_h": [1, 24],
+    "horizon_h": [
+      1,
+      24
+    ],
     "normalization": "train-only",
-    "models": ["baseline_rv_only_fe", "candidate_funding_conditioned_fe"],
-    "inference": ["Diebold-Mariano HAC on daily loss differential", "cluster-robust CR1 by coin", "Driscoll-Kraay HAC", "Holm step-down over declared family"],
-    "materiality_floor_rel_qlike": 0.02,
+    "models": [
+      "baseline_rv_only_fe",
+      "candidate_funding_conditioned_fe"
+    ],
+    "inference": [
+      "Diebold-Mariano HAC on daily loss differential",
+      "cluster-robust CR1 by coin",
+      "Driscoll-Kraay HAC",
+      "Holm step-down over declared family"
+    ],
+    "materiality_floor_rel_qlike": 0.02
   },
   "results_eval": {
     "next_hour_rv": {
@@ -43,15 +54,15 @@
       "materiality_met": false,
       "verdict": "NOT_SUPPORTED",
       "n_test_blocks": 23,
-      "n_forecasts": 684301,
-    },
+      "n_forecasts": 684301
+    }
   },
   "results_recompute": {
     "method": "independent stdlib recompute; hash verification + headline consistency",
     "all_checks_match": true,
     "n_checks": 31,
     "materiality_met_recompute": false,
-    "verdict_recompute": "NOT_SUPPORTED",
+    "verdict_recompute": "NOT_SUPPORTED"
   },
   "agreement": "eval and independent recompute agree: all_checks_match=true; same sign convention (baseline - candidate)/baseline",
   "materiality_floor_pct": 2.0,
@@ -59,18 +70,18 @@
     "The 2% relative QLIKE materiality floor was NOT met (1.93% relative improvement). Verdict NOT_SUPPORTED is a valid, publishable negative result that closes Half 1 (funding-conditioned volatility) at broad scale.",
     "MSE values are near-zero due to the small magnitude of squared log returns; QLIKE is the primary metric per the prereg.",
     "No risk overlay is built or implied (RESEARCH_PROMPT.md section 9 overlay gate not passed).",
-    "No threshold shopping; no floor relaxation after outcomes; symmetric verdict rule.",
+    "No threshold shopping; no floor relaxation after outcomes; symmetric verdict rule."
   ],
   "artifact_hashes": {
-    "fclr_volbroad01_source_registry_20261124T120000Z.json": "2a085fb9de762b6080ee8f4fcf4b30906d8a0a98301fff4aa3e49a7d1b25dcc8",
+    "fclr_volbroad01_source_registry_20261124T120000Z.json": "dae8bf2ab9a1310090127054c1b6e6d5c415b00e91dab668148e7eec3dc6af44",
     "fclr_volbroad01_source_registry_20261124T120000Z.md": "2753a3bc7b7702d797addf63990c70d67d038874e47645aaf511d41d17958735",
-    "fclr_volbroad01_prereg_20261124T120000Z.json": "86f11e48b8a52528799768cec8ef1b0622ae0fe79a5c6a2e90aee7951ce49c6b",
+    "fclr_volbroad01_prereg_20261124T120000Z.json": "bde5ee171fdc0d92fd2128323265a095d667f6a54974bb058b3a514719e0c96a",
     "fclr_volbroad01_prereg_20261124T120000Z.md": "0acb0955233f61d05bfe61ea4f2781fcccd707346ae9b364a8f7dbf9c3015240",
     "fclr_volbroad01_eval_20261124T120000Z.py": "efacbd4ba7574ef78c0f533ef2c3bc12f3936633e592854fcd5d839423b351aa",
     "fclr_volbroad01_eval_20261124T120000Z.json": "7f7d48f0d8b9649fae2ddaf6467f10bb8c8cc56df133630bced92a38a8cc98aa",
     "fclr_volbroad01_eval_20261124T120000Z.md": "30a7951d67b219030b0619a65d53e6f3e6ee0f4ba8008f35b98cde50ccdc8bf8",
     "fclr_volbroad01_recompute_20261124T120000Z.py": "55998db5f19d2df9f559a1954869ead1f02a6022fbb31beb0953c24fbdc1194a",
-    "fclr_volbroad01_recompute_20261124T120000Z.json": "800fff46bf41c0b0cbd1ca67977b4c7eaed1159b16a5a74b938b55d85536e37a",
+    "fclr_volbroad01_recompute_20261124T120000Z.json": "800fff46bf41c0b0cbd1ca67977b4c7eaed1159b16a5a74b938b55d85536e37a"
   },
   "sha256_asserted": true,
   "unresolved_blockers": [],
@@ -79,5 +90,6 @@
   "audit_pass": true,
   "verdict": "NOT_SUPPORTED",
   "audit_verdict": "CONSISTENT - eval and independent recompute agree (all_checks_match=true). Broad-panel funding-conditioned RV forecast returns NOT_SUPPORTED: the candidate does not clear the frozen 2% relative QLIKE materiality floor (1.93% < 2.0%). Null preserved honestly.",
-  "generated_utc": "2026-11-24T12:00:00Z"
+  "generated_utc": "2026-11-24T12:00:00Z",
+  "repair_note": "JSON re-serialized to strict RFC 8259 (removed trailing commas); source_registry gained an explicit top-level datasets map; prereg source_registry_sha256 rebound to the repaired registry; no scientific content, metric, or verdict changed."
 }

@@ -10,13 +10,13 @@
     "ran the HEAVY walk-forward evaluation (fclr_volbroad01_eval_ py+json+md): 23 test blocks, 684,301 forecasts, QLIKE/MSE with DM HAC, cluster-robust CR1, Driscoll-Kraay HAC, Holm",
     "ran the independent stdlib recompute (fclr_volbroad01_recompute_ py+json); all_checks_match:true",
     "completed the evidence audit (fclr_volbroad01_evidence_audit_ json+md); audit_pass:true, unresolved_blockers:[]",
-    "no network re-probe; no terminal campaign re-run; no risk overlay; no root-level artifact writes (all under session_20261124T120000Z/)",
+    "no network re-probe; no terminal campaign re-run; no risk overlay; no root-level artifact writes (all under session_20261124T120000Z/)"
   ],
   "artifact_integrity": {
     "all_required_files_non_empty": true,
     "no_zero_byte_placeholders": true,
     "sha256_sidecars_asserted": "54/54 ok",
-    "root_md_json_cap_respected": true,
+    "root_md_json_cap_respected": true
   },
   "result": {
     "verdict": "NOT_SUPPORTED",
@@ -24,11 +24,12 @@
     "qlike_candidate": 7.1729316269551315,
     "rel_qlike_pct": 1.9349378017191696,
     "materiality_met": false,
-    "materiality_floor_pct": 2.0,
+    "materiality_floor_pct": 2.0
   },
   "verdict_preservation": "null preserved honestly; materiality floor not relaxed; NOT_SUPPORTED reported per the frozen rule (1.93% relative QLIKE improvement below the 2% floor)",
   "track_status": "Half 1 (funding-conditioned volatility) broad-scale test: NOT_SUPPORTED (valid negative result closing Half 1 at 342+ coin scale); Half 2 (liquidation risk) confirmatory-exhausted on frozen ironflow_bulk panel",
   "generated_utc": "2026-11-24T12:00:00Z",
   "audit_pass": true,
-  "verdict": "NOT_SUPPORTED"
+  "verdict": "NOT_SUPPORTED",
+  "repair_note": "JSON re-serialized to strict RFC 8259 (removed trailing commas); no scientific content, metric, or verdict changed."
 }
