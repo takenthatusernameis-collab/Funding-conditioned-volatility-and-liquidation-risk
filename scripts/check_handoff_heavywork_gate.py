@@ -582,6 +582,43 @@ TRACKA_SOURCE_AUDIT_REQUIRED = (
 # 342-coin ironflow_bulk universe, but its prereg never tested TEMPORAL STABILITY
 # of the per-block rank-IC series. RESEARCH_PROMPT.md §17 promotion condition #4
 # requires that skill "is not dominated by ... one time block", and the sibling
+# FCLR-LIQ-RISK-PROGRAM-CLOSURE-01 hardening: the confirmatory liquidation-risk
+# program has exhausted all feasible paths on the frozen ironflow_bulk panel
+# (Track A STRUCTURALLY_BLOCKED; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED;
+# cross-sectional SUPPORTED_GENERALIZATION but NOT_STABLE + materiality floor
+# NOT MET). The next focus campaign is the formal program closure + complete
+# negative-results synthesis per RESEARCH_PROMPT.md §13/§19/§20. Once this
+# campaign starts (start UTC below), a post-start session cannot satisfy the
+# gate with a trigger-only, prose-only, audit-only, verify-and-stop, or
+# arbitrary recompute_* session. It must emit the outcome-blind closure protocol
+# freeze, the complete negative-results synthesis report, the frontier
+# exhaustion audit, the negative-results preservation record, the quantitative
+# meta-analysis triad, the independent stdlib recompute, the gate-critical
+# evidence_audit alias, and a non-empty trigger check, all under one fresh
+# session_<UTC>/ with no zero-byte placeholders. Sessions predating the
+# campaign start are grandfathered so this handoff refresh stays green.
+PROGRAM_CLOSURE_CAMPAIGN_RE = re.compile(
+    r"FCLR-LIQ-RISK-PROGRAM-CLOSURE-(\d+)-(\d{8}T\d{6}Z)"
+)
+PROGRAM_CLOSURE_REQUIRED = (
+    ("fclr_liq_risk_program_closure_protocol_freeze_", ".json"),
+    ("fclr_liq_risk_program_closure_protocol_freeze_", ".md"),
+    ("fclr_liq_risk_program_closure_synthesis_report_", ".json"),
+    ("fclr_liq_risk_program_closure_synthesis_report_", ".md"),
+    ("fclr_liq_risk_program_closure_frontier_exhaustion_audit_", ".json"),
+    ("fclr_liq_risk_program_closure_frontier_exhaustion_audit_", ".md"),
+    ("fclr_liq_risk_program_closure_negative_results_preservation_", ".json"),
+    ("fclr_liq_risk_program_closure_negative_results_preservation_", ".md"),
+    ("fclr_liq_risk_program_closure_meta_analysis_", ".py"),
+    ("fclr_liq_risk_program_closure_meta_analysis_", ".json"),
+    ("fclr_liq_risk_program_closure_meta_analysis_", ".md"),
+    ("fclr_liq_risk_program_closure_recompute_", ".py"),
+    ("fclr_liq_risk_program_closure_recompute_", ".json"),
+    ("evidence_audit_", ".json"),
+    ("evidence_audit_", ".md"),
+    ("trigger_check_", ".json"),
+)
+
 # FCLR-LIQ-CONTAGION-002 campaign was created precisely to close the same gap for
 # the contagion hypothesis (rolling-window edge-set stability). The BROAD-01
 # SUPPORTED finding is the ONLY liquidation-risk result ever marked SUPPORTED, and
@@ -1607,6 +1644,83 @@ def _session_synthesis_state(handoff_text: str, latest_sid: str | None,
         not out["missing_required_artifacts"]
         and not out["empty_required_artifacts"]
         and out["has_trigger_check"]
+    )
+    return out
+
+
+def _program_closure_state(handoff_text: str, latest_sid: str | None,
+                           latest_files: list[str],
+                           latest_dir: Path | None = None) -> dict:
+    """Return FCLR-LIQ-RISK-PROGRAM-CLOSURE-01 non-avoidance state.
+
+    After the formal program-closure campaign starts, a post-start session must
+    emit the complete eight-category closure artifact set under one fresh
+    session_<UTC>/ with no zero-byte placeholders: outcome-blind closure protocol
+    freeze (json+md), negative-results synthesis report (json+md), frontier
+    exhaustion audit (json+md), negative-results preservation (json+md),
+    quantitative meta-analysis triad (py+json+md), independent stdlib recompute
+    (py+json), gate-critical evidence_audit alias (json+md), and a non-empty
+    trigger check. A trigger-only, prose-only, audit-only, verify-and-stop, or
+    arbitrary recompute_* session fails closed. Sessions predating the campaign
+    start are grandfathered so the handoff refresh that first announces the
+    campaign remains green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "has_evidence_audit_alias": False,
+        "pass": True,
+    }
+    m = PROGRAM_CLOSURE_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = (
+        f"FCLR-LIQ-RISK-PROGRAM-CLOSURE-{m.group(1)}-{campaign_start}"
+    )
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in PROGRAM_CLOSURE_REQUIRED]
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, PROGRAM_CLOSURE_REQUIRED):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["has_evidence_audit_alias"] = any(
+        f.startswith("evidence_audit_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
+        and out["has_evidence_audit_alias"]
     )
     return out
 
@@ -2737,6 +2851,7 @@ def check(repo: Path = REPO) -> dict:
         "tracks01": None,
         "liq_xsec_broad": None,
         "broad_ts_01": None,
+        "program_closure": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -3393,6 +3508,33 @@ def check(repo: Path = REPO) -> dict:
                 if not bt["has_trigger_check"]:
                     payload["failures"].append(
                         f"BROAD_TS_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-LIQ-RISK-PROGRAM-CLOSURE-01: after the formal program-closure
+            # campaign starts, require the complete eight-category closure artifact
+            # set under one fresh session_<UTC>/ with no zero-byte placeholders.
+            pc = _program_closure_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["program_closure"] = pc
+            if pc["required"]:
+                if pc["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "PROGRAM_CLOSURE_ARTIFACTS_MISSING:"
+                        + ",".join(pc["missing_required_artifacts"])
+                    )
+                if pc["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "PROGRAM_CLOSURE_ARTIFACTS_EMPTY:"
+                        + ",".join(pc["empty_required_artifacts"])
+                    )
+                if not pc["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"PROGRAM_CLOSURE_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+                if not pc["has_evidence_audit_alias"]:
+                    payload["failures"].append(
+                        f"PROGRAM_CLOSURE_EVIDENCE_AUDIT_ALIAS_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
