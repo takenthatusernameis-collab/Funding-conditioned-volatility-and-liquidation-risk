@@ -262,27 +262,46 @@ def main():
         raise RuntimeError(f"input hash verification failed: {sha_bad} bad sidecars")
 
     print("Step 2: Load liquidations (dedup by coin/hour/tx_hash)", flush=True)
-    liq_frames = []
+    # Scalar sequential accumulation matching BROAD-01 exactly. A pandas
+    # groupby().sum() uses a different (pairwise/C-level) summation order and
+    # diverges from BROAD-01's per-row ``+=`` at machine epsilon for a few
+    # notional groups; the ill-conditioned unscaled RV fit amplifies that into a
+    # material headline gap. Keep BROAD-01's (month,row) order and Python ``+=``.
+    liq_count_long = {}
+    liq_notional_long = {}
+    liq_count_short = {}
+    liq_notional_short = {}
+    liq_tx_seen = set()
     liq_rows = 0
     for month in MONTHS:
         t = pq.read_table(BULK / "liquidations" / f"{month}.parquet")
-        df = t.to_pandas()
-        liq_rows += len(df)
-        df["coin"] = df["market"].map(coin_from_market)
-        df = add_hk(df, "timestamp")
-        df["txv"] = df["tx_hash"].astype(str)
-        df["noti"] = pd.to_numeric(df["notional_usd"], errors="coerce").fillna(0.0)
-        df["side"] = df["position_side"].astype(str).str.lower()
-        liq_frames.append(df[["coin", "hk", "txv", "noti", "side"]])
-    liq = pd.concat(liq_frames, ignore_index=True)
-    liq = liq.drop_duplicates(subset=["coin", "hk", "txv"])
-    liq_long = liq[liq["side"].str.startswith("long")]
-    liq_short = liq[liq["side"].str.startswith("short")]
-    liq_count_long = liq_long.groupby(["coin", "hk"]).size().to_dict()
-    liq_notional_long = liq_long.groupby(["coin", "hk"])["noti"].sum().to_dict()
-    liq_count_short = liq_short.groupby(["coin", "hk"]).size().to_dict()
-    liq_notional_short = liq_short.groupby(["coin", "hk"])["noti"].sum().to_dict()
-    print(f"  {liq_rows} rows, {len(liq)} unique events", flush=True)
+        ts = t.column("timestamp").to_pylist()
+        mk = t.column("market").to_pylist()
+        side = t.column("position_side").to_pylist()
+        notional = t.column("notional_usd").to_pylist()
+        tx = t.column("tx_hash").to_pylist()
+        n = t.num_rows
+        for i in range(n):
+            liq_rows += 1
+            coin = coin_from_market(mk[i])
+            hk = _hkey(ts[i])
+            txv = str(tx[i]) if tx[i] is not None else None
+            dk = (coin, hk, txv)
+            if dk in liq_tx_seen:
+                continue
+            liq_tx_seen.add(dk)
+            try:
+                noti = float(notional[i]) if notional[i] is not None else 0.0
+            except (TypeError, ValueError):
+                noti = 0.0
+            s = str(side[i]).lower() if side[i] is not None else ""
+            if s.startswith("long"):
+                liq_count_long[(coin, hk)] = liq_count_long.get((coin, hk), 0) + 1
+                liq_notional_long[(coin, hk)] = liq_notional_long.get((coin, hk), 0.0) + noti
+            elif s.startswith("short"):
+                liq_count_short[(coin, hk)] = liq_count_short.get((coin, hk), 0) + 1
+                liq_notional_short[(coin, hk)] = liq_notional_short.get((coin, hk), 0.0) + noti
+    print(f"  {liq_rows} rows, {len(liq_tx_seen)} unique events", flush=True)
 
     print("Step 3: Load candles (close + coin identity)", flush=True)
     candle_frames = []
@@ -368,6 +387,13 @@ def main():
         mkt_df = candles[(candles["market"] == mkt)].sort_values("hk")
         mkt_hours = mkt_df["hk"].to_list()
         closes = [float(v) for v in mkt_df["close"].to_list()]
+        # BROAD-01 fidelity: in BROAD-01's second per-hour loop ``c`` is never
+        # reassigned, so it stays equal to the market's LAST close (left over
+        # from the returns loop). ma_dev is therefore (last_close/prev_close-1)
+        # for every origin, not (close[i]/close[i-1]-1). This is a reference
+        # quirk that must be reproduced verbatim; "fixing" it changes the
+        # funding-conditioned fit materially. Preserve it.
+        last_close = closes[-1] if closes else 0.0
         rets = []
         cum = [0.0]
         for i, c in enumerate(closes):
@@ -379,7 +405,7 @@ def main():
             s24 = cum[i + 1] - cum[max(0, i - 23)]
             s168 = cum[i + 1] - cum[max(0, i - 167)]
             prev_c = closes[i - 1] if i > 0 else None
-            ma_dev = (c / prev_c - 1.0) if i > 0 else 0.0
+            ma_dev = (last_close / prev_c - 1.0) if i > 0 else 0.0
             fund, prem = fund_val.get((mkt, hk), (0.0, 0.0))
             oi = oi_val.get((mkt, hk), 0.0) or 0.0
             mk_p = mark_val.get((mkt, hk))
@@ -399,18 +425,30 @@ def main():
     print(f"  {len(series_df)} series rows, {series_df['coin'].nunique()} coins", flush=True)
 
     print("Step 6: Train-only scaling + abs funding percentile", flush=True)
+    # BROAD-01 computes mean/std with sequential Python ``sum`` over coin-major
+    # (sorted coin, hk) order. numpy mean/std use pairwise summation and a
+    # different variance algorithm, which diverges at machine epsilon. Replicate
+    # BROAD-01's exact order and arithmetic so the z-scores are bit-identical.
     scale_feats = ["rv24", "rv168", "fund", "prem", "oi", "dislocation", "ma_dev"]
     sc = {}
-    train_mask_df = series_df["hk"].isin(train_hours)
+    train_coin_major_scale = series_df.sort_values(["coin", "hk"], kind="mergesort")
+    train_mask_scale = train_coin_major_scale["hk"].isin(train_hours)
     for feat in scale_feats:
-        vals = series_df.loc[train_mask_df, feat].values
-        vals = vals[np.isfinite(vals)]
-        if len(vals) > 0:
-            sc[feat] = (float(np.mean(vals)), float(np.std(vals)) if np.std(vals) > 0 else 1.0)
+        vals = []
+        for v in train_coin_major_scale.loc[train_mask_scale, feat].tolist():
+            if v is None or (isinstance(v, float) and math.isnan(v)):
+                continue
+            vals.append(float(v))
+        if vals:
+            m = sum(vals) / len(vals)
+            var = sum((x - m) ** 2 for x in vals) / len(vals)
+            s = math.sqrt(var) if var > 0 else 1.0
+            sc[feat] = (m, s)
         else:
             sc[feat] = (0.0, 1.0)
 
     abs_fund_train = {}
+    train_mask_df = series_df["hk"].isin(train_hours)
     for coin in test_coins:
         funds = series_df[(series_df["coin"] == coin) & train_mask_df]["fund"].abs().values
         abs_fund_train[coin] = funds
@@ -498,30 +536,42 @@ def main():
     print("Step 8: Fit OLS models on train", flush=True)
 
     def b1_X(df):
+        # BROAD-01 builds features with scalar math.log(max(v,0)+eps). numpy's
+        # vectorized log can differ from libm math.log by 1 ULP on a few inputs;
+        # the ill-conditioned unscaled RV OLS amplifies that. Use math.log.
+        rv24 = df["rv24"].tolist()
+        rv168 = df["rv168"].tolist()
         return np.column_stack([
             np.ones(len(df)),
-            np.log(np.maximum(df["rv24"].values, 0.0) + EPS),
-            np.log(np.maximum(df["rv168"].values, 0.0) + EPS),
+            np.array([math.log(max(v, 0.0) + EPS) for v in rv24], dtype=float),
+            np.array([math.log(max(v, 0.0) + EPS) for v in rv168], dtype=float),
         ])
 
     def c2_X(df):
+        rv24 = df["rv24"].tolist()
+        rv168 = df["rv168"].tolist()
         return np.column_stack([
             np.ones(len(df)),
-            np.log(np.maximum(df["rv24"].values, 0.0) + EPS),
-            np.log(np.maximum(df["rv168"].values, 0.0) + EPS),
+            np.array([math.log(max(v, 0.0) + EPS) for v in rv24], dtype=float),
+            np.array([math.log(max(v, 0.0) + EPS) for v in rv168], dtype=float),
             df["z_fund"].values, df["abs_fund_pct"].values,
             df["z_prem"].values, df["z_oi"].values,
             df["z_dislocation"].values, df["z_ma_dev"].values,
         ])
 
     def fit_side(df, feat_fn, side_key):
-        fi = df[side_key].values.astype(float)
-        fi = np.where((fi is None) | (fi <= 0), 1.0, fi)
+        fi_raw = df[side_key].values.astype(float)
+        # BROAD-01 fit loop maps fi <= 0 (and None) -> 1.0.
+        fi_fit = np.where(fi_raw <= 0, 1.0, fi_raw)
         x_rows = feat_fn(df).tolist()
-        y = [math.log(float(v) + EPS) for v in fi]
+        y = [math.log(float(v) + EPS) for v in fi_fit]
         beta = ols_fit(x_rows, y)
+        # BROAD-01 residual loop only maps None -> 1.0; a 0.0 notional stays 0.0
+        # so its residual uses log(EPS), not log(1+EPS). Reproduce this quirk
+        # verbatim so the Duan smearing factor matches the sealed reference.
         resid = [
-            y[i] - sum(a * b for a, b in zip(x_rows[i], beta))
+            math.log(float(fi_raw[i]) + EPS)
+            - sum(a * b for a, b in zip(x_rows[i], beta))
             for i in range(len(x_rows))
         ]
         smear = sum(math.exp(v) for v in resid) / len(resid) if resid else 1.0
@@ -581,6 +631,14 @@ def main():
     ic_B1_s = np.array([b["ic"] for b in ic_blocks_B1_s])
     block_start_hs = [b["block_start_h"] for b in ic_blocks_C2_l]
     block_indices = [b["block_index"] for b in ic_blocks_C2_l]
+    import os as _os
+    if _os.environ.get("FCLR_DEBUG"):
+        print("DEBUG beta_B1_l", list(beta_B1_l), flush=True)
+        print("DEBUG beta_C2_l", list(beta_C2_l), flush=True)
+        print("DEBUG smear_B1_l", smear_B1_l, "smear_C2_l", smear_C2_l, flush=True)
+        print("DEBUG ic_B1_l", [round(float(x), 12) for x in ic_B1_l], flush=True)
+        print("DEBUG ic_C2_l", [round(float(x), 12) for x in ic_C2_l], flush=True)
+        print("DEBUG block_indices", block_indices, flush=True)
 
     mean_ic_C2_l = float(np.mean(ic_C2_l)) if len(ic_C2_l) > 0 else float("nan")
     mean_ic_C2_s = float(np.mean(ic_C2_s)) if len(ic_C2_s) > 0 else float("nan")
@@ -789,25 +847,52 @@ def main():
     print(f"  First-half mean={first_half_mean:.6f} second-half mean={second_half_mean:.6f} gap={gap:.6f} CI95=[{gap_ci_lo:.6f},{gap_ci_hi:.6f}] excludes_sign_reversal={gap_ci_excludes_sign_reversal}", flush=True)
 
     print("Step 17: Per-regime sign stability (RV-tercile, UTC-bucket)", flush=True)
+    # Prereg battery item 6: RV-tercile and UTC-session bucket sign stability.
+    reg = pred_C2_l.merge(test_df[["coin", "hk", "rv168"]], on=["coin", "hk"], how="left")
+
+    # RV-tercile: within each test block, split coins into 3 equal terciles by
+    # trailing rv168 at the origin, compute the cross-sectional rank-IC inside
+    # each tercile, and record its sign.
     rv_tercile_signs = []
+    rv_tercile_cells = []
+    for bi, grp in reg.groupby("block"):
+        grp = grp[np.isfinite(grp["rv168"].values)]
+        if len(grp) < 9:
+            continue
+        order = np.argsort(grp["rv168"].values, kind="mergesort")
+        for t_idx, idx in enumerate(np.array_split(order, 3)):
+            sub = grp.iloc[idx]
+            if len(sub) < 3:
+                continue
+            ic_val = spearman_rank_ic(sub["pred"].values, sub["actual"].values)
+            if np.isfinite(ic_val):
+                rv_tercile_signs.append(bool(ic_val > 0))
+                rv_tercile_cells.append({"block": int(bi), "tercile": int(t_idx),
+                                         "ic": float(ic_val), "n": int(len(sub))})
+    rv_tercile_frac_positive = float(np.mean(rv_tercile_signs)) if rv_tercile_signs else float("nan")
+
+    # UTC-session bucket: Asian [0,8), European [8,16), US [16,24) by origin hk.
+    def utc_session(hk):
+        hr = (int(hk) // 3600) % 24
+        if 0 <= hr < 8:
+            return "asian"
+        if 8 <= hr < 16:
+            return "european"
+        return "us"
+
+    reg["session"] = [utc_session(h) for h in reg["hk"].values]
     utc_bucket_signs = []
-    for bi, blk in enumerate(blocks):
-        grp = pred_C2_l[pred_C2_l["block"] == bi]
+    for (bi, sess), grp in reg.groupby(["block", "session"], sort=True):
         if len(grp) < 5:
             continue
         ic_val = spearman_rank_ic(grp["pred"].values, grp["actual"].values)
         if np.isfinite(ic_val):
-            rv_tercile_signs.append(ic_val > 0)
-            utc_hour = blk[0]
-            utc_bucket = (utc_hour // 3600) % 24
-            utc_bucket_signs.append((utc_bucket, ic_val > 0))
-
-    rv_tercile_frac_positive = float(np.mean(rv_tercile_signs)) if len(rv_tercile_signs) > 0 else float("nan")
-    bucket_signs_dict = {}
-    for bkt, sign in utc_bucket_signs:
-        bucket_signs_dict.setdefault(bkt, []).append(sign)
-    utc_buckets_positive = sum(1 for signs in bucket_signs_dict.values() if np.mean(signs) > 0.5)
-    utc_buckets_total = len(bucket_signs_dict)
+            utc_bucket_signs.append((sess, bool(ic_val > 0)))
+    session_signs_dict = {}
+    for sess, sign in utc_bucket_signs:
+        session_signs_dict.setdefault(sess, []).append(sign)
+    utc_buckets_positive = sum(1 for signs in session_signs_dict.values() if np.mean(signs) > 0.5)
+    utc_buckets_total = len(session_signs_dict)
     utc_frac_positive = float(utc_buckets_positive / utc_buckets_total) if utc_buckets_total > 0 else float("nan")
     print(f"  RV-tercile frac positive: {rv_tercile_frac_positive:.4f} ({sum(rv_tercile_signs)}/{len(rv_tercile_signs)})", flush=True)
     print(f"  UTC buckets positive: {utc_buckets_positive}/{utc_buckets_total} frac={utc_frac_positive:.4f}", flush=True)
@@ -940,6 +1025,7 @@ def main():
             "looic_min": loic_min,
             "looic_max": loic_max,
             "rv_tercile_frac_positive": rv_tercile_frac_positive,
+            "rv_tercile_cells": rv_tercile_cells,
             "utc_frac_positive": utc_frac_positive,
             "utc_buckets_positive": utc_buckets_positive,
             "utc_buckets_total": utc_buckets_total,

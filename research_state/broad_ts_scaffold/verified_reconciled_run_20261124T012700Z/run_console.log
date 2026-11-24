@@ -1,0 +1,42 @@
+Step 1: SHA-256 verification
+  SHA-256: 72 ok, 0 bad
+Step 2: Load liquidations (dedup by coin/hour/tx_hash)
+  2849452 rows, 956877 unique events
+Step 3: Load candles (close + coin identity)
+  12586 hours, 799 markets
+Step 4: Load funding + OI
+  done
+Step 5: Build per-market time series with cumulative-sum RV
+  3643742 series rows, 799 coins
+Step 6: Train-only scaling + abs funding percentile
+  done
+Step 7: Build test panel + train panel
+  test rows: 1715710, train rows (subsampled): 9508
+Step 8: Fit OLS models on train
+  OLS fits done
+Step 9: Predict on test + per-block rank-IC with block start hours
+  Deviance: long B1=14895.300477 C2=14929.610988 rel_imp=-0.002303
+  Deviance: short B1=13423.736369 C2=13328.791641 rel_imp=0.007073
+  BROAD-01 fidelity reconciliation: PASS
+Step 10: Block bootstrap CI95 (N=2000)
+  Bootstrap CI95: [0.142296, 0.168264]
+Step 11: Placebo/permutation null (N=1000)
+  Placebo 95th percentile: 0.001289, true effect exceeds: True
+Step 12: Leave-one-block-out range of mean rank-IC (long arm)
+  LOOIC range: [0.152453, 0.157673] range=0.005220
+Step 13: Leave-one-instrument-out (8 subsets)
+  LOIO: 8 valid, 8 sign reproduced, pass=True
+Step 14: Rolling-window rank-IC (6-block) min/median/max + CI95 interval
+  Rolling 6-block: min=0.118543 median=0.153692 max=0.183882 CI95=[0.109359,0.197771]
+Step 15: Ordered-block monotone trend test (Spearman block-index vs rank-IC)
+  Trend rho=-0.369967 p_two_sided=0.048951 not_reject=True
+Step 16: First-half vs second-half mean rank-IC gap with bootstrap CI
+  First-half mean=0.171861 second-half mean=0.138406 gap=-0.033455 CI95=[-0.026532,0.026818] excludes_sign_reversal=False
+Step 17: Per-regime sign stability (RV-tercile, UTC-bucket)
+  RV-tercile frac positive: 0.4222 (38/90)
+  UTC buckets positive: 3/3 frac=1.0000
+Step 18: Holm across declared stability family
+Step 19: Verdict (STABLE / NOT_STABLE)
+WROTE /home/runner/work/_temp/kilo-tmp/fclr_probe/fclr_liqxsecbroad01_ts_eval_20261123T164423Z.json
+WROTE /home/runner/work/_temp/kilo-tmp/fclr_probe/fclr_liqxsecbroad01_ts_eval_20261123T164423Z.md
+Verdict: NOT_STABLE, mean_IC_C2_long=0.155133
