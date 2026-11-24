@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-24T02:52:46Z
+# AGENT HANDOFF — 2026-11-24T02:56:53Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -13,11 +13,11 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-24T02:52:46Z**
+> **Timestamped initial task message — inferred 2026-11-24T02:56:53Z**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. The liquidation-risk half (RESEARCH_PROMPT.md §3.2 half 2) is unfinished but all confirmatory paths are exhausted on the frozen panel. The next session's single, non-deferrable job is the **FORMAL PROGRAM CLOSURE + NEGATIVE RESULTS SYNTHESIS** campaign per RESEARCH_PROMPT.md §13, §19, §20.
 >
-> **THE NEXT FOCUS CAMPAIGN (rank-0, mandatory heavy work): `FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025246Z`**
+> **THE NEXT FOCUS CAMPAIGN (rank-0, mandatory heavy work): `FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025653Z`**
 >
 > Execute a formal confirmatory-program closure with a complete negative-results synthesis. This is HEAVY WORK — not a status memo, not a probe, not a trigger-check-only session. The confirmatory liquidation-risk program has exhausted all feasible paths on the frozen ironflow_bulk panel (2025-05..2026-10, 2,849,452 liquidation rows, 342 coins, 799 test markets):
 > - **Track A (observed liquidations):** STRUCTURALLY_BLOCKED — ironflow_bulk is a capped-sample feed, not a complete census; cannot establish absence.
@@ -26,7 +26,7 @@
 > - **Cross-sectional rank ordering:** SUPPORTED_GENERALIZATION (BROAD-01, rank-IC +0.155, CI95 excludes null) but NOT_STABLE (BROAD-TS, temporal stability fails §17 condition #4) and Poisson-deviance materiality floor (2%) NOT MET on either arm.
 > - **Shek 2026 replication (H002):** PARTIAL_REPLICATION, non-confirmatory (p=0.079, magnitudes differ).
 >
-> **Next agent's single job:** Produce the complete closure artifact set under a fresh `research_state/session_<UTC>/` (UTC strictly > 20261124T02:52:46Z), prefix `fclr_liq_risk_program_closure_`, all non-empty, no zero-byte placeholders:
+> **Next agent's single job:** Produce the complete closure artifact set under a fresh `research_state/session_<UTC>/` (UTC strictly > 20261124T02:56:53Z), prefix `fclr_liq_risk_program_closure_`, all non-empty, no zero-byte placeholders:
 > 1. `fclr_liq_risk_program_closure_protocol_freeze.{json,md}` — outcome-blind closure protocol freeze (hash-bound to RESEARCH_PROMPT.md §13/§19/§20), `outcome_data_inspected_before_freeze:false`, input sha256 assertions.
 > 2. `fclr_liq_risk_program_closure_synthesis_report.{json,md}` — complete negative-results synthesis across all tracks/hypotheses/experiments with exact verdicts, CIs, artifact paths, and evidence.
 > 3. `fclr_liq_risk_program_closure_frontier_exhaustion_audit.{json,md}` — audit proving no feasible confirmatory design remains on admissible frozen data (per RESEARCH_PROMPT.md §16 three-blocked-routes rule spanning two+ source families/methods).
@@ -120,6 +120,8 @@ The scaffold reproduces BROAD-01's sealed headline BIT-EXACTLY (long mean rank-I
 | `research_state/experiment_frontier.json` | rank-0 is BROAD-TS (COMPLETED, NOT_STABLE); retire and promote closure campaign. |
 | `research_state/final_synthesis_report.md` | Historical synthesis (2026-11-10), superseded by active closure campaign. |
 | `research_state/negative_results_report.md` | Null/failed/inconclusive outcomes preserved (FCLR-001/002/003/009/014, Track B, Track C). |
+| `research_state/fclr_final_structural_closure_20261124T025751.{md,json}` | Terminal structural closure: program_status=CLOSED_TERMINAL, 71 rows, 0 §17 promotion met. |
+| `research_state/resume_trigger_registry.json` | Four reopen triggers (GATE4_BRANCH_1, NEW_OBSERVED_LIQUIDATION_SOURCE, HL_LABEL_EXTENSION, EXPANSION_ROBUSTNESS_REDO); all status=OPEN, do_not_act_until_satisfied=true. |
 
 Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before reading; do not mutate caches.
 
@@ -136,6 +138,7 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 - `research_state/session_20261124T015114Z/` — complete BROAD_TS artifact set.
 - `research_state/final_synthesis_report.md` — historical synthesis.
 - `research_state/negative_results_report.md` — preserved nulls/negatives.
+- `research_state/fclr_final_structural_closure_20261124T025751.{md,json}` — terminal closure evidence.
 
 ---
 
@@ -145,13 +148,15 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 - Refreshed AGENT_HANDOFF.md as the sole durable handoff after BROAD-TS artifact materialization under `session_20261124T015114Z/`.
 - BROAD-TS campaign complete: verdict NOT_STABLE, bit-exact fidelity (abs error 0.0), heavy-work gate SATISFIED.
 - All confirmatory liquidation-risk tracks exhausted on frozen panel.
-- Next focus campaign set: `FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025246Z` — formal program closure + negative-results synthesis (mandatory heavy work, eight-artifact set).
+- Terminal structural closure generated: `fclr_final_structural_closure_20261124T025751.{md,json}` confirms CLOSED_TERMINAL, 0/71 rows meet §17 promotion.
+- Next focus campaign set: `FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025653Z` — formal program closure + negative-results synthesis (mandatory heavy work, eight-artifact set).
 
 **Exact test outcomes with paths:**
 - Heavy-work gate: `python3 scripts/check_handoff_heavywork_gate.py --json` → reason=OK (SATISFIED)
 - Campaign gate unittests: all 126 tests pass
 - BROAD-TS eval: fidelity reconciliation PASS (abs error 0.0), verdict NOT_STABLE
 - Recompute: all_checks_match:true
+- Terminal closure: `python3 scripts/fclr_final_structural_closure.py` → program_status=CLOSED_TERMINAL, section17_promotion_met_any=0
 
 **State of each research gate:**
 - Heavy-work gate: **SATISFIED** (BROAD_TS artifact set complete, fidelity reconciled)
@@ -166,6 +171,9 @@ Execute `FCLR-LIQ-RISK-PROGRAM-CLOSURE-01` — formal program closure + complete
 
 **Precise verifying commands:**
 ```bash
+# 0. One-time environment setup if needed
+python3 -m pip install --quiet numpy pandas pyarrow
+
 # 1. Heavy-work gate must return reason=OK
 python3 scripts/check_handoff_heavywork_gate.py --json
 
@@ -182,7 +190,10 @@ python3 -m unittest \
 python3 -m py_compile \
   research_state/broad_ts_scaffold/fclr_liqxsecbroad01_ts_eval_20261123T164423Z.py
 
-# 4. Context only: the old 3-block scanner does not assess BROAD-TS feasibility
+# 4. Terminal closure must confirm CLOSED_TERMINAL
+python3 scripts/fclr_final_structural_closure.py
+
+# 5. Context only: the old 3-block scanner does not assess BROAD-TS feasibility
 python3 scripts/next_campaign_status.py
 ```
 
@@ -199,6 +210,7 @@ python3 scripts/next_campaign_status.py
 - **RESOLVED (multiple durable handoffs):** contradictory terminal-closure file at `research_state/handoff_archive/AGENT_HANDOFF_20261123T163509Z.md`; `AGENT_HANDOFF.md` is the only root handoff.
 - **RESOLVED (artifact materialization):** full BROAD_TS artifact set produced under `session_20261124T015114Z/`. Heavy-work gate SATISFIED.
 - **RESOLVED (verify-and-stop bottleneck):** the active heavy campaign is rank-0 COMPLETE; verify-and-stop is not a permitted completion. The next agent must execute the closure campaign or formally justify a materially different route.
+- **RESOLVED (terminal structural closure):** `fclr_final_structural_closure_20261124T025751.{md,json}` confirms CLOSED_TERMINAL with 0/71 rows meeting §17 promotion; all four reopen triggers remain OPEN with do_not_act_until_satisfied=true.
 - **OPEN (next frontier decision):** closure campaign `FCLR-LIQ-RISK-PROGRAM-CLOSURE-01` must be executed — eight mandatory artifacts under a fresh `session_<UTC>/`, no zero-byte placeholders, all in one session.
 
 ---
@@ -225,7 +237,10 @@ python3 -m unittest \
 python3 -m py_compile \
   research_state/broad_ts_scaffold/fclr_liqxsecbroad01_ts_eval_20261123T164423Z.py
 
-# 4. Context only: the old 3-block scanner does not assess BROAD-TS feasibility
+# 4. Terminal closure must confirm CLOSED_TERMINAL
+python3 scripts/fclr_final_structural_closure.py
+
+# 5. Context only: the old 3-block scanner does not assess BROAD-TS feasibility
 python3 scripts/next_campaign_status.py
 ```
 
@@ -233,7 +248,7 @@ python3 scripts/next_campaign_status.py
 
 **Active rank-0 campaign: `FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z`** — COMPLETED, artifacts produced, NOT_STABLE verdict. Retire upon closure campaign promotion.
 
-**Next focus campaign: `FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025246Z`** — formal program closure + negative-results synthesis; mandatory heavy work; eight-artifact set under fresh `session_<UTC>/`.
+**Next focus campaign: `FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025653Z`** — formal program closure + negative-results synthesis; mandatory heavy work; eight-artifact set under fresh `session_<UTC>/`.
 
 **Program status: CONFIRMATORY PROGRAM CONCLUDED — NEGATIVE RESULTS SYNTHESIS PENDING.** All confirmatory liquidation-risk tracks exhausted; forecast gate NOT PASSED; risk overlay INELIGIBLE; closure campaign REQUIRED.
 
