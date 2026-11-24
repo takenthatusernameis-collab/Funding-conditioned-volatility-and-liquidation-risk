@@ -1,0 +1,13 @@
+{
+  "experiment_id": "FCLR-LIQ-XSEC-BROAD-TS-01",
+  "campaign": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z",
+  "session_utc": "20261124T015114Z",
+  "trigger_type": "none_required",
+  "trigger_fired": false,
+  "reason": "Frozen data panel (ironflow_bulk 2025-05..2026-10); no external trigger can fire on frozen data. NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data and is not a valid reason to idle per RESEARCH_PROMPT.md §16/§19.",
+  "data_frozen": true,
+  "data_hash_verified": true,
+  "prereg_frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "note": "This session materializes the full BROAD_TS artifact set under a fresh session directory as mandated by the heavy-work gate. The eval emits NOT_STABLE (honest verdict). No external trigger is required or expected."
+}

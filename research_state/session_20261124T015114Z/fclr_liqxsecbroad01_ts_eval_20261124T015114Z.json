@@ -1,0 +1,1426 @@
+{
+  "experiment_id": "FCLR-LIQ-XSEC-BROAD-TS-01",
+  "campaign": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z",
+  "session_utc": "20261124T015114Z",
+  "software": "numpy + pandas + pyarrow (parquet read only); cross-sectional statistical evaluation is independent stdlib/numpy code",
+  "label_construct": "observed_ironflow_liquidation_intensity_capped_sample",
+  "label_caveat": "ironflow liquidations are a capped-sample feed (not a complete census per RESEARCH_PROMPT.md section 15); absence != zero; claims restricted to presence/intensity ordering",
+  "input_integrity": {
+    "sha256_sidecars_total": 72,
+    "sha256_verified_ok": 72,
+    "sha256_verified_bad": 0,
+    "sha256_all_match": true
+  },
+  "coverage": {
+    "n_distinct_hours": 12586,
+    "train_hours": 7551,
+    "test_hours_after_purge": 4987,
+    "n_test_blocks": 30,
+    "n_test_blocks_valid": 30,
+    "n_test_coins": 799,
+    "n_survivor_coins": 637,
+    "n_exited_coins": 162,
+    "n_test_rows": 1715710,
+    "n_liquidation_rows": 2849452
+  },
+  "fit": {
+    "n_train_rows_B1_long": 9508,
+    "n_train_rows_C2_long": 9508,
+    "n_train_rows_B1_short": 9508,
+    "n_train_rows_C2_short": 9508
+  },
+  "fidelity_reconciliation": {
+    "long_mean_rank_ic_c2_eval": 0.1551333434568285,
+    "long_mean_rank_ic_c2_broad01": 0.1551333434568285,
+    "long_mean_rank_ic_c2_abs_error": 0.0,
+    "long_poisson_deviance_b1_eval": 14895.300476998453,
+    "long_poisson_deviance_b1_broad01": 14895.300476998453,
+    "long_poisson_deviance_b1_abs_error": 0.0,
+    "tolerance": 0.001,
+    "short_arm_prediction_target_follows_broad01": true,
+    "reconciled": true
+  },
+  "headline_long": {
+    "mean_rank_IC_C2": 0.1551333434568285,
+    "mean_rank_IC_B1": -0.016518511115477096,
+    "n_blocks": 30,
+    "poisson_deviance_B1": 14895.300476998453,
+    "poisson_deviance_C2": 14929.610988368642,
+    "relative_improvement": -0.0023034454003242363,
+    "relative_improvement_pct": -0.23034454003242363,
+    "sign_convention": "(baseline - candidate) / baseline, positive = candidate better",
+    "materiality_floor_pct": 2.0,
+    "materiality_met": false
+  },
+  "headline_short": {
+    "mean_rank_IC_C2": -0.0020543155176227807,
+    "mean_rank_IC_B1": -0.07345071439616195,
+    "n_blocks": 30,
+    "poisson_deviance_B1": 13423.736369446207,
+    "poisson_deviance_C2": 13328.791640657253,
+    "relative_improvement": 0.007072898794784006,
+    "relative_improvement_pct": 0.7072898794784006,
+    "sign_convention": "(baseline - candidate) / baseline, positive = candidate better",
+    "materiality_floor_pct": 2.0,
+    "materiality_met": false
+  },
+  "per_block_series": {
+    "ic_C2_l": [
+      {
+        "block_index": 0,
+        "block_start_h": 1775538000,
+        "ic": 0.16002598923294029,
+        "n_coins": 57977
+      },
+      {
+        "block_index": 1,
+        "block_start_h": 1776142800,
+        "ic": 0.16944265480460163,
+        "n_coins": 57940
+      },
+      {
+        "block_index": 2,
+        "block_start_h": 1776747600,
+        "ic": 0.19022007011604675,
+        "n_coins": 56807
+      },
+      {
+        "block_index": 3,
+        "block_start_h": 1777352400,
+        "ic": 0.20295449162528947,
+        "n_coins": 57025
+      },
+      {
+        "block_index": 4,
+        "block_start_h": 1777957200,
+        "ic": 0.14247874110039624,
+        "n_coins": 58245
+      },
+      {
+        "block_index": 5,
+        "block_start_h": 1778562000,
+        "ic": 0.1739445069633786,
+        "n_coins": 58374
+      },
+      {
+        "block_index": 6,
+        "block_start_h": 1779166800,
+        "ic": 0.1695249989128286,
+        "n_coins": 59449
+      },
+      {
+        "block_index": 7,
+        "block_start_h": 1779771600,
+        "ic": 0.2241693276479162,
+        "n_coins": 58623
+      },
+      {
+        "block_index": 8,
+        "block_start_h": 1780376400,
+        "ic": 0.184934999623981,
+        "n_coins": 59691
+      },
+      {
+        "block_index": 9,
+        "block_start_h": 1780981200,
+        "ic": 0.16766729456728108,
+        "n_coins": 57365
+      },
+      {
+        "block_index": 10,
+        "block_start_h": 1781586000,
+        "ic": 0.14667673345362287,
+        "n_coins": 54894
+      },
+      {
+        "block_index": 11,
+        "block_start_h": 1782190800,
+        "ic": 0.1488147196684646,
+        "n_coins": 54559
+      },
+      {
+        "block_index": 12,
+        "block_start_h": 1782795600,
+        "ic": 0.13641087970403665,
+        "n_coins": 52869
+      },
+      {
+        "block_index": 13,
+        "block_start_h": 1783400400,
+        "ic": 0.1788724893146508,
+        "n_coins": 52122
+      },
+      {
+        "block_index": 14,
+        "block_start_h": 1784005200,
+        "ic": 0.1817724890780033,
+        "n_coins": 52486
+      },
+      {
+        "block_index": 15,
+        "block_start_h": 1784610000,
+        "ic": 0.15381958655827827,
+        "n_coins": 52847
+      },
+      {
+        "block_index": 16,
+        "block_start_h": 1785214800,
+        "ic": 0.12246133660265021,
+        "n_coins": 53212
+      },
+      {
+        "block_index": 17,
+        "block_start_h": 1785819600,
+        "ic": 0.08147796723233759,
+        "n_coins": 53978
+      },
+      {
+        "block_index": 18,
+        "block_start_h": 1786424400,
+        "ic": 0.08417703575782795,
+        "n_coins": 54881
+      },
+      {
+        "block_index": 19,
+        "block_start_h": 1787029200,
+        "ic": 0.08754868285880185,
+        "n_coins": 60693
+      },
+      {
+        "block_index": 20,
+        "block_start_h": 1787634000,
+        "ic": 0.23287171640755028,
+        "n_coins": 60228
+      },
+      {
+        "block_index": 21,
+        "block_start_h": 1788238800,
+        "ic": 0.10834952318736686,
+        "n_coins": 58897
+      },
+      {
+        "block_index": 22,
+        "block_start_h": 1788843600,
+        "ic": 0.18398956822030477,
+        "n_coins": 59176
+      },
+      {
+        "block_index": 23,
+        "block_start_h": 1789448400,
+        "ic": 0.12834757769765676,
+        "n_coins": 60671
+      },
+      {
+        "block_index": 24,
+        "block_start_h": 1790053200,
+        "ic": 0.15298516223799946,
+        "n_coins": 61336
+      },
+      {
+        "block_index": 25,
+        "block_start_h": 1790658000,
+        "ic": 0.14803271104586865,
+        "n_coins": 60824
+      },
+      {
+        "block_index": 26,
+        "block_start_h": 1791262800,
+        "ic": 0.12359344649135058,
+        "n_coins": 61331
+      },
+      {
+        "block_index": 27,
+        "block_start_h": 1791867600,
+        "ic": 0.17893807234077452,
+        "n_coins": 62345
+      },
+      {
+        "block_index": 28,
+        "block_start_h": 1792472400,
+        "ic": 0.12274080856920853,
+        "n_coins": 62639
+      },
+      {
+        "block_index": 29,
+        "block_start_h": 1793077200,
+        "ic": 0.16675672268344024,
+        "n_coins": 44226
+      }
+    ],
+    "ic_B1_l": [
+      {
+        "block_index": 0,
+        "block_start_h": 1775538000,
+        "ic": -0.013080727252018035,
+        "n_coins": 57977
+      },
+      {
+        "block_index": 1,
+        "block_start_h": 1776142800,
+        "ic": -0.01543030730469485,
+        "n_coins": 57940
+      },
+      {
+        "block_index": 2,
+        "block_start_h": 1776747600,
+        "ic": 0.03286559221378793,
+        "n_coins": 56807
+      },
+      {
+        "block_index": 3,
+        "block_start_h": 1777352400,
+        "ic": 0.06846011060946777,
+        "n_coins": 57025
+      },
+      {
+        "block_index": 4,
+        "block_start_h": 1777957200,
+        "ic": -0.007545642723700698,
+        "n_coins": 58245
+      },
+      {
+        "block_index": 5,
+        "block_start_h": 1778562000,
+        "ic": -0.02922296682906224,
+        "n_coins": 58374
+      },
+      {
+        "block_index": 6,
+        "block_start_h": 1779166800,
+        "ic": -0.036752426330906106,
+        "n_coins": 59449
+      },
+      {
+        "block_index": 7,
+        "block_start_h": 1779771600,
+        "ic": 0.039747357772884725,
+        "n_coins": 58623
+      },
+      {
+        "block_index": 8,
+        "block_start_h": 1780376400,
+        "ic": 0.005582667745277386,
+        "n_coins": 59691
+      },
+      {
+        "block_index": 9,
+        "block_start_h": 1780981200,
+        "ic": -0.0034224644746205252,
+        "n_coins": 57365
+      },
+      {
+        "block_index": 10,
+        "block_start_h": 1781586000,
+        "ic": -0.03110284729777142,
+        "n_coins": 54894
+      },
+      {
+        "block_index": 11,
+        "block_start_h": 1782190800,
+        "ic": -0.00024641366415846766,
+        "n_coins": 54559
+      },
+      {
+        "block_index": 12,
+        "block_start_h": 1782795600,
+        "ic": -0.04669291771939477,
+        "n_coins": 52869
+      },
+      {
+        "block_index": 13,
+        "block_start_h": 1783400400,
+        "ic": 0.009660873757616826,
+        "n_coins": 52122
+      },
+      {
+        "block_index": 14,
+        "block_start_h": 1784005200,
+        "ic": 0.018379105413380052,
+        "n_coins": 52486
+      },
+      {
+        "block_index": 15,
+        "block_start_h": 1784610000,
+        "ic": -0.01249294165162632,
+        "n_coins": 52847
+      },
+      {
+        "block_index": 16,
+        "block_start_h": 1785214800,
+        "ic": -0.006700322249126379,
+        "n_coins": 53212
+      },
+      {
+        "block_index": 17,
+        "block_start_h": 1785819600,
+        "ic": -0.08916664773771132,
+        "n_coins": 53978
+      },
+      {
+        "block_index": 18,
+        "block_start_h": 1786424400,
+        "ic": -0.07630290978608836,
+        "n_coins": 54881
+      },
+      {
+        "block_index": 19,
+        "block_start_h": 1787029200,
+        "ic": -0.12765652126446436,
+        "n_coins": 60693
+      },
+      {
+        "block_index": 20,
+        "block_start_h": 1787634000,
+        "ic": 0.047715139043713314,
+        "n_coins": 60228
+      },
+      {
+        "block_index": 21,
+        "block_start_h": 1788238800,
+        "ic": -0.12030283675122962,
+        "n_coins": 58897
+      },
+      {
+        "block_index": 22,
+        "block_start_h": 1788843600,
+        "ic": 0.017799069614782743,
+        "n_coins": 59176
+      },
+      {
+        "block_index": 23,
+        "block_start_h": 1789448400,
+        "ic": -0.09480531253555666,
+        "n_coins": 60671
+      },
+      {
+        "block_index": 24,
+        "block_start_h": 1790053200,
+        "ic": -0.03825875460527521,
+        "n_coins": 61336
+      },
+      {
+        "block_index": 25,
+        "block_start_h": 1790658000,
+        "ic": -0.0067842763208028015,
+        "n_coins": 60824
+      },
+      {
+        "block_index": 26,
+        "block_start_h": 1791262800,
+        "ic": -0.02000859324181959,
+        "n_coins": 61331
+      },
+      {
+        "block_index": 27,
+        "block_start_h": 1791867600,
+        "ic": 0.04699414558764558,
+        "n_coins": 62345
+      },
+      {
+        "block_index": 28,
+        "block_start_h": 1792472400,
+        "ic": -0.026344215909595077,
+        "n_coins": 62639
+      },
+      {
+        "block_index": 29,
+        "block_start_h": 1793077200,
+        "ic": 0.019560650426753624,
+        "n_coins": 44226
+      }
+    ],
+    "ic_C2_s": [
+      {
+        "block_index": 0,
+        "block_start_h": 1775538000,
+        "ic": 0.028145862387152353,
+        "n_coins": 57977
+      },
+      {
+        "block_index": 1,
+        "block_start_h": 1776142800,
+        "ic": 0.010882880922654332,
+        "n_coins": 57940
+      },
+      {
+        "block_index": 2,
+        "block_start_h": 1776747600,
+        "ic": 0.05986580145838635,
+        "n_coins": 56807
+      },
+      {
+        "block_index": 3,
+        "block_start_h": 1777352400,
+        "ic": 0.09193598932128874,
+        "n_coins": 57025
+      },
+      {
+        "block_index": 4,
+        "block_start_h": 1777957200,
+        "ic": 0.03788972858399279,
+        "n_coins": 58245
+      },
+      {
+        "block_index": 5,
+        "block_start_h": 1778562000,
+        "ic": 0.009599082024988022,
+        "n_coins": 58374
+      },
+      {
+        "block_index": 6,
+        "block_start_h": 1779166800,
+        "ic": -0.03765358880144574,
+        "n_coins": 59449
+      },
+      {
+        "block_index": 7,
+        "block_start_h": 1779771600,
+        "ic": 0.021797007427280257,
+        "n_coins": 58623
+      },
+      {
+        "block_index": 8,
+        "block_start_h": 1780376400,
+        "ic": -0.01610815292017064,
+        "n_coins": 59691
+      },
+      {
+        "block_index": 9,
+        "block_start_h": 1780981200,
+        "ic": 0.013789711557419057,
+        "n_coins": 57365
+      },
+      {
+        "block_index": 10,
+        "block_start_h": 1781586000,
+        "ic": -0.020533304399128677,
+        "n_coins": 54894
+      },
+      {
+        "block_index": 11,
+        "block_start_h": 1782190800,
+        "ic": 0.009298586256191645,
+        "n_coins": 54559
+      },
+      {
+        "block_index": 12,
+        "block_start_h": 1782795600,
+        "ic": -0.04591402168007227,
+        "n_coins": 52869
+      },
+      {
+        "block_index": 13,
+        "block_start_h": 1783400400,
+        "ic": 0.03004627052463871,
+        "n_coins": 52122
+      },
+      {
+        "block_index": 14,
+        "block_start_h": 1784005200,
+        "ic": 0.07011725011673178,
+        "n_coins": 52486
+      },
+      {
+        "block_index": 15,
+        "block_start_h": 1784610000,
+        "ic": 0.04100359178552174,
+        "n_coins": 52847
+      },
+      {
+        "block_index": 16,
+        "block_start_h": 1785214800,
+        "ic": 0.04964946464458639,
+        "n_coins": 53212
+      },
+      {
+        "block_index": 17,
+        "block_start_h": 1785819600,
+        "ic": -0.003705389430584404,
+        "n_coins": 53978
+      },
+      {
+        "block_index": 18,
+        "block_start_h": 1786424400,
+        "ic": -0.028050106256703542,
+        "n_coins": 54881
+      },
+      {
+        "block_index": 19,
+        "block_start_h": 1787029200,
+        "ic": -0.15864853924717945,
+        "n_coins": 60693
+      },
+      {
+        "block_index": 20,
+        "block_start_h": 1787634000,
+        "ic": -0.0193080939025157,
+        "n_coins": 60228
+      },
+      {
+        "block_index": 21,
+        "block_start_h": 1788238800,
+        "ic": -0.13337007027691086,
+        "n_coins": 58897
+      },
+      {
+        "block_index": 22,
+        "block_start_h": 1788843600,
+        "ic": -0.008894823414918932,
+        "n_coins": 59176
+      },
+      {
+        "block_index": 23,
+        "block_start_h": 1789448400,
+        "ic": -0.09178043790967304,
+        "n_coins": 60671
+      },
+      {
+        "block_index": 24,
+        "block_start_h": 1790053200,
+        "ic": -0.08476312243753802,
+        "n_coins": 61336
+      },
+      {
+        "block_index": 25,
+        "block_start_h": 1790658000,
+        "ic": -0.03216497876655585,
+        "n_coins": 60824
+      },
+      {
+        "block_index": 26,
+        "block_start_h": 1791262800,
+        "ic": -0.03684035969893417,
+        "n_coins": 61331
+      },
+      {
+        "block_index": 27,
+        "block_start_h": 1791867600,
+        "ic": 0.07594657083320579,
+        "n_coins": 62345
+      },
+      {
+        "block_index": 28,
+        "block_start_h": 1792472400,
+        "ic": 0.041183914173609906,
+        "n_coins": 62639
+      },
+      {
+        "block_index": 29,
+        "block_start_h": 1793077200,
+        "ic": 0.064953811596,
+        "n_coins": 44226
+      }
+    ],
+    "ic_B1_s": [
+      {
+        "block_index": 0,
+        "block_start_h": 1775538000,
+        "ic": -0.04350359940712611,
+        "n_coins": 57977
+      },
+      {
+        "block_index": 1,
+        "block_start_h": 1776142800,
+        "ic": -0.050804941424420394,
+        "n_coins": 57940
+      },
+      {
+        "block_index": 2,
+        "block_start_h": 1776747600,
+        "ic": -0.0013096393544692574,
+        "n_coins": 56807
+      },
+      {
+        "block_index": 3,
+        "block_start_h": 1777352400,
+        "ic": 0.05336062888336365,
+        "n_coins": 57025
+      },
+      {
+        "block_index": 4,
+        "block_start_h": 1777957200,
+        "ic": -0.0122432247983865,
+        "n_coins": 58245
+      },
+      {
+        "block_index": 5,
+        "block_start_h": 1778562000,
+        "ic": -0.047360778358287975,
+        "n_coins": 58374
+      },
+      {
+        "block_index": 6,
+        "block_start_h": 1779166800,
+        "ic": -0.0892514614083203,
+        "n_coins": 59449
+      },
+      {
+        "block_index": 7,
+        "block_start_h": 1779771600,
+        "ic": -0.01889560096898049,
+        "n_coins": 58623
+      },
+      {
+        "block_index": 8,
+        "block_start_h": 1780376400,
+        "ic": -0.05399775941758028,
+        "n_coins": 59691
+      },
+      {
+        "block_index": 9,
+        "block_start_h": 1780981200,
+        "ic": -0.027189571383899575,
+        "n_coins": 57365
+      },
+      {
+        "block_index": 10,
+        "block_start_h": 1781586000,
+        "ic": -0.08652054502920756,
+        "n_coins": 54894
+      },
+      {
+        "block_index": 11,
+        "block_start_h": 1782190800,
+        "ic": -0.04303739047153722,
+        "n_coins": 54559
+      },
+      {
+        "block_index": 12,
+        "block_start_h": 1782795600,
+        "ic": -0.09178354952453566,
+        "n_coins": 52869
+      },
+      {
+        "block_index": 13,
+        "block_start_h": 1783400400,
+        "ic": -0.029878517721215168,
+        "n_coins": 52122
+      },
+      {
+        "block_index": 14,
+        "block_start_h": 1784005200,
+        "ic": -0.009247124857443709,
+        "n_coins": 52486
+      },
+      {
+        "block_index": 15,
+        "block_start_h": 1784610000,
+        "ic": -0.04549305494623847,
+        "n_coins": 52847
+      },
+      {
+        "block_index": 16,
+        "block_start_h": 1785214800,
+        "ic": -0.02776451510826996,
+        "n_coins": 53212
+      },
+      {
+        "block_index": 17,
+        "block_start_h": 1785819600,
+        "ic": -0.0855686904605329,
+        "n_coins": 53978
+      },
+      {
+        "block_index": 18,
+        "block_start_h": 1786424400,
+        "ic": -0.11377872451078228,
+        "n_coins": 54881
+      },
+      {
+        "block_index": 19,
+        "block_start_h": 1787029200,
+        "ic": -0.2249355362417198,
+        "n_coins": 60693
+      },
+      {
+        "block_index": 20,
+        "block_start_h": 1787634000,
+        "ic": -0.08466119288937367,
+        "n_coins": 60228
+      },
+      {
+        "block_index": 21,
+        "block_start_h": 1788238800,
+        "ic": -0.20983402792276543,
+        "n_coins": 58897
+      },
+      {
+        "block_index": 22,
+        "block_start_h": 1788843600,
+        "ic": -0.09349299249417695,
+        "n_coins": 59176
+      },
+      {
+        "block_index": 23,
+        "block_start_h": 1789448400,
+        "ic": -0.19033257350596378,
+        "n_coins": 60671
+      },
+      {
+        "block_index": 24,
+        "block_start_h": 1790053200,
+        "ic": -0.15687355848369433,
+        "n_coins": 61336
+      },
+      {
+        "block_index": 25,
+        "block_start_h": 1790658000,
+        "ic": -0.1288300333246547,
+        "n_coins": 60824
+      },
+      {
+        "block_index": 26,
+        "block_start_h": 1791262800,
+        "ic": -0.12103851148147189,
+        "n_coins": 61331
+      },
+      {
+        "block_index": 27,
+        "block_start_h": 1791867600,
+        "ic": -0.047343019401684866,
+        "n_coins": 62345
+      },
+      {
+        "block_index": 28,
+        "block_start_h": 1792472400,
+        "ic": -0.08220528168442277,
+        "n_coins": 62639
+      },
+      {
+        "block_index": 29,
+        "block_start_h": 1793077200,
+        "ic": -0.03970664418705948,
+        "n_coins": 44226
+      }
+    ]
+  },
+  "uncertainty": {
+    "bootstrap_replicates": 2000,
+    "bootstrap_valid": 2000,
+    "ci95_lo": 0.1422962495328128,
+    "ci95_hi": 0.16826419606383433,
+    "ci95_excludes_null_favorable": true,
+    "placebo_replicates": 1000,
+    "placebo_valid": 1000,
+    "placebo_95th_percentile": 0.0012892227561452042,
+    "placebo_true_effect_exceeds_null": true,
+    "loio_subsets": 8,
+    "loio_valid": 8,
+    "loio_sign_reproduced": 8,
+    "loio_pass_threshold": 6,
+    "loio_pass": true
+  },
+  "stability_battery": {
+    "sign_reproduction_fraction_long_arm": 1.0,
+    "n_blocks_positive_long_arm": 30,
+    "sign_reproduction_threshold": 0.8,
+    "sign_reproduced_long_arm": true,
+    "rolling_window": 6,
+    "rolling_min": 0.11854284968131652,
+    "rolling_median": 0.15369191682101396,
+    "rolling_max": 0.18388202272764265,
+    "rolling_ci95_lo": 0.10935878742575515,
+    "rolling_ci95_hi": 0.19777071207952387,
+    "trend_rho": -0.3699666295884317,
+    "trend_p_two_sided": 0.04895104895104895,
+    "trend_alpha": 0.008333333333333333,
+    "trend_not_reject_stationarity": true,
+    "first_half_mean": 0.17186069238756257,
+    "second_half_mean": 0.13840599452609442,
+    "first_second_half_gap": -0.03345469786146815,
+    "gap_ci95_lo": -0.026532022161563102,
+    "gap_ci95_hi": 0.02681756983089589,
+    "gap_ci_excludes_sign_reversal": false,
+    "looic_range": 0.005220474109490114,
+    "looic_min": 0.1524527099068036,
+    "looic_max": 0.1576731840162937,
+    "rv_tercile_frac_positive": 0.4222222222222222,
+    "rv_tercile_cells": [
+      {
+        "block": 0,
+        "tercile": 0,
+        "ic": 0.21027053783759989,
+        "n": 19326
+      },
+      {
+        "block": 0,
+        "tercile": 1,
+        "ic": -0.0719896481833867,
+        "n": 19326
+      },
+      {
+        "block": 0,
+        "tercile": 2,
+        "ic": -0.21896262443017775,
+        "n": 19325
+      },
+      {
+        "block": 1,
+        "tercile": 0,
+        "ic": 0.20878344075030275,
+        "n": 19314
+      },
+      {
+        "block": 1,
+        "tercile": 1,
+        "ic": 0.0021872310042566506,
+        "n": 19313
+      },
+      {
+        "block": 1,
+        "tercile": 2,
+        "ic": -0.18966177492648412,
+        "n": 19313
+      },
+      {
+        "block": 2,
+        "tercile": 0,
+        "ic": 0.14241164686934774,
+        "n": 18936
+      },
+      {
+        "block": 2,
+        "tercile": 1,
+        "ic": -0.00048486313042963696,
+        "n": 18936
+      },
+      {
+        "block": 2,
+        "tercile": 2,
+        "ic": -0.19349722068361214,
+        "n": 18935
+      },
+      {
+        "block": 3,
+        "tercile": 0,
+        "ic": -0.018665924713290313,
+        "n": 19009
+      },
+      {
+        "block": 3,
+        "tercile": 1,
+        "ic": 0.04334759025685413,
+        "n": 19008
+      },
+      {
+        "block": 3,
+        "tercile": 2,
+        "ic": -0.10476623016830013,
+        "n": 19008
+      },
+      {
+        "block": 4,
+        "tercile": 0,
+        "ic": 0.19399471828833606,
+        "n": 19415
+      },
+      {
+        "block": 4,
+        "tercile": 1,
+        "ic": -0.01472747716503512,
+        "n": 19415
+      },
+      {
+        "block": 4,
+        "tercile": 2,
+        "ic": -0.16308508445595257,
+        "n": 19415
+      },
+      {
+        "block": 5,
+        "tercile": 0,
+        "ic": 0.13654283522182484,
+        "n": 19458
+      },
+      {
+        "block": 5,
+        "tercile": 1,
+        "ic": -0.023636183841648607,
+        "n": 19458
+      },
+      {
+        "block": 5,
+        "tercile": 2,
+        "ic": -0.1545073815990551,
+        "n": 19458
+      },
+      {
+        "block": 6,
+        "tercile": 0,
+        "ic": 0.17890300708675833,
+        "n": 19817
+      },
+      {
+        "block": 6,
+        "tercile": 1,
+        "ic": -0.0411697085941271,
+        "n": 19816
+      },
+      {
+        "block": 6,
+        "tercile": 2,
+        "ic": -0.18602088314104895,
+        "n": 19816
+      },
+      {
+        "block": 7,
+        "tercile": 0,
+        "ic": 0.21933478566165227,
+        "n": 19541
+      },
+      {
+        "block": 7,
+        "tercile": 1,
+        "ic": 0.005769935314377084,
+        "n": 19541
+      },
+      {
+        "block": 7,
+        "tercile": 2,
+        "ic": -0.1888009630461891,
+        "n": 19541
+      },
+      {
+        "block": 8,
+        "tercile": 0,
+        "ic": 0.30404494642444607,
+        "n": 19897
+      },
+      {
+        "block": 8,
+        "tercile": 1,
+        "ic": -0.019359349053835462,
+        "n": 19897
+      },
+      {
+        "block": 8,
+        "tercile": 2,
+        "ic": -0.09610899971744698,
+        "n": 19897
+      },
+      {
+        "block": 9,
+        "tercile": 0,
+        "ic": 0.09918872457846878,
+        "n": 19122
+      },
+      {
+        "block": 9,
+        "tercile": 1,
+        "ic": -0.003670204090520031,
+        "n": 19122
+      },
+      {
+        "block": 9,
+        "tercile": 2,
+        "ic": -0.14462543496055563,
+        "n": 19121
+      },
+      {
+        "block": 10,
+        "tercile": 0,
+        "ic": 0.17555009498570817,
+        "n": 18298
+      },
+      {
+        "block": 10,
+        "tercile": 1,
+        "ic": 0.028371064709811555,
+        "n": 18298
+      },
+      {
+        "block": 10,
+        "tercile": 2,
+        "ic": -0.13133834605974534,
+        "n": 18298
+      },
+      {
+        "block": 11,
+        "tercile": 0,
+        "ic": 0.1609956552314151,
+        "n": 18187
+      },
+      {
+        "block": 11,
+        "tercile": 1,
+        "ic": -0.002983115120628849,
+        "n": 18186
+      },
+      {
+        "block": 11,
+        "tercile": 2,
+        "ic": -0.15253325593870865,
+        "n": 18186
+      },
+      {
+        "block": 12,
+        "tercile": 0,
+        "ic": 0.05887875907785317,
+        "n": 17623
+      },
+      {
+        "block": 12,
+        "tercile": 1,
+        "ic": -0.026759698368388398,
+        "n": 17623
+      },
+      {
+        "block": 12,
+        "tercile": 2,
+        "ic": -0.05299174233367352,
+        "n": 17623
+      },
+      {
+        "block": 13,
+        "tercile": 0,
+        "ic": 0.048250130849512574,
+        "n": 17374
+      },
+      {
+        "block": 13,
+        "tercile": 1,
+        "ic": -0.02332657704826527,
+        "n": 17374
+      },
+      {
+        "block": 13,
+        "tercile": 2,
+        "ic": -0.0605771955522868,
+        "n": 17374
+      },
+      {
+        "block": 14,
+        "tercile": 0,
+        "ic": 0.07446151412735447,
+        "n": 17496
+      },
+      {
+        "block": 14,
+        "tercile": 1,
+        "ic": 0.03878737210320358,
+        "n": 17495
+      },
+      {
+        "block": 14,
+        "tercile": 2,
+        "ic": -0.05608192687771036,
+        "n": 17495
+      },
+      {
+        "block": 15,
+        "tercile": 0,
+        "ic": 0.11326564437757063,
+        "n": 17616
+      },
+      {
+        "block": 15,
+        "tercile": 1,
+        "ic": -0.00797207640743085,
+        "n": 17616
+      },
+      {
+        "block": 15,
+        "tercile": 2,
+        "ic": -0.038744014871616085,
+        "n": 17615
+      },
+      {
+        "block": 16,
+        "tercile": 0,
+        "ic": 0.14396090279334883,
+        "n": 17738
+      },
+      {
+        "block": 16,
+        "tercile": 1,
+        "ic": -0.048190111352262845,
+        "n": 17737
+      },
+      {
+        "block": 16,
+        "tercile": 2,
+        "ic": 0.0012714892973359284,
+        "n": 17737
+      },
+      {
+        "block": 17,
+        "tercile": 0,
+        "ic": 0.16598964395481083,
+        "n": 17993
+      },
+      {
+        "block": 17,
+        "tercile": 1,
+        "ic": -0.07598704714752462,
+        "n": 17993
+      },
+      {
+        "block": 17,
+        "tercile": 2,
+        "ic": 0.04668929798883507,
+        "n": 17992
+      },
+      {
+        "block": 18,
+        "tercile": 0,
+        "ic": 0.1522629229290395,
+        "n": 18294
+      },
+      {
+        "block": 18,
+        "tercile": 1,
+        "ic": -0.02949190249112931,
+        "n": 18294
+      },
+      {
+        "block": 18,
+        "tercile": 2,
+        "ic": -0.06529685658272899,
+        "n": 18293
+      },
+      {
+        "block": 19,
+        "tercile": 0,
+        "ic": 0.06999100911095697,
+        "n": 20231
+      },
+      {
+        "block": 19,
+        "tercile": 1,
+        "ic": -0.09041363981940968,
+        "n": 20231
+      },
+      {
+        "block": 19,
+        "tercile": 2,
+        "ic": -0.061050076974645776,
+        "n": 20231
+      },
+      {
+        "block": 20,
+        "tercile": 0,
+        "ic": -0.06274896855051368,
+        "n": 20076
+      },
+      {
+        "block": 20,
+        "tercile": 1,
+        "ic": -0.06807346743958236,
+        "n": 20076
+      },
+      {
+        "block": 20,
+        "tercile": 2,
+        "ic": -0.045536543773992924,
+        "n": 20076
+      },
+      {
+        "block": 21,
+        "tercile": 0,
+        "ic": -0.008770720348601718,
+        "n": 19633
+      },
+      {
+        "block": 21,
+        "tercile": 1,
+        "ic": 0.004641314866422295,
+        "n": 19632
+      },
+      {
+        "block": 21,
+        "tercile": 2,
+        "ic": -0.009889971104501611,
+        "n": 19632
+      },
+      {
+        "block": 22,
+        "tercile": 0,
+        "ic": 0.10791056210373795,
+        "n": 19726
+      },
+      {
+        "block": 22,
+        "tercile": 1,
+        "ic": -0.04754171039867468,
+        "n": 19725
+      },
+      {
+        "block": 22,
+        "tercile": 2,
+        "ic": 0.013774038967776181,
+        "n": 19725
+      },
+      {
+        "block": 23,
+        "tercile": 0,
+        "ic": 0.030213701642901082,
+        "n": 20224
+      },
+      {
+        "block": 23,
+        "tercile": 1,
+        "ic": 0.018763591836357344,
+        "n": 20224
+      },
+      {
+        "block": 23,
+        "tercile": 2,
+        "ic": -0.06302091140810484,
+        "n": 20223
+      },
+      {
+        "block": 24,
+        "tercile": 0,
+        "ic": 0.006794037317208181,
+        "n": 20446
+      },
+      {
+        "block": 24,
+        "tercile": 1,
+        "ic": -0.08059286748658652,
+        "n": 20445
+      },
+      {
+        "block": 24,
+        "tercile": 2,
+        "ic": -0.05055982340700338,
+        "n": 20445
+      },
+      {
+        "block": 25,
+        "tercile": 0,
+        "ic": -0.04821063710600344,
+        "n": 20275
+      },
+      {
+        "block": 25,
+        "tercile": 1,
+        "ic": -0.05776278571206938,
+        "n": 20275
+      },
+      {
+        "block": 25,
+        "tercile": 2,
+        "ic": -0.09382100049453108,
+        "n": 20274
+      },
+      {
+        "block": 26,
+        "tercile": 0,
+        "ic": 0.08010986315347182,
+        "n": 20444
+      },
+      {
+        "block": 26,
+        "tercile": 1,
+        "ic": 0.037351343942956944,
+        "n": 20444
+      },
+      {
+        "block": 26,
+        "tercile": 2,
+        "ic": -0.0018087287215751019,
+        "n": 20443
+      },
+      {
+        "block": 27,
+        "tercile": 0,
+        "ic": 0.021628905902953136,
+        "n": 20782
+      },
+      {
+        "block": 27,
+        "tercile": 1,
+        "ic": -0.06465939512234009,
+        "n": 20782
+      },
+      {
+        "block": 27,
+        "tercile": 2,
+        "ic": -0.08204892471533208,
+        "n": 20781
+      },
+      {
+        "block": 28,
+        "tercile": 0,
+        "ic": 0.06306385475070801,
+        "n": 20880
+      },
+      {
+        "block": 28,
+        "tercile": 1,
+        "ic": 0.012121593744547255,
+        "n": 20880
+      },
+      {
+        "block": 28,
+        "tercile": 2,
+        "ic": -0.027995496567448912,
+        "n": 20879
+      },
+      {
+        "block": 29,
+        "tercile": 0,
+        "ic": -0.01084730695595153,
+        "n": 14742
+      },
+      {
+        "block": 29,
+        "tercile": 1,
+        "ic": 0.052419098802697114,
+        "n": 14742
+      },
+      {
+        "block": 29,
+        "tercile": 2,
+        "ic": -0.10951884465027449,
+        "n": 14742
+      }
+    ],
+    "utc_frac_positive": 1.0,
+    "utc_buckets_positive": 3,
+    "utc_buckets_total": 3
+  },
+  "multiplicity": {
+    "holm_family": [
+      "trend_test_long_arm",
+      "first_second_half_gap_long_arm",
+      "loio_range_long_arm",
+      "rolling_mean_min_long_arm",
+      "per_regime_rv_tercile_long_arm",
+      "per_regime_utc_bucket_long_arm"
+    ],
+    "raw_pvals": {
+      "trend_test_long_arm": 0.04895104895104895,
+      "first_second_half_gap_long_arm": 0.5085,
+      "loio_range_long_arm": 0.0,
+      "rolling_mean_min_long_arm": 0.0,
+      "per_regime_rv_tercile_long_arm": 0.0,
+      "per_regime_utc_bucket_long_arm": 0.0
+    },
+    "holm_adjusted_pvals": {
+      "loio_range_long_arm": 0.0,
+      "rolling_mean_min_long_arm": 0.0,
+      "per_regime_rv_tercile_long_arm": 0.0,
+      "per_regime_utc_bucket_long_arm": 0.0,
+      "trend_test_long_arm": 0.0979020979020979,
+      "first_second_half_gap_long_arm": 0.5085
+    },
+    "alpha_k": 0.008333333333333333,
+    "primary_significant_after_holm": false
+  },
+  "decision": {
+    "verdict": "NOT_STABLE",
+    "verdict_rule": "STABLE iff (long arm) sign reproduced in >= 0.80 of blocks AND first/second-half gap CI excludes sign reversal AND ordered-block trend test does not reject stationarity at frozen alpha_k; otherwise NOT_STABLE.",
+    "sign_reproduced": true,
+    "gap_ci_excludes_sign_reversal": false,
+    "trend_not_reject_stationarity": true,
+    "null_preserved_honestly": true,
+    "no_threshold_shopping": true,
+    "no_relaxed_materiality_floor": true,
+    "no_overlay_built": true,
+    "not_a_time_series_forecast_gate": true,
+    "not_observed_liquidation_census": true
+  },
+  "sign_convention_note": "relative_improvement = (baseline - candidate) / baseline applied to Poisson deviance; positive = candidate better. Identical convention used in eval and recompute."
+}

@@ -1,0 +1,84 @@
+{
+  "experiment_id": "FCLR-LIQ-XSEC-BROAD-TS-01",
+  "campaign": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z",
+  "session_utc": "20261123T164423Z",
+  "status": "FROZEN_PRE_OUTCOMES",
+  "frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "software": "stdlib + pyarrow (parquet read only); cross-sectional statistical evaluation is independent stdlib code",
+  "label_construct": "observed_ironflow_liquidation_intensity_capped_sample",
+  "label_caveat": "ironflow liquidations are a capped-sample feed (not a complete census per RESEARCH_PROMPT.md section 15); absence != zero; claims restricted to presence/intensity ordering",
+  "input_integrity": {
+    "data_cache": "research_state/data_cache/ironflow_bulk/",
+    "subdirs": ["candles_1h", "funding", "open_interest", "liquidations"],
+    "months": ["2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09","2026-10"],
+    "sha256_sidecars": "assert .parquet.sha256 before every read; caches read-only",
+    "reuse_blocks_from": "research_state/session_20261123T085507Z/fclr_liqxsecbroad01_eval_20261123T085507Z.py (BROAD-01)",
+    "reuse_eval_json_from": "research_state/session_20261123T085507Z/fclr_liqxsecbroad01_eval_20261123T085507Z.json (BROAD-01)"
+  },
+  "design": {
+    "train_frac": 0.60,
+    "purge_embargo_h": 48,
+    "block_h": 168,
+    "horizon_h": 1,
+    "n_test_blocks": 30,
+    "min_coins_per_block": 5,
+    "sign_convention": "relative_improvement = (baseline - candidate) / baseline applied to Poisson deviance; positive = candidate better. Identical convention as BROAD-01.",
+    "feature_spec": "B1 = RV-only (log rv24, log rv168); C2 = funding-conditioned (B1 + signed funding + abs funding pct + premium + OI + dislocation + MA deviation), z-scored train-only",
+    "regime_conditioning": "RV-tercile + UTC-session bucket, expanding train-only thresholds",
+    "targets": "per-coin per-hour next-hour observed liquidation intensity (count + notional), long/short separate",
+    "primary_arm": "long arm (the SUPPORTED arm from BROAD-01: mean rank-IC 0.155133, CI95 [0.142081, 0.168895])",
+    "secondary_arm": "short arm (null from BROAD-01: mean rank-IC -0.002054; reported descriptively only)"
+  },
+  "stability_battery": {
+    "metrics": [
+      "fraction_of_blocks_positive_rank_ic_long_arm",
+      "fraction_of_blocks_broad01_sign_long_arm",
+      "rolling_window_rank_ic_6_block_mean_min_median_max_ci95",
+      "ordered_block_monotone_trend_test_spearman",
+      "first_half_vs_second_half_mean_rank_ic_gap_bootstrap_ci95",
+      "leave_one_block_out_range_mean_rank_ic",
+      "per_regime_sign_stability_rv_tercile",
+      "per_regime_sign_stability_utc_bucket"
+    ],
+    "block_bootstrap": {
+      "n_replicates": 2000,
+      "seed": 20261123,
+      "resampling_unit": "complete UTC test block jointly across coins",
+      "ci_method": "percentile CI95"
+    },
+    "holm_family": [
+      "trend_test_long_arm",
+      "first_second_half_gap_long_arm",
+      "loio_range_long_arm",
+      "rolling_mean_min_long_arm",
+      "per_regime_rv_tercile_long_arm",
+      "per_regime_utc_bucket_long_arm"
+    ],
+    "alpha_k": 0.05 / 6,
+    "two_sided": true
+  },
+  "verdict_rule": {
+    "statuses": ["STABLE", "NOT_STABLE"],
+    "primary_arm": "long arm",
+    "stable_iff": [
+      "sign_reproduced_fraction >= 0.80 on long arm (>= 24 of 30 blocks positive rank-IC)",
+      "first_half_vs_second_half mean rank-IC gap bootstrap CI95 excludes a sign reversal",
+      "ordered-block monotone trend test does not reject stationarity at frozen two-sided alpha_k"
+    ],
+    "not_stable_otherwise": true,
+    "null_preserved_honestly": true,
+    "no_threshold_shopping": true,
+    "no_relaxed_materiality_floor": true,
+    "no_overlay_built": true,
+    "not_a_time_series_forecast_gate": true
+  },
+  "artefacts_required": [
+    "fclr_liqxsecbroad01_ts_prereg_<UTC>.json + .md",
+    "fclr_liqxsecbroad01_ts_eval_<UTC>.py + .json + .md",
+    "fclr_liqxsecbroad01_ts_recompute_<UTC>.py + .json (all_checks_match:true)",
+    "fclr_liqxsecbroad01_ts_evidence_audit_<UTC>.json + .md",
+    "evidence_audit_<UTC>.json (gate-critical alias, non-empty)",
+    "trigger_check_<UTC>.json (non-empty)"
+  ]
+}

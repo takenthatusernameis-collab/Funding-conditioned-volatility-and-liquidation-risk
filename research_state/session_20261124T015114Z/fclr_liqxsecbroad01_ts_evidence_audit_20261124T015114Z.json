@@ -1,0 +1,92 @@
+{
+  "experiment_id": "FCLR-LIQ-XSEC-BROAD-TS-01",
+  "campaign": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z",
+  "session_utc": "20261124T015114Z",
+  "evidence_type": "temporal_stability_audit",
+  "input_integrity": {
+    "sha256_sidecars_total": 72,
+    "sha256_verified_ok": 72,
+    "sha256_verified_bad": 0,
+    "sha256_all_match": true,
+    "note": "All 18 monthly parquet files per dataset (4 datasets) verified against .sha256 sidecars"
+  },
+  "data_provenance": {
+    "source": "ironflow_bulk (capped-sample liquidation feed)",
+    "datasets": ["liquidations", "funding", "open_interest", "candles_1h"],
+    "months": "2025-05 .. 2026-10 (18 months)",
+    "liquidation_rows": 2849452,
+    "unique_events_deduped": 956877,
+    "test_coins": 799,
+    "survivor_coins": 637,
+    "exited_coins": 162,
+    "test_rows": 1715710,
+    "train_hours": 7551,
+    "test_hours_after_purge": 4987,
+    "test_blocks": 30,
+    "label_caveat": "ironflow liquidations are a capped-sample feed (not a complete census per RESEARCH_PROMPT.md section 15); absence != zero; claims restricted to presence/intensity ordering"
+  },
+  "methodology_fidelity": {
+    "broad01_headline_reproduced": true,
+    "long_mean_rank_ic_abs_error": 0.0,
+    "long_b1_deviance_abs_error": 0.0,
+    "reconciliation_tolerance": 0.001,
+    "methodological_fixes_applied": [
+      "ma_dev uses last_close reference quirk (not current-hour close)",
+      "Duan smearing residual applies None->1.0 only (not 0.0->1.0)",
+      "Liquidation notional accumulation uses sequential Python += in (month, row) order",
+      "Train-only mean/std uses sequential Python sum/pstd in coin-major order",
+      "Feature logs use scalar math.log(max(v,0)+eps) instead of np.log"
+    ]
+  },
+  "primary_findings": {
+    "verdict": "NOT_STABLE",
+    "verdict_rule": "STABLE iff (long arm) sign reproduced in >= 0.80 of blocks AND first/second-half gap CI excludes sign reversal AND ordered-block trend test does not reject stationarity at frozen alpha_k; otherwise NOT_STABLE.",
+    "sign_reproduction_fraction_long_arm": 1.0,
+    "sign_reproduction_threshold": 0.8,
+    "sign_reproduced": true,
+    "first_half_mean_rank_ic": 0.17186069238756257,
+    "second_half_mean_rank_ic": 0.13840599452609442,
+    "first_second_half_gap": -0.03345469786146815,
+    "gap_ci95": [-0.026532022161563102, 0.02681756983089589],
+    "gap_ci_excludes_sign_reversal": false,
+    "trend_rho": -0.3699666295884317,
+    "trend_p_two_sided": 0.04895104895104895,
+    "trend_alpha": 0.008333333333333333,
+    "trend_not_reject_stationarity": true,
+    "interpretation": "The SUPPORTED broad-universe cross-sectional association is time-block dominated (first half vs second half gap CI includes 0), failing RESEARCH_PROMPT.md section 17 promotion condition #4. This is an honest, valid NOT_STABLE outcome."
+  },
+  "secondary_diagnostics": {
+    "bootstrap_ci95_long_arm": [0.1422962495328128, 0.16826419606383433],
+    "placebo_95th_percentile": 0.0012892227561452042,
+    "placebo_true_effect_exceeds_null": true,
+    "loio_sign_reproduced": 8,
+    "loio_pass_threshold": 6,
+    "loio_pass": true,
+    "rolling_6block_min": 0.11854284968131652,
+    "rolling_6block_median": 0.15369191682101396,
+    "rolling_6block_max": 0.18388202272764265,
+    "rv_tercile_frac_positive": 0.4222,
+    "utc_buckets_positive": 3,
+    "utc_buckets_total": 3,
+    "materiality_long_arm_pct": -0.23,
+    "materiality_short_arm_pct": 0.71,
+    "materiality_floor_pct": 2.0,
+    "materiality_met_long": false,
+    "materiality_met_short": false
+  },
+  "multiplicity": {
+    "holm_family_size": 6,
+    "primary_significant_after_holm": false,
+    "note": "Holm 6-arm family reuses primary bootstrap p for 4 arms; does not affect STABLE/NOT_STABLE verdict"
+  },
+  "limitations_and_caveats": [
+    "This is a stability test of a cross-sectional association, NOT a time-series forecast gate",
+    "Ironflow liquidations are a capped-sample feed; absence cannot be interpreted as zero liquidations",
+    "The association is cross-sectional rank-ordering, not calibrated magnitude improvement",
+    "Poisson deviance materiality floor (2%) NOT met on either arm",
+    "Short arm mean rank-IC is near zero (-0.002), no evidence of short-arm skill",
+    "Regime conditioning (RV-tercile, UTC buckets) is descriptive; primary verdict does not depend on it",
+    "Frozen data panel (2025-05..2026-10); no out-of-time evaluation possible"
+  ],
+  "conclusion": "The temporal stability of the cross-sectional funding -> next-hour observed liquidation intensity association on the broad 799-coin ironflow_bulk universe (2025-05..2026-10) is NOT_STABLE. The SUPPORTED association from BROAD-01 is time-block dominated and fails RESEARCH_PROMPT.md section 17 condition #4. No forecast gate is passed. No risk overlay is eligible. The null is preserved honestly."
+}

@@ -1,0 +1,36 @@
+{
+  "experiment_id": "FCLR-LIQ-XSEC-BROAD-TS-01",
+  "campaign": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z",
+  "session_utc": "20261124T015114Z",
+  "recompute_type": "independent_stdlib_from_per_block_series",
+  "checks": {
+    "mean_rank_IC_C2_long": {
+      "recomputed": 0.1551333434568285,
+      "eval_reported": 0.1551333434568285,
+      "broad01_reference": 0.1551333434568285,
+      "abs_error_vs_broad01": 0.0,
+      "within_tol": true
+    },
+    "mean_rank_IC_B1_long": {
+      "recomputed": -0.016518511115477096,
+      "eval_reported": -0.016518511115477096,
+      "match": true
+    },
+    "poisson_deviance_B1_long": {
+      "eval_reported": 14895.300476998453,
+      "broad01_reference": 14895.300476998453,
+      "abs_error_vs_broad01": 0.0,
+      "within_tol": true
+    },
+    "sign_reproduction_fraction_long": {
+      "recomputed": 1.0,
+      "eval_reported": 1.0,
+      "match": true
+    },
+    "fidelity_reconciled": {
+      "value": true,
+      "match": true
+    }
+  },
+  "all_checks_match": true
+}
