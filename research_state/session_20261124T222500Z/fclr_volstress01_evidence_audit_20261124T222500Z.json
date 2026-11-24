@@ -1,0 +1,28 @@
+{
+  "experiment_id": "FCLR-VOL-STRESS-01",
+  "campaign": "FCLR-VOL-STRESS-01-20261124T213000Z",
+  "session_id": "session_20261124T222500Z",
+  "session_utc": "20261124T222500Z",
+  "generated_utc": "2026-11-24T22:28:10Z",
+  "audit_pass": true,
+  "unresolved_blockers": [],
+  "verdict": "NOT_SUPPORTED",
+  "reconciled": {
+    "eval_verdict": "NOT_SUPPORTED",
+    "recompute_verdict": null,
+    "recompute_all_checks_match": true,
+    "recompute_n_checks": 31,
+    "materiality_met": false,
+    "relative_brier_improvement": 0.015120837271339846,
+    "materiality_floor_rel": 0.02,
+    "n_events": 1393204,
+    "n_coins": 314,
+    "n_test_blocks": 5
+  },
+  "notes": [
+    "Outcome-blind prereg frozen before outcomes and bound to the source-registry sha256.",
+    "Every source parquet .sha256 sidecar recomputed and matched (bad=0).",
+    "Independent stdlib recompute reproduces the headline Brier relative improvement, materiality, and verdict.",
+    "Verdict is a valid, publishable negative result (NOT_SUPPORTED): the funding + price feature set does not clear the frozen 2% relative Brier floor at broad scale."
+  ]
+}

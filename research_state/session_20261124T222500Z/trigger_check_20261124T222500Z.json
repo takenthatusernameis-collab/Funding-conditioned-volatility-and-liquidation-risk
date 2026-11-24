@@ -1,0 +1,11 @@
+{
+  "experiment_id": "FCLR-VOL-STRESS-01",
+  "campaign": "FCLR-VOL-STRESS-01-20261124T213000Z",
+  "session_id": "session_20261124T222500Z",
+  "session_utc": "20261124T222500Z",
+  "generated_utc": "2026-11-24T22:28:10Z",
+  "external_trigger_required": false,
+  "trigger_source": "FROZEN_IRONFLOW_BULK",
+  "fired": false,
+  "reason": "The study uses only the frozen ironflow_bulk panel; NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data and is not required for this heavy confirmatory study."
+}

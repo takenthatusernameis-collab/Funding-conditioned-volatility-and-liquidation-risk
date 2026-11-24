@@ -1,0 +1,115 @@
+{
+  "experiment_id": "FCLR-VOL-STRESS-01",
+  "campaign": "FCLR-VOL-STRESS-01-20261124T213000Z",
+  "session_id": "session_20261124T222500Z",
+  "session_utc": "20261124T222500Z",
+  "phase": "HEAVY_STRESS_EVAL_AND_RECOMPUTE",
+  "status": "CONFIRMATORY_COMPLETE",
+  "holdout_opened": true,
+  "n_events": 1393204,
+  "n_forecasts": 1393204,
+  "n_stress_events": 63059,
+  "event_rate": 0.04526185684221406,
+  "n_coins": 314,
+  "n_test_blocks": 5,
+  "metrics": {
+    "baseline": {
+      "brier": 0.041717741250957625,
+      "log_loss": 0.1762005216148667,
+      "ece": 0.014506806140385032
+    },
+    "candidate": {
+      "brier": 0.041086934074174034,
+      "log_loss": 0.17348393992212202,
+      "ece": 0.01684298864792337
+    }
+  },
+  "relative_improvement": {
+    "brier": 0.015120837271339846,
+    "log_loss": 0.015417557609066023
+  },
+  "block_results": [
+    {
+      "block": 0,
+      "brier_baseline": 0.04628960988939409,
+      "brier_candidate": 0.045920616868876135,
+      "logloss_baseline": 0.1936234837902342,
+      "logloss_candidate": 0.19251565088005101
+    },
+    {
+      "block": 1,
+      "brier_baseline": 0.02167252972893071,
+      "brier_candidate": 0.021209069799202878,
+      "logloss_baseline": 0.11433033840597229,
+      "logloss_candidate": 0.1117121895217509
+    },
+    {
+      "block": 2,
+      "brier_baseline": 0.05762671410131066,
+      "brier_candidate": 0.05710400477171329,
+      "logloss_baseline": 0.22397877841680064,
+      "logloss_candidate": 0.22301025021348783
+    },
+    {
+      "block": 3,
+      "brier_baseline": 0.02917040548088221,
+      "brier_candidate": 0.02805440805721526,
+      "logloss_baseline": 0.13331130120099552,
+      "logloss_candidate": 0.126820857000554
+    },
+    {
+      "block": 4,
+      "brier_baseline": 0.051987797832294784,
+      "brier_candidate": 0.05130707499587447,
+      "logloss_baseline": 0.20960010962367498,
+      "logloss_candidate": 0.20711022569487314
+    }
+  ],
+  "inference": {
+    "cluster_bootstrap_by_coin": {
+      "n_boot": 2000,
+      "rel_brier_ci95": [
+        0.012254855801943958,
+        0.018167420725161264
+      ],
+      "p_improvement_gt_0": 0.0
+    },
+    "driscoll_kraay_block": {
+      "t": 5.310494742935967,
+      "p_two_sided": 1.0932803817809145e-07,
+      "lag": 2
+    },
+    "holm": {
+      "p_brier": 0.0,
+      "p_logloss": 1.0932803817809145e-07
+    }
+  },
+  "materiality_floor_rel": 0.02,
+  "materiality_met": false,
+  "significant": true,
+  "verdict": "NOT_SUPPORTED",
+  "design": {
+    "kind": "walk_forward_classification_stress_tail_exceedance",
+    "target": "forward 24h realized variance > expanding train-only per-coin 0.95 quantile",
+    "baseline": "RV-only HAR trailing log-RV lags",
+    "candidate": "RV-only + funding_rate + |funding_rate| + premium + mark/EMA24 distance",
+    "walk_forward": true,
+    "initial_train_months": 6,
+    "block_months": 2,
+    "n_test_blocks": 6,
+    "purge_embargo_h": 48,
+    "quantile_level": 0.95,
+    "min_history": 720,
+    "inference": [
+      "cluster-robust CR1 by coin",
+      "Driscoll-Kraay HAC",
+      "Holm"
+    ],
+    "multiplicity_family": [
+      "brier_relative_improvement",
+      "logloss_relative_improvement"
+    ]
+  },
+  "universe_note": "study universe = coins present in candles_1h AND funding AND open_interest (intersection); candles cover 342 coins but funding/OI cover ~198, so the funding-conditioned universe is the intersection",
+  "generated_utc": "2026-11-24T22:27:33Z"
+}

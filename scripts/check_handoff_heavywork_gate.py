@@ -728,6 +728,46 @@ VOL_STRESS_REQUIRED = (
     ("evidence_audit_", ".json"),
     ("trigger_check_", ".json"),
 )
+
+# FCLR-VOL-JUMP-01: the repository name leads with
+# "Funding-conditioned-volatility". The mean log-RV QLIKE arm (FCLR-VOL-BROAD-01),
+# the funding-extreme correction-time / hazard arm (FCLR-VOL-CORR-01), and the
+# volatility-STRESS / tail-exceedance arm (FCLR-VOL-STRESS-01) are ALL closed
+# NOT_SUPPORTED at broad scale. The one repo-name volatility estimand that has
+# never been tested confirmatory at broad scale is the SIGNED JUMP /
+# SEMIVARIANCE-ASYMMETRY sub-target (RESEARCH_PROMPT.md section 3.1 "future
+# realized volatility"; section 7 target 1): does the funding / price feature set
+# improve out-of-sample forecasts of a signed-jump / downside-vs-upside
+# semivariance-asymmetry TAIL event (next-24h jump component above a train-only
+# high quantile) beyond a realized-volatility-only baseline, judged on Brier /
+# log-loss / calibration with a frozen materiality floor? This is a DISTINCT
+# outcome family (jump / asymmetry, not mean QLIKE, not correction-time, not
+# tail-exceedance of total variance), so it is not a re-run of a terminal
+# endpoint. Once this campaign starts, a post-start session cannot satisfy the
+# gate with a trigger-only, prose-only, audit-only, prereg-only, verify-and-stop,
+# source-probe-only, or arbitrary recompute_* session. It must emit the on-disk
+# source registry, the outcome-blind prereg freeze, the heavy broad-panel
+# jump-forecast evaluation triad (py+json+md), the independent stdlib recompute
+# (py+json), the evidence audit (json+md), the gate-critical evidence_audit_
+# alias (json), and a non-empty trigger check (json), all under one fresh
+# session_<UTC>/ with no zero-byte placeholders. Sessions predating the campaign
+# start are grandfathered so the refresh that announces the campaign stays green.
+VOL_JUMP_CAMPAIGN_RE = re.compile(r"FCLR-VOL-JUMP-(\d+)-(\d{8}T\d{6}Z)")
+VOL_JUMP_REQUIRED = (
+    ("fclr_voljump01_source_registry_", ".json"),
+    ("fclr_voljump01_source_registry_", ".md"),
+    ("fclr_voljump01_prereg_", ".json"),
+    ("fclr_voljump01_prereg_", ".md"),
+    ("fclr_voljump01_eval_", ".py"),
+    ("fclr_voljump01_eval_", ".json"),
+    ("fclr_voljump01_eval_", ".md"),
+    ("fclr_voljump01_recompute_", ".py"),
+    ("fclr_voljump01_recompute_", ".json"),
+    ("fclr_voljump01_evidence_audit_", ".json"),
+    ("fclr_voljump01_evidence_audit_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
 # the contagion hypothesis (rolling-window edge-set stability). The BROAD-01
 # SUPPORTED finding is the ONLY liquidation-risk result ever marked SUPPORTED, and
 # it was declared the "durable final answer" without ever being asked whether it
@@ -910,6 +950,7 @@ NEW_QUANT_PREFIXES = (
     "fclr_volbroad",        # FCLR-VOL-BROAD broad-panel funding-conditioned volatility forecast artifacts
     "fclr_volcorr",         # FCLR-VOL-CORR broad-panel funding-extreme correction-time / hazard artifacts
     "fclr_volstress",       # FCLR-VOL-STRESS broad-panel funding-conditioned volatility-stress (tail-exceedance) artifacts
+    "fclr_voljump",         # FCLR-VOL-JUMP broad-panel funding-conditioned signed-jump / semivariance-asymmetry artifacts
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -2685,9 +2726,288 @@ def _vol_stress_state(handoff_text: str, latest_sid: str | None,
     return out
 
 
-def _panel_fe_state(handoff_text: str, latest_sid: str | None,
+def _vol_jump_state(handoff_text: str, latest_sid: str | None,
                     latest_files: list[str],
                     latest_dir: Path | None = None) -> dict:
+    """Return FCLR-VOL-JUMP-01 non-avoidance state.
+
+    The mean log-RV QLIKE arm (FCLR-VOL-BROAD-01), the correction-time / hazard
+    arm (FCLR-VOL-CORR-01), and the volatility-STRESS / tail-exceedance arm
+    (FCLR-VOL-STRESS-01) are all closed NOT_SUPPORTED at broad scale. The
+    remaining repo-name estimand is the SIGNED JUMP / SEMIVARIANCE-ASYMMETRY
+    sub-target: a distinct outcome family (jump / asymmetry, not mean QLIKE, not
+    correction-time, not total-variance tail exceedance). After this campaign
+    starts, a post-start session must emit the on-disk source registry, the
+    outcome-blind prereg freeze, the heavy broad-panel jump-forecast evaluation
+    triad (py+json+md), the independent stdlib recompute (py+json), the evidence
+    audit (json+md), the gate-critical evidence_audit_ alias (json), and a
+    non-empty trigger check. Trigger-only, prose-only, audit-only, prereg-only,
+    verify-and-stop, arbitrary recompute_* sessions, zero-byte placeholders, and
+    unreadable or non-conforming JSON fail closed. Sessions predating the
+    campaign start are grandfathered so the handoff refresh that first announces
+    the campaign stays green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "content_failures": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = VOL_JUMP_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_num = int(m.group(1))
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-VOL-JUMP-{campaign_num:02d}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _path(name: str) -> Path | None:
+        if not latest_dir or not latest_dir.exists():
+            return None
+        p = latest_dir / name
+        return p if p.is_file() else None
+
+    def _nonempty(name: str) -> bool:
+        p = _path(name)
+        return bool(p and p.stat().st_size > 0)
+
+    def _matches(prefix: str, suffix: str) -> list[str]:
+        return sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+
+    def _json(prefix: str) -> tuple[dict | None, str | None]:
+        hits = _matches(prefix, ".json")
+        for name in hits:
+            p = _path(name)
+            if not p:
+                continue
+            try:
+                value = json.loads(p.read_text(encoding="utf-8"))
+            except (OSError, UnicodeError, json.JSONDecodeError):
+                continue
+            if isinstance(value, dict):
+                return value, name
+        return None, None
+
+    def _number(value: object) -> bool:
+        return (
+            isinstance(value, (int, float))
+            and not isinstance(value, bool)
+            and math.isfinite(value)
+        )
+
+    def _sha256(name: str | None) -> str | None:
+        p = _path(name) if name else None
+        if not p:
+            return None
+        return hashlib.sha256(p.read_bytes()).hexdigest()
+
+    tag = f"voljump{campaign_num:02d}"
+    campaign_id = f"FCLR-VOL-JUMP-{campaign_num:02d}"
+    family = tuple(
+        (prefix.replace("fclr_voljump01_", f"fclr_{tag}_"), suffix)
+        for prefix, suffix in VOL_JUMP_REQUIRED
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["artifact_family"] = tag
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, family):
+        hits = _matches(prefix, suffix)
+        if not hits:
+            out["missing_required_artifacts"].append(label)
+        elif not any(_nonempty(name) for name in hits):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+
+    source_prefix = f"fclr_{tag}_source_registry_"
+    prereg_prefix = f"fclr_{tag}_prereg_"
+    eval_prefix = f"fclr_{tag}_eval_"
+    recompute_prefix = f"fclr_{tag}_recompute_"
+    audit_prefix = f"fclr_{tag}_evidence_audit_"
+    alias_prefix = "evidence_audit_"
+    trigger_prefix = "trigger_check_"
+
+    source, source_name = _json(source_prefix)
+    prereg, _ = _json(prereg_prefix)
+    evaluation, _ = _json(eval_prefix)
+    recompute, _ = _json(recompute_prefix)
+    evidence, _ = _json(audit_prefix)
+    alias, _ = _json(alias_prefix)
+    trigger, _ = _json(trigger_prefix)
+
+    for label, data in (
+        ("SOURCE", source),
+        ("PREREG", prereg),
+        ("EVAL", evaluation),
+        ("RECOMPUTE", recompute),
+        ("EVIDENCE", evidence),
+        ("EVIDENCE_ALIAS", alias),
+        ("TRIGGER", trigger),
+    ):
+        if data is None:
+            out["content_failures"].append(f"{label}_JSON_INVALID")
+            continue
+        if data.get("experiment_id") != campaign_id:
+            out["content_failures"].append(f"{label}_EXPERIMENT_ID")
+        session_matches = data.get("session_id") == latest_sid or (
+            data.get("session_utc") == latest_utc
+        )
+        if not session_matches:
+            out["content_failures"].append(f"{label}_SESSION_ID")
+
+    # Registry: prove the frozen datasets and their sidecars were inventoried
+    # before outcomes were computed.
+    if source is not None:
+        datasets = source.get("datasets")
+        if not isinstance(datasets, dict) or not {
+            "candles_1h", "funding", "open_interest"
+        }.issubset(datasets):
+            out["content_failures"].append("SOURCE_DATASETS")
+        integrity = source.get("input_integrity")
+        if not isinstance(integrity, dict):
+            out["content_failures"].append("SOURCE_INTEGRITY")
+        else:
+            if integrity.get("sha256_all_match") is not True:
+                out["content_failures"].append("SOURCE_HASH_ASSERTION")
+            if integrity.get("sha256_verified_bad") != 0:
+                out["content_failures"].append("SOURCE_BAD_HASHES")
+        files = source.get("files", source.get("input_sha256"))
+        if not isinstance(files, (list, dict)) or len(files) < 54:
+            out["content_failures"].append("SOURCE_FILE_COUNT")
+        elif isinstance(files, list):
+            valid_hashes = all(
+                isinstance(entry, dict)
+                and isinstance(entry.get("sha256"), str)
+                and re.fullmatch(r"[0-9a-f]{64}", entry["sha256"])
+                and entry.get("sha_match") is not False
+                for entry in files
+            )
+            if not valid_hashes:
+                out["content_failures"].append("SOURCE_FILE_HASHES")
+
+    # Prereg: freeze the outcome-blind jump-forecast design and bind it to the
+    # registry. The design kind must be a jump / asymmetry / bipower /
+    # semivariance / forecast / classification design (the jump sub-target), not
+    # the closed mean-QLIKE / correction-time / total-variance-tail endpoints.
+    if prereg is not None:
+        if prereg.get("frozen_before_outcomes") is not True and prereg.get(
+            "decision_frozen_before_outcomes"
+        ) is not True:
+            out["content_failures"].append("PREREG_NOT_FROZEN")
+        if prereg.get("outcome_data_inspected_before_freeze") is not False:
+            out["content_failures"].append("PREREG_OUTCOME_INSPECTION_FLAG")
+        design = prereg.get("design")
+        if not isinstance(design, dict) or not any(
+            k in str(design.get("kind", "")).lower()
+            for k in ("jump", "asymmetry", "bipower", "semivariance", "signed_jump", "downside")
+        ):
+            out["content_failures"].append("PREREG_DESIGN_KIND")
+        floor = prereg.get("materiality_floor_rel", prereg.get("materiality_floor"))
+        if not _number(floor) or floor <= 0:
+            out["content_failures"].append("PREREG_MATERIALITY")
+        hash_assertions = prereg.get("input_hash_assertions")
+        registry_sha = prereg.get("source_registry_sha256")
+        if registry_sha is None and isinstance(hash_assertions, dict):
+            registry_sha = hash_assertions.get("source_registry_sha256")
+        if registry_sha != _sha256(source_name):
+            out["content_failures"].append("PREREG_SOURCE_HASH")
+
+    # Evaluation: require a completed jump-forecast run with a real event /
+    # forecast count and numeric baseline/candidate Brier (or log-loss) metrics.
+    if evaluation is not None:
+        if evaluation.get("status") not in {
+            "CONFIRMATORY_COMPLETE", "NOT_SUPPORTED", "PROMOTED", "INCONCLUSIVE"
+        }:
+            out["content_failures"].append("EVAL_STATUS")
+        if evaluation.get("holdout_opened") is not True:
+            out["content_failures"].append("EVAL_HOLDOUT_NOT_OPENED")
+        n_events = evaluation.get("n_events", evaluation.get("n_forecasts"))
+        if not isinstance(n_events, int) or n_events < 1:
+            out["content_failures"].append("EVAL_EVENT_COUNT")
+        metrics = evaluation.get("metrics")
+        if not isinstance(metrics, dict) or not {"baseline", "candidate"}.issubset(
+            metrics
+        ):
+            out["content_failures"].append("EVAL_METRICS_MODELS")
+        else:
+            for model in ("baseline", "candidate"):
+                entry = metrics.get(model)
+                if not isinstance(entry, dict):
+                    out["content_failures"].append(f"EVAL_{model.upper()}_METRICS")
+                    continue
+                value = entry.get("brier", entry.get("log_loss"))
+                if not _number(value) or value < 0:
+                    out["content_failures"].append(
+                        f"EVAL_{model.upper()}_BRIER"
+                    )
+        if not isinstance(evaluation.get("materiality_met"), bool):
+            out["content_failures"].append("EVAL_MATERIALITY_FLAG")
+        verdict = str(evaluation.get("verdict", "")).upper()
+        if verdict not in {"PROMOTED", "NOT_SUPPORTED", "INCONCLUSIVE"}:
+            out["content_failures"].append("EVAL_VERDICT")
+        elif verdict == "PROMOTED" and evaluation.get("materiality_met") is not True:
+            out["content_failures"].append("EVAL_PROMOTION_WITHOUT_MATERIALITY")
+
+    # Recompute: the independent result must explicitly match the canonical run.
+    if recompute is not None:
+        if recompute.get("all_checks_match") is not True:
+            out["content_failures"].append("RECOMPUTE_NOT_MATCHED")
+        if recompute.get("n_checks") is None:
+            out["content_failures"].append("RECOMPUTE_CHECK_COUNT")
+
+    # Audit: require an explicit verdict and no unresolved blockers.
+    if evidence is not None:
+        if evidence.get("audit_pass") is not True:
+            out["content_failures"].append("EVIDENCE_AUDIT_NOT_PASSING")
+        if evidence.get("unresolved_blockers") != []:
+            out["content_failures"].append("EVIDENCE_AUDIT_BLOCKERS")
+        if evidence.get("verdict") != (evaluation or {}).get("verdict"):
+            out["content_failures"].append("EVIDENCE_EVAL_VERDICT_MISMATCH")
+
+    # Gate-critical alias must be a substantive audit, not a duplicate stub.
+    if alias is not None and evidence is not None:
+        if alias.get("verdict") != evidence.get("verdict"):
+            out["content_failures"].append("EVIDENCE_ALIAS_VERDICT_MISMATCH")
+        if alias.get("audit_pass") is not True:
+            out["content_failures"].append("EVIDENCE_ALIAS_NOT_PASSING")
+
+    # Trigger: no external liquidation trigger is needed or can fire here.
+    if trigger is not None:
+        if trigger.get("external_trigger_required") is not False:
+            out["content_failures"].append("TRIGGER_EXTERNAL_FLAG")
+        if trigger.get("trigger_source") != "FROZEN_IRONFLOW_BULK":
+            out["content_failures"].append("TRIGGER_SOURCE")
+        if trigger.get("fired") is not False:
+            out["content_failures"].append("TRIGGER_UNEXPECTED_FIRE")
+
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and not out["content_failures"]
+        and out["has_trigger_check"]
+    )
+    return out
+
+
+def _panel_fe_state(handoff_text: str, latest_sid: str | None,
+                     latest_files: list[str],
+                     latest_dir: Path | None = None) -> dict:
     """Return FCLR-PANEL-FE-001 non-avoidance state.
 
     After the panel fixed-effects funding-conditioning campaign starts, a
@@ -3815,6 +4135,7 @@ def check(repo: Path = REPO) -> dict:
         "vol_broad": None,
         "vol_corr": None,
         "vol_stress": None,
+        "vol_jump": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -4597,6 +4918,39 @@ def check(repo: Path = REPO) -> dict:
                 if not vs["has_trigger_check"]:
                     payload["failures"].append(
                         f"VOL_STRESS_TRIGGER_CHECK_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-VOL-JUMP-01: after the funding-conditioned signed-jump /
+            # semivariance-asymmetry campaign starts, require the on-disk source
+            # registry + outcome-blind prereg + HEAVY broad-panel jump-forecast
+            # evaluation triad + independent stdlib recompute + evidence audit +
+            # gate alias + trigger check. A future session cannot dodge the
+            # broad-panel jump test with a trigger-only, prose-only, audit-only,
+            # prereg-only, verify-and-stop, source-probe-only, or arbitrary
+            # recompute_* session, nor with zero-byte placeholders.
+            vj = _vol_jump_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["vol_jump"] = vj
+            if vj["required"]:
+                if vj["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "VOL_JUMP_ARTIFACTS_MISSING:"
+                        + ",".join(vj["missing_required_artifacts"])
+                    )
+                if vj["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "VOL_JUMP_ARTIFACTS_EMPTY:"
+                        + ",".join(vj["empty_required_artifacts"])
+                    )
+                if vj["content_failures"]:
+                    payload["failures"].append(
+                        "VOL_JUMP_CONTENT_INVALID:"
+                        + ",".join(vj["content_failures"])
+                    )
+                if not vj["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"VOL_JUMP_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None

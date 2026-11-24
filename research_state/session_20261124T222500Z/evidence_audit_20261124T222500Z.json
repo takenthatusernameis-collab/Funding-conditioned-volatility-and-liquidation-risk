@@ -1,0 +1,12 @@
+{
+  "experiment_id": "FCLR-VOL-STRESS-01",
+  "campaign": "FCLR-VOL-STRESS-01-20261124T213000Z",
+  "session_id": "session_20261124T222500Z",
+  "session_utc": "20261124T222500Z",
+  "generated_utc": "2026-11-24T22:28:10Z",
+  "audit_pass": true,
+  "verdict": "NOT_SUPPORTED",
+  "unresolved_blockers": [],
+  "alias_of": "fclr_volstress01_evidence_audit_20261124T222500Z.json",
+  "summary": "FCLR-VOL-STRESS-01 NOT_SUPPORTED: broad-panel funding-conditioned volatility-stress (tail-exceedance) forecast, relative Brier improvement 0.015120837271339846, materiality floor 0.02 not met; recompute all_checks_match=True."
+}
