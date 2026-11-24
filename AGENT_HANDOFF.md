@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-24T09:44:50Z
+# AGENT HANDOFF — 2026-11-24T09:47:22Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,7 +12,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-24T09:44:50Z**
+> **Timestamped initial task message — inferred 2026-11-24T09:47:22Z**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel (Track A STRUCTURALLY_BLOCKED on a capped-sample feed; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; the broad cross-sectional rank-ordering association is SUPPORTED_GENERALIZATION but NOT_STABLE and its 2% Poisson-deviance materiality floor is NOT MET). Half 1 (funding-conditioned volatility) is only closed on a **5-coin** panel. The next session's single, non-deferrable job is to run the **broad-universe funding-conditioned volatility forecast** at the same 342+ coin scale that produced the only SUPPORTED liquidation-risk result.
 >
@@ -107,6 +107,7 @@
 - Do not build a risk overlay.
 - Do not track-adulterate.
 - Do not ship a verdict from a non-reconciled eval. Emit a verdict only after the independent recompute reports `all_checks_match:true`; preserve fail-closed behavior.
+- **DO NOT treat `python3 scripts/next_campaign_status.py` output as a feasibility verdict.** That script only tests the OLD 3-contiguous-30-day-block framing (needs a >=127d contiguous span) and prints `no feasible 3-block design in ANY domain`. It does NOT assess the broad-panel walk-forward design (60% train / 48h purge / 168h blocks across the full 18-month `ironflow_bulk` panel), which IS feasible today. Misreading this output as "no feasible heavy work exists" and idling is a non-avoidance failure. The heavy work is the broad-panel RV forecast in this handoff, not a 3-block contiguous-span design.
 
 ---
 
@@ -198,7 +199,8 @@ python3 scripts/next_campaign_status.py
 
 ## BOTTLENECK RESOLUTION (this refresh)
 
-- **RE-VERIFIED THIS REFRESH (2026-11-24T09:44:50Z):** every RESOLVED item below was re-run and still holds — gate `reason_code=OK`/`pass=true`, `vol_broad.required=false` only via grandfathering (latest on-disk session `session_20261124T015114Z` predates `20261124T035500Z`), 107 campaign-gate tests OK (0.701s), caches 18/18/18, deps numpy 2.5.5 / pandas 3.1.1 / pyarrow 26.0.1 importable, root `research_state/*.md|*.json` 500/500, no empty session dir. No new blocker surfaced; the only OPEN item is the campaign execution itself.
+- **RE-VERIFIED THIS REFRESH (2026-11-24T09:47:22Z):** every RESOLVED item below was re-run and still holds — gate `reason_code=OK`/`pass=true`, `vol_broad.required=false` only via grandfathering (latest on-disk session `session_20261124T015114Z` predates `20261124T035500Z`), 107 campaign-gate tests OK, caches 18/18/18 (parquet+sha256 sidecars each), deps numpy 2.5.5 / pandas 3.1.1 / pyarrow 26.0.1 importable, root `research_state/*.md|*.json` 500/500, no empty session dir. **New this refresh: directly read `candles_1h/2025-05.parquet` → 35,550 rows, 342 coins, schema `[timestamp, market, coin, dex, market_class, open, high, low, close, volume, trades]`, months 2025-05..2026-10.** The campaign is empirically feasible TODAY; the next agent cannot claim the panel is unreadable or the universe absent. No new blocker surfaced; the only OPEN item is the campaign execution itself.
+- **RESOLVED (avoidance hazard — `next_campaign_status.py` misleading output):** the script prints `no feasible 3-block design in ANY domain`, which is TRUE only for the obsolete 3-contiguous-30-day-block framing (127d contiguous span). A future agent could misread this as "no heavy work is possible" and idle. Added a hard non-avoidance constraint forbidding that misread; the broad-panel walk-forward design is feasible on the full 18-month panel and is the mandated heavy work.
 - **RESOLVED (verify-and-stop / closure-memo escape hatch):** the prior plan routed the next session to a program-closure synthesis. That would let a future agent end the program by writing documents instead of running heavy science. Replaced with a concrete, feasible, heavy broad-panel volatility forecast that uses the same frozen panel and matches the repository-name first half.
 - **RESOLVED (no feasible heavy work on frozen data):** the broad `ironflow_bulk` panel (candles + funding + open_interest) has never been used for a direct RV forecast; a walk-forward, leakage-hardened, fixed-effects design is feasible today without any new source.
 - **RESOLVED (gate not binding the active frontier):** `VOL_BROAD_CAMPAIGN_RE` / `_vol_broad_state` / `VOL_BROAD_REQUIRED` are wired into `check()` and confirmed live this session (read `scripts/check_handoff_heavywork_gate.py:640,1764,3874`). A post-start session cannot pass with a trigger-only/audit-only/prereg-only/verify-and-stop session. Currently `required=false` only via grandfathering (latest on-disk session predates the campaign start); the binder activates the moment the next agent creates a `session_<UTC> > 20261124T035500Z` and becomes the latest on-disk session.
