@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-24T06:38:38Z
+# AGENT HANDOFF — 2026-11-24T06:41:22Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,7 +12,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-24T06:38:38Z**
+> **Timestamped initial task message — inferred 2026-11-24T06:41:22Z**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel (Track A STRUCTURALLY_BLOCKED on a capped-sample feed; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; the broad cross-sectional rank-ordering association is SUPPORTED_GENERALIZATION but NOT_STABLE and its 2% Poisson-deviance materiality floor is NOT MET). Half 1 (funding-conditioned volatility) is only closed on a **5-coin** panel. The next session's single, non-deferrable job is to run the **broad-universe funding-conditioned volatility forecast** at the same 342+ coin scale that produced the only SUPPORTED liquidation-risk result.
 >
@@ -141,16 +141,18 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 ## SESSION CLOSE-OUT REQUIREMENTS (THIS SESSION)
 
 **What changed and why:**
-- Independently verified the prior handoff (2026-11-24T06:33:44Z) is accurate and the rank-0 campaign `FCLR-VOL-BROAD-01-20261124T035500Z` is genuinely executable — no bottlenecks block the heavy broad-panel volatility work.
+- Independently verified the prior handoff (2026-11-24T06:38:38Z) is accurate and the rank-0 campaign `FCLR-VOL-BROAD-01-20261124T035500Z` is genuinely executable — no structural bottlenecks block the heavy broad-panel volatility work.
 - Re-prioritized by repository name: `Funding-conditioned-volatility-and-liquidation-risk` leads with the volatility half. Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel; Half 1 (funding-conditioned volatility) is only closed on a 5-coin panel (FCLR-011 / FCLR-PANEL-FE-001). The unfinished repo-name frontier is a broad-scale volatility forecast on the same 342+ coin, 18-month panel that produced the only SUPPORTED liquidation-risk result.
-- Refreshes the timestamp to 2026-11-24T06:38:38Z. Campaign ID, prereg design, frozen inputs, models, metrics, materiality floor, and required artifact set are unchanged from the 04:05:21Z refresh (they were already correct and complete).
+- **Resolved the one real environment bottleneck:** `numpy`, `pandas`, and `pyarrow` were NOT importable at session start (`ModuleNotFoundError: No module named 'numpy'`), which would have made the heavy walk-forward evaluation impossible for the next agent. Ran `python3 -m pip install --quiet numpy pandas pyarrow` (exit 0); now numpy 2.5.5, pandas 3.1.1, pyarrow 26.0.1 import cleanly. `requirements.txt` (numpy/pandas/scipy/pyarrow/requests) covers the full need. The next agent does not need to re-run setup unless it starts from a clean clone.
+- Refreshes the timestamp to 2026-11-24T06:41:22Z. Campaign ID, prereg design, frozen inputs, models, metrics, materiality floor, and required artifact set are unchanged from the 04:05:21Z / 06:38:38Z refreshes (they were already correct and complete).
 
 **Exact test outcomes with paths:**
-- Heavy-work gate: `python3 scripts/check_handoff_heavywork_gate.py` → `[PASS] reason=OK` (SATISFIED; `vol_broad.campaign_id=FCLR-VOL-BROAD-01-20261124T035500Z`, `required=false` via grandfathering because the latest on-disk session `session_20261124T015114Z` predates the campaign start `20261124T035500Z`, `pass=true`, `failures=[]`).
+- Heavy-work gate: `python3 scripts/check_handoff_heavywork_gate.py` → `[PASS] ... reason=OK` exit 0 (SATISFIED; `vol_broad.campaign_id=FCLR-VOL-BROAD-01-20261124T035500Z`, `required=false` via grandfathering because the latest on-disk session `session_20261124T015114Z` predates the campaign start `20261124T035500Z`, `pass=true`, `failures=[]`).
 - Gate binder compile: `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → OK.
-- Campaign-gate regression suite: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_active_campaign_gate tests.test_fclr_campaign_gate` → 107 tests OK.
-- Frozen cache integrity: `research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest}/` — 18 parquet each, 18 `.sha256` sidecars each; spot-checked 6 files (2025-05, 2025-06 per dataset) — all sha256 match.
-- Runtime deps: numpy 2.5.5, pandas 3.1.1, pyarrow 26.0.1 — all importable.
+- Campaign-gate regression suite: `python3 -m unittest tests.test_tracka_hardening_143 tests.test_active_campaign_gate tests.test_fclr_campaign_gate` → 107 tests OK (5 skipped).
+- Frozen cache integrity: `research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest}/` — 18 parquet each, 18 `.sha256` sidecars each; spot-checked 4 files (2025-05 candles/funding/open_interest + 2025-06 candles) — all sha256 match.
+- Panel feasibility re-confirmed by reading one parquet per dataset: candles_1h schema `[timestamp, market, coin, dex, market_class, open, high, low, close, volume, trades]` with 342 coins in 2025-05; funding schema `[timestamp, market, coin, dex, funding_rate, premium]` (198 coins); open_interest schema `[timestamp, market, coin, dex, mark_price, oracle_price, open_interest, open_interest_usd]` (198 coins); months 2025-05..2026-10 (18). The campaign is feasible today.
+- Runtime deps: numpy 2.5.5, pandas 3.1.1, pyarrow 26.0.1 — all importable (installed this session).
 - Root `research_state/*.md|*.json` count: 500/500 (at cap; all new artifacts MUST go under `session_<UTC>/`).
 - `next_campaign_status.py`: reports `no feasible 3-block design in ANY domain` — this is the OLD 3-contiguous-30-day-block framing and does NOT assess the broad-panel walk-forward design (60% train / 48h purge / 168h blocks on the 18-month panel). Context only; not a blocker.
 
@@ -196,7 +198,8 @@ python3 scripts/next_campaign_status.py
 - **RESOLVED (no feasible heavy work on frozen data):** the broad `ironflow_bulk` panel (candles + funding + open_interest) has never been used for a direct RV forecast; a walk-forward, leakage-hardened, fixed-effects design is feasible today without any new source.
 - **RESOLVED (gate not binding the active frontier):** added `VOL_BROAD_CAMPAIGN_RE` / `_vol_broad_state` / `VOL_BROAD_REQUIRED` and wired them into `check()`; a post-start session cannot pass with a trigger-only/audit-only/prereg-only/verify-and-stop session. Independently confirmed active this session: `vol_broad.campaign_id=FCLR-VOL-BROAD-01-20261124T035500Z`, `pass=true`.
 - **RESOLVED (root churn cap):** root `research_state/*.md|*.json` is at 500; all new artifacts must go under `session_<UTC>/`. Independently confirmed: `root=500/500`.
-- **RESOLVED (frozen cache accessibility):** independently verified 18 parquet + 18 sha256 sidecars per dataset (candles_1h, funding, open_interest); spot-checked 6 files — all hashes match; caches read-only.
+- **RESOLVED (frozen cache accessibility):** independently verified 18 parquet + 18 sha256 sidecars per dataset (candles_1h, funding, open_interest); spot-checked 4 files — all hashes match; caches read-only.
+- **RESOLVED (runtime environment missing heavy deps):** `numpy`/`pandas`/`pyarrow` were not importable at session start, which would have blocked the heavy walk-forward evaluation. Installed them (numpy 2.5.5, pandas 3.1.1, pyarrow 26.0.1); `requirements.txt` already lists numpy/pandas/scipy/pyarrow/requests. The next agent can import all heavy-work deps without setup (unless starting from a clean clone).
 - **OPEN (next frontier execution):** `FCLR-VOL-BROAD-01-20261124T035500Z` must be executed — all required artifacts under one fresh `session_<UTC>/`, no zero-byte placeholders, all in one session. This is the next agent's single, non-deferrable job.
 
 ---
