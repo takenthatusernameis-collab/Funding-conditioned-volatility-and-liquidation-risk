@@ -116,6 +116,7 @@
 | `research_state/data_cache/ironflow_bulk/candles_1h/` | 18 monthly parquet, 2025-05..2026-10; hourly OHLC. |
 | `research_state/data_cache/ironflow_bulk/funding/` | 18 monthly parquet; `funding_rate`, `premium`. |
 | `research_state/data_cache/ironflow_bulk/open_interest/` | 18 monthly parquet; `mark_price`, `oracle_price`, `open_interest`. |
+| `research_state/session_20261124T120000Z/` | Latest complete heavy session (FCLR-VOL-BROAD-01; NOT_SUPPORTED, vol_broad required satisfied). |
 | `research_state/session_20261124T015114Z/` | Latest complete heavy session (temporal-stability campaign). |
 | `research_state/session_20261121T130159Z/` | 5-coin panel fixed-effects volatility study (prior null). |
 | `research_state/experiment_frontier.json` | rank-0 is `FCLR-VOL-BROAD-01-20261124T035500Z` (READY_EXECUTE). |

@@ -1,0 +1,128 @@
+{
+  "experiment_id": "FCLR-VOL-BROAD-01",
+  "campaign": "FCLR-VOL-BROAD-01-20261124T035500Z",
+  "session_utc": "20261124T120000Z",
+  "session_id": "session_20261124T120000Z",
+  "phase": "PREREG_FREEZE_ON_BROAD_UNIVERSE",
+  "source": "fclr_volbroad01_prereg",
+  "outcome_data_inspected_before_freeze": false,
+  "decision_frozen_before_outcomes": true,
+  "frozen_before_outcomes": true,
+  "estimand": "out-of-sample, pooled two-way (coin + hour-of-day) fixed-effects within-transform forecast of next-hour and next-24-hour realized volatility on the broad frozen ironflow_bulk panel, testing whether funding features (signed funding rate, trailing abs_funding trail, trailing RV24/RV168, mark/oracle premium dislocation, MA deviation) improve QLIKE over a realized-volatility-only baseline once coin and hour fixed effects are removed, and whether any improvement clears the frozen 2% relative QLIKE materiality floor with Holm-adjusted uncertainty. Outcome-blind: no outcome summaries inspected before this freeze.",
+  "label_construct": {
+    "kind": "hourly_close_to_close_realized_volatility",
+    "targets": [
+      "next_hour_rv",
+      "next_24h_rv"
+    ],
+    "horizon_h": [
+      1,
+      24
+    ],
+    "description": "next-hour RV = squared close-to-close log return over hour t+1; next-24h RV = sum of squared close-to-close log returns over hours t+1..t+24; computed per coin from candles_1h close"
+  },
+  "universe": {
+    "kind": "broad_ironflow_bulk_intersection_panel",
+    "months": "2025-05 .. 2026-10 (18 monthly parquet)",
+    "n_coins_candles_1h": 342,
+    "n_coins_funding_oi": 198,
+    "note": "panel uses the intersection of coins present in candles_1h, funding, and open_interest; present-day survivors not substituted for the historical universe; no future information in coin selection."
+  },
+  "features": {
+    "all_known_at_origin": true,
+    "signed_funding_rate": "latest funding observation whose availability timestamp is <= origin hour t, retaining sign separately",
+    "abs_funding_trail": "trailing rolling mean of abs(funding_rate), train-only thresholds",
+    "rv24": "trailing 24-hour realized volatility (sum of squared close-to-close log returns) ending at t",
+    "rv168": "trailing 168-hour realized volatility ending at t",
+    "premium_dislocation": "mark_price / oracle_price - 1 from open_interest, contemporaneous alignment",
+    "ma_deviation": "close_t / 24-hour trailing moving average of close - 1, EMA computed from prior/current fully closed bars only",
+    "feature_sources": [
+      "ironflow_bulk/funding (funding_rate, premium)",
+      "ironflow_bulk/open_interest (mark_price, oracle_price)",
+      "ironflow_bulk/candles_1h (close)"
+    ],
+    "normalization": "train-only means and standard deviations; expanding train-only thresholds; no full-sample quantiles; no future information",
+    "min_valid_funding_observations": 30
+  },
+  "baseline": {
+    "kind": "realized_volatility_only_persistence",
+    "description": "pooled two-way (coin + hour-of-day) fixed-effects within-transform regression of target RV on trailing RV24 (and RV168) only; no funding features"
+  },
+  "candidate": {
+    "kind": "funding_conditioned_fe",
+    "description": "same pooled two-way FE within-transform as baseline, plus signed funding rate, abs_funding trail, RV24/RV168, mark/oracle premium dislocation, MA deviation"
+  },
+  "design": {
+    "kind": "walk_forward",
+    "train_frac": 0.6,
+    "purge_embargo_h": 48,
+    "block_h": 168,
+    "test_blocks": "chronological non-overlapping 168h blocks over the post-train test span",
+    "non_overlapping": true,
+    "expanding_train": true,
+    "feature_normalization": "train-only parameters per block",
+    "no_random_split": true,
+    "no_overlapping_forward_targets_across_purge": true
+  },
+  "train_frac": 0.6,
+  "purge_embargo_h": 48,
+  "materiality_floor_rel_qlike": 0.02,
+  "metrics": {
+    "primary": [
+      "QLIKE"
+    ],
+    "secondary": [
+      "MSE"
+    ],
+    "models": [
+      "baseline",
+      "candidate"
+    ],
+    "inference": [
+      "Diebold-Mariano HAC on daily loss differential",
+      "cluster-robust CR1 by coin",
+      "Driscoll-Kraay HAC"
+    ],
+    "multiplicity": "Holm step-down over declared family"
+  },
+  "uncertainty": {
+    "dm_hac": "HAC-standardized Diebold-Mariano test on paired daily loss differential (candidate - baseline)",
+    "cluster_robust_cr1": "cluster-robust standard errors by coin for FE coefficients",
+    "driscoll_kraay_hac": "Driscoll-Kraay HAC for cross-sectional and serial dependence",
+    "holm_family": [
+      "next_hour_rv",
+      "next_24h_rv",
+      "funding_feature_block",
+      "price_dislocation_feature_block"
+    ]
+  },
+  "verdict_rule": {
+    "PROMOTED_iff": "materiality_floor_met AND holm_adjusted_uncertainty_supports_improvement",
+    "NOT_SUPPORTED_iff": "floor not met OR uncertainty does not support improvement",
+    "INCONCLUSIVE_iff": "evaluation cannot be completed or fidelity blocker",
+    "symmetric": true,
+    "null_is_valid": "a null is a valid, publishable negative result that closes Half 1 at broad scale",
+    "no_threshold_shopping": true,
+    "no_floor_relaxation_after_outcomes": true
+  },
+  "materiality_floor": {
+    "threshold": 0.02,
+    "definition": "a +1 sample-SD funding shock must move QLIKE by >= 2% relative to baseline",
+    "frozen_before_outcomes": true,
+    "never_relaxed_after_outcomes": true
+  },
+  "sign_convention": {
+    "relative_improvement": "(baseline - candidate) / baseline",
+    "positive_means_candidate_better": true,
+    "used_identically_in_eval_and_recompute": true
+  },
+  "input_hash_assertions": {
+    "source_registry_sha256": "2a085fb9de762b6080ee8f4fcf4b30906d8a0a98301fff4aa3e49a7d1b25dcc8",
+    "source_registry_path": "research_state/session_20261124T120000Z/fclr_volbroad01_source_registry_20261124T120000Z.json",
+    "sha256_sidecars_asserted_before_every_read": true,
+    "caches_read_only_not_mutated": true,
+    "no_network_for_heavy_evaluation": true
+  },
+  "status_vocabulary": "PROMOTED / NOT_SUPPORTED / INCONCLUSIVE (symmetric, frozen)",
+  "generated_utc": "2026-11-24T12:00:00Z"
+}

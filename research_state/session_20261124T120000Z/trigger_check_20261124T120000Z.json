@@ -1,0 +1,25 @@
+{
+  "session_utc": "20261124T120000Z",
+  "session_id": "session_20261124T120000Z",
+  "experiment_id": "FCLR-VOL-BROAD-01",
+  "campaign": "FCLR-VOL-BROAD-01-20261124T035500Z",
+  "trigger": "FCLR-VOL-BROAD-01 campaign start UTC 20261124T035500Z has elapsed",
+  "trigger_status": "FIRED (campaign start elapsed; session UTC 20261124T120000Z > 20261124T035500Z)",
+  "new_observed_liquidation_source": "NOT_WAITING (cannot fire on frozen data; not a valid excuse to idle per RESEARCH_PROMPT.md section 16, section 19)",
+  "external_trigger_required": false,
+  "trigger_source": "FROZEN_IRONFLOW_BULK",
+  "fired": false,
+  "heavy_work_required": true,
+  "heavy_work_complete": true,
+  "heavy_work_artifacts": [
+    "fclr_volbroad01_source_registry_20261124T120000Z.{json,md}",
+    "fclr_volbroad01_prereg_20261124T120000Z.{json,md}",
+    "fclr_volbroad01_eval_20261124T120000Z.{py,json,md}",
+    "fclr_volbroad01_recompute_20261124T120000Z.{py,json}",
+    "fclr_volbroad01_evidence_audit_20261124T120000Z.{json,md}",
+    "evidence_audit_20261124T120000Z.json",
+    "trigger_check_20261124T120000Z.json"
+  ],
+  "note": "Trigger check non-empty; the heavy broad-panel funding-conditioned volatility evaluation is complete. The trigger is a campaign-start gate, not an external data trigger; do not wait for NEW_OBSERVED_LIQUIDATION_SOURCE.",
+  "generated_utc": "2026-11-24T12:00:00Z"
+}
