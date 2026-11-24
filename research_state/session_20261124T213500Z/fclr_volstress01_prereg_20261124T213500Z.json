@@ -1,0 +1,56 @@
+{
+  "experiment_id": "FCLR-VOL-STRESS-01",
+  "campaign": "FCLR-VOL-STRESS-01-20261124T213000Z",
+  "session_id": "session_20261124T213500Z",
+  "session_utc": "20261124T213500Z",
+  "generated_utc": "2026-11-24T21:35:00Z",
+  "frozen_before_outcomes": true,
+  "decision_frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "source_registry_sha256": "01ea3208fca6e3aeaea91dfd8be4fc534db172acb552878817ebf71bf13df191",
+  "input_hash_assertions": {
+    "source_registry_sha256": "01ea3208fca6e3aeaea91dfd8be4fc534db172acb552878817ebf71bf13df191",
+    "cache": "research_state/data_cache/ironflow_bulk/ (read-only, sha256-asserted)"
+  },
+  "question": "On the full frozen ironflow_bulk panel (18 monthly parquet, 2025-05..2026-10, 466 coins with candles_1h+funding+open_interest), does the funding + price-dislocation feature set improve out-of-sample forecasts of a realized-volatility STRESS event - next-24h realized variance exceeding an expanding, train-only high quantile per coin - beyond a realized-volatility-only baseline, judged on Brier / log-loss / calibration with a frozen materiality floor and Holm-adjusted uncertainty?",
+  "design": {
+    "kind": "walk_forward_classification_stress",
+    "estimand": "next-24h realized-variance tail-exceedance (stress) classification probability",
+    "target_definition": "stress event at forecast origin t for coin c: RV_{t+1..t+24} > q_{c,t}, where RV_{t+1..t+24} is the forward sum of squared hourly mark-price log returns over the next 24 complete hourly intervals and q_{c,t} is an EXPANDING, TRAIN-ONLY high quantile (0.90) of the coin's own trailing-24h realized variance observed strictly before t (no future information)",
+    "baseline": "RV-only (persistence / HAR-style): logistic regression of the stress label on trailing realized-variance features (RV24h, RV168h, lagged RV)",
+    "candidate": "RV + signed funding rate + absolute funding rate + mark/index premium + mark/EMA24 distance, on the same logistic form and fitting procedure as the baseline",
+    "feature_standardization": "train-only means and standard deviations; zero-variance columns dropped",
+    "walk_forward": {
+      "train_frac": 0.6,
+      "purge_embargo_h": 48,
+      "random_split": false,
+      "note": "chronological expanding train-only thresholds; no overlapping forward targets across the purge boundary"
+    },
+    "inference": [
+      "cluster-robust (CR1) by coin",
+      "Driscoll-Kraay HAC",
+      "Holm step-down over the declared family"
+    ],
+    "multiplicity_family": [
+      "baseline_vs_candidate_brier",
+      "baseline_vs_candidate_log_loss"
+    ],
+    "materiality_floor_rel": 0.02,
+    "materiality_rule": "the candidate's relative Brier (or log-loss) improvement over the RV-only baseline must exceed 2% relative",
+    "verdict_rule": "symmetric: PROMOTED if materiality_met and direction improves; else NOT_SUPPORTED; INCONCLUSIVE if a holdout cannot be formed",
+    "holdout": "chronological final holdout opened once after the prereg is frozen; never re-tuned"
+  },
+  "frozen_inputs": {
+    "candles_1h": "research_state/data_cache/ironflow_bulk/candles_1h/ (18 monthly parquet, timestamp,market,coin,dex,market_class,open,high,low,close,volume,trades)",
+    "funding": "research_state/data_cache/ironflow_bulk/funding/ (18 monthly parquet, timestamp,market,coin,dex,funding_rate,premium)",
+    "open_interest": "research_state/data_cache/ironflow_bulk/open_interest/ (18 monthly parquet, timestamp,market,coin,dex,mark_price,oracle_price,open_interest,open_interest_usd)"
+  },
+  "do_not": [
+    "re-run the broad RV-forecast (FCLR-VOL-BROAD-01, closed NOT_SUPPORTED)",
+    "re-run the correction-time campaign (FCLR-VOL-CORR-01, closed NOT_SUPPORTED)",
+    "build a risk overlay (section 9 forecast gate not passed)",
+    "threshold-shop or relax the frozen floor after outcomes",
+    "relabel exploratory as confirmatory",
+    "wait for NEW_OBSERVED_LIQUIDATION_SOURCE (cannot fire on frozen data)"
+  ]
+}
