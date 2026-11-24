@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-24T18:24:13Z
+# AGENT HANDOFF — 2026-11-24T19:28:26Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,7 +12,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-24T18:24:13Z**
+> **Timestamped initial task message — inferred 2026-11-24T19:28:26Z**
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Half 1 (funding-conditioned volatility) has two closed arms: (a) the 5-coin leakage-robust RV-forecast null (FCLR-011 / FCLR-PANEL-FE-001), and (b) the broad 342+ coin, 18-month `ironflow_bulk` RV-forecast (FCLR-VOL-BROAD-01, session_20261124T120000Z) which returned NOT_SUPPORTED — the funding-conditioned candidate improved QLIKE by only 1.93% relative over the realized-volatility-only baseline, below the frozen 2% materiality floor (23 test blocks, 684,301 forecasts; independent stdlib recompute `all_checks_match=true`). Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel. The next session's single, non-deferrable job is the **broad-universe funding-extreme CORRECTION-TIME / correction-hazard study** — a DISTINCT outcome family (correction time / hazard, not RV QLIKE) that has never been run confirmatory at broad scale (prior work was only a PARTIAL, non-confirmatory replication).
 >
