@@ -619,6 +619,40 @@ PROGRAM_CLOSURE_REQUIRED = (
     ("trigger_check_", ".json"),
 )
 
+# FCLR-VOL-BROAD-01 hardening: the repository name leads with
+# "Funding-conditioned-volatility", yet every leakage-robust volatility null
+# (FCLR-011, FCLR-PANEL-FE-001) was established on a 5-coin panel. The broad
+# 342-coin, 18-month ironflow_bulk panel that produced the only SUPPORTED
+# liquidation-risk finding has never been used for a direct funding-conditioned
+# realized-volatility forecast. The liquidation-risk half's confirmatory paths
+# are exhausted on the frozen panel, so the unfinished repo-name frontier is
+# Half 1 (funding-conditioned volatility) at broad scale. Once this campaign
+# starts, a post-start session cannot satisfy the gate with a trigger-only,
+# prose-only, audit-only, prereg-only, verify-and-stop, or arbitrary
+# recompute_* session. It must emit the on-disk source registry, the
+# outcome-blind prereg freeze, the heavy broad-panel walk-forward evaluation
+# triad (py+json+md), the independent stdlib recompute (py+json), the evidence
+# audit (json+md), the gate-critical evidence_audit_ alias (json), and a
+# non-empty trigger check (json), all under one fresh session_<UTC>/ with no
+# zero-byte placeholders. Sessions predating the campaign start are grandfathered
+# so this handoff refresh that first announces the campaign stays green.
+VOL_BROAD_CAMPAIGN_RE = re.compile(r"FCLR-VOL-BROAD-(\d+)-(\d{8}T\d{6}Z)")
+VOL_BROAD_REQUIRED = (
+    ("fclr_volbroad01_source_registry_", ".json"),
+    ("fclr_volbroad01_source_registry_", ".md"),
+    ("fclr_volbroad01_prereg_", ".json"),
+    ("fclr_volbroad01_prereg_", ".md"),
+    ("fclr_volbroad01_eval_", ".py"),
+    ("fclr_volbroad01_eval_", ".json"),
+    ("fclr_volbroad01_eval_", ".md"),
+    ("fclr_volbroad01_recompute_", ".py"),
+    ("fclr_volbroad01_recompute_", ".json"),
+    ("fclr_volbroad01_evidence_audit_", ".json"),
+    ("fclr_volbroad01_evidence_audit_", ".md"),
+    ("evidence_audit_", ".json"),
+    ("trigger_check_", ".json"),
+)
+
 # FCLR-LIQ-CONTAGION-002 campaign was created precisely to close the same gap for
 # the contagion hypothesis (rolling-window edge-set stability). The BROAD-01
 # SUPPORTED finding is the ONLY liquidation-risk result ever marked SUPPORTED, and
@@ -799,6 +833,7 @@ NEW_QUANT_PREFIXES = (
     "fclr_pooled_audit",    # FCLR-POOLED-AUDIT pooled ironflow adversarial leakage/quality audit artifacts
     "fclr_tracks",          # FCLR-TRACKA-SOURCE-AUDIT observed-liquidation source viability audit + pivot artifacts
     "fclr_liqxsecbroad",    # FCLR-LIQ-XSEC-BROAD broad-universe cross-sectional liquidation-risk generalization artifacts
+    "fclr_volbroad",        # FCLR-VOL-BROAD broad-panel funding-conditioned volatility forecast artifacts
 )
 AUDIT_PREFIX = "evidence_audit_"
 
@@ -1721,6 +1756,88 @@ def _program_closure_state(handoff_text: str, latest_sid: str | None,
         and not out["empty_required_artifacts"]
         and out["has_trigger_check"]
         and out["has_evidence_audit_alias"]
+    )
+    return out
+
+
+def _vol_broad_state(handoff_text: str, latest_sid: str | None,
+                     latest_files: list[str],
+                     latest_dir: Path | None = None) -> dict:
+    """Return FCLR-VOL-BROAD-01 non-avoidance state.
+
+    The repository name leads with "Funding-conditioned-volatility", but the
+    leakage-robust volatility nulls (FCLR-011, FCLR-PANEL-FE-001) were all on a
+    5-coin panel. The broad 342-coin ironflow_bulk panel has never been used for
+    a direct funding-conditioned realized-volatility forecast. After this
+    campaign starts, a post-start session must emit the on-disk source registry,
+    the outcome-blind prereg freeze, the heavy broad-panel walk-forward
+    evaluation triad (py+json+md), the independent stdlib recompute (py+json),
+    the evidence audit (json+md), the gate-critical evidence_audit_ alias (json),
+    and a non-empty trigger check. Trigger-only, prose-only, audit-only,
+    prereg-only, verify-and-stop, or arbitrary recompute_* sessions and
+    zero-byte placeholders fail closed. Sessions predating the campaign start are
+    grandfathered so the handoff refresh that first announces the campaign stays
+    green.
+    """
+    out = {
+        "campaign_id": None,
+        "campaign_start_utc": None,
+        "artifact_family": None,
+        "required": False,
+        "required_artifacts": [],
+        "missing_required_artifacts": [],
+        "empty_required_artifacts": [],
+        "has_trigger_check": False,
+        "pass": True,
+    }
+    m = VOL_BROAD_CAMPAIGN_RE.search(handoff_text or "")
+    if not m:
+        return out
+    campaign_start = m.group(2)
+    out["campaign_id"] = f"FCLR-VOL-BROAD-{m.group(1)}-{campaign_start}"
+    out["campaign_start_utc"] = campaign_start
+    if not latest_sid:
+        return out
+    latest_utc = latest_sid.removeprefix("session_")
+    if latest_utc <= campaign_start:
+        return out
+    out["required"] = True
+
+    def _nonempty(name: str) -> bool:
+        if not latest_dir or not latest_dir.exists():
+            return False
+        p = latest_dir / name
+        return p.is_file() and p.stat().st_size > 0
+
+    # Ladder-aware: bind the artifact family to the campaign number in the
+    # handoff (01 -> fclr_volbroad01_*, 02 -> fclr_volbroad02_*, ...). This keeps
+    # the gate enforcing heavy work after VOL-BROAD-01 closes instead of
+    # deadlocking a VOL-BROAD-02 session on impossible fclr_volbroad01_* names.
+    tag = f"volbroad{int(m.group(1)):02d}"
+    family = tuple(
+        (prefix.replace("fclr_volbroad01_", f"fclr_{tag}_"), suffix)
+        for prefix, suffix in VOL_BROAD_REQUIRED
+    )
+    required = [f"{prefix}<UTC>{suffix}" for prefix, suffix in family]
+    out["artifact_family"] = tag
+    out["required_artifacts"] = required
+    for label, (prefix, suffix) in zip(required, family):
+        matches = sorted(
+            f for f in latest_files if f.startswith(prefix) and f.endswith(suffix)
+        )
+        if not matches:
+            out["missing_required_artifacts"].append(label)
+            continue
+        if not any(_nonempty(name) for name in matches):
+            out["empty_required_artifacts"].append(label)
+    out["has_trigger_check"] = any(
+        f.startswith("trigger_check_") and f.endswith(".json") and _nonempty(f)
+        for f in latest_files
+    )
+    out["pass"] = (
+        not out["missing_required_artifacts"]
+        and not out["empty_required_artifacts"]
+        and out["has_trigger_check"]
     )
     return out
 
@@ -2852,6 +2969,7 @@ def check(repo: Path = REPO) -> dict:
         "liq_xsec_broad": None,
         "broad_ts_01": None,
         "program_closure": None,
+        "vol_broad": None,
     }
 
     # (1) Handoff exists and carries the required markers.
@@ -3535,6 +3653,34 @@ def check(repo: Path = REPO) -> dict:
                 if not pc["has_evidence_audit_alias"]:
                     payload["failures"].append(
                         f"PROGRAM_CLOSURE_EVIDENCE_AUDIT_ALIAS_MISSING:{latest_sid}"
+                    )
+
+            # FCLR-VOL-BROAD-01: after the broad-panel funding-conditioned
+            # volatility campaign starts, require the on-disk source registry +
+            # outcome-blind prereg + HEAVY broad-panel walk-forward evaluation
+            # triad + independent stdlib recompute + evidence audit + gate alias
+            # + trigger check. Trigger-only, prose-only, source-probe-only,
+            # audit-only, prereg-only, verify-and-stop sessions and zero-byte
+            # placeholders fail closed, so a future session cannot dodge the
+            # heavy broad-universe volatility test.
+            vb = _vol_broad_state(
+                text, latest_sid, latest_info["files"], latest_sdir
+            )
+            payload["vol_broad"] = vb
+            if vb["required"]:
+                if vb["missing_required_artifacts"]:
+                    payload["failures"].append(
+                        "VOL_BROAD_ARTIFACTS_MISSING:"
+                        + ",".join(vb["missing_required_artifacts"])
+                    )
+                if vb["empty_required_artifacts"]:
+                    payload["failures"].append(
+                        "VOL_BROAD_ARTIFACTS_EMPTY:"
+                        + ",".join(vb["empty_required_artifacts"])
+                    )
+                if not vb["has_trigger_check"]:
+                    payload["failures"].append(
+                        f"VOL_BROAD_TRIGGER_CHECK_MISSING:{latest_sid}"
                     )
 
         complete_sid = None
