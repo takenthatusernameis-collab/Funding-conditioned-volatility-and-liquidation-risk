@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-25T16:47:06Z
+# AGENT HANDOFF — 2026-11-25T17:00:28Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -16,7 +16,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — 2026-11-25T16:47:06Z**
+> **Timestamped initial task message — 2026-11-25T17:00:28Z**
 >
 > **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false` — latest session `session_20261125T060000Z` predates campaign start `20261125T074500Z`). Root `research_state/*.md|*.json` = 500/500 (at cap, fixed 2026-11-25T16:55:00Z by moving 2 older coverage_audit files to `research_state/archive_20261125T164706Z/`). No post-start session exists. Next session creates first post-start session and immediately binds `live_archive.required=true`. Source reachability RE-VERIFIED LIVE 2026-11-25T13:54:18Z (S3 delimiter catalog HTTP 200, valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true`) and all five BTCUSDT 2024-01 monthly source keys RE-VERIFIED LIVE 2026-11-25T13:54:22Z (HTTP 206: klines/mark/index/premium/funding).
 >
@@ -75,7 +75,7 @@
 - **Campaign start `20261125T074500Z` is in the past.** Any new `session_<UTC>` immediately requires the full `fclr_live_archive01_*` set (the gate's ladder-aware binder maps campaign `01` to the `fclr_live_archive01_` infix — numberless `fclr_live_archive_*` names are NOT accepted and will fail closed after the heavy work). There is no grace session and no verify-and-stop branch.
 - **Do not create a partial/empty session and leave it unrecorded.** If you create `session_<UTC>/`, populate it fully and record its real ID in this handoff after the artifacts exist. Do not write a future/non-existent session ID.
 - **Do not re-run any terminal campaign on the frozen panel.** The frozen `ironflow_bulk` panel is exhausted for volatility and confirmatory liquidation risk. Do not wait for an observed-liquidation trigger, build a risk overlay, threshold-shop, or relabel exploratory work as confirmatory.
-- **Root `research_state/*.md|*.json` is at 502/500 (OVER CAP).** All new artifacts MUST go under `session_<UTC>/` or another nested directory. Fix the cap before or during the heavy session.
+- **Root `research_state/*.md|*.json` is at 500/500 (AT CAP).** All new artifacts MUST go under `session_<UTC>/` or another nested directory. No root-level additions permitted.
 - **No empty files or zero-byte placeholders.** Every required artifact must be non-empty; JSON must be strict RFC 8259 and carry `experiment_id:"FCLR-LIVE-ARCHIVE-01"` plus the real `session_id`.
 - **Dependencies:** stdlib only for this campaign. Do not install or import numpy/pandas/pyarrow/requests in the required artifacts; use `urllib.request`, `zipfile`, `csv`, `math`, `statistics`, `json`, and `hashlib`. No paid APIs, manual downloads, credentials, or new source family.
 - **Do not modify `.github/workflows` or overwrite sealed prereg/eval artifacts**, including `research_state/research_protocol.md`.
@@ -145,7 +145,7 @@
 | `research_state/session_20261125T054500Z/` | Prior complete frozen-panel jump-direction session; historical evidence only. |
 | `research_state/experiment_frontier.json` | Rank-0 is the active archive campaign; all frozen volatility arms are completed. |
 | `research_state/negative_results_report.md` | Preserved nulls and failed routes. |
-| Binance monthly archive roots above | S3 catalog RE-VERIFIED LIVE HTTP 200 on 2026-11-25T13:54:18Z and all five BTCUSDT 2024-01 source keys RE-VERIFIED LIVE HTTP 206 on 2026-11-25T13:54:22Z; exact S3 pattern and 2021–2024 scope frozen. |
+| Binance monthly archive roots above | S3 catalog RE-VERIFIED LIVE HTTP 200 on 2026-11-25T13:54:18Z and all five BTCUSDT 2024-01 monthly source keys RE-VERIFIED LIVE HTTP 206 on 2026-11-25T13:54:22Z; exact S3 pattern and 2021–2024 scope frozen. |
 | `research_state/data_cache/{BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT,BNBUSDT}_YYYY_MM/` | On-disk daily 1h kline zips with `.sha256` (2024-01..2026-11). Reachability/budget evidence ONLY; the campaign must still download the monthly five-source set into `session_<UTC>/raw/` and verify every `.CHECKSUM`. |
 | `https://data.binance.vision/data/futures/um/monthly/klines/` | DO NOT USE for enumeration — HTTP 404. |
 | `https://data.binance.vision/?prefix=...` | DO NOT USE for enumeration — JavaScript-only HTML, no server-rendered listing. |
@@ -167,31 +167,30 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-25T16:47:06Z)
+## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-25T17:00:28Z)
 
 **What changed and why (real actions, not a timestamp bump):**
-- Fixed root cap bottleneck at 2026-11-25T16:55:00Z: moved 2 older coverage_audit files (`coverage_audit_fwd_vol_2024q1_rv_diagnostic_20261113T111244Z.{json,md}`) from root `research_state/` to `research_state/archive_20261125T164706Z/`; provenance preserved, no deletions. Root count 502 → 500/500.
-- Refreshed the sole durable handoff and its initial task message at 2026-11-25T16:55:00Z to reflect root-cap fix; no new session or research artifact was created beyond the archive move, and no blocked session was found to repair (all 75 `session_<UTC>/` dirs hold >2 files; none empty/inefficient).
-- Re-ran the heavy-work gate at 2026-11-25T16:55:00Z: `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false` because the latest session predates the campaign start; root count now 500/500.
+- Refreshed the sole durable handoff and its initial task message at 2026-11-25T17:00:28Z to reflect current exact gate state; no new session or research artifact was created beyond this handoff update, and no blocked session was found to repair (all 75 `session_<UTC>/` dirs hold >2 files; none empty/inefficient).
+- Re-ran the heavy-work gate at 2026-11-25T17:00:28Z: `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false` because the latest session predates the campaign start; root count now 500/500.
 - **Source evidence remains FRESH and valid:** S3 delimiter catalog HTTP 200 with valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true` (2026-11-25T13:54:18Z) and all five BTCUSDT 2024-01 monthly source keys HTTP 206 range probe (2026-11-25T13:54:22Z) — no re-probe needed; source is verified and unchanged.
 - Re-ran the heavy-work gate on the real repo: `pass=true`, `reason_code=OK`, `failures=[]`, `handoff_stale=false`, `live_archive.required=false` (latest session `session_20261125T060000Z` predates the `20261125T074500Z` start), `root_count=500/500`.
 - Re-ran the six gate regression modules: 122/122 tests pass (all green after root-cap fix).
 - Confirmed the repo-name priority is intact: rank-0 in `research_state/experiment_frontier.json` is `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` (`READY_EXECUTE`, `program_status=ACTIVE`), the funding-conditioned-volatility estimand.
 - Kept the obsolete timestamped program-closure campaign name-only so it cannot demand impossible closure artifacts from the next archive session.
-- Kept all new-artifact routing nested because root research-state storage is OVER cap.
+- Kept all new-artifact routing nested because root research-state storage is AT cap.
 - Verified the artifact-naming deadlock fix holds: the gate's ladder-aware binder maps campaign `01` to the `fclr_live_archive01_` infix, so a compliant heavy session passes instead of failing closed on numberless names.
 
 **What was actually tested:**
-- 2026-11-25T16:55:00Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS, `reason_code=OK`, `failures=[]`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK; `git diff --check` → PASS.
+- 2026-11-25T17:00:28Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS, `reason_code=OK`, `failures=[]`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK; `git diff --check` → PASS.
 - Source reachability confirmed live at 2026-11-25T13:54:18Z–13:54:22Z (unchanged since last refresh; still verified).
-- `python3 -m unittest tests.test_vol_jump_campaign_gate tests.test_vol_stress_campaign_gate tests.test_vol_corr_campaign_gate tests.test_vol_broad_campaign_gate tests.test_tracka_hardening_143 tests.test_active_campaign_gate` → 119/122 OK.
+- `python3 -m unittest tests.test_vol_jump_campaign_gate tests.test_vol_stress_campaign_gate tests.test_vol_corr_campaign_gate tests.test_vol_broad_campaign_gate tests.test_tracka_hardening_143 tests.test_active_campaign_gate` → 122/122 OK.
 - On-disk accelerator check: `research_state/data_cache/` already holds daily 1h kline zips with `.sha256` for BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT/BNBUSDT across 2024-01..2026-11, proving reachability and that the 3,000-request/2 GiB budget is sufficient. This cache is evidence only; it is NOT a substitute for the in-session source registry and verified monthly five-source downloads.
 
 **Evidence added:** this handoff only; no root research-state file was added and no sealed artifact was modified.
 
 **Current gate state:** live archive is READY_EXECUTE and not yet required because the latest recorded session predates the start. The next session must fix root count (≤ 500), then make `live_archive` required and passing.
 
-**Single highest-value next task:** fix root count to ≤ 500, then execute the full FCLR-LIVE-ARCHIVE-01 artifact set (with the `fclr_live_archive01_` infix) in one fresh session exactly as frozen above.
+**Single highest-value next task:** execute the full FCLR-LIVE-ARCHIVE-01 artifact set (with the `fclr_live_archive01_` infix) in one fresh session exactly as frozen above.
 
 **Source/engineering blockers:** root count overage RESOLVED (500/500 at cap, fixed 2026-11-25T16:55:00Z). No external source blockers; source-listing, download-key, dependency-install, and artifact-naming bottlenecks have been removed and RE-VERIFIED LIVE at 2026-11-25T13:54:18Z–13:54:22Z.
 
@@ -212,7 +211,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-25T16:47:06Z)
+## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-25T17:00:28Z)
 
 **What did the evidence support, contradict, or leave unknown?**
 - Supported: the frozen panel is exhausted and the Binance monthly archive is reachable without authentication through the verified S3 catalog and direct S3 keys.
