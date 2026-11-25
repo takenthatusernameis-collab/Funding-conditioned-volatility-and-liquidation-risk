@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-25T04:52:00Z
+# AGENT HANDOFF — 2026-11-25T04:54:30Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,7 +12,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-25T04:52:00Z**
+> **Timestamped initial task message — inferred 2026-11-25T04:54:30Z**
 >
 > **CURRENT GATE STATE (2026-11-25T04:52:00Z):** The heavy-work gate is GREEN on the real repo. `python3 scripts/check_handoff_heavywork_gate.py --json` returns `pass=true`, `reason_code=OK`. The latest on-disk AND handoff-recorded session is `session_20261125T045000Z`, which carries the COMPLETE `fclr_voljump03_*` artifact set (source_registry json+md with 54 sha256-asserted files, prereg json+md, eval py+json+md, recompute py+json with `all_checks_match=true` / `n_checks=76`, evidence_audit json+md, gate-critical `evidence_audit_` alias, non-empty `trigger_check_`). The `vol_jump` binder for the active campaign `FCLR-VOL-JUMP-04-20261125T045000Z` is currently `required=false` ONLY because the latest session `20261125T045000Z` is <= the campaign start `20261125T045000Z`. **That green is a property of the latest session equaling the campaign start, NOT evidence that the next campaign is done.** The campaign start is deliberately set to `20261125T045000Z` (in the past) so there is NO future grace window: the moment you create any `session_<UTC>` strictly newer than `20261125T045000Z` (i.e. any session from now on), the binder flips `required=true` and the full `fclr_voljump04_*` set (plus `evidence_audit_` alias and non-empty `trigger_check_`) becomes MANDATORY.
 >
