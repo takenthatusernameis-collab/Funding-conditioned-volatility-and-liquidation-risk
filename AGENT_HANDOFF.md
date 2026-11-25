@@ -10,7 +10,7 @@
 > **REPO-NAME PRIORITY:** name leads with **Funding-conditioned-volatility** → rank-0 is the new-source mean-RV QLIKE campaign below.
 > **ACTIVE CAMPAIGN:** `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` — execute heavy 3-block confirmatory evaluation on Binance public archive in ONE fresh `session_<UTC>/`.
 > **HEAVY WORK IS MANDATORY:** trigger-only, prose-only, source-probe-only, prereg-only, audit-only, verify-and-stop, arbitrary `recompute_*` sessions FAIL CLOSED.
-> **CRITICAL BLOCKER:** root `research_state/*.md|*.json` = 502/500 (OVER CAP by 2). Gate FAILS until ≤ 500. All new artifacts MUST go under `session_<UTC>/`.
+> **ROOT CAP FIXED:** root `research_state/*.md|*.json` = 500/500 (at cap). Gate PASSES. All new artifacts MUST go under `session_<UTC>/` or nested archive — no root-level additions.
 
 ---
 
@@ -18,10 +18,10 @@
 
 > **Timestamped initial task message — 2026-11-25T16:47:06Z**
 >
-> **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → FAIL (`pass=false`, `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, `failures=["ROOT_COUNT_EXCEEDS_CAP:502>500"]`, `live_archive.required=false` — latest session `session_20261125T060000Z` predates campaign start `20261125T074500Z`). Root `research_state/*.md|*.json` = 502/500 (cap exceeded by 2). No post-start session exists. Next session creates first post-start session and immediately binds `live_archive.required=true`. Source reachability RE-VERIFIED LIVE 2026-11-25T13:54:18Z (S3 delimiter catalog HTTP 200, valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true`) and all five BTCUSDT 2024-01 monthly source keys RE-VERIFIED LIVE 2026-11-25T13:54:22Z (HTTP 206: klines/mark/index/premium/funding).
+> **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false` — latest session `session_20261125T060000Z` predates campaign start `20261125T074500Z`). Root `research_state/*.md|*.json` = 500/500 (at cap, fixed 2026-11-25T16:55:00Z by moving 2 older coverage_audit files to `research_state/archive_20261125T164706Z/`). No post-start session exists. Next session creates first post-start session and immediately binds `live_archive.required=true`. Source reachability RE-VERIFIED LIVE 2026-11-25T13:54:18Z (S3 delimiter catalog HTTP 200, valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true`) and all five BTCUSDT 2024-01 monthly source keys RE-VERIFIED LIVE 2026-11-25T13:54:22Z (HTTP 206: klines/mark/index/premium/funding).
 >
 > **DO THIS NEXT, IN ONE SESSION:**
-> 1. **FIX ROOT CAP FIRST:** Reduce root `research_state/*.md|*.json` from 502 to ≤ 500 by moving ≥2 files to a nested directory (e.g., `research_state/archive_20261125T164706Z/`). Do NOT delete — preserve provenance. Gate will not pass until count ≤ 500.
+> 1. **ROOT CAP FIXED:** root `research_state/*.md|*.json` reduced from 502 to 500 (2 older coverage_audit files moved to `research_state/archive_20261125T164706Z/`; provenance preserved). Gate now PASS. Do not add any root-level `research_state/*.md|*.json`.
 > 2. **EXECUTE `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` on Binance public archive.** Primary estimand (repo-name-leading): **Does funding + price feature set improve next-24-hour mean realized-variance QLIKE over RV-only HAR baseline by ≥2% relative, with block-aware uncertainty and stability across 3 non-overlapping test blocks?**
 >
 > **FROZEN EXECUTION DESIGN — DO NOT RE-DERIVE OR EXPAND:**
@@ -118,9 +118,9 @@
 - **Half 1, frozen `ironflow_bulk` panel:** exhausted. Closed by name: FCLR-VOL-BROAD-01 (mean QLIKE 1.93% < 2%), FCLR-VOL-CORR-01 (correction-time/hazard not supported), FCLR-VOL-STRESS-01 (stress 1.51% < 2%), FCLR-VOL-JUMP-01/02/03 (jump magnitude below floor), and FCLR-VOL-JUMP-04 (jump direction 0.0474% < 2%).
 - **Half 2, frozen panel:** exhausted. Track A structurally blocked; Track B and C not supported; broad cross-sectional result not stable and immaterial.
 - **Program closure:** completed and validated under `session_20261125T060000Z` by name-only campaign FCLR-LIQ-RISK-PROGRAM-CLOSURE-02. Its negative results are preserved; do not rerun it.
-- **Heavy-work gate:** FAILING due to root count 502 > 500; latest complete session is `session_20261125T060000Z`. The next post-start session must satisfy `live_archive` with the full artifact set.
+- **Heavy-work gate:** now PASS (`root_count=500/500` at cap, fixed 2026-11-25T16:55:00Z); latest complete session is `session_20261125T060000Z`. The next post-start session must satisfy `live_archive` with the full artifact set.
 - **Forecast gate (§9):** NOT PASSED. Risk overlay remains ineligible.
-- **Root churn:** 502/500 (OVER CAP by 2); nested session storage only.
+- **Root churn:** 500/500 (at cap, FIXED 2026-11-25T16:55:00Z); nested session storage only going forward.
 
 ---
 
@@ -132,7 +132,7 @@
 - No new source beyond the verified Binance public archive; no credentials or paid/manual inputs.
 - Do not modify protected workflows or sealed artifacts.
 - Do not include any timestamped campaign ID other than the active one in this handoff.
-- Root count must be ≤ 500 before gate passes.
+- Root count at cap (500/500, fixed 2026-11-25T16:55:00Z); no root-level `research_state/*.md|*.json` additions permitted.
 
 ---
 
@@ -170,18 +170,19 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 ## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-25T16:47:06Z)
 
 **What changed and why (real actions, not a timestamp bump):**
-- Refreshed the sole durable handoff and its initial task message at 2026-11-25T16:47:06Z; no new session or research artifact was created, and no blocked session was found to repair (all 75 `session_<UTC>/` dirs hold >2 files; none empty/inefficient).
-- Re-ran the heavy-work gate at 2026-11-25T16:47:06Z: `pass=false`, `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, `failures=["ROOT_COUNT_EXCEEDS_CAP:502>500"]`, `live_archive.required=false` because the latest session predates the campaign start; root count remains 502/500.
+- Fixed root cap bottleneck at 2026-11-25T16:55:00Z: moved 2 older coverage_audit files (`coverage_audit_fwd_vol_2024q1_rv_diagnostic_20261113T111244Z.{json,md}`) from root `research_state/` to `research_state/archive_20261125T164706Z/`; provenance preserved, no deletions. Root count 502 → 500/500.
+- Refreshed the sole durable handoff and its initial task message at 2026-11-25T16:55:00Z to reflect root-cap fix; no new session or research artifact was created beyond the archive move, and no blocked session was found to repair (all 75 `session_<UTC>/` dirs hold >2 files; none empty/inefficient).
+- Re-ran the heavy-work gate at 2026-11-25T16:55:00Z: `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false` because the latest session predates the campaign start; root count now 500/500.
 - **Source evidence remains FRESH and valid:** S3 delimiter catalog HTTP 200 with valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true` (2026-11-25T13:54:18Z) and all five BTCUSDT 2024-01 monthly source keys HTTP 206 range probe (2026-11-25T13:54:22Z) — no re-probe needed; source is verified and unchanged.
-- Re-ran the heavy-work gate on the real repo: `pass=false`, `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, `failures=["ROOT_COUNT_EXCEEDS_CAP:502>500"]`, `handoff_stale=false`, `live_archive.required=false` (latest session `session_20261125T060000Z` predates the `20261125T074500Z` start), `root_count=502/500`.
-- Re-ran the six gate regression modules: 119/122 tests pass; 3 FAIL due to root count overage (`test_cli_json_pass_shape`, `test_real_repo_gate_passes`, `test_real_repo_root_count_within_cap`).
+- Re-ran the heavy-work gate on the real repo: `pass=true`, `reason_code=OK`, `failures=[]`, `handoff_stale=false`, `live_archive.required=false` (latest session `session_20261125T060000Z` predates the `20261125T074500Z` start), `root_count=500/500`.
+- Re-ran the six gate regression modules: 122/122 tests pass (all green after root-cap fix).
 - Confirmed the repo-name priority is intact: rank-0 in `research_state/experiment_frontier.json` is `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` (`READY_EXECUTE`, `program_status=ACTIVE`), the funding-conditioned-volatility estimand.
 - Kept the obsolete timestamped program-closure campaign name-only so it cannot demand impossible closure artifacts from the next archive session.
 - Kept all new-artifact routing nested because root research-state storage is OVER cap.
 - Verified the artifact-naming deadlock fix holds: the gate's ladder-aware binder maps campaign `01` to the `fclr_live_archive01_` infix, so a compliant heavy session passes instead of failing closed on numberless names.
 
 **What was actually tested:**
-- 2026-11-25T16:47:06Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → FAIL, `reason_code=HANDOFF_HEAVYWORK_GATE_FAILED`, `failures=["ROOT_COUNT_EXCEEDS_CAP:502>500"]`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 119/122 OK (3 FAIL on root cap); `git diff --check` → PASS.
+- 2026-11-25T16:55:00Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS, `reason_code=OK`, `failures=[]`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK; `git diff --check` → PASS.
 - Source reachability confirmed live at 2026-11-25T13:54:18Z–13:54:22Z (unchanged since last refresh; still verified).
 - `python3 -m unittest tests.test_vol_jump_campaign_gate tests.test_vol_stress_campaign_gate tests.test_vol_corr_campaign_gate tests.test_vol_broad_campaign_gate tests.test_tracka_hardening_143 tests.test_active_campaign_gate` → 119/122 OK.
 - On-disk accelerator check: `research_state/data_cache/` already holds daily 1h kline zips with `.sha256` for BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT/BNBUSDT across 2024-01..2026-11, proving reachability and that the 3,000-request/2 GiB budget is sufficient. This cache is evidence only; it is NOT a substitute for the in-session source registry and verified monthly five-source downloads.
@@ -192,7 +193,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 **Single highest-value next task:** fix root count to ≤ 500, then execute the full FCLR-LIVE-ARCHIVE-01 artifact set (with the `fclr_live_archive01_` infix) in one fresh session exactly as frozen above.
 
-**Source/engineering blockers:** root count overage (502 > 500) — must move ≥2 files to nested storage. No external source blockers; source-listing, download-key, dependency-install, and artifact-naming bottlenecks have been removed and RE-VERIFIED LIVE at 2026-11-25T13:54:18Z–13:54:22Z.
+**Source/engineering blockers:** root count overage RESOLVED (500/500 at cap, fixed 2026-11-25T16:55:00Z). No external source blockers; source-listing, download-key, dependency-install, and artifact-naming bottlenecks have been removed and RE-VERIFIED LIVE at 2026-11-25T13:54:18Z–13:54:22Z.
 
 ---
 
@@ -206,7 +207,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 - **RESOLVED — design drift:** model definitions, splits, purge, inference, materiality, and verdict inputs are frozen in the initial task message.
 - **RESOLVED — root churn and future grace loopholes:** nested storage is mandatory and the campaign start is already in the past.
 - **RESOLVED — artifact-naming deadlock:** every required artifact now uses the `fclr_live_archive01_` infix the gate's ladder-aware binder demands, so a compliant heavy session passes instead of failing closed on numberless names.
-- **OPEN — root count overage:** 502 > 500 cap; must move ≥2 files to nested directory (e.g., `research_state/archive_20261125T164706Z/`) before gate passes.
+- **RESOLVED — root count overage:** 502 → 500 (≥2 files moved to `research_state/archive_20261125T164706Z/` at 2026-11-25T16:55:00Z; provenance preserved). Gate now PASS with `failures=[]`.
 - **OPEN — execution:** the next session must download, freeze, evaluate, recompute, audit, and record the real session ID without stopping at a probe or prereg.
 
 ---
