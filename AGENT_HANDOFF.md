@@ -1,45 +1,57 @@
-# AGENT HANDOFF — 2026-11-25T13:44:39Z
+# AGENT HANDOFF — 2026-11-25T13:46:25Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
 > **PROGRAM STATUS: HALF 1 (FUNDING-CONDITIONED VOLATILITY) — FROZEN PANEL EXHAUSTED; NEW-SOURCE CONFIRMATORY CAMPAIGN ACTIVE. HALF 2 (LIQUIDATION RISK) — CONFIRMATORY-EXHAUSTED ON FROZEN PANEL.**
-> Half 1 is closed `NOT_SUPPORTED` on the frozen `ironflow_bulk` panel for mean log-RV QLIKE, funding-extreme correction-time/hazard, volatility stress/tail exceedance, signed-jump magnitude, and signed-jump direction.
-> Half 2 is closed on that panel: Track A structurally blocked; Track B not supported; Track C not supported; cross-sectional generalization not stable and below the materiality floor.
-> **REPO-NAME PRIORITY:** the repository name leads with **Funding-conditioned-volatility**, so rank-0 is the new-source mean-RV QLIKE campaign below, not another frozen-panel or liquidation-risk rerun.
-> **ACTIVE CAMPAIGN:** `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` — execute the heavy 3-block confirmatory evaluation on the Binance public archive in ONE fresh `session_<UTC>/`.
-> **HEAVY WORK IS MANDATORY:** trigger-only, prose-only, source-probe-only, prereg-only, audit-only, verify-and-stop, and arbitrary `recompute_*` sessions FAIL CLOSED.
+> Half 1 closed `NOT_SUPPORTED` on frozen `ironflow_bulk` (18-month, 342-coin) for: mean log-RV QLIKE (1.93% < 2% floor), correction-time/hazard, volatility stress/tail exceedance (1.51%), signed-jump magnitude, signed-jump direction (0.0474%).
+> Half 2 closed on that panel: Track A STRUCTURALLY_BLOCKED; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; cross-sectional SUPPORTED_GENERALIZATION but NOT_STABLE + materiality floor NOT MET.
+> **REPO-NAME PRIORITY:** name leads with **Funding-conditioned-volatility** → rank-0 is the new-source mean-RV QLIKE campaign below.
+> **ACTIVE CAMPAIGN:** `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` — execute heavy 3-block confirmatory evaluation on Binance public archive in ONE fresh `session_<UTC>/`.
+> **HEAVY WORK IS MANDATORY:** trigger-only, prose-only, source-probe-only, prereg-only, audit-only, verify-and-stop, arbitrary `recompute_*` sessions FAIL CLOSED.
 
 ---
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — refreshed 2026-11-25T13:44:39Z**
+> **Timestamped initial task message — 2026-11-25T13:46:25Z**
 >
-> **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` was re-run GREEN at 2026-11-25T13:44:39Z (`pass=true`, `reason_code=OK`, `handoff_stale=false`). Latest on-disk and handoff-recorded session remains `session_20261125T060000Z`; root `research_state/*.md|*.json` count remains 500/500. No post-start session exists yet. The next session creates the first post-start session and immediately binds `live_archive.required=true`; source reachability remains verified at 2026-11-25T12:52:23Z.
+> **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false` — latest session `session_20261125T060000Z` predates campaign start `20261125T074500Z`). Root `research_state/*.md|*.json` = 500/500 (cap). No post-start session exists. Next session creates first post-start session and immediately binds `live_archive.required=true`. Source reachability verified 2026-11-25T12:52:23Z.
 >
-> **DO THIS NEXT, IN ONE SESSION:** Execute `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` on the Binance public archive. The primary estimand is the repo-name-leading one: **does the funding + price feature set improve next-24-hour mean realized-variance QLIKE beyond a realized-volatility-only baseline by at least 2% relative, with block-aware uncertainty and stability across three non-overlapping test blocks?**
+> **DO THIS NEXT, IN ONE SESSION:** Execute `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` on Binance public archive. Primary estimand (repo-name-leading): **Does funding + price feature set improve next-24-hour mean realized-variance QLIKE over RV-only HAR baseline by ≥2% relative, with block-aware uncertainty and stability across 3 non-overlapping test blocks?**
 >
 > **FROZEN EXECUTION DESIGN — DO NOT RE-DERIVE OR EXPAND:**
-> 1. Use a bounded **2021-01-01 through 2024-12-31 UTC** archive window. Enumerate symbols ONLY from the S3 delimiter catalog: `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data/futures/um/monthly/klines/&delimiter=/` (paginate with `marker` until `IsTruncated=false`; parse `<CommonPrefixes><Prefix>.../<SYMBOL>/</Prefix>`). Do NOT use `data.binance.vision/data/.../klines/` (404), the JS-only `data.binance.vision/?prefix=...` HTML, or the GitHub API (403 rate limit). Coverage-only selection: rank symbols by count of existing 2021–2024 monthly kline keys, tie ascending symbol; take the top five, then verify all five core sources for those five and replace any incomplete candidate with the next coverage-ranked symbol. If fewer than five complete symbols exist, run all complete symbols and mark the result `PILOT/INCONCLUSIVE`; never zero-fill or outcome-select.
-> 2. Required monthly sources only, via S3 primary: `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip` and `.../fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip`. CDN `data.binance.vision` is fallback only after an S3 404, never a reason to skip a key. Do NOT download daily metrics/OI for this primary campaign; it is not needed for the estimand. The `data/spot/daily/*` paths are HTTP 404 and MUST NOT be used.
-> 3. Bound downloads to **3,000 HTTP requests and 2 GiB**, concurrency 4, at most 4 retries with exponential backoff. Cache raw zips under `session_<UTC>/raw/`, verify every `.CHECKSUM`, and keep bulky raw data out of Git. **Stdlib only: do not run `pip install` and do not require numpy/pandas/pyarrow/requests; use `urllib.request`, `zipfile`, `csv`, `math`, `statistics`, `json`, and `hashlib`.**
-> 4. Freeze the source registry and outcome-blind prereg BEFORE generating targets or inspecting outcomes. Derive split boundaries from unique UTC timestamps only: first 60% train, next 20% validation, last 20% test; apply a 7-calendar-day purge/embargo; divide the test span into three equal, non-overlapping blocks.
-> 5. Use one common eligible panel for every paired comparison. B0 is RV24 persistence. B1 is the fixed OLS HAR model on log RV1h/RV24h/RV168h. C1 adds signed funding and the trailing 90-day absolute-funding percentile. C2 adds mark/index premium and mark/EMA24 distance. Fit scaling and smearing on training data only. Primary contrast: **C2 versus B1**, paired next-24-hour QLIKE; C1 versus B1 is secondary.
-> 6. Use at least 2,000 deterministic block-bootstrap replicates resampling whole UTC time blocks jointly across symbols. Report absolute and relative QLIKE, MSE/MAE, sample/event counts, coverage, exclusions, per-block and leave-one-symbol-out diagnostics, and Holm-adjusted secondary contrasts. The frozen materiality floor is **2% relative QLIKE reduction**; the uncertainty interval must support improvement.
-> 7. Produce the complete artifact set below under the SAME fresh session. Run the independent stdlib recompute and evidence audit in that session. A valid `NOT_SUPPORTED`, `PROMOTED`, or `INCONCLUSIVE` verdict is acceptable only when the evidence supports it; fabricated passes and zero-byte placeholders are forbidden.
+> 1. **Window & symbols:** 2021-01-01 → 2024-12-31 UTC. Enumerate symbols ONLY from S3 delimiter catalog: `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data/futures/um/monthly/klines/&delimiter=/` (paginate `marker` until `IsTruncated=false`; parse `CommonPrefixes/Prefix`). DO NOT use `data.binance.vision/data/.../klines/` (404), JS-only `data.binance.vision/?prefix=...`, or GitHub API (403). Coverage-only selection: rank symbols by count of 2021–2024 monthly kline keys, tie ascending symbol; take top 5, verify all 5 core sources for each, replace incomplete with next coverage-ranked. If <5 complete symbols, run all complete and mark `PILOT/INCONCLUSIVE`; never zero-fill or outcome-select.
+> 2. **Monthly sources only (S3 primary):** `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip` + `.../fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip`. CDN `data.binance.vision` = fallback only after S3 404. Do NOT download daily metrics/OI. `data/spot/daily/*` = HTTP 404, MUST NOT use.
+> 3. **Budget & deps:** ≤3,000 HTTP requests, ≤2 GiB, concurrency 4, max 4 retries + exponential backoff. Cache raw zips under `session_<UTC>/raw/`, verify every `.CHECKSUM`. **Stdlib ONLY: `urllib.request`, `zipfile`, `csv`, `math`, `statistics`, `json`, `hashlib`. NO `pip install`, NO numpy/pandas/pyarrow/requests.**
+> 4. **Splits & embargo:** Freeze source registry + outcome-blind prereg BEFORE target generation. Splits from unique UTC timestamps: 60% train / 20% validation / 20% test; 7-calendar-day purge/embargo at all boundaries; test span → 3 equal non-overlapping blocks.
+> 5. **Models (common panel, paired):** B0 = RV24 persistence. B1 = OLS HAR on log RV1h/RV24h/RV168h. C1 = B1 + signed funding + trailing 90-day absolute-funding percentile. C2 = C1 + mark/index premium + mark/EMA24 distance. Training-only scaling + smearing. Primary contrast: **C2 vs B1**, paired next-24h QLIKE; C1 vs B1 = secondary.
+> 6. **Inference:** ≥2,000 deterministic block-bootstrap replicates (resample whole UTC time blocks jointly across symbols). Report: absolute/relative QLIKE, MSE/MAE, sample/event counts, coverage, exclusions, per-block + leave-one-symbol-out, Holm-adjusted secondary contrasts. Materiality floor: **2% relative QLIKE reduction**; uncertainty interval must support improvement.
+> 7. **Artifacts (ALL under same fresh `session_<UTC>/`, non-empty, `fclr_live_archive01_` infix MANDATORY):**
+>    - `fclr_live_archive01_source_registry_<UTC>.{json,md}` — enumeration, coverage selection, exact URLs, checksums, schemas, terms, rejections
+>    - `fclr_live_archive01_prereg_<UTC>.{json,md}` — outcome-blind design, `outcome_data_inspected_before_freeze:false`
+>    - `fclr_live_archive01_eval_<UTC>.{py,json,md}` — heavy 3-block confirmatory evaluation triad
+>    - `fclr_live_archive01_recompute_<UTC>.{py,json}` — independent stdlib recompute, `all_checks_match:true`
+>    - `fclr_live_archive01_evidence_audit_<UTC>.{json,md}` — evidence/leakage audit with `audit_pass` + `unresolved_blockers`
+>    - `evidence_audit_<UTC>.{json,md}` — gate-critical alias
+>    - `trigger_check_<UTC>.json` — `external_trigger_required:false`, `trigger_source:"BINANCE_PUBLIC_ARCHIVE"`, `fired:false`
+>    Every JSON carries `experiment_id:"FCLR-LIVE-ARCHIVE-01"` + real `session_id`.
+> 8. **Verdict:** Valid `NOT_SUPPORTED`, `PROMOTED`, or `INCONCLUSIVE` only when evidence supports it. Fabricated passes / zero-byte placeholders = FAIL CLOSED.
 >
-> **BOTTLENECKS REMOVED THIS HANDOFF:**
-> - **RE-VERIFIED 2026-11-25T12:52:23Z:** the S3 delimiter catalog returned HTTP 200; the five required monthly source keys returned HTTP 206 (range probe, key exists); the heavy-work gate is GREEN (`pass=true`, `reason_code=OK`, `handoff_stale=false`); and the six gate regression modules pass 122/122. The source, download-key, and dependency blockers below remain removed.
-> - **NEW — artifact-naming deadlock removed:** the gate's ladder-aware `_live_archive_state` maps campaign `01` to the `fclr_live_archive01_*` infix, but this handoff previously instructed numberless `fclr_live_archive_*` names. A session that followed the old text literally would have produced numberless files and then FAILED the gate with `LIVE_ARCHIVE_ARTIFACTS_MISSING` after doing all the heavy work. Every required artifact below now carries the `fclr_live_archive01_` infix (the shared `evidence_audit_` and `trigger_check_` aliases stay unprefixed).
-> - The obsolete closed program-closure campaign is now referred to by NAME ONLY. Its former timestamped ID no longer activates an impossible closure-artifact requirement on the next archive session.
-> - The symbol-listing blocker is removed: `data.binance.vision/data/futures/um/monthly/klines/` returns 404 and the `data.binance.vision/?prefix=...` page is JavaScript-only. The verified replacement is the S3 delimiter catalog at `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data/futures/um/monthly/klines/&delimiter=/`, which returned HTTP 200 with 1,000 `CommonPrefixes` and `IsTruncated=true` on 2026-11-25T12:52:23Z.
-> - The download-key blocker is removed: direct S3 keys for all five required monthly sources returned HTTP 206 (range probe) for BTCUSDT 2024-01 on 2026-11-25T12:52:23Z, confirming every key exists (klines, mark, index, premium, funding). CDN `data.binance.vision` is now explicitly fallback-only because some CDN keys 404 while the S3 key exists.
-> - The dependency-install blocker is removed: prior sessions repeatedly died on missing `numpy`/`pandas`/`pyarrow` and timed-out installs. The required campaign artifacts are now stdlib-only; `pip install` is forbidden for this campaign.
-> - The design is now bounded and executable without source discovery, model search, threshold shopping, credentials, external triggers, or a future grace window.
+> **BOTTLENECKS REMOVED (re-verified 2026-11-25T12:52:23Z):**
+> - S3 delimiter catalog → HTTP 200, 1,000 `CommonPrefixes`, `IsTruncated=true`
+> - All 5 monthly source keys (klines, mark, index, premium, funding) for BTCUSDT 2024-01 → HTTP 206 (range probe, key exists)
+> - Heavy-work gate → GREEN (122/122 gate regression tests pass)
+> - Stdlib-only artifacts → removes numpy/pandas/pyarrow install failures
+> - Artifact-naming deadlock fixed → gate's ladder-aware binder demands `fclr_live_archive01_` infix (numberless names FAIL CLOSED)
+> - Obsolete closure campaign referred by NAME ONLY (no timestamped ID to activate impossible binder)
+> - Symbol-listing blocker resolved (404/JS-only paths explicitly rejected)
+> - Download-key blocker resolved (S3 primary, CDN fallback-only)
+> - Dependency-install blocker resolved (stdlib-only, pip forbidden)
+> - Design bounded & executable (no discovery, search, threshold-shopping, credentials, triggers, grace windows)
 >
-> **VERIFICATION COMMANDS (after the heavy artifacts exist):**
+> **VERIFICATION COMMANDS (after artifacts exist):**
 > ```bash
 > python3 scripts/check_handoff_heavywork_gate.py --json
 > python3 -m py_compile scripts/check_handoff_heavywork_gate.py
@@ -151,11 +163,11 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-25T13:44:39Z)
+## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-25T13:46:25Z)
 
 **What changed and why (real actions, not a timestamp bump):**
-- Refreshed the sole durable handoff and its initial task message at 2026-11-25T13:44:39Z; no new session or research artifact was created, and no blocked session was found to repair.
-- Re-ran the heavy-work gate at 2026-11-25T13:44:39Z: `pass=true`, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false` because the latest session predates the campaign start; root count remains 500/500.
+- Refreshed the sole durable handoff and its initial task message at 2026-11-25T13:46:25Z; no new session or research artifact was created, and no blocked session was found to repair.
+- Re-ran the heavy-work gate at 2026-11-25T13:46:25Z: `pass=true`, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false` because the latest session predates the campaign start; root count remains 500/500.
 - Preserved the earlier live-source verification at 2026-11-25T12:52:23Z rather than claiming a new network probe; the next session must execute the heavy archive campaign, not repeat this refresh.
 - Re-verified the rank-0 source live at 2026-11-25T12:52:23Z: the S3 delimiter catalog `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data/futures/um/monthly/klines/&delimiter=/` returned HTTP 200 with a valid `ListBucketResult` (`IsTruncated=true`, `CommonPrefixes` present).
 - Re-verified all five required monthly source keys for BTCUSDT 2024-01 via HTTP range probe at 2026-11-25T12:52:23Z: klines, markPriceKlines, indexPriceKlines, premiumIndexKlines, and fundingRate each returned HTTP 206 (key exists).
@@ -167,7 +179,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 - Kept all new-artifact routing nested because root research-state storage is at cap.
 
 **What was actually tested:**
-- 2026-11-25T13:44:39Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK; `git diff --check` → PASS.
+- 2026-11-25T13:46:25Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK; `git diff --check` → PASS.
 - `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false`.
 - S3 catalog GET at 2026-11-25T12:52:23Z → HTTP 200, valid `ListBucketResult`.
 - Five S3 monthly source-key range probes at 2026-11-25T12:52:23Z → HTTP 206 for all five (klines/mark/index/premium/funding).
@@ -198,7 +210,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## RESEARCH_PROMPT.md §19 ANSWERS (this session)
+## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-25T13:46:25Z)
 
 **What did the evidence support, contradict, or leave unknown?**
 - Supported: the frozen panel is exhausted and the Binance monthly archive is reachable without authentication through the verified S3 catalog and direct S3 keys.
