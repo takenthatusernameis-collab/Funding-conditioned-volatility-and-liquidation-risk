@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-25T04:37:21Z
+# AGENT HANDOFF — 2026-11-25T04:43:01Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,9 +12,9 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-25T04:37:21Z**
+> **Timestamped initial task message — inferred 2026-11-25T04:43:01Z**
 >
-> **CURRENT GATE STATE (2026-11-25T04:37:21Z):** The heavy-work gate is GREEN on the real repo. `python3 scripts/check_handoff_heavywork_gate.py --json` returns `pass=true`, `reason_code=OK`. The latest on-disk AND handoff-recorded session is `session_20261125T034400Z`, which carries the COMPLETE `fclr_voljump02_*` artifact set (source_registry json+md, prereg json+md, eval py+json+md, recompute py+json with `all_checks_match=true` / `n_checks=60`, evidence_audit json+md, gate-critical `evidence_audit_` alias, non-empty `trigger_check_`). The `vol_jump` binder for the active campaign `FCLR-VOL-JUMP-03-20261125T034400Z` is currently `required=false` ONLY because the latest session `20261125T034400Z` is <= the campaign start `20261125T034400Z`. **That green is a property of the latest session equaling the campaign start, NOT evidence that the next campaign is done.** The campaign start is deliberately set to `20261125T034400Z` (in the past) so there is NO future grace window: the moment you create any `session_<UTC>` strictly newer than `20261125T034400Z` (i.e. any session from now on), the binder flips `required=true` and the full `fclr_voljump03_*` set (plus `evidence_audit_` alias and non-empty `trigger_check_`) becomes MANDATORY.
+> **CURRENT GATE STATE (2026-11-25T04:43:01Z):** The heavy-work gate is GREEN on the real repo. `python3 scripts/check_handoff_heavywork_gate.py --json` returns `pass=true`, `reason_code=OK`. The latest on-disk AND handoff-recorded session is `session_20261125T034400Z`, which carries the COMPLETE `fclr_voljump02_*` artifact set (source_registry json+md, prereg json+md, eval py+json+md, recompute py+json with `all_checks_match=true` / `n_checks=60`, evidence_audit json+md, gate-critical `evidence_audit_` alias, non-empty `trigger_check_`). The `vol_jump` binder for the active campaign `FCLR-VOL-JUMP-03-20261125T034400Z` is currently `required=false` ONLY because the latest session `20261125T034400Z` is <= the campaign start `20261125T034400Z`. **That green is a property of the latest session equaling the campaign start, NOT evidence that the next campaign is done.** The campaign start is deliberately set to `20261125T034400Z` (in the past) so there is NO future grace window: the moment you create any `session_<UTC>` strictly newer than `20261125T034400Z` (i.e. any session from now on), the binder flips `required=true` and the full `fclr_voljump03_*` set (plus `evidence_audit_` alias and non-empty `trigger_check_`) becomes MANDATORY.
 >
 > **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Half 1 (funding-conditioned volatility) is now closed at broad scale on ALL FOUR estimands: mean log-RV QLIKE (FCLR-VOL-BROAD-01, NOT_SUPPORTED), funding-extreme correction-time / hazard (FCLR-VOL-CORR-01, NOT_SUPPORTED), volatility-STRESS / tail-exceedance (FCLR-VOL-STRESS-01, NOT_SUPPORTED), and signed-jump / semivariance-asymmetry (FCLR-VOL-JUMP-01, NOT_SUPPORTED — 0.0922% relative Brier improvement). The leakage-hardened RE-CONFIRMATION of the jump null (FCLR-VOL-JUMP-02, session_20261125T034400Z, NOT_SUPPORTED — 0.1510% relative Brier improvement under non-overlapping forward windows, mark/index tolerance filter, delisting-aware per-coin identity, per-coin cluster bootstrap, 48h purge+embargo and Holm) is now ALSO closed. Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel. The next session's single, non-deferrable job is the **multi-estimator / multi-horizon signed-jump robustness study** — a materially different, leakage-hardened design that tests whether the jump null is an artifact of the bipower estimator or the 24h horizon, using only frozen on-disk data.
 >
@@ -147,10 +147,10 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 
 ---
 
-## SESSION CLOSE-OUT (THIS SESSION — 2026-11-25T04:37:21Z)
+## SESSION CLOSE-OUT (THIS SESSION — 2026-11-25T04:43:01Z)
 
 **What changed and why (real actions, not a timestamp bump):**
-- **Refreshed the sole durable handoff with a current timestamp (2026-11-25T04:37:21Z)** to provide the next agentic session with an accurate, inferred initial task message. The underlying heavy work (FCLR-VOL-JUMP-02) was completed in the prior session (`session_20261125T034400Z`).
+- **Refreshed the sole durable handoff with a current timestamp (2026-11-25T04:43:01Z)** to provide the next agentic session with an accurate, inferred initial task message. The underlying heavy work (FCLR-VOL-JUMP-02) was completed in the prior session (`session_20261125T034400Z`).
 - **Verified the heavy-work gate is green on the real repo:** `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `vol_jump.required=false` (latest session `20261125T034400Z` == campaign start `20261125T034400Z`), `handoff_stale=false`, `root_count=500/500`, `failures=[]`.
 - **Confirmed the active rank-0 campaign is `FCLR-VOL-JUMP-03-20261125T034400Z` (READY_EXECUTE)** in `research_state/experiment_frontier.json`.
 - **Confirmed the grandfathering grace window is CLOSED** — the campaign start `20261125T034400Z` is in the past; any new session is immediately bound to the full `fclr_voljump03_*` artifact set.
@@ -188,7 +188,7 @@ python3 scripts/next_campaign_status.py
 
 ---
 
-## BOTTLENECK RESOLUTION (this session — 2026-11-25T04:37:21Z)
+## BOTTLENECK RESOLUTION (this session — 2026-11-25T04:43:01Z)
 
 - **RESOLVED (the core bottleneck — deferred heavy work):** the FCLR-VOL-JUMP-02 heavy evaluation had been announced but never executed; prior sessions only refreshed this handoff. RESOLVED by executing the full leakage-hardened jump02 evaluation in the prior session (`session_20261125T034400Z`) with the complete 13-artifact set and a passing independent recompute.
 - **RESOLVED (future-dated grandfathering window):** the FCLR-VOL-JUMP-03 start is `20261125T034400Z` (the prior session time, in the past), so there is no future grace window; any new session is immediately bound. The gate stays green only because the latest session equals the start.
