@@ -5,24 +5,24 @@
     "program_status": "ACTIVE",
     "task": "FCLR-LIVE-ARCHIVE-01-20261125T074500Z",
     "generated": "20261125T074500Z",
-    "refreshed": "2026-11-25T07:53:29Z",
-    "last_checked": "2026-11-25T07:53:29Z",
+    "refreshed": "2026-11-25T12:52:23Z",
+    "last_checked": "2026-11-25T12:52:23Z",
     "last_verdict": null,
-    "next_action_heavy": "Execute FCLR-LIVE-ARCHIVE-01 under one fresh research_state/session_<UTC>/ (UTC > 20261125T074500Z). Download the verified Binance data/futures/um archive roots, freeze the outcome-blind source registry + prereg, run the heavy 3-block confirmatory volatility evaluation triad, independent stdlib recompute, evidence audit, gate-critical evidence_audit_ alias, and non-empty trigger_check. Trigger-only, prose-only, source-probe-only, audit-only, prereg-only, verify-and-stop, or arbitrary recompute_* sessions FAIL CLOSED.",
-    "next_unfinished_task": "Produce the full fclr_live_archive_* artifact set under one fresh session_<UTC>/ with no zero-byte placeholders: source_registry json+md, prereg json+md, eval py+json+md, recompute py+json, evidence_audit json+md, evidence_audit alias json, trigger_check json. Every JSON must carry experiment_id=FCLR-LIVE-ARCHIVE-01 and session_id=session_<UTC>.",
+    "next_action_heavy": "Execute FCLR-LIVE-ARCHIVE-01 under one fresh research_state/session_<UTC>/ (UTC > 20261125T074500Z). Enumerate symbols from the S3 delimiter catalog, download the five monthly sources (klines/markPriceKlines/indexPriceKlines/premiumIndexKlines/fundingRate) for a coverage-selected five-symbol 2021-2024 cohort into session_<UTC>/raw/ with .CHECKSUM verification, freeze the outcome-blind source registry + prereg, run the heavy 3-block confirmatory mean-RV QLIKE evaluation triad (C2 vs B1, 2% relative floor), independent stdlib recompute, evidence audit, gate-critical evidence_audit_ alias, and non-empty trigger_check. Stdlib only; no pip install. All artifacts use the fclr_live_archive01_ infix. Trigger-only, prose-only, source-probe-only, audit-only, prereg-only, verify-and-stop, or arbitrary recompute_* sessions FAIL CLOSED.",
+    "next_unfinished_task": "Produce the full fclr_live_archive01_* artifact set under one fresh session_<UTC>/ (UTC > 20261125T074500Z) with no zero-byte placeholders: fclr_live_archive01_source_registry_ json+md, fclr_live_archive01_prereg_ json+md, fclr_live_archive01_eval_ py+json+md, fclr_live_archive01_recompute_ py+json, fclr_live_archive01_evidence_audit_ json+md, evidence_audit_ json alias, trigger_check_ json. The fclr_live_archive01_ infix is REQUIRED by the gate ladder (numberless fclr_live_archive_* names fail closed). Stdlib only (urllib.request/zipfile/csv/math/statistics/json/hashlib); do NOT pip install numpy/pandas/pyarrow/requests. Every JSON must carry experiment_id=FCLR-LIVE-ARCHIVE-01 and session_id=session_<UTC>.",
     "resume_triggers": [],
     "trigger_status": {},
-    "blockers": "None external. Binance public archive verified 2026-11-25T07:53:29Z: data/futures/um/daily/metrics/<SYMBOL>/<SYMBOL>-metrics-YYYY-MM-DD.zip (5-min OI + taker long/short flow, 2020-09-01 -> present), data/futures/um/monthly/fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip (8h funding, epoch-ms calc_time), and data/futures/um/daily/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/<SYMBOL>/1h/... . The data/spot/daily/* paths return HTTP 404 and MUST NOT be used. Do NOT re-run any closed volatility arm or terminal liquidation track; do NOT build a risk overlay; do NOT add root-level research_state files (root *.md|*.json at cap 500 - all new artifacts MUST go under session_<UTC>/); do NOT threshold-shop after outcomes; do NOT relabel exploratory as confirmatory.",
+    "blockers": "None external. Binance public archive verified 2026-11-25T12:52:23Z: S3 delimiter catalog https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data/futures/um/monthly/klines/&delimiter=/ returns HTTP 200 (paginate with marker until IsTruncated=false); all five monthly source keys for BTCUSDT 2024-01 return HTTP 206 (klines/markPriceKlines/indexPriceKlines/premiumIndexKlines/fundingRate). Use ONLY data/futures/um/monthly/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines,fundingRate}/<SYMBOL>/... . The data/spot/daily/* paths return HTTP 404 and MUST NOT be used; daily metrics/OI are NOT needed for this estimand. Stdlib only; do NOT pip install numpy/pandas/pyarrow/requests. Do NOT re-run any closed volatility arm or terminal liquidation track; do NOT build a risk overlay; do NOT add root-level research_state files (root *.md|*.json at cap 500 - all new artifacts MUST go under session_<UTC>/); do NOT threshold-shop after outcomes; do NOT relabel exploratory as confirmatory.",
     "evidence": {
       "source": "https://data.binance.vision/",
-      "verified_roots": [
-        "data/futures/um/daily/metrics/",
-        "data/futures/um/monthly/fundingRate/",
-        "data/futures/um/daily/klines/",
-        "data/futures/um/daily/markPriceKlines/",
-        "data/futures/um/daily/indexPriceKlines/",
-        "data/futures/um/daily/premiumIndexKlines/"
-      ],
+    "verified_roots": [
+      "data/futures/um/monthly/klines/",
+      "data/futures/um/monthly/markPriceKlines/",
+      "data/futures/um/monthly/indexPriceKlines/",
+      "data/futures/um/monthly/premiumIndexKlines/",
+      "data/futures/um/monthly/fundingRate/"
+    ],
+    "verified_roots_note": "Monthly roots are the frozen campaign sources (HTTP 200/206 verified 2026-11-25T12:52:23Z). daily/metrics and daily/* roots are NOT used for this estimand; data/spot/daily/* is HTTP 404.",
       "verified_sample": {
         "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2020-09-01.zip",
         "sha256": "9a9c0518bfb939032afe97a6b1708668ec833457743b1ba6ef448fb157722ae3",
@@ -72,7 +72,7 @@
         "claim": "Execute the heavy 3-block confirmatory evaluation triad + independent stdlib recompute + evidence audit + gate alias + trigger check under one fresh session_<UTC>/ (UTC > 20261125T074500Z). All artifacts non-empty."
       }
     ],
-    "note": "ACTIVE rank-0 as of 2026-11-25T07:53:29Z. Promoted after FCLR-LIQ-RISK-PROGRAM-CLOSURE-02 completed on the frozen panel. The Binance public archive is verified, unauthenticated, free, and was never exploited; exact data/futures/um paths remove the prior download bottleneck. Stdlib + numpy + pandas + pyarrow + requests only; no overlay; no track-adulteration.",
+    "note": "ACTIVE rank-0 as of 2026-11-25T12:52:23Z. Promoted after FCLR-LIQ-RISK-PROGRAM-CLOSURE-02 completed on the frozen panel. The Binance public archive is verified, unauthenticated, free, and was never exploited; the S3 delimiter catalog + monthly five-source keys remove the prior download bottleneck. Stdlib only (no numpy/pandas/pyarrow/requests; no pip install); no overlay; no track-adulteration.",
     "session": null,
     "completed_session": null,
     "supersedes": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z",
