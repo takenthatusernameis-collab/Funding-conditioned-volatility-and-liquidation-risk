@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-25T05:50:53Z
+# AGENT HANDOFF — 2026-11-25T05:55:42Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
