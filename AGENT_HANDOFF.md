@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-25T12:52:23Z
+# AGENT HANDOFF — 2026-11-25T13:44:39Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -15,9 +15,9 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — verified 2026-11-25T12:52:23Z**
+> **Timestamped initial task message — refreshed 2026-11-25T13:44:39Z**
 >
-> **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` is GREEN on the real repo (`pass=true`, `reason_code=OK`, `handoff_stale=false`). Latest on-disk and handoff-recorded session: `session_20261125T060000Z`. Root `research_state/*.md|*.json` count: 500/500. The next session creates the first post-start session and immediately binds `live_archive.required=true`.
+> **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` was re-run GREEN at 2026-11-25T13:44:39Z (`pass=true`, `reason_code=OK`, `handoff_stale=false`). Latest on-disk and handoff-recorded session remains `session_20261125T060000Z`; root `research_state/*.md|*.json` count remains 500/500. No post-start session exists yet. The next session creates the first post-start session and immediately binds `live_archive.required=true`; source reachability remains verified at 2026-11-25T12:52:23Z.
 >
 > **DO THIS NEXT, IN ONE SESSION:** Execute `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` on the Binance public archive. The primary estimand is the repo-name-leading one: **does the funding + price feature set improve next-24-hour mean realized-variance QLIKE beyond a realized-volatility-only baseline by at least 2% relative, with block-aware uncertainty and stability across three non-overlapping test blocks?**
 >
@@ -151,9 +151,12 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## SESSION CLOSE-OUT (THIS SESSION — 2026-11-25T12:52:23Z)
+## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-25T13:44:39Z)
 
 **What changed and why (real actions, not a timestamp bump):**
+- Refreshed the sole durable handoff and its initial task message at 2026-11-25T13:44:39Z; no new session or research artifact was created, and no blocked session was found to repair.
+- Re-ran the heavy-work gate at 2026-11-25T13:44:39Z: `pass=true`, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false` because the latest session predates the campaign start; root count remains 500/500.
+- Preserved the earlier live-source verification at 2026-11-25T12:52:23Z rather than claiming a new network probe; the next session must execute the heavy archive campaign, not repeat this refresh.
 - Re-verified the rank-0 source live at 2026-11-25T12:52:23Z: the S3 delimiter catalog `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data/futures/um/monthly/klines/&delimiter=/` returned HTTP 200 with a valid `ListBucketResult` (`IsTruncated=true`, `CommonPrefixes` present).
 - Re-verified all five required monthly source keys for BTCUSDT 2024-01 via HTTP range probe at 2026-11-25T12:52:23Z: klines, markPriceKlines, indexPriceKlines, premiumIndexKlines, and fundingRate each returned HTTP 206 (key exists).
 - **Fixed a real artifact-naming deadlock:** the gate's ladder-aware binder requires the `fclr_live_archive01_*` infix for campaign 01, but the handoff listed numberless `fclr_live_archive_*` names. Following the old text would have failed the gate after the heavy work. All required artifact names now carry the `fclr_live_archive01_` infix.
@@ -164,6 +167,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 - Kept all new-artifact routing nested because root research-state storage is at cap.
 
 **What was actually tested:**
+- 2026-11-25T13:44:39Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK; `git diff --check` → PASS.
 - `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false`.
 - S3 catalog GET at 2026-11-25T12:52:23Z → HTTP 200, valid `ListBucketResult`.
 - Five S3 monthly source-key range probes at 2026-11-25T12:52:23Z → HTTP 206 for all five (klines/mark/index/premium/funding).
