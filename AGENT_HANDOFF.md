@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-25T13:54:22Z
+# AGENT HANDOFF — 2026-11-25T13:56:20Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -15,7 +15,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — 2026-11-25T13:54:22Z**
+> **Timestamped initial task message — 2026-11-25T13:56:20Z**
 >
 > **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false` — latest session `session_20261125T060000Z` predates campaign start `20261125T074500Z`). Root `research_state/*.md|*.json` = 500/500 (cap). No post-start session exists. Next session creates first post-start session and immediately binds `live_archive.required=true`. Source reachability RE-VERIFIED LIVE 2026-11-25T13:54:18Z (S3 delimiter catalog HTTP 200, valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true`) and all five BTCUSDT 2024-01 monthly source keys RE-VERIFIED LIVE 2026-11-25T13:54:22Z (HTTP 206: klines/mark/index/premium/funding).
 >
@@ -163,11 +163,11 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-25T13:54:22Z)
+## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-25T13:56:20Z)
 
 **What changed and why (real actions, not a timestamp bump):**
-- Refreshed the sole durable handoff and its initial task message at 2026-11-25T13:54:22Z; no new session or research artifact was created, and no blocked session was found to repair (all 75 `session_<UTC>/` dirs hold >2 files; none empty/inefficient).
-- Re-ran the heavy-work gate at 2026-11-25T13:54:22Z: `pass=true`, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false` because the latest session predates the campaign start; root count remains 500/500.
+- Refreshed the sole durable handoff and its initial task message at 2026-11-25T13:56:20Z; no new session or research artifact was created, and no blocked session was found to repair (all 75 `session_<UTC>/` dirs hold >2 files; none empty/inefficient).
+- Re-ran the heavy-work gate at 2026-11-25T13:56:20Z: `pass=true`, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false` because the latest session predates the campaign start; root count remains 500/500.
 - **Added FRESH live source evidence (not a copy of the earlier probe):** re-probed the rank-0 source live at 2026-11-25T13:54:18Z (S3 delimiter catalog → HTTP 200, valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true`) and all five required monthly source keys for BTCUSDT 2024-01 via HTTP range probe at 2026-11-25T13:54:22Z (klines, markPriceKlines, indexPriceKlines, premiumIndexKlines, fundingRate each → HTTP 206, key exists).
 - Re-ran the heavy-work gate on the real repo: `pass=true`, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false` (latest session `session_20261125T060000Z` predates the `20261125T074500Z` start), `root_count=500/500`.
 - Re-ran the six gate regression modules: 122/122 tests pass.
@@ -177,7 +177,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 - Verified the artifact-naming deadlock fix holds: the gate's ladder-aware binder maps campaign `01` to the `fclr_live_archive01_` infix, so a compliant heavy session passes instead of failing closed on numberless names.
 
 **What was actually tested:**
-- 2026-11-25T13:54:22Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK; `git diff --check` → PASS.
+- 2026-11-25T13:56:20Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS, `reason_code=OK`, `handoff_stale=false`, `live_archive.required=false`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK; `git diff --check` → PASS.
 - S3 catalog GET at 2026-11-25T13:54:18Z → HTTP 200, valid `ListBucketResult` with `CommonPrefixes` and `IsTruncated=true`.
 - Five S3 monthly source-key range probes at 2026-11-25T13:54:22Z → HTTP 206 for all five (klines/mark/index/premium/funding).
 - `python3 -m unittest tests.test_vol_jump_campaign_gate tests.test_vol_stress_campaign_gate tests.test_vol_corr_campaign_gate tests.test_vol_broad_campaign_gate tests.test_tracka_hardening_143 tests.test_active_campaign_gate` → 122/122 OK.
@@ -207,7 +207,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-25T13:54:22Z)
+## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-25T13:56:20Z)
 
 **What did the evidence support, contradict, or leave unknown?**
 - Supported: the frozen panel is exhausted and the Binance monthly archive is reachable without authentication through the verified S3 catalog and direct S3 keys.
