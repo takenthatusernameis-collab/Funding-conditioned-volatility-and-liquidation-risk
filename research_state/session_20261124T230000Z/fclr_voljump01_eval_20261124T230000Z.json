@@ -1,0 +1,138 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-01",
+  "campaign": "FCLR-VOL-JUMP-01-20261124T223000Z",
+  "session_id": "session_20261124T230000Z",
+  "session_utc": "20261124T230000Z",
+  "generated_utc": "2026-11-24T23:00:00Z",
+  "phase": "HEAVY_JUMP_EVAL_AND_RECOMPUTE",
+  "design": {
+    "kind": "walk_forward_classification_signed_jump_semivariance_asymmetry",
+    "target": "next-24h signed-jump / semivariance-asymmetry tail exceedance (train-only high quantile)",
+    "baseline": "RV-only (trailing RV24h) logistic",
+    "candidate": "RV + signed funding_rate + abs(funding_rate) + premium + mark/EMA24 distance",
+    "horizon_h": 24,
+    "purge_embargo_h": 48,
+    "quantile_level": 0.95,
+    "train_frac": 0.6,
+    "n_test_blocks": 6,
+    "materiality_floor_rel": 0.02
+  },
+  "universe": {
+    "n_coins": 466,
+    "n_panel_rows": 3051819
+  },
+  "status": "CONFIRMATORY_COMPLETE",
+  "holdout_opened": true,
+  "n_events": 53823,
+  "n_forecasts": 1440233,
+  "n_coins": 454,
+  "n_test_blocks": 4,
+  "event_rate": 0.03737103649201206,
+  "metrics": {
+    "baseline": {
+      "brier": 0.036021206544332614,
+      "log_loss": 0.15969574773499734,
+      "ece": 0.010362907063657723
+    },
+    "candidate": {
+      "brier": NaN,
+      "log_loss": NaN,
+      "ece": NaN
+    }
+  },
+  "relative_improvement": {
+    "brier": NaN,
+    "log_loss": NaN
+  },
+  "block_results": [
+    {
+      "block": 0,
+      "block_start": "2026-04-04 16:00:00+00:00",
+      "block_end": "2026-06-04 15:00:00+00:00",
+      "n_test": 436944,
+      "n_events": 20265,
+      "brier_baseline": 0.04419248225849984,
+      "brier_candidate": NaN,
+      "logloss_baseline": 0.186687432988712,
+      "logloss_candidate": NaN,
+      "rel_brier_improvement": NaN,
+      "rel_logloss_improvement": NaN,
+      "ece_baseline": 0.0029001718932878074,
+      "ece_candidate": NaN
+    },
+    {
+      "block": 1,
+      "block_start": "2026-06-06 15:00:00+00:00",
+      "block_end": "2026-08-06 14:00:00+00:00",
+      "n_test": 405871,
+      "n_events": 14516,
+      "brier_baseline": 0.034655970743249796,
+      "brier_candidate": NaN,
+      "logloss_baseline": 0.1553468373887681,
+      "logloss_candidate": NaN,
+      "rel_brier_improvement": NaN,
+      "rel_logloss_improvement": NaN,
+      "ece_baseline": 0.012368639486850587,
+      "ece_candidate": NaN
+    },
+    {
+      "block": 2,
+      "block_start": "2026-08-08 14:00:00+00:00",
+      "block_end": "2026-10-08 13:00:00+00:00",
+      "n_test": 441075,
+      "n_events": 15803,
+      "brier_baseline": 0.03454051105574018,
+      "brier_candidate": NaN,
+      "logloss_baseline": 0.15501437400757287,
+      "logloss_candidate": NaN,
+      "rel_brier_improvement": NaN,
+      "rel_logloss_improvement": NaN,
+      "ece_baseline": 0.011158922020726339,
+      "ece_candidate": NaN
+    },
+    {
+      "block": 3,
+      "block_start": "2026-10-10 13:00:00+00:00",
+      "block_end": "2026-12-10 12:00:00+00:00",
+      "n_test": 156343,
+      "n_events": 3239,
+      "brier_baseline": 0.02090583512892617,
+      "brier_candidate": NaN,
+      "logloss_baseline": 0.10875696944917099,
+      "logloss_candidate": NaN,
+      "rel_brier_improvement": NaN,
+      "rel_logloss_improvement": NaN,
+      "ece_baseline": 0.024049705053146415,
+      "ece_candidate": NaN
+    }
+  ],
+  "inference": {
+    "cluster_bootstrap_by_coin": {
+      "n_boot": 2000,
+      "rel_brier_ci95": [
+        NaN,
+        NaN
+      ],
+      "p_improvement_gt_0": NaN
+    },
+    "driscoll_kraay_block": {
+      "t": NaN,
+      "p_two_sided": NaN,
+      "lag": 2
+    },
+    "holm": {
+      "p_brier": NaN,
+      "p_logloss": NaN,
+      "adjusted": [
+        NaN,
+        NaN
+      ],
+      "rejected": false
+    }
+  },
+  "materiality_floor_rel": 0.02,
+  "materiality_met": false,
+  "significant": false,
+  "verdict": "NOT_SUPPORTED",
+  "elapsed_seconds": 57.78
+}
