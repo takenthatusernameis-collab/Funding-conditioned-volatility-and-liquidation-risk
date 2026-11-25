@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-25T11:47:31Z
+# AGENT HANDOFF — 2026-11-25T11:49:03Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -15,7 +15,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — verified 2026-11-25T11:47:31Z**
+> **Timestamped initial task message — verified 2026-11-25T11:49:03Z**
 >
 > **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` is GREEN on the real repo (`pass=true`, `reason_code=OK`, `handoff_stale=false`). Latest on-disk and handoff-recorded session: `session_20261125T060000Z`. Root `research_state/*.md|*.json` count: 500/500. The next session creates the first post-start session and immediately binds `live_archive.required=true`.
 >
