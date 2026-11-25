@@ -1,7 +1,87 @@
 [
   {
     "rank": 0,
-    "status": "COMPLETE",
+    "status": "READY_EXECUTE",
+    "program_status": "ACTIVE",
+    "task": "FCLR-LIVE-ARCHIVE-01-20261125T074500Z",
+    "generated": "20261125T074500Z",
+    "refreshed": "2026-11-25T07:53:29Z",
+    "last_checked": "2026-11-25T07:53:29Z",
+    "last_verdict": null,
+    "next_action_heavy": "Execute FCLR-LIVE-ARCHIVE-01 under one fresh research_state/session_<UTC>/ (UTC > 20261125T074500Z). Download the verified Binance data/futures/um archive roots, freeze the outcome-blind source registry + prereg, run the heavy 3-block confirmatory volatility evaluation triad, independent stdlib recompute, evidence audit, gate-critical evidence_audit_ alias, and non-empty trigger_check. Trigger-only, prose-only, source-probe-only, audit-only, prereg-only, verify-and-stop, or arbitrary recompute_* sessions FAIL CLOSED.",
+    "next_unfinished_task": "Produce the full fclr_live_archive_* artifact set under one fresh session_<UTC>/ with no zero-byte placeholders: source_registry json+md, prereg json+md, eval py+json+md, recompute py+json, evidence_audit json+md, evidence_audit alias json, trigger_check json. Every JSON must carry experiment_id=FCLR-LIVE-ARCHIVE-01 and session_id=session_<UTC>.",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None external. Binance public archive verified 2026-11-25T07:53:29Z: data/futures/um/daily/metrics/<SYMBOL>/<SYMBOL>-metrics-YYYY-MM-DD.zip (5-min OI + taker long/short flow, 2020-09-01 -> present), data/futures/um/monthly/fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip (8h funding, epoch-ms calc_time), and data/futures/um/daily/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/<SYMBOL>/1h/... . The data/spot/daily/* paths return HTTP 404 and MUST NOT be used. Do NOT re-run any closed volatility arm or terminal liquidation track; do NOT build a risk overlay; do NOT add root-level research_state files (root *.md|*.json at cap 500 - all new artifacts MUST go under session_<UTC>/); do NOT threshold-shop after outcomes; do NOT relabel exploratory as confirmatory.",
+    "evidence": {
+      "source": "https://data.binance.vision/",
+      "verified_roots": [
+        "data/futures/um/daily/metrics/",
+        "data/futures/um/monthly/fundingRate/",
+        "data/futures/um/daily/klines/",
+        "data/futures/um/daily/markPriceKlines/",
+        "data/futures/um/daily/indexPriceKlines/",
+        "data/futures/um/daily/premiumIndexKlines/"
+      ],
+      "verified_sample": {
+        "url": "https://data.binance.vision/data/futures/um/daily/metrics/BTCUSDT/BTCUSDT-metrics-2020-09-01.zip",
+        "sha256": "9a9c0518bfb939032afe97a6b1708668ec833457743b1ba6ef448fb157722ae3",
+        "checksum_sidecar_matched": true,
+        "columns": [
+          "create_time",
+          "symbol",
+          "sum_open_interest",
+          "sum_open_interest_value",
+          "count_toptrader_long_short_ratio",
+          "sum_toptrader_long_short_ratio",
+          "count_long_short_ratio",
+          "sum_taker_long_short_vol_ratio"
+        ],
+        "cadence": "5-minute",
+        "coverage_start": "2020-09-01"
+      },
+      "funding_sample": {
+        "url": "https://data.binance.vision/data/futures/um/monthly/fundingRate/BTCUSDT/BTCUSDT-fundingRate-2020-09.zip",
+        "columns": [
+          "calc_time",
+          "funding_interval_hours",
+          "last_funding_rate"
+        ],
+        "calc_time_unit": "epoch_ms"
+      },
+      "spot_paths_status": "HTTP 404 for data/spot/daily/{metrics,klines,fundingRate,markPriceKlines,indexPriceKlines,premiumIndexKlines}; DO NOT USE",
+      "root_md_json_count": 500,
+      "root_cap": 500,
+      "all_new_artifacts_must_go_under_session_dir": true,
+      "gate_enforced": "AGENT_HANDOFF.md FOCUS CAMPAIGN section; scripts/check_handoff_heavywork_gate.py LIVE_ARCHIVE_CAMPAIGN_RE / _live_archive_state / LIVE_ARCHIVE_REQUIRED ladder-aware binder"
+    },
+    "phases": [
+      {
+        "phase": "SOURCE_REGISTRY_AND_VERIFIED_DOWNLOAD",
+        "status": "NOT_STARTED",
+        "claim": "Record the verified data/futures/um roots, exact URLs, checksums, coverage, schema, and license in fclr_live_archive_source_registry_<UTC>.{json,md}; download a bounded sample and assert checksums."
+      },
+      {
+        "phase": "PREREG_FREEZE",
+        "status": "NOT_STARTED",
+        "claim": "Freeze the outcome-blind 3-block confirmatory design, 2% relative QLIKE materiality floor, RV-only baseline, funding+price candidate, purge/embargo, and symmetric verdict before outcomes."
+      },
+      {
+        "phase": "HEAVY_CONFIRMATORY_EVAL_AND_RECOMPUTE",
+        "status": "NOT_STARTED",
+        "claim": "Execute the heavy 3-block confirmatory evaluation triad + independent stdlib recompute + evidence audit + gate alias + trigger check under one fresh session_<UTC>/ (UTC > 20261125T074500Z). All artifacts non-empty."
+      }
+    ],
+    "note": "ACTIVE rank-0 as of 2026-11-25T07:53:29Z. Promoted after FCLR-LIQ-RISK-PROGRAM-CLOSURE-02 completed on the frozen panel. The Binance public archive is verified, unauthenticated, free, and was never exploited; exact data/futures/um paths remove the prior download bottleneck. Stdlib + numpy + pandas + pyarrow + requests only; no overlay; no track-adulteration.",
+    "session": null,
+    "completed_session": null,
+    "supersedes": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z",
+    "carry_forward_bundles": [],
+    "completed_utc": null
+  },
+  {
+    "rank": 1,
+    "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z",
     "generated": "20261125T054500Z",
@@ -63,7 +143,7 @@
     "completed_utc": "20261125T06:00:00Z"
   },
   {
-    "rank": 1,
+    "rank": 2,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-JUMP-04-20261125T045000Z",
@@ -124,7 +204,7 @@
     "completed_utc": "20261125T054500Z"
   },
   {
-    "rank": 2,
+    "rank": 3,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-JUMP-03-20261125T034400Z",
@@ -184,7 +264,7 @@
     "completed_utc": "20261125T045000Z"
   },
   {
-    "rank": 3,
+    "rank": 4,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-JUMP-02-20261125T033537Z",
@@ -243,7 +323,7 @@
     "completed_utc": "2026-11-25T03:44:00Z"
   },
   {
-    "rank": 4,
+    "rank": 5,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-JUMP-01-20261124T223000Z",
@@ -303,7 +383,7 @@
     "completed_utc": "2026-11-25T03:35:37Z"
   },
   {
-    "rank": 5,
+    "rank": 6,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-STRESS-01-20261124T213000Z",
@@ -362,7 +442,7 @@
     "completed_utc": "20261124T222500Z"
   },
   {
-    "rank": 6,
+    "rank": 7,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-CORR-01-20261124T180000Z",
@@ -421,7 +501,7 @@
     "superseded_utc": "2026-11-24T21:28:00Z"
   },
   {
-    "rank": 7,
+    "rank": 8,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-BROAD-01-20261124T035500Z",
@@ -539,10 +619,10 @@
       "research_state/session_20261123T085507Z/"
     ],
     "completed_utc": "2026-11-24T01:51:14Z",
-    "rank": 8
+    "rank": 9
   },
   {
-    "rank": 9,
+    "rank": 10,
     "status": "SUPERSEDED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025653Z",
@@ -594,7 +674,7 @@
     "superseded_utc": "2026-11-24T03:56:48Z"
   },
   {
-    "rank": 10,
+    "rank": 11,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIQ-XSEC-BROAD-01-20261123T080000Z",
@@ -680,7 +760,7 @@
     "superseded_by": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z"
   },
   {
-    "rank": 11,
+    "rank": 12,
     "status": "SUPERSEDED_TERMINAL",
     "program_status": "COMPLETE",
     "task": "FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z",

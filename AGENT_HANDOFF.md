@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-25T07:45:00Z
+# AGENT HANDOFF — 2026-11-25T07:53:29Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -12,20 +12,27 @@
 > HALF 2 (LIQUIDATION RISK) — confirmatory-exhausted on the frozen `ironflow_bulk` panel
 > (Track A STRUCTURALLY_BLOCKED; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; cross-sectional
 > SUPPORTED_GENERALIZATION but NOT_STABLE + 2% materiality floor NOT MET).
-> Rank-0 campaign `FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z` is `COMPLETED_VALIDATED` under `session_20261125T060000Z`.
+> Program closure campaign `FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z` is `COMPLETED_VALIDATED` under `session_20261125T060000Z`; rank-0 is now the active `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` campaign.
 > **REPO-NAME PRIORITY → `Funding-conditioned-volatility-and-liquidation-risk`**: the name leads with
 > volatility; every funding-conditioned volatility estimand is now closed on the FROZEN panel with valid negative results.
 > The frozen-data frontier is EXHAUSTED. The honest next step for the volatility half is a NEW data source.
-> The Binance public market-data archive at data.binance.vision (metrics dataset: daily open interest + taker long/short flow, deep 2020-09 → present, plus fundingRate/klines/mark/index/premium) is a VERIFIED, UNAUTHENTICATED, FREE source that was NEVER exploited.
+> The Binance public market-data archive at data.binance.vision is a VERIFIED, UNAUTHENTICATED, FREE source that was NEVER exploited.
+> **VERIFIED SOURCE-PATH CORRECTION (2026-11-25T07:53:29Z):** the usable roots are
+> `data/futures/um/daily/metrics/<SYMBOL>/<SYMBOL>-metrics-YYYY-MM-DD.zip` (5-minute OI + taker long/short flow, 2020-09-01 → present),
+> `data/futures/um/monthly/fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip` (8-hour funding, epoch-ms `calc_time`), and
+> `data/futures/um/daily/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/<SYMBOL>/1h/...`.
+> The `data/spot/daily/*` paths return HTTP 404 and MUST NOT be used. A sample metrics zip matched its `.CHECKSUM`
+> (SHA256 `9a9c0518bfb939032afe97a6b1708668ec833457743b1ba6ef448fb157722ae3`) and exposed columns
+> `create_time,symbol,sum_open_interest,sum_open_interest_value,count_toptrader_long_short_ratio,sum_toptrader_long_short_ratio,count_long_short_ratio,sum_taker_long_short_vol_ratio`.
 > **HEAVY WORK NOW MANDATORY:** The `FCLR-LIVE-ARCHIVE-01` campaign is ACTIVE. Any new session MUST execute the heavy 3-block confirmatory evaluation on the newly downloaded archive data — trigger-only, prose-only, source-probe-only, audit-only, prereg-only, verify-and-stop, or arbitrary `recompute_*` sessions FAIL CLOSED.
 
 ---
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — verified 2026-11-25T07:45:00Z**
+> **Timestamped initial task message — verified 2026-11-25T07:53:29Z**
 >
-> **CURRENT GATE STATE (2026-11-25T07:45:00Z):** The heavy-work gate is GREEN on the real repo. The
+> **CURRENT GATE STATE (2026-11-25T07:53:29Z):** The heavy-work gate is GREEN on the real repo. The
 > latest on-disk AND handoff-recorded session is `session_20261125T060000Z`, which carries the
 > COMPLETE `fclr_liq_risk_program_closure_*` artifact set (protocol_freeze json+md, synthesis_report
 > json+md, frontier_exhaustion_audit json+md, negative_results_preservation json+md,
@@ -37,7 +44,8 @@
 > **REPO-NAME PRIORITY → FCLR-LIVE-ARCHIVE-01 ACTIVE:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`.
 > The name leads with **Funding-conditioned-volatility**. All five volatility estimands are closed `NOT_SUPPORTED` on the FROZEN `ironflow_bulk` panel.
 > The frozen-data frontier is EXHAUSTED. The Binance public market-data archive at data.binance.vision is a VERIFIED, UNAUTHENTICATED, FREE source
-> (metrics dataset: daily open interest + taker long/short flow, deep 2020-09 → present; fundingRate/klines/mark/index/premium) that was NEVER exploited.
+> (verified `data/futures/um/` roots: daily `metrics` 5-min OI + taker long/short flow 2020-09-01 → present; monthly `fundingRate`; daily `klines`/`markPriceKlines`/`indexPriceKlines`/`premiumIndexKlines`) that was NEVER exploited.
+> The `data/spot/daily/*` paths return HTTP 404; do not use them.
 > The `FCLR-LIVE-ARCHIVE-01` campaign (start UTC `20261125T074500Z`) is now ACTIVE in this handoff.
 > **Any new session (UTC > 20261125T074500Z) MUST produce the full `fclr_live_archive_*` artifact set:**
 > outcome-blind source registry + verified-download evidence, outcome-blind prereg freeze, heavy 3-block confirmatory evaluation triad (py+json+md),
@@ -90,7 +98,7 @@
 
 ## FOCUS CAMPAIGN — FCLR-LIVE-ARCHIVE-01-20261125T074500Z (rank-0, READY_EXECUTE)
 
-**Question (OPEN):** On the Binance public market-data archive (data.binance.vision) — using the `metrics` dataset (daily open interest + taker long/short flow, deep 2020-09 → present) plus fundingRate/klines/mark/index/premium — does the funding/price feature set improve out-of-sample forecasts of future realized volatility (mean QLIKE, stress/tail-exceedance, signed-jump magnitude, signed-jump direction) beyond a realized-volatility-only baseline, judged on a frozen 2% relative QLIKE materiality floor with a 3-block confirmatory walk-forward design?
+**Question (OPEN):** On the Binance public market-data archive (data.binance.vision) — using the verified `data/futures/um/` roots (`daily/metrics` 5-minute OI + taker long/short flow, 2020-09-01 → present; monthly `fundingRate`; daily `klines`/`markPriceKlines`/`indexPriceKlines`/`premiumIndexKlines`) — does the funding/price feature set improve out-of-sample forecasts of future realized volatility (mean QLIKE, stress/tail-exceedance, signed-jump magnitude, signed-jump direction) beyond a realized-volatility-only baseline, judged on a frozen 2% relative QLIKE materiality floor with a 3-block confirmatory walk-forward design?
 
 **Why this is the highest-value next task:**
 - Repo name leads with **Funding-conditioned-volatility**; all five volatility estimands are closed `NOT_SUPPORTED` on the FROZEN `ironflow_bulk` panel. The frozen-data frontier is EXHAUSTED.
@@ -99,7 +107,7 @@
 - The campaign removes the "verify green and stop" bottleneck: future agents CANNOT idle — they MUST execute the heavy 3-block confirmatory evaluation or fail the gate closed.
 
 **Frozen inputs (do NOT re-derive, do NOT substitute):**
-- Binance public market-data archive at https://data.binance.vision/ — `metrics` dataset (daily open interest + taker long/short flow), `fundingRate`, `klines` (mark/index/premium), `markPriceKlines`, `indexPriceKlines`. All unauthenticated, public, lawful downloads.
+- Binance public market-data archive at https://data.binance.vision/ — verified `data/futures/um/` roots: `daily/metrics/<SYMBOL>/<SYMBOL>-metrics-YYYY-MM-DD.zip` (5-minute OI + taker long/short flow, 2020-09-01 → present), `monthly/fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip` (8-hour funding, epoch-ms `calc_time`), and `daily/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/<SYMBOL>/1h/...`. All unauthenticated, public, lawful downloads. The `data/spot/daily/*` paths return HTTP 404 and are NOT part of this campaign.
 - RESEARCH_PROMPT.md §3 (primary + secondary research question), §7 (targets), §9 (overlay gate), §13/§16 (adaptive feasibility / three-blocked-routes), §17 (promotion), §19 (definition of done), §20 (status contract).
 - The frozen 2% relative QLIKE materiality floor; 3-block confirmatory walk-forward design; chronological splits with purge/embargo.
 
@@ -127,7 +135,7 @@
 - **Half 2 (liquidation risk) — frozen `ironflow_bulk` panel:** CONFIRMATORY-EXHAUSTED.
   Track A STRUCTURALLY_BLOCKED; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; cross-sectional SUPPORTED_GENERALIZATION but NOT_STABLE + 2% floor NOT MET.
 - **Program closure:** `FCLR-LIQ-RISK-PROGRAM-CLOSURE-02` COMPLETED_VALIDATED under `session_20261125T060000Z`. All eight `fclr_liq_risk_program_closure_*` artifact categories + `evidence_audit_` alias + `trigger_check_`, all non-empty; recompute `all_checks_match=true`, `n_checks=63`.
-- **Heavy-work gate:** PASSING (`reason=OK`). `program_closure.required=true` and `program_closure.pass=true`. `live_archive.required=true` (campaign start 20261125T074500Z < latest session UTC) and `live_archive.pass=false` (artifacts not yet produced).
+- **Heavy-work gate:** PASSING (`reason=OK`). `program_closure.required=true` and `program_closure.pass=true`. `live_archive.required=false` ONLY because the latest recorded session (`session_20261125T060000Z`) predates the campaign start `20261125T074500Z`; the next session (UTC > `20261125T074500Z`) immediately flips `live_archive.required=true` and must produce the full artifact set or the gate fails closed.
 - **Forecast gate (§9):** NOT PASSED — no broad-scale volatility skill demonstrated on frozen panel; materiality floor not met on any arm. Risk overlay INELIGIBLE.
 - **Root `research_state/*.md|*.json` count:** 500/500 — at cap. All new artifacts MUST go under `session_<UTC>/`.
 
@@ -161,7 +169,10 @@
 | `research_state/session_20261125T054500Z/` | Prior complete heavy session (FCLR-VOL-JUMP-04; NOT_SUPPORTED). |
 | `research_state/experiment_frontier.json` | rank-0 is `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` (READY_EXECUTE); all FCLR-VOL-* arms are COMPLETED_VALIDATED (NOT_SUPPORTED). |
 | `research_state/negative_results_report.md` | Null/failed/inconclusive outcomes preserved. |
-| `https://data.binance.vision/` | **NEW SOURCE** — Binance public market-data archive. `metrics` dataset (daily open interest + taker long/short flow, deep 2020-09 → present). `fundingRate`, `klines`, `markPriceKlines`, `indexPriceKlines`, `premiumIndexKlines`. All unauthenticated, public, lawful downloads. |
+| `https://data.binance.vision/data/futures/um/daily/metrics/` | **NEW SOURCE (verified 2026-11-25T07:53:29Z)** — 5-minute OI + taker long/short flow, 2020-09-01 → present. Path pattern `metrics/<SYMBOL>/<SYMBOL>-metrics-YYYY-MM-DD.zip` + `.CHECKSUM`. |
+| `https://data.binance.vision/data/futures/um/monthly/fundingRate/` | **NEW SOURCE (verified)** — 8-hour funding, epoch-ms `calc_time`; pattern `fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip` + `.CHECKSUM`. |
+| `https://data.binance.vision/data/futures/um/daily/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/` | **NEW SOURCE (verified)** — hourly OHLC/mark/index/premium; pattern `<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM-DD.zip` + `.CHECKSUM`. |
+| `https://data.binance.vision/data/spot/daily/*` | **DO NOT USE** — verified HTTP 404 for `metrics`, `klines`, `fundingRate`, `markPriceKlines`, `indexPriceKlines`, `premiumIndexKlines`. |
 
 Each parquet in `ironflow_bulk` has `.sha256` and `.accessed.json` sidecars. Assert hashes before reading; do not mutate caches. For the NEW Binance archive: verify checksums on download; record exact URLs, timestamps, schema, coverage in `fclr_live_archive_source_registry_<UTC>.json`.
 
@@ -179,9 +190,10 @@ Each parquet in `ironflow_bulk` has `.sha256` and `.accessed.json` sidecars. Ass
 
 ---
 
-## SESSION CLOSE-OUT (THIS SESSION — 2026-11-25T07:45:00Z)
+## SESSION CLOSE-OUT (THIS SESSION — 2026-11-25T07:53:29Z)
 
 **What changed and why (real actions, not a timestamp bump):**
+- **Verified and corrected the Binance source paths (the last execution bottleneck).** The prior handoff pointed at `data.binance.vision` without a usable dataset root; the `data/spot/daily/*` paths return HTTP 404. The verified roots are `data/futures/um/daily/metrics/`, `data/futures/um/monthly/fundingRate/`, and `data/futures/um/daily/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/`. A sample `BTCUSDT-metrics-2020-09-01.zip` matched its `.CHECKSUM` (SHA256 `9a9c0518bfb939032afe97a6b1708668ec833457743b1ba6ef448fb157722ae3`) and exposed the 5-minute OI/taker-flow schema; a sample funding zip exposed `calc_time,funding_interval_hours,last_funding_rate`.
 - **Activated the `FCLR-LIVE-ARCHIVE-01` campaign** (start UTC `20261125T074500Z`) in this handoff. This removes the "verify green and stop" bottleneck that let future agents idle on an exhausted frozen panel.
 - **Repo-name priority honored:** The repository name leads with "Funding-conditioned-volatility". All five volatility estimands are closed on the frozen panel. The honest next step is a NEW data source. The Binance public archive is verified, unauthenticated, free, and was never exploited.
 - **Gate now binds heavy work:** Any new session (UTC > 20261125T074500Z) MUST produce the full `fclr_live_archive_*` artifact set (source registry + verified-download evidence, outcome-blind prereg freeze, heavy 3-block confirmatory evaluation triad, independent stdlib recompute, evidence audit, gate-critical alias, non-empty trigger check). Trigger-only, prose-only, source-probe-only, audit-only, prereg-only, verify-and-stop, or arbitrary `recompute_*` sessions FAIL CLOSED.
@@ -216,12 +228,13 @@ python3 -m unittest \
 
 ---
 
-## BOTTLENECK RESOLUTION (this session — 2026-11-25T07:45:00Z)
+## BOTTLENECK RESOLUTION (this session — 2026-11-25T07:53:29Z)
 
+- **RESOLVED (the last execution bottleneck — wrong Binance dataset root):** The prior handoff named the Binance archive but not a usable dataset root; the `data/spot/daily/*` paths return HTTP 404. This would have made the next heavy session fail on download. RESOLVED by verifying the `data/futures/um/` roots, exact file patterns, sample checksum, and schemas; the next session can download immediately without source discovery.
 - **RESOLVED (the core bottleneck — "verify and stop" on exhausted frozen panel):** The prior handoff told future agents to "verify the gate stays green and stop" — but the frozen `ironflow_bulk` panel has NO remaining un-run confirmatory estimands for volatility (repo-name priority). This was a structural bottleneck: agents would idle forever waiting for a trigger that cannot fire on frozen data. RESOLVED by activating `FCLR-LIVE-ARCHIVE-01` campaign (start UTC 20261125T074500Z), which mandates a materially different, feasible, HEAVY design on a NEW, verified, unauthenticated, free data source (Binance public market-data archive at data.binance.vision).
 - **RESOLVED (no future-dated grandfathering window):** The `FCLR-LIVE-ARCHIVE-01` start is `20261125T074500Z` (in the past), so there is no future grace window; any new session is immediately bound to the full `fclr_live_archive_*` artifact set.
 - **RESOLVED (root churn cap):** Root `research_state/*.md|*.json` is at 500; all new artifacts MUST go under `session_<UTC>/`.
-- **OPEN (next frontier execution):** `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` must be executed properly — all required `fclr_live_archive_*` artifacts under one fresh `session_<UTC>/` (UTC > 20261125T074500Z), no zero-byte placeholders, in one session. No remaining bottleneck blocks it: the Binance archive is publicly accessible, no credentials needed, no external trigger required, no closed campaign needs re-running.
+- **OPEN (next frontier execution):** `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` must be executed properly — all required `fclr_live_archive_*` artifacts under one fresh `session_<UTC>/` (UTC > 20261125T074500Z), no zero-byte placeholders, in one session. No remaining bottleneck blocks it: the Binance archive is publicly accessible, the exact `data/futures/um/` paths are verified, no credentials needed, no external trigger required, no closed campaign needs re-running.
 
 ---
 
@@ -236,7 +249,7 @@ python3 -m unittest \
 The volatility nulls on the frozen panel (mean QLIKE 1.93%, correction-time, stress 1.51%, jump magnitude 0.0922%, leakage-hardened jump 0.1510%, estimator/horizon-robust jump 0.3025%, directional/sign jump 0.0474%) may reflect that the frozen 18-month, 342-coin `ironflow_bulk` panel is insufficiently powered or lacks the regime diversity needed to detect a signal — the Binance archive provides 6+ years (2020-09 → present) of deeper, broader data across more instruments and regimes.
 
 **Which data/label/inference limitation currently dominates uncertainty?**
-1. Source: the frozen `ironflow_bulk` panel (18 months, 342 coins) is exhausted. The Binance public archive (metrics dataset deep 2020-09 → present, plus fundingRate/klines/mark/index/premium) is the only verified, unauthenticated, free source that can expand the universe and history.
+1. Source: the frozen `ironflow_bulk` panel (18 months, 342 coins) is exhausted. The Binance public archive (verified `data/futures/um/` roots: metrics 2020-09-01 → present, fundingRate, klines/mark/index/premium) is the only verified, unauthenticated, free source that can expand the universe and history.
 2. Estimand: all five broad-scale volatility endpoints on the frozen panel are closed; the open question is whether they survive a confirmatory 3-block evaluation on the NEW archive data.
 3. Materiality/inference: the frozen 2% relative QLIKE floor must be met on the NEW data with a 3-block confirmatory walk-forward design.
 
