@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-25T07:58:33Z
+# AGENT HANDOFF — 2026-11-25T11:42:33Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -15,16 +15,16 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — verified 2026-11-25T07:58:33Z**
+> **Timestamped initial task message — verified 2026-11-25T11:42:33Z**
 >
 > **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` is GREEN on the real repo. Latest on-disk and handoff-recorded session: `session_20261125T060000Z`. Root `research_state/*.md|*.json` count: 500/500. The next session creates the first post-start session and immediately binds `live_archive.required=true`.
 >
 > **DO THIS NEXT, IN ONE SESSION:** Execute `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` on the Binance public archive. The primary estimand is the repo-name-leading one: **does the funding + price feature set improve next-24-hour mean realized-variance QLIKE beyond a realized-volatility-only baseline by at least 2% relative, with block-aware uncertainty and stability across three non-overlapping test blocks?**
 >
 > **FROZEN EXECUTION DESIGN — DO NOT RE-DERIVE OR EXPAND:**
-> 1. Use a bounded **2021-01-01 through 2024-12-31 UTC** archive window. Enumerate symbols from the public archive listing, not today's survivors. Select the five symbols with the most complete core coverage in that window; break ties by ascending symbol. Selection is coverage-only and must precede any outcome calculation. If fewer than five complete symbols exist, run all complete symbols and mark the result `PILOT/INCONCLUSIVE`; never zero-fill or outcome-select.
-> 2. Required monthly sources only: `klines`, `markPriceKlines`, `indexPriceKlines`, `premiumIndexKlines` at `1h`, plus `fundingRate`. Do NOT download daily metrics/OI for this primary campaign; it is not needed for the estimand. The `data/spot/daily/*` paths are HTTP 404 and MUST NOT be used.
-> 3. Bound downloads to **3,000 HTTP requests and 2 GiB**, concurrency 4, at most 4 retries with exponential backoff. Cache raw zips under `session_<UTC>/raw/`, verify every `.CHECKSUM`, and keep bulky raw data out of Git.
+> 1. Use a bounded **2021-01-01 through 2024-12-31 UTC** archive window. Enumerate symbols ONLY from the S3 delimiter catalog: `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data/futures/um/monthly/klines/&delimiter=/` (paginate with `marker` until `IsTruncated=false`; parse `<CommonPrefixes><Prefix>.../<SYMBOL>/</Prefix>`). Do NOT use `data.binance.vision/data/.../klines/` (404), the JS-only `data.binance.vision/?prefix=...` HTML, or the GitHub API (403 rate limit). Coverage-only selection: rank symbols by count of existing 2021–2024 monthly kline keys, tie ascending symbol; take the top five, then verify all five core sources for those five and replace any incomplete candidate with the next coverage-ranked symbol. If fewer than five complete symbols exist, run all complete symbols and mark the result `PILOT/INCONCLUSIVE`; never zero-fill or outcome-select.
+> 2. Required monthly sources only, via S3 primary: `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip` and `.../fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip`. CDN `data.binance.vision` is fallback only after an S3 404, never a reason to skip a key. Do NOT download daily metrics/OI for this primary campaign; it is not needed for the estimand. The `data/spot/daily/*` paths are HTTP 404 and MUST NOT be used.
+> 3. Bound downloads to **3,000 HTTP requests and 2 GiB**, concurrency 4, at most 4 retries with exponential backoff. Cache raw zips under `session_<UTC>/raw/`, verify every `.CHECKSUM`, and keep bulky raw data out of Git. **Stdlib only: do not run `pip install` and do not require numpy/pandas/pyarrow/requests; use `urllib.request`, `zipfile`, `csv`, `math`, `statistics`, `json`, and `hashlib`.**
 > 4. Freeze the source registry and outcome-blind prereg BEFORE generating targets or inspecting outcomes. Derive split boundaries from unique UTC timestamps only: first 60% train, next 20% validation, last 20% test; apply a 7-calendar-day purge/embargo; divide the test span into three equal, non-overlapping blocks.
 > 5. Use one common eligible panel for every paired comparison. B0 is RV24 persistence. B1 is the fixed OLS HAR model on log RV1h/RV24h/RV168h. C1 adds signed funding and the trailing 90-day absolute-funding percentile. C2 adds mark/index premium and mark/EMA24 distance. Fit scaling and smearing on training data only. Primary contrast: **C2 versus B1**, paired next-24-hour QLIKE; C1 versus B1 is secondary.
 > 6. Use at least 2,000 deterministic block-bootstrap replicates resampling whole UTC time blocks jointly across symbols. Report absolute and relative QLIKE, MSE/MAE, sample/event counts, coverage, exclusions, per-block and leave-one-symbol-out diagnostics, and Holm-adjusted secondary contrasts. The frozen materiality floor is **2% relative QLIKE reduction**; the uncertainty interval must support improvement.
@@ -32,12 +32,13 @@
 >
 > **BOTTLENECKS REMOVED THIS HANDOFF:**
 > - The obsolete closed program-closure campaign is now referred to by NAME ONLY. Its former timestamped ID no longer activates an impossible closure-artifact requirement on the next archive session.
-> - The source is no longer ambiguous: monthly `klines`, `markPriceKlines`, `indexPriceKlines`, `premiumIndexKlines`, and `fundingRate` paths under `data/futures/um/monthly/` were verified HTTP 200 on 2026-11-25T07:58:33Z (BTCUSDT 2024-01 samples; content lengths 38,890 / 23,278 / 22,067 / 16,935 / 696 bytes respectively).
+> - The symbol-listing blocker is removed: `data.binance.vision/data/futures/um/monthly/klines/` returns 404 and the `data.binance.vision/?prefix=...` page is JavaScript-only. The verified replacement is the S3 delimiter catalog at `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data/futures/um/monthly/klines/&delimiter=/`, which returned HTTP 200 with 1,000 `CommonPrefixes` and `IsTruncated=true` on 2026-11-25T11:42:33Z.
+> - The download-key blocker is removed: direct S3 keys for all five required monthly sources returned HTTP 200 for BTCUSDT 2024-01 (klines 38,890; mark 23,278; index 22,067; premium 16,935; funding 696 bytes). CDN `data.binance.vision` is now explicitly fallback-only because some CDN keys 404 while the S3 key exists.
+> - The dependency-install blocker is removed: prior sessions repeatedly died on missing `numpy`/`pandas`/`pyarrow` and timed-out installs. The required campaign artifacts are now stdlib-only; `pip install` is forbidden for this campaign.
 > - The design is now bounded and executable without source discovery, model search, threshold shopping, credentials, external triggers, or a future grace window.
 >
 > **VERIFICATION COMMANDS (after the heavy artifacts exist):**
 > ```bash
-> python3 -m pip install --quiet numpy pandas pyarrow requests
 > python3 scripts/check_handoff_heavywork_gate.py --json
 > python3 -m py_compile scripts/check_handoff_heavywork_gate.py
 > python3 -m unittest \
@@ -59,7 +60,7 @@
 - **Do not re-run any terminal campaign on the frozen panel.** The frozen `ironflow_bulk` panel is exhausted for volatility and confirmatory liquidation risk. Do not wait for an observed-liquidation trigger, build a risk overlay, threshold-shop, or relabel exploratory work as confirmatory.
 - **Root `research_state/*.md|*.json` is at 500/500.** All new artifacts MUST go under `session_<UTC>/` or another nested directory.
 - **No empty files or zero-byte placeholders.** Every required artifact must be non-empty; JSON must be strict RFC 8259 and carry `experiment_id:"FCLR-LIVE-ARCHIVE-01"` plus the real `session_id`.
-- **Dependencies:** stdlib + numpy + pandas + pyarrow + requests only. No paid APIs, manual downloads, credentials, or new source family.
+- **Dependencies:** stdlib only for this campaign. Do not install or import numpy/pandas/pyarrow/requests in the required artifacts; use `urllib.request`, `zipfile`, `csv`, `math`, `statistics`, `json`, and `hashlib`. No paid APIs, manual downloads, credentials, or new source family.
 - **Do not modify `.github/workflows` or overwrite sealed prereg/eval artifacts**, including `research_state/research_protocol.md`.
 - **The ONLY timestamped campaign ID permitted in this file is `FCLR-LIVE-ARCHIVE-01-20261125T074500Z`.** Refer to closed campaigns by name only; another timestamped ID would activate its binder and fail later sessions closed.
 
@@ -76,11 +77,12 @@
 - It cannot be satisfied by documentation, source probing, preregistration alone, or an arbitrary recompute file.
 
 **Frozen inputs:**
-- `https://data.binance.vision/data/futures/um/monthly/klines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
-- `https://data.binance.vision/data/futures/um/monthly/markPriceKlines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
-- `https://data.binance.vision/data/futures/um/monthly/indexPriceKlines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
-- `https://data.binance.vision/data/futures/um/monthly/premiumIndexKlines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
-- `https://data.binance.vision/data/futures/um/monthly/fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip`
+- Symbol catalog: `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data/futures/um/monthly/klines/&delimiter=/` (paginate with `marker`; parse `CommonPrefixes`).
+- `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/klines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
+- `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/markPriceKlines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
+- `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/indexPriceKlines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
+- `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/premiumIndexKlines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
+- `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip`
 - RESEARCH_PROMPT.md §3, §7, §8, §9, §13, §14, §16, §17, §19, and §20.
 
 **Required artifacts (ALL under one fresh `session_<UTC>/`, non-empty):**
@@ -125,7 +127,10 @@
 | `research_state/session_20261125T054500Z/` | Prior complete frozen-panel jump-direction session; historical evidence only. |
 | `research_state/experiment_frontier.json` | Rank-0 is the active archive campaign; all frozen volatility arms are completed. |
 | `research_state/negative_results_report.md` | Preserved nulls and failed routes. |
-| Binance monthly archive roots above | Verified HTTP 200 on 2026-11-25T07:58:33Z; exact pattern and 2021–2024 scope frozen. |
+| Binance monthly archive roots above | S3 catalog and all five BTCUSDT 2024-01 source keys verified HTTP 200 on 2026-11-25T11:42:33Z; exact S3 pattern and 2021–2024 scope frozen. |
+| `https://data.binance.vision/data/futures/um/monthly/klines/` | DO NOT USE for enumeration — HTTP 404. |
+| `https://data.binance.vision/?prefix=...` | DO NOT USE for enumeration — JavaScript-only HTML, no server-rendered listing. |
+| `https://api.github.com/repos/binance/binance-public-data/contents/...` | DO NOT USE — HTTP 403 rate limit. |
 | `https://data.binance.vision/data/spot/daily/*` | DO NOT USE — HTTP 404. |
 
 Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access time, status, byte count, SHA256, schema, and coverage. Do not mutate frozen caches.
@@ -143,18 +148,21 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## SESSION CLOSE-OUT (THIS SESSION — 2026-11-25T07:58:33Z)
+## SESSION CLOSE-OUT (THIS SESSION — 2026-11-25T11:42:33Z)
 
 **What changed and why (real actions, not a timestamp bump):**
-- Verified the bounded monthly Binance archive routes needed for the primary campaign. HEAD requests returned HTTP 200 for BTCUSDT 2024-01 klines, mark-price klines, index-price klines, premium-index klines, and funding rate.
-- Removed the obsolete timestamped program-closure campaign ID from this handoff. That ID had remained gate-active and would have required impossible closure artifacts in the next archive session; referring to the closed campaign by name only removes that deadlock.
-- Narrowed rank-0 to the single highest-priority repo-name estimand: mean next-24-hour realized-variance QLIKE. The design now fixes the 2021–2024 window, coverage-only five-symbol cohort, monthly sources, download budget, models, splits, inference, and 2% floor.
+- Replaced the broken enumeration instruction with the verified S3 delimiter catalog and marker-pagination algorithm. The old `data.binance.vision/data/.../klines/` listing is HTTP 404, the `data.binance.vision/?prefix=...` page is JavaScript-only, and the GitHub contents API is HTTP 403 rate-limited.
+- Replaced CDN-primary downloads with S3-primary downloads plus CDN fallback. Direct S3 HEAD requests returned HTTP 200 for all five required BTCUSDT 2024-01 monthly sources; some equivalent CDN keys 404 even though the S3 key exists.
+- Removed the recurring dependency-install bottleneck: the campaign is now stdlib-only, and `pip install` is explicitly forbidden for the required artifacts.
+- Kept the obsolete timestamped program-closure campaign name-only so it cannot demand impossible closure artifacts from the next archive session.
 - Kept all new-artifact routing nested because root research-state storage is at cap.
 
 **What was actually tested:**
-- `python3 scripts/check_handoff_heavywork_gate.py --json` before the refresh: PASS, `reason=OK`.
-- Monthly archive HEAD probes: five HTTP 200 responses with non-zero content lengths as listed above.
-- Post-refresh gate and whitespace checks are run after this file is updated.
+- `python3 scripts/check_handoff_heavywork_gate.py --json` before the refresh: PASS, `reason=OK`, `live_archive.required=false` because the latest session predates the campaign start.
+- S3 catalog GET: HTTP 200, 1,000 `CommonPrefixes`, `IsTruncated=true`, `NextMarker=data/futures/um/monthly/klines/VINEUSDT/`.
+- S3 HEAD probes: klines 38,890 bytes; mark-price klines 23,278; index-price klines 22,067; premium-index klines 16,935; funding rate 696.
+- Negative probes: kline listing 404, CDN 2024-01 kline 404, GitHub API 403.
+- Post-refresh gate: PASS, `reason=OK`, `handoff_stale=false`, `live_archive.required=false`; `py_compile` and `git diff --check` pass; the six gate regression modules pass 122/122 tests.
 
 **Evidence added:** this handoff only; no root research-state file was added and no sealed artifact was modified.
 
@@ -162,14 +170,16 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 **Single highest-value next task:** execute the full FCLR-LIVE-ARCHIVE-01 artifact set in one fresh session exactly as frozen above.
 
-**Source/engineering blockers:** none external. The only blocker is non-execution; source discovery and obsolete-binder bottlenecks have been removed.
+**Source/engineering blockers:** none external. The only blocker is non-execution; source-listing, download-key, and dependency-install bottlenecks have been removed.
 
 ---
 
 ## BOTTLENECK RESOLUTION (this session)
 
-- **RESOLVED — obsolete closure binder:** the closed program-closure campaign no longer appears with a timestamp in this handoff, so it cannot demand its artifacts from the next archive session.
-- **RESOLVED — source ambiguity:** monthly archive paths are verified and the unusable spot paths are explicitly rejected.
+- **RESOLVED — symbol enumeration:** the S3 delimiter catalog is the only enumeration path; the 404 and JavaScript-only paths are explicitly rejected.
+- **RESOLVED — download keys:** S3 is primary and CDN is fallback-only; every key must exist in the S3 listing before download.
+- **RESOLVED — dependency installs:** stdlib-only required artifacts remove the repeated `numpy`/`pandas`/`pyarrow` failures and install timeouts.
+- **RESOLVED — obsolete closure binder:** the closed program-closure campaign no longer appears with a timestamp in this handoff.
 - **RESOLVED — unbounded scope:** the campaign is restricted to five coverage-selected symbols, 2021–2024 monthly files, one primary estimand, and a 3,000-request/2 GiB budget.
 - **RESOLVED — design drift:** model definitions, splits, purge, inference, materiality, and verdict inputs are frozen in the initial task message.
 - **RESOLVED — root churn and future grace loopholes:** nested storage is mandatory and the campaign start is already in the past.
@@ -180,7 +190,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 ## RESEARCH_PROMPT.md §19 ANSWERS (this session)
 
 **What did the evidence support, contradict, or leave unknown?**
-- Supported: the frozen panel is exhausted and the Binance monthly archive is reachable without authentication.
+- Supported: the frozen panel is exhausted and the Binance monthly archive is reachable without authentication through the verified S3 catalog and direct S3 keys.
 - Contradicted: the claim that no bounded heavy new-source design is executable; a five-symbol, four-year monthly design fits the request budget.
 - Unknown: whether funding + price features clear the 2% QLIKE floor on the new archive cohort.
 
