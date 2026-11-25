@@ -1,0 +1,510 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-04",
+  "campaign": "FCLR-VOL-JUMP-04-20261125T045000Z",
+  "session_id": "session_20261125T054500Z",
+  "session_utc": "20261125T054500Z",
+  "generated_utc": "2026-11-25T05:45:00Z",
+  "phase": "HEAVY_MULTI_ESTIMATOR_MULTI_HORIZON_DIRECTIONAL_JUMP_SIGN_EVAL_AND_RECOMPUTE",
+  "design": {
+    "kind": "walk_forward_classification_directional_signed_jump_semivariance_asymmetry_sign_multi_estimator_multi_horizon_nonoverlapping_leakage_hardened",
+    "estimators": [
+      "bipower",
+      "threshold_bipower"
+    ],
+    "horizons_h": [
+      24,
+      48
+    ],
+    "target": "next-H signed-jump DIRECTION / SIGN (downside-dominant: J^{(H)} < 0, RS- > RS+)",
+    "baseline": "RV-only (trailing RV_H) logistic",
+    "candidate": "RV + signed funding_rate + abs(funding_rate) + premium + mark/EMA24 distance",
+    "purge_embargo_h": 48,
+    "non_overlapping_forward_windows": true,
+    "mark_index_tolerance": 0.01,
+    "delisting_aware_identity": true,
+    "target_type": "binary_sign_no_quantile_threshold",
+    "train_frac": 0.6,
+    "n_test_blocks": 6,
+    "materiality_floor_rel": 0.02
+  },
+  "remediations_applied": [
+    "48h purge+embargo",
+    "non-overlapping forward-outcome windows (origin spacing >= H)",
+    "mark/index tolerance filter (|mark/oracle - 1| <= 0.01)",
+    "delisting-aware per-coin identity",
+    "per-coin cluster bootstrap",
+    "Holm across the declared estimator x horizon x metric family"
+  ],
+  "universe": {
+    "n_coins": 466,
+    "max_n_coins_per_config": 367
+  },
+  "configs": [
+    {
+      "estimator": "bipower",
+      "horizon_h": 24,
+      "n_forecasts": 38259,
+      "n_events": 19785,
+      "n_coins": 367,
+      "n_coins_delisting_aware": 115,
+      "n_test_blocks": 3,
+      "event_rate": 0.5171332235552419,
+      "metrics": {
+        "baseline": {
+          "brier": 0.25003428012400436,
+          "log_loss": 0.6932133627271505,
+          "ece": 0.018861071176389452
+        },
+        "candidate": {
+          "brier": 0.24979866229820638,
+          "log_loss": 0.6927480217574659,
+          "ece": 0.013387154291246548
+        }
+      },
+      "relative_improvement": {
+        "brier": 0.0009423420887772851,
+        "log_loss": 0.0006712810149157573
+      },
+      "sufficient_stats": {
+        "n_forecasts": 38259,
+        "n_events": 19785,
+        "sum_sq_base": 9566.061523264283,
+        "sum_sq_cand": 9557.047020867078,
+        "sum_ll_base": 26521.650044578055,
+        "sum_ll_cand": 26503.846564418887
+      },
+      "inference": {
+        "cluster_bootstrap_by_coin": {
+          "n_boot": 2000,
+          "rel_brier_ci95": [
+            3.5746341258539174e-05,
+            0.00041651333362214806
+          ],
+          "p_improvement_gt_0": 0.991
+        },
+        "driscoll_kraay_block": {
+          "t": 1123991.9436744205,
+          "p_two_sided": 0.0,
+          "lag": 2
+        }
+      },
+      "block_results": [
+        {
+          "block": 0,
+          "block_start": "2026-05-07 05:00:00+00:00",
+          "block_end": "2026-07-07 04:00:00+00:00",
+          "n_test": 10929,
+          "n_events": 5533,
+          "brier_baseline": 0.25003947132455984,
+          "brier_candidate": 0.2493988939652131,
+          "logloss_baseline": 0.6932254525204762,
+          "logloss_candidate": 0.6919663036911607,
+          "rel_brier_improvement": 0.0025619049502598676,
+          "rel_logloss_improvement": 0.0018163626634557898,
+          "sum_sq_base": 2732.6813821061146,
+          "sum_sq_cand": 2725.6805121458137,
+          "sum_ll_base": 7576.260970596284,
+          "sum_ll_cand": 7562.499733040696
+        },
+        {
+          "block": 1,
+          "block_start": "2026-07-09 04:00:00+00:00",
+          "block_end": "2026-09-09 03:00:00+00:00",
+          "n_test": 11036,
+          "n_events": 5598,
+          "brier_baseline": 0.2500071024113762,
+          "brier_candidate": 0.24976249047721422,
+          "logloss_baseline": 0.6931611555802986,
+          "logloss_candidate": 0.6926656874286403,
+          "rel_brier_improvement": 0.0009784199400842501,
+          "rel_logloss_improvement": 0.0007147950338380486,
+          "sum_sq_base": 2759.0783822119474,
+          "sum_sq_cand": 2756.378844906536,
+          "sum_ll_base": 7649.726512984174,
+          "sum_ll_cand": 7644.258526462474
+        },
+        {
+          "block": 2,
+          "block_start": "2026-09-11 03:00:00+00:00",
+          "block_end": "2026-11-11 02:00:00+00:00",
+          "n_test": 16294,
+          "n_events": 8654,
+          "brier_baseline": 0.25004920577796863,
+          "brier_candidate": 0.2500913013265453,
+          "logloss_baseline": 0.6932406137840675,
+          "logloss_candidate": 0.6933281149451158,
+          "rel_brier_improvement": -0.00016834905932085661,
+          "rel_logloss_improvement": -0.0001262204771452279,
+          "sum_sq_base": 4074.3017589462206,
+          "sum_sq_cand": 4074.9876638147284,
+          "sum_ll_base": 11295.662560997596,
+          "sum_ll_cand": 11297.088304915716
+        }
+      ]
+    },
+    {
+      "estimator": "bipower",
+      "horizon_h": 48,
+      "n_forecasts": 17198,
+      "n_events": 9010,
+      "n_coins": 367,
+      "n_coins_delisting_aware": 115,
+      "n_test_blocks": 3,
+      "event_rate": 0.5238981276892662,
+      "metrics": {
+        "baseline": {
+          "brier": 0.25001017151200045,
+          "log_loss": 0.6931672200920569,
+          "ece": 0.025253149244894867
+        },
+        "candidate": {
+          "brier": 0.24975510410797525,
+          "log_loss": 0.693155759891053,
+          "ece": 0.01819645634558784
+        }
+      },
+      "relative_improvement": {
+        "brier": 0.0010202281070510633,
+        "log_loss": 1.6533097168561126e-05
+      },
+      "sufficient_stats": {
+        "n_forecasts": 17198,
+        "n_events": 9010,
+        "sum_sq_base": 4299.674929663384,
+        "sum_sq_cand": 4295.288280448958,
+        "sum_ll_base": 11921.089851143193,
+        "sum_ll_cand": 11920.892758606331
+      },
+      "inference": {
+        "cluster_bootstrap_by_coin": {
+          "n_boot": 2000,
+          "rel_brier_ci95": [
+            -0.00011138476303354516,
+            0.0006297385981316315
+          ],
+          "p_improvement_gt_0": 0.911
+        },
+        "driscoll_kraay_block": {
+          "t": 1305432.5731589464,
+          "p_two_sided": 0.0,
+          "lag": 2
+        }
+      },
+      "block_results": [
+        {
+          "block": 0,
+          "block_start": "2026-05-26 16:00:00+00:00",
+          "block_end": "2026-07-26 15:00:00+00:00",
+          "n_test": 5388,
+          "n_events": 2711,
+          "brier_baseline": 0.250110159276709,
+          "brier_candidate": 0.24974324634662187,
+          "logloss_baseline": 0.6933681407218448,
+          "logloss_candidate": 0.6926411642253198,
+          "rel_brier_improvement": 0.0014670053033758693,
+          "rel_logloss_improvement": 0.0010484711567049282,
+          "sum_sq_base": 1347.593538182908,
+          "sum_sq_cand": 1345.6166113155987,
+          "sum_ll_base": 3735.8675422093,
+          "sum_ll_cand": 3731.9505928460235
+        },
+        {
+          "block": 1,
+          "block_start": "2026-07-28 15:00:00+00:00",
+          "block_end": "2026-09-28 14:00:00+00:00",
+          "n_test": 7038,
+          "n_events": 3568,
+          "brier_baseline": 0.25000532191574537,
+          "brier_candidate": 0.2502307113313567,
+          "logloss_baseline": 0.6931565928220789,
+          "logloss_candidate": 0.6936250831383856,
+          "rel_brier_improvement": -0.0009015384707982424,
+          "rel_logloss_improvement": -0.000675879478256574,
+          "sum_sq_base": 1759.537455643016,
+          "sum_sq_cand": 1761.1237463500884,
+          "sum_ll_base": 4878.436100281791,
+          "sum_ll_cand": 4881.733335127958
+        },
+        {
+          "block": 2,
+          "block_start": "2026-09-30 14:00:00+00:00",
+          "block_end": "2026-11-30 13:00:00+00:00",
+          "n_test": 4772,
+          "n_events": 2731,
+          "brier_baseline": 0.249904429136098,
+          "brier_candidate": 0.24906704165617585,
+          "logloss_baseline": 0.6929560370184622,
+          "logloss_candidate": 0.6930445998810456,
+          "rel_brier_improvement": 0.003350830886899212,
+          "rel_logloss_improvement": -0.00012780444624519273,
+          "sum_sq_base": 1192.5439358374597,
+          "sum_sq_cand": 1188.5479227832711,
+          "sum_ll_base": 3306.786208652102,
+          "sum_ll_cand": 3307.2088306323494
+        }
+      ]
+    },
+    {
+      "estimator": "threshold_bipower",
+      "horizon_h": 24,
+      "n_forecasts": 38259,
+      "n_events": 19647,
+      "n_coins": 367,
+      "n_coins_delisting_aware": 115,
+      "n_test_blocks": 3,
+      "event_rate": 0.5135262291225594,
+      "metrics": {
+        "baseline": {
+          "brier": 0.25022641571512,
+          "log_loss": 0.6935995316557342,
+          "ece": 0.020710298816471094
+        },
+        "candidate": {
+          "brier": 0.25014427397995087,
+          "log_loss": 0.6934328085781171,
+          "ece": 0.015406517391741995
+        }
+      },
+      "relative_improvement": {
+        "brier": 0.0003282696390561949,
+        "log_loss": 0.00024037368828539973
+      },
+      "sufficient_stats": {
+        "n_forecasts": 38259,
+        "n_events": 19647,
+        "sum_sq_base": 9573.412438844774,
+        "sum_sq_cand": 9570.269778198941,
+        "sum_ll_base": 26536.42448161673,
+        "sum_ll_cand": 26530.04582339018
+      },
+      "inference": {
+        "cluster_bootstrap_by_coin": {
+          "n_boot": 2000,
+          "rel_brier_ci95": [
+            -8.76241630669003e-05,
+            0.0002522505831596563
+          ],
+          "p_improvement_gt_0": 0.824
+        },
+        "driscoll_kraay_block": {
+          "t": 369595.7624950802,
+          "p_two_sided": 0.0,
+          "lag": 2
+        }
+      },
+      "block_results": [
+        {
+          "block": 0,
+          "block_start": "2026-05-07 05:00:00+00:00",
+          "block_end": "2026-07-07 04:00:00+00:00",
+          "n_test": 10929,
+          "n_events": 5573,
+          "brier_baseline": 0.2502650179737321,
+          "brier_candidate": 0.24996262399948477,
+          "logloss_baseline": 0.6936772866468601,
+          "logloss_candidate": 0.6930599896996975,
+          "rel_brier_improvement": 0.0012082950174004952,
+          "rel_logloss_improvement": 0.0008898906725727512,
+          "sum_sq_base": 2735.146381434918,
+          "sum_sq_cand": 2731.841517690369,
+          "sum_ll_base": 7581.199065763534,
+          "sum_ll_cand": 7574.452627427994
+        },
+        {
+          "block": 1,
+          "block_start": "2026-07-09 04:00:00+00:00",
+          "block_end": "2026-09-09 03:00:00+00:00",
+          "n_test": 11036,
+          "n_events": 5497,
+          "brier_baseline": 0.2500051173710637,
+          "brier_candidate": 0.250051270119182,
+          "logloss_baseline": 0.6931574109530948,
+          "logloss_candidate": 0.6932479077803076,
+          "rel_brier_improvement": -0.0001846072136587909,
+          "rel_logloss_improvement": -0.0001305573968954839,
+          "sum_sq_base": 2759.0564753070585,
+          "sum_sq_cand": 2759.5658170352926,
+          "sum_ll_base": 7649.685187278354,
+          "sum_ll_cand": 7650.683910263475
+        },
+        {
+          "block": 2,
+          "block_start": "2026-09-11 03:00:00+00:00",
+          "block_end": "2026-11-11 02:00:00+00:00",
+          "n_test": 16294,
+          "n_events": 8577,
+          "brier_baseline": 0.2503504100959125,
+          "brier_candidate": 0.2503291054052584,
+          "logloss_baseline": 0.6938468288066063,
+          "logloss_candidate": 0.6938081064010503,
+          "rel_brier_improvement": 8.50994837435363e-05,
+          "rel_logloss_improvement": 5.580829074714589e-05,
+          "sum_sq_base": 4079.2095821027983,
+          "sum_sq_cand": 4078.86244347328,
+          "sum_ll_base": 11305.540228574842,
+          "sum_ll_cand": 11304.909285698714
+        }
+      ]
+    },
+    {
+      "estimator": "threshold_bipower",
+      "horizon_h": 48,
+      "n_forecasts": 17198,
+      "n_events": 8912,
+      "n_coins": 367,
+      "n_coins_delisting_aware": 115,
+      "n_test_blocks": 3,
+      "event_rate": 0.5181997906733341,
+      "metrics": {
+        "baseline": {
+          "brier": 0.25043370075220417,
+          "log_loss": 0.6940619666435835,
+          "ece": 0.02613454917396812
+        },
+        "candidate": {
+          "brier": 0.25063025448779835,
+          "log_loss": 0.6952926790137758,
+          "ece": 0.017374403666579143
+        }
+      },
+      "relative_improvement": {
+        "brier": -0.0007848533763779191,
+        "log_loss": -0.0017732024362951894
+      },
+      "sufficient_stats": {
+        "n_forecasts": 17198,
+        "n_events": 8912,
+        "sum_sq_base": 4306.958785536406,
+        "sum_sq_cand": 4310.339116681156,
+        "sum_ll_base": 11936.47770233635,
+        "sum_ll_cand": 11957.643493678916
+      },
+      "inference": {
+        "cluster_bootstrap_by_coin": {
+          "n_boot": 2000,
+          "rel_brier_ci95": [
+            -0.0006552724397391699,
+            0.0002830706091008855
+          ],
+          "p_improvement_gt_0": 0.2095
+        },
+        "driscoll_kraay_block": {
+          "t": -199885.88362984988,
+          "p_two_sided": 0.0,
+          "lag": 2
+        }
+      },
+      "block_results": [
+        {
+          "block": 0,
+          "block_start": "2026-05-26 16:00:00+00:00",
+          "block_end": "2026-07-26 15:00:00+00:00",
+          "n_test": 5388,
+          "n_events": 2765,
+          "brier_baseline": 0.25045336329832657,
+          "brier_candidate": 0.25025796561901437,
+          "logloss_baseline": 0.6940519686949522,
+          "logloss_candidate": 0.6936444652770342,
+          "rel_brier_improvement": 0.0007801759047629815,
+          "rel_logloss_improvement": 0.0005871367509904284,
+          "sum_sq_base": 1349.4427214513837,
+          "sum_sq_cand": 1348.3899187552495,
+          "sum_ll_base": 3739.5520073284024,
+          "sum_ll_cand": 3737.35637891266
+        },
+        {
+          "block": 1,
+          "block_start": "2026-07-28 15:00:00+00:00",
+          "block_end": "2026-09-28 14:00:00+00:00",
+          "n_test": 7038,
+          "n_events": 3444,
+          "brier_baseline": 0.25016623801426235,
+          "brier_candidate": 0.2514004598759277,
+          "logloss_baseline": 0.6935968048908939,
+          "logloss_candidate": 0.6963124669706168,
+          "rel_brier_improvement": -0.004933606834647948,
+          "rel_logloss_improvement": -0.003915332453340862,
+          "sum_sq_base": 1760.6699831443784,
+          "sum_sq_cand": 1769.3564366067792,
+          "sum_ll_base": 4881.534312822111,
+          "sum_ll_cand": 4900.647142539201
+        },
+        {
+          "block": 2,
+          "block_start": "2026-09-30 14:00:00+00:00",
+          "block_end": "2026-11-30 13:00:00+00:00",
+          "n_test": 4772,
+          "n_events": 2703,
+          "brier_baseline": 0.25080596834464464,
+          "brier_candidate": 0.24991466079612887,
+          "logloss_baseline": 0.6947593005418768,
+          "logloss_candidate": 0.6956496169796846,
+          "rel_brier_improvement": 0.0035537732789954167,
+          "rel_logloss_improvement": -0.001281474659084651,
+          "sum_sq_base": 1196.8460809406442,
+          "sum_sq_cand": 1192.592761319127,
+          "sum_ll_base": 3315.3913821858364,
+          "sum_ll_cand": 3319.6399722270553
+        }
+      ]
+    }
+  ],
+  "status": "CONFIRMATORY_COMPLETE",
+  "holdout_opened": true,
+  "n_events": 57354,
+  "n_forecasts": 110914,
+  "n_coins": 367,
+  "n_test_blocks": 12,
+  "event_rate": 0.517103341327515,
+  "metrics": {
+    "baseline": {
+      "brier": 0.2501587507195561,
+      "log_loss": 0.6934709962644421
+    },
+    "candidate": {
+      "brier": 0.25004006884790136,
+      "log_loss": 0.6934420239112674
+    }
+  },
+  "relative_improvement": {
+    "brier": 0.00047442622460090424,
+    "log_loss": 4.1778752580481554e-05
+  },
+  "sufficient_stats": {
+    "n_forecasts": 110914,
+    "n_events": 57354,
+    "sum_sq_base": 27746.10767730885,
+    "sum_sq_cand": 27732.944196196135,
+    "sum_ll_base": 76915.64207967433,
+    "sum_ll_cand": 76912.42864009431
+  },
+  "inference": {
+    "holm_family_size": 8,
+    "holm_adjusted": [
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0,
+      0.838,
+      0.0
+    ],
+    "holm_rejected": true,
+    "p_values": [
+      0.991,
+      0.0,
+      0.911,
+      0.0,
+      0.824,
+      0.0,
+      0.2095,
+      0.0
+    ]
+  },
+  "materiality_floor_rel": 0.02,
+  "materiality_met": false,
+  "significant": true,
+  "verdict": "NOT_SUPPORTED",
+  "elapsed_seconds": 146.22
+}

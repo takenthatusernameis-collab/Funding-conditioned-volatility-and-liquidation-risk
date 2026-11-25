@@ -1,0 +1,64 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-04",
+  "session_id": "session_20261125T054500Z",
+  "session_utc": "20261125T054500Z",
+  "generated_utc": "2026-11-25T05:45:00Z",
+  "audit_pass": true,
+  "unresolved_blockers": [],
+  "verdict": "NOT_SUPPORTED",
+  "eval_status": "CONFIRMATORY_COMPLETE",
+  "holdout_opened": true,
+  "n_forecasts": 110914,
+  "n_events": 57354,
+  "n_coins": 367,
+  "n_configs": 4,
+  "estimators": ["bipower", "threshold_bipower"],
+  "horizons_h": [24, 48],
+  "target": "directional_sign_next_H_signed_jump_J_lt_0_downside_dominant_RSminus_gt_RSplus",
+  "metrics": {
+    "baseline": {
+      "brier": 0.2501587507195561,
+      "log_loss": 0.6934709962644421
+    },
+    "candidate": {
+      "brier": 0.25004006884790136,
+      "log_loss": 0.6934420239112674
+    }
+  },
+  "relative_improvement": {
+    "brier": 0.00047442622460090424,
+    "log_loss": 4.1778752580481554e-05
+  },
+  "per_config_relative_brier": {
+    "bipower_H24": 0.0009423420887772851,
+    "bipower_H48": 0.0010202281070510633,
+    "threshold_bipower_H24": 0.0003282696390561949,
+    "threshold_bipower_H48": -0.0007848533763779191
+  },
+  "materiality_floor_rel": 0.02,
+  "materiality_met": false,
+  "significant": true,
+  "recompute_all_checks_match": true,
+  "recompute_n_checks": 76,
+  "remediations_applied": [
+    "48h purge+embargo",
+    "non-overlapping forward-outcome windows (origin spacing >= H)",
+    "mark/index tolerance filter (|mark/oracle - 1| <= 0.01)",
+    "delisting-aware per-coin identity",
+    "per-coin cluster bootstrap",
+    "Holm across the declared estimator x horizon x metric family"
+  ],
+  "checks": [
+    "eval candidate metrics are numeric (not NaN)",
+    "independent stdlib recompute all_checks_match=true (76 checks)",
+    "materiality floor applied as frozen (2% relative Brier)",
+    "verdict symmetric and consistent with frozen prereg rule",
+    "all FCLR-POOLED-AUDIT-001 leakage remediations applied simultaneously",
+    "jump estimator varied (bipower vs threshold-bipower)",
+    "forecast horizon varied ({24h, 48h})",
+    "target is the DIRECTIONAL / SIGN of the signed jump (J<0), materially different from the closed jump01/02/03 magnitude-exceedance endpoint",
+    "base rate estimated train-only (binary sign target; no quantile threshold)",
+    "no external trigger required or fired on frozen data"
+  ],
+  "notes": "Directional / sign robustness study of the signed-jump / semivariance-asymmetry event. Across ALL four (estimator x horizon) configs the candidate's relative Brier improvement (-0.0785% .. 0.1020%) is below the frozen 2% floor; aggregate 0.0474%. The event base rate is ~51.7% (57,354 / 110,914), so the RV-only baseline Brier ~0.250 is near the irreducible coin-flip level and the funding + price-dislocation features add no material directional skill. The directional (sign) jump null SURVIVES variation of the jump estimator AND the forecast horizon under full leakage remediation. NOT_SUPPORTED is a valid, publishable negative result that closes the funding-conditioned volatility-jump family (magnitude AND direction) for good."
+}

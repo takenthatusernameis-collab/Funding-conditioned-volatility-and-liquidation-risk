@@ -1,0 +1,71 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-04",
+  "campaign": "FCLR-VOL-JUMP-04-20261125T045000Z",
+  "session_id": "session_20261125T054500Z",
+  "session_utc": "20261125T054500Z",
+  "generated_utc": "2026-11-25T05:45:00Z",
+  "frozen_before_outcomes": true,
+  "decision_frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "source_registry_sha256": "d2d8b4549e1c185ec8fe09e3aadc705f40f48cfabd44aaa983452ff5da86f422",
+  "input_hash_assertions": {
+    "source_registry_sha256": "d2d8b4549e1c185ec8fe09e3aadc705f40f48cfabd44aaa983452ff5da86f422"
+  },
+  "primary_question": "Does the funding + price-dislocation feature set improve out-of-sample forecasts of the DIRECTION / SIGN of a signed-jump / semivariance-asymmetry event (next-H signed jump J^{(H)} < 0, downside-dominant) beyond an RV-only baseline on the broad ironflow_bulk panel, clearing a frozen 2% materiality floor with Holm-adjusted uncertainty, WHEN the jump ESTIMATOR (bipower vs threshold-bipower) AND the forecast HORIZON ({24h, 48h}) are varied and ALL FCLR-POOLED-AUDIT-001 leakage remediations are applied simultaneously (48h purge+embargo, NON-overlapping forward-outcome windows, mark/index tolerance filter, delisting-aware per-coin identity, per-coin cluster bootstrap, Holm across the declared estimator x horizon x metric family)?",
+  "design": {
+    "kind": "walk_forward_classification_directional_signed_jump_semivariance_asymmetry_sign_multi_estimator_multi_horizon_nonoverlapping_leakage_hardened",
+    "outcome_family": "directional_signed_jump_semivariance_asymmetry_sign_classification",
+    "estimators": ["bipower", "threshold_bipower"],
+    "horizons_h": [24, 48],
+    "forecast_origin": "per-coin NON-OVERLAPPING origins spaced >= H hours (close of hour t), H in {24, 48}",
+    "target": "directional sign event y_t = 1 if J^{(H)}_{t+1..t+H} < 0 (downside-dominant: RS- > RS+ over the next H hours)",
+    "jump_definition": "J^{(H)} = sign(RS+ - RS-) * (RV_H - BV_H); RV_H = sum of squared 1h log returns over next H hours; BV_H = bipower variation (bipower OR threshold-bipower with a 3-sigma expanding threshold on the later return of each pair); RS+/RS- = realized semivariance of positive/negative returns over the same H-hour window. J^{(H)} < 0 iff RS- > RS+ in the typical case RV_H > BV_H.",
+    "target_type": "binary_sign (no train-only quantile threshold; base rate estimated train-only)",
+    "baseline": "RV-only (trailing log-RV_H) logistic",
+    "candidate": "RV + signed funding_rate + abs(funding_rate) + premium + mark/EMA24 distance",
+    "feature_standardization": "train-only (expanding) z-score",
+    "walk_forward": true,
+    "train_frac": 0.6,
+    "purge_embargo_h": 48,
+    "non_overlapping_forward_windows": true,
+    "min_origin_spacing_h": "H (24 or 48)",
+    "mark_index_tolerance": 0.01,
+    "delisting_aware_identity": true,
+    "n_test_blocks": 6,
+    "block_months": 2,
+    "no_random_split": true,
+    "remediations_applied": [
+      "48h purge+embargo",
+      "non-overlapping forward-outcome windows (origin spacing >= H)",
+      "mark/index tolerance filter (|mark/oracle - 1| <= 0.01)",
+      "delisting-aware per-coin identity",
+      "per-coin cluster bootstrap",
+      "Holm across the declared estimator x horizon x metric family"
+    ],
+    "inference": [
+      "cluster-robust CR1 by coin",
+      "Driscoll-Kraay HAC (block-level)",
+      "Holm step-down over the declared (estimator x horizon x metric) family"
+    ],
+    "multiplicity_family": [
+      "brier_relative_improvement",
+      "logloss_relative_improvement"
+    ],
+    "metrics": [
+      "brier",
+      "log_loss",
+      "calibration_ece"
+    ]
+  },
+  "materiality_floor_rel": 0.02,
+  "materiality_floor": 0.02,
+  "materiality_definition": "candidate relative Brier (or log-loss) improvement over the RV-only baseline must exceed 0.02 (2%) in at least one estimator x horizon config with Holm-adjusted significance; verdict is symmetric PROMOTED / NOT_SUPPORTED; a null that survives across ALL estimators and horizons closes the funding-conditioned volatility-jump family for good",
+  "verdict_rule": {
+    "PROMOTED": "materiality_met is True AND candidate beats baseline on Brier with Holm-adjusted significance",
+    "NOT_SUPPORTED": "materiality floor not met in any config (valid, publishable negative result; closes the funding-conditioned volatility-jump family for good)",
+    "INCONCLUSIVE": "insufficient events / degenerate metrics"
+  },
+  "universe": "coins present in candles_1h AND funding AND open_interest (intersection), delisting-aware, with sufficient trailing history and mark/index tolerance",
+  "frozen_inputs_note": "ironflow_bulk 18 monthly parquet per dataset; sha256-asserted; read-only; bounds 2025-05 .. 2026-10",
+  "distinct_from_prior": "Materially different DIRECTIONAL / SIGN design of the signed-jump / semivariance-asymmetry event (downside- vs upside-dominance), NOT the MAGNITUDE-exceedance endpoint closed by FCLR-VOL-JUMP-01/02/03. It varies the jump estimator (bipower vs threshold-bipower) and the forecast horizon ({24h, 48h}) under the SAME full leakage-hardened pipeline with a SIGN target; NOT a relabel or re-run of jump01/02/03, mean-QLIKE, correction-time, or total-variance tail-exceedance endpoints."
+}
