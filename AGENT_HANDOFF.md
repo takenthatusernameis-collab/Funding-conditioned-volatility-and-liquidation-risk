@@ -29,9 +29,9 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-25T06:00:00Z**
+> **Timestamped initial task message — verified 2026-11-25T07:13:08Z**
 >
-> **CURRENT GATE STATE (2026-11-25T06:00:00Z):** The heavy-work gate is GREEN on the real repo. The
+> **CURRENT GATE STATE (2026-11-25T07:13:08Z):** The heavy-work gate is GREEN on the real repo. The
 > latest on-disk AND handoff-recorded session is `session_20261125T060000Z`, which carries the
 > COMPLETE `fclr_liq_risk_program_closure_*` artifact set (protocol_freeze json+md, synthesis_report
 > json+md, frontier_exhaustion_audit json+md, negative_results_preservation json+md,
@@ -57,11 +57,14 @@
 > **NO HEAVY WORK REMAINS.** The next session's job is to VERIFY the gate stays green and STOP:
 > `python3 scripts/check_handoff_heavywork_gate.py --json` → `reason=OK` with
 > `program_closure.required=true` and `program_closure.pass=true`, plus the campaign-gate regression
-> suite. Do NOT re-run any closed volatility arm, do NOT re-run any terminal liquidation track, do NOT
-> build a risk overlay (forecast gate not passed), do NOT wait for `NEW_OBSERVED_LIQUIDATION_SOURCE`
-> (cannot fire on frozen data), do NOT add root-level `research_state/*.md|*.json` files (root at 500
-> cap), do NOT threshold-shop, do NOT relabel exploratory as confirmatory, and do NOT produce a
-> timestamp-only refresh of this handoff as a substitute for verification.
+> suite (122 tests OK). Do NOT re-run any closed volatility arm, do NOT re-run any terminal liquidation
+> track, do NOT build a risk overlay (forecast gate not passed), do NOT wait for
+> `NEW_OBSERVED_LIQUIDATION_SOURCE` (cannot fire on frozen data), do NOT add root-level
+> `research_state/*.md|*.json` files (root at 500 cap), do NOT threshold-shop, do NOT relabel
+> exploratory as confirmatory, and do NOT produce a timestamp-only refresh of this handoff as a
+> substitute for verification. Verified at 2026-11-25T07:13:08Z: gate `pass=true`, `reason_code=OK`,
+> `program_closure.required=true`, `program_closure.pass=true`, all 122 campaign-gate tests pass, root
+> count 500/500 at cap.
 
 ---
 
