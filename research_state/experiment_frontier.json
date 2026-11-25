@@ -3,13 +3,72 @@
     "rank": 0,
     "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
+    "task": "FCLR-VOL-JUMP-02-20261125T040000Z",
+    "generated": "20261125T040000Z",
+    "refreshed": "2026-11-25T03:00:00Z",
+    "last_checked": "2026-11-25T03:00:00Z",
+    "last_verdict": null,
+    "next_action_heavy": "Execute FCLR-VOL-JUMP-02 - a HEAVY, confirmatory, broad-universe (454-coin, 18-month ironflow_bulk) robustness RE-CONFIRMATION of the closed FCLR-VOL-JUMP-01 signed-jump / semivariance-asymmetry null. Apply ALL FCLR-POOLED-AUDIT-001 leakage remediations simultaneously (48h purge+embargo, NON-overlapping 24h forward-outcome windows, mark/index tolerance filter, delisting-aware per-coin identity, per-coin cluster bootstrap, Holm across the declared family) behind a fresh outcome-blind prereg frozen before any outcome is computed. Repo-name priority: the repository leads with 'Funding-conditioned-volatility'; all four broad-scale volatility arms (mean QLIKE FCLR-VOL-BROAD-01, correction-time FCLR-VOL-CORR-01, stress FCLR-VOL-STRESS-01, jump FCLR-VOL-JUMP-01) are now closed NOT_SUPPORTED, so the remaining repo-name work is to prove the jump null is not an artifact of the jump01 design's residual leakage. This is a materially different design, NOT a re-run of the terminal jump01 endpoint, and NOT a status memo, probe, trigger-check-only, verify-and-stop, or timestamp-only handoff refresh.",
+    "next_unfinished_task": "Produce the complete FCLR-VOL-JUMP-02 artifact set under one fresh research_state/session_<UTC>/ (UTC strictly > 20261125T040000Z), prefix fclr_voljump02_, all non-empty, no zero-byte placeholders: (1) fclr_voljump02_source_registry_{json,md} - sha256-asserted ironflow_bulk candles_1h/funding/open_interest inventory with a top-level datasets map, input_integrity.sha256_all_match=true, sha256_verified_bad=0, >=54 files each with 64-hex sha256 and sha_match not false; (2) fclr_voljump02_prereg_{json,md} - outcome-blind frozen prereg (outcome_data_inspected_before_freeze:false, frozen_before_outcomes:true, design.kind containing one of jump/asymmetry/bipower/semivariance/signed_jump/downside, materiality_floor_rel > 0, source_registry_sha256 == sha256 of the source-registry JSON); (3) fclr_voljump02_eval_{py,json,md} - the heavy jump-forecast robustness evaluation triad (status in {CONFIRMATORY_COMPLETE,NOT_SUPPORTED,PROMOTED,INCONCLUSIVE}, holdout_opened:true, integer n_events>=1, metrics.{baseline,candidate}.brier numeric, boolean materiality_met, verdict); (4) fclr_voljump02_recompute_{py,json} - independent stdlib recompute (all_checks_match:true, integer n_checks); (5) fclr_voljump02_evidence_audit_{json,md}; (6) evidence_audit_<UTC>.json - gate-critical alias (audit_pass:true, verdict == eval verdict); (7) trigger_check_<UTC>.json - non-empty (external_trigger_required:false, trigger_source:'FROZEN_IRONFLOW_BULK', fired:false). Record the real session id here (READY_EXECUTE -> COMPLETED_VALIDATED) and update AGENT_HANDOFF.md only after the artifacts exist. Do NOT write a future/non-existent session id into AGENT_HANDOFF.md before its artifacts exist.",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None external. Frozen ironflow_bulk panel only; no network. Do NOT re-run FCLR-VOL-BROAD-01, FCLR-VOL-CORR-01, FCLR-VOL-STRESS-01, or FCLR-VOL-JUMP-01 (all closed NOT_SUPPORTED); do NOT build a risk overlay (section 9 forecast gate not passed); do NOT wait for NEW_OBSERVED_LIQUIDATION_SOURCE; do NOT add root-level research_state files (root *.md|*.json at cap 500 - all new artifacts MUST go under session_<UTC>/); do NOT threshold-shop after outcomes; do NOT relabel exploratory as confirmatory; do NOT misread scripts/next_campaign_status.py (old 3-block framing) as 'no feasible work'.",
+    "evidence": {
+      "ironflow_bulk_cache": "research_state/data_cache/ironflow_bulk/",
+      "months": "2025-05 .. 2026-10 (18 months)",
+      "datasets": [
+        "candles_1h",
+        "funding",
+        "open_interest"
+      ],
+      "prior_closed_arms": [
+        "FCLR-VOL-BROAD-01 (mean log-RV QLIKE) NOT_SUPPORTED (session_20261124T120000Z)",
+        "FCLR-VOL-CORR-01 (correction-time / hazard) NOT_SUPPORTED (session_20261124T204500Z)",
+        "FCLR-VOL-STRESS-01 (volatility-stress / tail-exceedance) NOT_SUPPORTED (session_20261124T222500Z)",
+        "FCLR-VOL-JUMP-01 (signed-jump / semivariance-asymmetry) NOT_SUPPORTED (session_20261125T030000Z)"
+      ],
+      "root_md_json_count": 500,
+      "root_cap": 500,
+      "all_new_artifacts_must_go_under_session_dir": true,
+      "gate_enforced": "AGENT_HANDOFF.md FOCUS CAMPAIGN section; scripts/check_handoff_heavywork_gate.py (VOL_JUMP_CAMPAIGN_RE / _vol_jump_state / VOL_JUMP_REQUIRED: fclr_voljump02_source_registry_ json+md, prereg_ json+md, eval_ py+json+md, recompute_ py+json, evidence_audit_ json+md, evidence_audit_ json alias, trigger_check_ json)"
+    },
+    "phases": [
+      {
+        "phase": "SOURCE_REGISTRY_ON_DISK",
+        "status": "NOT_STARTED",
+        "claim": "Record ironflow_bulk candles_1h/funding/open_interest parquet read (paths, sha256, rows, coins, month span, schemas) with an explicit datasets map; assert every .sha256 sidecar; caches read-only."
+      },
+      {
+        "phase": "PREREG_FREEZE_ON_BROAD_UNIVERSE",
+        "status": "NOT_STARTED",
+        "claim": "Freeze the outcome-blind jump-robustness hypotheses, non-overlapping forward jump-event definition, RV-only baseline, funding+price candidate, all leakage remediations, materiality floor, and symmetric verdict (outcome_data_inspected_before_freeze:false)."
+      },
+      {
+        "phase": "HEAVY_JUMP_ROBUSTNESS_EVAL_AND_RECOMPUTE",
+        "status": "NOT_STARTED",
+        "claim": "Execute the heavy jump-robustness evaluation triad + independent stdlib recompute + evidence audit + gate alias + trigger check under one fresh session_<UTC>/ (UTC > 20261125T040000Z). All artifacts non-empty."
+      }
+    ],
+    "note": "ACTIVE rank-0 as of 2026-11-25T03:00:00Z. Promoted after FCLR-VOL-JUMP-01 closed NOT_SUPPORTED (all four repo-name volatility estimands now closed). Directly tests whether the jump null survives full leakage remediation; a surviving null is the publishable capstone of the funding-conditioned volatility program. Stdlib + numpy + pandas + pyarrow only; no network; no overlay; no track-adulteration.",
+    "session": null,
+    "completed_session": null,
+    "supersedes": "FCLR-VOL-JUMP-01-20261124T223000Z",
+    "carry_forward_bundles": [
+      "session_20261125T030000Z/"
+    ],
+    "completed_utc": null
+  },
+  {
+    "rank": 1,
+    "status": "COMPLETED_VALIDATED",
+    "program_status": "COMPLETE",
     "task": "FCLR-VOL-JUMP-01-20261124T223000Z",
     "generated": "20261124T223000Z",
     "refreshed": "2026-11-24T22:30:25Z",
-    "last_checked": "2026-11-24T22:30:25Z",
-    "last_verdict": null,
-    "next_action_heavy": "Execute FCLR-VOL-JUMP-01 - a HEAVY, confirmatory, broad-universe (314-coin, 18-month ironflow_bulk) study of the PRIMARY research question's signed-JUMP / SEMIVARIANCE-ASYMMETRY sub-target (RESEARCH_PROMPT.md section 3.1 'future realized volatility'; section 7 target 1): does the funding / price feature set improve out-of-sample forecasts of a signed-jump / downside-vs-upside semivariance-asymmetry TAIL event (next-24h jump component above a train-only high quantile) beyond a realized-volatility-only baseline, judged on Brier / log-loss / calibration with a frozen materiality floor? Repo-name priority: the repository leads with 'Funding-conditioned-volatility'; the mean QLIKE (FCLR-VOL-BROAD-01), correction-time (FCLR-VOL-CORR-01), and volatility-stress / tail-exceedance (FCLR-VOL-STRESS-01) arms are ALL closed NOT_SUPPORTED at broad scale, so the remaining repo-name frontier is the signed-jump / semivariance-asymmetry classification estimand, a DISTINCT outcome family (jump / asymmetry, not mean QLIKE, not correction-time, not total-variance tail exceedance) that has never been tested confirmatory at broad scale. This is NOT a status memo, NOT a probe, NOT a trigger-check-only session, NOT a verify-and-stop session, and NOT a timestamp-only handoff refresh.",
-    "next_unfinished_task": "Produce the complete FCLR-VOL-JUMP-01 artifact set under one fresh research_state/session_<UTC>/ (UTC strictly > 20261124T223000Z), prefix fclr_voljump01_, all non-empty, no zero-byte placeholders: (1) fclr_voljump01_source_registry_{json,md} - sha256-asserted ironflow_bulk candles_1h/funding/open_interest inventory with a top-level datasets map, input_integrity.sha256_all_match=true, sha256_verified_bad=0, >=54 files each with 64-hex sha256 and sha_match not false; (2) fclr_voljump01_prereg_{json,md} - outcome-blind frozen prereg (outcome_data_inspected_before_freeze:false, frozen_before_outcomes:true, design.kind containing one of jump/asymmetry/bipower/semivariance/signed_jump/downside, materiality_floor_rel > 0, source_registry_sha256 == sha256 of the source-registry JSON): jump event = next-24h signed-jump / semivariance-asymmetry above an expanding train-only high quantile per coin; baseline = RV-only; candidate = RV + funding + price-dislocation; (3) fclr_voljump01_eval_{py,json,md} - the heavy jump-forecast evaluation triad (status in {CONFIRMATORY_COMPLETE,NOT_SUPPORTED,PROMOTED,INCONCLUSIVE}, holdout_opened:true, integer n_events>=1, metrics.{baseline,candidate}.brier numeric, boolean materiality_met, verdict); (4) fclr_voljump01_recompute_{py,json} - independent stdlib recompute (all_checks_match:true, integer n_checks); (5) fclr_voljump01_evidence_audit_{json,md}; (6) evidence_audit_<UTC>.json - gate-critical alias (audit_pass:true, verdict == eval verdict); (7) trigger_check_<UTC>.json - non-empty (external_trigger_required:false, trigger_source:'FROZEN_IRONFLOW_BULK', fired:false). Record the real session id here (READY_EXECUTE -> COMPLETED_VALIDATED) and update AGENT_HANDOFF.md only after the artifacts exist. Do NOT write a future/non-existent session id into AGENT_HANDOFF.md before its artifacts exist.",
+    "last_checked": "2026-11-25T03:00:00Z",
+    "last_verdict": "NOT_SUPPORTED",
+    "next_action_heavy": "NONE - FCLR-VOL-JUMP-01 COMPLETED under session_20261125T030000Z. Verdict NOT_SUPPORTED: broad-panel (454-coin, 18-month ironflow_bulk) funding-conditioned signed-jump / semivariance-asymmetry forecast (1,136,222 forecasts; 39,116 jump events) improved Brier 0.0922% relative over the RV-only baseline, below the frozen 2% floor; statistically significant but economically immaterial. The volatility-jump arm is closed at broad scale; all four repo-name volatility estimands are now closed NOT_SUPPORTED. Rank-0 retired; FCLR-VOL-JUMP-02 promoted to rank-0 READY_EXECUTE.",
+    "next_unfinished_task": null,
     "resume_triggers": [],
     "trigger_status": {},
     "blockers": "None external. Frozen ironflow_bulk panel only; no network. Do NOT re-run FCLR-VOL-BROAD-01, FCLR-VOL-CORR-01, or FCLR-VOL-STRESS-01 (all closed NOT_SUPPORTED); do NOT build a risk overlay (section 9 forecast gate not passed); do NOT wait for NEW_OBSERVED_LIQUIDATION_SOURCE; do NOT add root-level research_state files (root *.md|*.json at cap 500 - all new artifacts MUST go under session_<UTC>/); do NOT threshold-shop after outcomes; do NOT relabel exploratory as confirmatory; do NOT misread scripts/next_campaign_status.py (old 3-block framing) as 'no feasible work'.",
@@ -51,16 +110,16 @@
       }
     ],
     "note": "ACTIVE rank-0 as of 2026-11-24T22:30:25Z. Promoted after FCLR-VOL-STRESS-01 closed NOT_SUPPORTED. Directly addresses the repository-name first half (funding-conditioned volatility) via the signed-jump / semivariance-asymmetry classification estimand that has never been tested confirmatory at broad scale; a null is a valid, strong negative result. Stdlib + numpy + pandas + pyarrow only; no network; no overlay; no track-adulteration.",
-    "session": null,
-    "completed_session": null,
+    "session": "session_20261125T030000Z",
+    "completed_session": "session_20261125T030000Z",
     "supersedes": "FCLR-VOL-STRESS-01-20261124T213000Z",
     "carry_forward_bundles": [
       "session_20261124T222500Z/"
     ],
-    "completed_utc": null
+    "completed_utc": "2026-11-25T03:00:00Z"
   },
   {
-    "rank": 1,
+    "rank": 2,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-STRESS-01-20261124T213000Z",
@@ -119,7 +178,7 @@
     "completed_utc": "20261124T222500Z"
   },
   {
-    "rank": 2,
+    "rank": 3,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-CORR-01-20261124T180000Z",
@@ -178,7 +237,7 @@
     "superseded_utc": "2026-11-24T21:28:00Z"
   },
   {
-    "rank": 3,
+    "rank": 4,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-BROAD-01-20261124T035500Z",
@@ -296,10 +355,10 @@
       "research_state/session_20261123T085507Z/"
     ],
     "completed_utc": "2026-11-24T01:51:14Z",
-    "rank": 4
+    "rank": 5
   },
   {
-    "rank": 5,
+    "rank": 6,
     "status": "SUPERSEDED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025653Z",
@@ -351,7 +410,7 @@
     "superseded_utc": "2026-11-24T03:56:48Z"
   },
   {
-    "rank": 6,
+    "rank": 7,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIQ-XSEC-BROAD-01-20261123T080000Z",
@@ -437,7 +496,7 @@
     "superseded_by": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z"
   },
   {
-    "rank": 7,
+    "rank": 8,
     "status": "SUPERSEDED_TERMINAL",
     "program_status": "COMPLETE",
     "task": "FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z",

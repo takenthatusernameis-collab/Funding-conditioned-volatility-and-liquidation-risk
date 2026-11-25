@@ -1,0 +1,44 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-01",
+  "session_id": "session_20261125T030000Z",
+  "session_utc": "20261125T030000Z",
+  "generated_utc": "2026-11-25T03:00:00Z",
+  "audit_pass": true,
+  "unresolved_blockers": [],
+  "verdict": "NOT_SUPPORTED",
+  "eval_status": "CONFIRMATORY_COMPLETE",
+  "holdout_opened": true,
+  "n_forecasts": 1136222,
+  "n_events": 39116,
+  "n_coins": 454,
+  "n_test_blocks": 4,
+  "metrics": {
+    "baseline": {
+      "brier": 0.03332230004724778,
+      "log_loss": 0.15053552712868395,
+      "ece": 0.012456362743041734
+    },
+    "candidate": {
+      "brier": 0.033291587900729745,
+      "log_loss": 0.15011236756903842,
+      "ece": 0.012628595821082025
+    }
+  },
+  "relative_improvement": {
+    "brier": 0.000921669466828195,
+    "log_loss": 0.0028110278531379273
+  },
+  "materiality_floor_rel": 0.02,
+  "materiality_met": false,
+  "significant": true,
+  "recompute_all_checks_match": true,
+  "recompute_n_checks": 60,
+  "checks": [
+    "eval candidate metrics are numeric (not NaN)",
+    "independent stdlib recompute all_checks_match=true",
+    "materiality floor applied as frozen (2% relative Brier)",
+    "verdict symmetric and consistent with frozen prereg rule",
+    "no external trigger required or fired on frozen data"
+  ],
+  "notes": "Candidate relative Brier improvement 0.0922% is statistically distinguishable from zero (Holm) but far below the frozen 2% materiality floor; NOT_SUPPORTED closes the signed-jump / semivariance-asymmetry arm at broad scale."
+}
