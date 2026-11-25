@@ -1,0 +1,10 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-02",
+  "session_id": "session_20261125T034400Z",
+  "session_utc": "20261125T034400Z",
+  "generated_utc": "2026-11-25T03:44:00Z",
+  "external_trigger_required": false,
+  "trigger_source": "FROZEN_IRONFLOW_BULK",
+  "fired": false,
+  "reason": "The FCLR-VOL-JUMP-02 heavy robustness evaluation runs entirely on the frozen ironflow_bulk panel; NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data and is not required."
+}

@@ -1,0 +1,373 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-02",
+  "session_id": "session_20261125T034400Z",
+  "session_utc": "20261125T034400Z",
+  "generated_utc": "2026-11-25T03:44:00Z",
+  "recompute_kind": "independent_stdlib_hash_and_sufficient_stat_recompute",
+  "n_checks": 60,
+  "n_sha256_checks": 54,
+  "all_checks_match": true,
+  "n_mismatches": 0,
+  "checks": [
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2025-05.parquet",
+      "expected": "9bd24cf774076f753f9692a663837f815853f755890434ba9a08e73600a86aef",
+      "actual": "9bd24cf774076f753f9692a663837f815853f755890434ba9a08e73600a86aef",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2025-06.parquet",
+      "expected": "f8eef410c8e21881e8511fec10a1a032b5ad37b21f94deef96b6f2f8cdc8131b",
+      "actual": "f8eef410c8e21881e8511fec10a1a032b5ad37b21f94deef96b6f2f8cdc8131b",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2025-07.parquet",
+      "expected": "466c6ebc277045f231cbe18583d3aa41488bd27aed57a5effd118712b603d647",
+      "actual": "466c6ebc277045f231cbe18583d3aa41488bd27aed57a5effd118712b603d647",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2025-08.parquet",
+      "expected": "bb5f2c85f874688f6fc154c576d0cc483445fa81bfcb28aa4024119aea248229",
+      "actual": "bb5f2c85f874688f6fc154c576d0cc483445fa81bfcb28aa4024119aea248229",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2025-09.parquet",
+      "expected": "ab22becbad69206cc01b4279604fabaaafb870bc54b2998c0bc243247db5f0f1",
+      "actual": "ab22becbad69206cc01b4279604fabaaafb870bc54b2998c0bc243247db5f0f1",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2025-10.parquet",
+      "expected": "f30ee1b41fe0c7405c4f5f0dba12adce2d19bdaa60f96bc31d1c1cc30395fad1",
+      "actual": "f30ee1b41fe0c7405c4f5f0dba12adce2d19bdaa60f96bc31d1c1cc30395fad1",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2025-11.parquet",
+      "expected": "bb2af7f07763589da702776c68880671e53dba2ab89d3281242ba41588920294",
+      "actual": "bb2af7f07763589da702776c68880671e53dba2ab89d3281242ba41588920294",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2025-12.parquet",
+      "expected": "3eb12fc5312276df6a1a8508b162dbf8e6a4b505713ccb1a372e954fe5b713db",
+      "actual": "3eb12fc5312276df6a1a8508b162dbf8e6a4b505713ccb1a372e954fe5b713db",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2026-01.parquet",
+      "expected": "a42260c697b59853b9321061ee03e146ac461708ead63a10c249839fca05b6ed",
+      "actual": "a42260c697b59853b9321061ee03e146ac461708ead63a10c249839fca05b6ed",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2026-02.parquet",
+      "expected": "94e1bbbd3791b5b9770c5d9708974386aa1cb854c5e18d4eb25ca809113fe091",
+      "actual": "94e1bbbd3791b5b9770c5d9708974386aa1cb854c5e18d4eb25ca809113fe091",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2026-03.parquet",
+      "expected": "6a34df24c25e4ecc147bc70e8d72df811df9ca1542cab4c523320f62616adf5b",
+      "actual": "6a34df24c25e4ecc147bc70e8d72df811df9ca1542cab4c523320f62616adf5b",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2026-04.parquet",
+      "expected": "6cab3cc3d6d3d8418d0c0dbbcff85c76d504008357a1695b39e12c57e2578180",
+      "actual": "6cab3cc3d6d3d8418d0c0dbbcff85c76d504008357a1695b39e12c57e2578180",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2026-05.parquet",
+      "expected": "f8f0e158bdd4b47a3a522115297364194c56ef0ab5953b5f70b4f524ffb33a82",
+      "actual": "f8f0e158bdd4b47a3a522115297364194c56ef0ab5953b5f70b4f524ffb33a82",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2026-06.parquet",
+      "expected": "1aabd11fdad5eadb7db7c7779c859ec6294d7c69e97b1f0782175b035036d4af",
+      "actual": "1aabd11fdad5eadb7db7c7779c859ec6294d7c69e97b1f0782175b035036d4af",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2026-07.parquet",
+      "expected": "7b90e976c56a325875c86aeb8b5558a182d264c1e89e64d73356afafcda417b7",
+      "actual": "7b90e976c56a325875c86aeb8b5558a182d264c1e89e64d73356afafcda417b7",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2026-08.parquet",
+      "expected": "3a48dfe803ffe46a30e598952d5e1c25557c7a6eb6bb7391c2cd2d5adea68759",
+      "actual": "3a48dfe803ffe46a30e598952d5e1c25557c7a6eb6bb7391c2cd2d5adea68759",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2026-09.parquet",
+      "expected": "36ef6d8a476a526c2f8c12c3376405b7fab48939467d3bc40c0c673078541e59",
+      "actual": "36ef6d8a476a526c2f8c12c3376405b7fab48939467d3bc40c0c673078541e59",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/candles_1h/2026-10.parquet",
+      "expected": "26f359c5c930e02020298faeeda04025d017b283610b9a2c97660385dc199324",
+      "actual": "26f359c5c930e02020298faeeda04025d017b283610b9a2c97660385dc199324",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2025-05.parquet",
+      "expected": "26005d5d1bfd0719e8eeb5e4d4c0750dadfa63d0c8161ad476a6a55170455058",
+      "actual": "26005d5d1bfd0719e8eeb5e4d4c0750dadfa63d0c8161ad476a6a55170455058",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2025-06.parquet",
+      "expected": "bb6b8878b6491961fbfbcb168b9906a0cc8b4c82586357f42424cac11733c729",
+      "actual": "bb6b8878b6491961fbfbcb168b9906a0cc8b4c82586357f42424cac11733c729",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2025-07.parquet",
+      "expected": "ad9d01aa425af412fce534c83c7a4f3ee5997dc3f533a07681b2ad4e679522ee",
+      "actual": "ad9d01aa425af412fce534c83c7a4f3ee5997dc3f533a07681b2ad4e679522ee",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2025-08.parquet",
+      "expected": "2cb155ad80289355fc96344316309fd48a4cccbef062a3c1e508cdb9f4152d27",
+      "actual": "2cb155ad80289355fc96344316309fd48a4cccbef062a3c1e508cdb9f4152d27",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2025-09.parquet",
+      "expected": "f06b49dd307a7922a3e429bd9a06e0ddb4febe0d2556d7f232ce6a040f9db205",
+      "actual": "f06b49dd307a7922a3e429bd9a06e0ddb4febe0d2556d7f232ce6a040f9db205",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2025-10.parquet",
+      "expected": "51c9ebd47a36afc31ae7907b539c1256e456132671f133be488ef3596c9e0a3d",
+      "actual": "51c9ebd47a36afc31ae7907b539c1256e456132671f133be488ef3596c9e0a3d",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2025-11.parquet",
+      "expected": "8a41b57b7ed53096127c27768e18b1516dff28522012f8d08159f6d2f577c640",
+      "actual": "8a41b57b7ed53096127c27768e18b1516dff28522012f8d08159f6d2f577c640",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2025-12.parquet",
+      "expected": "b962029567cc5831d300cf7c4a947b255fc20469c48b2deebe1daf1804fa02f7",
+      "actual": "b962029567cc5831d300cf7c4a947b255fc20469c48b2deebe1daf1804fa02f7",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2026-01.parquet",
+      "expected": "349a01e2f6518f63f18a8f7b55b168f563ee68faa16176b1f5e817edebea06e1",
+      "actual": "349a01e2f6518f63f18a8f7b55b168f563ee68faa16176b1f5e817edebea06e1",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2026-02.parquet",
+      "expected": "9fc4b300ba79dd79afe52823c805752d463b119e56afb9b2dc2732dbb67ed789",
+      "actual": "9fc4b300ba79dd79afe52823c805752d463b119e56afb9b2dc2732dbb67ed789",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2026-03.parquet",
+      "expected": "cc8dc6e57e6d512605f48d0f19039871829318c3a0632ed995b769d957490f2a",
+      "actual": "cc8dc6e57e6d512605f48d0f19039871829318c3a0632ed995b769d957490f2a",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2026-04.parquet",
+      "expected": "008ca1c6864e5a48de61133a8ea4ddb8123be0db9cc291be1a4368e57710998a",
+      "actual": "008ca1c6864e5a48de61133a8ea4ddb8123be0db9cc291be1a4368e57710998a",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2026-05.parquet",
+      "expected": "4340ecd686296a7b785ffb77570bd7e07254cc600fea7bb321721d386b7c57c0",
+      "actual": "4340ecd686296a7b785ffb77570bd7e07254cc600fea7bb321721d386b7c57c0",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2026-06.parquet",
+      "expected": "467131e7320a3d568d289d6d10fcee3f4a0e1dde13b8a73bb04977035ab01678",
+      "actual": "467131e7320a3d568d289d6d10fcee3f4a0e1dde13b8a73bb04977035ab01678",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2026-07.parquet",
+      "expected": "98860209990f26f30786ffb4d8f21cf97002a7035e71a147c915d7af35da23df",
+      "actual": "98860209990f26f30786ffb4d8f21cf97002a7035e71a147c915d7af35da23df",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2026-08.parquet",
+      "expected": "c067fcca81a1b6a5aaa0d636de16b99804d7de683ef90cde8ecd5c176db1bff0",
+      "actual": "c067fcca81a1b6a5aaa0d636de16b99804d7de683ef90cde8ecd5c176db1bff0",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2026-09.parquet",
+      "expected": "d8e43faa444e64c263a078b855d8c1edb9ef73fba5b63ef908fc5aa9314ec7bc",
+      "actual": "d8e43faa444e64c263a078b855d8c1edb9ef73fba5b63ef908fc5aa9314ec7bc",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/funding/2026-10.parquet",
+      "expected": "b081c40f350d3982d1279cd7d019a2d645aabd548cd30358a90e77d4b0e37d8e",
+      "actual": "b081c40f350d3982d1279cd7d019a2d645aabd548cd30358a90e77d4b0e37d8e",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2025-05.parquet",
+      "expected": "4490a320456fe0f416f5320f9419bd01c65236b877546c30966b287b9c60dea6",
+      "actual": "4490a320456fe0f416f5320f9419bd01c65236b877546c30966b287b9c60dea6",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2025-06.parquet",
+      "expected": "309346d25013e7ccb5ad753d8362ea91354209b9637bca254e99182213b9bdce",
+      "actual": "309346d25013e7ccb5ad753d8362ea91354209b9637bca254e99182213b9bdce",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2025-07.parquet",
+      "expected": "09116f78552bbfc3a0cc640e1a44c31a0322f6e2f1018974cc0a9ede18c3a16d",
+      "actual": "09116f78552bbfc3a0cc640e1a44c31a0322f6e2f1018974cc0a9ede18c3a16d",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2025-08.parquet",
+      "expected": "dce8b1320d0b9f7627f649988432e63cc393ffe4a7006c687f94d23f608aa665",
+      "actual": "dce8b1320d0b9f7627f649988432e63cc393ffe4a7006c687f94d23f608aa665",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2025-09.parquet",
+      "expected": "53a5b1cab586fee5f207f51046e525595713b3efd52697e7e8352e67d61c1de3",
+      "actual": "53a5b1cab586fee5f207f51046e525595713b3efd52697e7e8352e67d61c1de3",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2025-10.parquet",
+      "expected": "5fd20253a69b689591fd987af85a706714788ae75d06912879a95b22258c5fc8",
+      "actual": "5fd20253a69b689591fd987af85a706714788ae75d06912879a95b22258c5fc8",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2025-11.parquet",
+      "expected": "f3c20d2c8b68339e4194e5984481246235678f52d19139e26c6c8f0f084be2cf",
+      "actual": "f3c20d2c8b68339e4194e5984481246235678f52d19139e26c6c8f0f084be2cf",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2025-12.parquet",
+      "expected": "584160f9a23f9dbe64ff248152bca0056831a40765cbb7f619af33c56283a59e",
+      "actual": "584160f9a23f9dbe64ff248152bca0056831a40765cbb7f619af33c56283a59e",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2026-01.parquet",
+      "expected": "ac9ba48be4bedeac3ac2b7cf8a2defd8f5d334f19c57f7b2ede788212e4d01db",
+      "actual": "ac9ba48be4bedeac3ac2b7cf8a2defd8f5d334f19c57f7b2ede788212e4d01db",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2026-02.parquet",
+      "expected": "c346cb2a4f333da88da7f2ab93a6540eb435b802144d4e0c803bf2fbbd0307f7",
+      "actual": "c346cb2a4f333da88da7f2ab93a6540eb435b802144d4e0c803bf2fbbd0307f7",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2026-03.parquet",
+      "expected": "1855bccbeca65a34573bb35580d32cb5de978fc565a0110699ddd00cd07452b3",
+      "actual": "1855bccbeca65a34573bb35580d32cb5de978fc565a0110699ddd00cd07452b3",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2026-04.parquet",
+      "expected": "c05681575420102d6da681b6e11d6dec77f239266b2a52d1917b5f2b1b46c237",
+      "actual": "c05681575420102d6da681b6e11d6dec77f239266b2a52d1917b5f2b1b46c237",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2026-05.parquet",
+      "expected": "ace2357114fa5947f1bc34ecef904e00a7bf61b1a3cc0fc42450a688f89d0e60",
+      "actual": "ace2357114fa5947f1bc34ecef904e00a7bf61b1a3cc0fc42450a688f89d0e60",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2026-06.parquet",
+      "expected": "3be5f12eab4bf3a3e611b16f5bf7f6857f9a9bd1216ba7afc8e60fa6291d5075",
+      "actual": "3be5f12eab4bf3a3e611b16f5bf7f6857f9a9bd1216ba7afc8e60fa6291d5075",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2026-07.parquet",
+      "expected": "da3ffccb4a96159a637320ee7f073db95b92fec4badbaf43947fd2d35b7311f9",
+      "actual": "da3ffccb4a96159a637320ee7f073db95b92fec4badbaf43947fd2d35b7311f9",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2026-08.parquet",
+      "expected": "7ca39997d3a3566d69bf0c8ea87de3a065e467cf0bbe002a2b418073b9927fde",
+      "actual": "7ca39997d3a3566d69bf0c8ea87de3a065e467cf0bbe002a2b418073b9927fde",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2026-09.parquet",
+      "expected": "7cb39a7d8ff30c51ce9caf0a6c361e9237e36054d11165032fc5b407e80f1f73",
+      "actual": "7cb39a7d8ff30c51ce9caf0a6c361e9237e36054d11165032fc5b407e80f1f73",
+      "match": true
+    },
+    {
+      "check": "sha256:research_state/data_cache/ironflow_bulk/open_interest/2026-10.parquet",
+      "expected": "8f12370664f576bacf6ff1bca6fc17655f014a0a200da67823b14d215a7a94b6",
+      "actual": "8f12370664f576bacf6ff1bca6fc17655f014a0a200da67823b14d215a7a94b6",
+      "match": true
+    },
+    {
+      "check": "brier_baseline",
+      "expected": 0.0436108169105933,
+      "actual": 0.04361081691059329,
+      "match": true
+    },
+    {
+      "check": "brier_candidate",
+      "expected": 0.04354497452008576,
+      "actual": 0.04354497452008576,
+      "match": true
+    },
+    {
+      "check": "logloss_baseline",
+      "expected": 0.18435958775907788,
+      "actual": 0.18435958775907788,
+      "match": true
+    },
+    {
+      "check": "logloss_candidate",
+      "expected": 0.1835974083214619,
+      "actual": 0.1835974083214619,
+      "match": true
+    },
+    {
+      "check": "n_events",
+      "expected": 1388,
+      "actual": 1388,
+      "match": true
+    },
+    {
+      "check": "event_rate",
+      "expected": 0.045832782987716286,
+      "actual": 0.045832782987716286,
+      "match": true
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-02",
+  "campaign": "FCLR-VOL-JUMP-02-20261125T033537Z",
+  "session_id": "session_20261125T034400Z",
+  "session_utc": "20261125T034400Z",
+  "generated_utc": "2026-11-25T03:44:00Z",
+  "frozen_before_outcomes": true,
+  "decision_frozen_before_outcomes": true,
+  "outcome_data_inspected_before_freeze": false,
+  "source_registry_sha256": "2ab473eca3f31a95031430cf9ca9e43813449f997e812a9b5503ccfaba185e71",
+  "input_hash_assertions": {
+    "source_registry_sha256": "2ab473eca3f31a95031430cf9ca9e43813449f997e812a9b5503ccfaba185e71"
+  },
+  "primary_question": "Does the funding + price-dislocation feature set improve out-of-sample forecasts of a SIGNED-JUMP / SEMIVARIANCE-ASYMMETRY tail event beyond an RV-only baseline on the broad ironflow_bulk panel, clearing a frozen 2% materiality floor, WHEN ALL FCLR-POOLED-AUDIT-001 leakage remediations are applied simultaneously (48h purge+embargo, NON-overlapping forward-outcome windows, mark/index tolerance filter, delisting-aware per-coin identity, per-coin cluster bootstrap, Holm across the declared family)?",
+  "design": {
+    "kind": "walk_forward_classification_signed_jump_semivariance_asymmetry_nonoverlapping_leakage_hardened",
+    "outcome_family": "signed_jump_semivariance_asymmetry_classification",
+    "forecast_origin": "per-coin NON-OVERLAPPING origins spaced >= 24h (close of hour t)",
+    "target": "jump event y_t = 1 if J_{t+1..t+24} > q_t",
+    "jump_definition": "J = sign(RS+ - RS-) * (RV - BV); RV = sum of squared 1h log returns over next 24h; BV = bipower variation; RS+/RS- = realized semivariance of positive/negative returns",
+    "quantile_q_t": "expanding, TRAIN-ONLY per-coin high quantile (0.95) of trailing signed-jump magnitude |J|, shifted by 1 (no future information)",
+    "baseline": "RV-only (trailing log-RV) logistic",
+    "candidate": "RV + signed funding_rate + abs(funding_rate) + premium + mark/EMA24 distance",
+    "feature_standardization": "train-only (expanding) z-score",
+    "walk_forward": true,
+    "train_frac": 0.6,
+    "purge_embargo_h": 48,
+    "non_overlapping_forward_windows": true,
+    "min_origin_spacing_h": 24,
+    "mark_index_tolerance": 0.01,
+    "delisting_aware_identity": true,
+    "n_test_blocks": 6,
+    "block_months": 2,
+    "no_random_split": true,
+    "remediations_applied": [
+      "48h purge+embargo",
+      "non-overlapping forward-outcome windows (origin spacing >= 24h)",
+      "mark/index tolerance filter (|mark/oracle - 1| <= 0.01)",
+      "delisting-aware per-coin identity",
+      "per-coin cluster bootstrap",
+      "Holm across the declared family"
+    ],
+    "inference": [
+      "cluster-robust CR1 by coin",
+      "Driscoll-Kraay HAC (block-level)",
+      "Holm step-down over declared family"
+    ],
+    "multiplicity_family": [
+      "brier_relative_improvement",
+      "logloss_relative_improvement"
+    ],
+    "metrics": [
+      "brier",
+      "log_loss",
+      "calibration_ece"
+    ]
+  },
+  "materiality_floor_rel": 0.02,
+  "materiality_floor": 0.02,
+  "materiality_definition": "candidate relative Brier (or log-loss) improvement over the RV-only baseline must exceed 0.02 (2%); verdict is symmetric PROMOTED / NOT_SUPPORTED; a null that survives the remediations is a valid, publishable negative result",
+  "verdict_rule": {
+    "PROMOTED": "materiality_met is True AND candidate beats baseline on Brier (Holm-adjusted)",
+    "NOT_SUPPORTED": "materiality floor not met (valid, publishable negative result; closes the jump arm for good)",
+    "INCONCLUSIVE": "insufficient events / degenerate metrics"
+  },
+  "universe": "coins present in candles_1h AND funding AND open_interest (intersection), delisting-aware, with sufficient trailing history for train-only quantile and mark/index tolerance",
+  "frozen_inputs_note": "ironflow_bulk 18 monthly parquet per dataset; sha256-asserted; read-only; bounds 2025-05 .. 2026-10",
+  "distinct_from_prior": "Materially different robustness RE-CONFIRMATION of the closed FCLR-VOL-JUMP-01 null (adds non-overlapping forward windows, mark/index tolerance filter, delisting-aware identity); NOT a relabel or re-run of jump01, mean-QLIKE, correction-time, or total-variance tail-exceedance endpoints."
+}

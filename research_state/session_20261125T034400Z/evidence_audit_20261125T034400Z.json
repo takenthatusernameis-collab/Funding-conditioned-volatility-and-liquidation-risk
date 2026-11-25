@@ -1,0 +1,11 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-02",
+  "session_id": "session_20261125T034400Z",
+  "session_utc": "20261125T034400Z",
+  "generated_utc": "2026-11-25T03:44:00Z",
+  "audit_pass": true,
+  "verdict": "NOT_SUPPORTED",
+  "unresolved_blockers": [],
+  "alias_of": "fclr_voljump02_evidence_audit_20261125T034400Z.json",
+  "summary": "Gate-critical alias of the FCLR-VOL-JUMP-02 evidence audit; verdict NOT_SUPPORTED (candidate 0.1510% relative Brier improvement below frozen 2% floor; null survives full leakage remediation)."
+}

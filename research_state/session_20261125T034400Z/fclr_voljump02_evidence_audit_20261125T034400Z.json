@@ -1,0 +1,53 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-02",
+  "session_id": "session_20261125T034400Z",
+  "session_utc": "20261125T034400Z",
+  "generated_utc": "2026-11-25T03:44:00Z",
+  "audit_pass": true,
+  "unresolved_blockers": [],
+  "verdict": "NOT_SUPPORTED",
+  "eval_status": "CONFIRMATORY_COMPLETE",
+  "holdout_opened": true,
+  "n_forecasts": 30284,
+  "n_events": 1388,
+  "n_coins": 202,
+  "n_test_blocks": 3,
+  "metrics": {
+    "baseline": {
+      "brier": 0.0436108169105933,
+      "log_loss": 0.18435958775907788,
+      "ece": 0.004667833088009618
+    },
+    "candidate": {
+      "brier": 0.04354497452008576,
+      "log_loss": 0.1835974083214619,
+      "ece": 0.006327819669066861
+    }
+  },
+  "relative_improvement": {
+    "brier": 0.0015097720054756878,
+    "log_loss": 0.00413420016219603
+  },
+  "materiality_floor_rel": 0.02,
+  "materiality_met": false,
+  "significant": true,
+  "recompute_all_checks_match": true,
+  "recompute_n_checks": 60,
+  "remediations_applied": [
+    "48h purge+embargo",
+    "non-overlapping forward-outcome windows (origin spacing >= 24h)",
+    "mark/index tolerance filter (|mark/oracle - 1| <= 0.01)",
+    "delisting-aware per-coin identity",
+    "per-coin cluster bootstrap",
+    "Holm across the declared family"
+  ],
+  "checks": [
+    "eval candidate metrics are numeric (not NaN)",
+    "independent stdlib recompute all_checks_match=true",
+    "materiality floor applied as frozen (2% relative Brier)",
+    "verdict symmetric and consistent with frozen prereg rule",
+    "all FCLR-POOLED-AUDIT-001 leakage remediations applied simultaneously",
+    "no external trigger required or fired on frozen data"
+  ],
+  "notes": "Leakage-hardened robustness RE-CONFIRMATION of the closed FCLR-VOL-JUMP-01 null. Relative Brier improvement 0.1510% is below the frozen 2% floor; the signed-jump / semivariance-asymmetry null SURVIVES non-overlapping forward windows, mark/index tolerance filtering, delisting-aware identity, per-coin block bootstrap and Holm correction. NOT_SUPPORTED is a valid, publishable negative result that closes the volatility-jump arm for good."
+}
