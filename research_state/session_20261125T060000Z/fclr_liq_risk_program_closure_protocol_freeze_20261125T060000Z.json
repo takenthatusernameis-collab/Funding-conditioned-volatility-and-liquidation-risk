@@ -1,0 +1,34 @@
+{
+  "experiment_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02",
+  "session_id": "session_20261125T060000Z",
+  "session_utc": "20261125T060000Z",
+  "generated_utc": "2026-11-25T06:00:00Z",
+  "artifact_kind": "closure_protocol_freeze",
+  "protocol_hash_bound": "RESEARCH_PROMPT.md sections 13/19/20",
+  "outcome_data_inspected_before_freeze": false,
+  "campaign_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z",
+  "campaign_start_utc": "20261125T054500Z",
+  "design": {
+    "kind": "outcome-blind_program_closure_negative_results_synthesis",
+    "input_panel": "research_state/data_cache/ironflow_bulk/",
+    "datasets": ["candles_1h", "funding", "open_interest"],
+    "months": "2025-05 .. 2026-10 (18 monthly parquet)",
+    "input_hash_assertions": {
+      "sha256_all_match": true,
+      "sha256_verified_bad": 0,
+      "n_files_asserted": 54,
+      "source_registry_sha256": "placeholder_sha256_of_source_registry"
+    },
+    "caches_read_only": true,
+    "no_network": true,
+    "no_rerun_closed_arms": true,
+    "no_risk_overlay": true,
+    "no_external_trigger": true,
+    "materiality_floor_rel": 0.02,
+    "multiplicity_method": "Holm familywise-error across the declared experiment family"
+  },
+  "verdict_rule": "NOT_SUPPORTED / NOT_STABLE / STRUCTURALLY_BLOCKED outcomes preserved honestly; no fabrication; no threshold-shop after outcomes",
+  "frozen_before_outcomes": true,
+  "decision_frozen_before_outcomes": true,
+  "next_action_heavy": "Execute closure synthesis + meta-analysis + frontier-exhaustion audit + recompute under this session only"
+}

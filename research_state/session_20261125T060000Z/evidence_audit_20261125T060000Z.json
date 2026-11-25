@@ -1,0 +1,20 @@
+{
+  "experiment_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02",
+  "session_id": "session_20261125T060000Z",
+  "session_utc": "20261125T060000Z",
+  "generated_utc": "2026-11-25T06:00:00Z",
+  "artifact_kind": "closure_evidence_audit_alias",
+  "campaign_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z",
+  "audit_pass": true,
+  "verdict": "program closed; all confirmatory verdicts NOT_SUPPORTED / NOT_STABLE / STRUCTURALLY_BLOCKED",
+  "unresolved_blockers": [],
+  "alias_of": "fclr_liq_risk_program_closure_synthesis_report_20261125T060000Z.json",
+  "summary": "Gate-critical alias of the FCLR-LIQ-RISK-PROGRAM-CLOSURE-02 synthesis report. Half 1 (funding-conditioned volatility) closed NOT_SUPPORTED on all five estimands; Half 2 (liquidation risk) confirmatory-exhausted (Track A STRUCTURALLY_BLOCKED; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; cross-sectional SUPPORTED_GENERALIZATION but NOT_STABLE + materiality floor NOT MET). Frontier formally exhausted on frozen ironflow_bulk panel. No unresolved blockers.",
+  "evidence_inputs": [
+    "research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest}/ (54 parquet, sha256-asserted)",
+    "research_state/session_*/ closed campaign artifacts (source registries, preregs, evals, recomputes, evidence audits)"
+  ],
+  "sha256_assertions": true,
+  "no_network": true,
+  "no_rerun_closed_arms": true
+}

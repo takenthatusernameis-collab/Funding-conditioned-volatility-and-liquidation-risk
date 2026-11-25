@@ -1,0 +1,12 @@
+{
+  "experiment_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02",
+  "session_id": "session_20261125T060000Z",
+  "session_utc": "20261125T060000Z",
+  "generated_utc": "2026-11-25T06:00:00Z",
+  "artifact_kind": "closure_trigger_check",
+  "campaign_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z",
+  "external_trigger_required": false,
+  "trigger_source": "FROZEN_IRONFLOW_BULK",
+  "fired": false,
+  "reason": "The closure campaign runs entirely on frozen on-disk artifacts; NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data and is not required. No external trigger is needed or can fire here."
+}

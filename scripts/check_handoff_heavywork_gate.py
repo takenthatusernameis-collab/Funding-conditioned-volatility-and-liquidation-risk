@@ -947,6 +947,7 @@ NEW_QUANT_PREFIXES = (
     "fclr_pooled_audit",    # FCLR-POOLED-AUDIT pooled ironflow adversarial leakage/quality audit artifacts
     "fclr_tracks",          # FCLR-TRACKA-SOURCE-AUDIT observed-liquidation source viability audit + pivot artifacts
     "fclr_liqxsecbroad",    # FCLR-LIQ-XSEC-BROAD broad-universe cross-sectional liquidation-risk generalization artifacts
+    "fclr_liq_risk_program_closure",  # FCLR-LIQ-RISK-PROGRAM-CLOSURE-02 quantitative closure artifacts (meta-analysis, recompute)
     "fclr_volbroad",        # FCLR-VOL-BROAD broad-panel funding-conditioned volatility forecast artifacts
     "fclr_volcorr",         # FCLR-VOL-CORR broad-panel funding-extreme correction-time / hazard artifacts
     "fclr_volstress",       # FCLR-VOL-STRESS broad-panel funding-conditioned volatility-stress (tail-exceedance) artifacts

@@ -1,0 +1,125 @@
+{
+  "experiment_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02",
+  "session_id": "session_20261125T060000Z",
+  "session_utc": "20261125T060000Z",
+  "generated_utc": "2026-11-25T06:00:00Z",
+  "artifact_kind": "closure_synthesis_report",
+  "campaign_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z",
+  "input_panel": "research_state/data_cache/ironflow_bulk/",
+  "datasets": ["candles_1h", "funding", "open_interest"],
+  "months": "2025-05 .. 2026-10 (18 monthly parquet)",
+  "synthesis_basis": "frozen on-disk experiment artifacts only; no heavy evaluations re-run",
+  "verdict_table": {
+    "half_1_funding_conditioned_volatility": {
+      "FCLR-VOL-BROAD-01": {
+        "estimand": "mean log-RV QLIKE funding-conditioned RV forecast",
+        "verdict": "NOT_SUPPORTED",
+        "materiality": "1.93% relative QLIKE improvement < 2% floor",
+        "session": "session_20261124T120000Z",
+        "artifact_path": "research_state/session_20261124T120000Z/fclr_volbroad01_eval_*.json",
+        "n_forecasts": 684301,
+        "n_test_blocks": 23,
+        "coins": "342+",
+        "ci_supports_improvement": false,
+        "recompute": "all_checks_match=true"
+      },
+      "FCLR-VOL-CORR-01": {
+        "estimand": "funding-extreme correction-time / hazard",
+        "verdict": "NOT_SUPPORTED",
+        "materiality": "high-RV median 9.00h vs low-RV 10.00h; >=10% relative slower-correction floor NOT met",
+        "session": "session_20261124T204500Z",
+        "artifact_path": "research_state/session_20261124T204500Z/fclr_volcorr01_eval_*.json",
+        "n_events": 227023,
+        "coins": "342+",
+        "recompute": "all_checks_match=true, n_checks=29"
+      },
+      "FCLR-VOL-STRESS-01": {
+        "estimand": "volatility-STRESS / tail-exceedance (Brier)",
+        "verdict": "NOT_SUPPORTED",
+        "materiality": "1.51% relative Brier improvement < 2% floor",
+        "session": "session_20261124T222500Z",
+        "artifact_path": "research_state/session_20261124T222500Z/fclr_volstress01_eval_*.json",
+        "n_forecasts": 1393204,
+        "n_stress_events": 63059,
+        "coins": 314,
+        "recompute": "all_checks_match=true"
+      },
+      "FCLR-VOL-JUMP-01": {
+        "estimand": "signed-jump MAGNITUDE exceedance",
+        "verdict": "NOT_SUPPORTED",
+        "materiality": "0.0922% relative Brier improvement < 2% floor",
+        "session": "session_20261125T030000Z",
+        "artifact_path": "research_state/session_20261125T030000Z/fclr_voljump01_eval_*.json",
+        "n_forecasts": 1136222,
+        "n_jump_events": 39116,
+        "coins": 454,
+        "recompute": "all_checks_match=true"
+      },
+      "FCLR-VOL-JUMP-02": {
+        "estimand": "signed-jump MAGNITUDE (leakage-hardened)",
+        "verdict": "NOT_SUPPORTED",
+        "materiality": "0.1510% relative Brier improvement < 2% floor; null survives full leakage remediation",
+        "session": "session_20261125T034400Z",
+        "artifact_path": "research_state/session_20261125T034400Z/fclr_voljump02_eval_*.json",
+        "n_forecasts": 30284,
+        "n_jump_events": 1388,
+        "coins": 202,
+        "recompute": "all_checks_match=true, n_checks=60"
+      },
+      "FCLR-VOL-JUMP-03": {
+        "estimand": "signed-jump MAGNITUDE (multi-estimator x multi-horizon)",
+        "verdict": "NOT_SUPPORTED",
+        "materiality": "aggregate 0.3025% relative Brier improvement (range 0.0991%-0.5386%) < 2% floor; null survives bipower vs threshold-bipower AND {24h,48h}",
+        "session": "session_20261125T045000Z",
+        "artifact_path": "research_state/session_20261125T045000Z/fclr_voljump03_eval_*.json",
+        "n_forecasts": 87162,
+        "n_jump_events": 4235,
+        "coins": 202,
+        "configs": 4,
+        "recompute": "all_checks_match=true, n_checks=76"
+      },
+      "FCLR-VOL-JUMP-04": {
+        "estimand": "signed-jump DIRECTION/SIGN (downside-dominant)",
+        "verdict": "NOT_SUPPORTED",
+        "materiality": "aggregate 0.0474% / <=0.1020% best-config relative Brier improvement < 2% floor; null survives full leakage remediation and estimator/horizon variation",
+        "session": "session_20261125T054500Z",
+        "artifact_path": "research_state/session_20261125T054500Z/fclr_voljump04_eval_*.json",
+        "n_forecasts": 110914,
+        "n_events": 57354,
+        "coins": 367,
+        "configs": 4,
+        "recompute": "all_checks_match=true, n_checks=76"
+      }
+    },
+    "half_2_liquidation_risk": {
+      "Track_A": {
+        "estimand": "observed liquidation-event forecasting",
+        "verdict": "STRUCTURALLY_BLOCKED",
+        "basis": "ironflow liquidations capped-sample feed; no complete observed-liquidation source; NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data"
+      },
+      "Track_B": {
+        "estimand": "modeled hypothetical boundary-breach forecast",
+        "verdict": "NOT_SUPPORTED",
+        "basis": "modeled breach labels do not reconstruct account-specific liquidation mechanics"
+      },
+      "Track_C": {
+        "estimand": "volatility/stress outcome from mark-price history",
+        "verdict": "NOT_SUPPORTED",
+        "basis": "no arm cleared frozen materiality floor"
+      },
+      "cross_sectional": {
+        "estimand": "regime-conditioned cross-sectional funding -> next-hour liquidation-intensity rank ordering",
+        "verdict": "SUPPORTED_GENERALIZATION but NOT_STABLE",
+        "materiality": "2% Poisson-deviance materiality floor NOT MET",
+        "promotion_condition_4": "FAIL (not stable across time blocks)"
+      }
+    }
+  },
+  "overall_verdict": "program closure; all confirmatory paths exhausted on frozen ironflow_bulk panel",
+  "negative_results_preserved": true,
+  "all_nulls_honest": true,
+  "no_threshold_shop": true,
+  "no_overlay": true,
+  "audit_pass": true,
+  "unresolved_blockers": []
+}

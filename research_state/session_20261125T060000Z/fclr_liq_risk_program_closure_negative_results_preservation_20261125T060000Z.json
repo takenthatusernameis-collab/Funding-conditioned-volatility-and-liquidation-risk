@@ -1,0 +1,82 @@
+{
+  "experiment_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02",
+  "session_id": "session_20261125T060000Z",
+  "session_utc": "20261125T060000Z",
+  "generated_utc": "2026-11-25T06:00:00Z",
+  "artifact_kind": "closure_negative_results_preservation",
+  "campaign_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z",
+  "section_19_compliant": true,
+  "null_outcomes_preserved": [
+    {
+      "estimand": "FCLR-VOL-BROAD-01 mean log-RV QLIKE",
+      "verdict": "NOT_SUPPORTED",
+      "explanation": "1.93% relative QLIKE improvement below frozen 2% materiality floor; statistically nonzero but economically immaterial at broad scale",
+      "artifact": "research_state/session_20261124T120000Z/fclr_volbroad01_eval_*.json"
+    },
+    {
+      "estimand": "FCLR-VOL-CORR-01 funding-extreme correction-time/hazard",
+      "verdict": "NOT_SUPPORTED",
+      "explanation": "high-RV median correction 9.00h vs low-RV 10.00h (high-RV not slower); >=10% relative slower-correction floor NOT met; Shek (2026) pattern not reconstructed at broad scale",
+      "artifact": "research_state/session_20261124T204500Z/fclr_volcorr01_eval_*.json"
+    },
+    {
+      "estimand": "FCLR-VOL-STRESS-01 volatility-stress/tail-exceedance",
+      "verdict": "NOT_SUPPORTED",
+      "explanation": "1.51% relative Brier improvement below frozen 2% floor; 1,393,204 forecasts, 63,059 stress events, 314 coins",
+      "artifact": "research_state/session_20261124T222500Z/fclr_volstress01_eval_*.json"
+    },
+    {
+      "estimand": "FCLR-VOL-JUMP-01 signed-jump magnitude exceedance",
+      "verdict": "NOT_SUPPORTED",
+      "explanation": "0.0922% relative Brier improvement, far below 2% floor; 1,136,222 forecasts, 39,116 jump events, 454 coins",
+      "artifact": "research_state/session_20261125T030000Z/fclr_voljump01_eval_*.json"
+    },
+    {
+      "estimand": "FCLR-VOL-JUMP-02 leakage-hardened jump magnitude",
+      "verdict": "NOT_SUPPORTED",
+      "explanation": "0.1510% relative Brier improvement; null survives 48h purge+embargo, non-overlapping forward windows, mark/index tolerance filter, delisting-aware identity, per-coin cluster bootstrap, Holm",
+      "artifact": "research_state/session_20261125T034400Z/fclr_voljump02_eval_*.json"
+    },
+    {
+      "estimand": "FCLR-VOL-JUMP-03 multi-estimator x multi-horizon jump magnitude",
+      "verdict": "NOT_SUPPORTED",
+      "explanation": "aggregate 0.3025% relative Brier improvement below 2% floor; null survives bipower vs threshold-bipower AND {24h,48h}",
+      "artifact": "research_state/session_20261125T045000Z/fclr_voljump03_eval_*.json"
+    },
+    {
+      "estimand": "FCLR-VOL-JUMP-04 directional/sign jump",
+      "verdict": "NOT_SUPPORTED",
+      "explanation": "aggregate 0.0474% / <=0.1020% best-config relative Brier improvement below 2% floor; 110,914 non-overlapping forecasts, 57,354 downside-dominance events, 367 coins; null survives full leakage remediation",
+      "artifact": "research_state/session_20261125T054500Z/fclr_voljump04_eval_*.json"
+    },
+    {
+      "estimand": "Track A observed liquidation-event forecasting",
+      "verdict": "STRUCTURALLY_BLOCKED",
+      "explanation": "capped-sample liquidation feed; no complete observed-liquidation source; cannot fire on frozen data",
+      "artifact": "research_state/experiment_frontier.json (rank-0 evidence)"
+    },
+    {
+      "estimand": "Track B modeled hypothetical boundary-breach forecast",
+      "verdict": "NOT_SUPPORTED",
+      "explanation": "modeled proxy does not reconstruct account-specific liquidation mechanics",
+      "artifact": "research_state/experiment_frontier.json (rank-0 evidence)"
+    },
+    {
+      "estimand": "Track C volatility/stress outcome from mark-price history",
+      "verdict": "NOT_SUPPORTED",
+      "explanation": "no arm cleared frozen materiality floor",
+      "artifact": "research_state/experiment_frontier.json (rank-0 evidence)"
+    },
+    {
+      "estimand": "cross-sectional regime-conditioned funding -> liquidation-intensity rank ordering",
+      "verdict": "SUPPORTED_GENERALIZATION but NOT_STABLE",
+      "explanation": "2% Poisson-deviance materiality floor NOT MET; section 17 condition #4 fails; not stable across time blocks",
+      "artifact": "research_state/experiment_frontier.json (rank-0 evidence)"
+    }
+  ],
+  "preserved_honestly": true,
+  "no_fabricated_pass": true,
+  "all_verdicts_evidence_backed": true,
+  "audit_pass": true,
+  "unresolved_blockers": []
+}

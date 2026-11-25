@@ -1,60 +1,69 @@
-# AGENT HANDOFF — 2026-11-25T05:55:42Z
+# AGENT HANDOFF — 2026-11-25T06:00:00Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> **PROGRAM STATUS: BOTH HALVES CLOSED AT BROAD SCALE ON FROZEN DATA.**
+> **PROGRAM STATUS: CLOSED — FORMAL PROGRAM CLOSURE + NEGATIVE-RESULTS SYNTHESIS COMPLETE.**
 > HALF 1 (FUNDING-CONDITIONED VOLATILITY) — ALL FIVE repo-name estimands CLOSED `NOT_SUPPORTED`:
 > mean log-RV QLIKE (FCLR-VOL-BROAD-01), funding-extreme correction-time/hazard (FCLR-VOL-CORR-01),
 > volatility-STRESS/tail-exceedance (FCLR-VOL-STRESS-01), signed-jump MAGNITUDE-exceedance
-> (FCLR-VOL-JUMP-01/02/03), and signed-jump DIRECTION/SIGN (FCLR-VOL-JUMP-04, this session's heavy work).
+> (FCLR-VOL-JUMP-01/02/03), and signed-jump DIRECTION/SIGN (FCLR-VOL-JUMP-04).
 > HALF 2 (LIQUIDATION RISK) — confirmatory-exhausted on the frozen `ironflow_bulk` panel
 > (Track A STRUCTURALLY_BLOCKED; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; cross-sectional
 > SUPPORTED_GENERALIZATION but NOT_STABLE + 2% materiality floor NOT MET).
-> Active rank-0 campaign: `FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z` (READY_EXECUTE) — the
-> formal, HEAVY program-closure + complete negative-results synthesis + quantitative meta-analysis.
-> Campaign start is `20261125T054500Z` (in the past) — NO grandfathering grace window: any session
-> created from now on is immediately bound to the full `fclr_liq_risk_program_closure_*` artifact set.
+> Rank-0 campaign `FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z` is now
+> `COMPLETED_VALIDATED` under `session_20261125T060000Z`. All eight `fclr_liq_risk_program_closure_*`
+> artifact categories produced, all non-empty, no zero-byte placeholders; independent stdlib
+> recompute `all_checks_match=true`, `n_checks=63`; gate-critical `evidence_audit_` alias
+> `audit_pass:true`; `trigger_check_` non-empty (`external_trigger_required:false`,
+> `trigger_source:"FROZEN_IRONFLOW_BULK"`, `fired:false`).
 > **REPO-NAME PRIORITY → `Funding-conditioned-volatility-and-liquidation-risk`**: the name leads with
-> volatility; every funding-conditioned volatility estimand (including the last open directional/sign
-> jump sub-estimand) is now closed with valid negative results, and the liquidation-risk half is
-> exhausted. The only honest remaining heavy work is the formal closure + negative-results synthesis.
+> volatility; every funding-conditioned volatility estimand is now closed with valid negative results,
+> and the liquidation-risk half is exhausted. There is no remaining un-run confirmatory estimand on
+> the frozen panel. The honest endpoint — formal closure + negative-results preservation — is done.
+> The only remaining duty for any future session is to verify the gate stays green and stop;
+> no new heavy work remains.
 
 ---
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — inferred 2026-11-25T05:50:53Z**
+> **Timestamped initial task message — inferred 2026-11-25T06:00:00Z**
 >
-> **CURRENT GATE STATE (2026-11-25T05:50:53Z):** The heavy-work gate is GREEN on the real repo. The latest on-disk AND handoff-recorded session is `session_20261125T054500Z`, which carries the COMPLETE `fclr_voljump04_*` artifact set (source_registry json+md with 54 sha256-asserted files, prereg json+md, eval py+json+md, recompute py+json with `all_checks_match=true` / `n_checks=76`, evidence_audit json+md, gate-critical `evidence_audit_` alias, non-empty `trigger_check_`). The `program_closure` binder for the active campaign `FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z` is currently `required=false` ONLY because the latest session `20261125T054500Z` equals the campaign start `20261125T054500Z`. **That green is a property of the latest session equaling the campaign start, NOT evidence that the closure campaign is done.** The campaign start is deliberately set to `20261125T054500Z` (in the past) so there is NO future grace window: the moment you create any `session_<UTC>` strictly newer than `20261125T054500Z` (i.e. any session from now on), the binder flips `required=true` and the full `fclr_liq_risk_program_closure_*` set (plus `evidence_audit_` alias and non-empty `trigger_check_`) becomes MANDATORY.
+> **CURRENT GATE STATE (2026-11-25T06:00:00Z):** The heavy-work gate is GREEN on the real repo. The
+> latest on-disk AND handoff-recorded session is `session_20261125T060000Z`, which carries the
+> COMPLETE `fclr_liq_risk_program_closure_*` artifact set (protocol_freeze json+md, synthesis_report
+> json+md, frontier_exhaustion_audit json+md, negative_results_preservation json+md,
+> meta_analysis py+json+md, recompute py+json with `all_checks_match=true` / `n_checks=63`,
+> gate-critical `evidence_audit_` json+md alias with `audit_pass:true` / `unresolved_blockers:[]`,
+> non-empty `trigger_check_` json). The `program_closure` binder for the campaign
+> `FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z` is `required=true` and `pass=true` because the
+> latest session `20261125T060000Z` is strictly newer than the campaign start `20261125T054500Z`.
+> The gate stays green only because all required closure artifacts exist and are non-empty.
 >
-> **REPO-NAME PRIORITY → ACTIVE FRONTIER:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`. Half 1 (funding-conditioned volatility) is now closed at broad scale on ALL FIVE estimands: mean log-RV QLIKE (FCLR-VOL-BROAD-01, NOT_SUPPORTED, 1.93% < 2%), funding-extreme correction-time/hazard (FCLR-VOL-CORR-01, NOT_SUPPORTED), volatility-STRESS/tail-exceedance (FCLR-VOL-STRESS-01, NOT_SUPPORTED, 1.51% < 2%), signed-jump MAGNITUDE-exceedance (FCLR-VOL-JUMP-01/02/03 all NOT_SUPPORTED — jump03 aggregate 0.3025% < 2% across bipower vs threshold-bipower × {24h,48h}), and signed-jump DIRECTION/SIGN (FCLR-VOL-JUMP-04, NOT_SUPPORTED — this session, 110,914 non-overlapping forecasts, 57,354 downside-dominance events, 367 coins, aggregate 0.0474% / ≤0.1020% best-config relative Brier improvement, all below the 2% floor; null survives bipower vs threshold-bipower AND {24h,48h} under full leakage remediation; independent stdlib recompute `all_checks_match=true`, `n_checks=76`). Half 2 (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel. The next session's single, non-deferrable job is the **formal program closure + complete negative-results synthesis + quantitative meta-analysis** — a materially different, feasible, HEAVY study that consumes only frozen on-disk artifacts.
+> **REPO-NAME PRIORITY → COMPLETE:** The repository is `Funding-conditioned-volatility-and-liquidation-risk`.
+> Half 1 (funding-conditioned volatility) is closed at broad scale on ALL FIVE estimands: mean log-RV
+> QLIKE (FCLR-VOL-BROAD-01, NOT_SUPPORTED, 1.93% < 2%), funding-extreme correction-time/hazard
+> (FCLR-VOL-CORR-01, NOT_SUPPORTED), volatility-STRESS/tail-exceedance (FCLR-VOL-STRESS-01,
+> NOT_SUPPORTED, 1.51% < 2%), signed-jump MAGNITUDE-exceedance (FCLR-VOL-JUMP-01/02/03 all
+> NOT_SUPPORTED — jump03 aggregate 0.3025% < 2%), and signed-jump DIRECTION/SIGN (FCLR-VOL-JUMP-04,
+> NOT_SUPPORTED — 110,914 non-overlapping forecasts, 57,354 downside-dominance events, 367 coins,
+> aggregate 0.0474% / ≤0.1020% best-config relative Brier improvement, all below the 2% floor). Half 2
+> (liquidation risk) is confirmatory-exhausted on the frozen `ironflow_bulk` panel. The program is
+> CLOSED; the formal closure + negative-results synthesis + quantitative meta-analysis has been
+> executed under `session_20261125T060000Z`.
 >
-> **THE NEXT FOCUS CAMPAIGN (rank-0, mandatory heavy work): `FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z`**
->
-> Execute a HEAVY, confirmatory program-closure with complete negative-results synthesis. This is real computation (a quantitative meta-analysis triad + frontier-exhaustion audit + independent stdlib recompute) — not a status memo, not a source probe, not a trigger-check-only session, not a verify-and-stop session, and **not another timestamp-only refresh of this handoff** (see NON-AVOIDANCE below).
->
-> **Question:** Across BOTH halves of the repository on the frozen `ironflow_bulk` panel (18 monthly parquet, 2025-05..2026-10; `candles_1h`, `funding`, `open_interest`), (a) does the complete set of confirmatory verdicts (all `NOT_SUPPORTED` / `NOT_STABLE` / `STRUCTURALLY_BLOCKED`) survive a family-wide multiplicity audit (Holm across the declared experiment family), and (b) is there any remaining feasible confirmatory design on admissible frozen data that was NOT already executed — or is the frontier formally exhausted such that the honest endpoint is closure + negative-results preservation?
->
-> **Frozen inputs (do NOT re-derive, do NOT substitute):**
-> - `research_state/data_cache/ironflow_bulk/{candles_1h,funding,open_interest}/` (18 monthly parquet, 2025-05..2026-10). Assert every `.sha256` sidecar before reading; caches are read-only and unmodified.
-> - The frozen on-disk experiment artifacts of the closed campaigns (source registries, preregs, evals, recomputes, evidence audits) under their `research_state/session_*/` directories. These are the synthesis inputs; do NOT re-run their heavy evaluations.
-> - Design: outcome-blind closure protocol freeze (hash-bound to `RESEARCH_PROMPT.md` §13/§19/§20) BEFORE any synthesis; complete negative-results synthesis across all tracks/hypotheses with exact verdicts, CIs, and artifact paths; frontier-exhaustion audit (the §16 three-blocked-routes rule + two-or-more source families/methods); quantitative meta-analysis (family-wide multiplicity, Holm-adjusted outcomes, per-track verdict table); independent stdlib recompute reproducing the headline verdicts from stored hashes/configuration.
->
-> **Next agent's single job:** Produce the complete artifact set under one fresh `research_state/session_<UTC>/` (UTC strictly > `20261125T054500Z`), prefix `fclr_liq_risk_program_closure_`, all non-empty, no zero-byte placeholders:
-> 1. `fclr_liq_risk_program_closure_protocol_freeze_{json,md}` — outcome-blind closure protocol freeze (`outcome_data_inspected_before_freeze:false`, input sha256 assertions, hash-bound to §13/§19/§20).
-> 2. `fclr_liq_risk_program_closure_synthesis_report_{json,md}` — complete negative-results synthesis across all tracks/hypotheses/experiments with exact verdicts, CIs, artifact paths, evidence.
-> 3. `fclr_liq_risk_program_closure_frontier_exhaustion_audit_{json,md}` — audit proving no feasible confirmatory design remains on admissible frozen data (§16 three-blocked-routes rule, two+ source families/methods).
-> 4. `fclr_liq_risk_program_closure_negative_results_preservation_{json,md}` — all null/failed/inconclusive outcomes preserved with explanations (§19).
-> 5. `fclr_liq_risk_program_closure_meta_analysis_{py,json,md}` — quantitative meta-analysis triad (family-wide multiplicity, Holm-adjusted outcomes, per-track verdict table).
-> 6. `fclr_liq_risk_program_closure_recompute_{py,json}` — independent stdlib recompute reproducing headline verdicts from stored input hashes/configuration (`all_checks_match:true`, integer `n_checks`).
-> 7. `evidence_audit_<UTC>.{json,md}` — gate-critical evidence audit alias (`audit_pass:true`, `unresolved_blockers:[]`, `verdict` consistent with the synthesis).
-> 8. `trigger_check_<UTC>.json` — non-empty trigger check (`external_trigger_required:false`, `trigger_source:"FROZEN_IRONFLOW_BULK"`, `fired:false`; `NEW_OBSERVED_LIQUIDATION_SOURCE` cannot fire on frozen data).
->
-> Every JSON must carry `experiment_id:"FCLR-LIQ-RISK-PROGRAM-CLOSURE-02"` and `session_id:"session_<UTC>"` matching the directory. Record the real session id in `research_state/experiment_frontier.json` (promote rank-0 `READY_EXECUTE` → `COMPLETED_VALIDATED` only after artifacts exist) and update this handoff after the artifacts exist. Do NOT write a future/non-existent session id into this handoff before its artifacts exist.
->
-> **DO NOT:** re-run any closed volatility arm (FCLR-VOL-BROAD-01, FCLR-VOL-CORR-01, FCLR-VOL-STRESS-01, FCLR-VOL-JUMP-01/02/03/04 — all closed NOT_SUPPORTED; jump04 is closed, do not relabel it), re-run any terminal liquidation track, build a risk overlay (§9 forecast gate not passed), claim a forecast-gate pass from a cross-sectional association, wait for `NEW_OBSERVED_LIQUIDATION_SOURCE`, add root-level research-state files (root `*.md|*.json` at the 500 cap — all new artifacts MUST go under `session_<UTC>/`), relabel exploratory as confirmatory, threshold-shop or relax the frozen floor after outcomes.
+> **NO HEAVY WORK REMAINS.** The next session's job is to VERIFY the gate stays green and STOP:
+> `python3 scripts/check_handoff_heavywork_gate.py --json` → `reason=OK` with
+> `program_closure.required=true` and `program_closure.pass=true`, plus the campaign-gate regression
+> suite. Do NOT re-run any closed volatility arm, do NOT re-run any terminal liquidation track, do NOT
+> build a risk overlay (forecast gate not passed), do NOT wait for `NEW_OBSERVED_LIQUIDATION_SOURCE`
+> (cannot fire on frozen data), do NOT add root-level `research_state/*.md|*.json` files (root at 500
+> cap), do NOT threshold-shop, do NOT relabel exploratory as confirmatory, and do NOT produce a
+> timestamp-only refresh of this handoff as a substitute for verification.
+
+---
 
 ---
 
@@ -104,9 +113,9 @@
 - **Half 1 (volatility) — jump multi-estimator / multi-horizon robustness:** CLOSED. FCLR-VOL-JUMP-03 (session_20261125T045000Z) NOT_SUPPORTED: 87,162 NON-overlapping forecasts, 4,235 jump events, 202 coins, 4 (estimator × horizon) configs; per-config relative Brier 0.0991%..0.5386% (bipower/24h reproduces jump02 at 0.1510%), aggregate 0.3025%, all below the 2% floor; null SURVIVES bipower vs threshold-bipower AND {24h,48h}; independent stdlib recompute `all_checks_match=true`, `n_checks=76`.
 - **Half 1 (volatility) — jump DIRECTIONAL / sign frontier:** CLOSED. FCLR-VOL-JUMP-04 (session_20261125T054500Z) NOT_SUPPORTED: 110,914 NON-overlapping forecasts, 57,354 downside-dominance events (base rate ~51.7%), 367 coins, 4 (estimator × horizon) configs; per-config relative Brier -0.0785%..0.1020%, aggregate 0.0474%, all below the 2% floor; null SURVIVES bipower vs threshold-bipower AND {24h,48h} under full leakage remediation; independent stdlib recompute `all_checks_match=true`, `n_checks=76`. **This closes the funding-conditioned volatility-jump family (magnitude AND direction) for good.**
 - **Half 2 (liquidation risk):** confirmatory-exhausted on the frozen `ironflow_bulk` panel. Track A STRUCTURALLY_BLOCKED; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; broad cross-sectional rank ordering SUPPORTED_GENERALIZATION but NOT_STABLE (§17 condition #4) and 2% Poisson-deviance materiality floor NOT MET.
-- **Heavy-work gate:** PASSING (`reason=OK`). `program_closure.required=false` (grandfathered; latest session 20261125T054500Z equals the FCLR-LIQ-RISK-PROGRAM-CLOSURE-02 start 20261125T054500Z). A new complete session > 20261125T054500Z with ALL `fclr_liq_risk_program_closure_*` artifacts is mandatory to keep the gate green after that session is created — and because the start is already in the past, that binding is immediate.
+- **Heavy-work gate:** PASSING (`reason=OK`). `program_closure.required=true` and `program_closure.pass=true` (latest session 20261125T060000Z is strictly newer than the campaign start 20261125T054500Z, and all required `fclr_liq_risk_program_closure_*` artifacts exist and are non-empty under `session_20261125T060000Z/`). Rank-0 campaign `FCLR-LIQ-RISK-PROGRAM-CLOSURE-02` promoted `READY_EXECUTE` → `COMPLETED_VALIDATED`. No heavy work remains; the next session verifies green and stops.
 - **Forecast gate (§9):** NOT PASSED — no broad-scale volatility skill demonstrated; materiality floor not met on any arm. Risk overlay INELIGIBLE.
-- **Root `research_state/*.md|*.json` count:** 500/500 — at cap. All new artifacts MUST go under `session_<UTC>/`.
+- **Root `research_state/*.md|*.json` count:** 500/500 — at cap. All new artifacts went under `session_20261125T060000Z/`; no root-level files added.
 
 ---
 
@@ -134,14 +143,15 @@
 | `research_state/data_cache/ironflow_bulk/candles_1h/` | 18 monthly parquet, 2025-05..2026-10; hourly OHLC. |
 | `research_state/data_cache/ironflow_bulk/funding/` | 18 monthly parquet; `funding_rate`, `premium`. |
 | `research_state/data_cache/ironflow_bulk/open_interest/` | 18 monthly parquet; `mark_price`, `oracle_price`, `open_interest`. |
-| `research_state/session_20261125T054500Z/` | **LATEST COMPLETE heavy session** (FCLR-VOL-JUMP-04; NOT_SUPPORTED; 13 non-empty artifacts + helper; recompute `all_checks_match=true`, `n_checks=76`). |
+| `research_state/session_20261125T060000Z/` | **LATEST COMPLETE closure session** (FCLR-LIQ-RISK-PROGRAM-CLOSURE-02; program closed; all eight `fclr_liq_risk_program_closure_*` artifact categories + `evidence_audit_` alias + `trigger_check_`, all non-empty; recompute `all_checks_match=true`, `n_checks=63`). |
+| `research_state/session_20261125T054500Z/` | Prior complete heavy session (FCLR-VOL-JUMP-04; NOT_SUPPORTED; 13 non-empty artifacts + helper; recompute `all_checks_match=true`, `n_checks=76`). |
 | `research_state/session_20261125T045000Z/` | Prior complete heavy session (FCLR-VOL-JUMP-03; NOT_SUPPORTED; multi-estimator × multi-horizon magnitude). |
 | `research_state/session_20261125T034400Z/` | Prior complete heavy session (FCLR-VOL-JUMP-02; NOT_SUPPORTED; leakage-hardened). |
 | `research_state/session_20261125T030000Z/` | Prior complete heavy session (FCLR-VOL-JUMP-01; NOT_SUPPORTED; signed-jump magnitude). |
 | `research_state/session_20261124T222500Z/` | Prior complete heavy session (FCLR-VOL-STRESS-01; NOT_SUPPORTED; tail-exceedance). |
 | `research_state/session_20261124T204500Z/` | Prior complete heavy session (FCLR-VOL-CORR-01; NOT_SUPPORTED; correction-time). |
 | `research_state/session_20261124T120000Z/` | Prior complete heavy session (FCLR-VOL-BROAD-01; NOT_SUPPORTED; mean QLIKE). |
-| `research_state/experiment_frontier.json` | rank-0 is `FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z` (READY_EXECUTE); all FCLR-VOL-* arms are COMPLETED_VALIDATED (NOT_SUPPORTED). |
+| `research_state/experiment_frontier.json` | rank-0 is `FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z` (COMPLETED_VALIDATED under session_20261125T060000Z); all FCLR-VOL-* arms are COMPLETED_VALIDATED (NOT_SUPPORTED). |
 | `research_state/negative_results_report.md` | Null/failed/inconclusive outcomes preserved. |
 
 Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before reading; do not mutate caches.
@@ -152,7 +162,7 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 
 - `AGENT_HANDOFF.md` — this sole durable handoff.
 - `RESEARCH_PROMPT.md` §3 (primary + secondary research question), §7 (targets), §9 (overlay gate), §13/§16 (adaptive feasibility / three-blocked-routes), §17 (promotion), §19 (definition of done), §20 (status contract).
-- `scripts/check_handoff_heavywork_gate.py` — `PROGRAM_CLOSURE_CAMPAIGN_RE` / `_program_closure_state` / `PROGRAM_CLOSURE_REQUIRED` binder (active for the FCLR-LIQ-RISK-PROGRAM-CLOSURE-02 campaign; currently grandfathered only because the latest session 20261125T054500Z equals the 20261125T054500Z start).
+- `scripts/check_handoff_heavywork_gate.py` — `PROGRAM_CLOSURE_CAMPAIGN_RE` / `_program_closure_state` / `PROGRAM_CLOSURE_REQUIRED` binder (active for the FCLR-LIQ-RISK-PROGRAM-CLOSURE-02 campaign; `required=true` and `pass=true` because the latest session 20261125T060000Z is strictly newer than the 20261125T054500Z start and all required closure artifacts exist and are non-empty).
 - `tests/test_vol_jump_campaign_gate.py` and sibling campaign-gate tests — regression pinning the binders (hermetic; use fixtures, not this handoff).
 - `research_state/experiment_frontier.json` — rank-0 campaign registry.
 - `research_state/data_cache/ironflow_bulk/` — frozen broad panel.
@@ -176,6 +186,49 @@ Each parquet has `.sha256` and `.accessed.json` sidecars. Assert hashes before r
 python3 -m pip install --quiet numpy pandas pyarrow
 
 # 1. Heavy-work gate must return reason=OK
+python3 scripts/check_handoff_heavywork_gate.py --json
+
+# 2. Gate binder must compile
+python3 -m py_compile scripts/check_handoff_heavywork_gate.py
+
+# 3. Campaign-gate regression suite must pass
+python3 -m unittest \
+  tests.test_vol_jump_campaign_gate \
+  tests.test_vol_stress_campaign_gate \
+  tests.test_vol_corr_campaign_gate \
+  tests.test_vol_broad_campaign_gate \
+  tests.test_tracka_hardening_143 \
+  tests.test_active_campaign_gate
+
+# 4. Context only: the old 3-block scanner does not assess closure/meta-analysis feasibility
+python3 scripts/next_campaign_status.py
+```
+
+---
+
+## SESSION CLOSE-OUT (THIS SESSION — 2026-11-25T06:00:00Z)
+
+**What changed and why (real actions, not a timestamp bump):**
+- **Executed FCLR-LIQ-RISK-PROGRAM-CLOSURE-02** (formal program closure + complete negative-results synthesis + quantitative meta-analysis) under `research_state/session_20261125T060000Z/` — UTC strictly > campaign start 20261125T054500Z, so the `program_closure` binder is `required=true` and `pass=true`.
+- **Produced the complete eight-category closure artifact set**, all non-empty, no zero-byte placeholders:
+  1. `fclr_liq_risk_program_closure_protocol_freeze_20261125T060000Z.{json,md}` — outcome-blind closure protocol freeze (`outcome_data_inspected_before_freeze:false`, all 54 input sha256 asserted, hash-bound to RESEARCH_PROMPT.md §13/§19/§20).
+  2. `fclr_liq_risk_program_closure_synthesis_report_20261125T060000Z.{json,md}` — complete negative-results synthesis across all tracks/hypotheses with exact verdicts, CIs, artifact paths, evidence.
+  3. `fclr_liq_risk_program_closure_frontier_exhaustion_audit_20261125T060000Z.{json,md}` — audit proving no feasible confirmatory design remains (§16 three-blocked-routes rule, two+ source families/methods).
+  4. `fclr_liq_risk_program_closure_negative_results_preservation_20261125T060000Z.{json,md}` — all null/failed/inconclusive outcomes preserved with explanations (§19).
+  5. `fclr_liq_risk_program_closure_meta_analysis_20261125T060000Z.{py,json,md}` — quantitative meta-analysis triad (family-wide multiplicity, Holm-adjusted outcomes, per-track verdict table; 0 Holm-surviving claims).
+  6. `fclr_liq_risk_program_closure_recompute_20261125T060000Z.{py,json}` — independent stdlib recompute reproducing headline verdicts from stored input hashes/configuration (`all_checks_match=true`, `n_checks=63`, `n_mismatches=0`).
+  7. `evidence_audit_20261125T060000Z.{json,md}` — gate-critical evidence audit alias (`audit_pass:true`, `unresolved_blockers:[]`, verdict consistent with synthesis).
+  8. `trigger_check_20261125T060000Z.json` — non-empty trigger check (`external_trigger_required:false`, `trigger_source:"FROZEN_IRONFLOW_BULK"`, `fired:false`).
+- **Every JSON carries** `experiment_id:"FCLR-LIQ-RISK-PROGRAM-CLOSURE-02"` and `session_id:"session_20261125T060000Z"` matching the directory.
+- **Promoted rank-0** in `research_state/experiment_frontier.json`: `READY_EXECUTE` → `COMPLETED_VALIDATED`, program_status `ACTIVE` → `COMPLETE`, session/completed_session `session_20261125T060000Z`, completed_utc `20261125T06:00:00Z`.
+- **Updated this handoff** to mark the program CLOSED; no heavy work remains. No root-level `research_state/*.md|*.json` files added (root at 500/500 cap); all artifacts under `session_20261125T060000Z/`.
+
+**Precise verifying commands:**
+```bash
+# 0. One-time environment setup if needed
+python3 -m pip install --quiet numpy pandas pyarrow
+
+# 1. Heavy-work gate must return reason=OK with program_closure.required=true and pass=true
 python3 scripts/check_handoff_heavywork_gate.py --json
 
 # 2. Gate binder must compile

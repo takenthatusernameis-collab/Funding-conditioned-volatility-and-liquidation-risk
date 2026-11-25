@@ -1,0 +1,40 @@
+{
+  "experiment_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02",
+  "session_id": "session_20261125T060000Z",
+  "session_utc": "20261125T060000Z",
+  "generated_utc": "2026-11-25T06:00:00Z",
+  "artifact_kind": "closure_frontier_exhaustion_audit",
+  "campaign_id": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z",
+  "input_panel": "research_state/data_cache/ironflow_bulk/",
+  "audit_rule": "RESEARCH_PROMPT.md section 16 three-blocked-routes rule; two or more independent source families/methods",
+  "frontier_exhausted": true,
+  "blocked_routes": [
+    {
+      "route": "Track A observed liquidation labels",
+      "status": "STRUCTURALLY_BLOCKED",
+      "reason": "ironflow liquidations are a capped-sample feed (not a complete census); absence != zero liquidations; no complete observed-liquidation source available on frozen data; NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data"
+    },
+    {
+      "route": "Track B modeled hypothetical boundary-breach labels",
+      "status": "NOT_SUPPORTED",
+      "reason": "modeled breach labels do not reconstruct account-specific liquidation mechanics, portfolio margin, liquidation engine execution, or actual forced liquidations; cannot serve as confirmatory liquidation-risk outcome"
+    },
+    {
+      "route": "Track C volatility/stress outcomes from mark-price history",
+      "status": "NOT_SUPPORTED",
+      "reason": "all Half-2 arms below frozen materiality floor; cross-sectional finding NOT_STABLE (section 17 condition #4)"
+    },
+    {
+      "route": "Half 1 funding-conditioned volatility (all five estimands)",
+      "status": "NOT_SUPPORTED (closed)",
+      "reason": "mean QLIKE 1.93%, correction-time, stress 1.51%, jump magnitude 0.0922%/0.1510%/0.3025%, jump direction/sign 0.0474% — all below 2% floor"
+    }
+  ],
+  "source_families_tested": ["ironflow_bulk parquet (candles_1h/funding/open_interest)", "closed campaign artifacts under research_state/session_*/"],
+  "independent_methods": ["walk-forward OLS/logit evaluation", "cluster bootstrap + Driscoll-Kraay block inference", "Holm familywise-error correction", "independent stdlib hash/sufficient-statistic recompute"],
+  "no_feasible_confirmatory_design_remains": true,
+  "new_source_required_for_reopen": "NEW_OBSERVED_LIQUIDATION_SOURCE (cannot fire on frozen data)",
+  "honest_endpoint": "closure + negative-results preservation",
+  "audit_pass": true,
+  "unresolved_blockers": []
+}
