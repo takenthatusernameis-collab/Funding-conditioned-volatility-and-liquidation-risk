@@ -1,0 +1,61 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-03",
+  "session_id": "session_20261125T045000Z",
+  "session_utc": "20261125T045000Z",
+  "generated_utc": "2026-11-25T04:50:00Z",
+  "audit_pass": true,
+  "unresolved_blockers": [],
+  "verdict": "NOT_SUPPORTED",
+  "eval_status": "CONFIRMATORY_COMPLETE",
+  "holdout_opened": true,
+  "n_forecasts": 87162,
+  "n_events": 4235,
+  "n_coins": 202,
+  "n_configs": 4,
+  "estimators": ["bipower", "threshold_bipower"],
+  "horizons_h": [24, 48],
+  "metrics": {
+    "baseline": {
+      "brier": 0.04602448161472106,
+      "log_loss": 0.18744897869623355
+    },
+    "candidate": {
+      "brier": 0.045885085454948265,
+      "log_loss": 0.18688411215774543
+    }
+  },
+  "relative_improvement": {
+    "brier": 0.0030252825597136854
+  },
+  "per_config_relative_brier": {
+    "bipower_H24": 0.00151,
+    "bipower_H48": 0.000991,
+    "threshold_bipower_H24": 0.005386,
+    "threshold_bipower_H48": 0.002949
+  },
+  "materiality_floor_rel": 0.02,
+  "materiality_met": false,
+  "significant": true,
+  "recompute_all_checks_match": true,
+  "recompute_n_checks": 76,
+  "remediations_applied": [
+    "48h purge+embargo",
+    "non-overlapping forward-outcome windows (origin spacing >= H)",
+    "mark/index tolerance filter (|mark/oracle - 1| <= 0.01)",
+    "delisting-aware per-coin identity",
+    "per-coin cluster bootstrap",
+    "Holm across the declared estimator x horizon x metric family"
+  ],
+  "checks": [
+    "eval candidate metrics are numeric (not NaN)",
+    "independent stdlib recompute all_checks_match=true (76 checks)",
+    "materiality floor applied as frozen (2% relative Brier)",
+    "verdict symmetric and consistent with frozen prereg rule",
+    "all FCLR-POOLED-AUDIT-001 leakage remediations applied simultaneously",
+    "jump estimator varied (bipower vs threshold-bipower)",
+    "forecast horizon varied ({24h, 48h})",
+    "bipower/24h config reproduces the closed jump02 result (rel 0.1510%) as a pipeline sanity check",
+    "no external trigger required or fired on frozen data"
+  ],
+  "notes": "Multi-estimator x multi-horizon robustness study of the closed FCLR-VOL-JUMP-01/02 signed-jump / semivariance-asymmetry null. Across ALL four (estimator x horizon) configs the candidate's relative Brier improvement (0.0991% .. 0.5386%) is below the frozen 2% floor; aggregate 0.3025%. The bipower/24h config exactly reproduces jump02 (0.1510%), confirming pipeline consistency. The jump null SURVIVES variation of the jump estimator AND the forecast horizon under full leakage remediation. NOT_SUPPORTED is a valid, publishable negative result that closes the funding-conditioned volatility-jump arm for good."
+}

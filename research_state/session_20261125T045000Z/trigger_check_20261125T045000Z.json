@@ -1,0 +1,10 @@
+{
+  "experiment_id": "FCLR-VOL-JUMP-03",
+  "session_id": "session_20261125T045000Z",
+  "session_utc": "20261125T045000Z",
+  "generated_utc": "2026-11-25T04:50:00Z",
+  "external_trigger_required": false,
+  "trigger_source": "FROZEN_IRONFLOW_BULK",
+  "fired": false,
+  "reason": "The FCLR-VOL-JUMP-03 heavy multi-estimator x multi-horizon robustness evaluation runs entirely on the frozen ironflow_bulk panel; NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data and is not required."
+}
