@@ -4,7 +4,7 @@
 
 # AGENT_HANDOFF.md — FCLR-LIVE-ARCHIVE-01 Confirmatory Volatility Evaluation (repo-name rank-0)
 
-**Timestamp:** 2026-11-26T03:25:06Z
+**Timestamp:** 2026-11-26T04:10:11Z
 **Session:** NEXT (to execute)
 **Campaign:** FCLR-LIVE-ARCHIVE-01-20261125T074500Z (ACTIVE rank-0, READY_EXECUTE)
 **Hypothesis:** FCLR-H001 (incremental 24-hour realized-variance forecasting; funding + price features vs RV-only baseline)
