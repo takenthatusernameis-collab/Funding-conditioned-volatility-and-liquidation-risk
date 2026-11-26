@@ -1,0 +1,30 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-01-20261125T074500Z",
+  "session_utc": "20261126T042519Z",
+  "artifact_id": "fclr_live_archive01_evidence_audit_20261126T042519Z",
+  "generated_at": "2026-11-26T04:29:51Z",
+  "experiment_id": "FCLR-LIVE-ARCHIVE-01",
+  "audit_pass": true,
+  "unresolved_blockers": [],
+  "checks": {
+    "source_verified": true,
+    "downloads_complete": true,
+    "checksums_present": true,
+    "prereg_frozen_before_outcomes": true,
+    "prereg_hash_bound": true,
+    "train_only_scaling": true,
+    "embargo_168h": true,
+    "paired_contrast_C2_vs_B1": true,
+    "bootstrap_replicates": 2000,
+    "independent_recompute": true,
+    "no_zero_byte_placeholders": true,
+    "stdlib_only": true
+  },
+  "verdict": "NOT_SUPPORTED",
+  "leakage_audit": {
+    "outcome_inspected_before_freeze": false,
+    "target_built_after_prereg": true,
+    "embargo_applied_at_all_boundaries": true
+  },
+  "notes": "Funding+price features give a small but sub-floor QLIKE improvement (0.84%, CI [0.54%,1.14%]); verdict NOT_SUPPORTED. Independent recompute reproduces QLIKE levels to <1e-3 and the NOT_SUPPORTED verdict."
+}

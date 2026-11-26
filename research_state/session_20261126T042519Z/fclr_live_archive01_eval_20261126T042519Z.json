@@ -1,0 +1,115 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-01",
+  "campaign": "FCLR-LIVE-ARCHIVE-01-20261125T074500Z",
+  "session_id": "20261126T042519Z",
+  "session_utc": "20261126T042519Z",
+  "generated_at": "2026-11-26T04:28:55Z",
+  "source": "BINANCE_PUBLIC_ARCHIVE",
+  "symbols": [
+    "1INCHUSDT",
+    "AAVEUSDT",
+    "ADAUSDT",
+    "ALGOUSDT",
+    "ALPHAUSDT"
+  ],
+  "months": "2021-01..2024-12 (48 months)",
+  "n_symbols": 5,
+  "per_symbol_rows": {
+    "1INCHUSDT": 34872,
+    "AAVEUSDT": 34872,
+    "ADAUSDT": 34872,
+    "ALGOUSDT": 34872,
+    "ALPHAUSDT": 34872
+  },
+  "n_train": 103775,
+  "n_val": 34870,
+  "n_test": 35715,
+  "n_unique_timestamps": 34872,
+  "embargo_hours": 168,
+  "splits": "60/20/20 by unique UTC timestamp; 7-day purge/embargo; test->3 blocks",
+  "models": [
+    "B0",
+    "B1",
+    "C1",
+    "C2"
+  ],
+  "primary_contrast": "C2 vs B1 (paired next-24h QLIKE)",
+  "materiality_floor": 0.02,
+  "qlike": {
+    "B0": 0.5089553531612343,
+    "B1": 0.3214967200873563,
+    "C1": 0.3186218363090253,
+    "C2": 0.3187960071053789
+  },
+  "relative_reduction": {
+    "C1": 0.0089421869608805,
+    "C2": 0.008400437121857887
+  },
+  "relative_reduction_C2_vs_B1": 0.008400437121857887,
+  "per_block_qlike": {
+    "B1": [
+      0.3208671007375969,
+      0.3229182884082227,
+      0.32070477111624934
+    ],
+    "C2": [
+      0.318211831599076,
+      0.3202083220617521,
+      0.31796786765530866
+    ]
+  },
+  "leave_one_symbol_out": {
+    "1INCHUSDT": {
+      "n": 7143,
+      "qlike_B1": 0.3028621403319726,
+      "qlike_C2": 0.2987852899637672,
+      "rel_C2_vs_B1": 0.01346107626307046
+    },
+    "AAVEUSDT": {
+      "n": 7143,
+      "qlike_B1": 0.2821621772735781,
+      "qlike_C2": 0.27972806452670995,
+      "rel_C2_vs_B1": 0.008626644330533733
+    },
+    "ADAUSDT": {
+      "n": 7143,
+      "qlike_B1": 0.38306437822058964,
+      "qlike_C2": 0.3815286436864195,
+      "rel_C2_vs_B1": 0.004009076858840168
+    },
+    "ALGOUSDT": {
+      "n": 7143,
+      "qlike_B1": 0.31951218236178797,
+      "qlike_C2": 0.3173290949413287,
+      "rel_C2_vs_B1": 0.006832563955221312
+    },
+    "ALPHAUSDT": {
+      "n": 7143,
+      "qlike_B1": 0.32035857595119627,
+      "qlike_C2": 0.3187766347297191,
+      "rel_C2_vs_B1": 0.004938033004985451
+    }
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20261126,
+    "block_rows": 24,
+    "mean_abs_diff_B1_minus_C2": 0.002715007457484765,
+    "ci95_abs_diff": [
+      0.0017428409219967685,
+      0.0036771866757172953
+    ],
+    "ci95_relative_reduction": [
+      0.005421022402726871,
+      0.011437711323207712
+    ]
+  },
+  "download": {
+    "n_jobs": 1200,
+    "n_bad": 0
+  },
+  "verdict": "NOT_SUPPORTED",
+  "verdict_reason": "C2 vs B1 relative QLIKE reduction < 2% floor or CI includes 0",
+  "stdlib_only": true,
+  "outcome_data_inspected_before_freeze": false
+}

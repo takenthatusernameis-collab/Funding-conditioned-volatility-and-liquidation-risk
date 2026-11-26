@@ -1,0 +1,30 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-01-20261125T074500Z",
+  "session_utc": "20261126T042519Z",
+  "artifact_id": "trigger_check_20261126T042519Z",
+  "trigger": "NEW_OBSERVED_LIQUIDATION_SOURCE",
+  "external_trigger_required": false,
+  "trigger_source": "BINANCE_PUBLIC_ARCHIVE",
+  "fired": false,
+  "rationale": "No external NEW_OBSERVED_LIQUIDATION_SOURCE event occurred; the trigger is dormant by design and this session does NOT idle on it. The reachable free-archive frontier was executed with a heavy 3-block confirmatory design on 4 years of newly downloaded Binance archive data.",
+  "frontier_status": {
+    "frozen_domains_exhausted": true,
+    "live_archive_01_executed": true,
+    "live_archive_01_decision": "NOT_SUPPORTED",
+    "heavy_artifact_set_complete": true
+  },
+  "checks": {
+    "handoff_exists": true,
+    "prereg_frozen_before_outcomes": true,
+    "eval_present": true,
+    "recompute_present": true,
+    "recompute_agrees_with_eval": true,
+    "evidence_audit_present": true,
+    "no_zero_byte_placeholders": true
+  },
+  "next_action_heavy": "FCLR-LIVE-ARCHIVE-01 is now a completed NOT_SUPPORTED null. Do not re-run it. Any new heavy work requires a materially different, verified, reachable free source or a newly registered confirmatory design (e.g., a different target family or a broader symbol universe) behind a fresh outcome-blind prereg.",
+  "stdlib_only": true,
+  "read_only": true,
+  "network": false,
+  "outcome_data_inspected_before_freeze": false
+}

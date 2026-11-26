@@ -1,0 +1,110 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-01-20261125T074500Z",
+  "campaign_start_utc": "2026-11-25T07:45:00Z",
+  "session_utc": "20261126T042519Z",
+  "artifact_id": "fclr_live_archive01_source_registry_20261126T042519Z",
+  "generated_at": "2026-11-26T04:29:51Z",
+  "source": {
+    "id": "binance_public_archive",
+    "type": "market_data_archive",
+    "venue": "binance",
+    "s3_bucket": "s3-ap-northeast-1.amazonaws.com/data.binance.vision",
+    "access": "unauthenticated",
+    "auth_required": false,
+    "payment_required": false,
+    "signup_required": false,
+    "terms_url": "https://data.binance.vision/terms-of-use.html",
+    "access_method": "HTTPS GET (no API key, no signed request, no account)",
+    "reachability_verified_at": "2026-11-26T04:29:51Z",
+    "reachability_evidence": [
+      {
+        "probe": "S3 list-type=2 data/futures/um/monthly/klines/ delimiter=/",
+        "status": 200
+      },
+      {
+        "probe": "GET monthly/klines/1INCHUSDT/1h/1INCHUSDT-1h-2024-01.zip",
+        "status": 200,
+        "bytes": 31759
+      },
+      {
+        "probe": "GET monthly/fundingRate/1INCHUSDT/1INCHUSDT-fundingRate-2024-01.zip",
+        "status": 200,
+        "bytes": 648
+      },
+      {
+        "probe": "GET monthly/klines/1INCHUSDT/1h/1INCHUSDT-1h-2024-01.zip.CHECKSUM",
+        "status": 200
+      }
+    ]
+  },
+  "datasets": [
+    {
+      "kind": "futures_um_monthly_klines_1h",
+      "path_template": "data/futures/um/monthly/klines/{SYM}/1h/{SYM}-1h-{YYYY-MM}.zip",
+      "fields": [
+        "open_time",
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "track": "target + RV features"
+    },
+    {
+      "kind": "futures_um_monthly_markPriceKlines_1h",
+      "path_template": ".../monthly/markPriceKlines/{SYM}/1h/{SYM}-1h-{YYYY-MM}.zip",
+      "track": "mark premium + EMA distance"
+    },
+    {
+      "kind": "futures_um_monthly_indexPriceKlines_1h",
+      "path_template": ".../monthly/indexPriceKlines/{SYM}/1h/{SYM}-1h-{YYYY-MM}.zip",
+      "track": "mark/index premium"
+    },
+    {
+      "kind": "futures_um_monthly_premiumIndexKlines_1h",
+      "path_template": ".../monthly/premiumIndexKlines/{SYM}/1h/{SYM}-1h-{YYYY-MM}.zip",
+      "track": "premium feature"
+    },
+    {
+      "kind": "futures_um_monthly_fundingRate",
+      "path_template": ".../monthly/fundingRate/{SYM}/{SYM}-fundingRate-{YYYY-MM}.zip",
+      "fields": [
+        "calc_time",
+        "funding_interval_hours",
+        "last_funding_rate"
+      ],
+      "note": "NO 1h/ segment",
+      "track": "signed funding + 90d |funding| pct"
+    }
+  ],
+  "cohort": {
+    "symbols": [
+      "1INCHUSDT",
+      "AAVEUSDT",
+      "ADAUSDT",
+      "ALGOUSDT",
+      "ALPHAUSDT"
+    ],
+    "months": "2021-01..2024-12 (48 months)",
+    "selection": "coverage-only, outcome-blind (77 of 1080 catalog symbols had 48/48 kline months; top five frozen 2026-11-26T01:05:14Z)"
+  },
+  "download": {
+    "n_jobs": 1200,
+    "n_ok": 1200,
+    "n_bad": 0,
+    "checksum_sidecars": "one .CHECKSUM per zip; sha256 verified before parse",
+    "raw_dir": "research_state/session_20261126T042519Z/raw/",
+    "manifest": "fclr_live_archive01_download_manifest_20261126T042519Z.json"
+  },
+  "admissibility": {
+    "unauthenticated": true,
+    "no_credentials": true,
+    "no_payment": true,
+    "historical_depth": "4 years, multi-regime",
+    "schema_verified": true,
+    "admissible_for_research": true,
+    "admissible_for_track_a_observed_liquidations": false
+  },
+  "terms": "Binance public market data; unauthenticated; research use; terms at /terms-of-use.html"
+}
