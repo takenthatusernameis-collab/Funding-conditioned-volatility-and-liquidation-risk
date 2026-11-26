@@ -5,14 +5,14 @@
     "program_status": "ACTIVE",
     "task": "FCLR-LIVE-ARCHIVE-07-20261126T153244Z",
     "generated": "20261126T153244Z",
-    "refreshed": "2026-11-26T15:32:44Z",
-    "last_checked": "2026-11-26T15:32:44Z",
+    "refreshed": "2026-11-26T16:32:07Z",
+    "last_checked": "2026-11-26T16:32:07Z",
     "last_verdict": null,
     "next_action_heavy": "EXECUTE FCLR-LIVE-ARCHIVE-07 under one fresh session_<UTC>/ (id > 20261126T153244Z): disjoint-cohort (2024-04..2026-10, BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT) pre-registered sequential confirmatory look k=2 (alpha_2=0.008333) of the repo-name primary estimand (next-24h mean log-RV QLIKE, campaign-01 estimand) with the downside realized-semivariance level (campaign-06 estimand) as the declared Holm secondary. Stdlib only (numpy/pandas/pyarrow absent). Recovered template: handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py (change SESSION; add recompute+evidence_audit+trigger). Produce the complete fclr_live_archive07_* heavy set + independent recompute + evidence audit + gate alias + trigger check; then sync this frontier and run the handoff heavy-work gate until green.",
     "next_unfinished_task": "Produce the complete fclr_live_archive07_{source_registry,prereg,eval,recompute,evidence_audit}_<UTC> artifact set plus evidence_audit_<UTC> alias and trigger_check_<UTC>.json under one fresh research_state/session_<UTC>/ (id > 20261126T153244Z), with all_checks_match=true from an independent stdlib recompute, then set rank-0 to COMPLETED_VALIDATED with the reproduced verdict.",
     "resume_triggers": [],
     "trigger_status": {},
-    "blockers": "None external. Stdlib only: numpy/pandas/pyarrow are NOT installed and package installation is forbidden; use the recovered session_20261126T144850Z template (now at handoff_archive/quarantine_20261126T144850Z/) or the session_20261126T082429Z stdlib template, not the fclr_volbroad01_* template. Root research_state is at the 500-file cap: no new root-level md/json files. The aborted partial session 20261126T144850Z was quarantined this session, clearing the HANDOFF_STALE_LATEST_SESSION gate failure.",
+    "blockers": "None external. Stdlib only: numpy/pandas/pyarrow are NOT installed and package installation is forbidden; use the recovered session_20261126T144850Z template (now at handoff_archive/quarantine_20261126T144850Z/) or the session_20261126T082429Z stdlib template, not the fclr_volbroad01_* template. Root research_state is at the 500-file cap: no new root-level md/json files. The aborted partial 20261126T153717Z was quarantined intact to handoff_archive/quarantine_20261126T163207Z/ because all_checks_match=false, required audit/trigger artifacts were missing, and 3775 cache entries were unverified/missing; do not reuse its outputs. The earlier aborted 20261126T144850Z was also quarantined. The stale-session gate blocker is cleared.",
     "evidence": {
       "source": "https://data.binance.vision/ (verified on-disk cache; no network needed)",
       "cache": "research_state/data_cache/{BNBUSDT,BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT}_{2024_04..2026_10}/ (155 symbol-month dirs = 5 symbols x 31 months; funding zips 2024-04..2026-10; klines/index/mark/premium daily zips 2024-01..2026-11 with per-file .sha256 sidecars)",
@@ -36,7 +36,7 @@
       "template": "handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py (recovered stdlib template for campaign-07)",
       "supersedes": "FCLR-LIVE-ARCHIVE-06",
       "carry_forward_bundles": [],
-      "note": "ACTIVE rank-0 as of 2026-11-26T15:32:44Z. Aborted partial session 20261126T144850Z quarantined to handoff_archive/quarantine_20261126T144850Z/ (eval template preserved); gate now pass=true, failures=[]."
+      "note": "ACTIVE rank-0 as of 2026-11-26T16:32:07Z. Aborted partial 20261126T153717Z quarantined to handoff_archive/quarantine_20261126T163207Z/ (invalid recompute and missing audit/trigger; not evidence); earlier aborted 20261126T144850Z template remains at handoff_archive/quarantine_20261126T144850Z/. Source verification remains a required phase; do not call the cache fully verified."
     },
     "phases": [
       {
