@@ -1,8 +1,8 @@
 # AGENT HANDOFF — Durable Single Source of Truth for Next Session
 
-**Generated (UTC):** 2026-11-26T21:56:08Z
+**Generated (UTC):** 2026-11-26T21:57:06Z
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE`
-**HEAD:** `a9fe59653e9769fcfcbcaf8410879810d7d2beed`
+**HEAD:** `a4b0775e27bed136ec4bff2ce651ce3bbc660b37`
 **Working tree:** clean
 **Latest completed heavy session:** `session_20261126T133828Z`
 **Heavy-work gate at this refresh:** `pass=true`, `reason_code=OK`, `failures=[]`
@@ -11,7 +11,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T21:56:08Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T21:57:06Z)
 
 **EXECUTE `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` NOW.** The repository name leads with **Funding-conditioned-volatility**, so the highest-value unfinished work is the pre-registered disjoint-cohort replication of the repo-name primary estimand: next-24h mean log-realized-variance QLIKE, C2 versus B1, on the untouched 2024-04 through 2026-10 cohort for `BNBUSDT`, `BTCUSDT`, `ETHUSDT`, `SOLUSDT`, and `XRPUSDT`. This is sequential confirmatory look `k=2`, with frozen `alpha_2 = 0.05/(2*3) = 0.008333`. The declared Holm secondary is the campaign-06 estimand: next-24h downside realized-semivariance level, judged by MSE. Do not substitute another estimand, cohort, threshold, or model search.
 
@@ -113,4 +113,4 @@ All are under `research_state/session_20261126T133828Z/`. Do not re-run campaign
 **Dominant limitation to disclose:** only five symbols are available in the disjoint cohort, so per-block and leave-one-symbol-out diagnostics are mandatory.
 **Concrete falsification test:** C2 improves relative test QLIKE by at least 2% with the frozen uncertainty and Holm conditions on the untouched cohort.
 
-**END OF HANDOFF — 2026-11-26T21:56:08Z**
+**END OF HANDOFF — 2026-11-26T21:57:06Z**
