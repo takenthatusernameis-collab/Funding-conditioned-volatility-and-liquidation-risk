@@ -1,6 +1,63 @@
 [
-{
+ {
   "rank": 0,
+  "status": "READY_EXECUTE",
+  "program_status": "ACTIVE",
+  "task": "FCLR-LIVE-ARCHIVE-07-20261126T143224Z",
+  "generated": "20261126T143224Z",
+  "refreshed": "2026-11-26T14:32:24Z",
+  "last_checked": "2026-11-26T14:32:24Z",
+  "last_verdict": null,
+  "next_action_heavy": "EXECUTE FCLR-LIVE-ARCHIVE-07 under one fresh session_<UTC>/ (id > 20261126T143224Z): disjoint-cohort (2024-04..2026-10, BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT) pre-registered sequential confirmatory look k=2 (alpha_2=0.008333) of the repo-name primary estimand (next-24h mean log-RV QLIKE, campaign-01 estimand) with the downside realized-semivariance level (campaign-06 estimand) as the declared Holm secondary. Stdlib only (numpy/pandas/pyarrow absent). Produce the complete fclr_live_archive07_* heavy set + independent recompute + evidence audit + gate alias + trigger check; then sync this frontier and run the handoff heavy-work gate until green.",
+  "next_unfinished_task": "Produce the complete fclr_live_archive07_{source_registry,prereg,eval,recompute,evidence_audit}_<UTC> artifact set plus evidence_audit_<UTC> alias and trigger_check_<UTC>.json under one fresh research_state/session_<UTC>/, with all_checks_match=true from an independent stdlib recompute, then set rank-0 to COMPLETED_VALIDATED with the reproduced verdict.",
+  "resume_triggers": [],
+  "trigger_status": {},
+  "blockers": "None external. Stdlib only: numpy/pandas/pyarrow are NOT installed and package installation is forbidden; use the session_20261126T082429Z stdlib template, not the fclr_volbroad01_* template. Root research_state is at the 500-file cap: no new root-level md/json files.",
+  "evidence": {
+   "source": "https://data.binance.vision/ (verified on-disk cache; no network needed)",
+   "cache": "research_state/data_cache/{BNBUSDT,BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT}_{2024_04..2026_10}/ (funding zips 2024-04..2026-10; klines/index/mark/premium daily zips 2024-01..2026-11 with per-file .sha256 sidecars; 3689 zips in symbol dirs)",
+   "hash_registry": "research_state/cached_inputs_hashes.json (20694 entries; sample-verified zero mismatches)",
+   "cohort": "2024-04-01..2026-10-31 UTC; BNBUSDT, BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT (disjoint from the 2021-2024 cohort of campaigns 01-06)",
+   "sequential_look": "k=2 under RESEARCH_PROMPT.md \u00a717 alpha-spending; alpha_2 = 0.05/(2*3) = 0.008333",
+   "primary_target": "next-24h mean log-RV QLIKE (campaign-01 estimand); C2 vs B1 relative reduction >= 2% and 95% block-bootstrap CI lower bound > 0",
+   "secondary_target": "next-24h downside realized-semivariance level log(RV_minus+1e-9), MSE, Holm across the declared 2-family (campaign-06 estimand)",
+   "closed_prior_arms": [
+    "FCLR-LIVE-ARCHIVE-01 mean-RV QLIKE NOT_SUPPORTED (rel 0.840% < 2%)",
+    "FCLR-LIVE-ARCHIVE-03 stress/tail Brier NOT_SUPPORTED (rel 0.458% < 2%)",
+    "FCLR-LIVE-ARCHIVE-04 quantile/full-distribution NOT_SUPPORTED (rel avg-pinball -1.102%)",
+    "FCLR-LIVE-ARCHIVE-05 signed-semivariance-asymmetry NOT_SUPPORTED (rel MSE 0.141%)",
+    "FCLR-LIVE-ARCHIVE-06 downside-semivariance-level NOT_SUPPORTED (rel MSE 0.716%, CI [0.419%,1.020%] < 2%)",
+    "FCLR-VOL-BROAD-01 / VOL-CORR-01 / VOL-STRESS-01 / VOL-JUMP-01 broad ironflow arms NOT_SUPPORTED"
+   ],
+   "root_md_json_count": 500,
+   "root_cap": 500,
+   "all_new_artifacts_must_go_under_session_dir": true,
+   "gate_enforced": "AGENT_HANDOFF.md FOCUS CAMPAIGN section; scripts/check_handoff_heavywork_gate.py LIVE_ARCHIVE_CAMPAIGN_RE / _live_archive_state ladder-aware binder (campaign 07 -> fclr_live_archive07_*)",
+   "template": "research_state/session_20261126T082429Z/fclr_live_archive05_eval_20261126T082429Z.py (stdlib)",
+   "supersedes": "FCLR-LIVE-ARCHIVE-06",
+   "carry_forward_bundles": [],
+   "note": "ACTIVE rank-0 as of 2026-11-26T14:32:24Z. Repairs the red test_active_campaign_gate rank-0 invariant left by the campaign-06 close-out."
+  },
+  "phases": [
+   {
+    "phase": "SOURCE_REGISTRY_AND_VERIFIED_REUSE",
+    "status": "NOT_STARTED",
+    "claim": "Verify the 2024-04..2026-10 five-symbol cache against per-file .sha256 sidecars and cached_inputs_hashes.json; record coverage/layout/shortfalls."
+   },
+   {
+    "phase": "PREREG_FREEZE",
+    "status": "NOT_STARTED",
+    "claim": "Outcome-blind campaign-07 prereg frozen before outcomes; hash-bound to the source registry; look k=2 alpha_2=0.008333."
+   },
+   {
+    "phase": "HEAVY_CONFIRMATORY_EVAL_AND_RECOMPUTE",
+    "status": "NOT_STARTED",
+    "claim": "Heavy 3-block evaluation, independent stdlib recompute, evidence audit, gate alias, and trigger check under one fresh session_<UTC>/."
+   }
+  ]
+ },
+ {
+  "rank": 1,
   "status": "COMPLETED_VALIDATED",
   "program_status": "COMPLETE",
   "task": "FCLR-LIVE-ARCHIVE-06-20261126T083526Z",
@@ -30,39 +87,42 @@
     "FCLR-LIVE-ARCHIVE-05 signed-semivariance-asymmetry NOT_SUPPORTED (rel MSE 0.141%, CI [-0.032%,0.315%])"
    ],
    "root_md_json_count": 500,
-    "root_cap": 500,
-    "all_new_artifacts_must_go_under_session_dir": true,
-    "gate_enforced": "AGENT_HANDOFF.md FOCUS CAMPAIGN section; scripts/check_handoff_heavywork_gate.py LIVE_ARCHIVE_CAMPAIGN_RE / _live_archive_state ladder-aware binder (campaign 06 -> fclr_live_archive06_*)",
-    "n_test": 35715,
-    "relative_mse_reduction_C2_vs_B1": 0.007161214745326733,
-    "bootstrap_ci95_relative_mse_reduction": [0.004185519461045794, 0.01020492623312581],
-    "all_checks_match": true,
-    "session_id": "session_20261126T133828Z"
-   },
-   "phases": [
-    {
-     "phase": "SOURCE_REGISTRY_AND_VERIFIED_REUSE",
-     "status": "COMPLETE",
-     "claim": "Verified cache reused read-only; source registry produced under session_20261126T133828Z."
-    },
-    {
-     "phase": "PREREG_FREEZE",
-     "status": "COMPLETE",
-     "claim": "Outcome-blind downside-semivariance-level design frozen before outcomes under session_20261126T133828Z."
-    },
-    {
-     "phase": "HEAVY_CONFIRMATORY_EVAL_AND_RECOMPUTE",
-     "status": "COMPLETE",
-     "claim": "Heavy evaluation, independent recompute, evidence audit, gate alias, and trigger check produced under session_20261126T133828Z. all_checks_match=true."
-    }
+   "root_cap": 500,
+   "all_new_artifacts_must_go_under_session_dir": true,
+   "gate_enforced": "AGENT_HANDOFF.md FOCUS CAMPAIGN section; scripts/check_handoff_heavywork_gate.py LIVE_ARCHIVE_CAMPAIGN_RE / _live_archive_state ladder-aware binder (campaign 06 -> fclr_live_archive06_*)",
+   "n_test": 35715,
+   "relative_mse_reduction_C2_vs_B1": 0.007161214745326733,
+   "bootstrap_ci95_relative_mse_reduction": [
+    0.004185519461045794,
+    0.01020492623312581
    ],
-   "note": "COMPLETED under session_20261126T133828Z. Downside realized-semivariance LEVEL arm closed NOT_SUPPORTED (rel MSE 0.716%, CI [0.419%,1.020%] < 2% floor). All funding-conditioned volatility estimands now closed NOT_SUPPORTED on the verified 5-symbol archive.",
-   "session": "session_20261126T133828Z",
-   "completed_session": "session_20261126T133828Z",
-   "supersedes": "FCLR-LIVE-ARCHIVE-05",
-   "carry_forward_bundles": [],
-   "completed_utc": "2026-11-26T13:45:19Z"
+   "all_checks_match": true,
+   "session_id": "session_20261126T133828Z"
   },
+  "phases": [
+   {
+    "phase": "SOURCE_REGISTRY_AND_VERIFIED_REUSE",
+    "status": "COMPLETE",
+    "claim": "Verified cache reused read-only; source registry produced under session_20261126T133828Z."
+   },
+   {
+    "phase": "PREREG_FREEZE",
+    "status": "COMPLETE",
+    "claim": "Outcome-blind downside-semivariance-level design frozen before outcomes under session_20261126T133828Z."
+   },
+   {
+    "phase": "HEAVY_CONFIRMATORY_EVAL_AND_RECOMPUTE",
+    "status": "COMPLETE",
+    "claim": "Heavy evaluation, independent recompute, evidence audit, gate alias, and trigger check produced under session_20261126T133828Z. all_checks_match=true."
+   }
+  ],
+  "note": "COMPLETED under session_20261126T133828Z. Downside realized-semivariance LEVEL arm closed NOT_SUPPORTED (rel MSE 0.716%, CI [0.419%,1.020%] < 2% floor). All funding-conditioned volatility estimands now closed NOT_SUPPORTED on the verified 5-symbol archive.",
+  "session": "session_20261126T133828Z",
+  "completed_session": "session_20261126T133828Z",
+  "supersedes": "FCLR-LIVE-ARCHIVE-05",
+  "carry_forward_bundles": [],
+  "completed_utc": "2026-11-26T13:45:19Z"
+ },
  {
   "rank": 16,
   "status": "COMPLETED_VALIDATED",
@@ -81,7 +141,10 @@
    "raw_cache": "research_state/session_20261126T042519Z/raw/ (1200 verified monthly zips; read-only)",
    "n_test": 35715,
    "relative_mse_reduction_C2_vs_B1": 0.001406101839118935,
-   "bootstrap_ci95_relative_mse_reduction": [-0.0003194852659931619, 0.003147539327033331],
+   "bootstrap_ci95_relative_mse_reduction": [
+    -0.0003194852659931619,
+    0.003147539327033331
+   ],
    "all_checks_match": true,
    "root_md_json_count": 500,
    "root_cap": 500,
@@ -214,19 +277,19 @@
   },
   "phases": [
    {
-     "phase": "SOURCE_REGISTRY_AND_VERIFIED_REUSE",
-     "status": "COMPLETE",
-     "claim": "Record the verified cache (exact URLs, checksums, coverage) in fclr_live_archive03_source_registry_<UTC>.{json,md}; reuse raw zips read-only."
+    "phase": "SOURCE_REGISTRY_AND_VERIFIED_REUSE",
+    "status": "COMPLETE",
+    "claim": "Record the verified cache (exact URLs, checksums, coverage) in fclr_live_archive03_source_registry_<UTC>.{json,md}; reuse raw zips read-only."
    },
    {
-     "phase": "PREREG_FREEZE",
-     "status": "COMPLETE",
-     "claim": "Freeze the outcome-blind 3-block stress/tail design (train-only high-quantile threshold), 2% relative Brier/log-loss floor, B1 vs C2, purge/embargo, symmetric verdict BEFORE outcomes."
+    "phase": "PREREG_FREEZE",
+    "status": "COMPLETE",
+    "claim": "Freeze the outcome-blind 3-block stress/tail design (train-only high-quantile threshold), 2% relative Brier/log-loss floor, B1 vs C2, purge/embargo, symmetric verdict BEFORE outcomes."
    },
    {
-     "phase": "HEAVY_CONFIRMATORY_EVAL_AND_RECOMPUTE",
-     "status": "COMPLETE",
-     "claim": "Execute the heavy 3-block stress evaluation triad + independent stdlib recompute + evidence audit + gate alias + trigger check under one fresh session_<UTC>/ (UTC > 20261126T042519Z). All artifacts non-empty."
+    "phase": "HEAVY_CONFIRMATORY_EVAL_AND_RECOMPUTE",
+    "status": "COMPLETE",
+    "claim": "Execute the heavy 3-block stress evaluation triad + independent stdlib recompute + evidence audit + gate alias + trigger check under one fresh session_<UTC>/ (UTC > 20261126T042519Z). All artifacts non-empty."
    }
   ],
   "note": "ACTIVE rank-0 as of 2026-11-26T04:25:19Z. Promoted after FCLR-LIVE-ARCHIVE-01 (mean-RV QLIKE) completed NOT_SUPPORTED on the 4-year Binance archive. The stress/tail arm is a DISTINCT repo-name volatility estimand. Stdlib only; no overlay; raw cache reusable read-only.",
