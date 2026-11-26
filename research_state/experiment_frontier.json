@@ -5,8 +5,8 @@
   "program_status": "ACTIVE",
   "task": "FCLR-LIVE-ARCHIVE-06-20261126T083526Z",
   "generated": "20261126T083526Z",
-  "refreshed": "2026-11-26T08:35:26Z",
-  "last_checked": "2026-11-26T08:35:26Z",
+  "refreshed": "2026-11-26T12:29:07Z",
+  "last_checked": "2026-11-26T12:29:07Z",
   "last_verdict": null,
   "next_action_heavy": "Execute FCLR-LIVE-ARCHIVE-06 in one fresh research_state/session_<UTC>/ (UTC strictly > 20261126T083526Z): outcome-blind prereg, heavy 3-block confirmatory downside realized-semivariance LEVEL evaluation (log(RV_minus+1e-9) primary; B1 signed HAR vs C2 B1+funding+price), independent stdlib recompute, evidence audit, gate-critical evidence_audit_ alias, and trigger check. This is HEAVY WORK, not a refresh, probe, prereg-only, audit-only, or verify-and-stop session.",
   "next_unfinished_task": "Produce the complete fclr_live_archive06_* artifact set under one fresh session_<UTC>/, all non-empty and no zero-byte placeholders: source_registry json+md; prereg json+md (outcome_data_inspected_before_freeze:false, hash-bound to source registry); eval py+json+md (B1 vs C2, 60/20/20 by unique UTC timestamp, 168h purge/embargo, test->3 blocks, >=2000 deterministic block-bootstrap replicates, per-block and leave-one-symbol-out); recompute py+json (all_checks_match:true); fclr_live_archive06_evidence_audit_ json+md; evidence_audit_ json+md alias; trigger_check_ json. Then record the real session id in AGENT_HANDOFF.md and promote this entry to COMPLETED_VALIDATED only after the artifacts exist. Do NOT write a future/non-existent session id before artifacts exist.",
@@ -51,7 +51,7 @@
     "claim": "Execute the heavy 3-block downside-level evaluation triad + independent stdlib recompute + evidence audit + gate alias + trigger check under one fresh session_<UTC>/ (UTC > 20261126T083526Z). All artifacts non-empty."
    }
   ],
-  "note": "ACTIVE rank-0 as of 2026-11-26T08:35:26Z. Rebound after reconciling completed campaign 05 under session_20261126T082429Z. Campaign 06 forecasts downside variance LEVEL, distinct from the closed mean, tail, quantile, and asymmetry-ratio estimands. Stdlib only; no overlay; raw cache reusable read-only.",
+  "note": "ACTIVE rank-0 as of 2026-11-26T12:29:07Z. Refreshed without a new session; no blocked or partial session exists. Campaign 06 forecasts downside variance LEVEL, distinct from the closed mean, tail, quantile, and asymmetry-ratio estimands. Stdlib only; no overlay; raw cache reusable read-only.",
   "session": null,
   "completed_session": null,
   "supersedes": "FCLR-LIVE-ARCHIVE-05",

@@ -4,8 +4,8 @@
 
 # EXECUTE FCLR-LIVE-ARCHIVE-06 — funding-conditioned DOWNSIDE REALIZED-SEMVARIANCE LEVEL
 
-**Timestamp:** 2026-11-26T08:35:26Z
-**Session:** NEXT (routing only; no heavy artifact is claimed by this refresh)
+**Timestamp:** 2026-11-26T12:29:07Z
+**Session:** NEXT (routing refresh only; no heavy artifact is claimed by this refresh)
 **Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-06-20261126T083526Z` — `READY_EXECUTE`
 **Latest completed heavy session:** `session_20261126T082429Z`
 **Repo-name priority:** the repository name leads with **Funding-conditioned-volatility**, so rank-0 remains the funding-conditioned volatility program. The Binance-archive mean-RV, stress/tail, quantile/full-distribution, and signed-semivariance-asymmetry arms are closed `NOT_SUPPORTED`. The next distinct repo-name estimand is the **level** of downside realized semivariance: whether funding and price-dislocation features improve next-24h downside-variance forecasts beyond signed-HAR history.
@@ -18,7 +18,7 @@
 ## 1. FIRST ACTIONS — EXECUTE IN THIS ORDER
 
 1. Run `export UTC=$(date -u +%Y%m%dT%H%M%SZ)` and `mkdir -p research_state/session_$UTC`. The new id MUST be lexicographically greater than `20261126T083526Z`; do not reuse an older session.
-2. Reuse the verified raw cache read-only: `research_state/session_20261126T042519Z/raw/` (1,200 monthly zips). Do not re-download unless a file is missing.
+2. Reuse the verified raw cache read-only: `research_state/session_20261126T042519Z/raw/` (1,200 monthly zips; 22 MB). Do not re-download unless a file is missing.
 3. Copy and adapt `research_state/session_20261126T082429Z/fclr_live_archive05_eval_20261126T082429Z.py`. Keep its deterministic stdlib parser, MM/OLS, split, and block-bootstrap patterns; replace the asymmetry-ratio target with the frozen downside-semivariance level in §3.
 4. Produce every artifact in §4 under that ONE new `session_$UTC/`. Every file must be non-empty and every JSON must carry `experiment_id:"FCLR-LIVE-ARCHIVE-06"` and the real `session_id`.
 5. Record the real session id in §8 and synchronize `research_state/experiment_frontier.json` only after the artifacts exist. Then run §5 until the gate reports `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive06"`, and `failures=[]`.
@@ -37,7 +37,7 @@ If you are about to rewrite this file without a new heavy session, stop: that is
 - **Liquidation-risk program on the frozen panel — CLOSED.** Do not reopen.
 - **Active rank-0:** `FCLR-LIVE-ARCHIVE-06-20261126T083526Z`, `READY_EXECUTE`. No `fclr_live_archive06_*` artifact exists yet.
 
-**Bottleneck removed in this refresh:** the prior handoff and frontier still routed to campaign 05 after `session_20261126T082429Z` had already produced the complete campaign-05 heavy set. The stale handoff caused `HANDOFF_STALE_LATEST_SESSION`; this refresh records the completed session, demotes campaign 05 to `COMPLETED_VALIDATED`, and rebinds rank-0 to campaign 06. The scientific design is frozen here so the next session cannot substitute a lighter task.
+**Bottleneck review in this refresh:** no blocked or inefficient sessions were found. The latest on-disk session is `session_20261126T082429Z`, which is also the latest completed heavy session; no newer partial session exists. The only remaining bottleneck is that campaign 06 has not been executed. The gate already binds that execution: the instant any newer `session_<UTC>/` exists, the complete campaign-06 artifact set becomes mandatory in that same session. This refresh archives the prior handoff and keeps the machine-bound campaign unchanged so the next session cannot substitute a lighter task.
 
 **Why the gate is green today:** the latest on-disk session equals the latest completed heavy session (`session_20261126T082429Z`), which predates the campaign-06 start, so the grandfather clause applies. The instant any newer `session_<UTC>/` exists, the complete campaign-06 artifact set becomes mandatory in that same session.
 
@@ -112,11 +112,11 @@ If a feature month is missing, do not silently substitute or zero-fill. Record t
 
 ---
 
-## 8. SESSION CLOSE-OUT — 2026-11-26T08:35:26Z
+## 8. SESSION CLOSE-OUT — 2026-11-26T12:29:07Z
 
-**What changed:** the sole durable handoff was refreshed to the current timestamp; the stale campaign-05 routing was reconciled against `session_20261126T082429Z`; campaign 05 was recorded as completed `NOT_SUPPORTED`; rank-0 was rebound to campaign 06; the prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T083526Z.md`.
+**What changed:** the sole durable handoff was refreshed to the current timestamp; the prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T122907Z.md`; the active campaign remains `FCLR-LIVE-ARCHIVE-06-20261126T083526Z` with its frozen downside-semivariance design unchanged; the frontier refresh timestamp was synchronized. No heavy artifact is claimed.
 
-**What was tested this session:** no new quantitative campaign was executed and no heavy artifact is claimed. Baseline verification passed: the heavy-work gate returned `pass=true`, `reason_code=OK`, `failures=[]`, with `handoff_stale=false` and `heavy_session_id=session_20261126T082429Z`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` passed; the six-module unittest command in §5 passed 122 tests; `python3 -m json.tool research_state/experiment_frontier.json >/dev/null` passed. The latest completed heavy session remains `session_20261126T082429Z`.
+**What was tested this session:** no new quantitative campaign was executed. Verification passed after the refresh: the heavy-work gate returned `pass=true`, `reason_code=OK`, `failures=[]`, with `handoff_stale=false` and `heavy_session_id=session_20261126T082429Z`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` passed; the six-module unittest command in §5 passed 122 tests; `python3 -m json.tool research_state/experiment_frontier.json >/dev/null` passed; the raw cache audit found 1,200/1,200 zips. The latest completed heavy session remains `session_20261126T082429Z`.
 
 **Single highest-value next task:** execute the complete campaign-06 downside-semivariance evaluation, independent recompute, evidence audit, gate alias, and trigger check in one fresh session strictly newer than `20261126T083526Z`.
 
