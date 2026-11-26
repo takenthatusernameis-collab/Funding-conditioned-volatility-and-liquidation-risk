@@ -1,20 +1,21 @@
 # AGENT HANDOFF — Durable Single Source of Truth for Next Session
 
-**Generated (UTC):** 2026-11-26T21:51:26Z
+**Generated (UTC):** 2026-11-26T21:56:08Z
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE`
-**HEAD:** `ea4532b4eb34ed8e1b7a9c24be8e9e8ae39555e9`
+**HEAD:** `a9fe59653e9769fcfcbcaf8410879810d7d2beed`
 **Working tree:** clean
 **Latest completed heavy session:** `session_20261126T133828Z`
+**Heavy-work gate at this refresh:** `pass=true`, `reason_code=OK`, `failures=[]`
 
 > This is the sole durable handoff. A timestamp-only rewrite, a new empty session directory, a prereg-only run, an audit-only run, a trigger-only run, a source-registry-only run, or a verify-and-stop run is a failed next session. The next session must execute the heavy campaign below.
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T21:51:26Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T21:56:08Z)
 
 **EXECUTE `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` NOW.** The repository name leads with **Funding-conditioned-volatility**, so the highest-value unfinished work is the pre-registered disjoint-cohort replication of the repo-name primary estimand: next-24h mean log-realized-variance QLIKE, C2 versus B1, on the untouched 2024-04 through 2026-10 cohort for `BNBUSDT`, `BTCUSDT`, `ETHUSDT`, `SOLUSDT`, and `XRPUSDT`. This is sequential confirmatory look `k=2`, with frozen `alpha_2 = 0.05/(2*3) = 0.008333`. The declared Holm secondary is the campaign-06 estimand: next-24h downside realized-semivariance level, judged by MSE. Do not substitute another estimand, cohort, threshold, or model search.
 
-**No setup or gate-repair step is required first.** The heavy-work gate passed at this refresh with `pass=true`, `reason_code=OK`, and `failures=[]`. `scripts/next_campaign_status.py` still prints its obsolete “no feasible 3-block design” message; that message does **not** block campaign-07, which uses a feasible 60/20/20 chronological split with three test blocks on the frozen five-symbol cache.
+**No setup or gate-repair step is required first.** The heavy-work gate passed at this refresh with `pass=true`, `reason_code=OK`, and `failures=[]`; `research_state/experiment_frontier.json` rank-0 is `READY_EXECUTE`; the five-symbol 2024-04..2026-10 cache and the stdlib template are on disk. `scripts/next_campaign_status.py` still prints its obsolete “no feasible 3-block design in ANY domain” message; that message is a known non-blocker and does **not** block campaign-07, which uses a feasible 60/20/20 chronological split with three test blocks on the frozen five-symbol cache. Do not let that legacy line stall the run.
 
 ### Mandatory execution sequence
 
@@ -106,9 +107,10 @@ All are under `research_state/session_20261126T133828Z/`. Do not re-run campaign
 - Do not modify `.github/workflows`, sealed protocols, raw caches, or prior frozen artifacts.
 - Stdlib only for campaign-07. No package installation.
 - Do not create a second active handoff or a status-only session. The next session’s purpose is the complete heavy evaluation, independent reproduction, and synchronized frontier.
+- **Machine-enforced non-avoidance:** `scripts/check_handoff_heavywork_gate.py` binds campaign-07 to the `fclr_live_archive07_*` artifact family plus `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json` in the newest session. A trigger-only, prose-only, audit-only, prereg-only, source-registry-only, verify-and-stop, or zero-byte-placeholder session fails closed. The gate is green now only because the newest on-disk session predates the campaign start; the first post-start session that lacks the full heavy set will fail.
 
 **Highest-value next action:** execute campaign-07 exactly as frozen above.
 **Dominant limitation to disclose:** only five symbols are available in the disjoint cohort, so per-block and leave-one-symbol-out diagnostics are mandatory.
 **Concrete falsification test:** C2 improves relative test QLIKE by at least 2% with the frozen uncertainty and Holm conditions on the untouched cohort.
 
-**END OF HANDOFF — 2026-11-26T21:51:26Z**
+**END OF HANDOFF — 2026-11-26T21:56:08Z**
