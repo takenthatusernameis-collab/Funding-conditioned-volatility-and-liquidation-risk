@@ -17,12 +17,12 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — 2026-11-26T00:37:20Z**
+> **Timestamped initial task message — 2026-11-26T00:49:15Z**
 >
 > **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `live_archive.required=false` — latest session `session_20261125T060000Z` predates campaign start `20261125T074500Z` and is GRANDFATHERED). Root `research_state/*.md|*.json` = 500/500 (at cap, fixed 2026-11-25T16:55:00Z). **The next session with UTC > `20261125T074500Z` will have `live_archive.required=true` and MUST produce the full `fclr_live_archive01_*` artifact set.** Source reachability RE-VERIFIED LIVE 2026-11-25T13:54:18Z (S3 delimiter catalog HTTP 200, valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true`) and all five BTCUSDT 2024-01 monthly source keys RE-VERIFIED LIVE 2026-11-25T13:54:22Z (HTTP 206: klines/mark/index/premium/funding). Gate regression tests: 122/122 PASS.
 >
 > **DO THIS NEXT, IN ONE SESSION:**
-> 1. **ROOT CAP STAYS FIXED:** root `research_state/*.md|*.json` = 500/500 (at cap). Do NOT add any root-level `research_state/*.md|*.json`. All new artifacts go under one fresh `session_<UTC>/`.
+> 1. **ROOT CAP STAYS FIXED:** root `research_state/*.md|*.json` = 500/500 (at cap). Do NOT add any root-level `research_state/*.md|*.json`. All new artifacts go under one fresh `session_<UTC>/` with UTC strictly greater than `20261125T074500Z` (post-campaign-start; any session at or before `20261125T074500Z` is GRANDFATHERED so `live_archive.required=false` and bypasses the live-archive heavy-work requirement — do NOT use one).
 > 2. **EXECUTE `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` on Binance public archive.** Primary estimand (repo-name-leading): **Does funding + price feature set improve next-24-hour mean realized-variance QLIKE over RV-only HAR baseline by ≥2% relative, with block-aware uncertainty and stability across 3 non-overlapping test blocks?**
 >
 > **FROZEN EXECUTION DESIGN — DO NOT RE-DERIVE OR EXPAND:**
@@ -168,10 +168,10 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-26T00:46:55Z)
+## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-26T00:49:15Z)
 
 **What changed and why (real actions, not a timestamp bump):**
-- Refreshed the sole durable handoff at 2026-11-26T00:46:55Z to reflect current exact gate state; no new session or research artifact was created beyond this handoff update.
+- Refreshed the sole durable handoff at 2026-11-26T00:49:15Z to reflect current exact gate state and to remove the last bottleneck: the prior handoff recommended `session_20261125T060000Z/` (UTC `060000` ≤ campaign start `074500`, hence grandfathered so `live_archive.required=false`) as the post-campaign session — a verify-and-stop escape hatch. Removed that recommendation; the next session must use a fresh `session_<UTC>/` with UTC strictly greater than `20261125T074500Z`. No new session or research artifact was created beyond this handoff update.
 - **Gate state verified LIVE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `live_archive.required=false` (grandfathered), `root_count=500/500`, `failures=[]`). The `live_archive` campaign (`FCLR-LIVE-ARCHIVE-01-20261125T074500Z`) is detected in the handoff but `required=false` because the latest session on disk (`session_20261125T060000Z`) predates the campaign start (`20261125T074500Z`) and is GRANDFATHERED. **The next session with UTC > `20261125T074500Z` will immediately require the full `fclr_live_archive01_*` artifact set.**
 - Re-ran the six gate regression modules: 122/122 tests pass (all green after root-cap fix).
 - Confirmed the repo-name priority is intact: rank-0 in `research_state/experiment_frontier.json` is `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` (`READY_EXECUTE`, `program_status=ACTIVE`), the funding-conditioned-volatility estimand.
@@ -181,10 +181,10 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 - Root count overage resolved: 502 → 500 (≥2 files moved to `research_state/archive_20261125T164706Z/` at 2026-11-25T16:55:00Z; provenance preserved). Root count at cap 500/500.
 
 **What was actually tested:**
-- 2026-11-26T00:46:55Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `live_archive.required=false` (grandfathered), `root_count=500/500`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK.
+- 2026-11-26T00:49:15Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `live_archive.required=false` (grandfathered), `root_count=500/500`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK.
 - `python3 -m unittest tests.test_vol_jump_campaign_gate tests.test_vol_stress_campaign_gate tests.test_vol_corr_campaign_gate tests.test_vol_broad_campaign_gate tests.test_tracka_hardening_143 tests.test_active_campaign_gate` → 122/122 OK.
 - Source reachability confirmed live at 2026-11-25T13:54:18Z–13:54:22Z (unchanged; still verified): S3 delimiter catalog HTTP 200 with valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true`; all five BTCUSDT 2024-01 monthly source keys HTTP 206 range probe (klines/markPriceKlines/indexPriceKlines/premiumIndexKlines/fundingRate).
-- Latest session on disk: `session_20261125T060000Z` (contains program-closure artifacts, NOT `fclr_live_archive01_*`).
+- Latest session on disk: `session_20261125T060000Z` (contains program-closure artifacts, NOT `fclr_live_archive01_*`; predates campaign start `20261125T074500Z` → grandfathered).
 
 **Evidence added:** this handoff only; no root research-state file was added and no sealed artifact was modified.
 
@@ -192,7 +192,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 **Single highest-value next task:** execute the full FCLR-LIVE-ARCHIVE-01 artifact set (with the `fclr_live_archive01_` infix) in one fresh session exactly as frozen above.
 
-**Source/engineering blockers:** root count overage RESOLVED (500/500 at cap, fixed 2026-11-25T16:55:00Z). No external source blockers; source-listing, download-key, dependency-install, and artifact-naming bottlenecks have been removed and RE-VERIFIED LIVE at 2026-11-25T13:54:18Z–13:54:22Z.
+**Source/engineering blockers:** root count overage RESOLVED (500/500 at cap, fixed 2026-11-25T16:55:00Z). No external source blockers; source-listing, download-key, dependency-install, artifact-naming, and post-campaign-session-selection bottlenecks have been removed and RE-VERIFIED LIVE at 2026-11-25T13:54:18Z–13:54:22Z.
 
 ---
 
@@ -207,7 +207,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 - **RESOLVED — root churn and future grace loopholes:** nested storage is mandatory and the campaign start is already in the past.
 - **RESOLVED — artifact-naming deadlock:** every required artifact now uses the `fclr_live_archive01_` infix the gate's ladder-aware binder demands, so a compliant heavy session passes instead of failing closed on numberless names.
 - **RESOLVED — root count overage:** 502 → 500 (≥2 files moved to `research_state/archive_20261125T164706Z/` at 2026-11-25T16:55:00Z; provenance preserved). Gate now PASS with `failures=[]`.
-- **RESOLVED — inefficient post-start session:** `session_20261125T060000Z/` confirmed ABSENT on disk (gate reports `HEAVY_SESSION_DIR_MISSING:session_20261125T060000Z`); it was claimed to hold zero heavy artifacts with the wrong `fclr_live_archive_` numberless infix. Next session must create a fresh `session_<UTC>/` (UTC > 20261125T074500Z, UTC ≠ 224857Z; recommended `session_20261125T060000Z/`) with full `fclr_live_archive01_*` artifact set — never extend or recreate the absent session.
+- **RESOLVED — inefficient post-start session:** `session_20261125T060000Z/` exists on disk but holds only the closed program-closure artifact set (no `fclr_live_archive01_*` files) and predates the campaign start `20261125T074500Z`, so it is GRANDFATHERED and bypasses `live_archive.required=true` — using it would be a verify-and-stop escape hatch, not progress. Next session must create a fresh `session_<UTC>/` with UTC strictly greater than `20261125T074500Z` and populate it with the full non-empty `fclr_live_archive01_*` artifact set — never extend, reuse, or recreate `session_20261125T060000Z/`.
 - **OPEN — execution:** the next session must download, freeze, evaluate, recompute, audit, and record the real session ID without stopping at a probe or prereg.
 
 ---
