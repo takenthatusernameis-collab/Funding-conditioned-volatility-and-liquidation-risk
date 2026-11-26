@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Durable Single Source of Truth for Next Session
 
-**Generated (UTC):** 2026-11-26T17:47:27Z
+**Generated (UTC):** 2026-11-26T17:49:25Z
 **Program status:** CLOSED_TERMINAL (per `fclr_final_structural_closure_20261124T025751.md` and `final_record_closure_audit.md`)
 **Terminal verdict:** NO_CLAIM_WORTHY_RESULT_PROMOTABLE; ALL_P1_P2_P3_SEALED
 **HEAD:** (check `git rev-parse HEAD`)
@@ -155,4 +155,10 @@ AGENT_HANDOFF.md updated: yes
 
 **This document is the durable single source of truth.** Future agents MUST read this first, run the verification commands, and act ONLY per the decision tree in §4. No "next task" pointers outside this document are valid.
 
-**END OF HANDOFF — 2026-11-26T17:47:27Z**session_20261126T133828Z
+## 9. NEXT INITIAL TASK MESSAGE (timestamped 2026-11-26T17:49:25Z) — DURABLE HANDOFF
+
+**INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T17:49:25Z):**
+
+Program is CLOSED_TERMINAL for confirmatory tracks; NO reopen condition satisfied. The ONLY active heavy-work campaign is **FCLR-LIQ-CONTAGION-01** (rank-0 in `experiment_frontier.json`, status=READY_EXECUTE, program=ACTIVE, panel=`fclr_liq_combined_panel_20261115T181405Z.parquet`, 1.74M observed-liquidation events). It has NO evaluation artifact yet. Future agents MUST NOT idle: execute the full heavy evaluation triad on this frozen panel — (1) freeze an outcome-blind prereg with a NEW experiment ID under `research_state/session_<UTC>/`; (2) run eval + independent stdlib recompute + evidence audit + gate alias + trigger check; (3) produce non-empty prefixed artifacts (`fclr_liq_contagion01_*`); (4) update `experiment_frontier.json` and this handoff AFTER artifacts exist. All new artifacts MUST go under `session_<UTC>/` (root cap 500). Do NOT re-run sealed experiments, do NOT shop thresholds, do NOT fabricate data. If contagion evaluation completes, then and only then produce the closure acknowledgment. Reopen conditions remain unsatisfied; do not act on them. Heavy work is mandatory; idling is a failed session.
+
+**END OF HANDOFF — 2026-11-26T17:49:25Z**
