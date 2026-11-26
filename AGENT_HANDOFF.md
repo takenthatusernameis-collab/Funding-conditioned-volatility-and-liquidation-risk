@@ -4,7 +4,7 @@
 
 # AGENT_HANDOFF.md — FCLR-LIVE-ARCHIVE-01 Confirmatory Volatility Evaluation (repo-name rank-0)
 
-**Timestamp:** 2026-11-26T03:12:42Z
+**Timestamp:** 2026-11-26T03:15:52Z
 **Session:** NEXT (to execute)
 **Campaign:** FCLR-LIVE-ARCHIVE-01-20261125T074500Z (ACTIVE rank-0, READY_EXECUTE)
 **Hypothesis:** FCLR-H001 (incremental 24-hour realized-variance forecasting; funding + price features vs RV-only baseline)
@@ -211,7 +211,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## 13. SESSION CLOSE-OUT — 2026-11-26T03:12:42Z
+## 13. SESSION CLOSE-OUT — 2026-11-26T03:15:52Z
 
 **What changed and why (handoff refresh, not new research):**
 - Re-anchored the durable handoff to on-disk truth: rank-0 = FCLR-LIVE-ARCHIVE-01 (READY_EXECUTE); FCLR-009 and the liquidation-risk program closure are CLOSED; no `fclr_live_archive01_*` artifact exists.
@@ -236,7 +236,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## 14. RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T03:12:42Z)
+## 14. RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T03:15:52Z)
 
 **What did the evidence support, contradict, or leave unknown?**
 - Supported: the frozen panel is exhausted; the Binance monthly archive is reachable without authentication through the verified S3 catalog and direct S3 keys; a five-symbol, four-year monthly design fits the request budget.
