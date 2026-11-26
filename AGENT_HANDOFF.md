@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-26T00:37:20Z
+# AGENT HANDOFF — 2026-11-26T00:55:59Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -17,7 +17,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — 2026-11-26T00:49:15Z**
+> **Timestamped initial task message — 2026-11-26T00:55:59Z**
 >
 > **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `live_archive.required=false` — latest session `session_20261125T060000Z` predates campaign start `20261125T074500Z` and is GRANDFATHERED). Root `research_state/*.md|*.json` = 500/500 (at cap, fixed 2026-11-25T16:55:00Z). **The next session with UTC > `20261125T074500Z` will have `live_archive.required=true` and MUST produce the full `fclr_live_archive01_*` artifact set.** Source reachability RE-VERIFIED LIVE 2026-11-25T13:54:18Z (S3 delimiter catalog HTTP 200, valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true`) and all five BTCUSDT 2024-01 monthly source keys RE-VERIFIED LIVE 2026-11-25T13:54:22Z (HTTP 206: klines/mark/index/premium/funding). Gate regression tests: 122/122 PASS.
 >
@@ -168,10 +168,10 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-26T00:49:15Z)
+## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-26T00:55:59Z)
 
 **What changed and why (real actions, not a timestamp bump):**
-- Refreshed the sole durable handoff at 2026-11-26T00:49:15Z to reflect current exact gate state and to remove the last bottleneck: the prior handoff recommended `session_20261125T060000Z/` (UTC `060000` ≤ campaign start `074500`, hence grandfathered so `live_archive.required=false`) as the post-campaign session — a verify-and-stop escape hatch. Removed that recommendation; the next session must use a fresh `session_<UTC>/` with UTC strictly greater than `20261125T074500Z`. No new session or research artifact was created beyond this handoff update.
+- Refreshed the sole durable handoff at 2026-11-26T00:55:59Z to reflect current exact gate state and to remove the last bottleneck: the prior handoff recommended `session_20261125T060000Z/` (UTC `060000` ≤ campaign start `074500`, hence grandfathered so `live_archive.required=false`) as the post-campaign session — a verify-and-stop escape hatch. Removed that recommendation; the next session must use a fresh `session_<UTC>/` with UTC strictly greater than `20261125T074500Z`. No new session or research artifact was created beyond this handoff update.
 - **Gate state verified LIVE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `live_archive.required=false` (grandfathered), `root_count=500/500`, `failures=[]`). The `live_archive` campaign (`FCLR-LIVE-ARCHIVE-01-20261125T074500Z`) is detected in the handoff but `required=false` because the latest session on disk (`session_20261125T060000Z`) predates the campaign start (`20261125T074500Z`) and is GRANDFATHERED. **The next session with UTC > `20261125T074500Z` will immediately require the full `fclr_live_archive01_*` artifact set.**
 - Re-ran the six gate regression modules: 122/122 tests pass (all green after root-cap fix).
 - Confirmed the repo-name priority is intact: rank-0 in `research_state/experiment_frontier.json` is `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` (`READY_EXECUTE`, `program_status=ACTIVE`), the funding-conditioned-volatility estimand.
@@ -181,7 +181,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 - Root count overage resolved: 502 → 500 (≥2 files moved to `research_state/archive_20261125T164706Z/` at 2026-11-25T16:55:00Z; provenance preserved). Root count at cap 500/500.
 
 **What was actually tested:**
-- 2026-11-26T00:49:15Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `live_archive.required=false` (grandfathered), `root_count=500/500`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK.
+- 2026-11-26T00:55:59Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `live_archive.required=false` (grandfathered), `root_count=500/500`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK.
 - `python3 -m unittest tests.test_vol_jump_campaign_gate tests.test_vol_stress_campaign_gate tests.test_vol_corr_campaign_gate tests.test_vol_broad_campaign_gate tests.test_tracka_hardening_143 tests.test_active_campaign_gate` → 122/122 OK.
 - Source reachability confirmed live at 2026-11-25T13:54:18Z–13:54:22Z (unchanged; still verified): S3 delimiter catalog HTTP 200 with valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true`; all five BTCUSDT 2024-01 monthly source keys HTTP 206 range probe (klines/markPriceKlines/indexPriceKlines/premiumIndexKlines/fundingRate).
 - Latest session on disk: `session_20261125T060000Z` (contains program-closure artifacts, NOT `fclr_live_archive01_*`; predates campaign start `20261125T074500Z` → grandfathered).
@@ -212,7 +212,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T00:25:48Z)
+## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T00:55:59Z)
 
 **What did the evidence support, contradict, or leave unknown?**
 - Supported: the frozen panel is exhausted and the Binance monthly archive is reachable without authentication through the verified S3 catalog and direct S3 keys.
