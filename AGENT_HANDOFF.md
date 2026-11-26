@@ -2,7 +2,7 @@
 
 **Generated (UTC):** 2026-11-26T21:57:06Z
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE`
-**HEAD:** `a4b0775e27bed136ec4bff2ce651ce3bbc660b37`
+**HEAD:** `21fab5a4583b3701fa9a6b3138fd473d66007db1`
 **Working tree:** clean
 **Latest completed heavy session:** `session_20261126T133828Z`
 **Heavy-work gate at this refresh:** `pass=true`, `reason_code=OK`, `failures=[]`
