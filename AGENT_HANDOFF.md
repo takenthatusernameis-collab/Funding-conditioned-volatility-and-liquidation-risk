@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-26T01:46:34Z
+# AGENT HANDOFF — 2026-11-26T01:49:22Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -18,7 +18,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — 2026-11-26T01:46:34Z**
+> **Timestamped initial task message — 2026-11-26T01:49:22Z**
 >
 > **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `live_archive.required=false` — latest session `session_20261125T060000Z` predates campaign start `20261125T074500Z` and is GRANDFATHERED). Root `research_state/*.md|*.json` = 500/500 (at cap, fixed 2026-11-25T16:55:00Z). **The next session with UTC > `20261125T074500Z` will have `live_archive.required=true` and MUST produce the full `fclr_live_archive01_*` artifact set.** Gate regression tests: 122/122 PASS.
 >
@@ -171,11 +171,11 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## SESSION CLOSE-OUT — 2026-11-26T01:46:34Z
+## SESSION CLOSE-OUT — 2026-11-26T01:49:22Z
 
-**What changed and why (real actions, not a timestamp bump):**
-- Updated the sole durable handoff with a refreshed timestamped initial task message (2026-11-26T01:46:34Z) that preserves all frozen execution design, cohort, URLs, budget, and artifact requirements.
-- Confirmed gate state remains PASS with `live_archive.required=false` (grandfathered) and 122/122 regression tests passing.
+**What changed and why (handoff refresh + verification, not new research):**
+- Refreshed the sole durable handoff with the 2026-11-26T01:49:22Z timestamped initial task message after re-verifying the live-archive campaign remains the rank-0 repo-name priority.
+- Re-ran the heavy-work gate and all six gate regression modules; the campaign binder, frozen cohort, artifact contract, and post-start heavy-work requirement remain intact.
 - Root count remains 500/500 at cap; no root-level research-state files added.
 - All bottleneck resolutions from prior session remain in effect: symbol enumeration complete, five-source coverage verified, funding layout resolved, download budget bounded, stdlib-only deps enforced, artifact-naming deadlock fixed, root churn capped.
 
@@ -210,7 +210,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T01:46:34Z)
+## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T01:49:22Z)
 
 **What did the evidence support, contradict, or leave unknown?**
 - Supported: the frozen panel is exhausted and the Binance monthly archive is reachable without authentication through the verified S3 catalog and direct S3 keys.
