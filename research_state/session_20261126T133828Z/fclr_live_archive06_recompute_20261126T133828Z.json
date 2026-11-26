@@ -1,0 +1,62 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-06",
+  "session_id": "20261126T133828Z",
+  "artifact_id": "fclr_live_archive06_recompute_20261126T133828Z",
+  "method": "independent stdlib recompute (separate parser + prefix-sum rolling + plain Gauss-Jordan OLS)",
+  "n_test": 35715,
+  "n_unique_timestamps": 34872,
+  "recomputed": {
+    "B1": {
+      "mse": 0.8506573408549578,
+      "r2": 0.26186024162933497,
+      "sse": 30381.226928634816,
+      "sst": 41159.179659549714
+    },
+    "C2": {
+      "mse": 0.8445656009625306,
+      "r2": 0.26714621895098345,
+      "sse": 30163.66043837678,
+      "sst": 41159.179659549714
+    }
+  },
+  "relative_mse_reduction_C2_vs_B1": 0.007161214745181222,
+  "eval": {
+    "B1": {
+      "mse": 0.850657340856029,
+      "r2": 0.26186024162829535,
+      "sse": 30381.226928673073,
+      "sst": 41159.17965954357,
+      "sign_acc": 1.0,
+      "n": 35715
+    },
+    "C2": {
+      "mse": 0.8445656009634703,
+      "r2": 0.26714621895005863,
+      "sse": 30163.660438410345,
+      "sst": 41159.17965954357,
+      "sign_acc": 1.0,
+      "n": 35715
+    }
+  },
+  "eval_rel": 0.007161214745326733,
+  "abs_diffs": {
+    "mse_B1": 1.071143174158351e-12,
+    "mse_C2": 9.396927680427325e-13,
+    "rel": 1.4551033988841056e-13
+  },
+  "checks": {
+    "mse_B1_match": true,
+    "mse_C2_match": true,
+    "r2_B1_match": true,
+    "r2_C2_match": true,
+    "rel_reduction_match": true,
+    "n_test_match": true,
+    "verdict_reproduced": true
+  },
+  "all_checks_match": true,
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true,
+  "verdict_reproduced": "NOT_SUPPORTED",
+  "eval_verdict": "NOT_SUPPORTED"
+}

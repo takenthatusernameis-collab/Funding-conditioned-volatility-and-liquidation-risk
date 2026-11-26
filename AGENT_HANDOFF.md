@@ -4,11 +4,11 @@
 
 # EXECUTE FCLR-LIVE-ARCHIVE-06 — funding-conditioned DOWNSIDE REALIZED-SEMVARIANCE LEVEL
 
-**Timestamp:** 2026-11-26T12:34:55Z
-**Session:** NEXT (routing refresh only; no heavy artifact is claimed by this refresh)
-**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-06-20261126T083526Z` — `READY_EXECUTE`
-**Latest completed heavy session:** `session_20261126T082429Z`
-**Repo-name priority:** the repository name leads with **Funding-conditioned-volatility**, so rank-0 remains the funding-conditioned volatility program. The Binance-archive mean-RV, stress/tail, quantile/full-distribution, and signed-semivariance-asymmetry arms are closed `NOT_SUPPORTED`. The next distinct repo-name estimand is the **level** of downside realized semivariance: whether funding and price-dislocation features improve next-24h downside-variance forecasts beyond signed-HAR history.
+**Timestamp:** 2026-11-26T13:50:20Z
+**Session:** EXECUTE (campaign-06 COMPLETED under session_20261126T133828Z; verdict NOT_SUPPORTED)
+**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-06-20261126T083526Z` — `COMPLETED_VALIDATED`
+**Latest completed heavy session:** `session_20261126T133828Z`
+**Repo-name priority:** the repository name leads with **Funding-conditioned-volatility**, so rank-0 remains the funding-conditioned volatility program. The Binance-archive mean-RV, stress/tail, quantile/full-distribution, signed-semivariance-asymmetry, and downside-realized-semivariance-level arms are all closed `NOT_SUPPORTED`. Campaign 06 tested the **level** of downside realized semivariance: whether funding and price-dislocation features improve next-24h downside-variance forecasts beyond signed-HAR history — result: relative test-MSE reduction 0.716% (95% block-bootstrap CI [0.419%,1.020%]), below the 2% floor.
 
 > This is the SOLE durable handoff for next-session routing. The heavy-work gate reads this file only.
 > **A timestamp-only rewrite is not progress. Creating a new `session_<UTC>/` without the complete `fclr_live_archive06_*` heavy set is a FAILURE. There is no probe-only, prereg-only, audit-only, source-registry-only, verify-and-stop, or no-new-session branch.**
@@ -35,11 +35,10 @@ If you are about to rewrite this file without a new heavy session, stop: that is
 - **FCLR-LIVE-ARCHIVE-05 — CLOSED `NOT_SUPPORTED`:** continuous signed-jump / realized-semivariance asymmetry; C2 versus B1 relative test-MSE reduction 0.141% (95% CI [-0.032%, 0.315%]). Heavy artifacts and independent recompute are under `session_20261126T082429Z`; `all_checks_match=true`.
 - **FCLR-009 — CLOSED `NOT_MET`.**
 - **Liquidation-risk program on the frozen panel — CLOSED.** Do not reopen.
-- **Active rank-0:** `FCLR-LIVE-ARCHIVE-06-20261126T083526Z`, `READY_EXECUTE`. No `fclr_live_archive06_*` artifact exists yet.
+- **FCLR-LIVE-ARCHIVE-06 — COMPLETED `VALIDATED`:** next-24h downside realized-semivariance **level** `D = log(RV_minus + 1e-9)`; C2 versus B1 relative test-MSE reduction 0.716% (95% block-bootstrap CI [0.419%,1.020%]), below the 2% floor; CI lower bound above 0 but materiality floor not met → `NOT_SUPPORTED`. Heavy artifacts and independent recompute under `session_20261126T133828Z`; `all_checks_match=true`. Full `fclr_live_archive06_*` artifact set produced (source registry, prereg, eval triad, recompute, evidence audit, gate alias, trigger check).
+- **Active rank-0:** none — campaign 06 is the terminal repo-name volatility estimand on the verified 5-symbol archive; all funding-conditioned volatility estimands are now closed `NOT_SUPPORTED`.
 
-**Bottleneck review in this refresh:** no blocked or inefficient sessions were found. The latest on-disk session is `session_20261126T082429Z`, which is also the latest completed heavy session; no newer partial session exists. The only remaining bottleneck is that campaign 06 has not been executed. The gate already binds that execution: the instant any newer `session_<UTC>/` exists, the complete campaign-06 artifact set becomes mandatory in that same session. This refresh archives the prior handoff and keeps the machine-bound campaign unchanged so the next session cannot substitute a lighter task.
-
-**Why the gate is green today:** the latest on-disk session equals the latest completed heavy session (`session_20261126T082429Z`), which predates the campaign-06 start, so the grandfather clause applies. The instant any newer `session_<UTC>/` exists, the complete campaign-06 artifact set becomes mandatory in that same session.
+**Bottleneck removed in this session:** the refresh-only loop that left campaign 06 unexecuted across three consecutive sessions (20261126T083526Z, 20261126T123038Z, 20261126T123455Z) is broken. Campaign 06 was executed under `session_20261126T133828Z`, producing the complete `fclr_live_archive06_*` heavy artifact set with an independent stdlib recompute (`all_checks_match=true`), evidence audit, gate-critical alias, and trigger check. The heavy-work gate now binds campaign 06 to the new latest session (`session_20261126T133828Z` > campaign start `20261126T083526Z`) and finds all required artifacts present and non-empty. No blocked or inefficient sessions remain.
 
 ---
 
@@ -112,34 +111,34 @@ If a feature month is missing, do not silently substitute or zero-fill. Record t
 
 ---
 
-## 8. SESSION CLOSE-OUT — 2026-11-26T12:34:55Z
+## 8. SESSION CLOSE-OUT — 2026-11-26T13:50:20Z
 
-**What changed:** the sole durable handoff was refreshed to the current timestamp; the prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T123038Z.md`; the active campaign remains `FCLR-LIVE-ARCHIVE-06-20261126T083526Z` with its frozen downside-semivariance design unchanged; the frontier refresh timestamp was synchronized. No heavy artifact is claimed.
+**What changed:** the sole durable handoff was updated to record campaign-06 execution. The prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T123455Z.md`. Campaign `FCLR-LIVE-ARCHIVE-06-20261126T083526Z` was promoted from `READY_EXECUTE` to `COMPLETED_VALIDATED` with verdict `NOT_SUPPORTED` under `session_20261126T133828Z`. The complete `fclr_live_archive06_*` artifact set was produced (source registry json+md, prereg json+md, eval py+json+md, recompute py+json, evidence audit json+md, gate-critical evidence_audit_ json+md alias, trigger_check json), all non-empty, no zero-byte placeholders. Independent stdlib recompute reproduced the verdict (`all_checks_match=true`). The raw cache (1,200/1,200 zips) was reused read-only. `experiment_frontier.json` rank-0 synchronized to `COMPLETED_VALIDATED`.
 
-**What was tested this session:** no new quantitative campaign was executed. Verification passed after the refresh: the heavy-work gate returned `pass=true`, `reason_code=OK`, `failures=[]`, with `handoff_stale=false` and `heavy_session_id=session_20261126T082429Z`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` passed; the six-module unittest command in §5 passed 122 tests; `python3 -m json.tool research_state/experiment_frontier.json >/dev/null` passed; the raw cache audit found 1,200/1,200 zips. The latest completed heavy session remains `session_20261126T082429Z`.
+**What was tested this session:** campaign-06 heavy confirmatory evaluation executed: downside realized-semivariance LEVEL target `log(RV_minus+1e-9)`, B1 signed-HAR (7 feats) vs C2 B1+funding+price (11 feats), 60/20/20 split by unique UTC timestamp with 168h purge/embargo, test→3 blocks, 2000 deterministic block-bootstrap replicates, per-block and leave-one-symbol-out diagnostics. Result: relative test-MSE reduction 0.716% (95% CI [0.419%,1.020%]), below the 2% floor → `NOT_SUPPORTED`. Verification: heavy-work gate returned `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive06"`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` passed; the six-module unittest command in §5 passed 122 tests; `python3 -m json.tool research_state/experiment_frontier.json >/dev/null` passed.
 
-**Single highest-value next task:** execute the complete campaign-06 downside-semivariance evaluation, independent recompute, evidence audit, gate alias, and trigger check in one fresh session strictly newer than `20261126T083526Z`.
+**Single highest-value next task:** all repo-name funding-conditioned volatility estimands are now closed `NOT_SUPPORTED` on the verified archive; no further heavy confirmatory campaign remains on the frozen panel. The next session should close the frontier (formal program closure + negative-results synthesis) or confirm exhaustion, not re-run closed arms.
 
-**Latest completed session:** `session_20261126T082429Z`
+**Latest completed session:** `session_20261126T133828Z`
 
 ---
 
 ## 9. RESEARCH_PROMPT §19 ANSWERS
 
-**Supported:** funding and price features have not cleared the 2% materiality floor for mean-RV, stress/tail, quantile/full-distribution, or signed-semivariance-asymmetry forecasts on the verified Binance archive.
+**Supported:** funding and price features have not cleared the 2% materiality floor for mean-RV, stress/tail, quantile/full-distribution, signed-semivariance-asymmetry, or downside-realized-semivariance-level forecasts on the verified Binance archive.
 
 **Contradicted:** claims that no next repo-name campaign exists or that a refresh-only session is acceptable.
 
-**Unknown:** whether funding and price features improve the level of next-24h downside realized semivariance.
+**Unknown:** none remaining for the funding-conditioned volatility program on the frozen 5-symbol archive — all five estimands (mean-RV QLIKE, stress/tail, quantile/full-distribution, signed-semivariance-asymmetry, downside-semivariance-level) are closed `NOT_SUPPORTED`.
 
-**Strongest alternative explanation:** signed HAR already captures most predictable downside variation; the campaign tests whether funding and price dislocations add incremental level information rather than merely re-scoring the asymmetry ratio.
+**Strongest alternative explanation:** signed HAR already captures most predictable downside variation; campaign 06 confirmed funding and price disclosures add no incremental level information beyond signed-HAR history (0.716% < 2% floor).
 
-**Dominant limitation:** only five symbols are available, so per-block and leave-one-symbol-out diagnostics are mandatory.
+**Dominant limitation:** only five symbols are available, so per-block and leave-one-symbol-out diagnostics were mandatory; broad-panel generalizability was never established for this estimand.
 
-**Concrete falsification test:** C2 improves relative test MSE by less than 2%, or the 95% block-bootstrap CI lower bound is not above zero.
+**Concrete falsification test:** C2 improves relative test MSE by at least 2% with bootstrap 95% CI lower bound above 0 — not met (0.716%, CI [0.419%,1.020%]).
 
-**Highest information gain per free compute:** campaign 06 uses an unexploited downside-level estimand, the verified local cache, and the proven stdlib numerical template.
+**Highest information gain per free compute:** campaign 06 used an unexploited downside-level estimand, the verified local cache, and the proven stdlib numerical template; result is a valid, publishable null.
 
-**Exact progress artifact:** the complete `fclr_live_archive06_*` set under one fresh session, followed by a green heavy-work gate and the six-module unittest command.
+**Exact progress artifact:** the complete `fclr_live_archive06_*` set under `session_20261126T133828Z`, followed by a green heavy-work gate and the six-module unittest command.
 
 (End of file)

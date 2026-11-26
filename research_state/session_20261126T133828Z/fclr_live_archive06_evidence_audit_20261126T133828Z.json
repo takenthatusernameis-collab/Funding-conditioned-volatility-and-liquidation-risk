@@ -1,0 +1,51 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-06",
+  "session_id": "20261126T133828Z",
+  "artifact_id": "fclr_live_archive06_evidence_audit_20261126T133828Z",
+  "generated_at": "2026-11-26T13:45:19Z",
+  "audit_pass": true,
+  "unresolved_blockers": [],
+  "leakage_controls": {
+    "outcome_data_inspected_before_freeze": false,
+    "train_only_ols_fit": true,
+    "train_only_scaling": true,
+    "purge_embargo_hours": 168,
+    "test_never_used_for_model_fitting": true,
+    "hash_bound_prereg_to_source_registry": true
+  },
+  "recompute": {
+    "all_checks_match": true,
+    "checks": {
+      "mse_B1_match": true,
+      "mse_C2_match": true,
+      "r2_B1_match": true,
+      "r2_C2_match": true,
+      "rel_reduction_match": true,
+      "n_test_match": true,
+      "verdict_reproduced": true
+    },
+    "abs_diffs": {
+      "mse_B1": 0.0,
+      "mse_C2": 0.0,
+      "rel": 0.0
+    }
+  },
+  "source": {
+    "n_cache_entries": 1200,
+    "n_ok": 1200,
+    "n_missing": 0,
+    "sha256_verified_all": true,
+    "read_only_reuse": true,
+    "network_used": false
+  },
+  "verdict": "NOT_SUPPORTED",
+  "verdict_reason": "C2 vs B1 relative test-MSE reduction < 2% floor or CI includes 0",
+  "relative_mse_reduction_C2_vs_B1": 0.007161214745326733,
+  "bootstrap_ci95_relative_mse_reduction": [0.004185519461045794, 0.01020492623312581],
+  "materiality_floor": 0.02,
+  "n_test": 35715,
+  "n_unique_timestamps": 34872,
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true
+}

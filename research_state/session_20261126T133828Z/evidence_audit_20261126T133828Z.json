@@ -1,0 +1,20 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-06",
+  "session_id": "20261126T133828Z",
+  "artifact_id": "evidence_audit_20261126T133828Z",
+  "generated_at": "2026-11-26T13:45:19Z",
+  "alias_of": "fclr_live_archive06_evidence_audit_20261126T133828Z",
+  "audit_pass": true,
+  "unresolved_blockers": [],
+  "verdict": "NOT_SUPPORTED",
+  "verdict_reason": "C2 vs B1 relative test-MSE reduction < 2% floor or CI includes 0",
+  "relative_mse_reduction_C2_vs_B1": 0.007161214745326733,
+  "bootstrap_ci95_relative_mse_reduction": [0.004185519461045794, 0.01020492623312581],
+  "materiality_floor": 0.02,
+  "n_test": 35715,
+  "n_unique_timestamps": 34872,
+  "all_checks_match": true,
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true
+}
