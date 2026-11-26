@@ -4,7 +4,7 @@
 
 # EXECUTE FCLR-LIVE-ARCHIVE-07 — DISJOINT-COHORT OUT-OF-SAMPLE REPLICATION (2024-04..2026-10, BNB/BTC/ETH/SOL/XRP)
 
-**Timestamp:** 2026-11-26T17:35:51Z (refresh)
+**Timestamp:** 2026-11-26T17:40:45Z (refresh)
 **Session:** EXECUTE (campaign-06 COMPLETED under session_20261126T133828Z; campaign-07 ACTIVE READY_EXECUTE; aborted 20261126T153717Z attempt quarantined; feasibility re-verified; gate re-run green)
 **Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` — `READY_EXECUTE`
 **Latest completed heavy session:** `session_20261126T133828Z`
@@ -117,9 +117,9 @@ If a feature month is missing or a zip fails verification, do not silently subst
 
 ---
 
-## 8. SESSION CLOSE-OUT — 2026-11-26T17:35:51Z
+## 8. SESSION CLOSE-OUT — 2026-11-26T17:40:45Z
 
-**What changed:** the sole durable handoff was refreshed at `2026-11-26T17:35:51Z`; the prior version is archived at `handoff_archive/AGENT_HANDOFF_20261126T164326Z.md`. Campaign `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` remains the active rank-0 heavy campaign. The stale `AGENT_HANDOFF_20261126T173310Z.md` terminal-closure document is disavowed (invalid "EXHAUSTED / 3 ready months" claim contradicted by `experiment_frontier.json` rank-0 ACTIVE READY_EXECUTE and 214 on-disk symbol-month cache dirs); it is removed as a blocker. The aborted `20261126T153717Z` directory remains quarantined intact at `handoff_archive/quarantine_20261126T163207Z/`. No new heavy session or research_state root file was created (root remains at the 500-file cap; all new artifacts go under the fresh `session_<UTC>/`).
+**What changed:** the sole durable handoff was refreshed at `2026-11-26T17:40:45Z`; the prior version is archived at `handoff_archive/AGENT_HANDOFF_20261126T164326Z.md`. Campaign `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` remains the active rank-0 heavy campaign. The invalid `AGENT_HANDOFF_20261126T173310Z.md` terminal-closure document (claimed "EXHAUSTED / 3 ready months", contradicted by `experiment_frontier.json` rank-0 ACTIVE READY_EXECUTE and 214 on-disk symbol-month cache dirs) has been removed as a blocker; it must not be recreated. The aborted `20261126T153717Z` directory remains quarantined intact at `handoff_archive/quarantine_20261126T163207Z/`. No new heavy session or research_state root file was created (root remains at the 500-file cap; all new artifacts go under the fresh `session_<UTC>/`).
 
 **What was verified this session:** the partial attempt had `all_checks_match:false`, no evidence audit/alias or trigger check, and 3,775 registry gaps; it is not evidence for or against campaign-07. The valid disk-latest session is again `session_20261126T133828Z`. Feasibility re-verified: the recovered stdlib template is present at `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py`, the 2024-04..2026-10 five-symbol cache is on disk (155 symbol-month dirs), the frontier is rank-0 `READY_EXECUTE`, and campaign-06 completed stdlib-only with `all_checks_match:true`. Close-out verification passed: heavy-work gate `pass=true`, `reason_code=OK`, `failures=[]`, `handoff_stale=false`; `py_compile` passed; `python3 -m json.tool research_state/experiment_frontier.json` and `git diff --check` passed.
 
