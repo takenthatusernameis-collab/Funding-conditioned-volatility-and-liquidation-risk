@@ -1,3 +1,7 @@
+# AGENT HANDOFF
+
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
+
 # AGENT_HANDOFF.md — FCLR-009 Confirmatory Volatility Evaluation
 
 **Timestamp:** 2026-11-26T01:53:15Z
@@ -106,3 +110,5 @@ Create a single script `scripts/run_fclr009_eval.py` that:
 - Emits JSON + MD summary with all required gate fields
 
 **Verification test:** Run the script; confirm it produces the evaluation summary artifact with all gate fields populated and `gate_verdict` ∈ {MET, NOT_MET}.
+
+**Latest session:** session_20261125T060000Z
