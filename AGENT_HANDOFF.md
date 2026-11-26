@@ -4,7 +4,7 @@
 
 # EXECUTE FCLR-LIVE-ARCHIVE-06 — funding-conditioned DOWNSIDE REALIZED-SEMVARIANCE LEVEL
 
-**Timestamp:** 2026-11-26T12:30:38Z
+**Timestamp:** 2026-11-26T12:31:55Z
 **Session:** NEXT (routing refresh only; no heavy artifact is claimed by this refresh)
 **Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-06-20261126T083526Z` — `READY_EXECUTE`
 **Latest completed heavy session:** `session_20261126T082429Z`
@@ -112,9 +112,9 @@ If a feature month is missing, do not silently substitute or zero-fill. Record t
 
 ---
 
-## 8. SESSION CLOSE-OUT — 2026-11-26T12:30:38Z
+## 8. SESSION CLOSE-OUT — 2026-11-26T12:31:55Z
 
-**What changed:** the sole durable handoff was refreshed to the current timestamp; the prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T122907Z.md`; the active campaign remains `FCLR-LIVE-ARCHIVE-06-20261126T083526Z` with its frozen downside-semivariance design unchanged; the frontier refresh timestamp was synchronized. No heavy artifact is claimed.
+**What changed:** the sole durable handoff was refreshed to the current timestamp; the prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T123038Z.md`; the active campaign remains `FCLR-LIVE-ARCHIVE-06-20261126T083526Z` with its frozen downside-semivariance design unchanged; the frontier refresh timestamp was synchronized. No heavy artifact is claimed.
 
 **What was tested this session:** no new quantitative campaign was executed. Verification passed after the refresh: the heavy-work gate returned `pass=true`, `reason_code=OK`, `failures=[]`, with `handoff_stale=false` and `heavy_session_id=session_20261126T082429Z`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` passed; the six-module unittest command in §5 passed 122 tests; `python3 -m json.tool research_state/experiment_frontier.json >/dev/null` passed; the raw cache audit found 1,200/1,200 zips. The latest completed heavy session remains `session_20261126T082429Z`.
 
