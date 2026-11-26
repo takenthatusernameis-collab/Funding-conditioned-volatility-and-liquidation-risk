@@ -1,8 +1,8 @@
 # AGENT HANDOFF — Durable Single Source of Truth for Next Session
 
-**Generated (UTC):** 2026-11-26T22:03:43Z
+**Generated (UTC):** 2026-11-26T22:52:39Z
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE` with the CORRECTED, verified-feasible common-support design (see §0).
-**HEAD:** `39eee67a1`
+**HEAD:** `957678d07`
 **Working tree:** clean
 **Latest completed heavy session:** `session_20261126T133828Z` (campaign-06, `NOT_SUPPORTED`, `all_checks_match=true`)
 **Heavy-work gate at this refresh:** `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false`, `live_archive.pass=true` (green only because the newest on-disk session `20261126T133828Z` predates the campaign start `20261126T153244Z`; the first post-start session that lacks the full heavy set fails closed).
@@ -26,7 +26,7 @@ The single prior bottleneck (campaign-07 attempt `20261126T153717Z`, quarantined
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T22:03:43Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T22:52:39Z)
 
 **EXECUTE `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` NOW under one fresh `session_<UTC>/` (id lexicographically > `20261126T153244Z`), using the corrected common-support design in §0 and §3.** The repository name leads with **Funding-conditioned-volatility**, so the highest-value unfinished work is the pre-registered disjoint-cohort replication of the repo-name primary estimand: **next-24h mean log-realized-variance QLIKE, C2 versus B1**, on the untouched 2024-04 through 2026-10 cohort for `BNBUSDT`, `BTCUSDT`, `ETHUSDT`, `SOLUSDT`, `XRPUSDT`. This is sequential confirmatory look `k=2` with frozen `alpha_2 = 0.05/(2*3) = 0.008333`. The declared Holm secondary is the campaign-06 estimand: next-24h downside realized-semivariance level, judged by MSE. Do not substitute another estimand, cohort, threshold, or model search.
 
@@ -130,4 +130,4 @@ Complete artifact set (under `research_state/session_20261126T133828Z/`; do not 
 **Dominant limitation to disclose:** only five symbols are available in the disjoint cohort and their 1h coverage is unequal, so the common-support restriction and per-block + leave-one-symbol-out diagnostics are mandatory.
 **Concrete falsification test:** C2 improves relative test QLIKE by at least 2% with the frozen uncertainty and Holm conditions on the untouched common-support cohort.
 
-**END OF HANDOFF — 2026-11-26T22:03:43Z**
+**END OF HANDOFF — 2026-11-26T22:52:39Z**
