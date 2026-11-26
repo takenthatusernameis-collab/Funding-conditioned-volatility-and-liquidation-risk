@@ -4,7 +4,7 @@
 
 # EXECUTE FCLR-LIVE-ARCHIVE-06 — funding-conditioned DOWNSIDE REALIZED-SEMVARIANCE LEVEL
 
-**Timestamp:** 2026-11-26T12:31:55Z
+**Timestamp:** 2026-11-26T12:34:55Z
 **Session:** NEXT (routing refresh only; no heavy artifact is claimed by this refresh)
 **Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-06-20261126T083526Z` — `READY_EXECUTE`
 **Latest completed heavy session:** `session_20261126T082429Z`
@@ -112,7 +112,7 @@ If a feature month is missing, do not silently substitute or zero-fill. Record t
 
 ---
 
-## 8. SESSION CLOSE-OUT — 2026-11-26T12:31:55Z
+## 8. SESSION CLOSE-OUT — 2026-11-26T12:34:55Z
 
 **What changed:** the sole durable handoff was refreshed to the current timestamp; the prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T123038Z.md`; the active campaign remains `FCLR-LIVE-ARCHIVE-06-20261126T083526Z` with its frozen downside-semivariance design unchanged; the frontier refresh timestamp was synchronized. No heavy artifact is claimed.
 
