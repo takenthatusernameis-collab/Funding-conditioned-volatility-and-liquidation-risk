@@ -4,7 +4,7 @@
 
 # EXECUTE FCLR-LIVE-ARCHIVE-07 — DISJOINT-COHORT OUT-OF-SAMPLE REPLICATION (2024-04..2026-10, BNB/BTC/ETH/SOL/XRP)
 
-**Timestamp:** 2026-11-26T16:32:07Z
+**Timestamp:** 2026-11-26T16:36:11Z
 **Session:** EXECUTE (campaign-06 COMPLETED under session_20261126T133828Z; campaign-07 ACTIVE; aborted 20261126T153717Z attempt quarantined)
 **Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` — `READY_EXECUTE`
 **Latest completed heavy session:** `session_20261126T133828Z`
@@ -38,7 +38,7 @@ If you are about to rewrite this file without a new heavy session, stop: that is
 - **FCLR-009 — CLOSED `NOT_MET`.** **Liquidation-risk program on the frozen ironflow panel — CLOSED.** Do not reopen.
 - **FCLR-LIVE-ARCHIVE-07 — ACTIVE rank-0 `READY_EXECUTE`:** disjoint-cohort replication of the repo-name primary estimand (next-24h mean log-RV QLIKE) with the downside-semivariance level as the declared Holm secondary, on the 2024-04..2026-10 five-symbol cache. Source verification must be completed in the source registry; the cache has not fed a valid confirmatory campaign. This is the only remaining heavy confirmatory campaign that is feasible stdlib-only in this environment.
 
-**Bottlenecks removed in this session (2026-11-26T16:32:07Z):** (1) The aborted `20261126T153717Z` attempt left a lexicographically newer directory that failed `HANDOFF_STALE_LATEST_SESSION` and blocked every session behind a red gate. It was not a valid completion: `all_checks_match:false`, missing evidence audit/alias and trigger check, and 3,775 unverified/missing cache entries. The entire directory was moved intact to `handoff_archive/quarantine_20261126T163207Z/`; the disk-latest valid session is again `session_20261126T133828Z`. (2) The prior "verified cache" claim is corrected: campaign-07 must verify the cache and disclose exact gaps before treating the evaluation as confirmatory. (3) The prior closure-synthesis/verify-and-stop escape hatch remains removed: the next session must execute the complete heavy campaign. No blocked or inefficient sessions remain.
+**Bottlenecks removed in this session (2026-11-26T16:36:11Z):** (1) The aborted `20261126T153717Z` attempt left a lexicographically newer directory that failed `HANDOFF_STALE_LATEST_SESSION` and blocked every session behind a red gate. It was not a valid completion: `all_checks_match:false`, missing evidence audit/alias and trigger check, and 3,775 unverified/missing cache entries. The entire directory was moved intact to `handoff_archive/quarantine_20261126T163207Z/`; the disk-latest valid session is again `session_20261126T133828Z`. (2) The prior "verified cache" claim is corrected: campaign-07 must verify the cache and disclose exact gaps before treating the evaluation as confirmatory. (3) The prior closure-synthesis/verify-and-stop escape hatch remains removed: the next session must execute the complete heavy campaign. No blocked or inefficient sessions remain.
 
 ---
 
@@ -116,9 +116,9 @@ If a feature month is missing or a zip fails verification, do not silently subst
 
 ---
 
-## 8. SESSION CLOSE-OUT — 2026-11-26T16:32:07Z
+## 8. SESSION CLOSE-OUT — 2026-11-26T16:36:11Z
 
-**What changed:** the sole durable handoff was refreshed at `2026-11-26T16:32:07Z`; the prior version is archived at `handoff_archive/AGENT_HANDOFF_20261126T163207Z.md`. Campaign `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` remains the active rank-0 heavy campaign. The aborted `20261126T153717Z` directory was quarantined intact at `handoff_archive/quarantine_20261126T163207Z/`, removing the `HANDOFF_STALE_LATEST_SESSION` blocker. No new heavy session or research_state root file was created.
+**What changed:** the sole durable handoff was refreshed at `2026-11-26T16:36:11Z`; the prior version is archived at `handoff_archive/AGENT_HANDOFF_20261126T163611Z.md`. Campaign `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` remains the active rank-0 heavy campaign. The aborted `20261126T153717Z` directory was quarantined intact at `handoff_archive/quarantine_20261126T163207Z/`, removing the `HANDOFF_STALE_LATEST_SESSION` blocker. No new heavy session or research_state root file was created.
 
 **What was verified this session:** the partial attempt had `all_checks_match:false`, no evidence audit/alias or trigger check, and 3,775 registry gaps; it is not evidence for or against campaign-07. The valid disk-latest session is again `session_20261126T133828Z`. Close-out verification passed: heavy-work gate `pass=true`, `reason_code=OK`, `failures=[]`; `py_compile` passed; the six-module unittest command passed 122 tests; `python3 -m json.tool research_state/experiment_frontier.json` and `git diff --check` passed.
 
