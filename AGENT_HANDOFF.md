@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-26T01:49:22Z
+# AGENT HANDOFF — 2026-11-26T01:50:39Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -18,7 +18,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — 2026-11-26T01:49:22Z**
+> **Timestamped initial task message — 2026-11-26T01:50:39Z**
 >
 > **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `live_archive.required=false` — latest session `session_20261125T060000Z` predates campaign start `20261125T074500Z` and is GRANDFATHERED). Root `research_state/*.md|*.json` = 500/500 (at cap, fixed 2026-11-25T16:55:00Z). **The next session with UTC > `20261125T074500Z` will have `live_archive.required=true` and MUST produce the full `fclr_live_archive01_*` artifact set.** Gate regression tests: 122/122 PASS.
 >
@@ -171,18 +171,19 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## SESSION CLOSE-OUT — 2026-11-26T01:49:22Z
+## SESSION CLOSE-OUT — 2026-11-26T01:50:39Z
 
 **What changed and why (handoff refresh + verification, not new research):**
-- Refreshed the sole durable handoff with the 2026-11-26T01:49:22Z timestamped initial task message after re-verifying the live-archive campaign remains the rank-0 repo-name priority.
+- Refreshed the sole durable handoff with the 2026-11-26T01:50:39Z timestamped initial task message after re-verifying the live-archive campaign remains the rank-0 repo-name priority.
 - Re-ran the heavy-work gate and all six gate regression modules; the campaign binder, frozen cohort, artifact contract, and post-start heavy-work requirement remain intact.
 - Root count remains 500/500 at cap; no root-level research-state files added.
-- All bottleneck resolutions from prior session remain in effect: symbol enumeration complete, five-source coverage verified, funding layout resolved, download budget bounded, stdlib-only deps enforced, artifact-naming deadlock fixed, root churn capped.
+- All bottleneck resolutions from prior sessions remain in effect: symbol enumeration complete, five-source coverage verified, funding layout resolved, download budget bounded, stdlib-only deps enforced, artifact-naming deadlock fixed, root churn capped.
 
 **What was actually tested:**
-- `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `failures=[]`, `root_count=500/500`, `handoff_stale=false`.
-- `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS.
-- Six gate regression modules → 122/122 OK.
+- `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false` (latest on-disk session `session_20261125T060000Z` predates campaign start `20261125T074500Z` and is GRANDFATHERED), `live_archive.pass=true`.
+- `python3 -m unittest` (six gate regression modules) → 122/122 OK.
+- `research_state/experiment_frontier.json` rank-0 = `FCLR-LIVE-ARCHIVE-01-20261125T074500Z`, status `READY_EXECUTE`.
+- Root `research_state/*.md|*.json` count = 500/500 (at cap).
 
 **Evidence added:** this handoff only; exact coverage counts, cohort, URLs/layout, request budget, and current gate state are now durable.
 
@@ -210,7 +211,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T01:49:22Z)
+## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T01:50:39Z)
 
 **What did the evidence support, contradict, or leave unknown?**
 - Supported: the frozen panel is exhausted and the Binance monthly archive is reachable without authentication through the verified S3 catalog and direct S3 keys.
