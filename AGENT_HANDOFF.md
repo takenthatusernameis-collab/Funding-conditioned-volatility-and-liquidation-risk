@@ -4,7 +4,7 @@
 
 # AGENT_HANDOFF.md — FCLR-LIVE-ARCHIVE-01 Confirmatory Volatility Evaluation (repo-name rank-0)
 
-**Timestamp:** 2026-11-26T04:10:11Z
+**Timestamp:** 2026-11-26T04:13:32Z
 **Session:** NEXT (to execute)
 **Campaign:** FCLR-LIVE-ARCHIVE-01-20261125T074500Z (ACTIVE rank-0, READY_EXECUTE)
 **Hypothesis:** FCLR-H001 (incremental 24-hour realized-variance forecasting; funding + price features vs RV-only baseline)
@@ -19,10 +19,6 @@
 
 ### PRIOR HANDOFF ARCHIVED — 2026-11-26T03:19:42Z
 The prior handoff (above) is preserved as the immediate predecessor. This refresh re-anchors to the same on-disk frontier with a fresh timestamp to ensure gate freshness. No scientific content changed; the next session MUST execute the full FCLR-LIVE-ARCHIVE-01 artifact set in one fresh `session_<UTC>/` (UTC > `20261125T074500Z`).
-
----
-
-## 0. RECONCILIATION — CURRENT FRONTIER TRUTH (read first)
 
 ---
 
@@ -220,12 +216,12 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## 13. SESSION CLOSE-OUT — 2026-11-26T03:19:42Z
+## 13. SESSION CLOSE-OUT — 2026-11-26T04:13:32Z
 
 **What changed and why (handoff refresh, not new research):**
 - Re-anchored the durable handoff to on-disk truth: rank-0 = FCLR-LIVE-ARCHIVE-01 (READY_EXECUTE); FCLR-009 and the liquidation-risk program closure are CLOSED; no `fclr_live_archive01_*` artifact exists.
 - Re-froze the next-session routing: exact cohort, S3 monthly source patterns, request budget, stdlib-only deps, splits/models/inference, `fclr_live_archive01_` artifact contract, and gate verification commands.
-- Archived the prior handoff to `handoff_archive/AGENT_HANDOFF_20261126T015621Z.md`.
+- Archived the prior handoff to `handoff_archive/AGENT_HANDOFF_20261126T031942Z.md`.
 
 **What was actually tested:**
 - `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false` (latest on-disk session `session_20261125T060000Z` predates campaign start `20261125T074500Z` and is GRANDFATHERED), `live_archive.pass=true`.
@@ -245,7 +241,7 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## 14. RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T03:19:42Z)
+## 14. RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T04:13:32Z)
 
 **What did the evidence support, contradict, or leave unknown?**
 - Supported: the frozen panel is exhausted; the Binance monthly archive is reachable without authentication through the verified S3 catalog and direct S3 keys; a five-symbol, four-year monthly design fits the request budget.
@@ -263,3 +259,5 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 **Exact artifact and command demonstrating progress:** one complete `research_state/session_<UTC>/` with every required artifact in §5; `python3 scripts/check_handoff_heavywork_gate.py --json` must return `reason=OK` with `live_archive.required=true` and `live_archive.pass=true`, followed by the six-module unittest command in §6.
 
 **Latest completed session:** session_20261125T060000Z
+
+(End of file)
