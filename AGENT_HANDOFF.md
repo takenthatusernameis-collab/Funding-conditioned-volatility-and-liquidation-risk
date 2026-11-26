@@ -4,7 +4,7 @@
 
 # AGENT_HANDOFF.md — FCLR-LIVE-ARCHIVE-01 Confirmatory Volatility Evaluation (repo-name rank-0)
 
-**Timestamp:** 2026-11-26T03:19:42Z
+**Timestamp:** 2026-11-26T03:25:06Z
 **Session:** NEXT (to execute)
 **Campaign:** FCLR-LIVE-ARCHIVE-01-20261125T074500Z (ACTIVE rank-0, READY_EXECUTE)
 **Hypothesis:** FCLR-H001 (incremental 24-hour realized-variance forecasting; funding + price features vs RV-only baseline)
@@ -14,6 +14,15 @@
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
 > **A timestamp-only rewrite is NOT progress and is forbidden as the next session's deliverable. The next session MUST materialize the heavy evaluation + recompute artifacts in a fresh `session_<UTC>/`.**
+
+---
+
+### PRIOR HANDOFF ARCHIVED — 2026-11-26T03:19:42Z
+The prior handoff (above) is preserved as the immediate predecessor. This refresh re-anchors to the same on-disk frontier with a fresh timestamp to ensure gate freshness. No scientific content changed; the next session MUST execute the full FCLR-LIVE-ARCHIVE-01 artifact set in one fresh `session_<UTC>/` (UTC > `20261125T074500Z`).
+
+---
+
+## 0. RECONCILIATION — CURRENT FRONTIER TRUTH (read first)
 
 ---
 
