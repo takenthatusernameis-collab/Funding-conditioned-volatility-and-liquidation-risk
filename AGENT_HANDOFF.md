@@ -168,12 +168,11 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 
 ---
 
-## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-26T00:25:48Z)
+## SESSION CLOSE-OUT (THIS HANDOFF REFRESH — 2026-11-26T00:46:55Z)
 
 **What changed and why (real actions, not a timestamp bump):**
-- Refreshed the sole durable handoff and its initial task message at 2026-11-26T00:34:14Z to reflect current exact gate state; no new session or research artifact was created beyond this handoff update.
-- **Gate state verified:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `live_archive.required=false` (grandfathered), `root_count=500/500`). The `live_archive` campaign (`FCLR-LIVE-ARCHIVE-01-20261125T074500Z`) is detected in the handoff but `required=false` because the latest session on disk (`session_20261125T060000Z`) predates the campaign start (`20261125T074500Z`) and is GRANDFATHERED. **The next session with UTC > `20261125T074500Z` will immediately require the full `fclr_live_archive01_*` artifact set.**
-- Source evidence remains FRESH and valid: S3 delimiter catalog HTTP 200 with valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true` (2026-11-25T13:54:18Z) and all five BTCUSDT 2024-01 monthly source keys HTTP 206 range probe (2026-11-25T13:54:22Z) — no re-probe needed; source is verified and unchanged.
+- Refreshed the sole durable handoff at 2026-11-26T00:46:55Z to reflect current exact gate state; no new session or research artifact was created beyond this handoff update.
+- **Gate state verified LIVE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `live_archive.required=false` (grandfathered), `root_count=500/500`, `failures=[]`). The `live_archive` campaign (`FCLR-LIVE-ARCHIVE-01-20261125T074500Z`) is detected in the handoff but `required=false` because the latest session on disk (`session_20261125T060000Z`) predates the campaign start (`20261125T074500Z`) and is GRANDFATHERED. **The next session with UTC > `20261125T074500Z` will immediately require the full `fclr_live_archive01_*` artifact set.**
 - Re-ran the six gate regression modules: 122/122 tests pass (all green after root-cap fix).
 - Confirmed the repo-name priority is intact: rank-0 in `research_state/experiment_frontier.json` is `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` (`READY_EXECUTE`, `program_status=ACTIVE`), the funding-conditioned-volatility estimand.
 - Kept the obsolete timestamped program-closure campaign name-only so it cannot demand impossible closure artifacts from the next archive session.
@@ -182,11 +181,10 @@ Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access 
 - Root count overage resolved: 502 → 500 (≥2 files moved to `research_state/archive_20261125T164706Z/` at 2026-11-25T16:55:00Z; provenance preserved). Root count at cap 500/500.
 
 **What was actually tested:**
-- 2026-11-26T00:34:14Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `live_archive.required=false` (grandfathered), `root_count=500/500`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK; `git diff --check` → PASS.
-- Source reachability confirmed live at 2026-11-25T13:54:18Z–13:54:22Z (unchanged since last refresh; still verified).
+- 2026-11-26T00:46:55Z refresh: `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `live_archive.required=false` (grandfathered), `root_count=500/500`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` → PASS; six gate regression modules → 122/122 OK.
 - `python3 -m unittest tests.test_vol_jump_campaign_gate tests.test_vol_stress_campaign_gate tests.test_vol_corr_campaign_gate tests.test_vol_broad_campaign_gate tests.test_tracka_hardening_143 tests.test_active_campaign_gate` → 122/122 OK.
-- On-disk accelerator check: `research_state/data_cache/` already holds daily 1h kline zips with `.sha256` for BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT/BNBUSDT across 2024-01..2026-11, proving reachability and that the 3,000-request/2 GiB budget is sufficient. This cache is evidence only; it is NOT a substitute for the in-session source registry and verified monthly five-source downloads.
-- Latest session on disk: `session_20261125T060000Z` (contains program-closure artifacts, not `fclr_live_archive01_*`).
+- Source reachability confirmed live at 2026-11-25T13:54:18Z–13:54:22Z (unchanged; still verified): S3 delimiter catalog HTTP 200 with valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true`; all five BTCUSDT 2024-01 monthly source keys HTTP 206 range probe (klines/markPriceKlines/indexPriceKlines/premiumIndexKlines/fundingRate).
+- Latest session on disk: `session_20261125T060000Z` (contains program-closure artifacts, NOT `fclr_live_archive01_*`).
 
 **Evidence added:** this handoff only; no root research-state file was added and no sealed artifact was modified.
 
