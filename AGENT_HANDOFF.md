@@ -1,4 +1,4 @@
-# AGENT_HANDOFF.md — Durable Single Source of Truth for Next Session
+# AGENT HANDOFF — Durable Single Source of Truth for Next Session
 
 **Generated (UTC):** 2026-11-26T17:47:27Z
 **Program status:** CLOSED_TERMINAL (per `fclr_final_structural_closure_20261124T025751.md` and `final_record_closure_audit.md`)
@@ -155,4 +155,4 @@ AGENT_HANDOFF.md updated: yes
 
 **This document is the durable single source of truth.** Future agents MUST read this first, run the verification commands, and act ONLY per the decision tree in §4. No "next task" pointers outside this document are valid.
 
-**END OF HANDOFF — 2026-11-26T17:47:27Z**
+**END OF HANDOFF — 2026-11-26T17:47:27Z**session_20261126T133828Z
