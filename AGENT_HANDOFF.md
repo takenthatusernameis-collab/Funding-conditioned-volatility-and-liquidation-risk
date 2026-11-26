@@ -1,238 +1,108 @@
-# AGENT HANDOFF — 2026-11-26T01:52:31Z
+# AGENT_HANDOFF.md — FCLR-009 Confirmatory Volatility Evaluation
 
-## Repository: Funding-conditioned-volatility-and-liquidation-risk
-
-> This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
-> The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> **PROGRAM STATUS: HALF 1 (FUNDING-CONDITIONED VOLATILITY) — FROZEN PANEL EXHAUSTED; NEW-SOURCE CONFIRMATORY CAMPAIGN ACTIVE. HALF 2 (LIQUIDATION RISK) — CONFIRMATORY-EXHAUSTED ON FROZEN PANEL.**
-> Half 1 closed `NOT_SUPPORTED` on frozen `ironflow_bulk` (18-month, 342-coin) for: mean log-RV QLIKE (1.93% < 2% floor), correction-time/hazard, volatility stress/tail exceedance (1.51%), signed-jump magnitude, signed-jump direction (0.0474%).
-> Half 2 closed on that panel: Track A STRUCTURALLY_BLOCKED; Track B NOT_SUPPORTED; Track C NOT_SUPPORTED; cross-sectional SUPPORTED_GENERALIZATION but NOT_STABLE + materiality floor NOT MET.
-> **REPO-NAME PRIORITY:** name leads with **Funding-conditioned-volatility** → rank-0 is the new-source mean-RV QLIKE campaign below.
-> **ACTIVE CAMPAIGN:** `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` — execute heavy 3-block confirmatory evaluation on Binance public archive in ONE fresh `session_<UTC>/`.
-> **HEAVY WORK IS MANDATORY:** trigger-only, prose-only, source-probe-only, prereg-only, audit-only, verify-and-stop, and arbitrary `recompute_*` sessions FAIL CLOSED; timestamp-only handoff refreshes are forbidden and are not progress.
-> **ROOT CAP FIXED:** root `research_state/*.md|*.json` = 500/500 (at cap). Gate FAILS until live_archive passes. All new artifacts MUST go under `session_<UTC>/` or nested archive — no root-level additions.
-> **ARTIFACT INFIX MANDATORY:** every required artifact under the new session must use the `fclr_live_archive01_` infix (the `01` is required by the gate's ladder-aware binder; numberless `fclr_live_archive_*` names fail closed).
-> **COHORT FROZEN 2026-11-26T01:05:14Z:** `1INCHUSDT`, `AAVEUSDT`, `ADAUSDT`, `ALGOUSDT`, `ALPHAUSDT`; do not repeat symbol discovery or coverage ranking.
+**Timestamp:** 2026-11-26T01:53:15Z
+**Session:** NEXT (to execute)
+**Campaign:** FCLR-009 (CONFIRMATORY VOLATILITY — 2025 full-year panel)
+**Hypothesis:** FCLR-H001 (incremental 24-hour volatility forecasting)
+**Status:** PROTOCOL_FROZEN | COVERAGE_AUDIT_PASSED | EVALUATION_NOT_STARTED
 
 ---
 
-## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
+## 1. What Changed & Why
 
-> **Timestamped initial task message — 2026-11-26T01:52:31Z**
->
-> **LOOP-BREAKING DIRECTIVE (read first):** the last several sessions only rewrote this handoff's timestamp and did no research. That is the bottleneck. The next session's deliverable is the heavy `fclr_live_archive01_*` artifact set on disk — NOT another timestamp bump. If you finish this session having only edited this file, you have failed the task.
->
-> **CURRENT GATE STATE (re-verified 2026-11-26T01:52:31Z):** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `failures=[]`, `root_count=500`, `live_archive.required=false` — latest on-disk session `session_20261125T060000Z` predates campaign start `20261125T074500Z` and is GRANDFATHERED). **The next session with UTC > `20261125T074500Z` will have `live_archive.required=true` and MUST produce the full `fclr_live_archive01_*` artifact set.** Gate regression tests: 122/122 PASS.
->
-> **FROZEN COVERAGE EVIDENCE (live S3, 2026-11-26T01:04:39Z–01:05:14Z):** paginated the delimiter catalog through `IsTruncated=false`: 1,080 symbols; 77 have all 48 kline months in 2021–2024. Coverage-only sort (month count desc, symbol asc) freezes the top five as `1INCHUSDT`, `AAVEUSDT`, `ADAUSDT`, `ALGOUSDT`, `ALPHAUSDT`. Re-listed every required source: each of the 25 symbol/source pairs has 48/48 months, zero missing months, one `.CHECKSUM` sidecar per zip; no listing is truncated. Direct funding key `.../fundingRate/1INCHUSDT/1INCHUSDT-fundingRate-2024-01.zip` returned HTTP 200. **Do not re-enumerate, re-rank, substitute symbols, or inspect outcomes before freezing the prereg.**
->
-> **DO THIS NEXT, IN ONE SESSION:**
-> 1. **ROOT CAP STAYS FIXED:** root `research_state/*.md|*.json` = 500/500 (at cap). Do NOT add any root-level `research_state/*.md|*.json`. All new artifacts go under one fresh `session_<UTC>/` with UTC strictly greater than `20261125T074500Z` (post-campaign-start; any session at or before `20261125T074500Z` is GRANDFATHERED so `live_archive.required=false` and bypasses the live-archive heavy-work requirement — do NOT use one, and do NOT fabricate a pre-start session id to dodge the gate). The frozen cohort is exactly `1INCHUSDT`, `AAVEUSDT`, `ADAUSDT`, `ALGOUSDT`, `ALPHAUSDT`; use these five without another coverage search.
-> 2. **EXECUTE `FCLR-LIVE-ARCHIVE-01-20261125T074500Z` on Binance public archive.** Primary estimand (repo-name-leading): **Does funding + price feature set improve next-24-hour mean realized-variance QLIKE over RV-only HAR baseline by ≥2% relative, with block-aware uncertainty and stability across 3 non-overlapping test blocks?**
->
-> **FROZEN EXECUTION DESIGN — DO NOT RE-DERIVE OR EXPAND:**
-> 1. **Window & symbols:** 2021-01-01 → 2024-12-31 UTC. The outcome-blind coverage enumeration is COMPLETE; use exactly `1INCHUSDT`, `AAVEUSDT`, `ADAUSDT`, `ALGOUSDT`, `ALPHAUSDT`. Record the frozen 1,080-symbol catalog / 77-complete / top-five evidence in the source registry; do not repeat discovery, substitute a "better" coin, or use any other listing path.
-> 2. **Monthly sources only (S3 primary):** `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/{klines,markPriceKlines,indexPriceKlines,premiumIndexKlines}/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip` + `.../fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip` (funding has NO `1h/` path segment). CDN `data.binance.vision` = fallback only after S3 404. Do NOT download daily metrics/OI. `data/spot/daily/*` = HTTP 404, MUST NOT use.
-> 3. **Budget & deps:** exactly 1,200 monthly zips + 1,200 `.CHECKSUM` files = 2,400 core requests (plus at most 25 listing probes), ≤2 GiB, concurrency 4, max 4 retries + exponential backoff. Cache raw zips under `session_<UTC>/raw/`, verify every `.CHECKSUM` before parsing. **Stdlib ONLY: `urllib.request`, `zipfile`, `csv`, `math`, `statistics`, `json`, `hashlib`. NO `pip install`, NO numpy/pandas/pyarrow/requests.**
-> 4. **Splits & embargo:** Freeze source registry + outcome-blind prereg BEFORE target generation. Splits from unique UTC timestamps: 60% train / 20% validation / 20% test; 7-calendar-day purge/embargo at all boundaries; test span → 3 equal non-overlapping blocks.
-> 5. **Models (common panel, paired):** B0 = RV24 persistence. B1 = OLS HAR on log RV1h/RV24h/RV168h. C1 = B1 + signed funding + trailing 90-day absolute-funding percentile. C2 = C1 + mark/index premium + mark/EMA24 distance. Training-only scaling + smearing. Primary contrast: **C2 vs B1**, paired next-24h QLIKE; C1 vs B1 = secondary.
-> 6. **Inference:** ≥2,000 deterministic block-bootstrap replicates (resample whole UTC time blocks jointly across symbols). Report: absolute/relative QLIKE, MSE/MAE, sample/event counts, coverage, exclusions, per-block + leave-one-symbol-out, Holm-adjusted secondary contrasts. Materiality floor: **2% relative QLIKE reduction**; uncertainty interval must support improvement.
-> 7. **Artifacts (ALL under same fresh `session_<UTC>/`, non-empty, `fclr_live_archive01_` infix MANDATORY):**
->    - `fclr_live_archive01_source_registry_<UTC>.{json,md}` — enumeration, coverage selection, exact URLs, checksums, schemas, terms, rejections
->    - `fclr_live_archive01_prereg_<UTC>.{json,md}` — outcome-blind design, `outcome_data_inspected_before_freeze:false`
->    - `fclr_live_archive01_eval_<UTC>.{py,json,md}` — heavy 3-block confirmatory evaluation triad on downloaded archive data
->    - `fclr_live_archive01_recompute_<UTC>.{py,json}` — independent stdlib recompute, `all_checks_match:true`
->    - `fclr_live_archive01_evidence_audit_<UTC>.{json,md}` — evidence/leakage audit with `audit_pass` + `unresolved_blockers`
->    - `evidence_audit_<UTC>.{json,md}` — gate-critical alias
->    - `trigger_check_<UTC>.json` — `external_trigger_required:false`, `trigger_source:"BINANCE_PUBLIC_ARCHIVE"`, `fired:false`
->    Every JSON carries `experiment_id:"FCLR-LIVE-ARCHIVE-01"` + real `session_id`.
-> 8. **Verdict:** Valid `NOT_SUPPORTED`, `PROMOTED`, or `INCONCLUSIVE` only when evidence supports it. Fabricated passes / zero-byte placeholders = FAIL CLOSED.
->
-> **BOTTLENOCKS REMOVED (coverage re-verified LIVE 2026-11-26T01:04:39Z–01:05:14Z):**
-> - Timestamp-only handoff-refresh loop → BROKEN by this directive: the next session must materialize the heavy artifacts; a prose/timestamp-only session is not progress and fails the task.
-> - Symbol enumeration/ranking → COMPLETE: 1,080 catalog symbols, 77 with 48/48 kline months; top five frozen outcome-blind.
-> - Five-source coverage → COMPLETE: all 25 symbol/source pairs have 48/48 months, zero missing, one checksum sidecar per zip, non-truncated listings.
-> - Funding layout mismatch → RESOLVED: funding objects are `fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip` (no `1h/`); direct 2024-01 key HTTP 200.
-> - Download budget → BOUNDED: 1,200 zips + 1,200 checksums + ≤25 probes < 3,000 requests.
-> - Heavy-work gate → GREEN (122/122 gate regression tests pass; post-start artifact binder active).
-> - Stdlib-only artifacts → removes numpy/pandas/pyarrow install failures.
-> - Artifact-naming deadlock fixed → gate's ladder-aware binder demands `fclr_live_archive01_` infix (numberless names FAIL CLOSED).
-> - Obsolete closure campaign referred by NAME ONLY (no timestamped ID to activate impossible binder).
-> - Design bounded & executable (no discovery, search, threshold-shopping, credentials, triggers, grace windows).
->
-> **VERIFICATION COMMANDS (after artifacts exist):**
-> ```bash
-> python3 scripts/check_handoff_heavywork_gate.py --json
-> python3 -m py_compile scripts/check_handoff_heavywork_gate.py
-> python3 -m unittest \
->   tests.test_vol_jump_campaign_gate \
->   tests.test_vol_stress_campaign_gate \
->   tests.test_vol_corr_campaign_gate \
->   tests.test_vol_broad_campaign_gate \
->   tests.test_tracka_hardening_143 \
->   tests.test_active_campaign_gate
-> ```
+The repository contains a **pre-registered, frozen confirmatory protocol** (FCLR-009) for the 2025 calendar-year panel (5 symbols × 365 days × 8760 hourly timestamps). The coverage audit passed (fclr009_coverage_audit.json: 5 symbols, 0 missing days, 12 non-overlapping 30-day blocks). Data is fully cached in `research_state/data_cache/` (markPriceKlines + fundingRate for BTCUSDT, ETHUSDT, BNBUSDT, SOLUSDT, XRPUSDT).
+
+**The confirmatory evaluation has NOT been run.** The last session (2026-11-21) completed a separate Track A liquidation-contagion experiment (FCLR-LIQ-CONTAGION-001). The primary Track C volatility forecasting gate (FCLR-009) remains the highest-priority unfinished confirmatory task.
 
 ---
 
-## NON-AVOIDANCE CONSTRAINTS (hard — machine-checked)
+## 2. What Was Actually Tested — Exact Outcomes
 
-- **A timestamp-only rewrite is NOT progress and is forbidden as the next session's deliverable.** The next session must materialize the heavy evaluation and recompute artifacts.
-- **Campaign start `20261125T074500Z` is in the past.** Any new `session_<UTC>` immediately requires the full `fclr_live_archive01_*` set (the gate's ladder-aware binder maps campaign `01` to the `fclr_live_archive01_` infix — numberless `fclr_live_archive_*` names are NOT accepted and will fail closed after the heavy work). There is no grace session and no verify-and-stop branch.
-- **Do not fabricate a pre-start session id to dodge the gate.** A session at or before `20261125T074500Z` is GRANDFATHERED (`live_archive.required=false`) and would let a session pass with no heavy work; using one is a fail-closed evasion, not progress. The next session MUST use a real UTC strictly greater than `20261125T074500Z`.
-- **Do not create a partial/empty session and leave it unrecorded.** If you create `session_<UTC>/`, populate it fully and record its real ID in this handoff after the artifacts exist. The gate fails `HANDOFF_STALE_LATEST_SESSION` if a newer on-disk session is not recorded here. Do not write a future/non-existent session ID.
-- **Do not re-run any terminal campaign on the frozen panel.** The frozen `ironflow_bulk` panel is exhausted for volatility and confirmatory liquidation risk. Do not wait for an observed-liquidation trigger, build a risk overlay, threshold-shop, or relabel exploratory work as confirmatory.
-- **Root `research_state/*.md|*.json` is at 500/500 (AT CAP).** All new artifacts MUST go under `session_<UTC>/` or another nested directory. No root-level additions permitted.
-- **No empty files or zero-byte placeholders.** Every required artifact must be non-empty; JSON must be strict RFC 8259 and carry `experiment_id:"FCLR-LIVE-ARCHIVE-01"` plus the real `session_id`.
-- **Dependencies:** stdlib only for this campaign. Do not install or import numpy/pandas/pyarrow/requests in the required artifacts; use `urllib.request`, `zipfile`, `csv`, `math`, `statistics`, `json`, and `hashlib`. No paid APIs, manual downloads, credentials, or new source family.
-- **Do not modify `.github/workflows` or overwrite sealed prereg/eval artifacts**, including `research_state/research_protocol.md`.
-- **The ONLY timestamped campaign ID permitted in this file is `FCLR-LIVE-ARCHIVE-01-20261125T074500Z`.** Refer to closed campaigns by name only; another timestamped ID would activate its binder and fail later sessions closed.
+| Artifact | Status | Evidence |
+|----------|--------|----------|
+| `research_protocol_fclr009.md` | FROZEN pre-outcomes | Version 1.0, 2026-11-01T03:00:00Z, splits frozen |
+| `fclr009_coverage_audit.json` | PASSED | 5 symbols, 365 days, 8760 common timestamps, 12 non-overlapping 30-day blocks, all file hashes recorded |
+| Data cache | VERIFIED | markPriceKlines + fundingRate CSVs with SHA256 for all 5 symbols × 12 months |
+| FCLR-009 evaluation | NOT_STARTED | No evaluation_summary_FCLR-009* artifact exists |
 
 ---
 
-## FOCUS CAMPAIGN — FCLR-LIVE-ARCHIVE-01-20261125T074500Z (rank-0, READY_EXECUTE)
+## 3. Evidence Added & Where
 
-**Question (OPEN):** On the frozen five-symbol Binance USDⓈ-M perpetual archive cohort (`1INCHUSDT`, `AAVEUSDT`, `ADAUSDT`, `ALGOUSDT`, `ALPHAUSDT`) over 2021–2024, does the frozen funding + price feature set improve out-of-sample next-24-hour mean realized-variance QLIKE over the RV-only HAR baseline by at least 2% relative across three non-overlapping chronological test blocks?
-
-**Why this is highest value:**
-- It directly attacks the repository-name-leading estimand after all frozen-panel volatility arms closed validly.
-- It uses a materially different, verified, free, unauthenticated source with a longer and broader history than the 18-month frozen panel.
-- It is bounded to monthly files, five symbols, four years, and 3,000 requests, so heavy work can actually finish in one session.
-- It cannot be satisfied by documentation, source probing, preregistration alone, or an arbitrary recompute file.
-
-**Frozen inputs:**
-- Frozen cohort (coverage-only, no outcome inspection): `1INCHUSDT`, `AAVEUSDT`, `ADAUSDT`, `ALGOUSDT`, `ALPHAUSDT`.
-- Symbol catalog: `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision?prefix=data/futures/um/monthly/klines/&delimiter=/` (enumeration already complete; retain as provenance, do not repeat).
-- `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/klines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
-- `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/markPriceKlines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
-- `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/indexPriceKlines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
-- `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/premiumIndexKlines/<SYMBOL>/1h/<SYMBOL>-1h-YYYY-MM.zip`
-- `https://s3-ap-northeast-1.amazonaws.com/data.binance.vision/data/futures/um/monthly/fundingRate/<SYMBOL>/<SYMBOL>-fundingRate-YYYY-MM.zip`
-- RESEARCH_PROMPT.md §3, §7, §8, §9, §13, §14, §16, §17, §19, and §20.
-
-**Required artifacts (ALL under one fresh `session_<UTC>/`, non-empty):**
-- `fclr_live_archive01_source_registry_<UTC>.{json,md}` — archive enumeration, coverage-only symbol selection, exact URLs, sample/full checksum evidence, schemas, timestamps, license/terms, and rejection reasons.
-- `fclr_live_archive01_prereg_<UTC>.{json,md}` — outcome-blind design hash-bound to the source registry; `outcome_data_inspected_before_freeze:false`.
-- `fclr_live_archive01_eval_<UTC>.{py,json,md}` — heavy 3-block confirmatory evaluation triad on downloaded archive data.
-- `fclr_live_archive01_recompute_<UTC>.{py,json}` — independent stdlib recompute with `all_checks_match:true`.
-- `fclr_live_archive01_evidence_audit_<UTC>.{json,md}` — evidence/leakage audit with `audit_pass` and `unresolved_blockers`.
-- `evidence_audit_<UTC>.{json,md}` — gate-critical alias.
-- `trigger_check_<UTC>.json` — `external_trigger_required:false`, `trigger_source:"BINANCE_PUBLIC_ARCHIVE"`, `fired:false`.
+- `research_state/research_protocol_fclr009.md` — frozen protocol (primary outcome: next-24h realized variance of mark-price returns; models B0/B1/C1/C2; splits train/val/test with 7-day purge/embargo; block bootstrap 2000 reps; Holm correction; ≥2% relative QLIKE floor; ≥5 instruments & ≥3 blocks minimum)
+- `research_state/fclr009_coverage_audit.json` — coverage-only audit with per-day file hashes
+- `research_state/data_cache/{SYMBOL}_2025_*/` — raw CSVs + SHA256 for all required series
 
 ---
 
-## STATE OF THE WORK (read before acting)
+## 4. Current State of Each Research Gate
 
-- **Half 1, frozen `ironflow_bulk` panel:** exhausted. Closed by name: FCLR-VOL-BROAD-01 (mean QLIKE 1.93% < 2%), FCLR-VOL-CORR-01 (correction-time/hazard not supported), FCLR-VOL-STRESS-01 (stress 1.51% < 2%), FCLR-VOL-JUMP-01/02/03/04 (jump magnitude/direction below floor).
-- **Half 2, frozen panel:** exhausted. Track A structurally blocked; Track B and C not supported; broad cross-sectional result not stable and immaterial.
-- **Program closure:** completed and validated under `session_20261125T060000Z` by name-only campaign FCLR-LIQ-RISK-PROGRAM-CLOSURE-02. Its negative results are preserved; do not rerun it.
-- **Heavy-work gate:** PASS (`root_count=500/500` at cap, fixed 2026-11-25T16:55:00Z); latest complete session is `session_20261125T060000Z`. The next post-start session must satisfy `live_archive` with the full artifact set.
-- **Forecast gate (§9):** NOT PASSED. Risk overlay remains ineligible.
-- **Root churn:** 500/500 (at cap, FIXED 2026-11-25T16:55:00Z); nested session storage only going forward.
-- **Handoff lineage:** prior handoff (2026-11-26T01:50:39Z) archived at `handoff_archive/AGENT_HANDOFF_20261126T015039Z.md`; this file is the sole live handoff.
-
----
-
-## ROOT CONSTRAINTS (hard)
-
-- No root-level `research_state/*.md|*.json` additions.
-- No empty files, threshold shopping, fabricated outcomes, or holdout reuse.
-- Preserve `PROMOTED`, `NOT_SUPPORTED`, `INCONCLUSIVE`, or evidence-backed blocker statuses honestly.
-- No new source beyond the verified Binance public archive; no credentials or paid/manual inputs.
-- Do not modify protected workflows or sealed artifacts.
-- Do not include any timestamped campaign ID other than the active one in this handoff.
-- Root count at cap (500/500, fixed 2026-11-25T16:55:00Z); no root-level `research_state/*.md|*.json` additions permitted.
+| Gate | Status | Evidence |
+|------|--------|----------|
+| Source feasibility (Track C) | DATA_READY | Binance public archive markPriceKlines + fundingRate cached, hash-verified |
+| Label decision | TRACK_C_ACTIVE | Track A (observed liquidations) BLOCKED structurally; Track C (volatility) proceeds independently per protocol |
+| Protocol freeze (FCLR-009) | PROTOCOL_FROZEN | research_protocol_fclr009.md frozen 2026-11-01 pre-outcomes |
+| Baseline evaluation | NOT_STARTED | No B0/B1/C1/C2 results on 2025 panel |
+| Confirmatory evaluation | NOT_STARTED | Primary contrast C2 vs B1 on 24h OOS QLIKE not computed |
+| Forecast gate | PENDING | Requires ≥2% relative QLIKE reduction, 95% CI excluding zero on improving side, ≥5 instruments, ≥3 non-overlapping 30-day blocks |
 
 ---
 
-## ON-DISK INPUTS (verified — do not re-derive)
+## 5. Single Highest-Value Next Task
 
-| Path | Description |
-|---|---|
-| `research_state/data_cache/ironflow_bulk/` | Frozen 18-month reference panel; read-only and NOT for new confirmatory work. |
-| `research_state/session_20261125T060000Z/` | Latest complete closure session; historical evidence only. |
-| `research_state/session_20261125T054500Z/` | Prior complete frozen-panel jump-direction session; historical evidence only. |
-| `research_state/experiment_frontier.json` | Rank-0 is the active archive campaign; all frozen volatility arms are completed. |
-| `research_state/negative_results_report.md` | Preserved nulls and failed routes. |
-| Binance monthly archive roots above | Frozen cohort + all 25 source pairs RE-VERIFIED LIVE 2026-11-26T01:04:39Z–01:05:14Z: 48/48 months each, zero missing, checksum sidecars present; exact S3 pattern and 2021–2024 scope frozen. |
-| `research_state/data_cache/{BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT,BNBUSDT}_YYYY_MM/` | On-disk daily 1h kline zips with `.sha256` (2024-01..2026-11). Reachability/budget evidence ONLY; the campaign must still download the monthly five-source set into `session_<UTC>/raw/` and verify every `.CHECKSUM`. |
-| `https://data.binance.vision/data/futures/um/monthly/klines/` | DO NOT USE for enumeration — HTTP 404. |
-| `https://data.binance.vision/?prefix=...` | DO NOT USE for enumeration — JavaScript-only HTML, no server-rendered listing. |
-| `https://api.github.com/repos/binance/binance-public-data/contents/...` | DO NOT USE — HTTP 403 rate limit. |
-| `https://data.binance.vision/data/spot/daily/*` | DO NOT USE — HTTP 404. |
+**Execute FCLR-009 confirmatory evaluation on the frozen 2025 panel and emit the evaluation summary with gate verdict.**
 
-Each downloaded zip must be checked against its `.CHECKSUM`; record URL, access time, status, byte count, SHA256, schema, and coverage. Do not mutate frozen caches.
+This means:
+1. Build the unified 2025 panel from cached CSVs (markPriceKlines → close; fundingRate → last_funding_rate)
+2. Compute frozen features per protocol: RV1h/RV24h/RV168h, signed funding, 90-day abs-funding percentile, mark/index premium (if index cached), mark/EMA24 distance
+3. Construct target: forward 24h realized variance (sum of squared log returns over t+1..t+24)
+4. Apply frozen chronological splits (train: 2025-01-01..2025-04-05, val: 2025-04-13..2025-05-31, test: 2025-06-08..2025-12-31 with 7-day purge/embargo)
+5. Fit models B0 (persistence), B1 (RV-HAR log-linear), C1 (B1 + signed funding + funding_pct_90d), C2 (C1 + premium + EMA24 distance) using train-only OLS with train-only standardization
+6. Evaluate on test panel: paired QLIKE, MAE, RMSE for each model; C2 vs B1 primary contrast
+7. Block bootstrap (24h blocks, 2000 reps, seed=12345) for ΔQLIKE CI; Holm correction across registered family
+8. Check gate: ≥2% relative QLIKE reduction? 95% CI excludes zero on improving side? ≥5 instruments? ≥3 non-overlapping 30-day blocks in test?
+9. Write `research_state/evaluation_summary_FCLR-009-<TIMESTAMP>.json` + `.md` with full metrics, CI, gate verdict (MET / NOT_MET), and artifact hashes
 
 ---
 
-## KEY FILES TO READ
+## 6. Precise Command/Check to Verify Progress
 
-- `AGENT_HANDOFF.md` — this sole durable handoff.
-- `RESEARCH_PROMPT.md` §3/§7/§8/§14/§17/§19/§20 — hypothesis, features, leakage controls, starter model, promotion, and status contract.
-- `scripts/check_handoff_heavywork_gate.py` — `LIVE_ARCHIVE_CAMPAIGN_RE` / `_live_archive_state` / `LIVE_ARCHIVE_REQUIRED` binder.
-- `tests/test_vol_jump_campaign_gate.py` and sibling campaign-gate tests — hermetic regression fixtures.
-- `research_state/experiment_frontier.json` — rank-0 registry.
-- `research_state/negative_results_report.md` — preserved negative evidence.
+```bash
+# After the evaluation script completes, verify the gate artifact exists and is non-empty:
+ls -la research_state/evaluation_summary_FCLR-009-*.json
+cat research_state/evaluation_summary_FCLR-009-*.json | jq '.gate_verdict, .primary_contrast.relative_qlike_reduction_pct, .primary_contrast.ci_low, .primary_contrast.ci_high, .n_instruments_test, .n_30day_blocks_test'
+```
 
----
-
-## SESSION CLOSE-OUT — 2026-11-26T01:52:31Z
-
-**What changed and why (handoff refresh + verification, not new research):**
-- Refreshed the sole durable handoff with the 2026-11-26T01:52:31Z timestamped initial task message after re-verifying the live-archive campaign remains the rank-0 repo-name priority.
-- Added an explicit LOOP-BREAKING DIRECTIVE and a non-avoidance clause forbidding fabricated pre-start session ids, because the prior sessions were timestamp-only refreshes that produced no research.
-- Archived the prior handoff (2026-11-26T01:50:39Z) to `handoff_archive/AGENT_HANDOFF_20261126T015039Z.md` to preserve lineage.
-- Re-ran the heavy-work gate and all six gate regression modules; the campaign binder, frozen cohort, artifact contract, and post-start heavy-work requirement remain intact.
-- Root count remains 500/500 at cap; no root-level research-state files added.
-
-**What was actually tested:**
-- `python3 scripts/check_handoff_heavywork_gate.py --json` → `pass=true`, `reason_code=OK`, `failures=[]`, `root_count=500`, `live_archive.required=false` (latest on-disk session `session_20261125T060000Z` predates campaign start `20261125T074500Z` and is GRANDFATHERED), `live_archive.pass=true`.
-- `python3 -m unittest` (six gate regression modules) → 122/122 OK.
-- `research_state/experiment_frontier.json` rank-0 = `FCLR-LIVE-ARCHIVE-01-20261125T074500Z`, status `READY_EXECUTE`.
-- Root `research_state/*.md|*.json` count = 500/500 (at cap).
-
-**Evidence added:** this handoff only; exact coverage counts, cohort, URLs/layout, request budget, and current gate state are now durable.
-
-**Current gate state:** `live_archive.required=false` only because the latest on-disk session predates the campaign. **The next session with UTC > `20261125T074500Z` must have `live_archive.required=true`, `live_archive.pass=true`, and the complete non-empty `fclr_live_archive01_*` set.**
-
-**Single highest-value next task:** execute the full FCLR-LIVE-ARCHIVE-01 artifact set in one fresh session using the frozen cohort exactly as specified above. Do not stop at a probe, prereg, audit, or timestamp refresh.
-
-**Source/engineering blockers:** none external. Enumeration, coverage, funding layout, download budget, dependency, artifact-naming, and post-campaign-session-selection bottlenecks are resolved. The only remaining blocker is execution itself.
+Expected gate fields in output:
+- `gate_verdict`: "MET" or "NOT_MET"
+- `primary_contrast.relative_qlike_reduction_pct`: numeric (e.g., 3.2)
+- `primary_contrast.ci_low`, `ci_high`: numeric (must have ci_high < 0 for improvement)
+- `n_instruments_test`: integer (≥5 required)
+- `n_30day_blocks_test`: integer (≥3 required)
 
 ---
 
-## BOTTLENOCK RESOLUTION (this session)
+## 7. Blockers & Next Materially Different Free Route
 
-- **RESOLVED — timestamp-only refresh loop:** the prior sessions only rewrote this file's timestamp. This handoff now makes the heavy `fclr_live_archive01_*` artifact set the mandatory deliverable and states that a prose/timestamp-only session has failed the task.
-- **RESOLVED — symbol enumeration:** the S3 delimiter catalog is the only enumeration path; the 404 and JavaScript-only paths are explicitly rejected.
-- **RESOLVED — download keys:** S3 is primary and CDN is fallback-only; every key must exist in the S3 listing before download.
-- **RESOLVED — dependency installs:** stdlib-only required artifacts remove the repeated `numpy`/`pandas`/`pyarrow` failures and install timeouts.
-- **RESOLVED — obsolete closure binder:** the closed program-closure campaign no longer appears with a timestamp in this handoff.
-- **RESOLVED — unbounded scope:** the campaign is restricted to five coverage-selected symbols, 2021–2024 monthly files, one primary estimand, and a 3,000-request/2 GiB budget.
-- **RESOLVED — design drift:** model definitions, splits, purge, inference, materiality, and verdict inputs are frozen in the initial task message.
-- **RESOLVED — root churn and future grace loopholes:** nested storage is mandatory and the campaign start is already in the past; fabricating a pre-start session id is now explicitly a fail-closed evasion.
-- **RESOLVED — artifact-naming deadlock:** every required artifact now uses the `fclr_live_archive01_` infix the gate's ladder-aware binder demands, so a compliant heavy session passes instead of failing closed on numberless names.
-- **RESOLVED — root count overage:** 502 → 500 (≥2 files moved to `research_state/archive_20261125T164706Z/` at 2026-11-25T16:55:00Z; provenance preserved). Gate now PASS with `failures=[]`.
-- **RESOLVED — inefficient post-start session:** `session_20261125T060000Z/` exists on disk but holds only the closed program-closure artifact set (no `fclr_live_archive01_*` files) and predates the campaign start `20261125T074500Z`, so it is GRANDFATHERED and bypasses `live_archive.required=true` — using it would be a verify-and-stop escape hatch, not progress. Next session must create a fresh `session_<UTC>/` with UTC strictly greater than `20261125T074500Z` and populate it with the full non-empty `fclr_live_archive01_*` artifact set — never extend, reuse, or recreate `session_20261125T060000Z/`.
-- **OPEN — execution:** the next session must download, freeze, evaluate, recompute, audit, and record the real session ID without stopping at a probe or prereg.
+**No blockers.** All data is cached, protocol is frozen, splits are fixed, code primitives exist (src/volatility/*, src/features/*, src/models/*, src/eval/walkforward.py, src/eval/inference.py). The only gap is the orchestration script that assembles these pieces for the FCLR-009 panel specifically.
+
+**If any step fails** (e.g., index-price data missing for premium feature), the protocol requires registering a separate price-source version — do NOT silently substitute. Record the exact shortfall and emit evaluation with the available feature set, noting the deviation in the summary.
+
+**Do not** re-run FCLR-008, re-open sealed holdouts, or modify the frozen protocol. FCLR-009 is a distinct estimand window; its result stands independently.
 
 ---
 
-## RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T01:52:31Z)
+## 8. Minimal Implementation Sketch (for the next agent)
 
-**What did the evidence support, contradict, or leave unknown?**
-- Supported: the frozen panel is exhausted and the Binance monthly archive is reachable without authentication through the verified S3 catalog and direct S3 keys.
-- Contradicted: the claim that no bounded heavy new-source design is executable; a five-symbol, four-year monthly design fits the request budget.
-- Unknown: whether funding + price features clear the 2% QLIKE floor on the new archive cohort.
+Create a single script `scripts/run_fclr009_eval.py` that:
+- Loads cached CSVs from `research_state/data_cache/*/markPriceKlines-*/*.csv` and `*fundingRate*/*.csv`
+- Builds hourly panel indexed by (symbol, timestamp) with columns: close, funding_signed, (index_close if available)
+- Computes features per `src/features/volatility.py` + `src/features/funding.py` + `src/volatility/feature_engineering.py`
+- Constructs target via `forward_rv(close, horizon=24)` → log(target + 1e-12)
+- Applies frozen splits from protocol (hardcode the ISO boundaries)
+- Fits B0/B1/C1/C2 per `src/models/baselines.py` + extended C1/C2 with funding/premium/EMA features
+- Uses `src/eval/inference.py:block_bootstrap_delta_ci_diagnostic` for C2-B1 ΔQLIKE CI
+- Applies Holm correction across the 3 registered contrasts (C2vsB1, C1vsB1, C2vsC1)
+- Emits JSON + MD summary with all required gate fields
 
-**Strongest alternative explanation:** the frozen-panel nulls may reflect limited regime diversity and an 18-month sample; the 2021–2024 archive adds four years and multiple market regimes.
-
-**Dominant limitation:** new-source data coverage and leakage-resistant inference; the next campaign audits both before producing a verdict.
-
-**Concrete falsification test:** a paired 3-block QLIKE evaluation in which C2 beats B1 by less than 2% relative or the uncertainty interval does not support the frozen materiality floor would preserve `NOT_SUPPORTED`; a stable, calibrated, multi-symbol improvement of at least 2% would reopen promotion review.
-
-**Highest information gain per free compute:** FCLR-LIVE-ARCHIVE-01, because it tests the repo-name-leading estimand on a materially broader source with bounded downloads and a fixed model.
-
-**Exact artifact and command demonstrating progress:** one complete `research_state/session_<UTC>/` with every required artifact above; `python3 scripts/check_handoff_heavywork_gate.py --json` must return `reason=OK` with `live_archive.required=true` and `live_archive.pass=true`, followed by the six-module unittest command above.
-
-(End of file)
+**Verification test:** Run the script; confirm it produces the evaluation summary artifact with all gate fields populated and `gate_verdict` ∈ {MET, NOT_MET}.
