@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-26T00:34:14Z
+# AGENT HANDOFF — 2026-11-26T00:37:20Z
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 
@@ -17,7 +17,7 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-> **Timestamped initial task message — 2026-11-26T00:34:14Z**
+> **Timestamped initial task message — 2026-11-26T00:37:20Z**
 >
 > **CURRENT GATE STATE:** `python3 scripts/check_handoff_heavywork_gate.py --json` → PASS (`pass=true`, `reason_code=OK`, `live_archive.required=false` — latest session `session_20261125T060000Z` predates campaign start `20261125T074500Z` and is GRANDFATHERED). Root `research_state/*.md|*.json` = 500/500 (at cap, fixed 2026-11-25T16:55:00Z). **The next session with UTC > `20261125T074500Z` will have `live_archive.required=true` and MUST produce the full `fclr_live_archive01_*` artifact set.** Source reachability RE-VERIFIED LIVE 2026-11-25T13:54:18Z (S3 delimiter catalog HTTP 200, valid `ListBucketResult`, `CommonPrefixes`, `IsTruncated=true`) and all five BTCUSDT 2024-01 monthly source keys RE-VERIFIED LIVE 2026-11-25T13:54:22Z (HTTP 206: klines/mark/index/premium/funding). Gate regression tests: 122/122 PASS.
 >
