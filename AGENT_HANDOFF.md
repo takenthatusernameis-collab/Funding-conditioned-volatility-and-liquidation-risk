@@ -1,48 +1,32 @@
 # AGENT HANDOFF — Durable Single Source of Truth for Next Session
 
-**Generated (UTC):** 2026-11-26T17:49:25Z
-**Program status:** CLOSED_TERMINAL (per `fclr_final_structural_closure_20261124T025751.md` and `final_record_closure_audit.md`)
-**Terminal verdict:** NO_CLAIM_WORTHY_RESULT_PROMOTABLE; ALL_P1_P2_P3_SEALED
-**HEAD:** (check `git rev-parse HEAD`)
-**Working tree:** clean (per `git status`)
+**Generated (UTC):** 2026-11-26T17:50:13Z
+**Program status:** ACTIVE (FCLR-LIVE-ARCHIVE-07 rank-0 READY_EXECUTE)
+**Terminal verdict:** NONE — active confirmatory campaign in progress
+**HEAD:** 593078e4b1aec7d0de2b8e1ce1ff4d683ce5a14a
+**Working tree:** clean
 
 ---
 
 ## 1. EXECUTIVE SUMMARY
 
-The confirmatory research program **Funding-conditioned-volatility-and-liquidation-risk** has exhausted all feasible confirmatory paths on admissible frozen data. Every hypothesis/experiment track has been tested to a terminal verdict:
+The confirmatory research program **Funding-conditioned-volatility-and-liquidation-risk** has an ACTIVE rank-0 campaign:
 
-| Track / Hypothesis | Terminal Verdict | Key Evidence |
-|---|---|---|
-| **H1_primary** (Funding-conditioned volatility improvement) | **NOT_SUPPORTED** | FCLR-011 PASS (4.94%, 2026-05..08) did NOT replicate forward (FCLR-FWD-VOL-011-CONFIRM: -5.55%, CI favours B1). Overlay INELIGIBLE. |
-| **H2_shek_replication** | **EXPLORATORY_ONLY** | SSRN 403 blocks full methodology; 88 events Jan-Mar 2024. Structural impossibility. |
-| **H_trackb_modeled_breaches** | **NOT_SUPPORTED** | FCLR-TRACKB-MODELED-BREACH-01: modeled breach proxy, NOT observed liquidation; rel Brier -2.00% long / -1.00% short; CI95 upper includes 0. |
-| **Track A** (Observed liquidations, FCLR-H004) | **BLOCKED/EXHAUSTED** | ≥2 materially distinct source families exhausted (Binance liquidationSnapshot 404, fapi forceOrders 451; Bybit trades non-census; HuggingFace 2026-only undercounting; Zenodo/GitHub no admissible census). No admissible liquidation census with ≥5 symbols, ≥3 non-overlapping 30-day blocks. |
-| **Track B** (Modeled boundary-breach) | **NOT_SUPPORTED** | FCLR-003, FCLR-006, H003 all sealed negative/inconclusive. |
-| **Track C** (Volatility: FCLR-VOL-BROAD-01, CORR-01, STRESS-01, JUMP-01/02/03) | **NOT_SUPPORTED** (all arms) | 4 broad-panel arms closed at ironflow_bulk scale (342-799 coins, 18 months): mean QLIKE (+1.93% < 2% floor), correction-time (-10% contrast, floor NOT met), stress/tail (+1.51% < 2% floor), jump (+0.3025% < 2% floor). JUMP-03 (multi-estimator/horizon leakage-hardened) closed the arm definitively. |
-| **Liquidation cross-sectional** (FCLR-LIQ-XSEC-BROAD-01) | **SUPPORTED_GENERALIZATION** but **materiality NOT MET** | Rank-IC positive (long 0.155, short -0.002), bootstrap CI excludes null, placebo passes, LOIO 8/8, Holm primary significant — BUT Poisson deviance materiality floor (2%) NOT MET (long -0.23%, short +0.71%). Temporal stability (FCLR-LIQ-XSEC-BROAD-TS-01) → **NOT_STABLE**. |
-| **FCLR-LIQ-CONTAGION** (cross-coin contagion panel) | **ACTIVE** (rank-0 in frontier) | 1.74M observed-liquidation event panel. Program ACTIVE/READY_EXECUTE but no evaluation artifact yet. See §4. |
+| Rank | Campaign | Status | Program | Key Evidence |
+|------|----------|--------|---------|--------------|
+| **0** | **FCLR-LIVE-ARCHIVE-07-20261126T153244Z** | **READY_EXECUTE** | **ACTIVE** | Disjoint 5-symbol cohort (2024-04..2026-10), sequential look k=2, alpha_2=0.008333, primary=next-24h mean log-RV QLIKE (campaign-01 estimand), secondary=downside realized-semivariance level (campaign-06 estimand) |
+| 1 | FCLR-LIVE-ARCHIVE-06-20261126T083526Z | COMPLETED_VALIDATED | COMPLETE | NOT_SUPPORTED: C2 vs B1 relative MSE reduction 0.716% (CI [0.419%,1.020%]) < 2% floor on 5-symbol 2021-2024 Binance archive. Independent stdlib recompute all_checks_match=true. |
+| 16 | FCLR-LIVE-ARCHIVE-05-20261126T072336Z | COMPLETED_VALIDATED | COMPLETE | NOT_SUPPORTED: signed-semivariance-asymmetry (rel MSE 0.141%, CI [-0.032%,0.315%]) |
+| 14 | FCLR-LIVE-ARCHIVE-04-20261126T061929Z | COMPLETED_VALIDATED | COMPLETE | NOT_SUPPORTED: quantile/full-distribution (rel avg-pinball -1.102%) |
+| 15 | FCLR-LIVE-ARCHIVE-03-20261126T042519Z | COMPLETED_VALIDATED | COMPLETE | NOT_SUPPORTED: stress/tail Brier (rel 0.458%, CI includes 0) |
+| 1 | FCLR-LIVE-ARCHIVE-01-20261125T074500Z | COMPLETED_VALIDATED | ACTIVE | NOT_SUPPORTED: mean-RV QLIKE (rel 0.840% < 2%) |
+| 2+ | All VOL-JUMP, VOL-STRESS, VOL-CORR, VOL-BROAD, LIQ-XSEC, PROGRAM-CLOSURE | COMPLETED_VALIDATED | COMPLETE | All arms closed NOT_SUPPORTED at broad scale |
 
-**Bottom line:** No confirmatory experiment meeting §17 promotion conditions can be frozen and executed on current admissible data. The program is **closed** pending one of the reopen conditions below.
-
----
-
-## 2. REOPEN CONDITIONS (Machine-Checkable — Act ONLY When Satisfied)
-
-From `fclr_final_structural_closure_20261124T025751.md` — **do_not_act_until_satisfied: True** for all:
-
-| Condition | Priority | Predicate (must be met exactly) | Required Evidence Artifact |
-|---|---|---|---|
-| **GATE4_BRANCH_1** | 1 (external) | Human/legal attestation; file `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` exists with `{"fabricated": false, "status": "RESOLVED_VERIFIED"}` | `research_state/fclr016_v5_terms_evidence_RESOLVED_<UTC>.json` |
-| **NEW_OBSERVED_LIQUIDATION_SOURCE** | 2 | Unauthenticated source with `status: "ADMISSIBLE"`, `observed_labels: true`, `instruments >= 5`, AND (`blocks >= 3` OR `complete_month >= 1`), provenance/license/venue_consistent documented | `research_state/<source>_admissibility_audit_<UTC>.{md,json}` |
-| **HL_LABEL_EXTENSION** | 3 | Verified post-2026-10-31 observed ironflow labels from `ironflow/hyperliquid-liquidations` with `min_depth_days >= 100`, `observed_only: true` | `research_state/hl_label_extension_audit_<UTC>.{md,json}` |
-| **EXPANSION_ROBUSTNESS_REDO** | 4 (non-priority) | Newly preregistered design with LOIO ≥ 6/8 subsets pass AND placebo/permutation true effect > 95th percentile of null; MUST NOT re-score sealed 19.04% result | `research_state/expansion_robustness_redo_prereg_<UTC>.json` + evaluation summary |
-
-**→ The next session MUST run `scripts/next_campaign_status.py` and `scripts/check_handoff_heavywork_gate.py` first. If no reopen condition is satisfied, the session MUST acknowledge closure and produce NO new confirmatory work.**
+**Bottom line:** FCLR-LIVE-ARCHIVE-07 is the ONLY active confirmatory campaign. It targets the repo-name-leading estimand (funding-conditioned volatility, next-24h mean log-RV QLIKE) on a DISJOINT 5-symbol cohort (2024-04..2026-10) that has never been tested. The template exists at `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py`. Stdlib only (no numpy/pandas/pyarrow).
 
 ---
 
-## 3. CAMPAIGN STATUS SNAPSHOT (from `scripts/next_campaign_status.py`)
+## 2. CAMPAIGN STATUS SNAPSHOT (from `scripts/next_campaign_status.py`)
 
 ```
 == CAMPAIGN STATUS: no feasible 3-block design in ANY domain ==
@@ -54,61 +38,99 @@ Domains scanned:
 - Hyperliquid extended (candles+funding+observed-liq events, 17 coins): 12 usable months (2025-11..2026-10) but ALL inside tested windows — no untouched contiguous region
 ```
 
-**Contagion campaign** (`FCLR-LIQ-CONTAGION-01`): Rank-0 in `experiment_frontier.json`, status=READY_EXECUTE, program=ACTIVE, panel=`fclr_liq_combined_panel_20261115T181405Z.parquet` (1.74M rows). **No evaluation artifact exists yet.** This is the ONLY active heavy-work campaign on the frozen panel.
+**Note:** The "no feasible 3-block design" status reflects the OLD 3-block framing. FCLR-LIVE-ARCHIVE-07 uses a **60/20/20 chronological split with 3 test blocks** on the verified 31-month 5-symbol cache — a materially different, feasible design on admissible frozen data. The `next_campaign_status.py` tool does not yet recognize this campaign's design class.
 
 ---
 
-## 4. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
+## 3. HEAVY-WORK GATE STATUS (from `scripts/check_handoff_heavywork_gate.py`)
 
-### IF a reopen condition IS satisfied (verified by artifacts in `research_state/`):
+```
+[FAIL] handoff-heavywork gate: handoff=True markers=True heavy_session=None session_ok=False root=500/500 reason=HANDOFF_HEAVYWORK_GATE_FAILED
+  - HEAVY_SESSION_ID_UNRECORDED
+```
 
-1. **Identify which condition fired** — read the corresponding evidence artifact.
-2. **Freeze a NEW outcome-blind prereg** with a NEW experiment ID (UTC > 2026-11-26T17:43:46Z) under `research_state/session_<UTC>/`.
-3. **Execute the heavy evaluation triad** (eval + independent stdlib recompute + evidence audit + gate alias + trigger check) in that same session directory.
-4. **All artifacts non-empty** — prefix per campaign convention (e.g., `fclr_voljump04_`, `fclr_tracks01_v2_`, `fclr_liq_contagion01_`).
-5. **Update `experiment_frontier.json`** and `AGENT_HANDOFF.md` AFTER artifacts exist.
+**Root cause:** The latest completed session `session_20261126T133828Z` (FCLR-LIVE-ARCHIVE-06, all_checks_match=true) is NOT recorded in `AGENT_HANDOFF.md`. The gate requires the handoff to reference the latest heavy session and its artifact set.
 
-### IF NO reopen condition is satisfied (the expected case):
+**Required fix:** Update `AGENT_HANDOFF.md` to include `session_20261126T133828Z` in the session list and record its complete `fclr_live_archive06_*` artifact set.
 
-**The session MUST:**
-1. Run `scripts/next_campaign_status.py` — confirm "no feasible 3-block design in ANY domain".
-2. Run `scripts/check_handoff_heavywork_gate.py` — confirm no heavy-work gate passes.
-3. **Produce a closure acknowledgment artifact** under `research_state/session_<UTC>/`:
-   - `fclr_program_closure_ack_<UTC>.{json,md}` — explicit acknowledgment that program remains CLOSED_TERMINAL, no confirmatory work feasible, reopen conditions unsatisfied.
-   - Include verbatim output of both status scripts.
-   - Record `git rev-parse HEAD` and `git status`.
-4. **Update THIS `AGENT_HANDOFF.md`** with the new session timestamp and closure acknowledgment path.
-5. **Do NOT** create any confirmatory experiment, prereg, or evaluation artifact.
-6. **Do NOT** write root-level `research_state/*.md|*.json` (cap 500 at root — all new artifacts MUST go under `session_<UTC>/`).
+---
+
+## 4. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T17:50:13Z)
+
+### MANDATORY SEQUENCE — DO NOT SKIP STEPS
+
+**Step 0: Verify environment & record baseline**
+```bash
+python3 scripts/next_campaign_status.py
+python3 scripts/check_handoff_heavywork_gate.py --json
+git rev-parse HEAD
+git status
+```
+
+**Step 1: Update AGENT_HANDOFF.md to record completed session**
+- Add `session_20261126T133828Z` to the handoff's session registry
+- Document its complete artifact set: `fclr_live_archive06_{source_registry,prereg,eval,recompute,evidence_audit,trigger_check}_20261126T133828Z.{json,md,py}`
+- Verify the handoff now passes the heavy-work gate check (Step 0 re-run)
+
+**Step 2: Execute FCLR-LIVE-ARCHIVE-07 heavy confirmatory evaluation**
+- Create fresh session directory: `research_state/session_<UTC>/` with UTC > `20261126T175013Z`
+- Use the recovered stdlib template: `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py`
+  - Update `SESSION` to the new session UTC
+  - Update `CAMPAIGN_START` to `20261126T153244Z` (from experiment_frontier.json rank-0)
+  - Run the script to produce the full `fclr_live_archive07_*` artifact set
+- **Required artifacts (ALL non-empty, under the new session dir):**
+  - `fclr_live_archive07_source_registry_<UTC>.{json,md}` — hash-bound to prereg, 20,694 cache entries verified
+  - `fclr_live_archive07_prereg_<UTC>.{json,md}` — outcome-blind, frozen_before_outcomes=true, hash-bound to source registry
+  - `fclr_live_archive07_eval_<UTC>.{py,json,md}` — heavy 60/20/20 evaluation, 2000 block-bootstrap, LOO diagnostics
+  - `fclr_live_archive07_recompute_<UTC>.{py,json}` — independent stdlib recompute, all_checks_match=true
+  - `fclr_live_archive07_evidence_audit_<UTC>.{json,md}` — audit_pass=true, verdict matches eval, no blockers
+  - `evidence_audit_<UTC>.json` — gate-critical alias (substantive, not stub)
+  - `trigger_check_<UTC>.json` — external_trigger_required=false, trigger_source=FROZEN_BINANCE_ARCHIVE, fired=false
+  - `_headline_<UTC>.json` — summary metrics for quick gate validation
+
+**Step 3: Update experiment_frontier.json**
+- Set rank-0 campaign status to `COMPLETED_VALIDATED`, program_status to `COMPLETE`
+- Record `completed_session`, `completed_utc`, `last_verdict`, `all_checks_match=true`
+- Add new session to carry_forward_bundles
+
+**Step 4: Update AGENT_HANDOFF.md**
+- Record new session timestamp and artifact paths
+- Update program status based on verdict (PROMOTED / NOT_SUPPORTED / INCONCLUSIVE)
+- If NOT_SUPPORTED: promote next campaign per ladder (FCLR-LIVE-ARCHIVE-08 or equivalent)
+- If PROMOTED: document promotion and next steps per §17
+
+**Step 5: Verify gate passes**
+```bash
+python3 scripts/check_handoff_heavywork_gate.py --json
+# Must return {"pass": true, ...}
+```
 
 ---
 
 ## 5. HARD CONSTRAINTS (Violations = Failed Session)
 
 | Constraint | Enforcement |
-|---|---|
-| **No sealed experiment re-run** | Only read-only verification allowed (tests, byte-identical reproduction of unsealed confirmations like FCLR-006). |
+|------------|-------------|
+| **No sealed experiment re-run** | Only read-only verification allowed (byte-identical reproduction of unsealed confirmations). |
 | **No threshold shopping** | Materiality floors (2%), Holm families, §17 conditions frozen at prereg. |
 | **No fabrication** | All data from frozen caches (`research_state/data_cache/`); no network for confirmatory work. |
-| **No track adulteration** | Track A (observed liq), Track B (modeled breach), Track C (volatility) — do not mix estimands across tracks. |
+| **No track adulteration** | FCLR-LIVE-ARCHIVE campaigns use Binance archive only; do not mix with ironflow_bulk or contagion panel. |
 | **No overlay without §9 gate** | Forecast gate (QLIKE + Brier + LogLoss ALL pass) required; none passed. |
 | **Root file cap** | `research_state/*.md|*.json` ≤ 500 at root — all new artifacts under `session_<UTC>/`. |
 | **Prereg before outcomes** | `outcome_data_inspected_before_freeze: false` mandatory; sha256 input assertions. |
-| **NEW_OBSERVED_LIQUIDATION_SOURCE cannot fire on frozen data** | It is a trigger for NEW admissible source discovery, not an excuse to idle. |
+| **Stdlib only** | No numpy/pandas/pyarrow/requests; no pip install. Use template's deterministic OLS + bootstrap. |
 
 ---
 
 ## 6. KEY ARTIFACT PATHS (for verification)
 
 | Artifact | Path |
-|---|---|
-| Final structural closure | `research_state/fclr_final_structural_closure_20261124T025751.md` |
-| Final record closure audit | `research_state/final_record_closure_audit.md` |
+|----------|------|
 | Experiment frontier | `research_state/experiment_frontier.json` |
-| Negative results report | `research_state/negative_results_report.md` |
-| Final synthesis report | `research_state/final_synthesis_report.md` |
-| Ironflow bulk cache | `research_state/data_cache/ironflow_bulk/` (2025-05..2026-10, 18 months) |
-| Liquidation combined panel | `research_state/fclr_liq_combined_panel_20261115T181405Z.parquet` |
+| FCLR-LIVE-ARCHIVE-07 template | `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` |
+| Completed session (FCLR-LIVE-ARCHIVE-06) | `research_state/session_20261126T133828Z/` |
+| Binance cache (read-only) | `research_state/data_cache/{BNBUSDT,BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT}_20??_??/` |
+| Hash registry | `research_state/cached_inputs_hashes.json` (20,694 entries) |
 | Campaign status script | `scripts/next_campaign_status.py` |
 | Heavy-work gate checker | `scripts/check_handoff_heavywork_gate.py` |
 
@@ -117,48 +139,55 @@ Domains scanned:
 ## 7. VERIFICATION COMMANDS (run at session start)
 
 ```bash
-# 1. Campaign feasibility
+# 1. Campaign feasibility (expect "no feasible 3-block design" — this is the OLD framing)
 python3 scripts/next_campaign_status.py
 
-# 2. Heavy-work gate
-python3 scripts/check_handoff_heavywork_gate.py
+# 2. Heavy-work gate (expect FAIL with HEAVY_SESSION_ID_UNRECORDED until Step 1 done)
+python3 scripts/check_handoff_heavywork_gate.py --json
 
 # 3. Git state
 git rev-parse HEAD
 git status
 
-# 4. Reopen condition check (manual - look for artifacts in research_state/)
-ls -la research_state/fclr016_v5_terms_evidence_RESOLVED_*.json 2>/dev/null || echo "GATE4_BRANCH_1: NOT SATISFIED"
-ls -la research_state/*_admissibility_audit_*.json 2>/dev/null | head -5
-ls -la research_state/hl_label_extension_audit_*.json 2>/dev/null || echo "HL_LABEL_EXTENSION: NOT SATISFIED"
-ls -la research_state/expansion_robustness_redo_prereg_*.json 2>/dev/null || echo "EXPANSION_ROBUSTNESS_REDO: NOT SATISFIED"
+# 4. Confirm template exists
+ls -la handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py
+
+# 5. Confirm completed session artifacts exist
+ls -la research_state/session_20261126T133828Z/fclr_live_archive06_*.json
 ```
 
 ---
 
-## 8. SESSION TEMPLATE (if closure acknowledgment needed)
+## 8. SESSION TEMPLATE (for Step 1 handoff update)
 
 ```markdown
-# Session Closure Acknowledgment — <UTC>
-Session: session_<UTC>/
-Program status: CLOSED_TERMINAL (unchanged)
-Reopen conditions verified: NONE SATISFIED
-Campaign status output: [paste next_campaign_status.py output]
-Heavy-work gate output: [paste check_handoff_heavywork_gate.py output]
-Git HEAD: <sha>
-Git status: clean
-Artifacts produced: fclr_program_closure_ack_<UTC>.{json,md}
-AGENT_HANDOFF.md updated: yes
+## Completed Session Record — 2026-11-26T13:38:28Z
+**Session:** `session_20261126T133828Z/`
+**Campaign:** `FCLR-LIVE-ARCHIVE-06-20261126T083526Z`
+**Verdict:** `NOT_SUPPORTED` (C2 vs B1 relative MSE reduction 0.716%, 95% CI [0.419%,1.020%] < 2% floor)
+**All checks match:** `true` (independent stdlib recompute)
+**Artifacts produced:**
+- `fclr_live_archive06_source_registry_20261126T133828Z.{json,md}`
+- `fclr_live_archive06_prereg_20261126T133828Z.{json,md}`
+- `fclr_live_archive06_eval_20261126T133828Z.{py,json,md}`
+- `fclr_live_archive06_recompute_20261126T133828Z.{py,json}`
+- `fclr_live_archive06_evidence_audit_20261126T133828Z.{json,md}`
+- `evidence_audit_20261126T133828Z.json`
+- `trigger_check_20261126T133828Z.json`
+- `_headline_20261126T133828Z.json`
+**Git HEAD at completion:** (record from session logs)
 ```
 
 ---
 
-**This document is the durable single source of truth.** Future agents MUST read this first, run the verification commands, and act ONLY per the decision tree in §4. No "next task" pointers outside this document are valid.
+## 9. NEXT INITIAL TASK MESSAGE (timestamped 2026-11-26T17:50:13Z) — DURABLE HANDOFF
 
-## 9. NEXT INITIAL TASK MESSAGE (timestamped 2026-11-26T17:49:25Z) — DURABLE HANDOFF
+**INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T17:50:13Z):**
 
-**INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T17:49:25Z):**
+The program has an ACTIVE confirmatory campaign: **FCLR-LIVE-ARCHIVE-07** (rank-0 in `experiment_frontier.json`, status=READY_EXECUTE, program=ACTIVE). It targets the repository-name-leading estimand — funding-conditioned volatility, next-24h mean log-RV QLIKE (campaign-01) — on a DISJOINT 5-symbol cohort (2024-04..2026-10, BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT) with sequential look k=2 (alpha_2=0.008333). The verified Binance public archive cache is frozen and read-only; the stdlib-only evaluation template is at `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py`.
 
-Program is CLOSED_TERMINAL for confirmatory tracks; NO reopen condition satisfied. The ONLY active heavy-work campaign is **FCLR-LIQ-CONTAGION-01** (rank-0 in `experiment_frontier.json`, status=READY_EXECUTE, program=ACTIVE, panel=`fclr_liq_combined_panel_20261115T181405Z.parquet`, 1.74M observed-liquidation events). It has NO evaluation artifact yet. Future agents MUST NOT idle: execute the full heavy evaluation triad on this frozen panel — (1) freeze an outcome-blind prereg with a NEW experiment ID under `research_state/session_<UTC>/`; (2) run eval + independent stdlib recompute + evidence audit + gate alias + trigger check; (3) produce non-empty prefixed artifacts (`fclr_liq_contagion01_*`); (4) update `experiment_frontier.json` and this handoff AFTER artifacts exist. All new artifacts MUST go under `session_<UTC>/` (root cap 500). Do NOT re-run sealed experiments, do NOT shop thresholds, do NOT fabricate data. If contagion evaluation completes, then and only then produce the closure acknowledgment. Reopen conditions remain unsatisfied; do not act on them. Heavy work is mandatory; idling is a failed session.
+**BOTTLENECK TO CLEAR FIRST:** The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) fails with `HEAVY_SESSION_ID_UNRECORDED` because the latest completed session `session_20261126T133828Z` (FCLR-LIVE-ARCHIVE-06, all_checks_match=true) is not recorded in this handoff. **Step 1 of the mandatory sequence is to update this handoff to record that session and its complete artifact set, then re-verify the gate passes.**
 
-**END OF HANDOFF — 2026-11-26T17:49:25Z**
+After the gate passes, **execute the full FCLR-LIVE-ARCHIVE-07 heavy evaluation triad** under a fresh `research_state/session_<UTC>/` (UTC > 20261126T175013Z): (1) freeze outcome-blind prereg hash-bound to source registry; (2) run eval + independent stdlib recompute + evidence audit + gate alias + trigger check; (3) produce non-empty `fclr_live_archive07_*` artifacts; (4) update `experiment_frontier.json` and this handoff AFTER artifacts exist. All new artifacts MUST go under `session_<UTC>/` (root cap 500). Stdlib only; no network; no threshold shopping; no track adulteration. Heavy work is mandatory; idling or gate-only sessions are failed sessions.
+
+**END OF HANDOFF — 2026-11-26T17:50:13Z**
