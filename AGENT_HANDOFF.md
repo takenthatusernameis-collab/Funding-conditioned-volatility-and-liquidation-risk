@@ -1,40 +1,42 @@
 # AGENT HANDOFF — Durable Single Source of Truth for Next Session
 
-**Generated (UTC):** 2026-11-26T22:00:21Z
+**Generated (UTC):** 2026-11-26T22:03:43Z
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE` with the CORRECTED, verified-feasible common-support design (see §0).
 **HEAD:** `39eee67a1`
 **Working tree:** clean
 **Latest completed heavy session:** `session_20261126T133828Z` (campaign-06, `NOT_SUPPORTED`, `all_checks_match=true`)
-**Heavy-work gate at this refresh:** `pass=true`, `reason_code=OK`, `failures=[]` (green only because the newest on-disk session `20261126T133828Z` predates the campaign start `20261126T153244Z`; the first post-start session that lacks the full heavy set fails closed).
+**Heavy-work gate at this refresh:** `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false`, `live_archive.pass=true` (green only because the newest on-disk session `20261126T133828Z` predates the campaign start `20261126T153244Z`; the first post-start session that lacks the full heavy set fails closed).
 
 > This is the sole durable handoff. A timestamp-only rewrite, a new empty session directory, a prereg-only run, an audit-only run, a trigger-only run, a source-registry-only run, or a verify-and-stop run is a failed next session. The next session must execute the heavy campaign in §1–§3.
 
 ---
 
-## 0. BOTTLENECK RESOLVED AT THIS REFRESH (read first)
+## 0. BOTTLENECK STATUS (read first)
 
-The previous campaign-07 attempt at `20261126T153717Z` was **quarantined intact** to `handoff_archive/quarantine_20261126T163207Z/` (do not reuse its outputs). Its failure was **not** a missing cache and **not** a missing template. It was a **degenerate split** caused by unequal per-symbol 1h coverage interacting with the frozen *pooled* "60/20/20 by unique UTC timestamp" rule:
+**No session is blocked and no setup/gate-repair step is required.** The heavy-work gate is green, `experiment_frontier.json` rank-0 is `READY_EXECUTE`, the five-symbol 2024-04..2026-10 cache is on disk, and the stdlib recovery template is present.
+
+The single prior bottleneck (campaign-07 attempt `20261126T153717Z`, quarantined intact to `handoff_archive/quarantine_20261126T163207Z/` — do not reuse its outputs) was a **degenerate split**, not a missing cache or template:
 
 - The 2024-04..2026-10 five-symbol cache is complete in **date range** (all five symbols span 2024-04-01..2026-11-07) but **gappy in 1h density**: BNBUSDT/SOLUSDT/XRPUSDT carry ~8,976 one-hour mark rows each, ETHUSDT ~16,272, BTCUSDT ~21,360.
-- The frozen pooled split takes the latest ~20% of the **BTCUSDT-dominated** pooled timestamp axis as the test block. In that window only BTCUSDT is dense, so the test set collapsed to BTCUSDT only (`n_test=4368`, leave-one-symbol-out contained only BTCUSDT), the block bootstrap produced absurd intervals (`[-1.8e12%, …]`), the independent recompute reported `all_checks_match=false`, and required audit/trigger artifacts were absent. That is why it was quarantined.
+- The frozen pooled "60/20/20 by unique UTC timestamp" split takes the latest ~20% of the **BTCUSDT-dominated** pooled timestamp axis as the test block; only BTCUSDT is dense there, so the test set collapsed to BTCUSDT only, the block bootstrap produced absurd intervals, the independent recompute reported `all_checks_match=false`, and required audit/trigger artifacts were absent.
 
-**Resolution (the single design correction, verified feasible on the real cache):** restrict the pooled panel to the **common support** `S` = the set of UTC hourly timestamps at which **all five** symbols have a mark-price close > 0, *before* applying the frozen split. On the current cache `|S| = 8,976` (BNBUSDT/SOLUSDT/XRPUSDT are the binding 8,976-row series; BTCUSDT/ETHUSDT are supersets on `S`). Under the unchanged 60/20/20 + 168h embargo this yields **train≈5,217 / val≈1,795 / test≈1,964 timestamps ≈ 9,820 test rows across all five symbols** — non-degenerate, every block and every leave-one-symbol-out fold contains all five symbols. This changes **only the cohort support**, not the estimand, models, floor, alpha, Holm family, bootstrap, or verdict rule. The next session must recompute `S` from the cache and freeze `|S|` and the split sizes in the outcome-blind prereg.
+**Resolution (the single design correction, verified feasible on the real cache):** restrict the pooled panel to the **common support** `S` = the set of UTC hourly timestamps at which **all five** symbols have a mark-price close > 0, *before* applying the frozen split. On the current cache `|S| = 8,976` (BNBUSDT/SOLUSDT/XRPUSDT bind; BTCUSDT/ETHUSDT are supersets on `S`). Under the unchanged 60/20/20 + 168h embargo this yields **train≈5,217 / val≈1,795 / test≈1,964 timestamps ≈ 9,820 test rows across all five symbols** — non-degenerate; every block and every leave-one-symbol-out fold contains all five symbols. This changes **only the cohort support**, not the estimand, models, floor, alpha, Holm family, bootstrap, or verdict rule. Recompute `S` from the cache and freeze `|S|` and the split sizes in the outcome-blind prereg.
 
-**Do not** re-run the unfiltered pooled split (that is the quarantined failure mode). **Do not** zero-fill, silently substitute, re-download, or inspect outcomes before the prereg is frozen. The cache is sufficient as-is; no network and no package installation are required.
+**Do not** re-run the unfiltered pooled split (quarantined failure mode). **Do not** zero-fill, silently substitute, re-download, or inspect outcomes before the prereg is frozen. The cache is sufficient as-is; no network and no package installation are required.
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T22:00:21Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-26T22:03:43Z)
 
-**EXECUTE `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` NOW under one fresh session_<UTC>/ (id lexicographically > `20261126T153244Z`), using the corrected common-support design in §0 and §3.** The repository name leads with **Funding-conditioned-volatility**, so the highest-value unfinished work is the pre-registered disjoint-cohort replication of the repo-name primary estimand: **next-24h mean log-realized-variance QLIKE, C2 versus B1**, on the untouched 2024-04 through 2026-10 cohort for `BNBUSDT`, `BTCUSDT`, `ETHUSDT`, `SOLUSDT`, `XRPUSDT`. This is sequential confirmatory look `k=2` with frozen `alpha_2 = 0.05/(2*3) = 0.008333`. The declared Holm secondary is the campaign-06 estimand: next-24h downside realized-semivariance level, judged by MSE. Do not substitute another estimand, cohort, threshold, or model search.
+**EXECUTE `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` NOW under one fresh `session_<UTC>/` (id lexicographically > `20261126T153244Z`), using the corrected common-support design in §0 and §3.** The repository name leads with **Funding-conditioned-volatility**, so the highest-value unfinished work is the pre-registered disjoint-cohort replication of the repo-name primary estimand: **next-24h mean log-realized-variance QLIKE, C2 versus B1**, on the untouched 2024-04 through 2026-10 cohort for `BNBUSDT`, `BTCUSDT`, `ETHUSDT`, `SOLUSDT`, `XRPUSDT`. This is sequential confirmatory look `k=2` with frozen `alpha_2 = 0.05/(2*3) = 0.008333`. The declared Holm secondary is the campaign-06 estimand: next-24h downside realized-semivariance level, judged by MSE. Do not substitute another estimand, cohort, threshold, or model search.
 
-**No setup or gate-repair step is required first.** The heavy-work gate passed at this refresh (`pass=true`, `reason_code=OK`, `failures=[]`); `research_state/experiment_frontier.json` rank-0 is `READY_EXECUTE`; the five-symbol 2024-04..2026-10 cache and the stdlib template are on disk. `scripts/next_campaign_status.py` may still print its obsolete "no feasible 3-block design in ANY domain" line; that message is a known non-blocker and does **not** block campaign-07, which uses a feasible 60/20/20 chronological split with three test blocks on the common-support cache. Do not let that legacy line stall the run.
+**No setup or gate-repair step is required first.** `scripts/next_campaign_status.py` may still print its obsolete "no feasible 3-block design in ANY domain" line; that message is a known non-blocker and does **not** block campaign-07, which uses a feasible 60/20/20 chronological split with three test blocks on the common-support cache. Do not let that legacy line stall the run.
 
 ### Mandatory execution sequence
 
 1. Create exactly one fresh `research_state/session_<UTC>/` whose id is lexicographically greater than `20261126T153244Z`. Do not reuse or cite any aborted attempt (the quarantined `20261126T153717Z` and `20261126T144850Z` attempts are invalid evidence).
 2. Copy `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` into that new session directory. Set `SESSION` to the fresh UTC id and `CAMPAIGN_START` to `20261126T153244Z`. Running it from the quarantine directory is invalid (wrong relative cache path); running the copied script from `research_state/session_<UTC>/` resolves `../data_cache` correctly.
-3. **Apply the §0/§3 common-support filter in `build_symbol_panel` (or immediately after panel assembly, before pooling):** retain only rows whose timestamp `t` is in the all-five-symbol hourly intersection `S`. Recompute `S` from the cache; record `|S|`, per-symbol 1h counts, and the resulting train/val/test timestamp and row counts.
+3. **Apply the §0/§3 common-support filter in `build_symbol_panel` (line ~129) or immediately after panel assembly, before pooling:** retain only rows whose timestamp `t` is in the all-five-symbol hourly intersection `S`. Recompute `S` from the cache; record `|S|`, per-symbol 1h counts, and the resulting train/val/test timestamp and row counts.
 4. Reuse `research_state/data_cache/<SYM>_<YYYY_MM>/` read-only. Verify every consumed zip against its `.sha256` sidecar and `research_state/cached_inputs_hashes.json`; record exact coverage, layout, and any shortfall. Do not zero-fill, silently substitute, re-download, or inspect outcomes before the prereg is frozen.
 5. Produce the complete artifact set in §2 under that one fresh session directory. Every file must be non-empty; every JSON must carry the real `session_id` and experiment id. No root-level `research_state/*.md` or `*.json` files: the root is at its 500-file cap.
 6. Run the heavy evaluation and an independent stdlib recompute. The recompute must reproduce the verdict with `all_checks_match=true`; the evidence audit must have `audit_pass=true` and no unresolved blocker. A valid `NOT_SUPPORTED` result is acceptable; placeholders and fabricated agreement are not. The recompute must independently rebuild `S` and confirm the test set contains all five symbols with `n_test >= 500`.
@@ -111,19 +113,21 @@ Complete artifact set (under `research_state/session_20261126T133828Z/`; do not 
 
 ---
 
-## 6. FRONTIER AND NON-AVOIDANCE CONSTRAINTS
+## 6. FOCUS CAMPAIGN AND NON-AVOIDANCE CONSTRAINTS
 
+**Focus campaign (repo-name priority): Funding-conditioned next-24h volatility forecasting.** The repo name leads with **Funding-conditioned-volatility**, so the confirmatory campaign-07 contrast (C2 vs B1 on next-24h log-RV QLIKE, common-support disjoint 2024-04..2026-10 cohort) is the single highest-value unfinished task and the only task this session may execute. Heavy compute is mandatory: full three-block evaluation + ≥2,000-replicate block bootstrap + leave-one-symbol-out + independent stdlib recompute that rebuilds `S`.
+
+- **Machine-enforced non-avoidance:** `scripts/check_handoff_heavywork_gate.py` binds campaign-07 to the `fclr_live_archive07_*` artifact family plus `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json` in the newest session. A trigger-only, prose-only, audit-only, prereg-only, source-registry-only, verify-and-stop, or zero-byte-placeholder session fails closed. The gate is green now only because the newest on-disk session predates the campaign start; the first post-start session that lacks the full heavy set will fail.
 - Closed and not re-runnable: campaigns 01/03/04/05/06 on the five-symbol archive; broad ironflow VOL-BROAD/VOL-CORR/VOL-STRESS/VOL-JUMP arms; the terminal liquidation-risk program on the frozen ironflow panel.
 - Do not build a risk overlay: the forecast gate has not passed.
 - Do not wait for an external trigger; campaign-07 requires no network and no new source.
 - Do not modify `.github/workflows`, sealed protocols, raw caches, or prior frozen artifacts.
 - Stdlib only for campaign-07. No package installation.
 - Do not create a second active handoff or a status-only session. The next session's purpose is the complete heavy evaluation, independent reproduction, and synchronized frontier.
-- **Machine-enforced non-avoidance:** `scripts/check_handoff_heavywork_gate.py` binds campaign-07 to the `fclr_live_archive07_*` artifact family plus `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json` in the newest session. A trigger-only, prose-only, audit-only, prereg-only, source-registry-only, verify-and-stop, or zero-byte-placeholder session fails closed. The gate is green now only because the newest on-disk session predates the campaign start; the first post-start session that lacks the full heavy set will fail.
 - **Single durable handoff:** update this file and `research_state/experiment_frontier.json` only after the heavy artifacts exist and verify. Do not create root-level `research_state/*.md`/`*.json` files (root at 500-file cap).
 
 **Highest-value next action:** execute campaign-07 exactly as frozen above, on the common support `S`.
 **Dominant limitation to disclose:** only five symbols are available in the disjoint cohort and their 1h coverage is unequal, so the common-support restriction and per-block + leave-one-symbol-out diagnostics are mandatory.
 **Concrete falsification test:** C2 improves relative test QLIKE by at least 2% with the frozen uncertainty and Holm conditions on the untouched common-support cohort.
 
-**END OF HANDOFF — 2026-11-26T22:00:21Z**
+**END OF HANDOFF — 2026-11-26T22:03:43Z**
