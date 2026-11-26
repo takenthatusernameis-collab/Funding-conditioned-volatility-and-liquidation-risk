@@ -4,9 +4,9 @@
 
 # EXECUTE FCLR-LIVE-ARCHIVE-05 — funding-conditioned SIGNED-JUMP / realized-semivariance ASYMMETRY
 
-**Timestamp:** 2026-11-26T07:16:47Z
+**Timestamp:** 2026-11-26T07:19:22Z
 **Session:** NEXT (routing only; no heavy artifact is claimed by this refresh)
-**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-05-20261126T061929Z` — `READY_EXECUTE`
+**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-05-20261126T071922Z` — `READY_EXECUTE`
 **Latest completed heavy session:** `session_20261126T061929Z`
 **Repo-name priority:** the repository name leads with **Funding-conditioned-volatility**, so rank-0 is the funding-conditioned volatility program. The Binance-archive mean-RV, stress/tail, and quantile/full-distribution arms are closed `NOT_SUPPORTED`. The untested repo-name estimand is **signed-jump / realized-semivariance asymmetry**: upside versus downside next-24h realized variance.
 
@@ -17,7 +17,7 @@
 
 ## 1. FIRST ACTIONS — EXECUTE IN THIS ORDER
 
-1. Run `export UTC=$(date -u +%Y%m%dT%H%M%SZ)` and `mkdir -p research_state/session_$UTC`. The new id MUST be lexicographically greater than `session_20261126T061929Z`.
+1. Run `export UTC=$(date -u +%Y%m%dT%H%M%SZ)` and `mkdir -p research_state/session_$UTC`. The new id MUST be lexicographically greater than `20261126T071922Z`; do not reuse an older session.
 2. Reuse the verified raw cache read-only: `research_state/session_20261126T042519Z/raw/` (1,200 monthly zips). Do not re-download unless a file is missing.
 3. Copy and adapt `research_state/session_20261126T061929Z/fclr_live_archive04_eval_20261126T061929Z.py`. Keep its deterministic stdlib MM/IRLS and block-bootstrap patterns; replace the quantile target with the frozen asymmetry target in §3.
 4. Produce every artifact in §4 under that ONE new `session_$UTC/`. Every file must be non-empty and every JSON must carry `experiment_id:"FCLR-LIVE-ARCHIVE-05"` and the real `session_id`.
@@ -34,11 +34,11 @@ If you are about to rewrite this file without a new heavy session, stop: that is
 - **FCLR-LIVE-ARCHIVE-04 — CLOSED `NOT_SUPPORTED`:** quantile/full-distribution volatility; relative average-pinball reduction -1.102%, 95% CI [-1.233%, -0.969%]. Heavy artifacts and independent recompute are under `session_20261126T061929Z`; `all_checks_match=true`.
 - **FCLR-009 — CLOSED `NOT_MET`.**
 - **Liquidation-risk program on the frozen panel — CLOSED.** Do not reopen.
-- **Active rank-0:** `FCLR-LIVE-ARCHIVE-05-20261126T061929Z`, `READY_EXECUTE`. No `fclr_live_archive05_*` artifact exists yet.
+- **Active rank-0:** `FCLR-LIVE-ARCHIVE-05-20261126T071922Z`, `READY_EXECUTE`. No `fclr_live_archive05_*` artifact exists yet.
 
-**Bottleneck removed in this refresh:** `experiment_frontier.json` had remained on closed campaign 04 even though campaign 04 had completed and the handoff had advanced to 05. The registry is now synchronized to rank-0 campaign 05, with campaign 04 retained as completed evidence. This removes the stale-routing conflict for the next session.
+**Bottleneck removed in this refresh:** the campaign start and frontier were rebound from the stale `20261126T061929Z` routing point to this handoff's `20261126T071922Z` start. The artifact family and frozen scientific design are unchanged; only the stale session boundary was repaired. This prevents an older post-start session from being mistaken for the current execution target.
 
-**Why the gate is green today:** the latest on-disk session equals the campaign-05 start (`session_20261126T061929Z`), so the grandfather clause applies. The instant any newer `session_<UTC>/` exists, the complete campaign-05 artifact set becomes mandatory in that same session.
+**Why the gate is green today:** the latest on-disk session equals the prior completed heavy session (`session_20261126T061929Z`), which predates the rebound campaign start, so the grandfather clause applies. The instant any newer `session_<UTC>/` exists, the complete campaign-05 artifact set becomes mandatory in that same session.
 
 ---
 
@@ -46,8 +46,8 @@ If you are about to rewrite this file without a new heavy session, stop: that is
 
 1. **Cohort:** 2021-01-01 through 2024-12-31 UTC; exactly `1INCHUSDT`, `AAVEUSDT`, `ADAUSDT`, `ALGOUSDT`, `ALPHAUSDT`. Do not substitute coins or re-enumerate the cohort.
 2. **Primary target:** next-24h realized-semivariance asymmetry
- `A = log((RV_plus + eps) / (RV_minus + eps))`,
- where `RV_plus` sums squared positive 1h log-returns and `RV_minus` sums squared negative 1h log-returns over the next 24 hours. Use a fixed positive `eps`, train-only scaling, and no test-set outcome fitting.
+   `A = log((RV_plus + eps) / (RV_minus + eps))`,
+   where `RV_plus` sums squared positive 1h log-returns and `RV_minus` sums squared negative 1h log-returns over the next 24 hours. Use a fixed positive `eps`, train-only scaling, and no test-set outcome fitting.
 3. **Features:** B1 is HAR of signed components: log RV1h/RV24h/RV168h plus log RV_plus/RV_minus at 24h/168h. C2 is B1 plus signed funding(24h), trailing 90-day absolute-funding percentile, mark/index premium, and mark/EMA24 distance. All scaling is train-only.
 4. **Split and leakage controls:** 60/20/20 by unique UTC timestamp; 168-hour purge/embargo; test split divided into three chronological blocks. Do not open sealed holdouts.
 5. **Models:** fixed-form linear regression for B1 and C2 using the same deterministic stdlib MM/IRLS or coordinate-descent procedure. Also report a secondary downside-dominance sign classifier on the same split; the continuous asymmetry MSE contrast remains primary.
@@ -81,7 +81,7 @@ tests.test_vol_corr_campaign_gate tests.test_vol_broad_campaign_gate \
 tests.test_tracka_hardening_143 tests.test_active_campaign_gate
 ```
 
-Required gate result: top-level `pass=true`, `reason_code=OK`, `failures=[]`; `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive05"`, and empty missing/empty artifact lists.
+Required gate result after the heavy session: top-level `pass=true`, `reason_code=OK`, `failures=[]`; `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive05"`, and empty missing/empty artifact lists.
 
 ---
 
@@ -109,13 +109,13 @@ If a feature month is missing, do not silently substitute or zero-fill. Record t
 
 ---
 
-## 8. SESSION CLOSE-OUT — 2026-11-26T07:16:47Z
+## 8. SESSION CLOSE-OUT — 2026-11-26T07:19:22Z
 
-**What changed:** the sole durable handoff was refreshed to the current timestamp; the stale rank-0 frontier entry was replaced with campaign 05; completed campaign 04 was retained in the registry; the prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T070100Z.md`.
+**What changed:** the sole durable handoff was refreshed to the current timestamp; campaign 05's start was rebound to `20261126T071922Z`; the rank-0 frontier was synchronized to the same campaign id; the prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T070100Z.md`.
 
-**What was tested this session:** no new quantitative campaign was executed and no heavy artifact is claimed. The latest completed heavy session remains `session_20261126T061929Z`.
+**What was tested this session:** no new quantitative campaign was executed and no heavy artifact is claimed. Baseline verification passed: the heavy-work gate returned `pass=true`, `reason_code=OK`, `failures=[]`; `python3 -m py_compile scripts/check_handoff_heavywork_gate.py` passed; the six-module unittest command in §5 passed 122 tests. The latest completed heavy session remains `session_20261126T061929Z`.
 
-**Single highest-value next task:** execute the complete campaign-05 asymmetry evaluation, independent recompute, evidence audit, gate alias, and trigger check in one fresh session strictly newer than `session_20261126T061929Z`.
+**Single highest-value next task:** execute the complete campaign-05 asymmetry evaluation, independent recompute, evidence audit, gate alias, and trigger check in one fresh session strictly newer than `20261126T071922Z`.
 
 **Latest completed session:** `session_20261126T061929Z`
 

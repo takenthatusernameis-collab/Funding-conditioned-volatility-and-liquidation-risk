@@ -1,14 +1,14 @@
 [
- {
-  "rank": 0,
-  "status": "READY_EXECUTE",
-  "program_status": "ACTIVE",
-  "task": "FCLR-LIVE-ARCHIVE-05-20261126T061929Z",
-  "generated": "20261126T061929Z",
-  "refreshed": "2026-11-26T07:16:47Z",
-  "last_checked": "2026-11-26T07:16:47Z",
-  "last_verdict": null,
-  "next_action_heavy": "Execute FCLR-LIVE-ARCHIVE-05 in one fresh research_state/session_<UTC>/ (UTC strictly > 20261126T061929Z): outcome-blind prereg, heavy 3-block confirmatory signed-jump / realized-semivariance-asymmetry evaluation (continuous log((RV_plus+eps)/(RV_minus+eps)) primary; downside-dominance sign secondary), independent stdlib recompute, evidence audit, gate-critical evidence_audit_ alias, and trigger check. This is HEAVY WORK, not a refresh, probe, prereg-only, audit-only, or verify-and-stop session.",
+  {
+   "rank": 0,
+   "status": "READY_EXECUTE",
+   "program_status": "ACTIVE",
+   "task": "FCLR-LIVE-ARCHIVE-05-20261126T071922Z",
+   "generated": "20261126T071922Z",
+   "refreshed": "2026-11-26T07:19:22Z",
+   "last_checked": "2026-11-26T07:19:22Z",
+   "last_verdict": null,
+  "next_action_heavy": "Execute FCLR-LIVE-ARCHIVE-05 in one fresh research_state/session_<UTC>/ (UTC strictly > 20261126T071922Z): outcome-blind prereg, heavy 3-block confirmatory signed-jump / realized-semivariance-asymmetry evaluation (continuous log((RV_plus+eps)/(RV_minus+eps)) primary; downside-dominance sign secondary), independent stdlib recompute, evidence audit, gate-critical evidence_audit_ alias, and trigger check. This is HEAVY WORK, not a refresh, probe, prereg-only, audit-only, or verify-and-stop session.",
   "next_unfinished_task": "Produce the complete fclr_live_archive05_* artifact set under one fresh session_<UTC>/, all non-empty and no zero-byte placeholders: source_registry json+md; prereg json+md (outcome_data_inspected_before_freeze:false, hash-bound to source registry); eval py+json+md (B1 HAR signed components vs C2 B1+funding+price, 60/20/20 by unique UTC timestamp, 168h purge/embargo, test->3 blocks, >=2000 deterministic block-bootstrap replicates, per-block and leave-one-symbol-out); recompute py+json (all_checks_match:true); fclr_live_archive05_evidence_audit_ json+md; evidence_audit_ json+md alias; trigger_check_ json. Then record the real session id in AGENT_HANDOFF.md and promote this entry to COMPLETED_VALIDATED only after the artifacts exist. Do NOT write a future/non-existent session id before artifacts exist.",
   "resume_triggers": [],
   "trigger_status": {},
@@ -50,7 +50,7 @@
     "claim": "Execute the heavy 3-block asymmetry evaluation triad + independent stdlib recompute + evidence audit + gate alias + trigger check under one fresh session_<UTC>/ (UTC > 20261126T061929Z). All artifacts non-empty."
    }
   ],
-  "note": "ACTIVE rank-0 as of 2026-11-26T07:16:47Z. Promoted after FCLR-LIVE-ARCHIVE-04 closed NOT_SUPPORTED under session_20261126T061929Z. The signed-jump / semivariance-asymmetry arm is a DISTINCT repo-name volatility estimand. Stdlib only; no overlay; raw cache reusable read-only.",
+   "note": "ACTIVE rank-0 as of 2026-11-26T07:19:22Z. Rebound after the 07:16:47Z routing-only refresh; FCLR-LIVE-ARCHIVE-04 remains closed NOT_SUPPORTED under session_20261126T061929Z. The signed-jump / semivariance-asymmetry arm is a DISTINCT repo-name volatility estimand. Stdlib only; no overlay; raw cache reusable read-only.",
   "session": null,
   "completed_session": null,
   "supersedes": "FCLR-LIVE-ARCHIVE-04",
