@@ -1,0 +1,168 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-05",
+  "campaign": "FCLR-LIVE-ARCHIVE-05-20261126T072336Z",
+  "session_id": "20261126T082429Z",
+  "session_utc": "20261126T082429Z",
+  "generated_at": "2026-11-26T08:29:13Z",
+  "source": "BINANCE_PUBLIC_ARCHIVE_READ_ONLY_CACHE",
+  "source_session": "session_20261126T042519Z",
+  "symbols": [
+    "1INCHUSDT",
+    "AAVEUSDT",
+    "ADAUSDT",
+    "ALGOUSDT",
+    "ALPHAUSDT"
+  ],
+  "months": "2021-01..2024-12 (48 months)",
+  "n_symbols": 5,
+  "per_symbol_rows": {
+    "1INCHUSDT": 34872,
+    "AAVEUSDT": 34872,
+    "ADAUSDT": 34872,
+    "ALGOUSDT": 34872,
+    "ALPHAUSDT": 34872
+  },
+  "n_train": 103775,
+  "n_val": 34870,
+  "n_test": 35715,
+  "n_unique_timestamps": 34872,
+  "embargo_hours": 168,
+  "splits": "60/20/20 by unique UTC timestamp; 7-day purge/embargo; test->3 blocks",
+  "models": [
+    "B1",
+    "C2"
+  ],
+  "target": "next-24h realized-semivariance asymmetry log((RV_plus+eps)/(RV_minus+eps))",
+  "eps": 1e-09,
+  "b1_features": [
+    "log RV1h",
+    "log RV24h",
+    "log RV168h",
+    "log RV_plus24",
+    "log RV_minus24",
+    "log RV_plus168",
+    "log RV_minus168"
+  ],
+  "c2_features": [
+    "B1 (7)",
+    "signed funding(24h)",
+    "trailing 90d |funding| pct",
+    "mark/index premium",
+    "mark/EMA24 distance"
+  ],
+  "solver": "deterministic stdlib OLS (Gauss-Jordan normal equations, train-only)",
+  "materiality_floor": 0.02,
+  "metrics": {
+    "B1": {
+      "mse": 0.9355262850897595,
+      "r2": -0.01809502663945528,
+      "sse": 33412.32127198076,
+      "sst": 32818.470179810916,
+      "sign_acc": 0.501609967800644,
+      "n": 35715
+    },
+    "C2": {
+      "mse": 0.9342108398597507,
+      "r2": -0.01666348135009965,
+      "sse": 33365.340145591,
+      "sst": 32818.470179810916,
+      "sign_acc": 0.5031219375612488,
+      "n": 35715
+    }
+  },
+  "relative_mse_reduction_C2_vs_B1": 0.001406101839118935,
+  "per_block": {
+    "B1": {
+      "mse": [
+        0.9345999976521092,
+        0.9353948251235772,
+        0.936584032493592
+      ]
+    },
+    "C2": {
+      "mse": [
+        0.9333011541139398,
+        0.9339722009134882,
+        0.935359164551824
+      ]
+    }
+  },
+  "leave_one_symbol_out": {
+    "1INCHUSDT": {
+      "n": 7143,
+      "mse_B1": 0.930040550289786,
+      "r2_B1": -0.017866862098830483,
+      "mse_C2": 0.9228822219639135,
+      "r2_C2": -0.010032552951064089,
+      "rel_mse_C2_vs_B1": 0.007696791633055328,
+      "sign_acc_B1": 0.5168696626067478,
+      "sign_acc_C2": 0.5207895842083158
+    },
+    "AAVEUSDT": {
+      "n": 7143,
+      "mse_B1": 0.9255996352718747,
+      "r2_B1": -0.03127086971632598,
+      "mse_C2": 0.9235149780997902,
+      "r2_C2": -0.028948217315664104,
+      "rel_mse_C2_vs_B1": 0.0022522234156587373,
+      "sign_acc_B1": 0.49013019739605207,
+      "sign_acc_C2": 0.48369032619347613
+    },
+    "ADAUSDT": {
+      "n": 7143,
+      "mse_B1": 0.9149397968894428,
+      "r2_B1": -0.027630352387040924,
+      "mse_C2": 0.913958189256067,
+      "r2_C2": -0.02652784290868926,
+      "rel_mse_C2_vs_B1": 0.0010728658177434818,
+      "sign_acc_B1": 0.500489990200196,
+      "sign_acc_C2": 0.5059498810023799
+    },
+    "ALGOUSDT": {
+      "n": 7143,
+      "mse_B1": 0.9197608164456849,
+      "r2_B1": -0.005483650245593719,
+      "mse_C2": 0.9200559981304248,
+      "r2_C2": -0.005806343224628252,
+      "rel_mse_C2_vs_B1": -0.0003209330941936209,
+      "sign_acc_B1": 0.5126697466050679,
+      "sign_acc_C2": 0.5130897382052358
+    },
+    "ALPHAUSDT": {
+      "n": 7143,
+      "mse_B1": 0.9936976232180871,
+      "r2_B1": -0.01971209904026794,
+      "mse_C2": 0.993952452318926,
+      "r2_C2": -0.019973599431575728,
+      "rel_mse_C2_vs_B1": -0.0002564453158433618,
+      "sign_acc_B1": 0.48327033459330815,
+      "sign_acc_C2": 0.4859302813943721
+    }
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20261126,
+    "block_rows": 24,
+    "mean_diff_mse_B1_minus_C2": 0.0013205541600761904,
+    "mean_rel_mse_reduction": 0.0014115628615923809,
+    "ci95_abs_diff": [
+      -0.0002988868640354964,
+      0.0029446057737934138
+    ],
+    "ci95_relative_mse_reduction": [
+      -0.0003194852659931619,
+      0.003147539327033331
+    ]
+  },
+  "download": {
+    "n_cache_entries": 1200,
+    "n_ok": 1200,
+    "n_missing": 0
+  },
+  "verdict": "NOT_SUPPORTED",
+  "verdict_reason": "C2 vs B1 relative test-MSE reduction < 2% floor or CI includes 0",
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true,
+  "outcome_data_inspected_before_freeze": false
+}
