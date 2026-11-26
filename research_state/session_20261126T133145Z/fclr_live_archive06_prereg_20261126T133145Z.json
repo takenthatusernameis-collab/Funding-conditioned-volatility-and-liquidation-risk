@@ -1,0 +1,40 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-06-20261126T083526Z",
+  "session_utc": "20261126T133145Z",
+  "artifact_id": "fclr_live_archive06_prereg_20261126T133145Z",
+  "generated_at": "2026-11-26T13:34:40Z",
+  "experiment_id": "FCLR-LIVE-ARCHIVE-06",
+  "outcome_data_inspected_before_freeze": false,
+  "hash_bound_to_source_registry": "09e1bd24f47683d511b4f855ef99a698c83298c3f2bbe24e91c5d0cfe2132376",
+  "hypothesis": "FCLR-H006: funding + price features improve out-of-sample forecasts of next-24h downside realized-semivariance level log(RV_minus+eps) beyond a signed-component HAR baseline (B1), judged on relative test-MSE reduction.",
+  "window": "2021-01-01..2024-12-31 UTC",
+  "symbols": [
+    "1INCHUSDT",
+    "AAVEUSDT",
+    "ADAUSDT",
+    "ALGOUSDT",
+    "ALPHAUSDT"
+  ],
+  "target": "next-24h downside realized-semivariance level log(RV_minus+eps)",
+  "eps": 1e-09,
+  "splits": "60/20/20 by unique UTC timestamp; 7-day (168h) purge/embargo at train/val and val/test boundaries; test -> 3 interleaved blocks",
+  "models": {
+    "B1": "OLS on log RV1h/RV24h/RV168h + log RV_plus/RV_minus at 24h/168h (7 signed HAR features), train-only scaling",
+    "C2": "B1 + signed funding(24h) + trailing 90d |funding| percentile + mark/index premium + mark/EMA24 distance (11 features)"
+  },
+  "primary_contrast": "C2 vs B1 on paired test-set out-of-sample MSE",
+  "secondary": "downside level sign accuracy (sign of predicted vs actual downside level)",
+  "inference": ">=2000 deterministic moving-block bootstrap replicates (block=24 rows, seed=20261126); report MSE, R^2, sign accuracy, 95% CI on relative MSE reduction, per-block, leave-one-symbol-out",
+  "materiality_floor": 0.02,
+  "decision_rule": "PROMOTED iff relative test-MSE reduction >=2% AND bootstrap 95% CI lower bound > 0 AND test data sufficient; else NOT_SUPPORTED; INCONCLUSIVE if test data insufficient",
+  "leakage_controls": [
+    "outcome-blind freeze before target generation",
+    "train-only OLS fitting",
+    "train-only scaling + standardization",
+    "168h purge/embargo",
+    "no outcome inspection before freeze"
+  ],
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true
+}
