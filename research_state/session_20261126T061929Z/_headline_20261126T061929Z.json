@@ -1,0 +1,10 @@
+{
+  "avg_pinball": {
+    "B1": 0.0007848803338064948,
+    "C2": 0.0007935292185723664
+  },
+  "rel_pinball": -0.011019367403342244,
+  "n_test": 35715,
+  "verdict": "NOT_SUPPORTED",
+  "n_unique_timestamps": 34872
+}

@@ -1,0 +1,159 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-04",
+  "campaign": "FCLR-LIVE-ARCHIVE-04-20261126T053929Z",
+  "session_id": "20261126T061929Z",
+  "session_utc": "20261126T061929Z",
+  "generated_at": "2026-11-26T06:59:23Z",
+  "source": "BINANCE_PUBLIC_ARCHIVE_READ_ONLY_CACHE",
+  "source_session": "session_20261126T042519Z",
+  "symbols": [
+    "1INCHUSDT",
+    "AAVEUSDT",
+    "ADAUSDT",
+    "ALGOUSDT",
+    "ALPHAUSDT"
+  ],
+  "months": "2021-01..2024-12 (48 months)",
+  "n_symbols": 5,
+  "per_symbol_rows": {
+    "1INCHUSDT": 34872,
+    "AAVEUSDT": 34872,
+    "ADAUSDT": 34872,
+    "ALGOUSDT": 34872,
+    "ALPHAUSDT": 34872
+  },
+  "n_train": 103775,
+  "n_val": 34870,
+  "n_test": 35715,
+  "n_unique_timestamps": 34872,
+  "embargo_hours": 168,
+  "splits": "60/20/20 by unique UTC timestamp; 7-day purge/embargo; test->3 blocks",
+  "models": [
+    "B1",
+    "C2"
+  ],
+  "target": "next-24h realized variance (continuous) forecast as predictive distribution",
+  "quantile_levels": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "solver": "Hunter-Lange MM/IRLS linear quantile regression (train-only)",
+  "materiality_floor": 0.02,
+  "metrics": {
+    "B1": {
+      "avg_pinball": 0.0007848803338064948,
+      "per_tau_pinball": {
+        "0.1": 0.0002631925172811944,
+        "0.25": 0.0006326082743845696,
+        "0.5": 0.0011204119690828782,
+        "0.75": 0.0010842309201287848,
+        "0.9": 0.0008239579881550464
+      },
+      "empirical_coverage": {
+        "0.1": 0.25605487890242196,
+        "0.25": 0.5070978580428391,
+        "0.5": 0.6635867282654347,
+        "0.75": 0.7976760464790704,
+        "0.9": 0.921377572448551
+      },
+      "mean_abs_coverage_error": 0.12915861682766344,
+      "n": 35715
+    },
+    "C2": {
+      "avg_pinball": 0.0007935292185723664,
+      "per_tau_pinball": {
+        "0.1": 0.00026637946421347665,
+        "0.25": 0.000639634186456546,
+        "0.5": 0.0011204119841853595,
+        "0.75": 0.0011041378908208251,
+        "0.9": 0.0008370825671856247
+      },
+      "empirical_coverage": {
+        "0.1": 0.26011479770404594,
+        "0.25": 0.5060338793224135,
+        "0.5": 0.6635867282654347,
+        "0.75": 0.7889682206355872,
+        "0.9": 0.9246255074898502
+      },
+      "mean_abs_coverage_error": 0.12866582668346632,
+      "n": 35715
+    }
+  },
+  "relative_avg_pinball_reduction_C2_vs_B1": -0.011019367403342244,
+  "per_block": {
+    "B1": {
+      "avg_pinball": [
+        0.0007849890637516194,
+        0.0007853038852102381,
+        0.0007843480524576346
+      ]
+    },
+    "C2": {
+      "avg_pinball": [
+        0.0007936645942869151,
+        0.000793837862259398,
+        0.0007930851991707898
+      ]
+    }
+  },
+  "leave_one_symbol_out": {
+    "1INCHUSDT": {
+      "n": 7143,
+      "avg_pinball_B1": 0.0006731146764727922,
+      "avg_pinball_C2": 0.0006725728531936592,
+      "rel_pinball_C2_vs_B1": 0.0008049494359151318
+    },
+    "AAVEUSDT": {
+      "n": 7143,
+      "avg_pinball_B1": 0.0007113869006916459,
+      "avg_pinball_C2": 0.0007031136428776198,
+      "rel_pinball_C2_vs_B1": 0.011629758442251833
+    },
+    "ADAUSDT": {
+      "n": 7143,
+      "avg_pinball_B1": 0.0007605463417391788,
+      "avg_pinball_C2": 0.0007847600699462236,
+      "rel_pinball_C2_vs_B1": -0.03183728180412268
+    },
+    "ALGOUSDT": {
+      "n": 7143,
+      "avg_pinball_B1": 0.0010174356933031368,
+      "avg_pinball_C2": 0.0009839022252279845,
+      "rel_pinball_C2_vs_B1": 0.03295880840024871
+    },
+    "ALPHAUSDT": {
+      "n": 7143,
+      "avg_pinball_B1": 0.0008986266659213726,
+      "avg_pinball_C2": 0.0009096194453225349,
+      "rel_pinball_C2_vs_B1": -0.012232865791814906
+    }
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20261126,
+    "block_rows": 24,
+    "mean_diff_avg_pinball_B1_minus_C2": -8.644321984251582e-06,
+    "ci95_abs_diff": [
+      -9.674646463075052e-06,
+      -7.603014861249467e-06
+    ],
+    "ci95_relative_avg_pinball_reduction": [
+      -0.012326269427793116,
+      -0.00968684592258356
+    ]
+  },
+  "download": {
+    "n_cache_entries": 1200,
+    "n_ok": 1200,
+    "n_missing": 0
+  },
+  "verdict": "NOT_SUPPORTED",
+  "verdict_reason": "C2 vs B1 relative average pinball reduction < 2% floor or CI includes 0",
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true,
+  "outcome_data_inspected_before_freeze": false
+}

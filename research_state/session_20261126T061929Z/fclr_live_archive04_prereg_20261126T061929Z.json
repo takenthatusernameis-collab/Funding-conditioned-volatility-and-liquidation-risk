@@ -1,0 +1,46 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-04-20261126T053929Z",
+  "session_utc": "20261126T061929Z",
+  "artifact_id": "fclr_live_archive04_prereg_20261126T061929Z",
+  "generated_at": "2026-11-26T06:59:23Z",
+  "experiment_id": "FCLR-LIVE-ARCHIVE-04",
+  "outcome_data_inspected_before_freeze": false,
+  "hash_bound_to_source_registry": "aeaa5aa6833ebad0034fd527b3c19631a7f095b593623a37fe6681091d4cb1a0",
+  "hypothesis": "FCLR-H003: funding + price features improve out-of-sample forecasts of the FULL predictive distribution of next-24h realized variance (quantile forecasts) beyond an RV-only HAR baseline.",
+  "window": "2021-01-01..2024-12-31 UTC",
+  "symbols": [
+    "1INCHUSDT",
+    "AAVEUSDT",
+    "ADAUSDT",
+    "ALGOUSDT",
+    "ALPHAUSDT"
+  ],
+  "target": "next-24h realized variance (continuous) as a predictive distribution",
+  "quantile_levels": [
+    0.1,
+    0.25,
+    0.5,
+    0.75,
+    0.9
+  ],
+  "quantile_estimation": "train-only linear quantile regression (Hunter-Lange MM/IRLS); never re-fit on test",
+  "splits": "60/20/20 by unique UTC timestamp; 7-day (168h) purge/embargo at train/val and val/test boundaries; test -> 3 interleaved blocks",
+  "models": {
+    "B1": "linear quantile regression on log RV1h/RV24h/RV168h (HAR)",
+    "C2": "B1 + signed funding(24h) + trailing 90d |funding| percentile + mark/index premium + mark/EMA24 distance"
+  },
+  "primary_contrast": "C2 vs B1 on paired test-set average pinball loss across the five quantiles",
+  "inference": ">=2000 deterministic moving-block bootstrap replicates (block=24 rows, seed=20261126); report average + per-quantile pinball, empirical coverage, 95% CI, per-block, leave-one-symbol-out",
+  "materiality_floor": 0.02,
+  "decision_rule": "PROMOTED iff relative average-pinball reduction >=2% AND bootstrap 95% CI lower bound > 0 AND test data sufficient; else NOT_SUPPORTED; INCONCLUSIVE if test data insufficient",
+  "leakage_controls": [
+    "outcome-blind freeze before target generation",
+    "train-only quantile fitting",
+    "train-only scaling + standardization",
+    "7-day purge/embargo",
+    "no outcome inspection before freeze"
+  ],
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true
+}

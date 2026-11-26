@@ -2,48 +2,49 @@
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-# AGENT_HANDOFF.md — EXECUTE FCLR-LIVE-ARCHIVE-04 (funding-conditioned QUANTILE / full-distribution volatility)
+# AGENT_HANDOFF.md — EXECUTE FCLR-LIVE-ARCHIVE-05 (funding-conditioned SIGNED-JUMP / realized-semivariance ASYMMETRY)
 
-**Timestamp:** 2026-11-26T05:43:51Z
-**Session:** NEXT (to execute — this handoff is routing only; no heavy artifact is claimed here)
-**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-04-20261126T053929Z` — status `READY_EXECUTE`.
-**Repo-name priority:** the repository name leads with **Funding-conditioned-volatility** → rank-0 is the funding-conditioned volatility program. The mean-RV QLIKE arm, the stress/tail arm, the correction-time arm, and the signed-jump arm are all CLOSED. The single repo-name estimand never tested confirmatory on the verified 2021–2024 Binance archive is the **full predictive distribution / quantile-volatility** arm. That is this campaign.
-**Status:** FCLR-LIVE-ARCHIVE-01 CLOSED NOT_SUPPORTED | FCLR-LIVE-ARCHIVE-03 CLOSED NOT_SUPPORTED | FCLR-LIVE-ARCHIVE-04 READY_EXECUTE.
+**Timestamp:** 2026-11-26T07:01:00Z
+**Session:** NEXT (to execute — this handoff is routing only for campaign 05; the heavy work for campaign 04 is already DONE and on disk, see §0).
+**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-05-20261126T061929Z` — status `READY_EXECUTE` (grandfathered today; the first post-start session is forced to execute it).
+**Repo-name priority:** the repository name leads with **Funding-conditioned-volatility** → rank-0 is the funding-conditioned volatility program. On the verified 2021–2024 Binance archive the mean-RV QLIKE arm (FCLR-LIVE-ARCHIVE-01), the binary stress/tail arm (FCLR-LIVE-ARCHIVE-03) and the full-distribution / quantile arm (FCLR-LIVE-ARCHIVE-04) are now ALL CLOSED `NOT_SUPPORTED`. The single repo-name volatility estimand never tested confirmatory on that archive is the **signed-jump / realized-semivariance asymmetry** arm (upside vs downside variance). That is this campaign.
+**Status:** FCLR-LIVE-ARCHIVE-01 CLOSED NOT_SUPPORTED | FCLR-LIVE-ARCHIVE-03 CLOSED NOT_SUPPORTED | FCLR-LIVE-ARCHIVE-04 CLOSED NOT_SUPPORTED | FCLR-LIVE-ARCHIVE-05 READY_EXECUTE.
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
-> **A timestamp-only rewrite is NOT progress and is forbidden. A session that creates NO new `session_<UTC>/` is a FAILURE. The next session MUST materialize the full `fclr_live_archive04_*` heavy artifact set in a fresh `session_<UTC>/` whose UTC is strictly greater than `20261126T053929Z`.**
+> **A timestamp-only rewrite is NOT progress and is forbidden. A session that creates NO new `session_<UTC>/` is a FAILURE. The next session MUST materialize the full `fclr_live_archive05_*` heavy artifact set in a fresh `session_<UTC>/` whose UTC is strictly greater than `20261126T061929Z`.**
 
 ---
 
 ## NEXT SESSION — DO THESE FIRST, IN THIS ORDER (no deviation)
 
-1. `export UTC=$(date -u +%Y%m%dT%H%M%SZ)` and `mkdir -p research_state/session_$UTC`. If `session_$UTC` is not lexicographically greater than `session_20261126T051548Z`, wait and retry — the new session id MUST be `> 20261126T053929Z`.
-2. Copy the reusable stdlib evaluation template `research_state/session_20261126T051548Z/fclr_live_archive03_eval_20261126T051548Z.py` and adapt the binary stress target to the **quantile / pinball** target defined in §5. Do NOT re-download data: reuse the 1,200 verified zips under `research_state/session_20261126T042519Z/raw/` read-only.
-3. Produce the complete artifact set in §5 under that ONE `session_$UTC/`, all non-empty, `fclr_live_archive04_` infix mandatory.
-4. Record the real `session_$UTC` id in §13 of THIS file, then run the §6 gate + unittest commands. Do not stop before the gate returns `live_archive.required=true, live_archive.pass=true, artifact_family="live_archive04"`.
+1. `export UTC=$(date -u +%Y%m%dT%H%M%SZ)` and `mkdir -p research_state/session_$UTC`. If `session_$UTC` is not lexicographically greater than `session_20261126T061929Z`, wait and retry — the new session id MUST be `> 20261126T061929Z`.
+2. Copy the reusable stdlib template `research_state/session_20261126T061929Z/fclr_live_archive04_eval_20261126T061929Z.py` and adapt the target to the **signed-jump / realized-semivariance asymmetry** target defined in §5. Do NOT re-download data: reuse the 1,200 verified zips under `research_state/session_20261126T042519Z/raw/` read-only.
+3. Produce the complete artifact set in §5 under that ONE `session_$UTC/`, all non-empty, `fclr_live_archive05_` infix mandatory.
+4. Record the real `session_$UTC` id in §13 of THIS file, then run the §6 gate + unittest commands. Do not stop before the gate returns `live_archive.required=true, live_archive.pass=true, artifact_family="live_archive05"`.
 
-If you catch yourself about to (a) only rewrite this file's timestamp, (b) create a session with no `fclr_live_archive04_*` artifacts, (c) stop at a probe / prereg / audit / source-registry, or (d) declare "no next campaign" — STOP: that is the forbidden refresh loop. Execute the heavy evaluation instead.
+If you catch yourself about to (a) only rewrite this file's timestamp, (b) create a session with no `fclr_live_archive05_*` artifacts, (c) stop at a probe / prereg / audit / source-registry, or (d) declare "no next campaign" — STOP: that is the forbidden refresh loop. Execute the heavy evaluation instead.
 
 ---
 
 ## 0. RECONCILIATION — CURRENT FRONTIER TRUTH (read first)
 
+- **FCLR-LIVE-ARCHIVE-04 is CLOSED (do NOT re-run):** full-distribution / quantile volatility, C2 vs B1 relative average-pinball reduction **-1.102%** (95% block-bootstrap CI [-1.233%, -0.969%], entirely below the +2% floor), `NOT_SUPPORTED`, session_20261126T061929Z. Recompute `all_checks_match=true`, verdict reproduced.
 - **FCLR-LIVE-ARCHIVE-01 is CLOSED (do NOT re-run):** mean log-RV QLIKE, C2 vs B1 relative reduction 0.840% < 2% floor, session_20261126T042519Z.
 - **FCLR-LIVE-ARCHIVE-03 is CLOSED (do NOT re-run):** next-24h realized-variance stress/tail exceedance, C2 vs B1 relative Brier reduction 0.458% (95% CI [-0.966%, 1.972%]) < 2% floor, session_20261126T051548Z.
 - **FCLR-009 is CLOSED (do NOT re-run):** NOT_MET.
 - **Liquidation-risk program is CLOSED** on the frozen panel. Do not reopen.
-- **Active rank-0:** `FCLR-LIVE-ARCHIVE-04-20261126T053929Z` — funding-conditioned **quantile / full-distribution volatility forecasting** on the same verified 5-symbol 2021–2024 Binance archive. READY_EXECUTE; no `fclr_live_archive04_*` artifact exists yet (verified: `find research_state -name 'fclr_live_archive04_*'` returns nothing).
+- **Active rank-0:** `FCLR-LIVE-ARCHIVE-05-20261126T061929Z` — funding-conditioned **signed-jump / realized-semivariance asymmetry** forecasting on the same verified 5-symbol 2021–2024 Binance archive. READY_EXECUTE; no `fclr_live_archive05_*` artifact exists yet.
 
-**Bottleneck removed (do not re-introduce):** the prior frontier ended in a terminal “no next campaign” state, and the last handoff was itself a “ROUTING REFRESH ONLY” — a timestamp-only rewrite that let a future session verify-and-stop. That escape hatch is closed by the machine-bound FCLR-LIVE-ARCHIVE-04 binder below plus the first-action checklist above: the next post-start session cannot pass with a trigger-only, prose-only, prereg-only, audit-only, source-probe-only, verify-and-stop, refresh-only, or no-new-session session.
+**Bottleneck removed (do not re-introduce):** the prior frontier was stuck in a routing-refresh loop — every session only rewrote this handoff and re-routed to FCLR-LIVE-ARCHIVE-04 without ever executing it. That loop is now BROKEN: campaign 04 has been executed end-to-end (heavy eval + independent recompute + evidence audit, all on disk under `session_20261126T061929Z`). Campaign 05 is now the machine-bound rank-0 with a first-action checklist that closes the refresh / no-session escape hatch.
 
-**Why the gate is green TODAY (and why that ends the moment you act):** the latest on-disk session `session_20261126T051548Z` (05:15:48Z) predates the campaign start `20261126T053929Z`, so `live_archive.required=false` by the grandfather clause. The instant you create ANY `session_<UTC>` with UTC > `20261126T053929Z`, `live_archive.required` flips to `true` and the full `fclr_live_archive04_*` set becomes mandatory in that same session. There is no grace session and no verify-and-stop branch.
+**Why the gate is green TODAY (and why that ends the moment you act):** the latest on-disk session `session_20261126T061929Z` equals the campaign-05 start `20261126T061929Z`, so `live_archive.required=false` by the grandfather clause (it already carries the completed campaign-04 heavy set). The instant you create ANY `session_<UTC>` with UTC > `20261126T061929Z`, `live_archive.required` flips to `true` and the full `fclr_live_archive05_*` set becomes mandatory in that same session. There is no grace session and no verify-and-stop branch.
 
 ---
 
 ## 1. What Changed & Why
 
-The frozen 18-month `ironflow_bulk` panel and the 4-year Binance archive have now rejected the mean, stress, correction-time, and signed-jump volatility estimands. Per RESEARCH_PROMPT.md §16 (adaptive feasibility) and §10 (continuous priorities), the next materially different repo-name test is the **predictive distribution** of next-24h realized variance: quantile forecasts at pre-registered levels, scored with pinball loss and calibration, rather than a mean QLIKE or a binary tail label. This is a distinct outcome family and is feasible today with the verified raw cache already in hand.
+The frozen 18-month `ironflow_bulk` panel and the 4-year Binance archive have now rejected the mean, stress/tail, and full-distribution/quantile volatility estimands. Per RESEARCH_PROMPT.md §16 (adaptive feasibility) and §10 (continuous priorities), the next materially different repo-name test is the **signed-jump / realized-semivariance asymmetry** of next-24h realized variance: upside (positive-return) semivariance minus downside (negative-return) semivariance, forecast from funding + price features and judged out-of-sample with a heavy confirmatory design. This is a distinct outcome family (asymmetry / signed jump) that mean, binary-tail and quantile metrics cannot detect, and it is feasible today with the verified raw cache already in hand.
 
 ---
 
@@ -51,19 +52,24 @@ The frozen 18-month `ironflow_bulk` panel and the 4-year Binance archive have no
 
 | Artifact | Status | Evidence |
 |----------|--------|----------|
+| FCLR-LIVE-ARCHIVE-04 quantile / full-distribution | CLOSED NOT_SUPPORTED | rel avg-pinball -1.102%, CI [-1.233%, -0.969%]; session_20261126T061929Z |
 | FCLR-LIVE-ARCHIVE-01 mean-RV QLIKE | CLOSED NOT_SUPPORTED | rel 0.840% < 2%; session_20261126T042519Z |
 | FCLR-LIVE-ARCHIVE-03 stress/tail Brier | CLOSED NOT_SUPPORTED | rel 0.458%, CI includes 0; session_20261126T051548Z |
 | Frozen `ironflow_bulk` volatility arms | CLOSED NOT_SUPPORTED | BROAD/CORR/STRESS/JUMP |
 | Liquidation-risk program (frozen panel) | CLOSED | Track A blocked; B/C not supported; xsec not stable + floor not met |
-| FCLR-LIVE-ARCHIVE-04 quantile volatility | READY_EXECUTE | no heavy artifact yet; this handoff is routing only |
+| FCLR-LIVE-ARCHIVE-05 signed-jump / asymmetry | READY_EXECUTE | no heavy artifact yet; this handoff is routing only for 05 |
 
 ---
 
-## 3. Evidence Added & Where (this session)
+## 3. Evidence Added & Where (this session — session_20261126T061929Z)
 
-- This `AGENT_HANDOFF.md` — sole durable routing handoff to FCLR-LIVE-ARCHIVE-04, with a machine-aware first-action checklist that closes the refresh / no-session escape hatch.
-- Prior handoff preserved at `handoff_archive/AGENT_HANDOFF_20261126T053929Z.md`.
-- No new research_state session and no new quantitative artifact is claimed. The latest completed heavy session remains `session_20261126T051548Z`.
+- **FCLR-LIVE-ARCHIVE-04 heavy artifact set (NEW, on disk, non-empty):**
+  - `fclr_live_archive04_source_registry_20261126T061929Z.{json,md}` — 1,200/1,200 zips sha256-verified, read-only reuse.
+  - `fclr_live_archive04_prereg_20261126T061929Z.{json,md}` — outcome-blind, hash-bound to the source registry.
+  - `fclr_live_archive04_eval_20261126T061929Z.{py,json,md}` — heavy 3-block quantile-volatility evaluation (5 quantiles, pinball, coverage, ≥2000 block-bootstrap, per-block, leave-one-symbol-out). Verdict `NOT_SUPPORTED`.
+  - `fclr_live_archive04_recompute_20261126T061929Z.{py,json}` — independent stdlib recompute (separate parser + plain Gauss-Jordan MM/IRLS solver), `all_checks_match:true`, verdict reproduced.
+  - `fclr_live_archive04_evidence_audit_20261126T061929Z.{json,md}` + `evidence_audit_20261126T061929Z.json` (gate alias) + `trigger_check_20261126T061929Z.json`.
+- Prior handoff preserved at `handoff_archive/AGENT_HANDOFF_20261126T054351Z.md`.
 
 ---
 
@@ -75,47 +81,48 @@ The frozen 18-month `ironflow_bulk` panel and the 4-year Binance archive have no
 | Coverage / cohort freeze | FROZEN | 5 symbols × 48 months, outcome-blind (2021–2024) |
 | FCLR-LIVE-ARCHIVE-01 mean-RV QLIKE | CLOSED NOT_SUPPORTED | rel 0.840% < 2% |
 | FCLR-LIVE-ARCHIVE-03 stress/tail | CLOSED NOT_SUPPORTED | rel Brier 0.458% < 2% |
-| FCLR-LIVE-ARCHIVE-04 protocol freeze | NOT STARTED | next session must freeze before outcomes |
+| FCLR-LIVE-ARCHIVE-04 quantile / full-distribution | CLOSED NOT_SUPPORTED | rel avg-pinball -1.102%, CI below floor |
+| FCLR-LIVE-ARCHIVE-05 protocol freeze | NOT STARTED | next session must freeze before outcomes |
 | Forecast gate (§9) | NOT PASSED | risk overlay remains ineligible |
-| Heavy-work gate | PASS (grandfathered) | latest on-disk session `session_20261126T051548Z` predates campaign start `20261126T053929Z`; the first post-start session requires the full `fclr_live_archive04_*` set |
+| Heavy-work gate | PASS (grandfathered) | latest on-disk session `session_20261126T061929Z` equals campaign-05 start `20261126T061929Z`; the first post-start session requires the full `fclr_live_archive05_*` set |
 
 ---
 
 ## 5. Single Highest-Value Next Task
 
-**Execute the full FCLR-LIVE-ARCHIVE-04 artifact set in ONE fresh `research_state/session_<UTC>/` (UTC strictly > `20261126T053929Z`): a heavy 3-block confirmatory quantile-volatility evaluation + independent stdlib recompute + evidence audit + trigger check, with a valid `NOT_SUPPORTED` / `PROMOTED` / `INCONCLUSIVE` verdict.**
+**Execute the full FCLR-LIVE-ARCHIVE-05 artifact set in ONE fresh `research_state/session_<UTC>/` (UTC strictly > `20261126T061929Z`): a heavy 3-block confirmatory signed-jump / realized-semivariance-asymmetry evaluation + independent stdlib recompute + evidence audit + trigger check, with a valid `NOT_SUPPORTED` / `PROMOTED` / `INCONCLUSIVE` verdict.**
 
 ### Frozen execution design — DO NOT re-derive, expand, or threshold-shop
 
 1. **Window & symbols (FROZEN, reuse the verified cache):** 2021-01-01 → 2024-12-31 UTC; EXACTLY `1INCHUSDT`, `AAVEUSDT`, `ADAUSDT`, `ALGOUSDT`, `ALPHAUSDT`. Reuse the raw monthly zips under `research_state/session_20261126T042519Z/raw/` read-only; do NOT re-download unless a file is missing. Do NOT re-enumerate or substitute coins.
-2. **Target (DISTINCT family — full distribution):** next-24h realized variance, forecast as a predictive distribution at the pre-registered quantile levels **{0.10, 0.25, 0.50, 0.75, 0.90}**. Quantiles are estimated from training data only; no test-set quantile fitting.
-3. **Features:** B1 = HAR log RV1h/RV24h/RV168h only. C2 = B1 + signed funding(24h) + trailing 90d |funding| percentile + mark/index premium + mark/EMA24 distance. Train-only scaling; 7-day (168h) purge/embargo; 60/20/20 by unique UTC timestamp; test → 3 blocks.
-4. **Models:** fixed-form linear quantile regression fitted by a deterministic stdlib method (coordinate descent or IRLS); identical fitting procedure for B1 and C2. No external packages.
-5. **Metrics & inference:** average pinball loss across the five quantiles (primary), per-quantile pinball loss, empirical coverage, and calibration diagnostics; ≥2,000 deterministic block-bootstrap replicates (fixed seed); per-block + leave-one-symbol-out.
-6. **Materiality floor:** **≥2% relative reduction in average pinball loss** for C2 vs B1, with the 95% block-bootstrap CI lower bound > 0. If the floor is not met, preserve `NOT_SUPPORTED`; a null is valid.
+2. **Target (DISTINCT family — signed jump / asymmetry):** next-24h realized-semivariance asymmetry, `A = log((RV_plus + eps) / (RV_minus + eps))` where `RV_plus = sum of squared POSITIVE 1h log-returns` and `RV_minus = sum of squared NEGATIVE 1h log-returns` over the next 24 hours. Continuous, outcome-blind, train-only scaling.
+3. **Features:** B1 = HAR of the SIGNED components: log RV1h/RV24h/RV168h PLUS log RV_plus/RV_minus at 24h/168h. C2 = B1 + signed funding(24h) + trailing 90d |funding| percentile + mark/index premium + mark/EMA24 distance. Train-only scaling; 7-day (168h) purge/embargo; 60/20/20 by unique UTC timestamp; test → 3 blocks.
+4. **Models:** fixed-form linear regression fitted by a deterministic stdlib method (MM/IRLS or coordinate descent); identical fitting procedure for B1 and C2. No external packages. (A heavy confirmatory VARIANT: also report a binary "downside-dominance" sign classifier on the same split; the PRIMARY contrast remains the continuous asymmetry.)
+5. **Metrics & inference:** out-of-sample R² / MSE on the asymmetry target (primary), sign-accuracy of the downside-dominance classifier (secondary), ≥2,000 deterministic block-bootstrap replicates (fixed seed); per-block + leave-one-symbol-out.
+6. **Materiality floor:** **≥2% relative reduction in test MSE** for C2 vs B1, with the 95% block-bootstrap CI lower bound > 0. If the floor is not met, preserve `NOT_SUPPORTED`; a null is valid.
 7. **Verdict:** valid `NOT_SUPPORTED`, `PROMOTED`, or `INCONCLUSIVE` only when the evidence supports it. Fabricated passes / zero-byte placeholders = FAIL CLOSED.
 
-### Required artifacts — ALL under the SAME fresh `session_<UTC>/`, non-empty, `fclr_live_archive04_` infix MANDATORY
+### Required artifacts — ALL under the SAME fresh `session_<UTC>/`, non-empty, `fclr_live_archive05_` infix MANDATORY
 
-- `fclr_live_archive04_source_registry_<UTC>.{json,md}` — reuse verified cache, exact URLs, checksums, coverage.
-- `fclr_live_archive04_prereg_<UTC>.{json,md}` — outcome-blind, hash-bound to the source registry; `outcome_data_inspected_before_freeze:false`.
-- `fclr_live_archive04_eval_<UTC>.{py,json,md}` — heavy 3-block quantile-volatility evaluation triad.
-- `fclr_live_archive04_recompute_<UTC>.{py,json}` — independent stdlib recompute, `all_checks_match:true`.
-- `fclr_live_archive04_evidence_audit_<UTC>.{json,md}` — evidence/leakage audit with `audit_pass` + `unresolved_blockers`.
+- `fclr_live_archive05_source_registry_<UTC>.{json,md}` — reuse verified cache, exact URLs, checksums, coverage.
+- `fclr_live_archive05_prereg_<UTC>.{json,md}` — outcome-blind, hash-bound to the source registry; `outcome_data_inspected_before_freeze:false`.
+- `fclr_live_archive05_eval_<UTC>.{py,json,md}` — heavy 3-block signed-jump / asymmetry evaluation triad.
+- `fclr_live_archive05_recompute_<UTC>.{py,json}` — independent stdlib recompute, `all_checks_match:true`.
+- `fclr_live_archive05_evidence_audit_<UTC>.{json,md}` — evidence/leakage audit with `audit_pass` + `unresolved_blockers`.
 - `evidence_audit_<UTC>.{json,md}` — gate-critical alias (substantive, verdict matches).
 - `trigger_check_<UTC>.json` — `external_trigger_required:false`, `trigger_source:"BINANCE_PUBLIC_ARCHIVE"`, `fired:false`.
 
-Every JSON must carry `experiment_id:"FCLR-LIVE-ARCHIVE-04"` and the real `session_id`. Do NOT write a future/non-existent session id before the artifacts exist.
+Every JSON must carry `experiment_id:"FCLR-LIVE-ARCHIVE-05"` and the real `session_id`. Do NOT write a future/non-existent session id before the artifacts exist.
 
 ---
 
 ## 6. Precise Command/Check to Verify Progress
 
 ```bash
-# After the artifacts exist under the new session_<UTC>/ (UTC > 20261126T053929Z):
+# After the artifacts exist under the new session_<UTC>/ (UTC > 20261126T061929Z):
 python3 scripts/check_handoff_heavywork_gate.py --json
 # Expect: pass=true, reason_code=OK, live_archive.required=true, live_archive.pass=true,
-#         live_archive.artifact_family="live_archive04", failures=[]
+#         live_archive.artifact_family="live_archive05", failures=[]
 
 python3 -m py_compile scripts/check_handoff_heavywork_gate.py
 python3 -m unittest \
@@ -124,27 +131,29 @@ python3 -m unittest \
   tests.test_tracka_hardening_143 tests.test_active_campaign_gate
 ```
 
-Gate-pass condition: the latest on-disk `session_<UTC>` must have UTC > `20261126T053929Z` and contain all required `fclr_live_archive04_*` files above, each non-empty, plus a non-empty `trigger_check_*.json`. `missing_required_artifacts` and `empty_required_artifacts` must both be `[]`. Record the new session id in THIS handoff (§13) after the artifacts exist.
+Gate-pass condition: the latest on-disk `session_<UTC>` must have UTC > `20261126T061929Z` and contain all required `fclr_live_archive05_*` files above, each non-empty, plus a non-empty `trigger_check_*.json`. `missing_required_artifacts` and `empty_required_artifacts` must both be `[]`. Record the new session id in THIS handoff (§13) after the artifacts exist.
 
 ---
 
 ## 7. Blockers & Next Materially Different Free Route
 
-**No external blockers.** The cohort is cached and checksum-verified; the source, budget, stdlib-only deps, artifact-naming, and root-cap bottlenecks are resolved. The raw cache is reusable read-only.
+**No external blockers.** The cohort is cached and checksum-verified; the source, budget, stdlib-only deps, artifact-naming, and root-cap bottlenecks are resolved. The raw cache is reusable read-only. The numerical-stability bottleneck that could have blocked the quantile arm (heavy-tailed realized variance) was resolved with a standardized, monotone step-halving MM/IRLS solver — reuse that solver pattern for the asymmetry target.
 
 **If a step fails** (e.g., a feature month missing): do NOT silently substitute or zero-fill. Record the exact shortfall in the source registry/evidence audit, emit the evaluation with the available feature set, and note the deviation.
 
-**Do NOT** re-run FCLR-LIVE-ARCHIVE-01 or FCLR-LIVE-ARCHIVE-03 or any closed arm, re-open sealed holdouts, modify the frozen protocol, build a risk overlay, threshold-shop, or relabel exploratory work as confirmatory.
+**Do NOT** re-run FCLR-LIVE-ARCHIVE-01 / -03 / -04 or any closed arm, re-open sealed holdouts, modify the frozen protocol, build a risk overlay, threshold-shop, or relabel exploratory work as confirmatory.
 
 ---
 
 ## 8. Bottlenecks Removed (do not re-introduce)
 
-- **RESOLVED — terminal “verify green and stop” frontier:** the prior frontier had no open heavy campaign. FCLR-LIVE-ARCHIVE-04 is now machine-bound and READY_EXECUTE.
-- **RESOLVED — refresh loop / timestamp-only rewrite:** a timestamp-only handoff rewrite does not satisfy the post-start binder; the next session must emit the full evaluation + recompute + audit set. The first-action checklist at the top makes the required first move unmistakable.
-- **RESOLVED — no-new-session escape hatch:** creating no `session_<UTC>` is now explicitly named a FAILURE; the gate’s grandfather clause is the only reason it is green today and ends the instant a post-start session exists.
+- **RESOLVED — routing-refresh loop:** the prior frontier repeatedly rewrote this handoff and re-routed to campaign 04 without executing it. Campaign 04 is now executed end-to-end (heavy set on disk under session_20261126T061929Z). Do not re-introduce a routing-only refresh.
+- **RESOLVED — terminal "verify green and stop" frontier:** FCLR-LIVE-ARCHIVE-05 is now machine-bound and READY_EXECUTE.
+- **RESOLVED — refresh loop / timestamp-only rewrite:** a timestamp-only handoff rewrite does not satisfy the post-start binder; the next session must emit the full evaluation + recompute + audit set.
+- **RESOLVED — no-new-session escape hatch:** creating no `session_<UTC>` is explicitly named a FAILURE; the gate's grandfather clause is the only reason it is green today and ends the instant a post-start session exists.
+- **RESOLVED — numerical instability on heavy-tailed RV:** the quantile arm's MM/IRLS now uses target standardization + monotone step-halving (bounded coefficients, ordered coverage); reuse this pattern.
 - **RESOLVED — re-download cost:** the 5-symbol × 48-month × 5-source cohort is cached and checksum-verified (1,200/1,200 zips); reuse read-only.
-- **RESOLVED — artifact-naming deadlock:** the gate’s ladder maps campaign 04 → `fclr_live_archive04_*`.
+- **RESOLVED — artifact-naming deadlock:** the gate's ladder maps campaign 05 → `fclr_live_archive05_*`.
 - **RESOLVED — root churn:** root `research_state/*.md|*.json` = 500/500 (AT CAP). All new artifacts go under `session_<UTC>/`.
 - **OPEN — execution:** the next session must freeze, evaluate, recompute, audit, and record the real session id without stopping at a probe, prereg, audit, or refresh.
 
@@ -152,14 +161,14 @@ Gate-pass condition: the latest on-disk `session_<UTC>` must have UTC > `2026112
 
 ## 9. NON-AVOIDANCE CONSTRAINTS (hard — machine-checked)
 
-- A timestamp-only rewrite is NOT progress and is forbidden. Creating a session with no `fclr_live_archive04_*` artifacts is a FAILURE. The next session must materialize the heavy evaluation and recompute artifacts.
-- Campaign start `20261126T053929Z` is in the past. Any new `session_<UTC>` with UTC > `20261126T053929Z` immediately requires the full `fclr_live_archive04_*` set. There is no grace session and no verify-and-stop branch.
+- A timestamp-only rewrite is NOT progress and is forbidden. Creating a session with no `fclr_live_archive05_*` artifacts is a FAILURE. The next session must materialize the heavy evaluation and recompute artifacts.
+- Campaign start `20261126T061929Z` is in the past. Any new `session_<UTC>` with UTC > `20261126T061929Z` immediately requires the full `fclr_live_archive05_*` set. There is no grace session and no verify-and-stop branch.
 - Do NOT create a partial/empty session and leave it unrecorded. Populate it fully and record its real id in this handoff after the artifacts exist.
 - Root `research_state/*.md|*.json` is at 500/500 (AT CAP). All new artifacts go under `session_<UTC>/`.
-- No empty files or zero-byte placeholders. JSON must be strict RFC 8259 and carry `experiment_id:"FCLR-LIVE-ARCHIVE-04"` plus the real `session_id`.
+- No empty files or zero-byte placeholders. JSON must be strict RFC 8259 and carry `experiment_id:"FCLR-LIVE-ARCHIVE-05"` plus the real `session_id`.
 - Stdlib only. No `pip install`; no numpy/pandas/pyarrow/requests in required artifacts.
 - Do NOT modify `.github/workflows` or overwrite sealed prereg/eval artifacts.
-- The ONLY timestamped campaign id permitted in this file is `FCLR-LIVE-ARCHIVE-04-20261126T053929Z`. Refer to closed campaigns by name only.
+- The ONLY timestamped campaign id permitted in this file is `FCLR-LIVE-ARCHIVE-05-20261126T061929Z`. Refer to closed campaigns by name only.
 
 ---
 
@@ -168,7 +177,8 @@ Gate-pass condition: the latest on-disk `session_<UTC>` must have UTC > `2026112
 - **Half 1 (funding-conditioned volatility), frozen `ironflow_bulk` panel:** exhausted NOT_SUPPORTED (BROAD/CORR/STRESS/JUMP).
 - **Half 1, Binance archive mean-RV QLIKE (FCLR-LIVE-ARCHIVE-01):** CLOSED NOT_SUPPORTED.
 - **Half 1, Binance archive stress/tail (FCLR-LIVE-ARCHIVE-03):** CLOSED NOT_SUPPORTED.
-- **Half 1, Binance archive quantile/full-distribution (FCLR-LIVE-ARCHIVE-04):** ACTIVE rank-0, READY_EXECUTE.
+- **Half 1, Binance archive quantile/full-distribution (FCLR-LIVE-ARCHIVE-04):** CLOSED NOT_SUPPORTED (session_20261126T061929Z).
+- **Half 1, Binance archive signed-jump/asymmetry (FCLR-LIVE-ARCHIVE-05):** ACTIVE rank-0, READY_EXECUTE.
 - **Half 2 (liquidation risk), frozen panel:** closed.
 - **FCLR-009:** CLOSED NOT_MET.
 - **Forecast gate (§9):** NOT PASSED. Risk overlay ineligible.
@@ -182,8 +192,9 @@ Gate-pass condition: the latest on-disk `session_<UTC>` must have UTC > `2026112
 |---|---|
 | `research_state/session_20261126T042519Z/` | Completed FCLR-LIVE-ARCHIVE-01 heavy set + raw archive cache (reuse read-only). |
 | `research_state/session_20261126T042519Z/raw/` | 1,200 verified monthly zips (klines/mark/index/premium/funding) for the 5-symbol 2021–2024 cohort. |
-| `research_state/session_20261126T051548Z/` | Completed FCLR-LIVE-ARCHIVE-03 heavy set; reusable stdlib evaluation template. |
-| `research_state/experiment_frontier.json` | Rank-0 registry (FCLR-LIVE-ARCHIVE-04 READY_EXECUTE). |
+| `research_state/session_20261126T051548Z/` | Completed FCLR-LIVE-ARCHIVE-03 heavy set. |
+| `research_state/session_20261126T061929Z/` | Completed FCLR-LIVE-ARCHIVE-04 heavy set (quantile) + reusable stdlib MM/IRLS template. |
+| `research_state/experiment_frontier.json` | Rank-0 registry (FCLR-LIVE-ARCHIVE-05 READY_EXECUTE). |
 | `research_state/data_cache/ironflow_bulk/` | Frozen 18-month reference panel; read-only. |
 | `research_state/negative_results_report.md` | Preserved nulls and failed routes. |
 
@@ -195,45 +206,45 @@ Do not mutate frozen caches. Reuse the raw zips; verify checksums if re-reading.
 
 - `AGENT_HANDOFF.md` — this sole durable handoff.
 - `RESEARCH_PROMPT.md` §3/§7/§8/§9/§14/§16/§17/§19/§20.
-- `scripts/check_handoff_heavywork_gate.py` — `LIVE_ARCHIVE_CAMPAIGN_RE` / `_live_archive_state` ladder-aware binder (campaign 04 → `fclr_live_archive04_`).
-- `research_state/session_20261126T051548Z/fclr_live_archive03_eval_20261126T051548Z.py` — reusable stdlib HAR + download + bootstrap template to adapt to the quantile target.
+- `scripts/check_handoff_heavywork_gate.py` — `LIVE_ARCHIVE_CAMPAIGN_RE` / `_live_archive_state` ladder-aware binder (campaign 05 → `fclr_live_archive05_`).
+- `research_state/session_20261126T061929Z/fclr_live_archive04_eval_20261126T061929Z.py` — reusable stdlib MM/IRLS + download + bootstrap template to adapt to the asymmetry target (reuse the standardized, step-halving `quantile_fit`/`fit_model` pattern).
 - `research_state/experiment_frontier.json` — rank-0 registry.
 
 ---
 
-## 13. SESSION CLOSE-OUT — 2026-11-26T05:43:51Z
+## 13. SESSION CLOSE-OUT — 2026-11-26T07:01:00Z (session_20261126T061929Z)
 
-**What changed and why:** routing handoff. FCLR-LIVE-ARCHIVE-03 is closed NOT_SUPPORTED; the terminal “no next campaign” bottleneck and the refresh-only / no-new-session escape hatches are removed by promoting the materially different FCLR-LIVE-ARCHIVE-04 quantile/full-distribution volatility arm to rank-0 READY_EXECUTE, binding it in the heavy-work gate, and adding a machine-aware first-action checklist.
+**What changed and why:** the routing-refresh bottleneck is removed by EXECUTING the long-queued FCLR-LIVE-ARCHIVE-04 quantile / full-distribution volatility arm end-to-end (heavy eval + independent recompute + evidence audit, all non-empty under `session_20261126T061929Z`), closing it `NOT_SUPPORTED`, and promoting the materially different FCLR-LIVE-ARCHIVE-05 signed-jump / realized-semivariance-asymmetry arm to rank-0 READY_EXECUTE with start = this session id (grandfathered today, forced next session).
 
-**What was actually tested:** no new heavy artifact is claimed. The existing heavy-work gate remains green because the latest on-disk session (`session_20261126T051548Z`) predates the campaign start (`20261126T053929Z`). The next post-start session must produce the complete `fclr_live_archive04_*` set or fail closed.
+**What was actually tested:** FCLR-LIVE-ARCHIVE-04 — next-24h realized variance forecast as a predictive distribution at quantiles {0.10,0.25,0.50,0.75,0.90}, B1 (HAR) vs C2 (HAR + funding + price), 60/20/20 by unique UTC ts, 168h purge/embargo, test→3 blocks, ≥2000 block-bootstrap, leave-one-symbol-out. On the full verified 5-symbol 2021–2024 Binance cohort (n_train=103,775; n_test=35,715; 34,872 unique ts). **Verdict `NOT_SUPPORTED`:** C2 vs B1 relative average-pinball reduction **-1.102%** (95% CI [-1.233%, -0.969%], below the +2% floor); B1 avg pinball 7.8488e-4, C2 7.9353e-4; empirical coverage B1 {0.1:0.256, 0.25:0.507, 0.5:0.664, 0.75:0.798, 0.9:0.921}. Independent recompute `all_checks_match:true`, verdict reproduced.
 
-**Evidence added:** this handoff and the rank-0 frontier refresh; prior handoff archived at `handoff_archive/AGENT_HANDOFF_20261126T053929Z.md`.
+**Evidence added:** the full `fclr_live_archive04_*` heavy set under `research_state/session_20261126T061929Z/` (source registry, prereg, eval triad, recompute, evidence audit, gate alias, trigger check); prior handoff archived at `handoff_archive/AGENT_HANDOFF_20261126T054351Z.md`.
 
-**Current gate state:** `live_archive.required=false` only because the latest session predates the campaign; `live_archive.pass=true`. After the next session, `live_archive.required=true`, `artifact_family="live_archive04"`, and the full non-empty artifact set is mandatory.
+**Current gate state:** `live_archive.required=false` only because the latest session equals the campaign-05 start (grandfathered); `live_archive.pass=true`, top-level `pass=true`. After the next session, `live_archive.required=true`, `artifact_family="live_archive05"`, and the full non-empty artifact set is mandatory.
 
-**Single highest-value next task:** execute FCLR-LIVE-ARCHIVE-04 end-to-end in one fresh `session_<UTC>` (UTC > `20261126T053929Z`): outcome-blind prereg, heavy 3-block quantile-volatility evaluation, independent stdlib recompute, evidence audit, gate alias, and trigger check.
+**Single highest-value next task:** execute FCLR-LIVE-ARCHIVE-05 end-to-end in one fresh `session_<UTC>` (UTC > `20261126T061929Z`): outcome-blind prereg, heavy 3-block signed-jump / asymmetry evaluation, independent stdlib recompute, evidence audit, gate alias, and trigger check.
 
-**Latest completed session:** session_20261126T051548Z
+**Latest completed session:** session_20261126T061929Z
 
 ---
 
-## 14. RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T05:43:51Z)
+## 14. RESEARCH_PROMPT.md §19 ANSWERS (this session — 2026-11-26T07:01:00Z)
 
 **What did the evidence support, contradict, or leave unknown?**
-- Supported: funding + price features do not clear the 2% floor for mean RV QLIKE or binary stress/tail on the verified 4-year Binance archive.
+- Supported: funding + price features do not clear the 2% floor for mean RV QLIKE, binary stress/tail, OR the full predictive distribution / quantile forecast of next-24h realized variance on the verified 4-year Binance archive.
 - Contradicted: any claim that the new-source frontier is unexecutable, that no next repo-name campaign exists, or that a refresh-only / no-new-session session is acceptable.
-- Unknown: whether the same feature set improves the full predictive distribution / quantile forecast of next-24h realized variance.
+- Unknown: whether the same feature set improves the signed-jump / realized-semivariance asymmetry (upside vs downside variance) of next-24h realized variance.
 
-**Strongest alternative explanation:** the mean and tail nulls may reflect that HAR already captures most predictable variation; a quantile/full-distribution estimand can detect shape or asymmetry improvements that mean and binary metrics miss.
+**Strongest alternative explanation:** the mean, tail and quantile nulls may reflect that HAR already captures most predictable variation in the RETURN distribution; an asymmetry / signed-jump estimand can detect directional (up/down) variance shape that symmetric mean and quantile metrics miss.
 
-**Dominant limitation:** the 5-symbol cohort is narrow; quantile estimates and bootstrap inference must be reported with leave-one-symbol-out and per-block diagnostics.
+**Dominant limitation:** the 5-symbol cohort is narrow; asymmetry estimates and bootstrap inference must be reported with leave-one-symbol-out and per-block diagnostics.
 
-**Concrete falsification test:** a paired 3-block pinball-loss evaluation in which C2 beats B1 by <2% relative or the CI does not support the floor preserves `NOT_SUPPORTED`; a stable ≥2% improvement reopens promotion review.
+**Concrete falsification test:** a paired 3-block MSE evaluation in which C2 beats B1 by <2% relative or the CI does not support the floor preserves `NOT_SUPPORTED`; a stable ≥2% improvement reopens promotion review.
 
-**Highest information gain per free compute:** FCLR-LIVE-ARCHIVE-04, because it tests a distinct repo-name estimand on the same verified archive with the raw cache already in hand.
+**Highest information gain per free compute:** FCLR-LIVE-ARCHIVE-05, because it tests a distinct repo-name estimand (signed-jump asymmetry) on the same verified archive with the raw cache already in hand and a proven, numerically stable stdlib solver template.
 
-**Exact artifact and command demonstrating progress:** one complete `research_state/session_<UTC>/` with every `fclr_live_archive04_*` artifact in §5; `python3 scripts/check_handoff_heavywork_gate.py --json` must return `reason=OK` with `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive04"`, followed by the six-module unittest command in §6.
+**Exact artifact and command demonstrating progress:** one complete `research_state/session_<UTC>/` with every `fclr_live_archive05_*` artifact in §5; `python3 scripts/check_handoff_heavywork_gate.py --json` must return `reason=OK` with `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive05"`, followed by the six-module unittest command in §6.
 
-**Latest completed session:** session_20261126T051548Z
+**Latest completed session:** session_20261126T061929Z
 
 (End of file)
