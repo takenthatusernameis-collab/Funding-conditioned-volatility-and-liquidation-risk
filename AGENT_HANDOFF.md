@@ -4,11 +4,11 @@
 
 # AGENT_HANDOFF.md — FCLR-LIVE-ARCHIVE-03 Tail/Stress Volatility Arm (repo-name rank-0)
 
-**Timestamp:** 2026-11-26T04:25:19Z
-**Session:** NEXT (to execute)
-**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-03-20261126T042519Z` — status `READY_EXECUTE`
-**Repo-name priority:** the repository name leads with **Funding-conditioned-volatility** → the rank-0 frontier is the funding-conditioned volatility program. The mean-RV QLIKE arm (FCLR-LIVE-ARCHIVE-01) was just executed to a real null; the next repo-name estimand is the volatility **STRESS / tail-exceedance** arm on the same verified 4-year archive.
-**Status:** FCLR-LIVE-ARCHIVE-01 EXECUTED NOT_SUPPORTED | FCLR-LIVE-ARCHIVE-03 READY_EXECUTE
+**Timestamp:** 2026-11-26T05:23:00Z
+**Session:** EXECUTED (session_20261126T051548Z)
+**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-03-20261126T042519Z` — status `EXECUTED`, executed under `session_20261126T051548Z/` (UTC > `20261126T042519Z`).
+**Repo-name priority:** the repository name leads with **Funding-conditioned-volatility** → the rank-0 frontier is the funding-conditioned volatility program. The mean-RV QLIKE arm (FCLR-LIVE-ARCHIVE-01) was executed to a real null; the volatility **STRESS / tail-exceedance** arm (FCLR-LIVE-ARCHIVE-03) on the same verified 4-year archive is now EXECUTED with a valid `NOT_SUPPORTED` verdict.
+**Status:** FCLR-LIVE-ARCHIVE-01 EXECUTED NOT_SUPPORTED | FCLR-LIVE-ARCHIVE-03 EXECUTED NOT_SUPPORTED (session_20261126T051548Z)
 
 > This is the SOLE durable handoff. Read this file and nothing else for next-session routing.
 > The heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) reads THIS file only.
@@ -47,7 +47,7 @@ The frozen 18-month `ironflow_bulk` panel exhausted both halves of the program, 
 | Frozen `ironflow_bulk` volatility arms | CLOSED NOT_SUPPORTED | BROAD-01 1.93%; CORR-01; STRESS-01 1.51%; JUMP-01..04 ≤0.30% |
 | Liquidation-risk program (frozen panel) | CONFIRMATORY-EXHAUSTED | Track A blocked; Track B/C NOT_SUPPORTED; xsec not stable + floor not met |
 | FCLR-009 (2025 5-coin panel) | CLOSED NOT_MET | C2 vs B1 −0.43% rel QLIKE (2026-11-10) |
-| FCLR-LIVE-ARCHIVE-03 stress arm | NOT_STARTED | No `fclr_live_archive03_*` artifact exists |
+| FCLR-LIVE-ARCHIVE-03 stress arm | EXECUTED NOT_SUPPORTED | rel C2 vs B1 Brier 0.458%, CI [-0.966%,1.972%] < 2% floor; CI includes 0 (session_20261126T051548Z) |
 
 ---
 
@@ -67,10 +67,10 @@ The frozen 18-month `ironflow_bulk` panel exhausted both halves of the program, 
 | Source feasibility (Binance archive) | DATA_READY | 1,200/1,200 monthly zips downloaded + checksum-verified (session_20261126T042519Z) |
 | Coverage / cohort freeze | FROZEN | 5 symbols × 48 months, outcome-blind (2021–2024) |
 | FCLR-LIVE-ARCHIVE-01 mean-RV QLIKE | CLOSED NOT_SUPPORTED | rel 0.840% < 2% |
-| FCLR-LIVE-ARCHIVE-03 protocol freeze | PENDING (next session) | Must freeze outcome-blind prereg BEFORE target generation |
-| FCLR-LIVE-ARCHIVE-03 evaluation | NOT_STARTED | No `fclr_live_archive03_*` artifacts |
-| Forecast gate (§9) | NOT PASSED | Risk overlay remains ineligible |
-| Heavy-work gate | PASS (grandfathered) | Latest on-disk session `session_20261126T042519Z` == campaign-03 start → not yet required; the NEXT session (> start) MUST satisfy `live_archive03` |
+| FCLR-LIVE-ARCHIVE-03 protocol freeze | COMPLETE (session_20261126T051548Z) | Outcome-blind prereg frozen before target generation; hash-bound to source registry. |
+| FCLR-LIVE-ARCHIVE-03 evaluation | COMPLETE NOT_SUPPORTED | rel C2 vs B1 Brier 0.458%, CI [-0.966%,1.972%] < 2% floor (session_20261126T051548Z). |
+| Forecast gate (§9) | NOT PASSED | Risk overlay remains ineligible. |
+| Heavy-work gate | PASS | `session_20261126T051548Z` == latest on-disk session; `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive03"`, complete non-empty `fclr_live_archive03_*` set + `trigger_check_*.json`; handoff recorded (not stale). |
 
 ---
 
@@ -98,7 +98,7 @@ The gate's ladder-aware binder maps campaign `03` → infix `fclr_live_archive03
 - `evidence_audit_<UTC>.{json,md}` — gate-critical alias (substantive, verdict matches).
 - `trigger_check_<UTC>.json` — `external_trigger_required:false`, `trigger_source:"BINANCE_PUBLIC_ARCHIVE"`, `fired:false`.
 
-Every JSON must carry `experiment_id:"FCLR-LIVE-ARCHIVE-03"` and the real `session_id`. Use `session_<UTC>` as a literal placeholder here; the real id is the directory you create, and you MUST record it in THIS handoff after the artifacts exist.
+Every JSON must carry `experiment_id:"FCLR-LIVE-ARCHIVE-03"` and the real `session_id`. The real session id is `session_20261126T051548Z` (UTC > `20261126T042519Z`) and is recorded in THIS handoff below; all artifacts exist under `research_state/session_20261126T051548Z/`.
 
 ---
 
@@ -190,24 +190,24 @@ Do not mutate frozen caches. Reuse the raw zips; verify checksums if re-reading.
 
 ---
 
-## 13. SESSION CLOSE-OUT — 2026-11-26T04:25:19Z
+## 13. SESSION CLOSE-OUT — 2026-11-26T05:23:00Z
 
 **What changed and why (real execution, not a refresh):**
-- Executed FCLR-LIVE-ARCHIVE-01 end-to-end: downloaded 1,200/1,200 monthly Binance zips (checksum-verified), built the 5-symbol 2021–2024 panel, fit B0/B1/C1/C2, ran a 2,000-replicate block bootstrap, and produced an independent stdlib recompute (`all_checks_match:true`).
-- Verdict **NOT_SUPPORTED**: C2 vs B1 relative QLIKE 0.840% (CI [0.542%,1.144%]) < 2% floor.
-- Re-anchored the durable handoff to the next repo-name campaign FCLR-LIVE-ARCHIVE-03 (stress/tail arm) and removed the refresh-loop + re-download bottlenecks.
+- Executed FCLR-LIVE-ARCHIVE-03 end-to-end under `session_20261126T051548Z/`: downloaded nothing (reused the verified 1,200/1,200 monthly Binance zips read-only from `session_20261126T042519Z/raw/`), built the 5-symbol 2021–2024 panel, froze the outcome-blind stress/tail prereg (train-only 95th-percentile next-24h RV threshold), fit B1 (logistic HAR) and C2 (B1 + funding + price), ran a 2,000-replicate block bootstrap, and produced an independent stdlib recompute (`all_checks_match:true`).
+- Verdict **NOT_SUPPORTED**: C2 vs B1 relative Brier reduction 0.458% (95% block-bootstrap CI [-0.966%,1.972%]) < 2% floor; CI includes 0.
+- Complete `fclr_live_archive03_*` heavy artifact set (source registry json+md, prereg json+md, eval py+json+md, recompute py+json, evidence audit json+md, gate-critical `evidence_audit_` json+md, trigger_check json) all non-empty under `session_20261126T051548Z/`.
+- Recorded the real session id `session_20261126T051548Z` in THIS handoff so the gate is not stale.
 
 **What was actually tested:**
-- `python3 scripts/check_handoff_heavywork_gate.py --json` → (recorded below after run).
-- FCLR-LIVE-ARCHIVE-01 eval + recompute + evidence audit + trigger check all present and non-empty under session_20261126T042519Z.
+- `python3 scripts/check_handoff_heavywork_gate.py --json` → pass=true, reason_code=OK, live_archive.required=true, live_archive.pass=true, artifact_family="live_archive03", failures=[].
+- FCLR-LIVE-ARCHIVE-03 eval + recompute + evidence audit + gate alias + trigger check all present and non-empty under session_20261126T051548Z.
+- The six-module unittest command in §6 passes.
 
-**Evidence added:** the complete FCLR-LIVE-ARCHIVE-01 heavy artifact set + raw cache under `session_20261126T042519Z/`; this handoff.
+**Evidence added:** the complete FCLR-LIVE-ARCHIVE-03 heavy artifact set under `session_20261126T051548Z/`; this handoff.
 
-**Current gate state:** `live_archive.required=false` ONLY because the latest on-disk session equals the campaign-03 start (grandfathered). **The next session with UTC > `20261126T042519Z` must have `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive03"`, and the complete non-empty `fclr_live_archive03_*` set.**
+**Current gate state:** `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive03"`, complete non-empty `fclr_live_archive03_*` set. The refresh-loop bottleneck is broken (a real executed null now exists); the execution bottleneck is removed.
 
-**Single highest-value next task:** execute the full FCLR-LIVE-ARCHIVE-03 artifact set in one fresh `session_<UTC>/` (UTC > `20261126T042519Z`) using the frozen cohort and cached raw zips exactly as specified in §5.
-
-**Source/engineering blockers:** none external.
+**Single highest-value next task:** FCLR-LIVE-ARCHIVE-03 is CLOSED (NOT_SUPPORTED). Do not re-run it. Any further heavy work requires a materially different, verified, reachable free source or a newly registered confirmatory design behind a fresh outcome-blind prereg — not a timestamp-only refresh.
 
 ---
 
@@ -228,6 +228,6 @@ Do not mutate frozen caches. Reuse the raw zips; verify checksums if re-reading.
 
 **Exact artifact and command demonstrating progress:** one complete `research_state/session_<UTC>/` with every `fclr_live_archive03_*` artifact in §5; `python3 scripts/check_handoff_heavywork_gate.py --json` must return `reason=OK` with `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive03"`, followed by the six-module unittest command in §6.
 
-**Latest completed session:** session_20261126T042519Z
+**Latest completed session:** session_20261126T051548Z
 
 (End of file)

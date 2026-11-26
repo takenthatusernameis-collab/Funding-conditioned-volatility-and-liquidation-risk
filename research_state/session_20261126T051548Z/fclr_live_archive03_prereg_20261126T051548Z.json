@@ -1,0 +1,39 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-03-20261126T042519Z",
+  "session_utc": "20261126T051548Z",
+  "artifact_id": "fclr_live_archive03_prereg_20261126T051548Z",
+  "generated_at": "2026-11-26T05:20:48Z",
+  "experiment_id": "FCLR-LIVE-ARCHIVE-03",
+  "outcome_data_inspected_before_freeze": false,
+  "hash_bound_to_source_registry": "8974e957ce24c7fb8d8972b705def4c21458da9842f80a86a9b3a1b472a1372e",
+  "hypothesis": "FCLR-H003: funding + price features improve out-of-sample forecasts of next-24h realized-variance STRESS / tail-exceedance (train-only 95th percentile) beyond an RV-only HAR baseline.",
+  "window": "2021-01-01..2024-12-31 UTC",
+  "symbols": [
+    "1INCHUSDT",
+    "AAVEUSDT",
+    "ADAUSDT",
+    "ALGOUSDT",
+    "ALPHAUSDT"
+  ],
+  "target": "next-24h realized variance > train-only 95th percentile (binary stress event)",
+  "threshold": "train-only 95th percentile of train next-24h RV; never recomputed on test",
+  "splits": "60/20/20 by unique UTC timestamp; 7-day (168h) purge/embargo at train/val and val/test boundaries; test -> 3 interleaved blocks",
+  "models": {
+    "B1": "logistic regression on log RV1h/RV24h/RV168h (HAR)",
+    "C2": "B1 + signed funding(24h) + trailing 90d |funding| percentile + mark/index premium + mark/EMA24 distance"
+  },
+  "primary_contrast": "C2 vs B1 on paired test-set Brier score",
+  "inference": ">=2000 deterministic moving-block bootstrap replicates (block=24 rows, seed=20261126); report Brier/log-loss/ECE, 95% CI, per-block, leave-one-symbol-out",
+  "materiality_floor": 0.02,
+  "decision_rule": "PROMOTED iff relative Brier reduction >=2% AND bootstrap 95% CI lower bound > 0 AND test data sufficient; else NOT_SUPPORTED; INCONCLUSIVE if test data insufficient",
+  "leakage_controls": [
+    "outcome-blind freeze before target generation",
+    "train-only stress threshold",
+    "train-only scaling + standardization",
+    "7-day purge/embargo",
+    "no outcome inspection before freeze"
+  ],
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true
+}

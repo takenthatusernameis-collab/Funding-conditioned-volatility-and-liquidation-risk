@@ -1,0 +1,151 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-03",
+  "campaign": "FCLR-LIVE-ARCHIVE-03-20261126T042519Z",
+  "session_id": "20261126T051548Z",
+  "session_utc": "20261126T051548Z",
+  "generated_at": "2026-11-26T05:20:48Z",
+  "source": "BINANCE_PUBLIC_ARCHIVE_READ_ONLY_CACHE",
+  "source_session": "session_20261126T042519Z",
+  "symbols": [
+    "1INCHUSDT",
+    "AAVEUSDT",
+    "ADAUSDT",
+    "ALGOUSDT",
+    "ALPHAUSDT"
+  ],
+  "months": "2021-01..2024-12 (48 months)",
+  "n_symbols": 5,
+  "per_symbol_rows": {
+    "1INCHUSDT": 34872,
+    "AAVEUSDT": 34872,
+    "ADAUSDT": 34872,
+    "ALGOUSDT": 34872,
+    "ALPHAUSDT": 34872
+  },
+  "n_train": 103775,
+  "n_val": 34870,
+  "n_test": 35715,
+  "n_unique_timestamps": 34872,
+  "embargo_hours": 168,
+  "splits": "60/20/20 by unique UTC timestamp; 7-day purge/embargo; test->3 blocks",
+  "models": [
+    "B1",
+    "C2"
+  ],
+  "target": "next-24h realized-variance stress exceedance (train-only 95th percentile) -> binary",
+  "stress_threshold": 0.016601559690655784,
+  "materiality_floor": 0.02,
+  "metrics": {
+    "B1": {
+      "brier": 0.018752884995396495,
+      "log_loss": 0.08369900295703897,
+      "ece": 0.002439441569954253,
+      "n": 35715,
+      "n_stress": 748,
+      "stress_rate": 0.020943581128377433
+    },
+    "C2": {
+      "brier": 0.018667028590339606,
+      "log_loss": 0.08312786905920809,
+      "ece": 0.0033718277269784514,
+      "n": 35715,
+      "n_stress": 748,
+      "stress_rate": 0.020943581128377433
+    }
+  },
+  "relative_brier_reduction_C2_vs_B1": 0.004578303822476691,
+  "relative_logloss_reduction_C2_vs_B1": 0.006823664292919142,
+  "per_block": {
+    "B1": {
+      "brier": [
+        0.018801695924511117,
+        0.018768061667731765,
+        0.018688897393946607
+      ],
+      "log_loss": [
+        0.08323417277452906,
+        0.08432459261064734,
+        0.08353824348594123
+      ]
+    },
+    "C2": {
+      "brier": [
+        0.018765249474973544,
+        0.018695267687870828,
+        0.018540568608174445
+      ],
+      "log_loss": [
+        0.08282337928745602,
+        0.08376008038498009,
+        0.08280014750518602
+      ]
+    }
+  },
+  "leave_one_symbol_out": {
+    "1INCHUSDT": {
+      "n": 7143,
+      "n_stress": 73,
+      "threshold": 0.016268050206077547,
+      "brier_B1": 0.010420591793714249,
+      "brier_C2": 0.010297839083956112,
+      "rel_brier_C2_vs_B1": 0.011779821356420587
+    },
+    "AAVEUSDT": {
+      "n": 7143,
+      "n_stress": 62,
+      "threshold": 0.01694362001458198,
+      "brier_B1": 0.008748598154274588,
+      "brier_C2": 0.00843208958369609,
+      "rel_brier_C2_vs_B1": 0.03617820421021976
+    },
+    "ADAUSDT": {
+      "n": 7143,
+      "n_stress": 122,
+      "threshold": 0.01757396064974871,
+      "brier_B1": 0.016781054899126333,
+      "brier_C2": 0.016664128583080338,
+      "rel_brier_C2_vs_B1": 0.006967757196961573
+    },
+    "ALGOUSDT": {
+      "n": 7143,
+      "n_stress": 280,
+      "threshold": 0.0173781316325802,
+      "brier_B1": 0.03174233642005741,
+      "brier_C2": 0.03228226895165797,
+      "rel_brier_C2_vs_B1": -0.01700985473959593
+    },
+    "ALPHAUSDT": {
+      "n": 7143,
+      "n_stress": 190,
+      "threshold": 0.014915377831941003,
+      "brier_B1": 0.023919473366002763,
+      "brier_C2": 0.023345535757545482,
+      "rel_brier_C2_vs_B1": 0.02399457545219329
+    }
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20261126,
+    "block_rows": 24,
+    "mean_diff_Brier_B1_minus_C2": 8.975448430888006e-05,
+    "ci95_abs_diff": [
+      -0.00018109575764438683,
+      0.00036978124331721394
+    ],
+    "ci95_relative_brier_reduction": [
+      -0.009656954526668439,
+      0.019718632274873374
+    ]
+  },
+  "download": {
+    "n_cache_entries": 1200,
+    "n_ok": 1200,
+    "n_missing": 0
+  },
+  "verdict": "NOT_SUPPORTED",
+  "verdict_reason": "C2 vs B1 relative Brier reduction < 2% floor or CI includes 0",
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true,
+  "outcome_data_inspected_before_freeze": false
+}

@@ -1,15 +1,15 @@
 [
  {
   "rank": 0,
-  "status": "READY_EXECUTE",
-  "program_status": "ACTIVE",
+  "status": "COMPLETE",
+  "program_status": "COMPLETE",
   "task": "FCLR-LIVE-ARCHIVE-03-20261126T042519Z",
   "generated": "20261126T042519Z",
-  "refreshed": "2026-11-26T04:25:19Z",
-  "last_checked": "2026-11-26T04:25:19Z",
-  "last_verdict": null,
-  "next_action_heavy": "Execute FCLR-LIVE-ARCHIVE-03 under one fresh research_state/session_<UTC>/ (UTC > 20261126T042519Z). REUSE the verified raw cache at session_20261126T042519Z/raw/ (read-only; do not re-download). Freeze the outcome-blind source registry + prereg, then run the heavy 3-block confirmatory volatility-STRESS / tail-exceedance evaluation (next-24h RV above a train-only high quantile; B1 HAR vs C2 +funding+price; Brier/log-loss/ECE; 2% relative floor; >=2000 block bootstrap), independent stdlib recompute, evidence audit, gate-critical evidence_audit_ alias, and non-empty trigger_check. Stdlib only; no pip install. All artifacts use the fclr_live_archive03_ infix. Trigger-only, prose-only, source-probe-only, audit-only, prereg-only, verify-and-stop, or arbitrary recompute_* sessions FAIL CLOSED.",
-  "next_unfinished_task": "Produce the full fclr_live_archive03_* artifact set under one fresh session_<UTC>/ (UTC > 20261126T042519Z), no zero-byte placeholders: fclr_live_archive03_source_registry_ json+md, fclr_live_archive03_prereg_ json+md, fclr_live_archive03_eval_ py+json+md, fclr_live_archive03_recompute_ py+json, fclr_live_archive03_evidence_audit_ json+md, evidence_audit_ json alias, trigger_check_ json. The fclr_live_archive03_ infix is REQUIRED by the gate ladder. Stdlib only. Every JSON carries experiment_id=FCLR-LIVE-ARCHIVE-03 and session_id=session_<UTC>.",
+  "refreshed": "2026-11-26T05:23:00Z",
+  "last_checked": "2026-11-26T05:23:00Z",
+  "last_verdict": "NOT_SUPPORTED",
+  "next_action_heavy": "NONE - FCLR-LIVE-ARCHIVE-03 COMPLETED under session_20261126T051548Z. Verdict NOT_SUPPORTED: C2 vs B1 relative next-24h Brier reduction 0.458% (95% block-bootstrap CI [-0.966%,1.972%]) < 2% floor; CI includes 0, on the 5-symbol 2021-2024 Binance archive. Independent stdlib recompute all_checks_match=true. Complete fclr_live_archive03_* heavy artifact set under session_20261126T051548Z/. Do not re-run.",
+  "next_unfinished_task": null,
   "resume_triggers": [],
   "trigger_status": {},
   "blockers": "None external. The 5-symbol x 48-month x 5-source cohort is already downloaded and checksum-verified under session_20261126T042519Z/raw/ (1200/1200 zips); reuse read-only. Do NOT re-run FCLR-LIVE-ARCHIVE-01 or any closed arm; do NOT build a risk overlay; do NOT add root-level research_state files (root at cap 500 - all new artifacts under session_<UTC>/); do NOT threshold-shop after outcomes; do NOT relabel exploratory as confirmatory.",
@@ -57,27 +57,27 @@
   },
   "phases": [
    {
-    "phase": "SOURCE_REGISTRY_AND_VERIFIED_REUSE",
-    "status": "NOT_STARTED",
-    "claim": "Record the verified cache (exact URLs, checksums, coverage) in fclr_live_archive03_source_registry_<UTC>.{json,md}; reuse raw zips read-only."
+     "phase": "SOURCE_REGISTRY_AND_VERIFIED_REUSE",
+     "status": "COMPLETE",
+     "claim": "Record the verified cache (exact URLs, checksums, coverage) in fclr_live_archive03_source_registry_<UTC>.{json,md}; reuse raw zips read-only."
    },
    {
-    "phase": "PREREG_FREEZE",
-    "status": "NOT_STARTED",
-    "claim": "Freeze the outcome-blind 3-block stress/tail design (train-only high-quantile threshold), 2% relative Brier/log-loss floor, B1 vs C2, purge/embargo, symmetric verdict BEFORE outcomes."
+     "phase": "PREREG_FREEZE",
+     "status": "COMPLETE",
+     "claim": "Freeze the outcome-blind 3-block stress/tail design (train-only high-quantile threshold), 2% relative Brier/log-loss floor, B1 vs C2, purge/embargo, symmetric verdict BEFORE outcomes."
    },
    {
-    "phase": "HEAVY_CONFIRMATORY_EVAL_AND_RECOMPUTE",
-    "status": "NOT_STARTED",
-    "claim": "Execute the heavy 3-block stress evaluation triad + independent stdlib recompute + evidence audit + gate alias + trigger check under one fresh session_<UTC>/ (UTC > 20261126T042519Z). All artifacts non-empty."
+     "phase": "HEAVY_CONFIRMATORY_EVAL_AND_RECOMPUTE",
+     "status": "COMPLETE",
+     "claim": "Execute the heavy 3-block stress evaluation triad + independent stdlib recompute + evidence audit + gate alias + trigger check under one fresh session_<UTC>/ (UTC > 20261126T042519Z). All artifacts non-empty."
    }
   ],
   "note": "ACTIVE rank-0 as of 2026-11-26T04:25:19Z. Promoted after FCLR-LIVE-ARCHIVE-01 (mean-RV QLIKE) completed NOT_SUPPORTED on the 4-year Binance archive. The stress/tail arm is a DISTINCT repo-name volatility estimand. Stdlib only; no overlay; raw cache reusable read-only.",
-  "session": null,
-  "completed_session": null,
+  "session": "session_20261126T051548Z",
+  "completed_session": "session_20261126T051548Z",
   "supersedes": "FCLR-LIVE-ARCHIVE-01",
   "carry_forward_bundles": [],
-  "completed_utc": null
+  "completed_utc": "2026-11-26T05:23:00Z"
  },
  {
   "rank": 1,
