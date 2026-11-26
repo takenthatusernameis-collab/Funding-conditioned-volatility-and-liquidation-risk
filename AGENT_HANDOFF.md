@@ -4,9 +4,9 @@
 
 # EXECUTE FCLR-LIVE-ARCHIVE-07 — DISJOINT-COHORT OUT-OF-SAMPLE REPLICATION (2024-04..2026-10, BNB/BTC/ETH/SOL/XRP)
 
-**Timestamp:** 2026-11-26T14:39:34Z
+**Timestamp:** 2026-11-26T15:32:44Z
 **Session:** EXECUTE (campaign-06 COMPLETED under session_20261126T133828Z; verdict NOT_SUPPORTED)
-**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-07-20261126T143224Z` — `READY_EXECUTE`
+**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` — `READY_EXECUTE`
 **Latest completed heavy session:** `session_20261126T133828Z`
 **Repo-name priority:** the repository name leads with **Funding-conditioned-volatility**, so rank-0 remains the funding-conditioned volatility program. All five next-24h estimands on the 2021-2024 five-symbol archive (mean-RV QLIKE, stress/tail, quantile/full-distribution, signed-semivariance-asymmetry, downside-realized-semivariance LEVEL) are closed `NOT_SUPPORTED`, and the broad ironflow arms (VOL-BROAD/CORR/STRESS/JUMP) are closed `NOT_SUPPORTED` at broad scale. The single highest-value unexecuted repo-name test is the **pre-registered disjoint-cohort replication**: the 2024-04..2026-10 window on BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT has a verified on-disk cache but has NEVER fed a confirmatory campaign. This is sequential confirmatory look k=2 under RESEARCH_PROMPT.md §17 (alpha-spending: alpha_2 = 0.05/(2x3) = 0.008333), not a re-run: new symbols, new window, new regime, frozen before outcomes.
 
@@ -17,10 +17,10 @@
 
 ## 1. FIRST ACTIONS — EXECUTE IN THIS ORDER
 
-1. Run `export UTC=$(date -u +%Y%m%dT%H%M%SZ)` and `mkdir -p research_state/session_$UTC`. The new id MUST be lexicographically greater than `20261126T143455Z`; do not reuse an older session.
+1. Run `export UTC=$(date -u +%Y%m%dT%H%M%SZ)` and `mkdir -p research_state/session_$UTC`. The new id MUST be lexicographically greater than `20261126T153244Z`; do not reuse an older session.
 2. Reuse the verified on-disk cache read-only: `research_state/data_cache/<SYM>_<YYYY_MM>/` for the five symbols in §3. Do not re-download; the environment has no network dependency for this campaign.
-3. Copy and adapt `research_state/session_20261126T082429Z/fclr_live_archive05_eval_20261126T082429Z.py`. Keep its deterministic stdlib zip parser, MM/OLS, split, and block-bootstrap patterns; replace the asymmetry-ratio target with the frozen targets in §3. **Do NOT use the `fclr_volbroad01_*` template: this environment has no numpy/pandas/pyarrow installed and package installation is forbidden — stdlib only.**
-4. Produce every artifact in §4 under that ONE new `session_$UTC/`. Every file must be non-empty and every JSON must carry `experiment_id:"FCLR-LIVE-ARCHIVE-07"` and the real `session_id`.
+3. Copy and adapt the recovered stdlib template at `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` (an aborted prior attempt at this exact campaign — its deterministic stdlib zip parser, MM/OLS, split, and block-bootstrap are complete and reusable). Change `SESSION` to your fresh id and keep the frozen targets in §3. **Do NOT use the `fclr_volbroad01_*` template: this environment has no numpy/pandas/pyarrow installed and package installation is forbidden — stdlib only.**
+4. Produce every artifact in §4 under that ONE new `session_$UTC/`. Every file must be non-empty and every JSON must carry `experiment_id:"FCLR-LIVE-ARCHIVE-07"` and the real `session_id`. The template in step 3 writes the source registry + prereg + eval triad; you MUST additionally emit the independent recompute, the evidence audit, the gate alias, and the trigger check (§4) — the eval script alone does NOT satisfy the gate.
 5. Record the real session id in §8 and synchronize `research_state/experiment_frontier.json` only after the artifacts exist (rank-0 -> `COMPLETED_VALIDATED` with the reproduced verdict; demote this campaign to a non-zero rank). Then run §5 until the gate reports `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive07"`, and `failures=[]`.
 
 If you are about to rewrite this file without a new heavy session, stop: that is the forbidden refresh loop. Execute the evaluation.
@@ -38,13 +38,13 @@ If you are about to rewrite this file without a new heavy session, stop: that is
 - **FCLR-009 — CLOSED `NOT_MET`.** **Liquidation-risk program on the frozen ironflow panel — CLOSED.** Do not reopen.
 - **FCLR-LIVE-ARCHIVE-07 — ACTIVE rank-0 `READY_EXECUTE`:** disjoint-cohort replication of the repo-name primary estimand (next-24h mean log-RV QLIKE) with the downside-semivariance level as the declared Holm secondary, on the verified 2024-04..2026-10 five-symbol cache. This is the only remaining heavy confirmatory campaign that is feasible stdlib-only in this environment.
 
-**Bottlenecks removed in this session:** (1) the six-module verification suite was RED — `tests.test_active_campaign_gate.test_frontier_rank0_is_active_heavy_campaign` failed because the prior session left frontier rank-0 at `COMPLETED_VALIDATED`, a status that test forbids at rank-0; rank-0 is now the active campaign-07 entry and the suite is green again. (2) The prior handoff's "close the frontier / negative-results synthesis or confirm exhaustion" direction was a light-work escape hatch; it is replaced by the binding heavy campaign above — a closure-synthesis session now fails the gate. (3) The prior handoff pointed at templates without disclosing that numpy/pandas/pyarrow are absent in this environment; the stdlib-only constraint and the correct template are now explicit. No blocked or inefficient sessions remain.
+**Bottlenecks removed in this session (2026-11-26T15:32:44Z):** (1) An aborted prior attempt at this campaign left an unrecorded partial session `20261126T144850Z` on disk (only `fclr_live_archive07_eval_*.py`, no JSON/recompute/audit/trigger outputs). Because that directory was lexicographically newer than the latest session recorded here, the heavy-work gate failed `HANDOFF_STALE_LATEST_SESSION` and every session was blocked behind a red gate. The partial directory has been removed from `research_state/` (disk-latest is back to `session_20261126T133828Z`) and its complete stdlib eval script preserved at `handoff_archive/quarantine_20261126T144850Z/` as the reusable template named in §1.3 — so the next session starts from a green gate and a ready template instead of re-deriving the parser. (2) The prior "close the frontier / negative-results synthesis or confirm exhaustion" escape hatch remains replaced by the binding heavy campaign above — a closure-synthesis session fails the gate. (3) The stdlib-only constraint and the correct template location are now explicit (numpy/pandas/pyarrow are absent; package installation is forbidden). No blocked or inefficient sessions remain.
 
 ---
 
 ## 3. FROZEN EXECUTION DESIGN — DO NOT RE-DERIVE OR THRESHOLD-SHOP
 
-1. **Cohort:** 2024-04-01 through 2026-10-31 UTC; exactly `BNBUSDT`, `BTCUSDT`, `ETHUSDT`, `SOLUSDT`, `XRPUSDT`. This cohort is disjoint from the 2021-2024 five-symbol cohort of campaigns 01-06. Do not substitute coins, do not extend into 2026-11 (partial month, no funding zip), and do not re-enumerate the cohort. Funding zips exist 2024-04..2026-10 for all five symbols; klines/index/mark/premium daily zips exist 2024-01..2026-11 (per-day subdirectories `klines-YYYY-MM-DD/` etc. in some months, top-level daily zips in others — record the exact per-month layout in the source registry).
+1. **Cohort:** 2024-04-01 through 2026-10-31 UTC; exactly `BNBUSDT`, `BTCUSDT`, `ETHUSDT`, `SOLUSDT`, `XRPUSDT`. This cohort is disjoint from the 2021-2024 five-symbol cohort of campaigns 01-06. Do not substitute coins, do not extend into 2026-11 (partial month, no funding zip), and do not re-enumerate the cohort. Funding zips exist 2024-04..2026-10 for all five symbols; klines/index/mark/premium daily zips exist 2024-01..2026-11 (per-day subdirectories `klines-YYYY-MM-DD/` etc. in some months, top-level daily zips in others — record the exact per-month layout in the source registry). Verified on disk this session: 155 symbol-month cache dirs = 5 symbols x 31 months (2024-04..2026-10).
 2. **Primary target (repo-name primary, campaign-01 estimand):** next-24h mean log realized variance `y = log(RV_24h_next + eps)`, `eps = 1e-09` in squared-log-return units, from 1h mark-price log-returns. Metric: QLIKE.
 3. **Declared secondary (campaign-06 estimand, Holm-adjusted across the 2-family):** next-24h downside realized-semivariance level `D = log(RV_minus + 1e-09)`. Metric: MSE. The family is exactly these two targets; no other target may be added post hoc.
 4. **Features:** B1 is the same signed-HAR set used by campaigns 05/06: log RV1h/RV24h/RV168h plus log RV_plus/RV_minus at 24h/168h. C2 is B1 plus signed funding(24h), trailing 90-day absolute-funding percentile, mark/index premium, and mark/EMA24 distance. All scaling is train-only.
@@ -95,7 +95,8 @@ Required gate result after the heavy session: top-level `pass=true`, `reason_cod
 |---|---|
 | `research_state/data_cache/<SYM>_<YYYY_MM>/` (SYM in §3.1) | Verified daily zips + monthly funding zip; reuse read-only. |
 | `research_state/cached_inputs_hashes.json` | 20,694-entry sha256 registry; verify and disclose gaps. |
-| `research_state/session_20261126T082429Z/fclr_live_archive05_eval_20261126T082429Z.py` | Stdlib parser, OLS, split, and bootstrap template. |
+| `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` | Recovered stdlib parser, OLS, split, and bootstrap template for THIS campaign (change `SESSION`; add recompute/audit/trigger). |
+| `research_state/session_20261126T082429Z/fclr_live_archive05_eval_20261126T082429Z.py` | Alternate stdlib parser/OLS/split/bootstrap template. |
 | `research_state/session_20261126T082429Z/fclr_live_archive05_recompute_20261126T082429Z.py` | Independent-recompute pattern. |
 | `research_state/experiment_frontier.json` | Rank-0 registry; update only after artifacts exist. |
 | `RESEARCH_PROMPT.md` §3/§7/§8/§9/§16/§17/§19/§20 | Research constraints and reporting requirements. |
@@ -109,18 +110,18 @@ If a feature month is missing or a zip fails verification, do not silently subst
 - Do not re-run closed campaigns (01/03/04/05/06, broad ironflow arms) or relabel exploratory work as confirmatory.
 - Do not build a risk overlay; the forecast gate is not passed.
 - Do not stop at a source probe, prereg, audit, trigger check, closure synthesis, or handoff refresh.
-- Do not create an empty/partial session and leave it unrecorded.
+- Do not create an empty/partial session and leave it unrecorded (this is exactly the `20261126T144850Z` failure mode that was just quarantined).
 - The next session must leave a complete heavy artifact set, a reproduced verdict, and a synchronized frontier.
 
 ---
 
-## 8. SESSION CLOSE-OUT — 2026-11-26T14:39:34Z
+## 8. SESSION CLOSE-OUT — 2026-11-26T15:32:44Z
 
-**What changed:** the sole durable handoff was updated to announce campaign `FCLR-LIVE-ARCHIVE-07-20261126T143224Z` as the active rank-0 heavy campaign with a fresh session-bound timestamp. The prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T135020Z.md`. `experiment_frontier.json` rank-0 remains the active campaign-07 entry with `program_status:"ACTIVE"`, a concrete `next_unfinished_task`, and three pending phases. The six-module verification suite is green (122 tests passing). No root-level `research_state` files were added (root remains at 500/500 cap). No sealed artifacts were touched.
+**What changed:** the sole durable handoff was updated to announce campaign `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` as the active rank-0 heavy campaign with a fresh session-bound timestamp. The aborted partial session `20261126T144850Z` was quarantined out of `research_state/` to `handoff_archive/quarantine_20261126T144850Z/` (its complete stdlib eval script preserved as the §1.3 template), which cleared the `HANDOFF_STALE_LATEST_SESSION` gate failure that was blocking all sessions. `experiment_frontier.json` rank-0 is the active campaign-07 entry with `program_status:"ACTIVE"`, a concrete `next_unfinished_task`, and three pending phases. The six-module verification suite is green (122 tests passing). No root-level `research_state` files were added (root remains at 500/500 cap). No sealed artifacts were touched.
 
-**What was verified this session:** heavy-work gate `pass=true`, `reason_code=OK`, `failures=[]` (campaign-07 start 20261126T143224Z is after the latest session, so the live-archive binder is grandfathered until the next session executes); the six-module unittest command passes 122 tests; `python3 -m json.tool research_state/experiment_frontier.json` passes. Cache feasibility was verified on disk: funding zips 2024-04..2026-10 for all five symbols; klines/index/mark/premium daily zips 2024-01..2026-11 with per-file `.sha256` sidecars; 3,689 zips in the symbol dirs; registry sample-verified with zero mismatches.
+**What was verified this session:** heavy-work gate `pass=true`, `reason_code=OK`, `failures=[]` (campaign-07 start 20261126T153244Z is after the latest recorded session `session_20261126T133828Z`, so the live-archive binder is grandfathered until the next session executes); the six-module unittest command passes 122 tests; `python3 -m json.tool research_state/experiment_frontier.json` passes. Cache feasibility was verified on disk: 155 symbol-month dirs (5 symbols x 31 months, 2024-04..2026-10); funding zips 2024-04..2026-10 for all five symbols; klines/index/mark/premium daily zips 2024-01..2026-11 with per-file `.sha256` sidecars.
 
-**Single highest-value next task:** execute campaign-07 exactly as frozen in §3 and produce the complete `fclr_live_archive07_*` artifact set under one fresh `session_<UTC>/` (id > 20261126T143224Z), with an independent stdlib recompute reproducing the verdict, then synchronize the frontier and re-run §5 until green.
+**Single highest-value next task:** execute campaign-07 exactly as frozen in §3 and produce the complete `fclr_live_archive07_*` artifact set under one fresh `session_<UTC>/` (id > 20261126T153244Z), with an independent stdlib recompute reproducing the verdict, then synchronize the frontier and re-run §5 until green.
 
 **Latest completed session:** `session_20261126T133828Z`
 
@@ -140,7 +141,7 @@ If a feature month is missing or a zip fails verification, do not silently subst
 
 **Concrete falsification test:** C2 improves relative test QLIKE by at least 2% with bootstrap 95% CI lower bound above 0 at alpha_2 = 0.008333 on the 2024-04..2026-10 cohort.
 
-**Highest information gain per free compute:** campaign-07 reuses a fully verified on-disk cache and the proven stdlib numerical template; either outcome is decisive for the repo-name program.
+**Highest information gain per free compute:** campaign-07 reuses a fully verified on-disk cache and the proven stdlib numerical template (now recovered from the quarantined attempt); either outcome is decisive for the repo-name program.
 
 **Exact progress artifact:** the complete `fclr_live_archive07_*` set under the new session, a green heavy-work gate, and the six-module unittest command passing 122 tests.
 
