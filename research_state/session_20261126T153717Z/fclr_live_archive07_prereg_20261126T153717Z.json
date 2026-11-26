@@ -1,0 +1,43 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-07-20261126T143224Z",
+  "session_utc": "20261126T153717Z",
+  "artifact_id": "fclr_live_archive07_prereg_20261126T153717Z",
+  "generated_at": "2026-11-26T15:40:17Z",
+  "experiment_id": "FCLR-LIVE-ARCHIVE-07",
+  "outcome_data_inspected_before_freeze": false,
+  "hash_bound_to_source_registry": "371e7db58c0c3ddd56471eb06b76e17ff8172f585e3f8950648b6d339a43a49c",
+  "frozen_before_outcomes": true,
+  "decision_frozen_before_outcomes": true,
+  "hypothesis": "FCLR-H007: funding + price features improve out-of-sample forecasts of next-24h mean log realized variance (QLIKE) beyond a signed-component HAR baseline (B1) on the disjoint 2024-04..2026-10 cohort, judged on relative test-QLIKE reduction.",
+  "window": "2024-04-01..2026-10-31 UTC",
+  "symbols": [
+    "BNBUSDT",
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "target": "next-24h mean log realized variance log(RV_24h_next + eps)",
+  "eps": 1e-09,
+  "splits": "60/20/20 by unique UTC timestamp; 7-day (168h) purge/embargo at train/val and val/test boundaries; test -> 3 chronological blocks",
+  "models": {
+    "B1": "OLS on log RV1h/RV24h/RV168h + log RV_plus/RV_minus at 24h/168h (7 signed HAR features), train-only scaling",
+    "C2": "B1 + signed funding(24h) + trailing 90d |funding| percentile + mark/index premium + mark/EMA24 distance (11 features)"
+  },
+  "primary_contrast": "C2 vs B1 on paired test-set out-of-sample QLIKE",
+  "secondary": "next-24h downside realized-semivariance level log(RV_minus+eps), MSE, Holm across the declared 2-family",
+  "inference": ">=2000 deterministic block-bootstrap replicates (block=24 rows, seed=20261126); report QLIKE, MSE, R^2, 95% CI on relative QLIKE reduction, per-block, leave-one-symbol-out",
+  "materiality_floor": 0.02,
+  "alpha_2_sequential_look_k2": 0.008333333333333333,
+  "decision_rule": "PROMOTED iff relative test-QLIKE reduction >=2% AND bootstrap 95% CI lower bound > 0 AND test data sufficient; else NOT_SUPPORTED; INCONCLUSIVE if insufficient data",
+  "leakage_controls": [
+    "outcome-blind freeze before target generation",
+    "train-only OLS fitting",
+    "train-only scaling + standardization",
+    "168h purge/embargo",
+    "no outcome inspection before freeze"
+  ],
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true
+}

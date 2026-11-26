@@ -1,0 +1,147 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-07",
+  "session_id": "20261126T153717Z",
+  "session_utc": "20261126T153717Z",
+  "artifact_id": "fclr_live_archive07_recompute_20261126T153717Z",
+  "generated_at": "2026-11-26T15:49:24Z",
+  "source": "BINANCE_PUBLIC_ARCHIVE_READ_ONLY_CACHE",
+  "symbols": [
+    "BNBUSDT",
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "months": "2024-04..2026-10 (31 months)",
+  "n_symbols": 5,
+  "per_symbol_rows": {
+    "BNBUSDT": 8616,
+    "BTCUSDT": 21000,
+    "ETHUSDT": 15912,
+    "SOLUSDT": 8616,
+    "XRPUSDT": 8616
+  },
+  "n_train": 46896,
+  "n_val": 11496,
+  "n_test": 4368,
+  "n_unique_timestamps": 21000,
+  "embargo_hours": 168,
+  "splits": "60/20/20 by unique UTC timestamp; 7-day (168h) purge/embargo; test->3 chronological blocks",
+  "models": [
+    "B1",
+    "C2"
+  ],
+  "target": "next-24h mean log realized variance log(RV_24h_next + eps)",
+  "eps": 1e-09,
+  "materiality_floor": 0.02,
+  "recomputed": {
+    "B1": {
+      "qlike": -6.763766010119411,
+      "mse": 0.7932604471503526,
+      "r2": 0.2022118036342454,
+      "sse": 3464.96163315274,
+      "sst": 4343.209950882992,
+      "n": 4368
+    },
+    "C2": {
+      "qlike": -6.754893899393937,
+      "mse": 0.7911313131310447,
+      "r2": 0.20435309026360726,
+      "sse": 3455.661575756403,
+      "sst": 4343.209950882992,
+      "n": 4368
+    }
+  },
+  "relative_qlike_reduction_C2_vs_B1": 0.0,
+  "downside_mse_B1": 63.399818524100176,
+  "downside_mse_C2": 63.7111458876935,
+  "relative_downside_mse_reduction": -0.00491054029555268,
+  "secondary_direction": "inconsistent",
+  "per_block": {
+    "B1": {
+      "qlike": [
+        -6.762908454810405,
+        -6.761246756024938,
+        -6.767142819522907
+      ]
+    },
+    "C2": {
+      "qlike": [
+        -6.753823221101135,
+        -6.751970976854323,
+        -6.758887500226355
+      ]
+    }
+  },
+  "leave_one_symbol_out": {
+    "BTCUSDT": {
+      "n": 4368,
+      "qlike_B1": -6.774495329464428,
+      "qlike_C2": -6.771448590952934,
+      "rel_qlike_C2_vs_B1": -3046738511.494063
+    }
+  },
+  "verdict": "NOT_SUPPORTED",
+  "verdict_reason": "C2 vs B1 relative test-QLIKE reduction < 2% floor",
+  "eval": {
+    "B1": {
+      "qlike": -6.763766010119411,
+      "mse": 0.7932604471503526,
+      "r2": 0.2022118036342454,
+      "sse": 3464.96163315274,
+      "sst": 4343.209950882992,
+      "n": 4368
+    },
+    "C2": {
+      "qlike": -6.754893899393937,
+      "mse": 0.7911313131310447,
+      "r2": 0.20435309026360726,
+      "sse": 3455.661575756403,
+      "sst": 4343.209950882992,
+      "n": 4368
+    }
+  },
+  "eval_rel": 0.0,
+  "eval_verdict": "NOT_SUPPORTED",
+  "abs_diffs": {
+    "B1_qlike": 0.0,
+    "B1_mse": 0.0,
+    "B1_r2": 0.0,
+    "B1_sse": 0.0,
+    "B1_sst": 0.0,
+    "C2_qlike": 0.0,
+    "C2_mse": 0.0,
+    "C2_r2": 0.0,
+    "C2_sse": 0.0,
+    "C2_sst": 0.0,
+    "rel_qlike": 0.0,
+    "mse_down_B1": 0.0,
+    "mse_down_C2": 0.0,
+    "rel_down": 0.0
+  },
+  "checks": {
+    "B1_qlike_match": true,
+    "B1_mse_match": true,
+    "B1_r2_match": true,
+    "B1_sse_match": true,
+    "B1_sst_match": true,
+    "C2_qlike_match": true,
+    "C2_mse_match": true,
+    "C2_r2_match": true,
+    "C2_sse_match": true,
+    "C2_sst_match": true,
+    "rel_qlike_match": true,
+    "downside_match": true,
+    "n_test_match": true,
+    "n_unique_match": true,
+    "verdict_reproduced": true,
+    "stdlib_only": true,
+    "network": false
+  },
+  "all_checks_match": false,
+  "n_checks": 17,
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true,
+  "verdict_reproduced": "NOT_SUPPORTED"
+}
