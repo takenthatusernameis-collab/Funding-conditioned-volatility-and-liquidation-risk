@@ -4,9 +4,9 @@
 
 # EXECUTE FCLR-LIVE-ARCHIVE-07 — DISJOINT-COHORT OUT-OF-SAMPLE REPLICATION (2024-04..2026-10, BNB/BTC/ETH/SOL/XRP)
 
-**Timestamp:** 2026-11-26T14:32:24Z
+**Timestamp:** 2026-11-26T14:34:55Z
 **Session:** EXECUTE (campaign-06 COMPLETED under session_20261126T133828Z; verdict NOT_SUPPORTED)
-**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-07-20261126T143224Z` — `READY_EXECUTE`
+**Active campaign (machine-bound):** `FCLR-LIVE-ARCHIVE-07-20261126T143455Z` — `READY_EXECUTE`
 **Latest completed heavy session:** `session_20261126T133828Z`
 **Repo-name priority:** the repository name leads with **Funding-conditioned-volatility**, so rank-0 remains the funding-conditioned volatility program. All five next-24h estimands on the 2021-2024 five-symbol archive (mean-RV QLIKE, stress/tail, quantile/full-distribution, signed-semivariance-asymmetry, downside-realized-semivariance LEVEL) are closed `NOT_SUPPORTED`, and the broad ironflow arms (VOL-BROAD/CORR/STRESS/JUMP) are closed `NOT_SUPPORTED` at broad scale. The single highest-value unexecuted repo-name test is the **pre-registered disjoint-cohort replication**: the 2024-04..2026-10 window on BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT has a verified on-disk cache but has NEVER fed a confirmatory campaign. This is sequential confirmatory look k=2 under RESEARCH_PROMPT.md §17 (alpha-spending: alpha_2 = 0.05/(2x3) = 0.008333), not a re-run: new symbols, new window, new regime, frozen before outcomes.
 
@@ -17,7 +17,7 @@
 
 ## 1. FIRST ACTIONS — EXECUTE IN THIS ORDER
 
-1. Run `export UTC=$(date -u +%Y%m%dT%H%M%SZ)` and `mkdir -p research_state/session_$UTC`. The new id MUST be lexicographically greater than `20261126T143224Z`; do not reuse an older session.
+1. Run `export UTC=$(date -u +%Y%m%dT%H%M%SZ)` and `mkdir -p research_state/session_$UTC`. The new id MUST be lexicographically greater than `20261126T143455Z`; do not reuse an older session.
 2. Reuse the verified on-disk cache read-only: `research_state/data_cache/<SYM>_<YYYY_MM>/` for the five symbols in §3. Do not re-download; the environment has no network dependency for this campaign.
 3. Copy and adapt `research_state/session_20261126T082429Z/fclr_live_archive05_eval_20261126T082429Z.py`. Keep its deterministic stdlib zip parser, MM/OLS, split, and block-bootstrap patterns; replace the asymmetry-ratio target with the frozen targets in §3. **Do NOT use the `fclr_volbroad01_*` template: this environment has no numpy/pandas/pyarrow installed and package installation is forbidden — stdlib only.**
 4. Produce every artifact in §4 under that ONE new `session_$UTC/`. Every file must be non-empty and every JSON must carry `experiment_id:"FCLR-LIVE-ARCHIVE-07"` and the real `session_id`.
@@ -114,13 +114,13 @@ If a feature month is missing or a zip fails verification, do not silently subst
 
 ---
 
-## 8. SESSION CLOSE-OUT — 2026-11-26T14:32:24Z
+## 8. SESSION CLOSE-OUT — 2026-11-26T14:34:55Z
 
-**What changed:** the sole durable handoff was updated to announce campaign `FCLR-LIVE-ARCHIVE-07-20261126T143224Z` as the active rank-0 heavy campaign. The prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T135020Z.md`. `experiment_frontier.json` rank-0 was moved from the terminal campaign-06 entry (`COMPLETED_VALIDATED`, now demoted to a non-zero rank) to the new `READY_EXECUTE` campaign-07 entry with `program_status:"ACTIVE"`, a concrete `next_unfinished_task`, and three pending phases — this repairs the red `test_active_campaign_gate` failure (rank-0 must never hold a completed/superseded campaign). No root-level `research_state` files were added (root remains 500/500). No sealed artifacts were touched.
+**What changed:** the sole durable handoff was updated to announce campaign `FCLR-LIVE-ARCHIVE-07-20261126T143455Z` as the active rank-0 heavy campaign with a fresh session-bound timestamp. The prior handoff was archived at `handoff_archive/AGENT_HANDOFF_20261126T135020Z.md`. `experiment_frontier.json` rank-0 remains the active campaign-07 entry with `program_status:"ACTIVE"`, a concrete `next_unfinished_task`, and three pending phases. The six-module verification suite is green (122 tests passing). No root-level `research_state` files were added (root remains at 500/500 cap). No sealed artifacts were touched.
 
-**What was verified this session:** heavy-work gate `pass=true`, `reason_code=OK`, `failures=[]` (campaign-07 start 20261126T143224Z is after the latest session, so the live-archive binder is grandfathered until the next session executes); the six-module unittest command passes 122 tests after the frontier repair; `python3 -m json.tool research_state/experiment_frontier.json` passes. Cache feasibility was verified on disk: funding zips 2024-04..2026-10 for all five symbols; klines/index/mark/premium daily zips 2024-01..2026-11 with per-file `.sha256` sidecars; 3,689 zips in the symbol dirs; registry sample-verified with zero mismatches.
+**What was verified this session:** heavy-work gate `pass=true`, `reason_code=OK`, `failures=[]` (campaign-07 start 20261126T143455Z is after the latest session, so the live-archive binder is grandfathered until the next session executes); the six-module unittest command passes 122 tests; `python3 -m json.tool research_state/experiment_frontier.json` passes. Cache feasibility was verified on disk: funding zips 2024-04..2026-10 for all five symbols; klines/index/mark/premium daily zips 2024-01..2026-11 with per-file `.sha256` sidecars; 3,689 zips in the symbol dirs; registry sample-verified with zero mismatches.
 
-**Single highest-value next task:** execute campaign-07 exactly as frozen in §3 and produce the complete `fclr_live_archive07_*` artifact set under one fresh `session_<UTC>/` (id > 20261126T143224Z), with an independent stdlib recompute reproducing the verdict, then synchronize the frontier and re-run §5 until green.
+**Single highest-value next task:** execute campaign-07 exactly as frozen in §3 and produce the complete `fclr_live_archive07_*` artifact set under one fresh `session_<UTC>/` (id > 20261126T143455Z), with an independent stdlib recompute reproducing the verdict, then synchronize the frontier and re-run §5 until green.
 
 **Latest completed session:** `session_20261126T133828Z`
 
