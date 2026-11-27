@@ -1,9 +1,8 @@
 # AGENT HANDOFF — Durable Single Source of Truth for Next Session
 
-**Generated (UTC):** 2026-11-27T02:07:19Z
+**Generated (UTC):** 2026-11-27T02:08:08Z
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE`.
-**HEAD:** `a83d40440`
-**Working tree:** clean
+**HEAD:** `dbf2a692b` (checkpoint; working tree clean)
 **Latest completed heavy session:** `session_20261126T133828Z` (campaign-06, `NOT_SUPPORTED`, `all_checks_match=true`)
 **Heavy-work gate at this refresh (2026-11-27T02:07:19Z):** `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false`, `live_archive.pass=true`, `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-07-20261126T153244Z` (green ONLY because the newest on-disk session `20261126T133828Z` predates the campaign start `20261126T153244Z`; the first post-start session that lacks the full heavy set fails closed — the gate is armed). Baseline re-confirmed this refresh: the six-module unittest command runs **122 tests OK**, the stdlib recovery template `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` `py_compile`s clean, the five-symbol `research_state/data_cache/` is present (**175 symbol-month dirs = 5 symbols × 35 months, 2024_01..2026_11**; the campaign window uses 2024_04..2026_10), and `research_state` root is at the **500-file cap** (no new root-level `.md`/`.json`).
 
