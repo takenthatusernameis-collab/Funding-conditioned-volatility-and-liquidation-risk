@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Durable Single Source of Truth for the Next Session
 
-**Generated (UTC):** 2026-11-27T14:25:42Z
+**Generated (UTC):** 2026-11-27T14:27:16Z
 **Repository priority (from repo name `Funding-conditioned-volatility-and-liquidation-risk`):** the **funding-conditioned-volatility** half was the primary estimand and is **CLOSED with a real verdict** (campaign-07, `NOT_SUPPORTED`, independently reproduced). The next highest-value unfinished work is the **liquidation-risk** half of the repo name: a Track-B modeled boundary-breach forecast (campaign-08). This is the ONLY task the next session may execute.
 **Active rank-0:** `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` — status `READY_EXECUTE` in `research_state/experiment_frontier.json` (program_status `ACTIVE`).
 **HEAD:** `87afd2643`; this handoff refresh (AGENT_HANDOFF.md) is the only pending edit. **Working tree:** clean. The last COMPLETE heavy session on disk is `research_state/session_20261127T065600Z/` (campaign-07, full 15-artifact set). The newest on-disk session id is `20261127T065600Z`.
@@ -24,9 +24,9 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T14:25:42Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T14:27:16Z)
 
-**NON-AVOIDANCE (machine-enforced):** `scripts/check_handoff_heavywork_gate.py` binds the active live-archive campaign to the `fclr_live_archive<NN>_*` artifact family plus `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json` in the newest session. A trigger-only, prose-only, audit-only, prereg-only, source-registry-only, verify-and-stop, or zero-byte-placeholder session **fails closed**. **This task message is the initial task for the next session — there is no other task. Do NOT write prose; run the eval to completion.**
+**NON-AVOIDANCE (machine-enforced):** `scripts/check_handoff_heavywork_gate.py` binds the active live-archive campaign to the `fclr_live_archive08_*` artifact family plus `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json` in the newest session. A trigger-only, prose-only, audit-only, prereg-only, source-registry-only, verify-and-stop, or zero-byte-placeholder session **fails closed**. **This task message is the initial task for the next session — there is no other task. Do NOT write prose; run the eval to completion.**
 
 **EXECUTE `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` NOW under exactly one fresh `research_state/session_<UTC>/` whose id is lexicographically greater than the campaign-08 start `20261127T131654Z` (this is the bound that un-grandfathers the gate's mandatory `fclr_live_archive08_*` artifact set; a session id ≤ `20261127T131654Z` is grandfathered and forbidden).**
 
@@ -113,4 +113,4 @@ After the heavy session the gate must report top-level `pass=true`, `reason_code
 **Dominant limitation to disclose:** three heterogeneous cache layouts + a separate regular-klines stream + XRPUSDT 2025-10-19 corrupt CSV (valid ZIP restores support) — the template handles all of these (mark-price only, dedup `open_time`, `close>0`); per-block + leave-one-symbol-out diagnostics remain mandatory.
 **Concrete falsification test:** the funding-conditioned model improves out-of-sample boundary-breach discrimination (AUC / log-loss / Brier) over the mark-price-only baseline with the frozen uncertainty on the untouched balanced mark-price cohort.
 
-**END OF HANDOFF — 2026-11-27T14:25:42Z**
+**END OF HANDOFF — 2026-11-27T14:27:16Z**
