@@ -1,67 +1,56 @@
-# AGENT HANDOFF — Durable Single Source of Truth for Next Session
+# AGENT HANDOFF — Durable Single Source of Truth for the Next Session
 
-**Generated (UTC):** 2026-11-27T05:52:16Z
-**Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE`.
-**HEAD:** `76ed092c8` (refreshed this pass; prior header's `13f19df2c` was stale by one checkpoint commit).
-**Working tree:** clean. This refresh is a verification-and-curation pass, NOT a heavy session: it (1) re-ran the heavy-work gate (`pass=true`, `reason_code=OK`, `failures=[]`, armed) at 2026-11-27T05:52:16Z, confirmed `experiment_frontier.json` rank-0 is `READY_EXECUTE`, and `py_compile` of the recovery template and gate (both OK); (2) re-confirmed the §0 balanced common-support correction (`|S| = 22,584`, XRPUSDT binds by 24h on the corrupt 2025-10-19 day) carries forward unchanged; and (3) re-affirmed the single §1 task and the §6 non-avoidance constraints. No root `INITIAL_TASK_MESSAGE_*` file exists (all three prior duplicates remain archived in `handoff_archive/`); no new root or `research_state` root file was created (research_state root stays at exactly 500 md+json, zero headroom). The durable body design (§0 correction, §2 artifacts, §3 frozen design, §6 constraints) is unchanged and re-verified; gate re-confirmed `pass=true` at 2026-11-27T05:52:16Z.
-**Single source of truth:** this file is the ONLY durable handoff. The former root `INITIAL_TASK_MESSAGE_20261127T021343Z.md`, `INITIAL_TASK_MESSAGE_20261127T025859Z.md`, and `INITIAL_TASK_MESSAGE_20261127T045208Z.md` were duplicates of §1 and are in `handoff_archive/` — do not resurrect them and do not create another root-level message; read §1 below.
-**Latest completed heavy session:** `session_20261126T133828Z` (campaign-06, `NOT_SUPPORTED`, `all_checks_match=true`). No post-start heavy session exists yet — campaign-07 is the un-started work, not a bottleneck.
-**Heavy-work gate at this refresh (re-run 2026-11-27T05:52:16Z):** `pass=true`, `reason_code=OK`, `failures=[]`, `handoff_stale=false`, `live_archive.required=false`, `live_archive.pass=true`, `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-07-20261126T153244Z` (green ONLY because the newest on-disk session `20261126T133828Z` predates the campaign start `20261126T153244Z`; the gate is **armed**: the first post-start session that lacks the full `fclr_live_archive07_*` heavy set fails closed). Recovery template and gate `py_compile` clean at this refresh.
-**Independent cache re-verification carried forward (re-derived 2026-11-27T04:56:18Z; stdlib, mark-price-only, any-depth `markPriceKlines-*` reader, dedup by `open_time`, `close>0`, window 2024-04-01 00:00 .. 2026-10-31 23:00 UTC, 1,139 mark-price CSVs per symbol):** BNBUSDT=BTCUSDT=ETHUSDT=SOLUSDT=**22,608** clean 1h closes; XRPUSDT=**22,584** (exactly 24 nonpositive closes, all on `2025-10-19`); all-five intersection **`|S| = 22,584`**; `S` spans `2024-04-01 00:00 .. 2026-10-31 23:00 UTC`. This reproduces §0 from the raw cache and supersedes any other figure. The next agent must still recompute `S` in-session and freeze the exact value in the prereg.
+**Generated (UTC):** 2026-11-27T05:56:19Z
+**Repository priority (from repo name `Funding-conditioned-volatility-and-liquidation-risk`):** Funding-conditioned next-24h volatility forecasting is the single highest-value unfinished task.
+**Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE` in `research_state/experiment_frontier.json`.
+**HEAD:** `e34c20a1c` (verified this pass; prior header's `76ed092c8` was stale by two checkpoint commits).
+**Working tree:** clean. Root `research_state/` is at **exactly 500** md+json files (zero headroom). No root-level `INITIAL_TASK_MESSAGE_*` exists (all prior duplicates are archived in `handoff_archive/`).
 
-> This is the sole durable handoff. A timestamp-only rewrite, a new empty session directory, a prereg-only run, an audit-only run, a trigger-only run, a source-registry-only run, or a verify-and-stop run is a failed next session. The next session must execute the heavy campaign in §1–§3.
+> **This file is the ONLY durable handoff.** Do not create a root `INITIAL_TASK_MESSAGE_*` file, a second handoff, or any root-level `research_state/*.md`/`*.json` (a single root write makes 501 and fails the gate). Read §1 and execute it.
 
 ---
 
-## 0. BOTTLENECK STATUS (read first — no open bottleneck at this refresh; one prior bottleneck stays removed, one number stays corrected)
+## 0. BOTTLENECK STATUS (read first)
 
-**No session is blocked and no setup/gate-repair step is required at 2026-11-27T05:52:16Z.** The heavy-work gate is green (and armed), `experiment_frontier.json` rank-0 is `READY_EXECUTE`, the five-symbol 2024-04..2026-10 mark-price cache is on disk, `|S| = 22,584` is the carried-forward independently re-derived value (re-derived 2026-11-27T04:56:18Z from the raw cache) and must be recomputed in-session, and the stdlib recovery template compiles (`py_compile` OK). The only open item is the un-started campaign-07 heavy session itself; that is the work, not a bottleneck. **Gate consequence (armed):** because campaign start `20261126T153244Z` is in the past relative to every eligible new session id, the first session whose `research_state/session_<UTC>/` lacks the complete non-empty `fclr_live_archive07_*` set (source registry, prereg, eval py+json+md, recompute py+json, evidence audit json+md, `evidence_audit_<UTC>.json`, `trigger_check_<UTC>.json`) plus an independent recompute with `all_checks_match=true` and `audit_pass=true` fails the gate closed — no trigger-only, prose-only, audit-only, prereg-only, source-registry-only, or verify-and-stop session can pass.
+**No session is blocked and no setup/gate-repair step is required at 2026-11-27T05:56:19Z.** The heavy-work gate is green and **armed**; `experiment_frontier.json` rank-0 is `READY_EXECUTE`; the five-symbol 2024-04..2026-10 mark-price cache is on disk; the stdlib recovery template compiles; `|S| = 22,584` is the carried-forward independently re-derived value (re-derived 2026-11-27T04:56:18Z from the raw cache) and must be recomputed in-session.
 
-**Anti-re-curation directive (removes the recurring inefficiency — READ TWICE):** this file has now been refreshed many times (latest 2026-11-27T04:58:40Z) without campaign-07 ever executing. A further timestamp-only or verification-only refresh is itself the bottleneck and a failed session. The next session MUST execute the §1 heavy campaign end-to-end (full three-block eval + ≥2,000-replicate block bootstrap + leave-one-symbol-out + independent stdlib recompute that rebuilds `S`) and update this file only afterward (§6). Do not produce another handoff-only session; do not create a root `INITIAL_TASK_MESSAGE_*` file; do not add any `research_state` root `.md`/`.json` (root is at exactly 500, zero headroom). If you find yourself writing prose instead of running the eval, STOP and run §1 steps 1–8.
+**THE bottleneck is the re-curation loop itself — do not repeat it.** This file has been refreshed many times in the last hours (04:54, 04:58, 05:52, now 05:56) without campaign-07 ever executing. A further timestamp-only or verification-only refresh is itself the bottleneck and a failed session. The next session MUST execute the §1 heavy campaign end-to-end and update this file only afterward (§6). If you find yourself writing prose instead of running the eval, STOP and run §1 steps 1–8.
 
-**Bottleneck removed at the 2026-11-27T04:54:10Z refresh (ambiguity, not compute):** a third competing root-level `INITIAL_TASK_MESSAGE_20261127T045208Z.md` (created 04:52:08Z) again duplicated §1 and re-created the "which message is authoritative?" stall. It is now archived in `handoff_archive/` and this file is the single durable handoff. There is exactly one initial task message (§1); do not create another root-level message.
+**Gate consequence (armed):** because campaign start `20261126T153244Z` is in the past relative to every eligible new session id (newest on-disk session `20261126T133828Z` predates it), the first session whose `research_state/session_<UTC>/` lacks the complete non-empty `fclr_live_archive07_*` set (source registry, prereg, eval py+json+md, recompute py+json, evidence audit json+md, `evidence_audit_<UTC>.json`, `trigger_check_<UTC>.json`) plus an independent recompute with `all_checks_match=true` and `audit_pass=true` **fails the gate closed**. No trigger-only, prose-only, audit-only, prereg-only, source-registry-only, or verify-and-stop session can pass.
 
-**Bottleneck removed at the 2026-11-27T03:06:12Z refresh (ambiguity, not compute, still in force):** two competing root-level `INITIAL_TASK_MESSAGE_*.md` files duplicated §1 and created a "which message is authoritative?" stall for the next agent. Both are archived in `handoff_archive/` and this file is the single durable handoff. There is exactly one initial task message (§1); do not create another.
+**Authoritative common-support number (supersedes every earlier figure — re-derived from the raw cache, stdlib, mark-price only, any-depth `markPriceKlines-*` reader, dedup by `open_time`, `close>0`, window 2024-04-01 00:00 .. 2026-10-31 23:00 UTC, 1,139 mark-price CSVs per symbol):**
 
-**One implementation trap is removed here so the next session cannot stall or silently build an unbalanced panel:** the recovery template's price loop is zip-only and predates the three on-disk layouts. Replace that loop with a recursive `markPriceKlines-*` CSV/ZIP reader (any depth, dedup by `open_time`, `close>0`), and apply the all-five-symbol support `S` to the aligned raw mark/index series **before** computing returns, rolling history, or forward targets. Merely filtering the final pooled rows is insufficient: a lookback or next-24h target window could still cross the XRPUSDT 2025-10-19 gap. This is an implementation clarification of the frozen common-support design, not a new estimand or threshold.
+- **BNBUSDT = BTCUSDT = ETHUSDT = SOLUSDT = 22,608** clean 1h mark-price closes each in-window.
+- **XRPUSDT = 22,584** — the **binding series, short by exactly 24 hours**.
+- **True common support `|S| = 22,584`** (all-five-symbol hourly intersection). **Freeze this exact value in the prereg; do NOT hard-code 22,608 and do NOT claim "all five identical."**
+- **Cause of the 24h shortfall (verified):** `research_state/data_cache/XRPUSDT_2025_10/markPriceKlines-2025-10-19/XRPUSDT-1h-2025-10-19.csv` has **24 rows with NEGATIVE close values** (e.g. `-0.00054414`) for `2025-10-19 00:00..23:00 UTC`. Mark price cannot be negative — corrupt source data. **Quarantine and record provenance; do NOT zero-fill, repair, or silently substitute.** Excluding `close<=0` removes exactly those 24 hours.
+- **The panel is still effectively balanced:** every 60/20/20 block and every leave-one-symbol-out fold contains all five symbols; the only effect is one absent UTC day. No degenerate-split risk.
+- **Embargoed 60/20/20 split on `S` (168h purge), `|S| = 22,584`:** train ≈ 13,550 ts / val ≈ 4,517 ts / test ≈ 4,517 ts ≈ **22,585 test rows across all five symbols**; three chronological test blocks of ≈1,500 ts (≈7,500 rows) each, all five symbols in every block.
 
-**The prior handoff's central number was WRONG and is corrected here by direct measurement of the on-disk cache.** Prior handoffs claimed `|S| = 22,608` with "all five symbols IDENTICAL / balanced / none binds." Independent recompute (mark-price only, all three layouts, deduped by `open_time`, restricted to the campaign window `2024-04-01 00:00 .. 2026-10-31 23:00 UTC`) gives:
-
-- **BNBUSDT = BTCUSDT = ETHUSDT = SOLUSDT = 22,608** one-hour mark-price closes each in-window.
-- **XRPUSDT = 22,584** — it is the **binding series, short by exactly 24 hours**.
-- **True common support `|S| = 22,584`** (the all-five-symbol hourly intersection). Freeze this exact value in the outcome-blind prereg; do NOT hard-code 22,608.
-- **Cause of the 24h shortfall (verified, not a missing file):** `research_state/data_cache/XRPUSDT_2025_10/markPriceKlines-2025-10-19/XRPUSDT-1h-2025-10-19.csv` contains **24 rows with NEGATIVE close values** (e.g. `-0.00054414`) for `2025-10-19 00:00..23:00 UTC`. Mark price cannot be negative; this is corrupt source data. **Quarantine and record it with provenance; do NOT zero-fill, repair, or silently substitute.** Excluding `close<=0` (already required) removes exactly those 24 hours, so `S` is the clean intersection.
-- **The panel is still effectively balanced:** every 60/20/20 block and every leave-one-symbol-out fold contains all five symbols; the only effect of the XRP gap is that one UTC day is absent from the common support. There is **no degenerate-split risk**.
-- **Embargoed 60/20/20 split on `S` (168h purge), `|S| = 22,584`:** train ≈ 13,550 ts / val ≈ 4,517 ts / test ≈ 4,517 ts ≈ **22,585 test rows across all five symbols**; three chronological test blocks of ≈1,500 ts (≈7,500 rows) each, all five symbols present in every block.
-
-**Do NOT hard-code 22,608 and do NOT claim "all five identical." Recompute `S` from the cache (mark-price only) and freeze the real `|S| = 22,584`, the per-symbol counts (four at 22,608, XRPUSDT at 22,584), and the split sizes in the prereg.**
-
-**Independent re-verification recorded at 2026-11-27T02:56:07Z and carried forward unchanged at this 2026-11-27T03:09:26Z refresh (stdlib, mark-price-only, all three layouts, dedup by `open_time`, `close>0`, window 2024-04-01 00:00 .. 2026-10-31 23:00 UTC):** BNBUSDT=BTCUSDT=ETHUSDT=SOLUSDT=**22,608** clean 1h closes each; XRPUSDT=**22,584** (exactly 24 nonpositive closes, all on `2025-10-19`); all-five intersection **`|S| = 22,584`**. This reproduces the numbers above from the raw cache and supersedes every earlier `|S|=8976` / "BNBUSDT binds" / "all five identical 22,608" claim. The next agent must still recompute `S` in-session and freeze the exact value in the prereg; do not treat this note as a substitute for the in-session recompute.
-
-**Re-verified again at 2026-11-27T03:59:57Z (this refresh) with a from-scratch stdlib reader; `|S| = 22,584` reproduced exactly.** Load-bearing trap confirmed the hard way: a reader that only accepts a CSV whose *immediate* parent directory starts with `markPriceKlines-` silently drops the layout-1 months (`2024_04`..`2024_06`), because there the CSV sits one level deeper under a `<SYM>-1h-<date>/` subdir — that mistake yields a false `|S| = 20,400` and a false `min = 2024-07-01`. The correct rule (now frozen here) is: **a CSV is mark price iff ANY directory component of its path starts with `markPriceKlines-`** (walk to any depth), then dedup by `open_time` and drop `close<=0`. Use exactly this rule; do not re-discover the 20,400 artifact.
+The next agent must still recompute `S` in-session and freeze the exact value in the prereg; this note is not a substitute for the in-session recompute.
 
 ### Cache layout heterogeneity — the one rule the next agent MUST follow
 
-The mark-price 1h data is stored in **three different layouts** across the window, and the month directories ALSO contain a **separate regular-klines stream** that must NOT be confused with mark price:
+The mark-price 1h data is stored in **three layouts**, and the month dirs ALSO carry a **separate regular-klines stream** that must NOT be confused with mark price:
 
-1. `2024_04`..`2024_09`: extracted nested CSVs at `markPriceKlines-<date>/<SYM>-1h-<date>/<SYM>-1h-<date>.csv`.
-2. `2024_10`..`2024_12`: extracted CSVs at `markPriceKlines-<date>/<SYM>-1h-<date>.csv` (one level flatter; a same-day `.zip` duplicate also sits beside the `.csv`).
-3. `2025_01`..`2026_10`: extracted CSVs under `markPriceKlines-<date>/...` **plus** top-level `<SYM>-1h-<date>.zip` files.
+1. `2024_04`..`2024_09`: nested CSVs at `markPriceKlines-<date>/<SYM>-1h-<date>/<SYM>-1h-<date>.csv`.
+2. `2024_10`..`2024_12`: flatter CSVs at `markPriceKlines-<date>/<SYM>-1h-<date>.csv` (a same-day `.zip` duplicate also sits beside the `.csv`).
+3. `2025_01`..`2026_10`: CSVs under `markPriceKlines-<date>/...` **plus** top-level `<SYM>-1h-<date>.zip` files.
 
-**Critical:** the top-level `<SYM>-1h-<date>.zip` files are **regular klines (price)**, NOT mark price — verified: for `BNBUSDT 2025-01-01` the top-level zip close is `709.15170927` while the `markPriceKlines` CSV close is `709.01083122`. **Use ONLY `markPriceKlines-*` mark-price CSVs (any depth). Never fold the top-level `<SYM>-1h-*.zip` klines into the mark-price panel.** Dedup by `open_time` (ms) so the same-day `.zip`/`.csv` duplicates and any overlapping hours do not double-count (measured ~2,352 duplicate `open_time` overwrites per symbol across the full cache — dedup is mandatory).
+**Rule (frozen):** a CSV is mark price **iff ANY directory component of its path starts with `markPriceKlines-`** (walk to any depth), then dedup by `open_time` (ms) and drop `close<=0`. **Trap:** a reader that only accepts a CSV whose *immediate* parent starts with `markPriceKlines-` silently drops the layout-1 months and yields a false `|S| = 20,400` / false `min = 2024-07-01`. Do not re-discover the 20,400 artifact.
+
+**Critical:** the top-level `<SYM>-1h-<date>.zip` files are **regular klines (price), NOT mark price** (verified: `BNBUSDT 2025-01-01` top-level zip close `709.15170927` vs markPrice CSV close `709.01083122`). **Never fold top-level `<SYM>-1h-*.zip` klines into the mark-price panel.** Dedup by `open_time` is mandatory (~2,352 duplicate overwrites per symbol across the cache).
 
 ### Two verification-format facts the source registry MUST record
 
-- **`.sha256` sidecars are hash-only** (a single 64-hex line, no filename). `sha256sum -c <sidecar>` fails with "no properly formatted checksum lines." Verify each consumed file by computing `sha256sum <file>` and comparing the digest to the sidecar's single line (and to `research_state/cached_inputs_hashes.json`).
+- **`.sha256` sidecars are hash-only** (single 64-hex line, no filename). `sha256sum -c <sidecar>` fails; instead compute `sha256sum <file>` and compare the digest to the sidecar's single line AND to `research_state/cached_inputs_hashes.json`.
 - **`research_state/cached_inputs_hashes.json` is nested:** top-level `{count, derivation_notes, generated_at, hashes}` with **20,694 entries under `hashes`** keyed by repo-relative path. Look up `d["hashes"][path]`, not `path in d`.
 
-The prior quarantined attempts (`20261126T153717Z` → `handoff_archive/quarantine_20261126T163207Z/`, and `20261126T144850Z` → `handoff_archive/quarantine_20261126T144850Z/`) are invalid evidence — do not reuse their outputs. The recovery template at `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` compiles and is the correct starting point; **copy it into the fresh session and add the mark-price-only `S` filter (with the `close>0` / XRP 2025-10-19 quarantine) before pooling.**
-
-**Do not** zero-fill, silently substitute, re-download, or inspect outcomes before the prereg is frozen. The cache is sufficient as-is; no network and no package installation are required.
+Prior quarantined attempts (`20261126T153717Z` → `handoff_archive/quarantine_20261126T163207Z/`, and `20261126T144850Z` → `handoff_archive/quarantine_20261126T144850Z/`) are **invalid evidence — do not reuse their outputs.** The recovery template at `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` compiles and is the correct starting point; **copy it into the fresh session and add the mark-price-only `S` filter (with `close>0` / XRP 2025-10-19 quarantine) before pooling.** Do NOT zero-fill, silently substitute, re-download, or inspect outcomes before the prereg is frozen. The cache is sufficient as-is; no network and no package installation are required.
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T05:52:16Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T05:56:19Z)
 
 **EXECUTE `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` NOW under one fresh `session_<UTC>/` (id lexicographically > `20261126T153244Z`), using the corrected balanced common-support design in §0 and §3.** The repository name leads with **Funding-conditioned-volatility**, so the highest-value unfinished work is the pre-registered disjoint-cohort replication of the repo-name primary estimand: **next-24h mean log-realized-variance QLIKE, C2 versus B1**, on the untouched 2024-04 through 2026-10 cohort for `BNBUSDT`, `BTCUSDT`, `ETHUSDT`, `SOLUSDT`, `XRPUSDT`. This is sequential confirmatory look `k=2` with frozen `alpha_2 = 0.05/(2*3) = 0.008333`. The declared Holm secondary is the campaign-06 estimand: next-24h downside realized-semivariance level, judged by MSE. Do not substitute another estimand, cohort, threshold, or model search.
 
@@ -71,9 +60,9 @@ The prior quarantined attempts (`20261126T153717Z` → `handoff_archive/quaranti
 
 1. Create exactly one fresh `research_state/session_<UTC>/` whose id is lexicographically greater than `20261126T153244Z`. Do not reuse or cite any aborted attempt (the quarantined `20261126T153717Z` and `20261126T144850Z` attempts are invalid evidence).
 2. Copy `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` into that new session directory. Set `SESSION` to the fresh UTC id and `CAMPAIGN_START` to `20261126T153244Z`. Running it from the quarantine directory is invalid (wrong relative cache path); running the copied script from `research_state/session_<UTC>/` resolves `../data_cache` correctly.
-3. **Apply the §0 mark-price-only common-support filter to the aligned raw series before feature/target construction, not merely to the final pooled rows:** read ONLY `markPriceKlines-*` mark-price CSVs/ZIPs (any of the three layouts), dedup by `open_time`, drop `close<=0` (this removes the corrupt XRPUSDT 2025-10-19 day), then retain only rows whose timestamp `t` is in the all-five-symbol hourly intersection `S`. **Do not** read the top-level `<SYM>-1h-*.zip` klines. Recompute `S` from the cache; record `|S| = 22,584`, per-symbol 1h counts (four at 22,608; XRPUSDT 22,584; XRPUSDT binds by 24h on 2025-10-19), and the resulting train/val/test timestamp and row counts.
+3. **Apply the §0 mark-price-only common-support filter to the aligned raw series before feature/target construction, not merely to the final pooled rows:** read ONLY `markPriceKlines-*` mark-price CSVs/ZIPs (any of the three layouts, any depth), dedup by `open_time`, drop `close<=0` (removes the corrupt XRPUSDT 2025-10-19 day), then retain only rows whose timestamp `t` is in the all-five-symbol hourly intersection `S`. **Do not** read the top-level `<SYM>-1h-*.zip` klines. Recompute `S` from the cache; record `|S| = 22,584`, per-symbol 1h counts (four at 22,608; XRPUSDT 22,584; XRPUSDT binds by 24h on 2025-10-19), and the resulting train/val/test timestamp and row counts.
 4. Reuse `research_state/data_cache/<SYM>_<YYYY_MM>/` read-only. Verify every consumed file by computing its sha256 and comparing to the hash-only `.sha256` sidecar AND `research_state/cached_inputs_hashes.json["hashes"][path]`; record exact coverage, layout (which of the three layouts each month used), the XRPUSDT 2025-10-19 corrupt-day quarantine, and any shortfall. Do not zero-fill, silently substitute, re-download, or inspect outcomes before the prereg is frozen.
-5. Produce the complete artifact set in §2 under that one fresh session directory. Every file must be non-empty; every JSON must carry the real `session_id` and experiment id. No root-level `research_state/*.md` or `*.json` files: the root is at **exactly 500** md+json files (the enforced `ROOT_COUNT_CAP = 500`, **zero headroom** — a single root-level write makes 501 and fails the gate).
+5. Produce the complete artifact set in §2 under that one fresh session directory. Every file must be non-empty; every JSON must carry the real `session_id` and experiment id. No root-level `research_state/*.md` or `*.json` files (root is at **exactly 500**, zero headroom).
 6. Run the heavy evaluation and an independent stdlib recompute. The recompute must reproduce the verdict with `all_checks_match=true`; the evidence audit must have `audit_pass=true` and no unresolved blocker. A valid `NOT_SUPPORTED` result is acceptable; placeholders and fabricated agreement are not. The recompute must independently rebuild `S` (mark-price only, `close>0`, XRP 2025-10-19 excluded) and confirm the test set contains all five symbols with `n_test >= 500`.
 7. Only after the artifacts exist, update `research_state/experiment_frontier.json` and this handoff. Set rank-0 to `COMPLETED_VALIDATED`, record the reproduced verdict and completed session, demote campaign-07 to a non-zero rank, and promote the next materially distinct unfinished task without reopening a closed arm.
 8. Finish only when the verification in §4 passes. If any required artifact is missing or empty, the session is incomplete.
@@ -95,7 +84,7 @@ The prior quarantined attempts (`20261126T153717Z` → `handoff_archive/quaranti
 
 ## 3. FROZEN DESIGN — DO NOT RE-DERIVE OR THRESHOLD-SHOP
 
-1. **Cohort / support:** 2024-04-01 through 2026-10-31 UTC; exactly the five symbols above; **restricted to the mark-price common support `S`** = UTC hourly timestamps where all five symbols have a `markPriceKlines` close > 0 (the §0 correction; `|S| = 22,584` balanced-for-four / XRPUSDT-binds-by-24h at this refresh, to be recomputed and frozen in the prereg). This is disjoint from the 2021-2024 cohort used by campaigns 01–06.
+1. **Cohort / support:** 2024-04-01 through 2026-10-31 UTC; exactly the five symbols above; **restricted to the mark-price common support `S`** = UTC hourly timestamps where all five symbols have a `markPriceKlines` close > 0 (the §0 correction; `|S| = 22,584` balanced-for-four / XRPUSDT-binds-by-24h, to be recomputed and frozen in the prereg). Disjoint from the 2021-2024 cohort used by campaigns 01–06.
 2. **Primary target:** `y = log(RV_24h_next + 1e-09)` from one-hour mark-price log returns; metric is out-of-sample QLIKE.
 3. **Declared secondary:** `log(RV_minus_next24h + 1e-09)`; metric is MSE. The Holm family is exactly these two targets.
 4. **B1:** fixed signed-HAR history set used by campaigns 05/06: log RV1h/RV24h/RV168h plus log RV_plus/RV_minus at 24h/168h.
@@ -128,23 +117,14 @@ After the heavy session, the gate must report top-level `pass=true`, `reason_cod
 
 ---
 
-## 5. COMPLETED SESSION RECORD — `session_20261126T133828Z`
+## 5. COMPLETED SESSION RECORD — `session_20261126T133828Z` (do not re-run)
 
 **Campaign:** `FCLR-LIVE-ARCHIVE-06-20261126T083526Z`
 **Verdict:** `NOT_SUPPORTED` — C2 versus B1 relative test-MSE reduction `0.716%`, 95% block-bootstrap CI `[0.419%, 1.020%]`, below the frozen 2% floor.
 **Independent recompute:** `all_checks_match=true`; `n_test=35715`; `n_unique_timestamps=34872`.
 **Evidence audit:** `audit_pass=true`; `unresolved_blockers=[]`.
 
-Complete artifact set (under `research_state/session_20261126T133828Z/`; do not re-run campaign-06):
-
-- `fclr_live_archive06_source_registry_20261126T133828Z.{json,md}`
-- `fclr_live_archive06_prereg_20261126T133828Z.{json,md}`
-- `fclr_live_archive06_eval_20261126T133828Z.{py,json,md}`
-- `fclr_live_archive06_recompute_20261126T133828Z.{py,json}`
-- `fclr_live_archive06_evidence_audit_20261126T133828Z.{json,md}`
-- `evidence_audit_20261126T133828Z.{json,md}`
-- `trigger_check_20261126T133828Z.json`
-- `_headline_20261126T133828Z.json`
+Complete artifact set under `research_state/session_20261126T133828Z/`: `fclr_live_archive06_source_registry_20261126T133828Z.{json,md}`, `fclr_live_archive06_prereg_20261126T133828Z.{json,md}`, `fclr_live_archive06_eval_20261126T133828Z.{py,json,md}`, `fclr_live_archive06_recompute_20261126T133828Z.{py,json}`, `fclr_live_archive06_evidence_audit_20261126T133828Z.{json,md}`, `evidence_audit_20261126T133828Z.{json,md}`, `trigger_check_20261126T133828Z.json`, `_headline_20261126T133828Z.json`.
 
 ---
 
@@ -165,4 +145,4 @@ Complete artifact set (under `research_state/session_20261126T133828Z/`; do not 
 **Dominant limitation to disclose:** the mark-price cache is stored in three heterogeneous layouts, the month dirs also carry a separate regular-klines stream, and XRPUSDT 2025-10-19 has 24 negative (corrupt) mark-price closes — the recompute must use mark-price only, dedup by `open_time`, drop `close<=0`, and quarantine the XRP day; per-block + leave-one-symbol-out diagnostics remain mandatory.
 **Concrete falsification test:** C2 improves relative test QLIKE by at least 2% with the frozen uncertainty and Holm conditions on the untouched balanced mark-price cohort.
 
-**END OF HANDOFF — 2026-11-27T05:52:16Z**
+**END OF HANDOFF — 2026-11-27T05:56:19Z**
