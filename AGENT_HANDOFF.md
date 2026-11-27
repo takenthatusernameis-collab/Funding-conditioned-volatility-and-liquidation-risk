@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
 
-**Generated (UTC):** 2026-11-27T22:13:19Z
+**Generated (UTC):** 2026-11-27T23:03:47Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Single durable handoff for the next agentic work session.**
 
@@ -9,14 +9,19 @@
 > `handoff_archive/` to remove the multi-handoff bottleneck. Do not recreate them;
 > append to this file only.
 >
-> **CURATOR REFRESH 2026-11-27T22:13:19Z:** handoff re-verified green
+> **CURATOR REFRESH 2026-11-27T23:03:47Z:** handoff re-verified green
 > (`check_handoff_heavywork_gate.py` → `pass=true`, `reason_code=OK`, `failures=[]`,
 > `handoff_stale=false`, `handoff_markers_ok=true`,
-> `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-08-20261127T131654Z`). Inputs confirmed
-> present so the next session is NOT blocked: `research_state/data_cache/` holds all five
-> symbols 2024-01..2026-11 (markPrice/funding/premium/index), `cached_inputs_hashes.json`
-> present, and every campaign-07 template in `session_20261127T065600Z/` is non-empty.
-> Root `research_state/` md+json count is at the cap of 500 → all new artifacts go under one
+> `heavy_session_dir=research_state/session_20261127T065600Z`,
+> `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-08-20261127T131654Z`,
+> `live_archive.required=false` **by design** — the binder is ARMED, not inert: it flips to
+> `required=true` and fail-closed the instant any `session_<UTC>` with id
+> `> 20261127T131654Z` appears on disk, so a trigger-only / prose-only / audit-only /
+> prereg-only / verify-and-stop session cannot pass). Inputs confirmed present so the next
+> session is NOT blocked: `research_state/data_cache/` holds all five symbols
+> 2024-01..2026-11 (markPrice/funding/premium/index), `cached_inputs_hashes.json` present,
+> and every campaign-07 template in `session_20261127T065600Z/` is non-empty. Root
+> `research_state/` md+json count is at the cap of 500 → all new artifacts go under one
 > fresh `session_<UTC>/`. No campaign change, no token change, no grandfathered-id change.
 > No session is blocked; rank-0 FCLR-LIVE-ARCHIVE-08 remains the single repo-name-aligned
 > open path. The executor session (id > `20261127T131654Z`) must still produce the full
@@ -64,6 +69,14 @@ artifacts go under one fresh `research_state/session_<UTC>/`, never the root.**
    lexicographically **> `20261127T131654Z`**.
 5. **Prior "MONITOR ONLY / verify-and-stop" directives:** SUPERSEDED. Execute the campaign
    below to completion in one session; do not wait, probe, or idle.
+6. **False "design exhausted" signal.** `scripts/next_campaign_status.py` prints
+   "contiguous design exhausted" / "no disjoint 30-day block feasible" — that verdict is
+   scoped to the OLD disjoint-block design family (separate 127-day train + 30-day test
+   blocks). It does **NOT** apply to FCLR-LIVE-ARCHIVE-08, which uses the full balanced
+   common support `S` (`|S|=22608`, 2024-04..2026-10) with a single 60/20/20 + 168h embargo
+   chronological split and three contiguous test blocks carved from `S`. Do not re-derive
+   feasibility, do not declare the campaign blocked on that message, and do not switch
+   designs — execute campaign-08 exactly as frozen below.
 
 ---
 
@@ -114,12 +127,19 @@ All non-empty, under **one fresh** `research_state/session_<UTC>/` with id **> 2
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-**TIMESTAMP:** 2026-11-27T22:13:19Z
+**TIMESTAMP:** 2026-11-27T23:03:47Z
 **REPO-NAME PRIORITY:** the repository leads with *Funding-conditioned-volatility* AND
 *liquidation-risk*. Every volatility arm is terminally closed; the single highest-value
 unfinished, repo-name-aligned task is the funding-conditioned **liquidation-risk** Track-B
 modeled boundary-breach forecast (FCLR-LIVE-ARCHIVE-08). It is the ONLY task this session
 may execute.
+
+**FOCUS CAMPAIGN (repo-name priority, non-avoidance):** FCLR-LIVE-ARCHIVE-08 — the
+funding-conditioned liquidation-risk Track-B modeled boundary-breach forecast. This is the
+single focus campaign. The gate (`scripts/check_handoff_heavywork_gate.py`) binds every
+post-start session (id `> 20261127T131654Z`) to the full `fclr_live_archive08_*` artifact
+family plus `trigger_check_<UTC>.json`, so heavy work cannot be avoided, deferred, or
+reduced to prose-only / audit-only / prereg-only / trigger-only / verify-and-stop.
 
 **SESSION CONSTRAINT:** create `research_state/session_<UTC>/` with UTC **> 20261127T131654Z**
 (use the actual `date -u +%Y%m%dT%H%M%SZ` run start time, which will be later than
