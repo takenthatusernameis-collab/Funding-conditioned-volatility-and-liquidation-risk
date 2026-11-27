@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Durable Single Source of Truth for the Next Session
 
-**Generated (UTC):** 2026-11-27T06:03:18Z
+**Generated (UTC):** 2026-11-27T06:03:55Z
 **Repository priority (from repo name `Funding-conditioned-volatility-and-liquidation-risk`):** Funding-conditioned next-24h volatility forecasting is the single highest-value unfinished task. The repo name leads with **Funding-conditioned-volatility**, so the confirmatory campaign-07 contrast (C2 vs B1 on next-24h log-RV QLIKE, balanced mark-price disjoint 2024-04..2026-10 cohort) is the only task this session may execute.
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE` in `research_state/experiment_frontier.json`.
 **HEAD:** `e2e26c0c9` (verified this pass). **Working tree:** clean except the new `scripts/fclr_live_archive07_eval_ready.py` (the corrected base, see §0).
@@ -50,7 +50,7 @@ Prior quarantined attempts (`20261126T153717Z`, `20261126T144850Z`) are **invali
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T06:03:18Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T06:03:55Z)
 
 **NON-AVOIDANCE (machine-enforced):** `scripts/check_handoff_heavywork_gate.py` binds campaign-07 to the `fclr_live_archive07_*` artifact family plus `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json` in the newest session. A trigger-only, prose-only, audit-only, prereg-only, source-registry-only, verify-and-stop, or zero-byte-placeholder session fails closed. The gate is green now only because the newest on-disk session predates the campaign start; the first post-start session that lacks the full heavy set will fail closed. **This task message is the initial task for the next session — there is no other task. Do NOT write prose; run the eval.**
 
@@ -138,4 +138,4 @@ After the heavy session the gate must report top-level `pass=true`, `reason_code
 **Dominant limitation to disclose:** three heterogeneous cache layouts + a separate regular-klines stream + XRPUSDT 2025-10-19 corrupt day — the ready template handles all three (mark-price only, dedup `open_time`, `close>0`, quarantine); per-block + leave-one-symbol-out diagnostics remain mandatory.
 **Concrete falsification test:** C2 improves relative test QLIKE by ≥2% with the frozen uncertainty and Holm conditions on the untouched balanced mark-price cohort.
 
-**END OF HANDOFF — 2026-11-27T06:03:18Z**
+**END OF HANDOFF — 2026-11-27T06:03:55Z**
