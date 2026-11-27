@@ -1,0 +1,27 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-07",
+  "session_id": "20261127T065600Z",
+  "artifact_id": "fclr_live_archive07_recompute_20261127T065600Z",
+  "generated_at": "2026-11-27T07:01:36Z",
+  "method": "independent stdlib recompute: own cache reader, own panel build, train-only standardization + Cholesky ridge OLS",
+  "n_common": 22608,
+  "n_test": 23260,
+  "n_unique_timestamps": 22416,
+  "qlike_B1": 0.4266689382671831,
+  "qlike_C2": 0.4296723953531042,
+  "relative_qlike_reduction_C2_vs_B1": -0.00703931506736566,
+  "verdict": "NOT_SUPPORTED",
+  "checks": {
+    "n_common_match": true,
+    "n_test_match": true,
+    "n_unique_timestamps_match": true,
+    "qlike_B1_match": true,
+    "qlike_C2_match": true,
+    "rel_qlike_match": true,
+    "verdict_match": true
+  },
+  "all_checks_match": true,
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true
+}

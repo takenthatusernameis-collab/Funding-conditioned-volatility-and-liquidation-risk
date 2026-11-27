@@ -3,16 +3,51 @@
     "rank": 0,
     "status": "READY_EXECUTE",
     "program_status": "ACTIVE",
+    "task": "FCLR-LIVE-ARCHIVE-08",
+    "generated": "20261127T070243Z",
+    "refreshed": "2026-11-27T07:02:43Z",
+    "last_checked": "2026-11-27T07:02:43Z",
+    "last_verdict": null,
+    "next_action_heavy": "EXECUTE FCLR-LIVE-ARCHIVE-08 (repo-name secondary: liquidation-risk) under one fresh research_state/session_<UTC>/ (id lexicographically > 20261127T065600Z) on the SAME frozen balanced mark-price common support S (|S|=22608, 2024-04..2026-10, five symbols) and the SAME 60/20/20 + 168h embargo chronological split. Track-B modeled boundary-breach forecast (NOT an overlay): pre-registered hypothetical long/short liquidation boundaries from disclosed constant margin/leverage scenarios; target = whether the future mark-price path breaches the boundary within a fixed horizon; separate long/short labels; compare a funding-conditioned model vs a mark-price-only baseline by out-of-sample AUC / log-loss / Brier with >=2000 block-bootstrap and leave-one-symbol-out; independent stdlib recompute all_checks_match=true. Stdlib only, read-only cache, no network. Then update handoff to LEAD with FCLR-LIVE-ARCHIVE-08 and re-run the handoff heavy-work gate until green.",
+    "next_unfinished_task": "Produce the complete fclr_live_archive08_{source_registry,prereg,eval,recompute,evidence_audit}_<UTC> set + evidence_audit_<UTC> alias + trigger_check_<UTC>.json under one fresh session, with all_checks_match=true, then set rank-0 to COMPLETED_VALIDATED.",
+    "resume_triggers": [],
+    "trigger_status": {},
+    "blockers": "None external. Forecast gate (campaign-07) did NOT pass, so per RESEARCH_PROMPT section 9 NO risk overlay is authorized; campaign-08 is forecast validation of a modeled boundary-breach target, which is permitted. Reuse the campaign-07 mark-price cache read-only; do NOT re-download.",
+    "phases": [
+      {
+        "phase": 1,
+        "name": "source_registry_and_prereg",
+        "status": "PENDING",
+        "detail": "outcome-blind source registry (mark-price-only S, |S|=22608, sha256) + frozen prereg (margin/leverage scenarios, horizon, long/short labels)"
+      },
+      {
+        "phase": 2,
+        "name": "heavy_boundary_breach_eval",
+        "status": "PENDING",
+        "detail": "3-block out-of-sample AUC/log-loss/Brier, funding-conditioned vs mark-price-only, >=2000 block bootstrap + leave-one-symbol-out"
+      },
+      {
+        "phase": 3,
+        "name": "independent_recompute_and_audit",
+        "status": "PENDING",
+        "detail": "separate-code-path stdlib recompute all_checks_match=true + evidence audit audit_pass=true + trigger check"
+      }
+    ]
+  },
+  {
+    "rank": 1,
+    "status": "COMPLETED_VALIDATED",
+    "program_status": "ACTIVE",
     "task": "FCLR-LIVE-ARCHIVE-07-20261126T153244Z",
     "generated": "20261126T153244Z",
-    "refreshed": "2026-11-27T01:00:04Z",
-    "last_checked": "2026-11-27T01:00:04Z",
-    "last_verdict": null,
-    "next_action_heavy": "EXECUTE FCLR-LIVE-ARCHIVE-07 under one fresh session_<UTC>/ (id > 20261126T153244Z) on the CORRECTED BALANCED common-support design: restrict the pooled panel to S = UTC hourly timestamps where ALL FIVE symbols (BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT/XRPUSDT) have a markPriceKlines close>0 (recomputed mark-price-only on the current cache, 2024-04..2026-10 window: |S|=22584 - BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT each 22608 1h closes but XRPUSDT 22584, binds by 24h; XRPUSDT 2025-10-19 has 24 negative/corrupt mark-price closes -> quarantine, do NOT zero-fill; the earlier |S|=8976 and 'all five identical 22608' figures were measurement artifacts and are SUPERSEDED), THEN apply the frozen 60/20/20 by unique UTC timestamp + 168h embargo + 3 chronological test blocks (train~13550/val~4517/test~4517 ts ~22585 test rows across all 5 symbols, all symbols in every block). Pre-registered sequential confirmatory look k=2 (alpha_2=0.008333) of the repo-name primary estimand (next-24h mean log-RV QLIKE, C2 vs B1, floor 2%) with the campaign-06 downside realized-semivariance level (MSE) as the declared Holm secondary. Stdlib only. Recovered template: handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py (set SESSION; add the mark-price-only S filter before pooling; add recompute+evidence_audit+trigger). Produce the complete fclr_live_archive07_* heavy set + independent recompute (rebuild S; all_checks_match=true) + evidence audit + gate alias + trigger check; then sync this frontier and run the handoff heavy-work gate until green.",
+    "refreshed": "2026-11-27T07:02:43Z",
+    "last_checked": "2026-11-27T07:02:43Z",
+    "last_verdict": "NOT_SUPPORTED",
+    "next_action_heavy": "DONE: campaign-07 executed in session_20261127T065600Z; verdict NOT_SUPPORTED (C2 vs B1 relative test-QLIKE reduction -0.704%, 95% CI [-1.218%,-0.190%], floor +2%); independent stdlib recompute all_checks_match=true; |S|=22608 (XRPUSDT 2025-10-19 corrupt CSV dropped by close>0, valid ZIP copy restores full support).",
     "next_unfinished_task": "Produce the complete fclr_live_archive07_{source_registry,prereg,eval,recompute,evidence_audit}_<UTC> artifact set plus evidence_audit_<UTC> alias and trigger_check_<UTC>.json under one fresh research_state/session_<UTC>/ (id > 20261126T153244Z), on the common support S, with all_checks_match=true from an independent stdlib recompute that rebuilds S and confirms all five symbols in every block/fold and n_test>=500, then set rank-0 to COMPLETED_VALIDATED with the reproduced verdict.",
     "resume_triggers": [],
     "trigger_status": {},
-    "blockers": "None external. BOTTLENECK RESOLVED by direct cache measurement at 2026-11-27T01:00:04Z: the earlier |S|=8976 / 'BNBUSDT binds' / 'degenerate BTCUSDT-only test block' claim AND the later 'all five identical 22608 / none binds' claim were both MEASUREMENT ARTIFACTS, not data properties. Correct mark-price-only recompute (all three layouts, deduped by open_time, close>0, 2024-04-01..2026-10-31 window) gives |S|=22584: BNBUSDT/BTCUSDT/ETHUSDT/SOLUSDT each 22608 but XRPUSDT 22584 (binds by 24h; XRPUSDT 2025-10-19 has 24 negative/corrupt mark-price closes -> quarantine, do NOT zero-fill); still effectively balanced (all five symbols in every block/fold), no degenerate-split risk. The ONE real hazard is layout heterogeneity: (1) 2024_04..09 nested extracted CSVs under markPriceKlines-<date>/<SYM>-1h-<date>/; (2) 2024_10..12 flatter markPriceKlines-<date>/<SYM>-1h-<date>.csv; (3) 2025_01+ extracted markPriceKlines CSVs PLUS top-level <SYM>-1h-<date>.zip that are REGULAR KLINES (verified different values), NOT mark price. Use ONLY markPriceKlines-* CSVs (any depth); NEVER fold the top-level <SYM>-1h-*.zip klines into the mark-price panel; dedup by open_time. Do NOT hard-code 8976 or 22608. Sidecars are hash-only (verify by computing sha256, not sha256sum -c); cached_inputs_hashes.json nests 20694 hashes under d['hashes'][path]. Stdlib only: numpy/pandas/pyarrow are NOT installed and package installation is forbidden; use the recovered session_20261126T144850Z template (now at handoff_archive/quarantine_20261126T144850Z/) or the session_20261126T082429Z stdlib template, not the fclr_volbroad01_* template. Root research_state is at the 500-file cap: no new root-level md/json files. Source verification (per-file hash-only .sha256 + cached_inputs_hashes.json) remains a required phase; do not call the cache fully verified until the source registry records it.",
+    "blockers": "None. Template QLIKE defect corrected (standard non-negative QLIKE); |S|=22608 supersedes 22584.",
     "evidence": {
       "source": "https://data.binance.vision/ (verified on-disk cache; no network needed)",
       "cache": "research_state/data_cache/{BNBUSDT,BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT}_{2024_04..2026_10}/ (155 symbol-month dirs = 5 symbols x 31 months; funding zips 2024-04..2026-10; klines/index/mark/premium daily zips 2024-01..2026-11 with per-file .sha256 sidecars)",
@@ -73,10 +108,11 @@
         "status": "NOT_STARTED",
         "claim": "Heavy 3-block evaluation on the common support S, independent stdlib recompute that rebuilds S (all_checks_match=true, all five symbols in every block/fold, n_test>=500), evidence audit, gate alias, and trigger check under one fresh session_<UTC>/."
       }
-    ]
+    ],
+    "last_completed_session": "20261127T065600Z"
   },
   {
-    "rank": 1,
+    "rank": 2,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIVE-ARCHIVE-06-20261126T083526Z",
@@ -143,7 +179,7 @@
     "completed_utc": "2026-11-26T13:45:19Z"
   },
   {
-    "rank": 16,
+    "rank": 3,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIVE-ARCHIVE-05-20261126T072336Z",
@@ -194,7 +230,7 @@
     "completed_utc": "2026-11-26T08:33:00Z"
   },
   {
-    "rank": 14,
+    "rank": 4,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIVE-ARCHIVE-04-20261126T061929Z",
@@ -239,7 +275,7 @@
     "completed_utc": "2026-11-26T07:01:00Z"
   },
   {
-    "rank": 15,
+    "rank": 5,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIVE-ARCHIVE-03-20261126T042519Z",
@@ -319,7 +355,7 @@
     "completed_utc": "2026-11-26T05:23:00Z"
   },
   {
-    "rank": 1,
+    "rank": 6,
     "status": "COMPLETED_VALIDATED",
     "program_status": "ACTIVE",
     "task": "FCLR-LIVE-ARCHIVE-01-20261125T074500Z",
@@ -399,7 +435,7 @@
     "completed_utc": "2026-11-26T04:25:19Z"
   },
   {
-    "rank": 2,
+    "rank": 7,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-02-20261125T054500Z",
@@ -462,7 +498,7 @@
     "completed_utc": "20261125T06:00:00Z"
   },
   {
-    "rank": 3,
+    "rank": 8,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-JUMP-04-20261125T045000Z",
@@ -523,7 +559,7 @@
     "completed_utc": "20261125T054500Z"
   },
   {
-    "rank": 4,
+    "rank": 9,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-JUMP-03-20261125T034400Z",
@@ -583,7 +619,7 @@
     "completed_utc": "20261125T045000Z"
   },
   {
-    "rank": 5,
+    "rank": 10,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-JUMP-02-20261125T033537Z",
@@ -642,7 +678,7 @@
     "completed_utc": "2026-11-25T03:44:00Z"
   },
   {
-    "rank": 6,
+    "rank": 11,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-JUMP-01-20261124T223000Z",
@@ -702,7 +738,7 @@
     "completed_utc": "2026-11-25T03:35:37Z"
   },
   {
-    "rank": 7,
+    "rank": 12,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-STRESS-01-20261124T213000Z",
@@ -761,7 +797,7 @@
     "completed_utc": "20261124T222500Z"
   },
   {
-    "rank": 8,
+    "rank": 13,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-CORR-01-20261124T180000Z",
@@ -820,7 +856,7 @@
     "superseded_utc": "2026-11-24T21:28:00Z"
   },
   {
-    "rank": 9,
+    "rank": 14,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-VOL-BROAD-01-20261124T035500Z",
@@ -938,10 +974,10 @@
       "research_state/session_20261123T085507Z/"
     ],
     "completed_utc": "2026-11-24T01:51:14Z",
-    "rank": 10
+    "rank": 15
   },
   {
-    "rank": 11,
+    "rank": 16,
     "status": "SUPERSEDED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIQ-RISK-PROGRAM-CLOSURE-01-20261124T025653Z",
@@ -993,7 +1029,7 @@
     "superseded_utc": "2026-11-24T03:56:48Z"
   },
   {
-    "rank": 12,
+    "rank": 17,
     "status": "COMPLETED_VALIDATED",
     "program_status": "COMPLETE",
     "task": "FCLR-LIQ-XSEC-BROAD-01-20261123T080000Z",
@@ -1079,7 +1115,7 @@
     "superseded_by": "FCLR-LIQ-XSEC-BROAD-TS-01-20261123T135825Z"
   },
   {
-    "rank": 13,
+    "rank": 18,
     "status": "SUPERSEDED_TERMINAL",
     "program_status": "COMPLETE",
     "task": "FCLR-TRACKA-SOURCE-AUDIT-01-20261122T225107Z",

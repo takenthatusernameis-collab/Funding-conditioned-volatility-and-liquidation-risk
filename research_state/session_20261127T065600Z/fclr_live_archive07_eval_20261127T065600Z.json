@@ -1,0 +1,203 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-07",
+  "campaign": "FCLR-LIVE-ARCHIVE-07-20261126T153244Z",
+  "session_id": "20261127T065600Z",
+  "session_utc": "20261127T065600Z",
+  "generated_at": "2026-11-27T06:59:05Z",
+  "source": "BINANCE_PUBLIC_ARCHIVE_READ_ONLY_CACHE",
+  "symbols": [
+    "BNBUSDT",
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "months": "2024-04..2026-10 (31 months)",
+  "n_symbols": 5,
+  "common_support": {
+    "definition": "UTC hourly timestamps where all five symbols have markPriceKlines close>0",
+    "n_common": 22608,
+    "per_symbol_mark_raw": {
+      "BNBUSDT": 22608,
+      "BTCUSDT": 22608,
+      "ETHUSDT": 22608,
+      "SOLUSDT": 22608,
+      "XRPUSDT": 22608
+    },
+    "per_symbol_rows": {
+      "BNBUSDT": 22416,
+      "BTCUSDT": 22416,
+      "ETHUSDT": 22416,
+      "SOLUSDT": 22416,
+      "XRPUSDT": 22416
+    },
+    "layout_notes": {
+      "BNBUSDT": {
+        "layouts": [
+          "flat",
+          "nested"
+        ],
+        "n_mark_raw": 22608,
+        "n_in_common": 22608
+      },
+      "BTCUSDT": {
+        "layouts": [
+          "flat",
+          "nested"
+        ],
+        "n_mark_raw": 22608,
+        "n_in_common": 22608
+      },
+      "ETHUSDT": {
+        "layouts": [
+          "flat",
+          "nested"
+        ],
+        "n_mark_raw": 22608,
+        "n_in_common": 22608
+      },
+      "SOLUSDT": {
+        "layouts": [
+          "flat",
+          "nested"
+        ],
+        "n_mark_raw": 22608,
+        "n_in_common": 22608
+      },
+      "XRPUSDT": {
+        "layouts": [
+          "flat",
+          "nested"
+        ],
+        "n_mark_raw": 22608,
+        "n_in_common": 22608
+      }
+    }
+  },
+  "n_train": 66405,
+  "n_val": 22415,
+  "n_test": 23260,
+  "n_unique_timestamps": 22416,
+  "embargo_hours": 168,
+  "splits": "60/20/20 by unique UTC timestamp on S; 7-day (168h) purge/embargo; test->3 chronological blocks",
+  "models": [
+    "B1",
+    "C2"
+  ],
+  "target": "next-24h mean log realized variance log(RV_24h_next + eps)",
+  "eps": 1e-09,
+  "alpha_2_sequential_look_k2": 0.008333333333333333,
+  "b1_features": [
+    "log RV1h",
+    "log RV24h",
+    "log RV168h",
+    "log RV_plus24",
+    "log RV_minus24",
+    "log RV_plus168",
+    "log RV_minus168"
+  ],
+  "c2_features": [
+    "B1 (7)",
+    "signed funding(24h)",
+    "trailing 90d |funding| pct",
+    "mark/index premium",
+    "mark/EMA24 distance"
+  ],
+  "secondary_target": "next-24h downside realized-semivariance level log(RV_minus+eps), MSE",
+  "secondary_holm_family": "2 (primary QLIKE + secondary downside-semivariance MSE)",
+  "solver": "deterministic stdlib OLS (pivoted Gauss-Jordan normal equations, train-only)",
+  "materiality_floor": 0.02,
+  "metrics": {
+    "B1": {
+      "qlike": 0.4266689382122256,
+      "mse": 0.7377058033086763,
+      "r2": 0.29083207293912516,
+      "sse": 17159.03698495981,
+      "sst": 24196.0138497449,
+      "n": 23260
+    },
+    "C2": {
+      "qlike": 0.429672395405718,
+      "mse": 0.7316782673013476,
+      "r2": 0.29662643594458127,
+      "sse": 17018.836497429344,
+      "sst": 24196.0138497449,
+      "n": 23260
+    }
+  },
+  "relative_qlike_reduction_C2_vs_B1": -0.007039315320391223,
+  "downside_mse_B1": 1.861493558245828,
+  "downside_mse_C2": 1.838408211274637,
+  "relative_downside_mse_reduction": 0.012401518591848112,
+  "secondary_direction": "consistent",
+  "per_block": {
+    "B1": {
+      "qlike": [
+        0.4271078960229965,
+        0.42709885947966125,
+        0.4258000025162212
+      ]
+    },
+    "C2": {
+      "qlike": [
+        0.43003107287743864,
+        0.43013876761187236,
+        0.42884729946479255
+      ]
+    }
+  },
+  "leave_one_symbol_out": {
+    "BNBUSDT": {
+      "n": 4652,
+      "qlike_B1": 0.3381862615773132,
+      "qlike_C2": 0.3337076711226823,
+      "rel_qlike_C2_vs_B1": 0.013242969817113747
+    },
+    "BTCUSDT": {
+      "n": 4652,
+      "qlike_B1": 0.4110390797692108,
+      "qlike_C2": 0.40951318838977246,
+      "rel_qlike_C2_vs_B1": 0.003712278113056961
+    },
+    "ETHUSDT": {
+      "n": 4652,
+      "qlike_B1": 0.57310515415353,
+      "qlike_C2": 0.5773875349716348,
+      "rel_qlike_C2_vs_B1": -0.007472242723815238
+    },
+    "SOLUSDT": {
+      "n": 4652,
+      "qlike_B1": 0.33181363635727706,
+      "qlike_C2": 0.3369431484750268,
+      "rel_qlike_C2_vs_B1": -0.015459015410164173
+    },
+    "XRPUSDT": {
+      "n": 4652,
+      "qlike_B1": 0.49916669171821254,
+      "qlike_C2": 0.5150594090272079,
+      "rel_qlike_C2_vs_B1": -0.03183849718475822
+    }
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20261126,
+    "block_rows": 24,
+    "mean_diff_qlike_B1_minus_C2": -0.002982024905471675,
+    "mean_rel_qlike_reduction": -0.00698908366277278,
+    "ci95_abs_diff": [
+      -0.005196532017517237,
+      -0.0008093453527510192
+    ],
+    "ci95_relative_qlike_reduction": [
+      -0.012179307074217988,
+      -0.0018968930715749688
+    ]
+  },
+  "gaps": [],
+  "verdict": "NOT_SUPPORTED",
+  "verdict_reason": "C2 vs B1 relative test-QLIKE reduction < 2% floor or CI includes 0",
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true,
+  "outcome_data_inspected_before_freeze": false
+}

@@ -1,0 +1,70 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-07-20261126T153244Z",
+  "session_utc": "20261127T065600Z",
+  "artifact_id": "fclr_live_archive07_source_registry_20261127T065600Z",
+  "generated_at": "2026-11-27T06:59:05Z",
+  "experiment_id": "FCLR-LIVE-ARCHIVE-07",
+  "source": {
+    "id": "binance_public_archive",
+    "type": "market_data_archive",
+    "venue": "binance",
+    "access": "unauthenticated",
+    "auth_required": false,
+    "payment_required": false,
+    "signup_required": false,
+    "access_method": "HTTPS GET (no API key, no signed request, no account)"
+  },
+  "datasets": [
+    {
+      "kind": "futures_um_daily_markPriceKlines_1h",
+      "layouts": [
+        "nested_csv_2024_04_2024_09",
+        "flat_csv_2024_10_2024_12",
+        "csv_or_zip_2025_01_2026_10"
+      ],
+      "rule": "mark price iff any path component starts with 'markPriceKlines-'; dedup open_time; close>0",
+      "track": "target + RV features + EMA distance"
+    },
+    {
+      "kind": "futures_um_daily_indexPriceKlines_1h",
+      "rule": "index price iff any path component starts with 'indexPriceKlines-'; used only for mark/index premium",
+      "track": "mark/index premium"
+    },
+    {
+      "kind": "futures_um_monthly_fundingRate",
+      "path_template": "research_state/data_cache/{SYM}_{YYYY_MM}/{SYM}-fundingRate-YYYY-MM.{zip,csv}",
+      "track": "signed funding + 90d |funding| pct"
+    }
+  ],
+  "cohort": {
+    "symbols": [
+      "BNBUSDT",
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "XRPUSDT"
+    ],
+    "months": "2024-04..2026-10 (31 months)",
+    "selection": "coverage-only, outcome-blind (frozen, disjoint from 2021-2024 cohort)",
+    "common_support_n": 22608
+  },
+  "cache": {
+    "root": "research_state/data_cache/<SYM>_<YYYY_MM>/",
+    "access": "read-only reuse; no re-download",
+    "n_symbol_month_dirs": 155,
+    "n_gaps": 0
+  },
+  "hash_registry": "research_state/cached_inputs_hashes.json (20,694 entries)",
+  "sidecar_verification": "per-file .sha256 sidecars present; gaps disclosed in eval output",
+  "quarantine": "XRPUSDT 2025-10-19 mark-price day has 24 negative closes; dropped by close>0; NOT zero-filled",
+  "admissibility": {
+    "unauthenticated": true,
+    "no_credentials": true,
+    "no_payment": true,
+    "historical_depth": "31 months, multi-regime",
+    "schema_verified": true,
+    "admissible_for_research": true,
+    "admissible_for_track_a_observed_liquidations": false
+  },
+  "terms": "Binance public market data; unauthenticated; research use."
+}

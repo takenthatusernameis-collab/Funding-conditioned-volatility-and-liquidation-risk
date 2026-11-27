@@ -1,0 +1,12 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-07",
+  "session_id": "20261127T065600Z",
+  "artifact_id": "trigger_check_20261127T065600Z",
+  "generated_at": "2026-11-27T07:01:46Z",
+  "external_trigger_required": false,
+  "trigger_source": "BINANCE_PUBLIC_ARCHIVE",
+  "fired": false,
+  "reason": "free unauthenticated public archive already cached and checksum-verified; campaign-07 needs no network/new source",
+  "network": false,
+  "stdlib_only": true
+}
