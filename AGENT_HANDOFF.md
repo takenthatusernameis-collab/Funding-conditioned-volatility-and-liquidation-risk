@@ -1,10 +1,10 @@
 # AGENT HANDOFF — Durable Single Source of Truth for the Next Session
 
-**Generated (UTC):** 2026-11-27T14:27:16Z
+**Generated (UTC):** 2026-11-27T14:29:35Z
 **Repository priority (from repo name `Funding-conditioned-volatility-and-liquidation-risk`):** the **funding-conditioned-volatility** half was the primary estimand and is **CLOSED with a real verdict** (campaign-07, `NOT_SUPPORTED`, independently reproduced). The next highest-value unfinished work is the **liquidation-risk** half of the repo name: a Track-B modeled boundary-breach forecast (campaign-08). This is the ONLY task the next session may execute.
 **Active rank-0:** `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` — status `READY_EXECUTE` in `research_state/experiment_frontier.json` (program_status `ACTIVE`).
 **HEAD:** `87afd2643`; this handoff refresh (AGENT_HANDOFF.md) is the only pending edit. **Working tree:** clean. The last COMPLETE heavy session on disk is `research_state/session_20261127T065600Z/` (campaign-07, full 15-artifact set). The newest on-disk session id is `20261127T065600Z`.
-**Gate (verified this pass, 2026-11-27T14:19:08Z):** top-level `pass=true`, `reason_code=OK`, `failures=[]`; `live_archive.required=false` (grandfathered: newest on-disk session `20261127T065600Z` ≤ campaign-08 start `20261127T131654Z`), `live_archive.pass=true`, `live_archive.campaign_id="FCLR-LIVE-ARCHIVE-08-20261127T131654Z"`, `artifact_family=null`, empty missing/empty lists. The gate flips to `live_archive.required=true` and demands the full `fclr_live_archive08_*` set the instant a session with id > `20261127T131654Z` exists (see §1). Six-module unittest suite = **122 tests OK**; `py_compile` of the campaign-07 template OK; `experiment_frontier.json` valid JSON; `git diff --check` clean. Root `research_state/` is at **exactly 500** md+json files (zero headroom) — do NOT add any root-level `research_state/*.md`/`*.json` (one root write makes 501 and fails the gate).
+**Gate (re-verified this pass, 2026-11-27T14:29:35Z):** top-level `pass=true`, `reason_code=OK`, `failures=[]`; `live_archive.required=false` (grandfathered: newest on-disk session `20261127T065600Z` ≤ campaign-08 start `20261127T131654Z`), `live_archive.pass=true`, `live_archive.campaign_id="FCLR-LIVE-ARCHIVE-08-20261127T131654Z"`, `artifact_family=null`, empty missing/empty lists. The gate flips to `live_archive.required=true` and demands the full `fclr_live_archive08_*` set the instant a session with id > `20261127T131654Z` exists (see §1). Six-module unittest suite = **122 tests OK**; `py_compile` of the campaign-07 template OK; `experiment_frontier.json` valid JSON; `git diff --check` clean. Root `research_state/` is at **exactly 500** md+json files (zero headroom) — do NOT add any root-level `research_state/*.md`/`*.json` (one root write makes 501 and fails the gate).
 
 > **This file is the ONLY durable handoff.** Do not create a root `INITIAL_TASK_MESSAGE_*` file, a second handoff, or any root-level `research_state/*.md`/`*.json`. Read §1 and execute it.
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T14:27:16Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T14:29:35Z)
 
 **NON-AVOIDANCE (machine-enforced):** `scripts/check_handoff_heavywork_gate.py` binds the active live-archive campaign to the `fclr_live_archive08_*` artifact family plus `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json` in the newest session. A trigger-only, prose-only, audit-only, prereg-only, source-registry-only, verify-and-stop, or zero-byte-placeholder session **fails closed**. **This task message is the initial task for the next session — there is no other task. Do NOT write prose; run the eval to completion.**
 
@@ -113,4 +113,4 @@ After the heavy session the gate must report top-level `pass=true`, `reason_code
 **Dominant limitation to disclose:** three heterogeneous cache layouts + a separate regular-klines stream + XRPUSDT 2025-10-19 corrupt CSV (valid ZIP restores support) — the template handles all of these (mark-price only, dedup `open_time`, `close>0`); per-block + leave-one-symbol-out diagnostics remain mandatory.
 **Concrete falsification test:** the funding-conditioned model improves out-of-sample boundary-breach discrimination (AUC / log-loss / Brier) over the mark-price-only baseline with the frozen uncertainty on the untouched balanced mark-price cohort.
 
-**END OF HANDOFF — 2026-11-27T14:27:16Z**
+**END OF HANDOFF — 2026-11-27T14:29:35Z**
