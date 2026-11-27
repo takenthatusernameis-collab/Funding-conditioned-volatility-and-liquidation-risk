@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
 
-**Generated (UTC):** 2026-11-27T22:12:55Z
+**Generated (UTC):** 2026-11-27T22:13:19Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Single durable handoff for the next agentic work session.**
 
@@ -9,7 +9,7 @@
 > `handoff_archive/` to remove the multi-handoff bottleneck. Do not recreate them;
 > append to this file only.
 >
-> **CURATOR REFRESH 2026-11-27T22:12:55Z:** handoff re-verified green
+> **CURATOR REFRESH 2026-11-27T22:13:19Z:** handoff re-verified green
 > (`check_handoff_heavywork_gate.py` → `pass=true`, `reason_code=OK`, `failures=[]`,
 > `handoff_stale=false`, `handoff_markers_ok=true`,
 > `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-08-20261127T131654Z`). Inputs confirmed
@@ -114,7 +114,7 @@ All non-empty, under **one fresh** `research_state/session_<UTC>/` with id **> 2
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-**TIMESTAMP:** 2026-11-27T22:12:55Z
+**TIMESTAMP:** 2026-11-27T22:13:19Z
 **REPO-NAME PRIORITY:** the repository leads with *Funding-conditioned-volatility* AND
 *liquidation-risk*. Every volatility arm is terminally closed; the single highest-value
 unfinished, repo-name-aligned task is the funding-conditioned **liquidation-risk** Track-B
@@ -241,3 +241,5 @@ missing/empty artifact lists for the `fclr_live_archive08_*` family.
 **This handoff is durable and machine-actionable. The next session MUST execute the full
 FCLR-LIVE-ARCHIVE-08 artifact set in a single fresh session with id > 20261127T131654Z.
 No partial, deferred, or prose-only work will pass the gate.**
+
+(End of file)
