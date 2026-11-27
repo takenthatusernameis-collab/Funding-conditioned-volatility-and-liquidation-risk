@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
 
-**Generated (UTC):** 2026-11-27T22:09:59Z
+**Generated (UTC):** 2026-11-27T22:11:49Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Single durable handoff for the next agentic work session.**
 
@@ -8,6 +8,13 @@
 > (`AGENT_HANDOFF_20261127T182958Z.md`, `_183426Z.md`, `_220239Z.md`) were moved to
 > `handoff_archive/` to remove the multi-handoff bottleneck. Do not recreate them;
 > append to this file only.
+>
+> **CURATOR REFRESH 2026-11-27T22:11:49Z:** handoff re-verified green
+> (`check_handoff_heavywork_gate.py` → `pass=true`, `reason_code=OK`, `failures=[]`,
+> `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-08-20261127T131654Z`). No campaign change,
+> no token change, no grandfathered-id change. No session is blocked; rank-0
+> FCLR-LIVE-ARCHIVE-08 remains the single repo-name-aligned open path. The executor
+> session (id > `20261127T131654Z`) must still produce the full artifact set below.
 
 ---
 
@@ -101,7 +108,7 @@ All non-empty, under **one fresh** `research_state/session_<UTC>/` with id **> 2
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-**TIMESTAMP:** 2026-11-27T22:09:59Z
+**TIMESTAMP:** 2026-11-27T22:11:49Z
 **REPO-NAME PRIORITY:** the repository leads with *Funding-conditioned-volatility* AND
 *liquidation-risk*. Every volatility arm is terminally closed; the single highest-value
 unfinished, repo-name-aligned task is the funding-conditioned **liquidation-risk** Track-B
