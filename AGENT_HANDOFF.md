@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
 
-**Generated (UTC):** 2026-11-27T22:11:49Z
+**Generated (UTC):** 2026-11-27T22:12:55Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Single durable handoff for the next agentic work session.**
 
@@ -9,12 +9,18 @@
 > `handoff_archive/` to remove the multi-handoff bottleneck. Do not recreate them;
 > append to this file only.
 >
-> **CURATOR REFRESH 2026-11-27T22:11:49Z:** handoff re-verified green
+> **CURATOR REFRESH 2026-11-27T22:12:55Z:** handoff re-verified green
 > (`check_handoff_heavywork_gate.py` → `pass=true`, `reason_code=OK`, `failures=[]`,
-> `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-08-20261127T131654Z`). No campaign change,
-> no token change, no grandfathered-id change. No session is blocked; rank-0
-> FCLR-LIVE-ARCHIVE-08 remains the single repo-name-aligned open path. The executor
-> session (id > `20261127T131654Z`) must still produce the full artifact set below.
+> `handoff_stale=false`, `handoff_markers_ok=true`,
+> `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-08-20261127T131654Z`). Inputs confirmed
+> present so the next session is NOT blocked: `research_state/data_cache/` holds all five
+> symbols 2024-01..2026-11 (markPrice/funding/premium/index), `cached_inputs_hashes.json`
+> present, and every campaign-07 template in `session_20261127T065600Z/` is non-empty.
+> Root `research_state/` md+json count is at the cap of 500 → all new artifacts go under one
+> fresh `session_<UTC>/`. No campaign change, no token change, no grandfathered-id change.
+> No session is blocked; rank-0 FCLR-LIVE-ARCHIVE-08 remains the single repo-name-aligned
+> open path. The executor session (id > `20261127T131654Z`) must still produce the full
+> artifact set below.
 
 ---
 
@@ -108,7 +114,7 @@ All non-empty, under **one fresh** `research_state/session_<UTC>/` with id **> 2
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-**TIMESTAMP:** 2026-11-27T22:11:49Z
+**TIMESTAMP:** 2026-11-27T22:12:55Z
 **REPO-NAME PRIORITY:** the repository leads with *Funding-conditioned-volatility* AND
 *liquidation-risk*. Every volatility arm is terminally closed; the single highest-value
 unfinished, repo-name-aligned task is the funding-conditioned **liquidation-risk** Track-B
