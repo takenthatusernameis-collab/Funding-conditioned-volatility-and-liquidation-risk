@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
 
-**Generated (UTC):** 2026-11-27T23:05:08Z
+**Generated (UTC):** 2026-11-27T23:05:37Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Single durable handoff for the next agentic work session.**
 
@@ -127,7 +127,7 @@ All non-empty, under **one fresh** `research_state/session_<UTC>/` with id **> 2
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-**TIMESTAMP:** 2026-11-27T23:05:08Z
+**TIMESTAMP:** 2026-11-27T23:05:37Z
 **REPO-NAME PRIORITY:** the repository leads with *Funding-conditioned-volatility* AND
 *liquidation-risk*. Every volatility arm is terminally closed; the single highest-value
 unfinished, repo-name-aligned task is the funding-conditioned **liquidation-risk** Track-B
