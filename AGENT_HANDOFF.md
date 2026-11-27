@@ -1,6 +1,6 @@
 # AGENT HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
 
-**Generated (UTC):** 2026-11-27T23:05:37Z
+**Generated (UTC):** 2026-11-27T23:08:06Z
 **Repository:** Funding-conditioned-volatility-and-liquidation-risk
 **Single durable handoff for the next agentic work session.**
 
@@ -9,7 +9,7 @@
 > `handoff_archive/` to remove the multi-handoff bottleneck. Do not recreate them;
 > append to this file only.
 >
-> **CURATOR REFRESH 2026-11-27T23:04:38Z:** handoff re-verified green
+> **CURATOR REFRESH 2026-11-27T23:08:06Z:** handoff re-verified green
 > (`check_handoff_heavywork_gate.py` → `pass=true`, `reason_code=OK`, `failures=[]`,
 > `handoff_stale=false`, `handoff_markers_ok=true`,
 > `heavy_session_dir=research_state/session_20261127T065600Z`,
@@ -127,7 +127,7 @@ All non-empty, under **one fresh** `research_state/session_<UTC>/` with id **> 2
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-**TIMESTAMP:** 2026-11-27T23:05:37Z
+**TIMESTAMP:** 2026-11-27T23:08:06Z
 **REPO-NAME PRIORITY:** the repository leads with *Funding-conditioned-volatility* AND
 *liquidation-risk*. Every volatility arm is terminally closed; the single highest-value
 unfinished, repo-name-aligned task is the funding-conditioned **liquidation-risk** Track-B
