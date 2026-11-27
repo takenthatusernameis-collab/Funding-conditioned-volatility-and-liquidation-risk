@@ -1,90 +1,153 @@
-# AGENT HANDOFF — 2026-11-27T22:04:44Z
-## Funding-Conditioned Volatility and Liquidation Risk — Next Session Mandate
+# AGENT HANDOFF — Funding-conditioned-volatility-and-liquidation-risk
 
-### PROGRAM STATE: ACTIVE — FCLR-LIVE-ARCHIVE-08 (Campaign-08) IS THE ONLY AUTHORIZED HEAVY WORK
-- **Terminal verdict (volatility arms):** `NO_CLAIM_WORTHY_RESULT_PROMOTABLE; ALL_P1_P2_P3_SEALED` — closed; do NOT reopen volatility arms.
-- **Reopen conditions:** 4 machine-checkable predicates — ALL STATUS=OPEN, NONE SATISFIED. Do not act until satisfied.
-- **Next executable heavy work:** FCLR-LIVE-ARCHIVE-08 rank-0 `READY_EXECUTE`, `program_status=ACTIVE` (Track-B modeled boundary-breach forecast on Binance 5-symbol mark-price cache).
-- **Ground truth:** `python scripts/next_campaign_status.py` → `CAMPAIGN STATUS: no feasible 3-block design in ANY domain` (verified 2026-11-27). Campaign-08 is the only exception (modeled boundary-breach target, permitted; NOT an overlay).
-- **Newest complete session on disk:** `session_20261127T065600Z` — inside the grandfathered range `(20261127T065600Z, 20261127T131654Z]` and FORBIDDEN as a fresh session ID.
-
-### BOTTLENECKS REMOVED (so progress can continue)
-1. **3-block design exhaustion:** `next_campaign_status.py` confirms no feasible 3-block design in any domain. Campaign-08 is exempt — it is a modeled boundary-breach forecast on the frozen balanced mark-price common support `S` (`|S|=22608`, 2024-04..2026-10, five symbols), not a new 3-block kline design.
-2. **Forecast gate (campaign-07) NOT_SUPPORTED → NO risk overlay (§9).** Campaign-08 is forecast validation of a modeled boundary-breach target, which is explicitly permitted. Do NOT build an overlay.
-3. **Grandfathered session ID range:** IDs in `(20261127T065600Z, 20261127T131654Z]` are forbidden. Fresh session ID must be > `20261127T131654Z`.
-4. **Root cap 500:** `research_state/` root md+json count is exactly 500. All new artifacts MUST go under `research_state/session_<UTC>/`; no root-level writes.
-5. **Prior MONITOR ONLY directive:** SUPERSEDED. Execute Campaign-08 to completion; do not wait, probe, or monitor.
-
-### INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (2026-11-27T22:04:44Z)
-**Repo-name priority:** Funding-conditioned-volatility-and-liquidation-risk. The repo name leads with Funding-conditioned-volatility AND liquidation-risk. Campaign-08 is the funding-conditioned Track-B modeled boundary-breach forecast — the single highest-value unfinished task and the only task this session may execute.
-
-**Machine-enforced non-avoidance:** `scripts/check_handoff_heavywork_gate.py` binds Campaign-08 to the `fclr_live_archive08_*` artifact family plus `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json` in the newest session. A trigger-only, prose-only, audit-only, prereg-only, source-registry-only, verify-and-stop, or zero-byte-placeholder session fails closed.
-
-Execution sequence:
-1. Read `AGENT_HANDOFF.md` and `AGENT_HANDOFF_20261127T182958Z.md` completely.
-2. Run `python scripts/next_campaign_status.py`; confirm `CAMPAIGN STATUS: no feasible 3-block design in ANY domain` (expected).
-3. Generate fresh session ID `session_<UTC>` with **UTC > 20261127T131654Z**; create `research_state/session_<UTC>/`.
-4. **Phase 1:** Produce outcome-blind source registry `fclr_live_archive08_source_registry_<UTC>.{json,md}` (mark-price-only `S`, `|S|=22608`, sha256 vs `.sha256` sidecars + `cached_inputs_hashes.json`) + frozen prereg `fclr_live_archive08_prereg_<UTC>.{json,md}` (margin/leverage scenarios, horizon, long/short labels, frozen `|S|` and 60/20/20+168h split sizes). `outcome_data_inspected_before_freeze: false`.
-5. **Phase 2:** Execute heavy 3-block out-of-sample evaluation `fclr_live_archive08_eval_<UTC>.{py,json,md}` (AUC/log-loss/Brier, funding-conditioned vs mark-price-only baseline, ≥2000 deterministic block-bootstrap + leave-one-symbol-out) on `S`.
-6. **Phase 3:** Independent stdlib recompute `fclr_live_archive08_recompute_<UTC>.{py,json}` (`all_checks_match=true`, separate code path) + evidence audit `fclr_live_archive08_evidence_audit_<UTC>.{json,md}` (`audit_pass=true`) + gate alias `evidence_audit_<UTC>.{json,md}` + trigger check `trigger_check_<UTC>.json`. All non-empty, no zero-byte placeholders.
-7. **After artifacts exist and verify:** Update `research_state/experiment_frontier.json` rank-0 `FCLR-LIVE-ARCHIVE-08` → `COMPLETED_VALIDATED` with the reproduced verdict. Run `python3 scripts/check_handoff_heavywork_gate.py` until green (`pass=true`, `failures=[]`).
-8. If a blocker prevents Phase 1 from starting, report it explicitly with evidence; do not invent alternative work. Do not re-open any closed arm.
-
-### HARD CONSTRAINTS (violation = wasted session / gate failure)
-- **Session ID > 20261127T131654Z.** Grandfathered IDs forbidden.
-- **Forecast gate (campaign-07) NOT_SUPPORTED → NO risk overlay (§9).** Campaign-08 is forecast validation of a modeled boundary-breach target, permitted.
-- **Reuse campaign-07 mark-price cache READ-ONLY.** Do NOT re-download. Cache at `research_state/data_cache/{BNBUSDT,BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT}_{2024_04..2026_10}/`.
-- **Stdlib only** — no numpy/pandas/pyarrow/requests; no pip install.
-- **All artifacts under one fresh `research_state/session_<UTC>/`** — root cap 500 reached; no root-level `*.md|*.json`.
-- **Do not modify** `.github/workflows`, sealed protocols, raw caches, or prior frozen artifacts.
-- **XRPUSDT 2025-10-19:** 24 corrupt negative mark-price closes; drop `close<=0`, quarantine, do NOT zero-fill. Valid ZIP copy restores full `|S|=22608`.
-- **Common support `S`:** UTC hourly timestamps where ALL FIVE symbols have `markPriceKlines close>0`, restricted to 2024-04-01..2026-10-31. `|S|=22608`. Freeze `|S|` and split sizes in the outcome-blind prereg.
-
-### REQUIRED OUTPUT SET (all non-empty, under the single session directory)
-| Artifact | Purpose |
-|----------|---------|
-| `fclr_live_archive08_source_registry_<UTC>.{json,md}` | Outcome-blind source registry; mark-price-only `S`, `|S|=22608`, sha256 vs sidecars + `cached_inputs_hashes.json` |
-| `fclr_live_archive08_prereg_<UTC>.{json,md}` | Frozen prereg: margin/leverage scenarios, horizon, long/short labels, frozen `|S|` and 60/20/20 + 168h embargo split sizes |
-| `fclr_live_archive08_eval_<UTC>.{py,json,md}` | Heavy 3-block OOS AUC/log-loss/Brier; funding-conditioned vs mark-price-only baseline; ≥2000 bootstrap + LOSO |
-| `fclr_live_archive08_recompute_<UTC>.{py,json}` | Independent stdlib recompute; `all_checks_match=true` |
-| `fclr_live_archive08_evidence_audit_<UTC>.{json,md}` | Evidence audit with `audit_pass=true` |
-| `evidence_audit_<UTC>.{json,md}` | Gate alias (copy of above) |
-| `trigger_check_<UTC>.json` | Trigger check |
-
-### WHAT NOT TO DO (common failure modes)
-| Forbidden Action | Reason |
-|------------------|--------|
-| Re-run any closed volatility arm (FCLR-LIVE-ARCHIVE-01..07, FCLR-VOL-*) | All closed NOT_SUPPORTED; §17 promotion impossible |
-| Build a risk overlay | Forecast gate (campaign-07) NOT_SUPPORTED → §9 forbids |
-| Wait for NEW_OBSERVED_LIQUIDATION_SOURCE / HL_LABEL_EXTENSION / GATE4_BRANCH_1 | Machine-checkable predicates unsatisfied; do_not_act_until_satisfied=True |
-| Add root-level research_state files | Root cap 500 reached; all new artifacts under `session_<UTC>/` |
-| Threshold-shop after outcomes / relabel exploratory as confirmatory | Structural violation; terminal verdicts are sealed |
-| Use session ID ≤ 20261127T131654Z | Grandfathered by gate; will be rejected |
-| Re-download Binance data | Cache verified, read-only; reuse only |
-| Trigger-only / prose-only / audit-only / verify-and-stop session | Gate fails closed via `check_handoff_heavywork_gate.py` |
-
-### ESCALATION / BLOCKER RESOLUTION
-- If cache appears corrupted: verify against `.sha256` sidecars and `cached_inputs_hashes.json` — do NOT re-download.
-- If XRPUSDT 2025-10-19 blocks common support: valid ZIP copy exists in cache; use it.
-- If bootstrap/LOSO compute is slow: stdlib only; optimize within stdlib; no external deps.
-- No human/legal action can unblock GATE4_BRANCH_1 — hard external dependency; do not act.
-
-### NEXT SESSION DIRECTIVE (final)
-**EXECUTE FCLR-LIVE-ARCHIVE-08 (Campaign-08) to completion.** This is the single durable handoff; the timestamped copy at `AGENT_HANDOFF_20261127T182958Z.md` is the detailed spec. No other work is authorized.
-
-### VERIFICATION COMMANDS (run at START and END of session)
-```bash
-export UTC=$(date -u +%Y%m%dT%H%M%SZ)
-mkdir -p research_state/session_$UTC
-python scripts/next_campaign_status.py
-python scripts/check_handoff_heavywork_gate.py --json
-python -m py_compile scripts/check_handoff_heavywork_gate.py
-python3 -m json.tool research_state/experiment_frontier.json >/dev/null
-git diff --check
-```
-
-Gate must report at END: top-level `pass=true`, `reason_code=OK`, `failures=[]`, with empty missing/empty artifact lists for the `fclr_live_archive08_*` family.
+**Generated (UTC):** 2026-11-27T22:06:41Z
+**Repository:** Funding-conditioned-volatility-and-liquidation-risk
+**Durable handoff for next agentic work session**
 
 ---
 
-*Generated by session at 2026-11-27T22:04:44Z. This handoff is durable; do not overwrite without explicit user direction.*
+## EXECUTIVE STATUS
+
+**Confirmatory program: CONCLUDED** (final_synthesis_report.md, 2026-11-10)
+- **Track C (volatility/stress forecasts):** NOT_SUPPORTED — all 8+ confirmatory panels/experiments (FCLR-001, 003, 008, 009, 011, 012-V, 013, GATE4 v3 30d) null; best C2 vs B1 = -0.43% QLIKE (CI crosses zero, below 2% floor)
+- **Track B (modeled boundary breaches):** NOT_SUPPORTED — 32 tests (FCLR-H003-EXT-001), no cells survive Holm correction
+- **Track A (observed liquidations):** STRUCTURALLY_BLOCKED — no admissible unauthenticated historical source with required coverage
+- **Risk overlay:** NOT ELIGIBLE (no passed OOS forecasting gate)
+
+**Environment constraints (verified 2026-11-10, still binding):**
+- No network/downloads, no paid/manual/credentialed data
+- No workflow/scheduler/poller additions
+- No fabricated provenance or outcomes
+- No threshold shopping or sealed-holdout reuse
+- Stdlib only (numpy, pandas, scipy, pyarrow, requests allowed but no pip install)
+
+---
+
+## ACTIVE RANK-0 CAMPAIGN: FCLR-LIVE-ARCHIVE-08
+
+**Status:** `READY_EXECUTE` | **Program:** `ACTIVE` | **Rank:** 0
+**Experiment ID:** `FCLR-LIVE-ARCHIVE-08` (generated 20261127T080708Z)
+**Campaign start (gate anchor):** `20261127T131654Z`
+
+### Task Definition (from experiment_frontier.json rank-0)
+> **Track-B modeled boundary-breach forecast (NOT an overlay):**
+> Pre-registered hypothetical long/short liquidation boundaries from disclosed constant margin/leverage scenarios; target = whether the future mark-price path breaches the boundary within a fixed horizon; separate long/short labels; compare a funding-conditioned model vs a mark-price-only baseline by out-of-sample AUC / log-loss / Brier with >=2000 block-bootstrap and leave-one-symbol-out; independent stdlib recompute all_checks_match=true. Stdlib only, read-only cache, no network.
+
+### Frozen Design (MUST REUSE EXACTLY)
+- **Data domain:** Binance 5-symbol (BNBUSDT, BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT) monthly futures archive (markPriceKlines, fundingRate, premiumIndexKlines, indexPriceKlines) 2024-04..2026-10
+- **Common support S:** Balanced mark-price hourly intersection, `|S| = 22608` timestamps (all five symbols present, close>0). XRPUSDT 2025-10-19 has 24 corrupt closes (quarantined, not zero-filled); other four symbols 22608 each. Split: 60/20/20 + 168h embargo (train=13550, val=4517, test=4517 per symbol; test rows across 5 symbols = 22585)
+- **Estimands:** Long-breach / short-breach AUC, log-loss, Brier. Baseline = mark-price-only (RV + lagged returns). Candidate = funding-conditioned (adds funding rate, premium, dislocation/smoothing features). Materiality floor: >=2% relative improvement with 95% block-bootstrap CI lower bound > 0.
+- **Multiplicity:** Leave-one-symbol-out + >=2000 block-bootstrap. Symmetric verdict (NOT_SUPPORTED / SUPPORTED / INCONCLUSIVE) frozen before outcomes.
+
+### Required Artifact Set (enforced by `scripts/check_handoff_heavywork_gate.py` — LIVE_ARCHIVE_REQUIRED)
+All artifacts must be non-empty and placed under **one fresh** `research_state/session_<UTC>/` directory with session ID **> 20261127T131654Z** (NOT merely > 20261127T065600Z — the interval (20261127T065600Z, 20261127T131654Z] is GRANDFATHERED and FORBIDDEN).
+
+| Artifact Prefix | Suffixes | Description |
+|-----------------|----------|-------------|
+| `fclr_live_archive_source_registry_` | `.json`, `.md` | Outcome-blind source registry: verified cache read (paths, sha256, coverage, layouts), hash-bound to `cached_inputs_hashes.json` |
+| `fclr_live_archive_prereg_` | `.json`, `.md` | Outcome-blind prereg freeze: margin/leverage scenarios, horizon, long/short labels, estimands, floor, alpha, bootstrap, split sizes on S — `outcome_data_inspected_before_freeze: false` |
+| `fclr_live_archive_eval_` | `.py`, `.json`, `.md` | Heavy 3-block evaluation on common support S: funding-conditioned vs mark-price-only, AUC/log-loss/Brier, >=2000 block bootstrap + leave-one-symbol-out |
+| `fclr_live_archive_recompute_` | `.py`, `.json` | **Independent stdlib recompute** that rebuilds S and confirms all_checks_match=true, all five symbols in every block/fold, n_test>=500 |
+| `fclr_live_archive_evidence_audit_` | `.json`, `.md` | Evidence audit: artifact hashes, config reproduction, verdict traceability |
+| `evidence_audit_` | `.json` | Gate-critical alias (must exist alongside the named audit) |
+| `trigger_check_` | `.json` | Gate trigger check (non-empty) |
+
+### Blocker Resolution (from experiment_frontier.json)
+- **None external.** No aborted session on disk; newest complete session is `20261127T065600Z` (FCLR-LIVE-ARCHIVE-07, NOT_SUPPORTED).
+- **Forecast gate (campaign-07) did NOT pass** → per RESEARCH_PROMPT §9 NO risk overlay is authorized; campaign-08 is forecast validation of a modeled boundary-breach target, which is permitted.
+- **Reuse the campaign-07 mark-price cache read-only; do NOT re-download.**
+
+---
+
+## GATE ENFORCEMENT
+
+The handoff gate (`scripts/check_handoff_heavywork_gate.py`) is **machine-enforced**. A session passes only if:
+1. `AGENT_HANDOFF.md` exists with `INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SECTION` and records the last completed heavy session ID + full-suite result.
+2. The latest session contains the **exact LIVE_ARCHIVE_REQUIRED artifact set** (all 10 files, non-empty) under a fresh `session_<UTC>/` with ID > 20261127T131654Z.
+3. `research_state/` root md+json count ≤ 500 (churn cap).
+4. Independent recompute achieves `all_checks_match=true`.
+
+**Failure modes to avoid:**
+- Trigger-only, prose-only, audit-only, verify-and-stop sessions → **FAIL**
+- Arbitrary `recompute_*` without the full triad → **FAIL**
+- Session ID ≤ 20261127T131654Z → **FAIL** (grandfathered interval forbidden)
+- Zero-byte placeholders → **FAIL**
+- Root churn cap breach → **FAIL**
+
+---
+
+## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
+
+**TIMESTAMP:** 2026-11-27T22:06:41Z
+**SESSION CONSTRAINT:** New session ID must be **> 20261127T131654Z** (e.g., `session_20261127T220641Z` or later)
+
+### MANDATORY WORKPLAN (execute in order, single session)
+
+#### Phase 1: Source Registry & Prereg Freeze (outcome-blind)
+1. **Verify cache** — Read `research_state/data_cache/{BNBUSDT,BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT}_2024_04..2026_10/` mark-price klines + funding. Assert every `.sha256` sidecar against `research_state/cached_inputs_hashes.json` (20694 entries). Record coverage, layouts, shortfalls.
+2. **Rebuild common support S** — All-five-symbol hourly intersection (mark-price close>0, dedup by open_time) restricted to 2024-04-01..2026-10-31 UTC. Freeze `|S|=22608` and split sizes (train=13550, val=4517, test=4517 per symbol; test rows across 5 symbols = 22585).
+3. **Emit source registry** — `fclr_live_archive08_source_registry_<UTC>.{json,md}` under the new session dir.
+4. **Freeze prereg** — Outcome-blind: margin/leverage scenarios (disclosed constant), breach horizon, long/short labels, estimands (AUC/log-loss/Brier), baseline (mark-price-only RV+lagged returns), candidate (funding-conditioned), materiality floor (2% relative, CI lower bound > 0), alpha (Holm across declared family), bootstrap (>=2000 block + leave-one-symbol-out), split on S. Hash-bound to source registry. `outcome_data_inspected_before_freeze: false`. Emit `fclr_live_archive08_prereg_<UTC>.{json,md}`.
+
+#### Phase 2: Heavy Boundary-Breach Evaluation
+5. **Implement evaluation** — Stdlib only (no sklearn, no external ML libs). Rolling-origin 3-block on S: for each block, train on prior train+val, embargo 168h, test on block. Generate hypothetical long/short liquidation boundaries from margin/leverage scenarios. Compute breach labels (future mark-price path breaches boundary within horizon). Fit baseline (mark-price-only) and candidate (funding-conditioned) models. Score AUC, log-loss, Brier. Block bootstrap (>=2000) + leave-one-symbol-out for CIs and multiplicity.
+6. **Emit evaluation triad** — `fclr_live_archive08_eval_<UTC>.{py,json,md}` (code, results, report).
+
+#### Phase 3: Independent Recompute & Evidence Audit
+7. **Independent recompute** — Separate code path (stdlib only) that rebuilds S from cache, re-runs the full evaluation, asserts `all_checks_match=true`, confirms all five symbols in every block/fold, n_test>=500. Emit `fclr_live_archive08_recompute_<UTC>.{py,json}`.
+8. **Evidence audit** — Artifact hashes, config reproduction, verdict traceability. Emit `fclr_live_archive08_evidence_audit_<UTC>.{json,md}` + alias `evidence_audit_<UTC>.json`.
+9. **Trigger check** — Non-empty `trigger_check_<UTC>.json` with gate status.
+
+### SUCCESS CRITERIA
+- All 10 required artifacts present, non-empty, under one fresh `session_<UTC>/` (ID > 20261127T131654Z)
+- `scripts/check_handoff_heavywork_gate.py` exits 0 (PASS)
+- `all_checks_match=true` from independent recompute
+- Symmetric verdict (NOT_SUPPORTED / SUPPORTED / INCONCLUSIVE) recorded in prereg and evaluation
+
+### REFERENCE ARTIFACTS (from campaign-07, session_20261127T065600Z)
+- Template eval: `research_state/session_20261127T065600Z/fclr_live_archive07_eval_20261127T065600Z.py`
+- Template recompute: `research_state/session_20261127T065600Z/fclr_live_archive07_recompute_20261127T065600Z.py`
+- Template prereg: `research_state/session_20261127T065600Z/fclr_live_archive07_prereg_20261127T065600Z.json`
+- Source registry: `research_state/session_20261127T065600Z/fclr_live_archive07_source_registry_20261127T065600Z.json`
+
+---
+
+## CONTEXT: WHY THIS CAMPAIGN EXISTS
+
+The repository name leads with **"Funding-conditioned-volatility"**, yet every leakage-robust volatility null was established on a 5-coin panel. The Binance public market-data archive at `data.binance.vision` (metrics dataset: daily open interest + taker long/short flow, deep 2020-09→present, plus fundingRate/klines/mark/index/premium) is a **verified, unauthenticated, free source that was never exploited**. The frozen-data frontier is exhausted (`next_campaign_status.py: NO_FEASIBLE_3_BLOCK_DESIGN_IN_ANY_DOMAIN`). This campaign removes the "prose-only / source-probe-only / verify-and-stop" escape hatch by mandating a **materially different, verified, confirmatory design on newly downloaded archive data** — but for the **liquidation-risk** half (Track B modeled boundary breaches), which is permitted because the forecast gate (campaign-07) did NOT pass (no risk overlay authorized).
+
+---
+
+## COMPLETED CAMPAIGNS (DO NOT RE-RUN)
+
+| Campaign | Session | Verdict | Status |
+|----------|---------|---------|--------|
+| FCLR-LIVE-ARCHIVE-07 | 20261127T065600Z | NOT_SUPPORTED (C2 vs B1 rel -0.704%, CI [-1.218%,-0.190%]) | COMPLETED_VALIDATED |
+| FCLR-LIVE-ARCHIVE-06 | 20261126T133828Z | NOT_SUPPORTED (downside semivar level, rel MSE 0.716%, CI [0.419%,1.020%]) | COMPLETED_VALIDATED |
+| FCLR-LIVE-ARCHIVE-05 | 20261126T082429Z | NOT_SUPPORTED (signed semivar asymmetry, rel MSE 0.141%) | COMPLETED_VALIDATED |
+| FCLR-LIVE-ARCHIVE-04 | 20261126T061929Z | NOT_SUPPORTED (quantile/full-dist, rel pinball -1.102%) | COMPLETED_VALIDATED |
+| FCLR-LIVE-ARCHIVE-03 | 20261126T051548Z | NOT_SUPPORTED (stress/tail Brier, rel 0.458%) | COMPLETED_VALIDATED |
+| FCLR-LIVE-ARCHIVE-01 | 20261126T042519Z | NOT_SUPPORTED (mean-RV QLIKE, rel 0.840%) | COMPLETED_VALIDATED |
+| FCLR-LIQ-RISK-PROGRAM-CLOSURE-02 | 20261125T060000Z | NOT_SUPPORTED (formal closure + meta-analysis) | COMPLETED_VALIDATED |
+| FCLR-VOL-JUMP-04..01 | 20261125T030000Z..054500Z | NOT_SUPPORTED (all volatility-jump arms) | COMPLETED_VALIDATED |
+| FCLR-VOL-STRESS-01 | 20261124T222500Z | NOT_SUPPORTED (vol stress/tail) | COMPLETED_VALIDATED |
+| FCLR-VOL-CORR-01 | 20261124T204500Z | NOT_SUPPORTED (correction-time/hazard) | COMPLETED_VALIDATED |
+| FCLR-VOL-BROAD-01 | 20261124T120000Z | NOT_SUPPORTED (mean log-RV QLIKE broad) | COMPLETED_VALIDATED |
+
+**All volatility arms (Track C) are CLOSED. Track A is STRUCTURALLY_BLOCKED. Track B (this campaign) is the only remaining confirmatory path.**
+
+---
+
+## KEY FILES TO READ BEFORE STARTING
+
+1. `research_state/experiment_frontier.json` — rank-0 task definition (this campaign)
+2. `research_state/final_synthesis_report.md` — program conclusion evidence
+3. `scripts/next_campaign_status.py` — cache frontier truth (run with `--json`)
+4. `scripts/check_handoff_heavywork_gate.py` — gate enforcement (LIVE_ARCHIVE_REQUIRED)
+5. `research_state/session_20261127T065600Z/` — campaign-07 template artifacts
+6. `research_state/cached_inputs_hashes.json` — 20694 verified checksums
+7. `research_state/data_cache/` — read-only Binance 5-symbol monthly archive
+
+---
+
+**This handoff is durable and machine-actionable. The next session MUST execute the full FCLR-LIVE-ARCHIVE-08 artifact set in a single fresh session with ID > 20261127T131654Z. No partial, deferred, or prose-only work will pass the gate.**
