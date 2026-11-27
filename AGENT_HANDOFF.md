@@ -1,13 +1,13 @@
 # AGENT HANDOFF — Durable Single Source of Truth for Next Session
 
-**Generated (UTC):** 2026-11-27T04:00:00Z
+**Generated (UTC):** 2026-11-27T04:54:10Z
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE`.
-**HEAD:** `dc69eae02`
-**Working tree:** clean; this refresh updates only the header (generated time + HEAD), the §0 independent re-verification stamp, the §1 timestamp, the root-cap precision note, and the end stamp. The durable body design (§0 correction, §2 artifacts, §3 frozen design, §6 constraints) is unchanged and re-verified.
-**Single source of truth:** this file is the ONLY durable handoff. The former root `INITIAL_TASK_MESSAGE_20261127T021343Z.md` and `INITIAL_TASK_MESSAGE_20261127T025859Z.md` were duplicates of §1 and have been moved to `handoff_archive/` — do not resurrect them; read §1 below.
+**HEAD:** `2a217e1a4`
+**Working tree:** clean; this refresh (1) archives the duplicate root `INITIAL_TASK_MESSAGE_20261127T045208Z.md` into `handoff_archive/` — it re-duplicated §1 and was the only open "which message is authoritative?" bottleneck — so this file is again the sole durable handoff; and (2) updates only the header (generated time + HEAD), the §0/§1/end timestamps, and the gate re-run stamp. The durable body design (§0 correction, §2 artifacts, §3 frozen design, §6 constraints) is unchanged and re-verified.
+**Single source of truth:** this file is the ONLY durable handoff. The former root `INITIAL_TASK_MESSAGE_20261127T021343Z.md`, `INITIAL_TASK_MESSAGE_20261127T025859Z.md`, and `INITIAL_TASK_MESSAGE_20261127T045208Z.md` were duplicates of §1 and have been moved to `handoff_archive/` — do not resurrect them; read §1 below.
 **Latest completed heavy session:** `session_20261126T133828Z` (campaign-06, `NOT_SUPPORTED`, `all_checks_match=true`)
-**Heavy-work gate at this refresh (re-run 2026-11-27T03:59:57Z):** `pass=true`, `reason_code=OK`, `failures=[]`, `handoff_stale=false`, `live_archive.required=false`, `live_archive.pass=true`, `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-07-20261126T153244Z` (green ONLY because the newest on-disk session `20261126T133828Z` predates the campaign start `20261126T153244Z`; the first post-start session that lacks the full heavy set fails closed — the gate is armed).
-**Independent re-verification at this refresh (2026-11-27T03:59:57Z, stdlib, mark-price-only, any-depth `markPriceKlines-*` reader, dedup by `open_time`, `close>0`, window 2024-04-01 00:00 .. 2026-10-31 23:00 UTC):** BNBUSDT=BTCUSDT=ETHUSDT=SOLUSDT=**22,608** clean 1h closes; XRPUSDT=**22,584** (exactly 24 nonpositive closes, all on `2025-10-19`); all-five intersection **`|S| = 22,584`**. This reproduces §0 from the raw cache and supersedes any other figure. The six-module unittest set passes (122 tests, OK) and the recovery template `py_compile`s clean.
+**Heavy-work gate at this refresh (re-run 2026-11-27T04:54:10Z):** `pass=true`, `reason_code=OK`, `failures=[]`, `handoff_stale=false`, `live_archive.required=false`, `live_archive.pass=true`, `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-07-20261126T153244Z` (green ONLY because the newest on-disk session `20261126T133828Z` predates the campaign start `20261126T153244Z`; the first post-start session that lacks the full heavy set fails closed — the gate is armed). Six-module unittest set re-run green at this refresh (122 tests, OK); recovery template `py_compile`s clean.
+**Independent cache re-verification carried forward unchanged from 2026-11-27T03:59:57Z (NOT re-run this refresh; stdlib, mark-price-only, any-depth `markPriceKlines-*` reader, dedup by `open_time`, `close>0`, window 2024-04-01 00:00 .. 2026-10-31 23:00 UTC):** BNBUSDT=BTCUSDT=ETHUSDT=SOLUSDT=**22,608** clean 1h closes; XRPUSDT=**22,584** (exactly 24 nonpositive closes, all on `2025-10-19`); all-five intersection **`|S| = 22,584`**. This reproduces §0 from the raw cache and supersedes any other figure. The next agent must still recompute `S` in-session and freeze the exact value in the prereg.
 
 > This is the sole durable handoff. A timestamp-only rewrite, a new empty session directory, a prereg-only run, an audit-only run, a trigger-only run, a source-registry-only run, or a verify-and-stop run is a failed next session. The next session must execute the heavy campaign in §1–§3.
 
@@ -15,7 +15,9 @@
 
 ## 0. BOTTLENECK STATUS (read first — no open bottleneck at this refresh; one prior bottleneck stays removed, one number stays corrected)
 
-**No session is blocked and no setup/gate-repair step is required at 2026-11-27T04:00:00Z.** The heavy-work gate is green (and armed), `experiment_frontier.json` rank-0 is `READY_EXECUTE`, the five-symbol 2024-04..2026-10 mark-price cache is on disk, `|S| = 22,584` was independently reproduced at this refresh, and the stdlib recovery template compiles (`py_compile` OK). The only open item is the un-started campaign-07 heavy session itself; that is the work, not a bottleneck.
+**No session is blocked and no setup/gate-repair step is required at 2026-11-27T04:54:10Z.** The heavy-work gate is green (and armed), `experiment_frontier.json` rank-0 is `READY_EXECUTE`, the five-symbol 2024-04..2026-10 mark-price cache is on disk, `|S| = 22,584` was independently reproduced at the 2026-11-27T03:59:57Z refresh and carried forward, and the stdlib recovery template compiles (`py_compile` OK). The only open item is the un-started campaign-07 heavy session itself; that is the work, not a bottleneck.
+
+**Bottleneck removed at this 2026-11-27T04:54:10Z refresh (ambiguity, not compute):** a third competing root-level `INITIAL_TASK_MESSAGE_20261127T045208Z.md` (created 04:52:08Z) again duplicated §1 and re-created the "which message is authoritative?" stall. It is now archived in `handoff_archive/` and this file is the single durable handoff. There is exactly one initial task message (§1); do not create another root-level message.
 
 **Bottleneck removed at the 2026-11-27T03:06:12Z refresh (ambiguity, not compute, still in force):** two competing root-level `INITIAL_TASK_MESSAGE_*.md` files duplicated §1 and created a "which message is authoritative?" stall for the next agent. Both are archived in `handoff_archive/` and this file is the single durable handoff. There is exactly one initial task message (§1); do not create another.
 
@@ -57,7 +59,7 @@ The prior quarantined attempts (`20261126T153717Z` → `handoff_archive/quaranti
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T04:00:00Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T04:54:10Z)
 
 **EXECUTE `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` NOW under one fresh `session_<UTC>/` (id lexicographically > `20261126T153244Z`), using the corrected balanced common-support design in §0 and §3.** The repository name leads with **Funding-conditioned-volatility**, so the highest-value unfinished work is the pre-registered disjoint-cohort replication of the repo-name primary estimand: **next-24h mean log-realized-variance QLIKE, C2 versus B1**, on the untouched 2024-04 through 2026-10 cohort for `BNBUSDT`, `BTCUSDT`, `ETHUSDT`, `SOLUSDT`, `XRPUSDT`. This is sequential confirmatory look `k=2` with frozen `alpha_2 = 0.05/(2*3) = 0.008333`. The declared Holm secondary is the campaign-06 estimand: next-24h downside realized-semivariance level, judged by MSE. Do not substitute another estimand, cohort, threshold, or model search.
 
@@ -161,4 +163,4 @@ Complete artifact set (under `research_state/session_20261126T133828Z/`; do not 
 **Dominant limitation to disclose:** the mark-price cache is stored in three heterogeneous layouts, the month dirs also carry a separate regular-klines stream, and XRPUSDT 2025-10-19 has 24 negative (corrupt) mark-price closes — the recompute must use mark-price only, dedup by `open_time`, drop `close<=0`, and quarantine the XRP day; per-block + leave-one-symbol-out diagnostics remain mandatory.
 **Concrete falsification test:** C2 improves relative test QLIKE by at least 2% with the frozen uncertainty and Holm conditions on the untouched balanced mark-price cohort.
 
-**END OF HANDOFF — 2026-11-27T04:00:00Z**
+**END OF HANDOFF — 2026-11-27T04:54:10Z**
