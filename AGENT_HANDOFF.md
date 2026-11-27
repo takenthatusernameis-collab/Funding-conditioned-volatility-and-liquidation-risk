@@ -1,9 +1,9 @@
 # AGENT HANDOFF — Durable Single Source of Truth for the Next Session
 
-**Generated (UTC):** 2026-11-27T06:03:55Z
+**Generated (UTC):** 2026-11-27T06:05:47Z
 **Repository priority (from repo name `Funding-conditioned-volatility-and-liquidation-risk`):** Funding-conditioned next-24h volatility forecasting is the single highest-value unfinished task. The repo name leads with **Funding-conditioned-volatility**, so the confirmatory campaign-07 contrast (C2 vs B1 on next-24h log-RV QLIKE, balanced mark-price disjoint 2024-04..2026-10 cohort) is the only task this session may execute.
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE` in `research_state/experiment_frontier.json`.
-**HEAD:** `e2e26c0c9` (verified this pass). **Working tree:** clean except the new `scripts/fclr_live_archive07_eval_ready.py` (the corrected base, see §0).
+**HEAD:** `966089a91` (verified this pass). **Working tree:** clean except the new `scripts/fclr_live_archive07_eval_ready.py` (the corrected base, see §0).
 **Gate (verified this pass):** `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false` (newest on-disk session `20261126T133828Z` predates campaign start `20261126T153244Z`; the first post-start session flips it to required). Root `research_state/` is at **exactly 500** md+json files (zero headroom). XRPUSDT 2025-10-19 corrupt day re-verified this pass: 24/24 rows have `close<=0` (e.g. `-0.00054414`).
 
 > **This file is the ONLY durable handoff.** Do not create a root `INITIAL_TASK_MESSAGE_*` file, a second handoff, or any root-level `research_state/*.md`/`*.json` (a single root write makes 501 and fails the gate). Read §1 and execute it.
@@ -12,7 +12,7 @@
 
 ## 0. BOTTLENECK STATUS — the re-curation loop is now physically broken
 
-**No session is blocked and no setup/gate-repair step is required at 2026-11-27T06:03:18Z.** The gate is green and armed; the five-symbol 2024-04..2026-10 mark-price cache is on disk; `|S| = 22,584` is the carried-forward independently re-derived value and must be recomputed in-session.
+**No session is blocked and no setup/gate-repair step is required at 2026-11-27T06:05:47Z.** The gate is green and armed; the five-symbol 2024-04..2026-10 mark-price cache is on disk; `|S| = 22,584` is the carried-forward independently re-derived value and must be recomputed in-session.
 
 **THE bottleneck was the re-curation loop itself — this pass removes its root cause.** Prior refreshes (04:54, 04:58, 05:52, 05:56, 05:57, 05:58) re-verified readiness but handed the next session a template with two real defects that forced a rewrite every time:
 
@@ -50,7 +50,7 @@ Prior quarantined attempts (`20261126T153717Z`, `20261126T144850Z`) are **invali
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T06:03:55Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T06:05:47Z)
 
 **NON-AVOIDANCE (machine-enforced):** `scripts/check_handoff_heavywork_gate.py` binds campaign-07 to the `fclr_live_archive07_*` artifact family plus `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json` in the newest session. A trigger-only, prose-only, audit-only, prereg-only, source-registry-only, verify-and-stop, or zero-byte-placeholder session fails closed. The gate is green now only because the newest on-disk session predates the campaign start; the first post-start session that lacks the full heavy set will fail closed. **This task message is the initial task for the next session — there is no other task. Do NOT write prose; run the eval.**
 
@@ -138,4 +138,4 @@ After the heavy session the gate must report top-level `pass=true`, `reason_code
 **Dominant limitation to disclose:** three heterogeneous cache layouts + a separate regular-klines stream + XRPUSDT 2025-10-19 corrupt day — the ready template handles all three (mark-price only, dedup `open_time`, `close>0`, quarantine); per-block + leave-one-symbol-out diagnostics remain mandatory.
 **Concrete falsification test:** C2 improves relative test QLIKE by ≥2% with the frozen uncertainty and Holm conditions on the untouched balanced mark-price cohort.
 
-**END OF HANDOFF — 2026-11-27T06:03:55Z**
+**END OF HANDOFF — 2026-11-27T06:05:47Z**
