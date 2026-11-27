@@ -1,9 +1,9 @@
 # AGENT HANDOFF — Durable Single Source of Truth for Next Session
 
-**Generated (UTC):** 2026-11-27T03:09:26Z
+**Generated (UTC):** 2026-11-27T03:51:32Z
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE`.
-**HEAD:** `cc34712a3`
-**Working tree:** this handoff refresh plus the archival of the prior handoff (`AGENT_HANDOFF_20261127T030612Z.md`) into `handoff_archive/` is the only intended diff.
+**HEAD:** `3453dfc36`
+**Working tree:** clean; this header refresh (generated time + HEAD only) is the only intended diff. The durable body below (§0–§6) is unchanged.
 **Single source of truth:** this file is the ONLY durable handoff. The former root `INITIAL_TASK_MESSAGE_20261127T021343Z.md` and `INITIAL_TASK_MESSAGE_20261127T025859Z.md` were duplicates of §1 and have been moved to `handoff_archive/` — do not resurrect them; read §1 below.
 **Latest completed heavy session:** `session_20261126T133828Z` (campaign-06, `NOT_SUPPORTED`, `all_checks_match=true`)
 **Heavy-work gate at this refresh:** `pass=true`, `reason_code=OK`, `failures=[]`, `handoff_stale=false`, `live_archive.required=false`, `live_archive.pass=true`, `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-07-20261126T153244Z` (green ONLY because the newest on-disk session `20261126T133828Z` predates the campaign start `20261126T153244Z`; the first post-start session that lacks the full heavy set fails closed — the gate is armed).
