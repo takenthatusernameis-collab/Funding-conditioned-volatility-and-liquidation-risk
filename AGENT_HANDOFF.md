@@ -1,11 +1,11 @@
 # AGENT HANDOFF — Durable Single Source of Truth for Next Session
 
-**Generated (UTC):** 2026-11-27T02:03:42Z
+**Generated (UTC):** 2026-11-27T02:04:42Z
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` is rank-0 `READY_EXECUTE`.
 **HEAD:** `6e83e09ae`
 **Working tree:** clean
 **Latest completed heavy session:** `session_20261126T133828Z` (campaign-06, `NOT_SUPPORTED`, `all_checks_match=true`)
-**Heavy-work gate at this refresh (2026-11-27T02:03:42Z):** `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false`, `live_archive.pass=true`, `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-07-20261126T153244Z` (green ONLY because the newest on-disk session `20261126T133828Z` predates the campaign start `20261126T153244Z`; the first post-start session that lacks the full heavy set fails closed — the gate is armed). Baseline re-confirmed this refresh: the six-module unittest command runs **122 tests OK**, the stdlib recovery template `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` `py_compile`s clean, the five-symbol `research_state/data_cache/` is present (201 symbol-month dirs), and `research_state` root is at the **500-file cap** (no new root-level `.md`/`.json`).
+**Heavy-work gate at this refresh (2026-11-27T02:04:42Z):** `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=false`, `live_archive.pass=true`, `live_archive.campaign_id=FCLR-LIVE-ARCHIVE-07-20261126T153244Z` (green ONLY because the newest on-disk session `20261126T133828Z` predates the campaign start `20261126T153244Z`; the first post-start session that lacks the full heavy set fails closed — the gate is armed). Baseline re-confirmed this refresh: the six-module unittest command runs **122 tests OK**, the stdlib recovery template `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` `py_compile`s clean, the five-symbol `research_state/data_cache/` is present (201 symbol-month dirs), and `research_state` root is at the **500-file cap** (no new root-level `.md`/`.json`).
 
 > This is the sole durable handoff. A timestamp-only rewrite, a new empty session directory, a prereg-only run, an audit-only run, a trigger-only run, a source-registry-only run, or a verify-and-stop run is a failed next session. The next session must execute the heavy campaign in §1–§3.
 
@@ -26,7 +26,7 @@
 
 **Do NOT hard-code 22,608 and do NOT claim "all five identical." Recompute `S` from the cache (mark-price only) and freeze the real `|S| = 22,584`, the per-symbol counts (four at 22,608, XRPUSDT at 22,584), and the split sizes in the prereg.**
 
-**Independent re-verification at this refresh (2026-11-27T02:03:42Z baseline):** the gate is `pass=true/OK`, the six-module unittest runs 122 tests OK, the recovery template `py_compile`s clean, and the cache is present. The `|S| = 22,584` figure was independently reproduced from the raw cache at the 2026-11-27T01:56:12Z refresh (mark-price only, all three layouts, dedup by `open_time`, `close>0`, window 2024-04-01 00:00 .. 2026-10-31 23:00 UTC): BNBUSDT=BTCUSDT=ETHUSDT=SOLUSDT=**22,608** clean 1h closes each; XRPUSDT=**22,584** (exactly 24 nonpositive closes, all on `2025-10-19`); all-five intersection **`|S| = 22,584`**. This supersedes every earlier `|S|=8976` / "BNBUSDT binds" / "all five identical 22,608" claim. The next agent must still recompute `S` in-session and freeze the exact value in the prereg; do not treat this note as a substitute for the in-session recompute.
+**Independent re-verification at this refresh (2026-11-27T02:04:42Z baseline):** the gate is `pass=true/OK`, the six-module unittest runs 122 tests OK, the recovery template `py_compile`s clean, and the cache is present. The `|S| = 22,584` figure was independently reproduced from the raw cache at the 2026-11-27T01:56:12Z refresh (mark-price only, all three layouts, dedup by `open_time`, `close>0`, window 2024-04-01 00:00 .. 2026-10-31 23:00 UTC): BNBUSDT=BTCUSDT=ETHUSDT=SOLUSDT=**22,608** clean 1h closes each; XRPUSDT=**22,584** (exactly 24 nonpositive closes, all on `2025-10-19`); all-five intersection **`|S| = 22,584`**. This supersedes every earlier `|S|=8976` / "BNBUSDT binds" / "all five identical 22,608" claim. The next agent must still recompute `S` in-session and freeze the exact value in the prereg; do not treat this note as a substitute for the in-session recompute.
 
 ### Cache layout heterogeneity — the one rule the next agent MUST follow
 
@@ -49,7 +49,7 @@ The prior quarantined attempts (`20261126T153717Z` → `handoff_archive/quaranti
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T02:03:42Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T02:04:42Z)
 
 **EXECUTE `FCLR-LIVE-ARCHIVE-07-20261126T153244Z` NOW under one fresh `session_<UTC>/` (id lexicographically > `20261126T153244Z`), using the corrected balanced common-support design in §0 and §3.** The repository name leads with **Funding-conditioned-volatility**, so the highest-value unfinished work is the pre-registered disjoint-cohort replication of the repo-name primary estimand: **next-24h mean log-realized-variance QLIKE, C2 versus B1**, on the untouched 2024-04 through 2026-10 cohort for `BNBUSDT`, `BTCUSDT`, `ETHUSDT`, `SOLUSDT`, `XRPUSDT`. This is sequential confirmatory look `k=2` with frozen `alpha_2 = 0.05/(2*3) = 0.008333`. The declared Holm secondary is the campaign-06 estimand: next-24h downside realized-semivariance level, judged by MSE. Do not substitute another estimand, cohort, threshold, or model search.
 
@@ -153,4 +153,4 @@ Complete artifact set (under `research_state/session_20261126T133828Z/`; do not 
 **Dominant limitation to disclose:** the mark-price cache is stored in three heterogeneous layouts, the month dirs also carry a separate regular-klines stream, and XRPUSDT 2025-10-19 has 24 negative (corrupt) mark-price closes — the recompute must use mark-price only, dedup by `open_time`, drop `close<=0`, and quarantine the XRP day; per-block + leave-one-symbol-out diagnostics remain mandatory.
 **Concrete falsification test:** C2 improves relative test QLIKE by at least 2% with the frozen uncertainty and Holm conditions on the untouched balanced mark-price cohort.
 
-**END OF HANDOFF — 2026-11-27T02:03:42Z**
+**END OF HANDOFF — 2026-11-27T02:04:42Z**
