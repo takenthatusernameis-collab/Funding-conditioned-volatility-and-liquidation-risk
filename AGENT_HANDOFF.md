@@ -1,10 +1,10 @@
 # AGENT HANDOFF — Durable Single Source of Truth for the Next Session
 
-**Generated (UTC):** 2026-11-27T08:07:08Z
+**Generated (UTC):** 2026-11-27T08:58:11Z
 **Repository priority (from repo name `Funding-conditioned-volatility-and-liquidation-risk`):** the funding-conditioned-volatility half was the primary estimand and is **CLOSED with a real verdict** (campaign-07, `NOT_SUPPORTED`, independently reproduced). The next highest-value unfinished work is the **liquidation-risk** half of the repo name: a Track-B modeled boundary-breach forecast (campaign-08). This is the ONLY task the next session may execute.
 **Program status:** ACTIVE — `FCLR-LIVE-ARCHIVE-08` is rank-0 `READY_EXECUTE` in `research_state/experiment_frontier.json`.
-**HEAD:** working tree clean at `ba32f7ca3`; this handoff + frontier refresh are the only pending edits. **Working tree:** the last COMPLETE heavy session is `research_state/session_20261127T065600Z/` (campaign-07, full 15-artifact set). No incomplete/aborted session directory exists on disk anymore (the prior `20261127T070655Z` template-only attempt has been removed).
-**Gate (verified this pass, 2026-11-27T08:07:08Z):** `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive07"`, empty missing/empty lists. Root `research_state/` is at **exactly 500** md+json files (zero headroom) — do NOT add any root-level `research_state/*.md`/`*.json` (one root write makes 501 and fails the gate).
+**HEAD:** working tree clean at `a293c41c8`; this handoff refresh is the only pending edit. **Working tree:** the last COMPLETE heavy session is `research_state/session_20261127T065600Z/` (campaign-07, full 15-artifact set). No incomplete/aborted session directory exists on disk. The newest on-disk session id is `20261127T065600Z`.
+**Gate (verified this pass, 2026-11-27T08:58:11Z):** `pass=true`, `reason_code=OK`, `failures=[]`, `live_archive.required=true`, `live_archive.pass=true`, `artifact_family="live_archive07"`, empty missing/empty lists. Root `research_state/` is at **exactly 500** md+json files (zero headroom) — do NOT add any root-level `research_state/*.md`/`*.json` (one root write makes 501 and fails the gate).
 
 > **This file is the ONLY durable handoff.** Do not create a root `INITIAL_TASK_MESSAGE_*` file, a second handoff, or any root-level `research_state/*.md`/`*.json`. Read §1 and execute it.
 
@@ -24,7 +24,7 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T08:07:08Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T08:58:11Z)
 
 **NON-AVOIDANCE (machine-enforced):** `scripts/check_handoff_heavywork_gate.py` binds the active live-archive campaign to the `fclr_live_archive<NN>_*` artifact family plus `evidence_audit_<UTC>.{json,md}` and `trigger_check_<UTC>.json` in the newest session. A trigger-only, prose-only, audit-only, prereg-only, source-registry-only, verify-and-stop, or zero-byte-placeholder session **fails closed**. **This task message is the initial task for the next session — there is no other task. Do NOT write prose; run the eval to completion.**
 
@@ -41,7 +41,7 @@
 3. Reuse `research_state/data_cache/<SYM>_<YYYY_MM>/` read-only. Confirm `|S| = 22,608` and record it. Supplement the source registry with per-file sha256 vs the hash-only `.sha256` sidecar AND `cached_inputs_hashes.json["hashes"][path]`, coverage per symbol, layout per month, and the XRPUSDT 2025-10-19 corrupt-CSV / valid-ZIP provenance. Do not zero-fill, substitute, re-download, or inspect outcomes before the prereg is frozen.
 4. Produce the complete artifact set in §2 under that one fresh session directory. Every file non-empty; every JSON carries the real `session_id` and experiment id. No root-level `research_state/*.md`/`*.json` (root is at **exactly 500**).
 5. Run an independent stdlib recompute (separate code path — own cache reader, own panel build, different solver) that reproduces the verdict with `all_checks_match=true`; evidence audit with `audit_pass=true` and no unresolved blocker. The recompute must independently rebuild `S` (mark-price only, `close>0`) and confirm all five symbols in every block/fold with `n_test >= 500`. A valid `NOT_SUPPORTED` is acceptable; placeholders and fabricated agreement are not.
-6. Only after the artifacts exist, update `research_state/experiment_frontier.json` and this handoff. Set rank-0 to `COMPLETED_VALIDATED`, record the reproduced verdict and completed session, demote campaign-08 to a non-zero rank, and **update this handoff so the FIRST `FCLR-LIVE-ARCHIVE-<NN>-<start>` token is `08`** (archive the 07 completion record below it) so the gate ratchets to the 08 artifact family.
+6. Only after the artifacts exist, update `research_state/experiment_frontier.json` and this handoff. Set rank-0 to `COMPLETED_VALIDATED`, record the reproduced verdict and completed session, demote campaign-08 to a non-zero rank, and **update this handoff so the FIRST `FCLR-LIVE-ARCHIVE-<NN>-<start>` token is `09`** (archive the 08 completion record below it) so the gate ratchets to the 09 artifact family.
 7. Finish only when §4 verification passes. Any missing/empty required artifact ⇒ session incomplete.
 
 ---
@@ -113,4 +113,4 @@ After the heavy session the gate must report top-level `pass=true`, `reason_code
 **Dominant limitation to disclose:** three heterogeneous cache layouts + a separate regular-klines stream + XRPUSDT 2025-10-19 corrupt CSV (valid ZIP restores support) — the template handles all of these (mark-price only, dedup `open_time`, `close>0`); per-block + leave-one-symbol-out diagnostics remain mandatory.
 **Concrete falsification test:** the funding-conditioned model improves out-of-sample boundary-breach discrimination (AUC / log-loss / Brier) over the mark-price-only baseline with the frozen uncertainty on the untouched balanced mark-price cohort.
 
-**END OF HANDOFF — 2026-11-27T08:07:08Z**
+**END OF HANDOFF — 2026-11-27T08:58:11Z**
