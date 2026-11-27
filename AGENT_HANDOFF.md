@@ -1,16 +1,20 @@
 # AGENT HANDOFF — Durable Single Source of Truth for the Next Session
 
-**Generated (UTC):** 2026-11-27T16:49:46Z
+**Generated (UTC):** 2026-11-27T16:53:28Z
 **Repository priority (from repo name `Funding-conditioned-volatility-and-liquidation-risk`):** the **funding-conditioned-volatility** half was the primary estimand and is **CLOSED with a real verdict** (campaign-07, `NOT_SUPPORTED`, independently reproduced). The next highest-value unfinished work is the **liquidation-risk** half of the repo name: a Track-B modeled boundary-breach forecast (campaign-08). This is the ONLY task the next session may execute.
 **Active rank-0:** `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` — status `READY_EXECUTE` in `research_state/experiment_frontier.json` (program_status `ACTIVE`).
-**HEAD:** `c4786e37d` (chore checkpoint). **Working tree:** clean. The last COMPLETE heavy session on disk is `research_state/session_20261127T065600Z/` (campaign-07, full 15-artifact set). The newest on-disk session id is `20261127T065600Z`; no aborted `20261127T132836Z` directory exists.
-**Gate (re-verified this pass, 2026-11-27T15:26:11Z):** top-level `pass=true`, `reason_code=OK`, `failures=[]`; `live_archive.required=false` (grandfathered: newest on-disk session `20261127T065600Z` ≤ campaign-08 start `20261127T131654Z`), `live_archive.pass=true`, `live_archive.campaign_id="FCLR-LIVE-ARCHIVE-08-20261127T131654Z"`, `artifact_family=null`, empty missing/empty lists. The gate flips to `live_archive.required=true` and demands the full `fclr_live_archive08_*` set the instant a session with id > `20261127T131654Z` exists (see §1). Six-module unittest suite = **122 tests OK**; `py_compile` of the campaign-07 template OK; `experiment_frontier.json` valid JSON; `git diff --check` clean. Root `research_state/` is at **exactly 500** md+json files (zero headroom) — do NOT add any root-level `research_state/*.md`/`*.json` (one root write makes 501 and fails the gate).
+**HEAD:** the latest `chore(kilo): checkpoint agent session` commit (was `ca2e0da91` at generation; **the hash advances on every checkpoint and is NOT a durable anchor — do not rely on it**). **Working tree:** clean. The durable anchor is the last COMPLETE heavy session on disk: `research_state/session_20261127T065600Z/` (campaign-07, full 15-artifact set, `all_checks_match=true`). The newest on-disk session id is `20261127T065600Z`; no aborted `20261127T132836Z` directory exists and no session id in the forbidden range `(20261127T065600Z, 20261127T131654Z]` exists (re-verified 2026-11-27T16:53:28Z).
+**Gate (re-verified this pass, 2026-11-27T16:53:28Z):** top-level `pass=true`, `reason_code=OK`, `failures=[]`; `live_archive.required=false` (grandfathered: newest on-disk session `20261127T065600Z` ≤ campaign-08 start `20261127T131654Z`), `live_archive.pass=true`, `live_archive.campaign_id="FCLR-LIVE-ARCHIVE-08-20261127T131654Z"`, `artifact_family=null`, empty missing/empty lists. The gate flips to `live_archive.required=true` and demands the full `fclr_live_archive08_*` set the instant a session with id > `20261127T131654Z` exists (see §1). Six-module unittest suite = **122 tests OK**; `py_compile` of the campaign-07 template OK; `experiment_frontier.json` valid JSON; `git diff --check` clean. Root `research_state/` is at **exactly 500** md+json files (zero headroom) — do NOT add any root-level `research_state/*.md`/`*.json` (one root write makes 501 and fails the gate).
 
 > **This file is the ONLY durable handoff.** Do not create a root `INITIAL_TASK_MESSAGE_*` file, a second handoff, or any root-level `research_state/*.md`/`*.json`. Read §1 and execute it.
 
 ---
 
 ## 0. BOTTLENECK STATUS — nothing is blocked; the path is real and validated
+
+**Two recurring bottlenecks removed this pass (2026-11-27T16:53:28Z):**
+1. **Stale HEAD reference.** Prior handoffs pinned an exact `HEAD` hash (`c4786e37d`) that goes stale on every `chore(kilo): checkpoint` commit (HEAD is already `ca2e0da91`). The handoff now anchors to the durable `session_20261127T065600Z/` directory and explicitly states the hash is not an anchor — no more chasing a moving commit id.
+2. **Residual grandfathered avoidance range.** The gate grandfathers any session id `<= 20261127T131654Z`, leaving the half-open range `(20261127T065600Z, 20261127T131654Z]` as a silent green-with-no-work path. §1 PRE-FLIGHT SELF-AUDIT now forces the next agent to prove no session sits in that range and to mint an id strictly `> 20261127T131654Z` before any other action.
 
 **No session is blocked and there is no re-curation trap.** Prior passes handed the next session a mathematically broken QLIKE template (uncentred, non-negative-violating form) that produced 10^11% LOO artifacts; that was fixed in `session_20261127T065600Z` to the standard non-negative QLIKE `mean(exp(y−p) − (y−p) − 1)`, the full heavy evaluation was executed, and the verdict was reproduced by an independent stdlib recompute (`all_checks_match=true`). The next session starts from real, validated artifacts — not a template.
 
@@ -26,18 +30,31 @@
 
 ---
 
-## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T16:49:46Z)
+## 1. INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION (UTC 2026-11-27T16:53:28Z)
 
 ### REPOSITORY PRIORITY (from repo name `Funding-conditioned-volatility-and-liquidation-risk`)
 The **funding-conditioned-volatility** half is **CLOSED** (Campaign-07 `FCLR-LIVE-ARCHIVE-07`, verdict `NOT_SUPPORTED`, independently reproduced). The **liquidation-risk** half is the **single highest-value unfinished task** and the **only task** the next session may execute: **Campaign-08 `FCLR-LIVE-ARCHIVE-08`** — a Track-B modeled boundary-breach forecast.
 
-### CURRENT STATE (verified 2026-11-27T16:49:46Z)
-- **HEAD**: `c4786e37d` (clean working tree)
+### CURRENT STATE (verified 2026-11-27T16:53:28Z)
+- **HEAD**: latest `chore(kilo): checkpoint` commit (clean working tree; hash advances on every checkpoint — anchor to the session dir, not the hash)
 - **Last COMPLETE heavy session**: `research_state/session_20261127T065600Z/` (Campaign-07, full 15-artifact set, `all_checks_match=true`)
 - **Active rank-0 in `experiment_frontier.json`**: `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` — status `READY_EXECUTE`
 - **Gate status**: `pass=true`, `reason_code=OK`, `live_archive.required=false` (grandfathered: newest on-disk session `20261127T065600Z` ≤ Campaign-08 start `20261127T131654Z`)
 - **Root `research_state/` count**: **exactly 500** md+json files (zero headroom — do NOT add any root-level files)
 - **Tests**: 6-module unittest suite = **122 tests OK**
+
+### PRE-FLIGHT SELF-AUDIT (MANDATORY — run FIRST, report the output; closes the residual avoidance hole)
+The gate grandfathers any session id `<= 20261127T131654Z` (gate line `if latest_utc <= campaign_start: return`). That leaves ONE narrow silent-avoidance path: a session id in the half-open range `(20261127T065600Z, 20261127T131654Z]` would keep the gate green with **no** heavy artifacts. You MUST close it yourself before doing anything else:
+```bash
+# 1. Confirm NO session already sits in the forbidden range (must print nothing):
+ls -d research_state/session_* 2>/dev/null | awk -F'session_' '{print $2}' \
+  | awk '$1>"20261127T065600Z" && $1<="20261127T131654Z"'
+# 2. Mint a fresh id and ASSERT it is strictly greater than the campaign-08 start:
+export UTC=$(date -u +%Y%m%dT%H%M%SZ)
+python3 -c "import os,sys; u=os.environ['UTC']; sys.exit(0 if u>'20261127T131654Z' else 'FATAL: session id '+u+' is grandfathered; wait/retry')"
+echo "PRE-FLIGHT OK: fresh session id $UTC > 20261127T131654Z"
+```
+If step 1 prints any id, or step 2 aborts, STOP and do not proceed — you are on the forbidden grandfathered path. Only a session id **strictly greater than `20261127T131654Z`** flips the gate to `live_archive.required=true` and forces the full heavy artifact set.
 
 ### BOTTLENECKS REMOVED (all verified this pass)
 1. **Broken QLIKE template** → fixed in `session_20261127T065600Z` to standard non-negative QLIKE `mean(exp(y−p) − (y−p) − 1)`
@@ -198,4 +215,4 @@ After the heavy session the gate must report top-level `pass=true`, `reason_code
 **Dominant limitation to disclose:** three heterogeneous cache layouts + a separate regular-klines stream + XRPUSDT 2025-10-19 corrupt CSV (valid ZIP restores support) — the template handles all of these (mark-price only, dedup `open_time`, `close>0`); per-block + leave-one-symbol-out diagnostics remain mandatory.
 **Concrete falsification test:** the funding-conditioned model improves out-of-sample boundary-breach discrimination (AUC / log-loss / Brier) over the mark-price-only baseline with the frozen uncertainty on the untouched balanced mark-price cohort.
 
-**END OF HANDOFF — 2026-11-27T15:26:11Z**
+**END OF HANDOFF — 2026-11-27T16:53:28Z**
