@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-28T00:04:07Z
+# AGENT HANDOFF — 2026-11-28T00:05:37Z
 ## REPOSITORY: Funding-conditioned-volatility-and-liquidation-risk
 ## NEXT SESSION MUST EXECUTE: FCLR-LIVE-ARCHIVE-08 (Track-B modeled boundary-breach forecast)
 
@@ -8,7 +8,8 @@
 
 **EXECUTE FCLR-LIVE-ARCHIVE-08 (Track-B modeled boundary-breach forecast) under one fresh `research_state/session_<UTC>/` with session_id lexicographically > 20261127T131654Z (the campaign-08 start gate). This is the ONLY executable heavy work remaining.**
 
-- Repository name priority: "Funding-conditioned-volatility" → the Binance 5-symbol archive (|S|=22,608, 2024-04..2026-10, five symbols) is the live data frontier for funding-conditioned volatility.
+**Repository-name priority:** "Funding-conditioned-volatility" → the Binance 5-symbol archive (|S|=22,608, 2024-04..2026-10, five symbols: BNBUSDT, BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT) is the live data frontier for funding-conditioned volatility. Prioritize this over all other domains.
+
 - All prior funding-conditioned volatility arms (LIVE-ARCHIVE-01 through -07) are CLOSED NOT_SUPPORTED on verified cache.
 - Hyperliquid bulk/extended frontiers are exhausted (no untouched region ≥127 days for 3-block design).
 - Contagion campaign (FCLR-LIQ-CONTAGION-001) is rank-1; rank-0 is FCLR-LIVE-ARCHIVE-08.
