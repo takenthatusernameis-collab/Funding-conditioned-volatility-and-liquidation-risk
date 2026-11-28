@@ -1,21 +1,21 @@
-# AGENT HANDOFF — 2026-11-28T00:05:37Z
+# AGENT HANDOFF — 2026-11-28T00:07:52Z
 ## REPOSITORY: Funding-conditioned-volatility-and-liquidation-risk
-## NEXT SESSION MUST EXECUTE: FCLR-LIVE-ARCHIVE-08 (Track-B modeled boundary-breach forecast)
+## NEXT SESSION MUST EXECUTE: FCLR-LIVE-ARCHIVE-08-20261127T131654Z (Track-B modeled boundary-breach forecast)
 
 ---
 
 ## INITIAL TASK MESSAGE FOR NEXT AGENTIC WORK SESSION
 
-**EXECUTE FCLR-LIVE-ARCHIVE-08 (Track-B modeled boundary-breach forecast) under one fresh `research_state/session_<UTC>/` with session_id lexicographically > 20261127T131654Z (the campaign-08 start gate). This is the ONLY executable heavy work remaining.**
+**EXECUTE FCLR-LIVE-ARCHIVE-08-20261127T131654Z (Track-B modeled boundary-breach forecast) under one fresh `research_state/session_<UTC>/` with session_id lexicographically > 20261127T131654Z (the campaign-08 start gate). This is the ONLY executable heavy work remaining, and it is now HARD-BOUND by the handoff heavy-work gate: any post-start session that does not emit the full `fclr_live_archive08_*` artifact set fails closed.**
 
-**Repository-name priority:** "Funding-conditioned-volatility" → the Binance 5-symbol archive (|S|=22,608, 2024-04..2026-10, five symbols: BNBUSDT, BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT) is the live data frontier for funding-conditioned volatility. Prioritize this over all other domains.
+**Repository-name priority:** the name leads with "Funding-conditioned-volatility", so the Binance 5-symbol archive (|S|=22,608, 2024-04..2026-10, five symbols: BNBUSDT, BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT) is the live data frontier. Every funding-conditioned volatility estimand on that archive is now CLOSED NOT_SUPPORTED (campaigns 01–07); the only unfinished repo-name work is the liquidation-risk half, executed as the Track-B modeled boundary-breach forecast (campaign-08). Prioritize this over all other domains.
 
 - All prior funding-conditioned volatility arms (LIVE-ARCHIVE-01 through -07) are CLOSED NOT_SUPPORTED on verified cache.
-- Hyperliquid bulk/extended frontiers are exhausted (no untouched region ≥127 days for 3-block design).
+- Hyperliquid bulk/extended frontiers are exhausted (no untouched region ≥127 days for a 3-block design).
 - Contagion campaign (FCLR-LIQ-CONTAGION-001) is rank-1; rank-0 is FCLR-LIVE-ARCHIVE-08.
 - Forecast gate (campaign-07) did NOT pass → NO risk overlay authorized (RESEARCH_PROMPT §9); Track-B modeled boundary-breach forecast IS permitted.
 - Data: Frozen balanced mark-price common support S (|S|=22,608) — cache read-only, already on disk, do NOT re-download.
-- Target: Whether future mark-price path breaches pre-registered hypothetical long/short liquidation boundary within fixed horizon (margin/leverage scenarios disclosed).
+- Target: whether the future mark-price path breaches a pre-registered hypothetical long/short liquidation boundary within a fixed horizon (margin/leverage scenarios disclosed).
 - Models: Baseline (RV1h, RV24h, RV168h) vs Funding-conditioned (Baseline + signed funding(24h) + trailing 90d |funding| pct + mark/index premium + mark/EMA24 distance).
 - Metrics: OOS AUC/log-loss/Brier with ≥2000 block-bootstrap + leave-one-symbol-out.
 - Validation: Independent stdlib recompute with `all_checks_match=true`.
@@ -30,7 +30,7 @@
 
 | Field | Value |
 |-------|-------|
-| **Rank-0 Task** | `FCLR-LIVE-ARCHIVE-08` |
+| **Rank-0 Task** | `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` |
 | **Status** | `READY_EXECUTE` |
 | **Program Status** | `ACTIVE` |
 | **Generated** | `20261127T080708Z` |
@@ -39,11 +39,13 @@
 
 **CRITICAL SESSION ID CONSTRAINT**: Next fresh session ID **MUST BE > 20261127T131654Z** (the campaign-08 start gate). A session ID in `(20261127T065600Z, 20261127T131654Z]` is **GRANDFATHERED BY THE GATE AND FORBIDDEN**.
 
+**GATE BINDING (closed the prose-only escape hatch):** the canonical dated token `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` above activates `scripts/check_handoff_heavywork_gate.py` → `_live_archive_state` (ladder-aware: campaign 08 → `fclr_live_archive08_*`). Any session with id > 20261127T131654Z that omits any required `fclr_live_archive08_*` artifact (or writes a zero-byte placeholder, or omits `trigger_check_<UTC>.json`) FAILS the gate. The current latest on-disk session (20261127T065600Z) predates the start gate and is grandfathered, so the gate is GREEN now and ARMED for the next session.
+
 ---
 
 ## EXPERIMENT SPECIFICATION (FCLR-LIVE-ARCHIVE-08)
 
-**Domain**: Track-B modeled boundary-breach forecast (NOT an overlay) — permitted because campaign-07 forecast gate did NOT pass (per RESEARCH_PROMPT §9, NO risk overlay authorized; forecast validation of modeled boundary-breach target IS permitted).
+**Domain**: Track-B modeled boundary-breach forecast (NOT an overlay) — permitted because campaign-07 forecast gate did NOT pass (per RESEARCH_PROMPT §9, NO risk overlay authorized; forecast validation of a modeled boundary-breach target IS permitted).
 
 **Data**: Frozen balanced mark-price common support **S** (|S| = 22,608 timestamps, 2024-04..2026-10, five symbols: BNBUSDT, BTCUSDT, ETHUSDT, SOLUSDT, XRPUSDT). Cache is read-only, verified, already on disk at `research_state/data_cache/{SYMBOL}_{2024_04..2026_10}/`. **Do NOT re-download.**
 
@@ -76,16 +78,16 @@
 | `evidence_audit_<UTC>.json` | Alias (gate requirement) |
 | `trigger_check_<UTC>.json` | Trigger check |
 
-**All artifacts non-empty. `all_checks_match=true` from independent recompute.**
+**All artifacts non-empty. `all_checks_match=true` from independent recompute.** These exact prefixes are what `_live_archive_state` binds for campaign 08; missing/empty any of them fails the gate.
 
 ---
 
 ## POST-EXECUTION HANDOFF UPDATE
 
 After producing the complete artifact set with `all_checks_match=true`:
-1. Update this handoff to **LEAD with FCLR-LIVE-ARCHIVE-08**
-2. Re-run the handoff heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) until **GREEN**
-3. Set rank-0 to `COMPLETED_VALIDATED` in `experiment_frontier.json`
+1. Update this handoff to **LEAD with the next campaign** (promote rank-1 FCLR-LIQ-CONTAGION-001 to rank-0, or the next ladder step), carrying the same dated-token discipline so the gate stays armed.
+2. Re-run the handoff heavy-work gate (`scripts/check_handoff_heavywork_gate.py`) until **GREEN**.
+3. Set rank-0 to `COMPLETED_VALIDATED` in `experiment_frontier.json`.
 
 ---
 
@@ -97,8 +99,9 @@ After producing the complete artifact set with `all_checks_match=true`:
 | External dependencies | **NONE** |
 | Cache verification | **REQUIRED PHASE** — verify 2024-04..2026-10 five-symbol cache against per-file .sha256 sidecars and `cached_inputs_hashes.json`; define/freeze common support S |
 | Risk overlay authorization | **FORBIDDEN** — campaign-07 forecast gate NOT passed (RESEARCH_PROMPT §9) |
+| Gate enforcement gap | **CLOSED** — dated token `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` now arms the `_live_archive_state` binder |
 
-No sessions are blocked or inefficient. All campaigns rank 1+ are COMPLETED_VALIDATED/COMPLETE. The only remaining heavy work is FCLR-LIVE-ARCHIVE-08 at rank 0.
+No sessions are blocked or inefficient. All campaigns rank 1+ are COMPLETED_VALIDATED/COMPLETE. The only remaining heavy work is FCLR-LIVE-ARCHIVE-08 at rank 0, and it is now gate-armed so it cannot be skipped.
 
 ---
 
@@ -153,7 +156,7 @@ research_state/data_cache/XRPUSDT_2024_04..2026_10/
 [ ] Phase 4: Independent recompute — rebuild S, all_checks_match=true, 5 symbols/block/fold, n_test≥500
 [ ] Phase 5: Evidence audit + gate alias + trigger check
 [ ] All artifacts non-empty under session_<UTC>/
-[ ] Update handoff to LEAD with FCLR-LIVE-ARCHIVE-08
+[ ] Update handoff to LEAD with the next campaign (dated token preserved)
 [ ] Run check_handoff_heavywork_gate.py until GREEN
 [ ] Set experiment_frontier.json rank-0 to COMPLETED_VALIDATED
 ```
@@ -162,8 +165,8 @@ research_state/data_cache/XRPUSDT_2024_04..2026_10/
 
 ## GATE ENFORCEMENT
 
-- `AGENT_HANDOFF.md` FOCUS CAMPAIGN section
-- `scripts/check_handoff_heavywork_gate.py` — `LIVE_ARCHIVE_CAMPAIGN_RE` / `_live_archive_state` ladder-aware binder (campaign 08 → `fclr_live_archive08_*`)
+- `AGENT_HANDOFF.md` FOCUS CAMPAIGN section (dated token `FCLR-LIVE-ARCHIVE-08-20261127T131654Z`)
+- `scripts/check_handoff_heavywork_gate.py` — `LIVE_ARCHIVE_CAMPAIGN_RE` / `_live_archive_state` ladder-aware binder (campaign 08 → `fclr_live_archive08_*`); now ARMED because the dated token is present
 - Root `research_state/*.md|*.json` capped at 500 — **ALL NEW ARTIFACTS MUST GO UNDER `session_<UTC>/`**
 - Stdlib only (numpy, pandas, pyarrow, requests pre-installed); no pip install; no network
 
@@ -178,6 +181,6 @@ handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T14
 
 ---
 
-**THIS IS THE ONLY EXECUTABLE HEAVY WORK REMAINING. The Binance 5-symbol contiguous design is exhausted. The Hyperliquid bulk/extended frontiers are exhausted. The contagion campaign is rank-1. FCLR-LIVE-ARCHIVE-08 IS THE ACTIVE RANK-0 TASK.**
+**THIS IS THE ONLY EXECUTABLE HEAVY WORK REMAINING. The Binance 5-symbol contiguous design is exhausted. The Hyperliquid bulk/extended frontiers are exhausted. The contagion campaign is rank-1. FCLR-LIVE-ARCHIVE-08 IS THE ACTIVE RANK-0 TASK AND IS NOW GATE-ARMED.**
 
 **SESSION ID MUST BE > 20261127T131654Z. NO EXCEPTIONS.**
