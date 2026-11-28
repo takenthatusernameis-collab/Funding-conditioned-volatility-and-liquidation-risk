@@ -1,4 +1,5 @@
 # AGENT HANDOFF — 2026-11-28T08:55:21Z
+> **SUPERSEDED 2026-11-28T09:07:46Z.** "ALL CONFIRMATORY PATHS EXHAUSTED" applies to the volatility half only. The liquidation-risk half has one open, unblocked HIGH gap. Follow `HANDOFF_NEXT_SESSION.md` (single source of truth) instead.
 
 ## Repository: Funding-conditioned-volatility-and-liquidation-risk
 

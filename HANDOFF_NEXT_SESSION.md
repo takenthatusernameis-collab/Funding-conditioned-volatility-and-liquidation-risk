@@ -1,131 +1,90 @@
-# HANDOFF_NEXT_SESSION — 20261128T090141Z
+# DURABLE HANDOFF — SINGLE SOURCE OF TRUTH — 20261128T090746Z
 
 **REPO:** Funding-conditioned-volatility-and-liquidation-risk
-**PRIORITY:** Repo-name dual mandate — **Volatility half EXHAUSTED; Liquidation-risk half has ONE remaining HIGH-priority gap**
+**STATUS:** LIQUIDATION-RISK HALF HAS ONE UNBLOCKED HIGH-PRIORITY GAP — EXECUTE HEAVY WORK NOW
+**SUPERSEDES:** `AGENT_HANDOFF.md`, `AGENT_HANDOFF_20261128T090515Z.md` (false "CLOSED_TERMINAL / do nothing"), `AGENT_HANDOFF_20261128T085828Z.md`, `AGENT_HANDOFF_20261128T085521Z`, and all `AGENT_HANDOFF_2026*.md`. This file is the only authoritative next-session instruction.
 
 ---
 
-## CURRENT STATE (authoritative)
+## 0. INITIAL TASK MESSAGE FOR THE NEXT AGENTIC SESSION (read this first)
 
-### ✅ VOLATILITY HALF — CLOSED (all confirmatory arms NOT_SUPPORTED)
-- **Binance 5-symbol archive (FCLR-LIVE-ARCHIVE-01..08)**: COMPLETED_VALIDATED 2026-11-28T07:58:00Z
-  - Mean-RV QLIKE (0.840% < 2% floor)
-  - Stress/tail Brier (0.458% < 2%)
-  - Quantile/full-distribution (−1.102%)
-  - Signed-semivariance-asymmetry (0.141% < 2%)
-  - Downside-semivariance-level (0.716% < 2%)
-  - All 8 campaigns: independent stdlib recompute `all_checks_match=true`
-- **Ironflow bulk Hyperliquid (FCLR-VOL-BROAD-01, CORR-01, STRESS-01, JUMP-01..04)**: COMPLETED_VALIDATED
-  - Broad panel (300-450+ coins, 18 months): ALL NOT_SUPPORTED
-  - Program closure FCLR-LIQ-RISK-PROGRAM-CLOSURE-02 executed 2026-11-25T06:00:00Z
-
-**No further volatility work is warranted.** All estimands closed with replicated negative results.
-
-### ⚠️ LIQUIDATION-RISK HALF — ONE HIGH-PRIORITY GAP REMAINS
-**GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1** (from `next_panel_gap_audit_20261111T163229Z.md`, priority: HIGH)
-- **Objective**: Funding-conditioned features vs RV-only baseline for **next-24h observed Hyperliquid liquidation intensity** on a **new pre-registered panel/window disjoint from evaluated 2026-05..2026-10 holdout**, using **ironflow observed labels**
-- **Cached inputs READY**:
-  - Observed labels: `ironflow/hyperliquid-liquidations` 2025-05..2026-04 (18 monthly parquet files, ~2.8M rows, 468 markets, CC BY 4.0)
-  - Funding: `ironflow/hyperliquid-funding` 2025-05..2026-04 (9 coins, CC BY 4.0)
-- **MISSING (single bounded acquisition)**:
-  - **Hyperliquid 1h candles (RV context) for 2025-05..2026-04** — NOT cached (only 2026-05..2026-10 present)
-  - Required: Bounded first-time unauthenticated Hyperliquid `candleSnapshot` 1h fetch+cache with provenance for prereg-specified coins/months only
-- **Constraints (NON-NEGOTIABLE)**:
-  1. **Pre-register BEFORE any outcome computation/panel alignment** (JSON+md: hypothesis, exact window/symbols, label def/aggregation, feature set, splits/embargo ≥7d, baselines/contrasts B1 vs C2, metric, materiality threshold, minima ≥5 instruments + ≥3 non-overlapping 30d test blocks, inclusion rules, missingness handling)
-  2. Fetch candles ONLY for prereg-specified coins/months; **do not re-fetch 2026-05..2026-10**
-  3. Build deterministic aligned panel; emit parquet/json + build report with hashes/coverage/leakage-guard notes
-  4. Run pre-registered evaluation ONLY after freeze artifacts exist; compute splits/embargo + bootstrap CIs per prereg
-  5. Update `experiment_frontier.json`, `hypothesis_registry.json`, `run_manifest.json`, `final_confirmatory_verdict.md` atomically
-  6. If prereg minima unsatisfiable → emit concrete infeasibility addendum with evidence; pivot to GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10 (MEDIUM-HIGH)
-
-### 🔒 FIREWALLS (immutable)
-- **Track A**: Hyperliquid ironflow observed liquidations ONLY. NO Binance merge. Modeled ≠ observed.
-- **Track B**: CLOSED_NEGATIVE (modeled boundary breaches)
-- **Track C**: CLOSED (volatility-only, H001 NOT_SUPPORTED confirmatory)
-- **H002**: PERMANENT_BLOCK (SSRN HTTP 403)
-- **Gate 4 (Branch 1)**: EXTERNAL_BLOCKER_UNRESOLVED — **do not wait, do not poll**; Branch 2 executes independently
-
-### 📋 RESUME CONDITION (from cross_track_decision_log.md)
-> New admissible unauthenticated liquidation/funding source passing rubric (≥5 symbols, ≥3 non-overlapping 30-day blocks, documented completeness, license OK) OR SSRN H002 methodology accessible — **in either case pre-register a new experiment ID BEFORE outcome inspection**. Otherwise no further confirmatory work is warranted.
+> You are resuming the FCLR program. The repo name mandates two halves: **funding-conditioned volatility** and **liquidation risk**. The volatility half is EXHAUSTED (every confirmatory arm NOT_SUPPORTED, independently recomputed). The liquidation-risk half has exactly ONE remaining pre-registered gap, `GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1`, and **all required data is already on disk**. Your job is NOT to look for work, NOT to re-litigate closed tracks, and NOT to declare closure. Your job is to execute the 5-phase confirmatory campaign below to a verdict. Heavy work only. No planning, no discussion.
+>
+> **The single biggest bottleneck has been REMOVED:** the prior handoff claimed Hyperliquid 1h candles for 2025-05..2026-04 were MISSING and had to be fetched. They are NOT missing. `research_state/data_cache/ironflow_bulk/candles_1h/` already holds 18 monthly parquets (2025-05 .. 2026-10) with `.sha256` + `.accessed.json` provenance (unauthenticated, no API key, requester_pays=false, CC-BY-4.0). **Phase 1 acquisition is a NO-OP. Do NOT re-fetch. Do NOT touch 2026-05..2026-10 (sealed holdout).** Go straight to Phase 0.
 
 ---
 
-## NEXT SESSION MANDATORY TASK SEQUENCE
+## 1. WHY THIS IS THE PRIORITY (repo-name derived)
 
-### PHASE 0 — PRE-REGISTRATION FREEZE (outcome-blind, mandatory first step)
-**Create**: `research_state/prereg_tracka_early_observed_2025h2_2026q1_<UTC>.json` + `.md`
-- Hypothesis: Funding-conditioned features (C2: rv1h, rv24h, rv168h, funding_rate, abs_funding, premium, ema_dist) improve out-of-sample forecasting of **next-24h observed liquidation intensity** vs RV-only baseline (B1: rv1h, rv24h, rv168h) on Hyperliquid native perps
-- Universe: 9 coins with cached funding (BTC, ETH, SOL, BNB, XRP, AVAX, DOGE, LINK, SUI) — **frozen ex ante**
-- Window: **2025-06-01 .. 2026-04-30** (disjoint from sealed 2026-05..2026-10)
-- Label: ironflow observed liquidation events aggregated to hourly intensity per market (count/volume/notional — specify in prereg)
-- Splits: Chronological, coin-pooled, 7d embargo, ≥3 non-overlapping 30d test blocks (e.g., 2025-10..2025-12, 2026-01..2026-02, 2026-03..2026-04)
-- Primary contrast: C2_vs_B1; Metric: QLIKE or Brier (specify); Materiality floor: ≥2% relative improvement; CI: circular block bootstrap 168h, 2000 reps
-- Holm family: 4 horizons (6h, 24h, 72h, 168h) × 3 contrasts (C2_vs_B1, C1_vs_B1, C2_vs_C1) = 12 tests
-- `outcome_data_inspected_before_freeze: false`, `frozen_before_outcomes: true`, `pre_registered_before_outcomes: true`
-- Record all data source URLs, licenses, checksums, access timestamps
+- **Half 1 — Funding-conditioned volatility: CLOSED.** Binance 5-symbol archive (FCLR-LIVE-ARCHIVE-01..08) + Ironflow broad panel (FCLR-VOL-BROAD/CORR/STRESS/JUMP-01..04) all COMPLETED_VALIDATED, all NOT_SUPPORTED, all `all_checks_match=true`. No further volatility work is warranted.
+- **Half 2 — Liquidation risk: ONE HIGH gap remains.** `GAP-TRACKA-EARLY-OBSERVED-2025H2_2026Q1` (priority HIGH, from `research_state/next_panel_gap_audit_20261111T163229Z.md`): funding-conditioned features vs RV-only baseline for **next-24h observed Hyperliquid liquidation intensity** on a window **disjoint from the sealed 2026-05..2026-10 holdout**, using **ironflow observed labels**.
 
-### PHASE 1 — CANDLE ACQUISITION (bounded, provenance-recorded)
-**Tool**: `scripts/fclr_ironflow_bulk.py` (or equivalent unauthenticated Hyperliquid candleSnapshot fetcher)
-- Fetch **only** prereg-specified coins × months 2025-05..2026-04
-- Cache under `research_state/data_cache/ironflow_bulk/candles_1h/<YYYY-MM>.parquet`
-- Emit provenance sidecars: `<file>.sha256`, `<file>.accessed.json` (endpoint, params, UTC access time, HTTP status, unauthenticated/no-key/no-requester-pays/signature status)
-- **Do not re-fetch 2026-05..2026-10** (already cached separately)
+---
+
+## 2. DATA READINESS (verified on disk 2026-11-28T09:07Z — no acquisition needed)
+
+| Input | Path | State |
+|---|---|---|
+| Observed liquidation labels | `research_state/data_cache/ironflow_bulk/liquidations/2025-05..2026-04.parquet` (18 files) | READY |
+| Funding | `research_state/data_cache/ironflow_bulk/funding/2025-05..2026-04.parquet` (18 files) | READY |
+| 1h candles (RV context) | `research_state/data_cache/ironflow_bulk/candles_1h/2025-05..2026-04.parquet` (18 files + `.sha256` + `.accessed.json`) | **READY (previously mislabeled missing)** |
+| Sealed holdout (DO NOT READ) | `.../candles_1h/2026-05..2026-10.parquet` | SEALED — never score |
+
+Fetchers exist if ever needed (`scripts/fclr_ironflow_bulk.py`) but are NOT to be run for this window.
+
+---
+
+## 3. MANDATORY CAMPAIGN — EXECUTE IN ORDER, NO SKIPPING
+
+### PHASE 0 — PRE-REGISTRATION FREEZE (outcome-blind; FIRST action)
+Create `research_state/session_<UTC>/prereg_tracka_early_observed_2025h2_2026q1_<UTC>.{json,md}`:
+- Hypothesis: C2 (rv1h, rv24h, rv168h, funding_rate, abs_funding, premium, ema_dist) improves OOS next-24h observed liquidation intensity vs B1 (rv1h, rv24h, rv168h).
+- Universe (frozen ex ante): 9 coins with cached funding (BTC, ETH, SOL, BNB, XRP, AVAX, DOGE, LINK, SUI).
+- Window: **2025-06-01 .. 2026-04-30** (disjoint from sealed 2026-05..2026-10).
+- Label: ironflow observed liquidation events → hourly intensity per market (count/volume/notional — specify).
+- Splits: chronological, coin-pooled, **7d embargo**, ≥3 non-overlapping 30d test blocks.
+- Primary contrast C2_vs_B1; metric QLIKE or Brier (specify); materiality floor ≥2% relative; CI circular block bootstrap 168h, 2000 reps.
+- Holm family: 4 horizons (6h,24h,72h,168h) × 3 contrasts = 12 tests.
+- Set `outcome_data_inspected_before_freeze:false`, `frozen_before_outcomes:true`, `pre_registered_before_outcomes:true`. Record source URLs, licenses, checksums, access timestamps.
+
+### PHASE 1 — ACQUISITION: **NO-OP** (data cached). Verify sidecar hashes, do not fetch.
 
 ### PHASE 2 — DETERMINISTIC PANEL BUILD
-- Align: observed labels (ironflow) + funding (ironflow) + candles (newly fetched) on hourly grid
-- Leakage guard: decision-time features only (as-of merge backward, hour-floored); no forward fill; train-only standardization
-- Emit: `research_state/tracka_early_observed_2025h2_2026q1_panel_<UTC>.parquet` + `tracka_early_observed_2025h2_2026q1_panel_build_report_<UTC>.json` (with SHA-256, coverage, drop counts, symbol/block breakdown)
+Align labels + funding + candles on hourly grid; as-of backward merge, hour-floored, no forward fill, train-only standardization. Emit `..._panel_<UTC>.parquet` + `..._panel_build_report_<UTC>.json` (SHA-256, coverage, drop counts, symbol/block breakdown, leakage-guard notes).
 
-### PHASE 3 — PRE-REGISTERED EVALUATION
-- Run frozen protocol on test blocks only
-- Compute: QLIKE/Brier per model/block/horizon, paired differences, block-bootstrap CIs, Holm adjustment
-- Emit: `research_state/evaluation_summary_TRACKA-EARLY-OBSERVED-2025H2_2026Q1_<UTC>.md` + `.json`
-- Verdict: PROMOTE_CANDIDATE / NOT_MET / INCONCLUSIVE per decision rule
+### PHASE 3 — PRE-REGISTERED EVALUATION (frozen test blocks only)
+QLIKE/Brier per model/block/horizon, paired diffs, block-bootstrap CIs, Holm. Emit `evaluation_summary_TRACKA-EARLY-OBSERVED-2025H2_2026Q1_<UTC>.{md,json}`. Verdict PROMOTE_CANDIDATE / NOT_MET / INCONCLUSIVE.
 
 ### PHASE 4 — INDEPENDENT RECOMPUTE + EVIDENCE AUDIT + GATE ALIAS + TRIGGER CHECK
-- Separate-code-path stdlib recompute from stored input hashes → `all_checks_match=true`
-- Evidence audit: leakage check, subgroup diagnostics (LOIO, per-coin, per-block), calibration
-- Gate alias + trigger check JSON
-- All artifacts under `research_state/session_<UTC>/`
+Separate stdlib code path from stored input hashes → `all_checks_match=true`; leakage/subgroup (LOIO, per-coin, per-block)/calibration audit; gate alias + trigger check JSON. All under `session_<UTC>/`.
 
 ### PHASE 5 — ATOMIC STATE UPDATES
-- Update `experiment_frontier.json` (new task entry, rank-0 if PROMOTE_CANDIDATE)
-- Update `hypothesis_registry.json`, `run_manifest.json`, `final_confirmatory_verdict.md`
-- **Preserve all prior NOT_MET and sealed records intact**
+Update `experiment_frontier.json` (new entry, rank-0 if PROMOTE_CANDIDATE), `hypothesis_registry.json`, `run_manifest.json`, `final_confirmatory_verdict.md`. Preserve all prior NOT_MET and sealed records intact.
 
 ---
 
-## STOP / PIVOT CONDITIONS
-- **Valid Gate 4 RESOLVED_VERIFIED terms evidence appears** → switch to Branch 1 immediately
-- **Any required source fails admissibility/provenance verification** → do not use; document and pivot to GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10
-- **Prereg minima unsatisfiable on audited data** → emit infeasibility addendum with evidence; pivot per GAP-TRACKA-SYMBOL-EXPANSION rules
+## 4. STOP / PIVOT
+- Prereg minima unsatisfiable on audited data → emit infeasibility addendum with evidence; pivot to `GAP-TRACKA-SYMBOL-EXPANSION-2026M05M10` (MEDIUM-HIGH).
+- Any source fails provenance/admissibility → do not use; document; pivot per above.
+- Valid Gate-4 RESOLVED_VERIFIED external evidence appears → switch to Branch 1.
+
+## 5. FORBIDDEN (invalidates session)
+- ❌ Declaring the program "CLOSED_TERMINAL / do nothing" — that prior handoff is superseded and wrong; the liquidation gap is open and unblocked.
+- ❌ Any outcome computation/panel alignment before Phase 0 freeze artifacts exist.
+- ❌ Reading/scoring sealed 2026-05..2026-10 holdout.
+- ❌ Re-fetching candles 2025-05..2026-04 (already cached) or using Binance/2024 data / mixing venues.
+- ❌ Presenting modeled/proxy labels as observed; threshold/model/split tuning on test blocks.
+- ❌ Re-scoring sealed volatility verdicts; editing `.github/workflows/*`; committing raw parquet/caches.
+- ❌ Adding root-level `research_state/*.md|*.json` (root at cap 500 — all new artifacts under `session_<UTC>/`).
+
+## 6. SUCCESS CRITERIA (session incomplete without all)
+1. Prereg JSON+MD frozen before outcomes (`outcome_data_inspected_before_freeze:false`).
+2. Panel built with hashes/coverage/leakage-guard notes (no acquisition).
+3. Pre-registered evaluation on frozen test blocks only.
+4. Independent stdlib recompute `all_checks_match=true`.
+5. Evidence audit + gate alias + trigger check produced.
+6. Atomic frontier/registry/manifest/verdict updates.
+7. All artifacts non-empty under `research_state/session_<UTC>/`.
 
 ---
-
-## FORBIDDEN ACTIONS (will invalidate session)
-- ❌ Any outcome computation/panel alignment **before** preregistration freeze artifacts exist
-- ❌ Reading/scoring sealed 2026-05..2026-10 holdout for any purpose
-- ❌ Using Binance/2024 data or mixing venues in one panel
-- ❌ Presenting modeled/proxy liquidation labels as observed
-- ❌ Threshold/model/feature/split tuning against test blocks
-- ❌ Re-scoring/re-weighting/re-labelling sealed volatility verdicts
-- ❌ Using secondary-family (open-interest) results to promote any claim
-- ❌ Editing `.github/workflows/*`
-- ❌ Committing raw bulk parquet objects or caches
-- ❌ Adding root-level `research_state/*.md|*.json` (root at cap 500 — all new artifacts under `session_<UTC>/`)
-
----
-
-## SUCCESS CRITERIA (session not complete without)
-1. Preregistration JSON+MD frozen **before** any outcome computation (`outcome_data_inspected_before_freeze: false`)
-2. Candle acquisition provenance recorded (sidecars + manifest)
-3. Deterministic panel built with hashes/coverage/leakage-guard notes
-4. Pre-registered evaluation executed on frozen test blocks only
-5. Independent stdlib recompute `all_checks_match=true`
-6. Evidence audit + gate alias + trigger check produced
-7. Atomic state updates to frontier/registry/manifest/verdict
-8. All artifacts non-empty under `research_state/session_<UTC>/`
-
----
-
-**This is the only remaining confirmatory path on the repo's namesake topic. Execute Phase 0 immediately. No planning, no discussion — heavy work only.**
+*Single durable handoff generated 2026-11-28T09:07:46Z. Execute Phase 0 immediately. Heavy work only.*
