@@ -1,6 +1,8 @@
-# AGENT HANDOFF — 2026-11-28T01:04:58Z
+# AGENT HANDOFF — 2026-11-28T01:06:44Z
 ## REPOSITORY: Funding-conditioned-volatility-and-liquidation-risk
 ## NEXT SESSION MUST EXECUTE: FCLR-LIVE-ARCHIVE-08-20261127T131654Z (Track-B modeled boundary-breach forecast)
+
+**Refresh authority:** this 2026-11-28T01:06:44Z refresh is the sole durable handoff. It re-verified the repository state and supersedes every contradictory rank/contagion statement elsewhere in this file. The actual `experiment_frontier.json` has exactly one active rank-0 campaign, FCLR-LIVE-ARCHIVE-08; rank-1 is the COMPLETED_VALIDATED campaign-07, not an active contagion campaign.
 
 ---
 
@@ -19,7 +21,7 @@
 6. `evidence_audit_<UTC>.json` — gate-required alias.
 7. `trigger_check_<UTC>.json` — non-empty trigger check.
 
-**Last completed heavy session**: `session_20261127T065600Z` (campaign-07, verdict NOT_SUPPORTED: QLIKE rel -0.704%, 95% CI [-1.218%,-0.190%], floor +2%; independent stdlib recompute all_checks_match=true; |S|=22608). The on-disk newest session equals this id, so the handoff is NOT stale and the gate is GREEN (verified 2026-11-28T01:04:58Z).
+**Last completed heavy session**: `session_20261127T065600Z` (campaign-07, verdict NOT_SUPPORTED: QLIKE rel -0.704%, 95% CI [-1.218%,-0.190%], floor +2%; independent stdlib recompute all_checks_match=true; |S|=22608). The on-disk newest session equals this id, so the handoff is NOT stale and the gate is GREEN (verified 2026-11-28T01:06:44Z).
 
 **CRITICAL SESSION-ID CONSTRAINT**: the next fresh session id MUST be > `20261127T131654Z`. Because the current wall clock is already past that gate, any session created now is automatically post-start and therefore enforced. Do NOT reuse `session_20261127T065600Z` or any 20261126/20261127 id at or below the gate, and do not hand-name a session dir with a pre-gate timestamp to dodge enforcement.
 
@@ -60,7 +62,7 @@ This is a materially different, feasible design on the SAME frozen, verified pan
 
 ## POST-EXECUTION HANDOFF UPDATE (do this after the artifact set is complete)
 
-1. Update this handoff to **LEAD with the next campaign** (promote rank-1 `FCLR-LIQ-CONTAGION-001` to rank-0, or the next ladder step), carrying the same dated-token discipline so the gate stays armed for the following session.
+1. Update this handoff to **LEAD with the next unfinished repo-name liquidation-risk campaign**, carrying a fresh dated token so the gate stays armed for the following session. Do NOT promote the completed campaign-07 or any stale `FCLR-LIQ-CONTAGION` prose: neither is an active frontier entry. If no materially different campaign is already registered, create one before any verify-and-stop action, bind its exact heavy artifact family in the gate, and record it as the sole rank-0 task.
 2. Re-run `python3 scripts/check_handoff_heavywork_gate.py` until **GREEN**.
 3. Set rank-0 to `COMPLETED_VALIDATED` in `research_state/experiment_frontier.json` with the reproduced verdict.
 
@@ -70,11 +72,11 @@ This is a materially different, feasible design on the SAME frozen, verified pan
 
 | Blocker | Status |
 |---------|--------|
-| Aborted / stalled session on disk | **NONE** (newest complete: 20261127T065600Z; no *.lock / *.tmp / *ABORT* found) |
+| Aborted / stalled session on disk | **NONE** (newest complete: 20261127T065600Z; no *.lock / *.tmp / *ABORT* found; rechecked 2026-11-28T01:06:44Z) |
 | External dependencies | **NONE** |
 | Cache verification | **VERIFIED PRESENT** — 5-symbol 2024-04..2026-10 cache on disk (175 symbol-month dirs incl. 155 in-window); per-file .sha256 sidecars + `cached_inputs_hashes.json`; define/freeze common support S |
 | Risk overlay authorization | **FORBIDDEN** — campaign-07 forecast gate NOT passed (RESEARCH_PROMPT §9) |
-| Gate enforcement gap | **CLOSED** — dated token `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` arms the `_live_archive_state` binder; verified GREEN 2026-11-28T00:14:51Z |
+| Gate enforcement gap | **CLOSED** — dated token `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` arms the `_live_archive_state` binder; verified GREEN 2026-11-28T01:06:44Z |
 | Root churn cap | **AT CAP (500/500)** — all new artifacts go under `session_<UTC>/` |
 | Template availability | **PRESENT** — `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` |
 
@@ -117,7 +119,7 @@ research_state/data_cache/XRPUSDT_2024_04..2026_10/
 - Path: `research_state/data_cache/ironflow_bulk/` (candles_1h, funding, open_interest, liquidations)
 - Months: 2025-05..2026-10 (18 months)
 - Status: program formally exhausted (FCLR-LIQ-RISK-PROGRAM-CLOSURE-02 completed 2026-11-25T06:00:00Z)
-- Contagion panel: `fclr_liq_combined_panel_20261115T181405Z.parquet` (1.74M rows, 15 coins, 2025-03..2026-10) — rank-1 campaign `FCLR-LIQ-CONTAGION-001` is ACTIVE/READY_EXECUTE but rank-0 is FCLR-LIVE-ARCHIVE-08.
+- Contagion panel: `fclr_liq_combined_panel_20261115T181405Z.parquet` (1.74M rows, 15 coins, 2025-03..2026-10) — retained as historical evidence only; it is NOT an active rank-0/rank-1 task. FCLR-LIVE-ARCHIVE-08 is the sole active campaign.
 
 ---
 
@@ -142,7 +144,7 @@ research_state/data_cache/XRPUSDT_2024_04..2026_10/
 ## GATE ENFORCEMENT
 
 - `AGENT_HANDOFF.md` FOCUS CAMPAIGN section (dated token `FCLR-LIVE-ARCHIVE-08-20261127T131654Z`) — present above.
-- `scripts/check_handoff_heavywork_gate.py` — `LIVE_ARCHIVE_CAMPAIGN_RE` / `_live_archive_state` ladder-aware binder (campaign 08 → `fclr_live_archive08_*`); ARMED because the dated token is present; verified GREEN 2026-11-28T01:04:58Z.
+- `scripts/check_handoff_heavywork_gate.py` — `LIVE_ARCHIVE_CAMPAIGN_RE` / `_live_archive_state` ladder-aware binder (campaign 08 → `fclr_live_archive08_*`); ARMED because the dated token is present; verified GREEN 2026-11-28T01:06:44Z.
 - Root `research_state/*.md|*.json` capped at 500 (currently 500/500) — ALL NEW ARTIFACTS MUST GO UNDER `session_<UTC>/`.
 - Stdlib only (numpy, pandas, scipy, pyarrow, requests pre-installed); no pip install; no network.
 
@@ -157,6 +159,6 @@ handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T14
 
 ---
 
-**THIS IS THE ONLY EXECUTABLE HEAVY WORK REMAINING. The Binance 5-symbol contiguous volatility design is exhausted. The Hyperliquid bulk/extended frontiers are exhausted. The contagion campaign is rank-1. FCLR-LIVE-ARCHIVE-08 IS THE ACTIVE RANK-0 TASK AND IS GATE-ARMED.**
+**THIS IS THE ONLY EXECUTABLE HEAVY WORK REMAINING. The Binance 5-symbol contiguous volatility design is exhausted. The Hyperliquid bulk/extended frontiers are exhausted. FCLR-LIVE-ARCHIVE-08 IS THE ACTIVE RANK-0 TASK AND IS GATE-ARMED; stale contagion prose is not a fallback.**
 
 **SESSION ID MUST BE > 20261127T131654Z. NO EXCEPTIONS.**
