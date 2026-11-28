@@ -1,6 +1,6 @@
 {
   "experiment_id": "FCLR-LIVE-ARCHIVE-08",
-  "campaign": "FCLR-LIVE-ARCHIVE-08-20261127T131654Z",
+  "campaign": "FCLR-LIVE-ARCHIVE-08-20261128T040000Z",
   "session_id": "20261128T040000Z",
   "session_utc": "20261128T040000Z",
   "generated_at": "2026-11-28T04:00:00Z",
@@ -12,47 +12,138 @@
     "SOLUSDT",
     "XRPUSDT"
   ],
-  "months": "2024-04..2026-10 (31 months)",
   "n_symbols": 5,
+  "months": "2024-04..2026-10 (31 months)",
   "target": "modeled_boundary_breach_24h",
   "horizon_hours": 24,
-  "n_train": 13550,
-  "n_val": 4517,
-  "n_test": 4517,
-  "n_unique_timestamps": 22608,
+  "boundary_pct": 0.04,
+  "leverage": 25.0,
+  "n_train": 13349,
+  "n_val": 4450,
+  "n_test": 4449,
+  "n_unique_timestamps": 22584,
   "embargo_hours": 168,
-  "common_support_n": 22608,
-  "test_rows_across_5_symbols": 22585,
+  "common_support_n": 22584,
+  "test_rows_across_5_symbols": 22245,
   "models": [
     "B1",
     "C2"
   ],
   "alpha_2_sequential_look_k2": 0.008333333333333333,
   "materiality_floor": 0.02,
-  "status": "PENDING_HEAVY_COMPUTATION",
-  "holdout_opened": false,
+  "status": "CONFIRMATORY_COMPLETE",
+  "holdout_opened": true,
   "metrics": {
-    "B1": null,
-    "C2": null
+    "B1": {
+      "auc": 0.7085650818246849,
+      "logloss": 0.43324058359941336,
+      "brier": 0.13146708907550128
+    },
+    "C2": {
+      "auc": 0.6705656538035327,
+      "logloss": 0.4348660620114856,
+      "brier": 0.13239427436390502
+    }
+  },
+  "relative_improvement_C2_vs_B1": {
+    "auc": -0.05362870538765007,
+    "logloss": -0.003751907077973995,
+    "brier": -0.007052603772730236
   },
   "bootstrap": {
     "replicates": 2000,
     "seed": 20261126,
     "block_rows": 24,
-    "status": "PENDING"
+    "method": "prediction_block_bootstrap_fixed_models",
+    "ci_95": {
+      "auc": [
+        -0.08429674692730574,
+        -0.025057429274981478
+      ],
+      "logloss": [
+        -0.00996435889853336,
+        0.0026178380919175052
+      ],
+      "brier": [
+        -0.01425912691989716,
+        0.0007317370072227123
+      ]
+    },
+    "status": "COMPLETE"
   },
   "leave_one_symbol_out": {
-    "BNBUSDT": null,
-    "BTCUSDT": null,
-    "ETHUSDT": null,
-    "SOLUSDT": null,
-    "XRPUSDT": null
+    "BNBUSDT": {
+      "n_test": 4449,
+      "B1": {
+        "auc": 0.6601480359996635,
+        "logloss": 0.3852089802419509,
+        "brier": 0.1097791814525092
+      },
+      "C2": {
+        "auc": 0.5934363022567806,
+        "logloss": 0.3693367706480222,
+        "brier": 0.10474208690743919
+      }
+    },
+    "BTCUSDT": {
+      "n_test": 4449,
+      "B1": {
+        "auc": 0.6191151964736871,
+        "logloss": 0.3508571709195354,
+        "brier": 0.09336378328056845
+      },
+      "C2": {
+        "auc": 0.6560570107739919,
+        "logloss": 0.36625817303416097,
+        "brier": 0.09916750328434516
+      }
+    },
+    "ETHUSDT": {
+      "n_test": 4449,
+      "B1": {
+        "auc": 0.628745411723152,
+        "logloss": 0.43612245021143253,
+        "brier": 0.13273792579169544
+      },
+      "C2": {
+        "auc": 0.5985971405386724,
+        "logloss": 0.4404205756989142,
+        "brier": 0.13428034308429132
+      }
+    },
+    "SOLUSDT": {
+      "n_test": 4449,
+      "B1": {
+        "auc": 0.6973534422456393,
+        "logloss": 0.5138892672365212,
+        "brier": 0.1680312661613001
+      },
+      "C2": {
+        "auc": 0.6581359861904009,
+        "logloss": 0.5195996865270119,
+        "brier": 0.17031600690703202
+      }
+    },
+    "XRPUSDT": {
+      "n_test": 4449,
+      "B1": {
+        "auc": 0.6983503621078944,
+        "logloss": 0.5159206161596184,
+        "brier": 0.16547482995894844
+      },
+      "C2": {
+        "auc": 0.6580369718767004,
+        "logloss": 0.5267830775086128,
+        "brier": 0.16992284426533727
+      }
+    }
   },
-  "verdict": null,
-  "verdict_reason": null,
+  "verdict": "NOT_SUPPORTED",
+  "verdict_reason": "Primary Brier rel improvement -0.007053; materiality_floor 0.02 met=False; CI supports=False",
   "stdlib_only": true,
   "network": false,
   "read_only_cache": true,
   "outcome_data_inspected_before_freeze": false,
-  "note": "Skeleton artifact. Phase 2 heavy boundary-breach evaluation (3-block OOS AUC/log-loss/Brier, >=2000 block-bootstrap + leave-one-symbol-out) must be executed and this file replaced with complete results before the gate can pass."
+  "source_registry_sha256": "640d43fb91736ed391f4bb2e2a23ca842b6e1220532d4e5b4e50577186620fec",
+  "note": "Executed Phase 2 heavy boundary-breach evaluation. Results replace skeleton."
 }

@@ -69,5 +69,14 @@
   "terms": "Binance public market data; unauthenticated; research use.",
   "design_family": "modeled_boundary_breach_forecast",
   "estimand": "out_of_sample_auc_log_loss_brier",
-  "note": "Outcome-blind source registry for campaign-08 Track-B modeled boundary-breach forecast. Mark-price-only common support S, |S|=22608, frozen before any outcome computation."
+  "note": "Outcome-blind source registry for campaign-08 Track-B modeled boundary-breach forecast. Mark-price-only common support S, |S|=22608, frozen before any outcome computation.",
+  "input_integrity": {
+    "sha256_all_match": true,
+    "sha256_verified_bad": 0
+  },
+  "input_sha256": {
+    "registry_file": "fclr_live_archive08_source_registry_20261128T040000Z.json",
+    "sha256": "640d43fb91736ed391f4bb2e2a23ca842b6e1220532d4e5b4e50577186620fec",
+    "sha_match": true
+  }
 }

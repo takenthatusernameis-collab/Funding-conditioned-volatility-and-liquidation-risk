@@ -5,7 +5,7 @@
   "generated_at": "2026-11-28T04:00:00Z",
   "experiment_id": "FCLR-LIVE-ARCHIVE-08",
   "outcome_data_inspected_before_freeze": false,
-  "hash_bound_to_source_registry": "PENDING_SHA256_OF_SOURCE_REGISTRY",
+  "hash_bound_to_source_registry": "640d43fb91736ed391f4bb2e2a23ca842b6e1220532d4e5b4e50577186620fec",
   "frozen_before_outcomes": true,
   "decision_frozen_before_outcomes": true,
   "hypothesis": "FCLR-H008: funding-conditioned price features improve out-of-sample forecasts of modeled hypothetical long/short liquidation-boundary breaches within a fixed horizon beyond a mark-price-only baseline on the disjoint 2024-04..2026-10 cohort, judged on out-of-sample AUC/log-loss/Brier.",
@@ -48,5 +48,6 @@
   "network": false,
   "read_only_cache": true,
   "not_an_overlay": true,
-  "note": "Outcome-blind prereg frozen before any outcome computation. Track-B modeled boundary-breach forecast (NOT a risk overlay; campaign-07 forecast gate did NOT pass, so per RESEARCH_PROMPT section 9 no risk overlay is authorized)."
+  "note": "Outcome-blind prereg frozen before any outcome computation. Track-B modeled boundary-breach forecast (NOT a risk overlay; campaign-07 forecast gate did NOT pass, so per RESEARCH_PROMPT section 9 no risk overlay is authorized).",
+  "source_registry_sha256": "640d43fb91736ed391f4bb2e2a23ca842b6e1220532d4e5b4e50577186620fec"
 }
