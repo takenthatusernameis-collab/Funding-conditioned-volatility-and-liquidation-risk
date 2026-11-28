@@ -1,24 +1,183 @@
 {
   "experiment_id": "FCLR-LIVE-ARCHIVE-08",
+  "campaign": "FCLR-LIVE-ARCHIVE-08-20261128T040000Z",
   "session_id": "20261128T040000Z",
   "session_utc": "20261128T040000Z",
-  "artifact_id": "fclr_live_archive08_recompute_20261128T040000Z",
-  "generated_at": "2026-11-28T04:00:00Z",
-  "method": "independent stdlib recompute (separate code path) that rebuilds common support S from cache (mark-price only, all three layouts, dedup by open_time, close>0)",
-  "all_checks_match": false,
-  "n_checks": 0,
-  "common_support_n": null,
-  "per_symbol_counts": null,
-  "all_five_symbols_every_block_fold": null,
-  "n_test": null,
-  "n_test_across_5_symbols": null,
-  "split_train_ts": null,
-  "split_val_ts": null,
-  "split_test_ts": null,
-  "symbols_verified": [],
-  "status": "PENDING_HEAVY_COMPUTATION",
+  "generated_at": "2026-11-28T07:57:40Z",
+  "method": "independent stdlib recompute (separate code path: csv.DictReader + os.walk + distinct feature/bootstrap/AUC paths)",
+  "all_checks_match": true,
+  "n_checks": 12,
+  "common_support_n": 22584,
+  "per_symbol_counts": {
+    "BNBUSDT": 22608,
+    "BTCUSDT": 22608,
+    "ETHUSDT": 22608,
+    "SOLUSDT": 22608,
+    "XRPUSDT": 22584
+  },
+  "all_five_symbols_every_block_fold": true,
+  "n_test": 4449,
+  "n_test_across_5_symbols": 22245,
+  "split_train_ts": 13349,
+  "split_val_ts": 4450,
+  "split_test_ts": 4449,
+  "symbols_verified": [
+    "BNBUSDT",
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "status": "COMPLETE",
   "stdlib_only": true,
   "network": false,
   "read_only_cache": true,
-  "note": "Skeleton artifact. Phase 3 independent recompute must be executed and must report all_checks_match=true before the gate can pass."
+  "checks": {
+    "b1_auc_match": true,
+    "c2_auc_match": true,
+    "b1_logloss_match": true,
+    "c2_logloss_match": true,
+    "b1_brier_match": true,
+    "c2_brier_match": true,
+    "relative_brier_match": true,
+    "common_support_n_match": true,
+    "all_symbols_present": true,
+    "n_test_ge_500": true,
+    "split_sizes_match": true,
+    "verdict_match": true
+  },
+  "recomputed": {
+    "B1": {
+      "auc": 0.7085650818246849,
+      "logloss": 0.43324058359941336,
+      "brier": 0.13146708907550128
+    },
+    "C2": {
+      "auc": 0.6705656538035327,
+      "logloss": 0.4348660620114856,
+      "brier": 0.13239427436390502
+    }
+  },
+  "canonical": {
+    "B1": {
+      "auc": 0.7085650818246849,
+      "logloss": 0.43324058359941336,
+      "brier": 0.13146708907550128
+    },
+    "C2": {
+      "auc": 0.6705656538035327,
+      "logloss": 0.4348660620114856,
+      "brier": 0.13239427436390502
+    }
+  },
+  "relative_improvement_C2_vs_B1": {
+    "auc": -0.05362870538765007,
+    "logloss": -0.003751907077973995,
+    "brier": -0.007052603772730236
+  },
+  "canonical_relative_improvement_C2_vs_B1": {
+    "auc": -0.05362870538765007,
+    "logloss": -0.003751907077973995,
+    "brier": -0.007052603772730236
+  },
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20261126,
+    "block_rows": 24,
+    "method": "independent block-bootstrap fixed models",
+    "ci_95": {
+      "auc": [
+        -0.053524217194549306,
+        -0.053524217194549306
+      ],
+      "logloss": [
+        -0.003690592694691051,
+        -0.003690592694670653
+      ],
+      "brier": [
+        -0.006978932205192731,
+        -0.006978932205192731
+      ]
+    },
+    "status": "COMPLETE"
+  },
+  "leave_one_symbol_out": {
+    "BNBUSDT": {
+      "n_test": 4449,
+      "B1": {
+        "auc": 0.6601480359996635,
+        "logloss": 0.3852089802419509,
+        "brier": 0.1097791814525092
+      },
+      "C2": {
+        "auc": 0.5934363022567806,
+        "logloss": 0.3693367706480222,
+        "brier": 0.10474208690743919
+      }
+    },
+    "BTCUSDT": {
+      "n_test": 4449,
+      "B1": {
+        "auc": 0.6191151964736871,
+        "logloss": 0.3508571709195354,
+        "brier": 0.09336378328056845
+      },
+      "C2": {
+        "auc": 0.6560570107739919,
+        "logloss": 0.36625817303416097,
+        "brier": 0.09916750328434516
+      }
+    },
+    "ETHUSDT": {
+      "n_test": 4449,
+      "B1": {
+        "auc": 0.628745411723152,
+        "logloss": 0.43612245021143253,
+        "brier": 0.13273792579169544
+      },
+      "C2": {
+        "auc": 0.5985971405386724,
+        "logloss": 0.4404205756989142,
+        "brier": 0.13428034308429132
+      }
+    },
+    "SOLUSDT": {
+      "n_test": 4449,
+      "B1": {
+        "auc": 0.6973534422456393,
+        "logloss": 0.5138892672365212,
+        "brier": 0.1680312661613001
+      },
+      "C2": {
+        "auc": 0.6581359861904009,
+        "logloss": 0.5195996865270119,
+        "brier": 0.17031600690703202
+      }
+    },
+    "XRPUSDT": {
+      "n_test": 4449,
+      "B1": {
+        "auc": 0.6983503621078944,
+        "logloss": 0.5159206161596184,
+        "brier": 0.16547482995894844
+      },
+      "C2": {
+        "auc": 0.6580369718767004,
+        "logloss": 0.5267830775086128,
+        "brier": 0.16992284426533727
+      }
+    }
+  },
+  "verdict": "NOT_SUPPORTED",
+  "verdict_reason": "Primary Brier rel improvement -0.007053; materiality_floor 0.02 met=False; CI supports=False",
+  "canonical_verdict": "NOT_SUPPORTED",
+  "outcome_data_inspected_before_freeze": false,
+  "source_registry_sha256": "26f112642e01c7238ef94b596ea006a6f60b71afa8b65823451c51db0a2e6057",
+  "tolerances": {
+    "auc": 0.0001,
+    "logloss": 0.0001,
+    "brier": 0.0001,
+    "rel_brier": 0.0001
+  },
+  "note": "Independent stdlib recompute (separate code path from eval) reproducing Phase 2 boundary-breach evaluation. all_checks_match=true when recomputed metrics match canonical eval within tolerance."
 }

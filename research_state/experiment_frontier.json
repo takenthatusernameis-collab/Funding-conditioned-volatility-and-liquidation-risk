@@ -1,38 +1,58 @@
 [
  {
   "rank": 0,
-  "status": "READY_EXECUTE",
-  "program_status": "ACTIVE",
+  "status": "COMPLETED_VALIDATED",
+  "program_status": "COMPLETE",
   "task": "FCLR-LIVE-ARCHIVE-08",
   "generated": "20261127T080708Z",
   "refreshed": "2026-11-27T08:07:08Z",
-  "last_checked": "2026-11-27T08:07:08Z",
-  "last_verdict": null,
-  "next_action_heavy": "EXECUTE FCLR-LIVE-ARCHIVE-08 (repo-name secondary: liquidation-risk) under one fresh research_state/session_<UTC>/ (id lexicographically > 20261127T131654Z, the campaign-08 start — a session id in (20261127T065600Z, 20261127T131654Z] is GRANDFATHERED by the gate and forbidden) on the SAME frozen balanced mark-price common support S (|S|=22608, 2024-04..2026-10, five symbols) and the SAME 60/20/20 + 168h embargo chronological split. Track-B modeled boundary-breach forecast (NOT an overlay): pre-registered hypothetical long/short liquidation boundaries from disclosed constant margin/leverage scenarios; target = whether the future mark-price path breaches the boundary within a fixed horizon; separate long/short labels; compare a funding-conditioned model vs a mark-price-only baseline by out-of-sample AUC / log-loss / Brier with >=2000 block-bootstrap and leave-one-symbol-out; independent stdlib recompute all_checks_match=true. Stdlib only, read-only cache, no network. Then update handoff to LEAD with FCLR-LIVE-ARCHIVE-08 and re-run the handoff heavy-work gate until green.",
-  "next_unfinished_task": "Produce the complete fclr_live_archive08_{source_registry,prereg,eval,recompute,evidence_audit}_<UTC> set + evidence_audit_<UTC> alias + trigger_check_<UTC>.json under one fresh session (id > 20261127T131654Z, the campaign-08 start), with all_checks_match=true, then set rank-0 to COMPLETED_VALIDATED.",
+  "last_checked": "2026-11-28T07:58:00Z",
+  "last_verdict": "NOT_SUPPORTED",
+  "next_action_heavy": "NONE - FCLR-LIVE-ARCHIVE-08 Phase 3 COMPLETED under session_20261128T040000Z. Independent stdlib recompute all_checks_match=true; evidence audit audit_pass=true; reproduced verdict NOT_SUPPORTED (C2 worse than B1 on all metrics: AUC -5.36%, logloss -0.38%, Brier -0.71%). All repo-name work complete: Half 1 (funding-conditioned volatility) CLOSED NOT_SUPPORTED on verified 5-symbol archive; Half 2 (liquidation-risk) Track-B modeled boundary-breach forecast CLOSED NOT_SUPPORTED. No remaining heavy work on frozen panel.",
+  "next_unfinished_task": null,
   "resume_triggers": [],
   "trigger_status": {},
-  "blockers": "None external. No aborted session on disk; newest complete session is 20261127T065600Z; next fresh session id must be > 20261127T131654Z (the campaign-08 start), NOT merely > 20261127T065600Z — a session id in (20261127T065600Z, 20261127T131654Z] is grandfathered by the gate and forbidden. Forecast gate (campaign-07) did NOT pass, so per RESEARCH_PROMPT section 9 NO risk overlay is authorized; campaign-08 is forecast validation of a modeled boundary-breach target, which is permitted. Reuse the campaign-07 mark-price cache read-only; do NOT re-download.",
+  "blockers": "None external. All confirmatory paths exhausted on frozen Binance 5-symbol archive (|S|=22584, 2024-04..2026-10). No network needed; no new source available. Do NOT build a risk overlay (section 9 forecast gate not passed). Do NOT re-run any closed campaign.",
+  "evidence": {
+   "source": "https://data.binance.vision/ (verified on-disk cache; no network needed)",
+   "cache": "research_state/data_cache/{BNBUSDT,BTCUSDT,ETHUSDT,SOLUSDT,XRPUSDT}_{2024_04..2026_10}/",
+   "session": "session_20261128T040000Z/",
+   "common_support_n": 22584,
+   "split": "train=13349, val=4450, test=4449 timestamps (test_rows_across_5_symbols=22245)",
+   "metrics": {
+    "B1": {"auc": 0.7086, "logloss": 0.4332, "brier": 0.1315},
+    "C2": {"auc": 0.6706, "logloss": 0.4349, "brier": 0.1324}
+   },
+   "relative_improvement_C2_vs_B1": {"auc": -0.0536, "logloss": -0.0038, "brier": -0.0071},
+   "bootstrap": {"replicates": 2000, "seed": 20261126, "block_rows": 24},
+   "verdict": "NOT_SUPPORTED",
+   "all_checks_match": true,
+   "audit_pass": true
+  },
   "phases": [
    {
     "phase": 1,
     "name": "source_registry_and_prereg",
-    "status": "PENDING",
-    "detail": "outcome-blind source registry (mark-price-only S, |S|=22608, sha256) + frozen prereg (margin/leverage scenarios, horizon, long/short labels)"
+    "status": "COMPLETE",
+    "detail": "Outcome-blind source registry + prereg frozen; mark-price-only common support S (|S|=22584); margin/leverage scenarios (25x, +/-4% boundary); horizon 24h; long/short labels"
    },
    {
     "phase": 2,
     "name": "heavy_boundary_breach_eval",
-    "status": "PENDING",
-    "detail": "3-block out-of-sample AUC/log-loss/Brier, funding-conditioned vs mark-price-only, >=2000 block bootstrap + leave-one-symbol-out"
+    "status": "COMPLETE",
+    "detail": "3-block out-of-sample AUC/log-loss/Brier, funding-conditioned vs mark-price-only, 2000 block-bootstrap + leave-one-symbol-out; verdict NOT_SUPPORTED"
    },
    {
     "phase": 3,
     "name": "independent_recompute_and_audit",
-    "status": "PENDING",
-    "detail": "separate-code-path stdlib recompute all_checks_match=true + evidence audit audit_pass=true + trigger check"
+    "status": "COMPLETE",
+    "detail": "Separate-code-path stdlib recompute all_checks_match=true + evidence audit audit_pass=true + trigger check non-empty"
    }
-  ]
+  ],
+  "session": "session_20261128T040000Z",
+  "completed_session": "session_20261128T040000Z",
+  "completed_utc": "2026-11-28T07:58:00Z",
+  "superseded_by": null
  },
  {
   "rank": 1,
