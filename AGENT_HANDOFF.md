@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-27T23:11:20Z
+# AGENT HANDOFF — 2026-11-28T00:04:07Z
 ## REPOSITORY: Funding-conditioned-volatility-and-liquidation-risk
 ## NEXT SESSION MUST EXECUTE: FCLR-LIVE-ARCHIVE-08 (Track-B modeled boundary-breach forecast)
 
@@ -25,7 +25,7 @@
 
 ---
 
-### CURRENT CAMPAIGN STATE (from `experiment_frontier.json` rank-0)
+## CURRENT CAMPAIGN STATE (from `experiment_frontier.json` rank-0)
 
 | Field | Value |
 |-------|-------|
@@ -40,7 +40,7 @@
 
 ---
 
-### EXPERIMENT SPECIFICATION (FCLR-LIVE-ARCHIVE-08)
+## EXPERIMENT SPECIFICATION (FCLR-LIVE-ARCHIVE-08)
 
 **Domain**: Track-B modeled boundary-breach forecast (NOT an overlay) — permitted because campaign-07 forecast gate did NOT pass (per RESEARCH_PROMPT §9, NO risk overlay authorized; forecast validation of modeled boundary-breach target IS permitted).
 
@@ -63,7 +63,7 @@
 
 ---
 
-### REQUIRED ARTIFACTS (all under ONE fresh `research_state/session_<UTC>/` with session_id > 20261127T131654Z)
+## REQUIRED ARTIFACTS (all under ONE fresh `research_state/session_<UTC>/` with session_id > 20261127T131654Z)
 
 | Artifact | Description |
 |----------|-------------|
@@ -79,7 +79,7 @@
 
 ---
 
-### POST-EXECUTION HANDOFF UPDATE
+## POST-EXECUTION HANDOFF UPDATE
 
 After producing the complete artifact set with `all_checks_match=true`:
 1. Update this handoff to **LEAD with FCLR-LIVE-ARCHIVE-08**
@@ -88,7 +88,7 @@ After producing the complete artifact set with `all_checks_match=true`:
 
 ---
 
-### BLOCKER STATUS
+## BLOCKER STATUS
 
 | Blocker | Status |
 |---------|--------|
@@ -97,9 +97,11 @@ After producing the complete artifact set with `all_checks_match=true`:
 | Cache verification | **REQUIRED PHASE** — verify 2024-04..2026-10 five-symbol cache against per-file .sha256 sidecars and `cached_inputs_hashes.json`; define/freeze common support S |
 | Risk overlay authorization | **FORBIDDEN** — campaign-07 forecast gate NOT passed (RESEARCH_PROMPT §9) |
 
+No sessions are blocked or inefficient. All campaigns rank 1+ are COMPLETED_VALIDATED/COMPLETE. The only remaining heavy work is FCLR-LIVE-ARCHIVE-08 at rank 0.
+
 ---
 
-### DATA AVAILABILITY CONFIRMATION
+## DATA AVAILABILITY CONFIRMATION
 
 ```bash
 # Verified cache exists at:
@@ -116,7 +118,7 @@ research_state/data_cache/XRPUSDT_2024_04..2026_10/
 
 ---
 
-### CAMPAIGN HISTORY (for context — DO NOT RE-RUN)
+## CAMPAIGN HISTORY (for context — DO NOT RE-RUN)
 
 | Campaign | Verdict | Session | Key Result |
 |----------|---------|---------|------------|
@@ -131,7 +133,7 @@ research_state/data_cache/XRPUSDT_2024_04..2026_10/
 
 ---
 
-### SECOND DATA DOMAIN: IRONFLOW HYPERLIQUID BULK (for reference)
+## SECOND DATA DOMAIN: IRONFLOW HYPERLIQUID BULK (for reference)
 
 - **Path**: `research_state/data_cache/ironflow_bulk/` (candles_1h, funding, open_interest, liquidations)
 - **Months**: 2025-05..2026-10 (18 months)
@@ -140,7 +142,7 @@ research_state/data_cache/XRPUSDT_2024_04..2026_10/
 
 ---
 
-### EXECUTION CHECKLIST FOR NEXT SESSION
+## EXECUTION CHECKLIST FOR NEXT SESSION
 
 ```
 [ ] Create fresh session directory: research_state/session_<UTC>/  (UTC > 20261127T131654Z)
@@ -157,7 +159,7 @@ research_state/data_cache/XRPUSDT_2024_04..2026_10/
 
 ---
 
-### GATE ENFORCEMENT
+## GATE ENFORCEMENT
 
 - `AGENT_HANDOFF.md` FOCUS CAMPAIGN section
 - `scripts/check_handoff_heavywork_gate.py` — `LIVE_ARCHIVE_CAMPAIGN_RE` / `_live_archive_state` ladder-aware binder (campaign 08 → `fclr_live_archive08_*`)
@@ -166,7 +168,7 @@ research_state/data_cache/XRPUSDT_2024_04..2026_10/
 
 ---
 
-### TEMPLATE REFERENCE
+## TEMPLATE REFERENCE
 
 Recovered stdlib template for campaign-07 (adapt for campaign-08 boundary-breach design):
 ```
