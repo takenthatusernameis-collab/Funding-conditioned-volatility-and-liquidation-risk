@@ -1,8 +1,8 @@
-# AGENT HANDOFF — 2026-11-28T01:10:22Z
+# AGENT HANDOFF — 2026-11-28T01:14:07Z
 ## REPOSITORY: Funding-conditioned-volatility-and-liquidation-risk
 ## NEXT SESSION MUST EXECUTE: FCLR-LIVE-ARCHIVE-08-20261127T131654Z (Track-B modeled boundary-breach forecast)
 
-**Refresh authority:** this 2026-11-28T01:10:22Z refresh is the sole durable handoff. It re-verified the repository state and supersedes every contradictory rank/contagion statement elsewhere in this file. The actual `experiment_frontier.json` has exactly one active rank-0 campaign, FCLR-LIVE-ARCHIVE-08; rank-1 is the COMPLETED_VALIDATED campaign-07, not an active contagion campaign.
+**Refresh authority:** this 2026-11-28T01:14:07Z refresh is the sole durable handoff. It re-verified the repository state and supersedes every contradictory rank/contagion statement elsewhere in this file. The actual `experiment_frontier.json` has exactly one active rank-0 campaign, FCLR-LIVE-ARCHIVE-08; rank-1 is the COMPLETED_VALIDATED campaign-07, not an active contagion campaign.
 
 ---
 
