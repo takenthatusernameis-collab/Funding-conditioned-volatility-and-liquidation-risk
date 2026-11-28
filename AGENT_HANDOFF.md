@@ -168,10 +168,10 @@ research_state/data_cache/XRPUSDT_2024_04 .. XRPUSDT_2026_10
 ```
 [x] Create fresh session dir: research_state/session_20261128T040000Z/  (UTC > 20261127T131654Z)
 [x] Record session id in THIS handoff (avoid HANDOFF_STALE_LATEST_SESSION) — DONE
-[ ] Phase 1: Source registry — verify cache, define/freeze common support S (|S|=22608) — skeleton written, needs hash bind
-[ ] Phase 1: Prereg freeze — outcome-blind, margin/leverage scenarios, horizon, long/short labels — skeleton written, needs hash bind
-[ ] Phase 2: Heavy evaluation — 3-block OOS AUC/log-loss/Brier, >=2000 bootstrap + LOIO — skeleton written, heavy computation required
-[ ] Phase 3: Independent recompute — rebuild S, all_checks_match=true, 5 symbols/block/fold, n_test>=500 — skeleton written, heavy computation required
+[ ] Phase 1: Source registry — verify cache, define/freeze common support S (|S|=22584 validated: four symbols 22608, XRPUSDT binds at 22584 on corrupt 2025-10-19; cache traversal fixed for nested+flat layouts) — complete, hash-bound
+[ ] Phase 1: Prereg freeze — outcome-blind, margin/leverage scenarios, horizon, long/short labels — complete, hash-bound PENDING
+[ ] Phase 2: Heavy evaluation — 3-block OOS AUC/log-loss/Brier, >=2000 bootstrap + LOIO — skeleton fixed (path + dual-layout cache traversal), heavy computation required
+[ ] Phase 3: Independent recompute — rebuild S, all_checks_match=true, 5 symbols/block/fold, n_test>=500 — skeleton fixed (path), heavy computation required
 [ ] Phase 3: Evidence audit + gate alias (evidence_audit_<UTC>.json) + trigger check — skeletons written, need audit_pass=true
 [ ] All artifacts non-empty under session_20261128T040000Z/
 [ ] Update handoff to LEAD with the next campaign (dated token preserved)

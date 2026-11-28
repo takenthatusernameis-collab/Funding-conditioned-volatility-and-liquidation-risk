@@ -18,7 +18,7 @@ import hashlib
 import json
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[1]
+REPO = Path(__file__).resolve().parents[2]
 RS = REPO / "research_state"
 CACHE = RS / "data_cache"
 SESSION = RS / "session_20261128T040000Z"
