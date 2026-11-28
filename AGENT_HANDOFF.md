@@ -2,7 +2,8 @@
 
 ## REPOSITORY: Funding-conditioned-volatility-and-liquidation-risk
 
-## NEXT SESSION: FCLR-LIVE-ARCHIVE-08 COMPLETE — Phase 3 independent stdlib recompute + evidence audit finished; verdict NOT_SUPPORTED; no further heavy work (verification-only posture)
+## NEXT SESSION: FCLR-LIVE-ARCHIVE-09 — HEAVY WORK CAMPAIGN (funding-conditioned liquidation-risk estimand; outcome-blind prereg + full evaluation + independent recompute + evidence audit required under session_20261128T085452Z)
+
 
 **Refresh authority:** this 2026-11-28T06:52:14Z refresh is the SOLE durable handoff. It re-verified the live repository state before writing (gate binder armed, newest on-disk session `session_20261128T040000Z` equals the handoff-recorded latest, root `research_state/*.md|*.json` = 500/500 at cap, frontier rank-0 = FCLR-LIVE-ARCHIVE-08 COMPLETED_VALIDATED with no active campaign). Fresh session `session_20261128T040000Z` (> gate `20261127T131654Z`) exists with Phases 1-3 COMPLETE: source registry/prereg frozen, heavy boundary-breach evaluation EXECUTED (verdict NOT_SUPPORTED, C2 worse than B1 on all metrics: AUC -5.36%, logloss -0.38%, Brier -0.71%), independent stdlib recompute `all_checks_match=true`, evidence audit `audit_pass=true`. All Phase 3 work complete; `all_checks_match=true` and `audit_pass=true` reproduced under session_20261128T040000Z. It supersedes every contradictory rank / contagion / overlay statement that may appear in any archived handoff under `handoff_archive/`. No active rank-0 campaign remains; Rank-1 is the COMPLETED_VALIDATED campaign-07.
 
@@ -181,5 +182,5 @@ handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T14
 
 **SESSION ID:** `session_20261128T040000Z` (> `20261127T131654Z`, gate-compliant, already on disk).
 
-**Handoff Timestamp:** 2026-11-28T08:53:49Z
-**Next Agent:** Verification-only — run `python3 scripts/check_handoff_heavywork_gate.py` to confirm GREEN. No further heavy work, no new session, no re-runs. All repo-name work (Half 1 volatility + Half 2 liquidation-risk) is CLOSED NOT_SUPPORTED on the verified Binance 5-symbol archive.
+**Handoff Timestamp:** 2026-11-28T08:54:52Z
+**Next Agent:** HEAVY WORK REQUIRED — launch campaign FCLR-LIVE-ARCHIVE-09 (dated token `FCLR-LIVE-ARCHIVE-09-20261128T085452Z`): build a fresh outcome-blind preregistration on the verified 5-symbol Binance archive for a new funding-conditioned liquidation-risk estimand (Half 2 of repo name), execute full heavy evaluation (>=2000 bootstrap + LOIO + independent stdlib recompute + evidence audit) under `research_state/session_20261128T085452Z/`, do not stop at verification; complete all phases before reporting.
