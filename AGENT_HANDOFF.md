@@ -1,4 +1,4 @@
-# AGENT HANDOFF — 2026-11-28T00:12:48Z
+# AGENT HANDOFF — 2026-11-28T00:14:51Z
 ## REPOSITORY: Funding-conditioned-volatility-and-liquidation-risk
 ## NEXT SESSION MUST EXECUTE: FCLR-LIVE-ARCHIVE-08-20261127T131654Z (Track-B modeled boundary-breach forecast)
 
@@ -13,15 +13,15 @@
 **What "done" means (all under the one fresh session dir, all non-empty):**
 1. `fclr_live_archive08_source_registry_<UTC>.json` + `.md` — outcome-blind source registry (mark-price-only S, |S|=22608, per-file sha256).
 2. `fclr_live_archive08_prereg_<UTC>.json` + `.md` — frozen prereg (margin/leverage scenarios, horizon, separate long/short labels), frozen BEFORE outcomes.
-3. `fclr_live_archive08_eval_<UTC>.py` + `.json` + `.md` — heavy 3-block OOS AUC / log-loss / Brier, funding-conditioned vs mark-price-only baseline, ≥2000 block-bootstrap + leave-one-symbol-out.
-4. `fclr_live_archive08_recompute_<UTC>.py` + `.json` — independent stdlib recompute that rebuilds S, confirms all 5 symbols in every block/fold, n_test≥500, and emits `all_checks_match=true`.
+3. `fclr_live_archive08_eval_<UTC>.py` + `.json` + `.md` — heavy 3-block OOS AUC / log-loss / Brier, funding-conditioned vs mark-price-only baseline, >=2000 block-bootstrap + leave-one-symbol-out.
+4. `fclr_live_archive08_recompute_<UTC>.py` + `.json` — independent stdlib recompute that rebuilds S, confirms all 5 symbols in every block/fold, n_test>=500, and emits `all_checks_match=true`.
 5. `fclr_live_archive08_evidence_audit_<UTC>.json` + `.md` — evidence audit with `audit_pass=true`.
 6. `evidence_audit_<UTC>.json` — gate-required alias.
 7. `trigger_check_<UTC>.json` — non-empty trigger check.
 
-**Last completed heavy session**: `session_20261127T065600Z` (campaign-07, verdict NOT_SUPPORTED: QLIKE rel -0.704%, 95% CI [-1.218%,-0.190%], floor +2%; independent stdlib recompute all_checks_match=true; |S|=22608). The on-disk newest session equals this id, so the handoff is not stale.
+**Last completed heavy session**: `session_20261127T065600Z` (campaign-07, verdict NOT_SUPPORTED: QLIKE rel -0.704%, 95% CI [-1.218%,-0.190%], floor +2%; independent stdlib recompute all_checks_match=true; |S|=22608). The on-disk newest session equals this id, so the handoff is NOT stale and the gate is GREEN (verified 2026-11-28T00:14:51Z).
 
-**CRITICAL SESSION-ID CONSTRAINT**: the next fresh session id MUST be > `20261127T131654Z`. Session ids in `(20261127T065600Z, 20261127T131654Z]` are GRANDFATHERED BY THE GATE AND FORBIDDEN. Do not reuse `20261127T065600Z` or any 20261126/20261127 id at or below the gate.
+**CRITICAL SESSION-ID CONSTRAINT**: the next fresh session id MUST be > `20261127T131654Z`. Because the current wall clock is already past that gate, any session created now is automatically post-start and therefore enforced. Do NOT reuse `session_20261127T065600Z` or any 20261126/20261127 id at or below the gate, and do not hand-name a session dir with a pre-gate timestamp to dodge enforcement.
 
 ---
 
@@ -32,7 +32,7 @@ The gate binder `scripts/check_handoff_heavywork_gate.py::_live_archive_state` i
 - The gate resolves the **lexicographically latest** `session_<UTC>` id recorded in this handoff AND the latest on-disk session dir. If the on-disk newest session is newer than the handoff-recorded one, the gate fails `HANDOFF_STALE_LATEST_SESSION`. So the next session MUST both (a) create the new session dir and (b) record its id in this handoff.
 - For a post-start session (id > `20261127T131654Z`), `_live_archive_state` requires every `fclr_live_archive08_*` artifact above to be present AND non-empty, plus a non-empty `trigger_check_*.json`. Missing, empty, or trigger-less → FAIL.
 - Root `research_state/*.md|*.json` is capped at 500 (currently 500/500). **ALL new artifacts MUST go under `session_<UTC>/`, never the root.**
-- Stdlib only (numpy, pandas, pyarrow, requests pre-installed). No pip install. No network. Cache is read-only; do NOT re-download.
+- Stdlib only (numpy, pandas, scipy, pyarrow, requests pre-installed). No pip install. No network. Cache is read-only; do NOT re-download.
 
 This is a materially different, feasible design on the SAME frozen, verified panel — not a re-run of a terminal endpoint. The volatility half is exhausted; the liquidation-risk half is the open repo-name frontier.
 
@@ -52,7 +52,7 @@ This is a materially different, feasible design on the SAME frozen, verified pan
 - Baseline (mark-price-only): RV1h, RV24h, RV168h features.
 - Funding-conditioned: Baseline + signed funding(24h) + trailing 90d |funding| pct + mark/index premium + mark/EMA24 distance.
 
-**Metrics**: OOS AUC / log-loss / Brier with ≥2000 block-bootstrap and leave-one-symbol-out.
+**Metrics**: OOS AUC / log-loss / Brier with >=2000 block-bootstrap and leave-one-symbol-out.
 
 **Validation**: independent stdlib recompute with `all_checks_match=true`.
 
@@ -70,12 +70,13 @@ This is a materially different, feasible design on the SAME frozen, verified pan
 
 | Blocker | Status |
 |---------|--------|
-| Aborted session on disk | **NONE** (newest complete: 20261127T065600Z) |
+| Aborted / stalled session on disk | **NONE** (newest complete: 20261127T065600Z; no *.lock / *.tmp / *ABORT* found) |
 | External dependencies | **NONE** |
-| Cache verification | **REQUIRED PHASE** — verify 2024-04..2026-10 five-symbol cache against per-file .sha256 sidecars and `cached_inputs_hashes.json`; define/freeze common support S |
+| Cache verification | **VERIFIED PRESENT** — 5-symbol 2024-04..2026-10 cache on disk (175 symbol-month dirs incl. 155 in-window); per-file .sha256 sidecars + `cached_inputs_hashes.json`; define/freeze common support S |
 | Risk overlay authorization | **FORBIDDEN** — campaign-07 forecast gate NOT passed (RESEARCH_PROMPT §9) |
-| Gate enforcement gap | **CLOSED** — dated token `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` arms the `_live_archive_state` binder (verified GREEN at 2026-11-28T00:12:48Z) |
+| Gate enforcement gap | **CLOSED** — dated token `FCLR-LIVE-ARCHIVE-08-20261127T131654Z` arms the `_live_archive_state` binder; verified GREEN 2026-11-28T00:14:51Z |
 | Root churn cap | **AT CAP (500/500)** — all new artifacts go under `session_<UTC>/` |
+| Template availability | **PRESENT** — `handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T144850Z.py` |
 
 No sessions are blocked or inefficient. All campaigns rank 1+ are COMPLETED_VALIDATED/COMPLETE. The only remaining heavy work is FCLR-LIVE-ARCHIVE-08 at rank 0, and it is gate-armed so it cannot be skipped.
 
@@ -90,7 +91,7 @@ research_state/data_cache/BTCUSDT_2024_04..2026_10/
 research_state/data_cache/ETHUSDT_2024_04..2026_10/
 research_state/data_cache/SOLUSDT_2024_04..2026_10/
 research_state/data_cache/XRPUSDT_2024_04..2026_10/
-# 155 symbol-month dirs = 5 symbols x 31 months (plus legacy lowercase dirs)
+# 155 in-window symbol-month dirs = 5 symbols x 31 months (plus legacy 2024_01..03 dirs)
 # Funding zips 2024-04..2026-10; klines/index/mark/premium daily zips 2024-01..2026-11 with .sha256 sidecars
 ```
 
@@ -126,8 +127,8 @@ research_state/data_cache/XRPUSDT_2024_04..2026_10/
 [ ] Create fresh session dir: research_state/session_<UTC>/  (UTC > 20261127T131654Z)
 [ ] Phase 1: Source registry — verify cache, define/freeze common support S (|S|=22608)
 [ ] Phase 2: Prereg freeze — outcome-blind, margin/leverage scenarios, horizon, long/short labels
-[ ] Phase 3: Heavy evaluation — 3-block OOS AUC/log-loss/Brier, ≥2000 bootstrap + LOSO
-[ ] Phase 4: Independent recompute — rebuild S, all_checks_match=true, 5 symbols/block/fold, n_test≥500
+[ ] Phase 3: Heavy evaluation — 3-block OOS AUC/log-loss/Brier, >=2000 bootstrap + LOSO
+[ ] Phase 4: Independent recompute — rebuild S, all_checks_match=true, 5 symbols/block/fold, n_test>=500
 [ ] Phase 5: Evidence audit + gate alias (evidence_audit_<UTC>.json) + trigger check
 [ ] All artifacts non-empty under session_<UTC>/
 [ ] Record the new session id in THIS handoff (avoid HANDOFF_STALE_LATEST_SESSION)
@@ -141,9 +142,9 @@ research_state/data_cache/XRPUSDT_2024_04..2026_10/
 ## GATE ENFORCEMENT
 
 - `AGENT_HANDOFF.md` FOCUS CAMPAIGN section (dated token `FCLR-LIVE-ARCHIVE-08-20261127T131654Z`) — present above.
-- `scripts/check_handoff_heavywork_gate.py` — `LIVE_ARCHIVE_CAMPAIGN_RE` / `_live_archive_state` ladder-aware binder (campaign 08 → `fclr_live_archive08_*`); ARMED because the dated token is present; verified GREEN 2026-11-28T00:12:48Z.
+- `scripts/check_handoff_heavywork_gate.py` — `LIVE_ARCHIVE_CAMPAIGN_RE` / `_live_archive_state` ladder-aware binder (campaign 08 → `fclr_live_archive08_*`); ARMED because the dated token is present; verified GREEN 2026-11-28T00:14:51Z.
 - Root `research_state/*.md|*.json` capped at 500 (currently 500/500) — ALL NEW ARTIFACTS MUST GO UNDER `session_<UTC>/`.
-- Stdlib only (numpy, pandas, pyarrow, requests pre-installed); no pip install; no network.
+- Stdlib only (numpy, pandas, scipy, pyarrow, requests pre-installed); no pip install; no network.
 
 ---
 
