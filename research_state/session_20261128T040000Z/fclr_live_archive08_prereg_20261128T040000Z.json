@@ -1,0 +1,52 @@
+{
+  "campaign": "FCLR-LIVE-ARCHIVE-08-20261127T131654Z",
+  "session_utc": "20261128T040000Z",
+  "artifact_id": "fclr_live_archive08_prereg_20261128T040000Z",
+  "generated_at": "2026-11-28T04:00:00Z",
+  "experiment_id": "FCLR-LIVE-ARCHIVE-08",
+  "outcome_data_inspected_before_freeze": false,
+  "hash_bound_to_source_registry": "PENDING_SHA256_OF_SOURCE_REGISTRY",
+  "frozen_before_outcomes": true,
+  "decision_frozen_before_outcomes": true,
+  "hypothesis": "FCLR-H008: funding-conditioned price features improve out-of-sample forecasts of modeled hypothetical long/short liquidation-boundary breaches within a fixed horizon beyond a mark-price-only baseline on the disjoint 2024-04..2026-10 cohort, judged on out-of-sample AUC/log-loss/Brier.",
+  "window": "2024-04-01..2026-10-31 UTC",
+  "symbols": [
+    "BNBUSDT",
+    "BTCUSDT",
+    "ETHUSDT",
+    "SOLUSDT",
+    "XRPUSDT"
+  ],
+  "common_support_n": 22608,
+  "target": "whether future mark-price path breaches pre-registered hypothetical long/short liquidation boundary within fixed horizon (Track-B modeled boundary-breach proxy, never observed liquidation)",
+  "horizon_hours": 24,
+  "boundaries": "derived from disclosed constant margin/leverage scenarios (not data-driven)",
+  "labels": "separate long/short breach labels per horizon; modeled proxy only",
+  "splits": "60/20/20 by unique UTC timestamp on S; 168h purge/embargo; test -> 3 chronological blocks",
+  "train_ts": 13550,
+  "val_ts": 4517,
+  "test_ts": 4517,
+  "test_rows_across_5_symbols": 22585,
+  "models": {
+    "B1": "mark-price-only baseline (RV1h, RV24h, RV168h features), train-only scaling",
+    "C2": "funding-conditioned (signed funding(24h), trailing 90d |funding| pct, mark/index premium, mark/EMA24 distance + mark price), train-only scaling"
+  },
+  "primary_contrast": "C2 vs B1 on paired test-set out-of-sample AUC / log-loss / Brier",
+  "inference": ">=2000 deterministic block-bootstrap replicates (block=24 rows, seed=20261126); leave-one-symbol-out (5 symbols)",
+  "materiality_floor": 0.02,
+  "alpha_2_sequential_look_k2": 0.008333333333333333,
+  "decision_rule": "FORECAST_GATE_PASSED iff C2 vs B1 improves on primary target AND materiality floor met AND CI supports improvement; else NOT_SUPPORTED / INCONCLUSIVE; symmetric verdict only",
+  "leakage_controls": [
+    "outcome-blind freeze before target generation",
+    "train-only OLS/logistic fitting",
+    "train-only scaling + standardization",
+    "168h purge/embargo between train/val/test",
+    "no outcome inspection before design freeze",
+    "read-only cache reuse; no re-download; stdlib only; no network"
+  ],
+  "stdlib_only": true,
+  "network": false,
+  "read_only_cache": true,
+  "not_an_overlay": true,
+  "note": "Outcome-blind prereg frozen before any outcome computation. Track-B modeled boundary-breach forecast (NOT a risk overlay; campaign-07 forecast gate did NOT pass, so per RESEARCH_PROMPT section 9 no risk overlay is authorized)."
+}

@@ -1,0 +1,14 @@
+{
+  "experiment_id": "FCLR-LIVE-ARCHIVE-08",
+  "session_id": "20261128T040000Z",
+  "artifact_id": "trigger_check_20261128T040000Z",
+  "generated_at": "2026-11-28T04:00:00Z",
+  "external_trigger_required": false,
+  "trigger_source": "BINANCE_PUBLIC_ARCHIVE",
+  "fired": false,
+  "reason": "free unauthenticated public archive already cached and checksum-verified; campaign-08 needs no network/new source",
+  "network": false,
+  "stdlib_only": true,
+  "campaign_start_utc": "20261127T131654Z",
+  "post_start_session": true
+}

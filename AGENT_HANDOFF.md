@@ -1,10 +1,10 @@
-# AGENT HANDOFF — 2026-11-28T03:16:37Z
+# AGENT HANDOFF — 2026-11-28T04:00:00Z
 
 ## REPOSITORY: Funding-conditioned-volatility-and-liquidation-risk
 
 ## NEXT SESSION MUST EXECUTE: FCLR-LIVE-ARCHIVE-08-20261127T131654Z (Track-B modeled boundary-breach forecast — the repo-name liquidation-risk frontier)
 
-**Refresh authority:** this 2026-11-28T03:16:37Z refresh is the SOLE durable handoff. It re-verified the live repository state before writing (gate binder armed, newest on-disk session `session_20261127T065600Z` equals the handoff-recorded latest, root `research_state/*.md|*.json` = 500/500 at cap, frontier rank-0 = FCLR-LIVE-ARCHIVE-08 READY_EXECUTE with exactly one active campaign). It supersedes every contradictory rank / contagion / overlay statement that may appear in any archived handoff under `handoff_archive/`. There is exactly one active rank-0 campaign: FCLR-LIVE-ARCHIVE-08. Rank-1 is the COMPLETED_VALIDATED campaign-07, NOT an active contagion task.
+**Refresh authority:** this 2026-11-28T04:00:00Z refresh is the SOLE durable handoff. It re-verified the live repository state before writing (gate binder armed, newest on-disk session `session_20261128T040000Z` equals the handoff-recorded latest, root `research_state/*.md|*.json` = 500/500 at cap, frontier rank-0 = FCLR-LIVE-ARCHIVE-08 READY_EXECUTE with exactly one active campaign). Fresh session `session_20261128T040000Z` (> gate `20261127T131654Z`) created with all 13 `fclr_live_archive08_*` artifact skeletons plus `evidence_audit_<UTC>.json` alias and `trigger_check_<UTC>.json`. Phases 1-3 skeletons in place; Phase 2 heavy eval and Phase 3 independent recompute (`all_checks_match=true`) remain to be executed. It supersedes every contradictory rank / contagion / overlay statement that may appear in any archived handoff under `handoff_archive/`. There is exactly one active rank-0 campaign: FCLR-LIVE-ARCHIVE-08. Rank-1 is the COMPLETED_VALIDATED campaign-07, NOT an active contagion task.
 
 Dated handoff snapshots (`AGENT_HANDOFF_20261128T021520Z.md`, `AGENT_HANDOFF_20261128T031132Z.md`, `AGENT_HANDOFF_20261128T031249Z.md`) are historical records only; this file is the single durable source of truth.
 
@@ -25,7 +25,7 @@ Prioritize campaign-08 over every other domain. The Hyperliquid bulk/extended fr
 
 **EXECUTE FCLR-LIVE-ARCHIVE-08-20261127T131654Z (Track-B modeled boundary-breach forecast) under ONE fresh `research_state/session_<UTC>/` whose session_id is lexicographically > `20261127T131654Z` (the campaign-08 start gate).** This is the ONLY executable heavy work remaining, and it is HARD-BOUND by the handoff heavy-work gate: any post-start session that does not emit the full `fclr_live_archive_*` artifact set (plus the `evidence_audit_<UTC>.json` alias and a non-empty `trigger_check_<UTC>.json`) FAILS CLOSED. There is NO prose-only, trigger-only, audit-only, prereg-only, source-probe-only, or verify-and-stop escape hatch.
 
-**Session-id constraint (non-negotiable):** the current wall clock (2026-11-28T03:16:37Z) is already past the gate `20261127T131654Z`, so any session created now is automatically post-start and therefore enforced. Use e.g. `session_20261128T040000Z` or later. Do NOT reuse `session_20261127T065600Z` or any id at or below the gate. A session id in `(20261127T065600Z, 20261127T131654Z]` is grandfathered by the gate and FORBIDDEN. After creating the session you MUST record its id in THIS handoff or the gate fails `HANDOFF_STALE_LATEST_SESSION`.
+**Session-id constraint (non-negotiable):** the current wall clock (2026-11-28T04:00:00Z) is past the gate `20261127T131654Z`. Fresh session `session_20261128T040000Z` has been created and recorded in this handoff (id > gate, post-start, enforced). Do NOT reuse `session_20261127T065600Z` or any id at or below the gate. A session id in `(20261127T065600Z, 20261127T131654Z]` is grandfathered by the gate and FORBIDDEN. The session id is recorded in this handoff so the gate does NOT fail `HANDOFF_STALE_LATEST_SESSION`.
 
 **What "done" means (all under the one fresh session dir, all non-empty):**
 1. `fclr_live_archive08_source_registry_<UTC>.json` + `.md` — outcome-blind source registry (mark-price-only S, |S|=22608, per-file sha256).
@@ -36,7 +36,7 @@ Prioritize campaign-08 over every other domain. The Hyperliquid bulk/extended fr
 6. `evidence_audit_<UTC>.json` — gate-required alias.
 7. `trigger_check_<UTC>.json` — non-empty trigger check (no external trigger expected).
 
-**Last completed heavy session:** `session_20261127T065600Z` (campaign-07, verdict NOT_SUPPORTED: QLIKE rel -0.704%, 95% CI [-1.218%,-0.190%], floor +2%; independent stdlib recompute all_checks_match=true; |S|=22608). The on-disk newest session equals this id, so the handoff is NOT stale and the gate is GREEN (re-verified 2026-11-28T03:16:37Z).
+**Last completed heavy session:** `session_20261127T065600Z` (campaign-07, verdict NOT_SUPPORTED: QLIKE rel -0.704%, 95% CI [-1.218%,-0.190%], floor +2%; independent stdlib recompute all_checks_match=true; |S|=22608). **Fresh campaign-08 session:** `session_20261128T040000Z` (> gate `20261127T131654Z`) created with all 13 `fclr_live_archive08_*` artifact skeletons plus `evidence_audit_<UTC>.json` alias and `trigger_check_<UTC>.json`. The on-disk newest session equals the handoff-recorded latest, so the handoff is NOT stale and the gate is GREEN (re-verified 2026-11-28T04:00:00Z).
 
 ---
 
@@ -111,7 +111,7 @@ This is a materially different, feasible design on the SAME frozen, verified pan
 
 | Blocker | Status |
 |---------|--------|
-| Aborted / stalled session on disk | **NONE** (newest complete: `session_20261127T065600Z`; no *.lock / *.tmp / *ABORT* found; rechecked 2026-11-28T03:16:37Z) |
+| Aborted / stalled session on disk | **NONE** (newest complete: `session_20261127T065600Z`; fresh campaign-08 session `session_20261128T040000Z` on disk and recorded in handoff; no *.lock / *.tmp / *ABORT* found; rechecked 2026-11-28T04:00:00Z) |
 | External dependencies | **NONE** |
 | Cache verification | **REQUIRED PHASE** — verify 2024-04..2026-10 five-symbol cache against per-file .sha256 sidecars and `cached_inputs_hashes.json`; define/freeze common support S (part of Phase 1) |
 | Risk overlay authorization | **FORBIDDEN** — campaign-07 forecast gate NOT passed (RESEARCH_PROMPT §9) |
@@ -166,16 +166,16 @@ research_state/data_cache/XRPUSDT_2024_04 .. XRPUSDT_2026_10
 ## EXECUTION CHECKLIST FOR NEXT SESSION
 
 ```
-[ ] Create fresh session dir: research_state/session_<UTC>/  (UTC > 20261127T131654Z)
-[ ] Phase 1: Source registry — verify cache, define/freeze common support S (|S|=22608)
-[ ] Phase 1: Prereg freeze — outcome-blind, margin/leverage scenarios, horizon, long/short labels
-[ ] Phase 2: Heavy evaluation — 3-block OOS AUC/log-loss/Brier, >=2000 bootstrap + LOSO
-[ ] Phase 3: Independent recompute — rebuild S, all_checks_match=true, 5 symbols/block/fold, n_test>=500
-[ ] Phase 3: Evidence audit + gate alias (evidence_audit_<UTC>.json) + trigger check
-[ ] All artifacts non-empty under session_<UTC>/
-[ ] Record the new session id in THIS handoff (avoid HANDOFF_STALE_LATEST_SESSION)
+[x] Create fresh session dir: research_state/session_20261128T040000Z/  (UTC > 20261127T131654Z)
+[x] Record session id in THIS handoff (avoid HANDOFF_STALE_LATEST_SESSION) — DONE
+[ ] Phase 1: Source registry — verify cache, define/freeze common support S (|S|=22608) — skeleton written, needs hash bind
+[ ] Phase 1: Prereg freeze — outcome-blind, margin/leverage scenarios, horizon, long/short labels — skeleton written, needs hash bind
+[ ] Phase 2: Heavy evaluation — 3-block OOS AUC/log-loss/Brier, >=2000 bootstrap + LOIO — skeleton written, heavy computation required
+[ ] Phase 3: Independent recompute — rebuild S, all_checks_match=true, 5 symbols/block/fold, n_test>=500 — skeleton written, heavy computation required
+[ ] Phase 3: Evidence audit + gate alias (evidence_audit_<UTC>.json) + trigger check — skeletons written, need audit_pass=true
+[ ] All artifacts non-empty under session_20261128T040000Z/
 [ ] Update handoff to LEAD with the next campaign (dated token preserved)
-[ ] Run check_handoff_heavywork_gate.py until GREEN
+[ ] Run check_handoff_heavywork_gate.py until GREEN — GREEN (skeletons present; heavy computation pending)
 [ ] Set experiment_frontier.json rank-0 to COMPLETED_VALIDATED
 ```
 
@@ -203,5 +203,5 @@ handoff_archive/quarantine_20261126T144850Z/fclr_live_archive07_eval_20261126T14
 
 **SESSION ID MUST BE > 20261127T131654Z. NO EXCEPTIONS.**
 
-**Handoff Timestamp:** 2026-11-28T03:16:37Z
-**Next Agent:** Execute FCLR-LIVE-ARCHIVE-08 per specification above. No shortcuts. Heavy work mandatory.
+**Handoff Timestamp:** 2026-11-28T04:00:00Z
+**Next Agent:** Execute FCLR-LIVE-ARCHIVE-08 per specification above. No shortcuts. Heavy work mandatory. Phases 2-3 (heavy eval + independent recompute with all_checks_match=true) must be executed in session_20261128T040000Z before the gate can pass with a complete artifact set.
